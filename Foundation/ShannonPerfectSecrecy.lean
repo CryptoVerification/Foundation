@@ -19,6 +19,12 @@ open scoped BigOperators
 
 variable {Key Msg Ciph : Type _}
 
+/-- Simple rational-valued distribution on a finite type. -/
+structure FiniteDistribution (α : Type _) [Fintype α] where
+  prob : α → ℚ
+  nonneg : ∀ a, 0 ≤ prob a
+  sum_one : ∑ a, prob a = 1
+
 section FiniteKeys
 
 variable [Fintype Key] [DecidableEq Ciph]
