@@ -25,6 +25,35 @@ structure FiniteDistribution (α : Type _) [Fintype α] where
   nonneg : ∀ a, 0 ≤ prob a
   sum_one : ∑ a, prob a = 1
 
+namespace FiniteDistribution
+
+variable {α : Type _} [Fintype α]
+
+section
+variable [DecidableEq α]
+
+/-- Dirac distribution supported at `a₀`. -/
+def dirac (a₀ : α) : FiniteDistribution α :=
+  { prob := fun a => if a = a₀ then 1 else 0
+    , nonneg := by
+        intro a
+        split_ifs <;> norm_num
+    , sum_one := by
+        classical
+        have :
+            ((Finset.univ : Finset α).sum fun a =>
+                if a = a₀ then (1 : ℚ) else 0) = 1 := by
+          simp [Finset.mem_univ]
+        exact this }
+
+@[simp]
+lemma dirac_prob (a₀ a : α) :
+    (dirac (α := α) a₀).prob a = if a = a₀ then 1 else 0 := rfl
+
+end
+
+end FiniteDistribution
+
 section FiniteKeys
 
 variable [Fintype Key] [DecidableEq Ciph]
