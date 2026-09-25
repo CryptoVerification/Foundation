@@ -1,14 +1,13 @@
 # Foundation
 
-## GitHub configuration
+Lean 4 のライブラリです。Nix の開発用シェルで Lean と Lake（Lean のビルドツール）を利用できます。
 
-To set up your new GitHub repository, follow these steps:
+## セットアップ
 
-* Under your repository name, click **Settings**.
-* In the **Actions** section of the sidebar, click "General".
-* Check the box **Allow GitHub Actions to create and approve pull requests**.
-* Click the **Pages** section of the settings sidebar.
-* In the **Source** dropdown menu, select "GitHub Actions".
+```sh
+nix develop path:.
+lake build
+```
 
-After following the steps above, you can remove this section from the README file.
-# Foundation
+開発用シェルを開かずにビルドする場合は、`nix develop path:. -c lake build` を実行してください。`path:.` は、Git にまだ登録していない設定ファイルも現在の作業ディレクトリから読み込む指定です。
+Lean のソースコードは `Foundation/` に追加し、`Foundation.lean` から読み込んでください。
