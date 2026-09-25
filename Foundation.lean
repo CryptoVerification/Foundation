@@ -4,6 +4,7 @@ import Foundation.Core.Bound
 import Foundation.Core.Reduction
 import Foundation.Core.SecurityBound
 import Foundation.Asymptotics.Negligible
+import Foundation.Asymptotics.PolynomiallyBounded
 import Foundation.Asymptotics.AdvantageBound
 import Foundation.Resource.Adversary
 import Foundation.Resource.Reduction
@@ -14,6 +15,7 @@ import Foundation.Relation.Equivalence
 import Foundation.Examples.ReductionComposition
 import Foundation.Examples.Relations
 import Foundation.Examples.Negligible
+import Foundation.Examples.PolynomiallyBounded
 import Foundation.Examples.AdversaryFamily
 import Foundation.Examples.SecureOnWithin
 import Foundation.Examples.ReductionResources
