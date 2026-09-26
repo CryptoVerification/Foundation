@@ -1,5 +1,6 @@
 import Mathlib.Data.ENNReal.Inv
 import Mathlib.Order.Filter.AtTopBot.Basic
+import Foundation.Asymptotics.PolynomiallyBounded
 
 open scoped ENNReal
 open Filter
@@ -86,5 +87,51 @@ theorem add {ε δ : Nat → ℝ≥0∞}
     ε n + δ n ≤ invPoly (k + 2) n + invPoly (k + 2) n :=
       add_le_add hεn hδn
     _ ≤ invPoly (k + 1) n := add_invPoly_le k n hn
+
+/-- A polynomially bounded multiplicative loss preserves negligibility.
+This is the scalar estimate used for polynomial-loss reductions. -/
+theorem mul_polynomial {ε : Nat → ℝ≥0∞} {p : Nat → Nat}
+    (hε : Negligible ε) (hp : PolynomiallyBounded p) :
+    Negligible (fun n => (p n : ℝ≥0∞) * ε n) := by
+  obtain ⟨c, k, hp⟩ := hp
+  intro j
+  filter_upwards [hp, hε (j + k + 1), eventually_ge_atTop c]
+    with n hpn hεn hcn
+  let t : ℝ≥0∞ := ((n + 1 : Nat) : ℝ≥0∞)
+  have ht0 : t ≠ 0 := by
+    dsimp [t]
+    simp
+  have htTop : t ≠ ∞ := by
+    dsimp [t]
+    exact ENNReal.natCast_ne_top _
+  have hpn' : p n ≤ (n + 1) ^ (k + 1) := by
+    calc
+      p n ≤ c * (n + 1) ^ k := hpn
+      _ ≤ (n + 1) * (n + 1) ^ k := by
+        apply Nat.mul_le_mul_right
+        omega
+      _ = (n + 1) ^ (k + 1) := by rw [pow_succ]; ac_rfl
+  have hcast : (p n : ℝ≥0∞) ≤ t ^ (k + 1) := by
+    dsimp [t]
+    exact_mod_cast hpn'
+  have hεn' : ε n ≤ invPoly (j + k + 2) n := by
+    simpa [Nat.add_assoc] using hεn
+  have hcancel : t ^ (k + 1) * invPoly (j + k + 2) n =
+      invPoly (j + 1) n := by
+    change t ^ (k + 1) * (t ^ (j + k + 2))⁻¹ = (t ^ (j + 1))⁻¹
+    have hfactor : (t ^ (j + k + 2))⁻¹ =
+        (t⁻¹) ^ (k + 1) * (t⁻¹) ^ (j + 1) := by
+      rw [ENNReal.inv_pow, show j + k + 2 = (k + 1) + (j + 1) by omega]
+      exact pow_add _ _ _
+    rw [hfactor]
+    calc
+      t ^ (k + 1) * (t⁻¹ ^ (k + 1) * t⁻¹ ^ (j + 1)) =
+          (t * t⁻¹) ^ (k + 1) * t⁻¹ ^ (j + 1) := by rw [mul_pow]; ac_rfl
+      _ = (t ^ (j + 1))⁻¹ := by
+        rw [ENNReal.mul_inv_cancel ht0 htTop, one_pow, one_mul, ENNReal.inv_pow]
+  calc
+    (p n : ℝ≥0∞) * ε n ≤ t ^ (k + 1) * invPoly (j + k + 2) n :=
+      mul_le_mul hcast hεn' zero_le zero_le
+    _ = invPoly (j + 1) n := hcancel
 
 end Negligible

@@ -80,4 +80,14 @@ theorem mul {r s : Nat → Nat}
     _ = (c₁ * c₂) * ((n + 1) ^ k₁ * (n + 1) ^ k₂) := by ac_rfl
     _ = (c₁ * c₂) * (n + 1) ^ (k₁ + k₂) := by rw [pow_add]
 
+/-- A fixed natural power of a polynomially bounded profile remains
+polynomially bounded. -/
+theorem pow {r : Nat → Nat} (hr : PolynomiallyBounded r) (d : Nat) :
+    PolynomiallyBounded (fun n => (r n) ^ d) := by
+  induction d with
+  | zero =>
+      simpa only [pow_zero] using (const 1)
+  | succ d ih =>
+      simpa only [pow_succ] using (mul ih hr)
+
 end PolynomiallyBounded

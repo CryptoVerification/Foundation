@@ -17,11 +17,14 @@ import Foundation.Examples.ReductionComposition
 import Foundation.Examples.Relations
 import Foundation.Examples.Negligible
 import Foundation.Examples.PolynomiallyBounded
+import Foundation.Examples.PolynomialAdvantage
 import Foundation.Examples.AdversaryFamily
 import Foundation.Examples.ResourceMeasure
 import Foundation.Examples.SecureOnWithin
 import Foundation.Examples.ReductionResources
 import Foundation.Examples.AsymptoticReduction
+import Foundation.Examples.ResourceReduction
+import Foundation.Examples.ResourceReductionComposition
 import Foundation.Notions.PKE.Basic
 import Foundation.Notions.PKE.INDCPA
 import Foundation.Notions.PKE.Examples

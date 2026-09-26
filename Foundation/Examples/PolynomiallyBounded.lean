@@ -19,6 +19,11 @@ example : PolynomiallyBounded (fun n => n * n + 3 * n + 7) := by
         PolynomiallyBounded.id))
     (PolynomiallyBounded.const 7)
 
+example : PolynomiallyBounded (fun n => (n + 7) ^ 3) :=
+  PolynomiallyBounded.pow
+    (PolynomiallyBounded.add PolynomiallyBounded.id
+      (PolynomiallyBounded.const 7)) 3
+
 /-- An arbitrary finite prefix does not affect the growth condition. -/
 example : PolynomiallyBounded
     (fun n => if n < 100 then 10 ^ 20 else n * n) := by
