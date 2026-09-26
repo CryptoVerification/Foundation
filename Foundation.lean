@@ -7,6 +7,7 @@ import Foundation.Asymptotics.Negligible
 import Foundation.Asymptotics.PolynomiallyBounded
 import Foundation.Asymptotics.AdvantageBound
 import Foundation.Resource.Adversary
+import Foundation.Resource.Uniformity
 import Foundation.Resource.Measure
 import Foundation.Resource.Reduction
 import Foundation.Security.Asymptotic
@@ -19,6 +20,8 @@ import Foundation.Examples.Negligible
 import Foundation.Examples.PolynomiallyBounded
 import Foundation.Examples.PolynomialAdvantage
 import Foundation.Examples.AdversaryFamily
+import Foundation.Examples.UniformAdversary
+import Foundation.Examples.UniformPolynomialAdversary
 import Foundation.Examples.ResourceMeasure
 import Foundation.Examples.SecureOnWithin
 import Foundation.Examples.ReductionResources

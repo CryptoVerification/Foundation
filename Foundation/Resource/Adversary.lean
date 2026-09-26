@@ -26,6 +26,11 @@ namespace AdversaryClass
 def all (P : CryptoGoal.{u}) : AdversaryClass P where
   admissible := fun _ _ => True
 
+/-- Admit exactly the adversary families satisfying both classes'
+admissibility conditions. -/
+def inter {P : CryptoGoal.{u}} (C D : AdversaryClass P) : AdversaryClass P where
+  admissible := fun F A => C.admissible F A ∧ D.admissible F A
+
 end AdversaryClass
 
 /-- A concrete bound for every admissible adversary family on `F`.
