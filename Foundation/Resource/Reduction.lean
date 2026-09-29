@@ -34,6 +34,21 @@ structure PreservesAdmissibility {P : CryptoGoal.{u}} {Q : CryptoGoal.{v}}
     CP.admissible F A →
       CQ.admissible (R.mapFamily F) (R.mapAdversaryFamily F A)
 
+namespace PreservesAdmissibility
+
+/-- Preservation of each condition gives preservation of their intersection. -/
+theorem inter {P : CryptoGoal.{u}} {Q : CryptoGoal.{v}}
+    {R : Reduction P Q} {C₁ C₂ : AdversaryClass P}
+    {D₁ D₂ : AdversaryClass Q}
+    (h₁ : R.PreservesAdmissibility C₁ D₁)
+    (h₂ : R.PreservesAdmissibility C₂ D₂) :
+    R.PreservesAdmissibility (C₁.inter C₂) (D₁.inter D₂) := by
+  constructor
+  intro F A hA
+  exact ⟨h₁.preserves F A hA.1, h₂.preserves F A hA.2⟩
+
+end PreservesAdmissibility
+
 /-- Every reduction preserves admissibility into a class accepting all
 target adversary families. -/
 theorem preservesAdmissibility_allTarget
