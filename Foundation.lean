@@ -1,4 +1,6 @@
 import Foundation.Basic
+import Foundation.Probability.Comp
+import Foundation.Examples.Probability
 import Foundation.Core.Goal
 import Foundation.Core.Bound
 import Foundation.Core.Reduction
@@ -48,6 +50,8 @@ import Foundation.Examples.ResourceReduction
 import Foundation.Examples.ResourceReductionComposition
 import Foundation.Notions.PKE.Basic
 import Foundation.Notions.PKE.INDCPA
+import Foundation.Notions.PKE.ConcreteINDCPA
+import Foundation.Notions.PKE.ConcreteINDCPAExamples
 import Foundation.Notions.PKE.Examples
 import Foundation.Notions.PKE.INDCCA2
 import Foundation.Notions.PKE.CCAExamples
@@ -62,10 +66,18 @@ import Foundation.Notions.Signature.EUFtoStrong
 import Foundation.Notions.Signature.Relations
 import Foundation.Assumptions.DDH.Basic
 import Foundation.Assumptions.DDH.DDH
+import Foundation.Assumptions.DDH.Concrete
+import Foundation.Assumptions.DDH.ConcreteExamples
 import Foundation.Assumptions.DDH.Examples
 import Foundation.Assumptions.DDH.Structured
 import Foundation.Assumptions.DDH.StructuredExamples
 import Foundation.Constructions.ElGamal.Basic
+import Foundation.Constructions.ElGamal.Concrete
+import Foundation.Constructions.ElGamal.ConcreteExamples
+import Foundation.Constructions.ElGamal.ConcreteReduction
+import Foundation.Constructions.ElGamal.ConcreteReductionExamples
+import Foundation.Constructions.ElGamal.ConcreteSecurity
+import Foundation.Constructions.ElGamal.ConcreteSecurityExamples
 import Foundation.Constructions.ElGamal.INDCPA
 import Foundation.Constructions.ElGamal.Examples
 import Foundation.Constructions.ElGamal.ToDDH
