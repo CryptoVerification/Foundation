@@ -12,6 +12,41 @@ inductive RunsFor (p : Program) : Configuration → Configuration → Nat → Pr
       (prior : RunsFor p c d steps) (last : Step p d e) :
       RunsFor p c e (steps + 1)
 
+/-- Lift a one-cell right-reading invariant through an actual trace. This
+tracks retained input cells, including internal blanks, without replacing
+the tape by a newly parsed or reconstructed bitstring. -/
+theorem RunsFor.input_right_suffix_of_step {p : Program}
+    {start finish : Configuration} {used : Nat} (run : RunsFor p start finish used)
+    (hStep : ∀ c d, Step p c d →
+      d.inputTape.right = c.inputTape.right ∨ d.inputTape.right = c.inputTape.right.tail) :
+    ∃ count, finish.inputTape.right = start.inputTape.right.drop count := by
+  induction run with
+  | zero => exact ⟨0, rfl⟩
+  | @succ middle finish steps prior last ih =>
+      obtain ⟨count, hRight⟩ := ih
+      rcases hStep middle finish last with hSame | hTail
+      · exact ⟨count, hSame.trans hRight⟩
+      · refine ⟨count + 1, ?_⟩
+        rw [hTail, hRight, ← List.drop_one, List.drop_drop]
+
+/-- Track the whole retained input tape through instructions that only
+leave its head in place or move it one cell right. At most one such move is
+charged per operational transition. This includes the saved left cells and
+the current cell, not just a suffix of the represented right side. -/
+theorem RunsFor.input_moveRight_of_step {p : Program}
+    {start finish : Configuration} {used : Nat} (run : RunsFor p start finish used)
+    (hStep : ∀ c d, Step p c d →
+      d.inputTape = c.inputTape ∨ d.inputTape = c.inputTape.moveRight) :
+    ∃ moves, moves ≤ used ∧ finish.inputTape = (Tape.moveRight^[moves]) start.inputTape := by
+  induction run with
+  | zero => exact ⟨0, Nat.le_refl _, rfl⟩
+  | @succ middle finish steps prior last ih =>
+      obtain ⟨moves, hMoves, hInput⟩ := ih
+      rcases hStep middle finish last with hSame | hRight
+      · exact ⟨moves, by omega, hSame.trans hInput⟩
+      · refine ⟨moves + 1, by omega, ?_⟩
+        rw [hRight, hInput, Function.iterate_succ_apply']
+
 /-- Concatenate two actual machine traces. Their transition counts add;
 this does not insert bookkeeping steps after a halt. -/
 theorem RunsFor.trans {p : Program} {start middle finish : Configuration}
@@ -104,6 +139,21 @@ theorem PaddedRunsFor.toRunsFor_of_running {p : Program}
           | true => exact False.elim ((no_step_of_halted hh) step)
         exact RunsFor.succ (ih hMiddle) step
       · simp [hRunning] at hHalted
+
+/-- Remove only post-halt bookkeeping stutters from a padded branch.
+The retained trace uses actual transitions and reaches the same physical
+configuration within the original inspected bound. -/
+theorem PaddedRunsFor.toRunsFor_le {p : Program}
+    {start finish : Configuration} {steps : Nat}
+    (run : PaddedRunsFor p start finish steps) :
+    ∃ used, used ≤ steps ∧ RunsFor p start finish used := by
+  induction run with
+  | zero => exact ⟨0, Nat.le_refl _, RunsFor.zero _⟩
+  | succ prior last ih =>
+      obtain ⟨used, hUsed, actual⟩ := ih
+      rcases last with step | ⟨_hHalted, rfl⟩
+      · exact ⟨used + 1, by omega, RunsFor.succ actual step⟩
+      · exact ⟨used, by omega, actual⟩
 
 /-- Output-tape storage grows by at most one cell per real transition;
 bookkeeping stutters after halt do not grow it. -/
@@ -486,6 +536,26 @@ theorem evalConfigWithin_eq_of_le (p : Program) (start : Configuration)
       exact haltedEval c (h c ((mem_support_evalConfigWithin_iff _ _ _ _).mp hc)) _
     _ = _ := PMF.bindOnSupport_pure _
 
+/-- A halted actual trace of deterministic code certifies every padded
+branch at any larger common budget, from the same retained configuration.
+This transfers native stopping certificates to probabilistic composition
+without resetting tapes or charging artificial execution steps. -/
+theorem RunsFor.haltsFrom_of_no_randomBit {p : Program} {start target : Configuration}
+    {used budget : Nat} (run : RunsFor p start target used)
+    (hHalted : target.halted = true)
+    (hNoRandom : ∀ tape, Instruction.randomBit tape ∉ p)
+    (hBound : used ≤ budget) :
+    ∀ finish, PaddedRunsFor p start finish budget → finish.halted = true := by
+  have hEval := run.evalConfigWithin_eq_pure_of_no_randomBit hNoRandom
+  have hAt (c : Configuration) (hc : PaddedRunsFor p start c used) : c.halted = true := by
+    have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr hc
+    rw [hEval, PMF.mem_support_pure_iff] at hMem
+    simpa only [hMem] using hHalted
+  intro finish trace
+  have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr trace
+  rw [evalConfigWithin_eq_of_le _ _ _ _ hBound hAt, hEval, PMF.mem_support_pure_iff] at hMem
+  simpa only [hMem] using hHalted
+
 /-- Two halted traces of deterministic code from the same retained
 configuration have the same final configuration, even if their transition
 counts differ. No tape cells are reset or reconstructed by this theorem. -/
@@ -584,5 +654,16 @@ theorem HaltsWithin.mono {p : Program} {input : List Bool} {bound bound' : Nat}
             · exact False.elim (no_step_of_halted hMiddle hStep)
             · simpa [hEq] using hMiddle
   simpa only [Nat.add_sub_of_le hle] using hAdd (bound' - bound)
+
+/-- A stopping certificate gives an actual halted branch within its bound.
+The witness is a trace of the existing program, not newly supplied machine
+code or an uncharged reset of the starting configuration. -/
+theorem exists_halted_run_of_haltsFrom (p : Program) (start : Configuration) (bound : Nat)
+    (halts : ∀ finish, PaddedRunsFor p start finish bound → finish.halted = true) :
+    ∃ finish used, used ≤ bound ∧ RunsFor p start finish used ∧ finish.halted = true := by
+  obtain ⟨finish, hMem⟩ := (evalConfigWithin p start bound).support_nonempty
+  have padded := (mem_support_evalConfigWithin_iff _ _ _ _).mp hMem
+  obtain ⟨used, hUsed, actual⟩ := padded.toRunsFor_le
+  exact ⟨finish, used, hUsed, actual, halts finish padded⟩
 
 end Machine

@@ -124,15 +124,17 @@ theorem seekStoredInputScratch_control_closed (c d : Configuration)
   all_goals subst d
   all_goals simp [Configuration.advance, Configuration.updateTape, hIndex]
 
-/-- Three native scans stop on every finite input tape. Malformed retained
-blocks may change which blank is reached; stopping does not assume that the
-resulting head is the intended protocol scratch region. Every crossed cell
-and the final caller halt are charged, and the other tape is unchanged. -/
-theorem seekStoredInputScratch_terminates_from_anyTape (input output : Tape) :
+/-- Three native scans stop on every finite input tape and retain the exact
+successive input-head positions. The local `advance` expression describes
+the proved native scan; it is not an additional machine instruction. -/
+theorem seekStoredInputScratch_terminates_with_input_layout (input output : Tape) :
+    let advance := fun t : Tape =>
+      (Tape.moveRight^[((t.current :: t.right).takeWhile Option.isSome).length + 1]) t
     ∃ finish used, used ≤ 100 * (input.cells + output.cells) + 100 ∧
       RunsFor seekStoredInputScratch
         ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
-      finish.halted = true ∧ finish.outputTape = output := by
+      finish.halted = true ∧ finish.outputTape = output ∧
+      finish.inputTape = advance (advance (advance input)) := by
   obtain ⟨first, t₁, h₁, run₁, halt₁, output₁⟩ :=
     GuardedCompiler.seekScratchInput_terminates_from_anyTape input output
   obtain ⟨second, t₂, h₂, run₂, halt₂, output₂⟩ :=
@@ -161,13 +163,34 @@ theorem seekStoredInputScratch_terminates_from_anyTape (input output : Tape) :
       Program.asSubroutine, Instruction.asSubroutine, Configuration.resumeAt, finish, Instruction.next]
   refine ⟨finish, t₁ + t₂ + t₃ + 1, ?_,
     RunsFor.succ ((firstRun.trans secondRun).trans thirdRun) last, rfl,
-    output₃.trans (output₂.trans output₁)⟩
-  have storage₁ := GuardedCompiler.sourceStorage_le_of_run run₁
-  have storage₂ := GuardedCompiler.sourceStorage_le_of_run run₂
-  change first.inputTape.cells + first.outputTape.cells ≤ input.cells + output.cells + t₁ at storage₁
-  change second.inputTape.cells + second.outputTape.cells ≤
-    first.inputTape.cells + first.outputTape.cells + t₂ at storage₂
-  omega
+    output₃.trans (output₂.trans output₁), ?_⟩
+  · have storage₁ := GuardedCompiler.sourceStorage_le_of_run run₁
+    have storage₂ := GuardedCompiler.sourceStorage_le_of_run run₂
+    change first.inputTape.cells + first.outputTape.cells ≤ input.cells + output.cells + t₁ at storage₁
+    change second.inputTape.cells + second.outputTape.cells ≤
+      first.inputTape.cells + first.outputTape.cells + t₂ at storage₂
+    omega
+  · have hFirst := (GuardedCompiler.seekScratchInput_halted_input_layout
+      input output first t₁ run₁ halt₁).1
+    have hSecond := (GuardedCompiler.seekScratchInput_halted_input_layout
+      first.inputTape first.outputTape second t₂ run₂ halt₂).1
+    have hThird := (GuardedCompiler.seekScratchInput_halted_input_layout
+      second.inputTape second.outputTape third t₃ run₃ halt₃).1
+    dsimp only [finish]
+    rw [hThird, hSecond, hFirst]
+
+/-- Three native scans stop on every finite input tape. Malformed retained
+blocks may change which blank is reached; stopping does not assume that the
+resulting head is the intended protocol scratch region. Every crossed cell
+and the final caller halt are charged, and the other tape is unchanged. -/
+theorem seekStoredInputScratch_terminates_from_anyTape (input output : Tape) :
+    ∃ finish used, used ≤ 100 * (input.cells + output.cells) + 100 ∧
+      RunsFor seekStoredInputScratch
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true ∧ finish.outputTape = output := by
+  obtain ⟨finish, used, hBound, run, hHalted, hOutput, _⟩ :=
+    seekStoredInputScratch_terminates_with_input_layout input output
+  exact ⟨finish, used, hBound, run, hHalted, hOutput⟩
 
 theorem seekStoredInputScratch_haltsFrom_anyTape (input output : Tape) (finish : Configuration)
     (run : PaddedRunsFor seekStoredInputScratch

@@ -110,15 +110,22 @@ theorem prepareMessageSelectionFinish_output (beforeInput beforeOutput : List (O
 /-- Complete two-branch distribution for native rewind and selection on
 arbitrary finite tapes. Output storage depends only on the one native fair
 bit and two charged head moves, even when input fields are malformed. -/
-theorem prepareMessageSelection_eval_anyTape (input output : Tape) :
+theorem prepareMessageSelection_eval_with_input_layout (input output : Tape) :
     ∃ finish : Bool → Configuration,
       evalConfigWithin prepareMessageSelection
         ({ inputTape := input, outputTape := output } : Configuration)
         (40 * (input.cells + output.cells) + 50) = Foundation.Probability.sampleBit.map finish ∧
       ∀ bit, (finish bit).halted = true ∧
-        (finish bit).outputTape = (output.write (some bit)).moveRight.moveRight := by
-  obtain ⟨rewound, rewindTime, hRewindTime, hRewindRun, hRewindHalt, hRewindOutput⟩ :=
-    rewindBitstring_terminates_from input output
+        (finish bit).outputTape = (output.write (some bit)).moveRight.moveRight ∧
+        ∀ (raw : List Bool) (blanks : Nat),
+          input.current :: input.right = raw.map some ++ none :: List.replicate blanks none →
+          ∃ (remaining : List Bool) (padding : Nat),
+            (finish bit).inputTape.current :: (finish bit).inputTape.right =
+              remaining.map some ++ none :: List.replicate padding none := by
+  obtain ⟨rewound, leading, _saved, hLeading, hRewindRun, hRewindHalt, hRewindInput, hRewindOutput⟩ :=
+    rewindBitstring_terminates_with_layout input output
+  let rewindTime := 2 * leading.length + 4
+  have hRewindTime : rewindTime ≤ 2 * input.left.length + 4 := by dsimp only [rewindTime]; omega
   let pre := rewindBitstring.asSubroutine 0 5
   let start := rewound.resumeAt 0
   let selectionTime := 4 * rewound.inputTape.cells + 21
@@ -167,8 +174,36 @@ theorem prepareMessageSelection_eval_anyTape (input output : Tape) :
   refine ⟨fun bit => { selected bit with pc := 23, halted := true }, ?_, ?_⟩
   · rw [evalConfigWithin_eq_of_le _ _ _ _ hBound hAt, hLaw]
   · intro bit
-    exact ⟨rfl, (hSelectedFinish bit).2.trans
-      (congrArg (fun tape : Tape => (tape.write (some bit)).moveRight.moveRight) hRewindOutput)⟩
+    refine ⟨rfl, (hSelectedFinish bit).2.trans
+      (congrArg (fun tape : Tape => (tape.write (some bit)).moveRight.moveRight) hRewindOutput), ?_⟩
+    intro raw blanks hForward
+    have hRewoundForward : rewound.inputTape.current :: rewound.inputTape.right =
+        (leading ++ raw).map some ++ none :: List.replicate blanks none := by
+      rw [hRewindInput]
+      cases leading <;> cases raw <;> simp [Tape.moveRight, List.cons_append, List.map_append, hForward]
+    have hMem : selected bit ∈ (evalConfigWithin selectMessage start selectionTime).support := by
+      rw [hSelected, PMF.mem_support_map_iff]
+      exact ⟨bit, by simp [Foundation.Probability.sampleBit, Foundation.Probability.uniform], rfl⟩
+    obtain ⟨moves, _hMoves, hMoved⟩ := selectMessage_input_moveRight
+      ((mem_support_evalConfigWithin_iff _ _ _ _).mp hMem)
+    change ∃ (remaining : List Bool) (padding : Nat),
+      (selected bit).inputTape.current :: (selected bit).inputTape.right =
+        remaining.map some ++ none :: List.replicate padding none
+    rw [hMoved]
+    exact moveRight_iterate_raw_frontier rewound.inputTape (leading ++ raw) blanks moves hRewoundForward
+
+
+/-- The original complete two-branch law remains available without the
+additional raw-input frontier postcondition. -/
+theorem prepareMessageSelection_eval_anyTape (input output : Tape) :
+    ∃ finish : Bool → Configuration,
+      evalConfigWithin prepareMessageSelection
+        ({ inputTape := input, outputTape := output } : Configuration)
+        (40 * (input.cells + output.cells) + 50) = Foundation.Probability.sampleBit.map finish ∧
+      ∀ bit, (finish bit).halted = true ∧
+        (finish bit).outputTape = (output.write (some bit)).moveRight.moveRight := by
+  obtain ⟨finish, hEval, hFinish⟩ := prepareMessageSelection_eval_with_input_layout input output
+  exact ⟨finish, hEval, fun bit => ⟨(hFinish bit).1, (hFinish bit).2.1⟩⟩
 
 /-- Rewind and fair-bit message selection stop on arbitrary retained finite
 tapes. Canonical normalized-response validity is not a premise. -/

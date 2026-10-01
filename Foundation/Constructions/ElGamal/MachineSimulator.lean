@@ -36,8 +36,8 @@ theorem simulatorCode_length (N : RepresentedChooseNormalizer M) (source : Progr
 
 /-- The finite common branch bound of the actual simulator invocation.
 This is a step-count specification, not code used to manufacture the reply.
-Polynomial closure and universal malformed-input termination remain
-separate obligations; this definition does not claim `PolynomialTime`. -/
+Polynomial closure and universal malformed-input termination are proved
+in `MachineSimulatorRuntime`; the definition itself is analysis data. -/
 def simulatorTailBudget (N : RepresentedChooseNormalizer M) (source : Program) (q : Nat → Nat)
     (n : Nat) (x : X n) (first second last : (embed n x).params.Element) : Nat :=
   let I := (M.instanceCode n).encode x
@@ -109,8 +109,8 @@ theorem nativeSimulator_eval (N : RepresentedChooseNormalizer M) (source : Progr
 
 /-- Universal halting over the source choose, normalizer, native challenge,
 group multiplication and source guess branches on this encoded tuple.
-This valid-input certificate is distinct from an all-bitstring polynomial
-time theorem, which also has to cover malformed DDH requests. -/
+This pointwise certificate supplies semantic evaluation fuel. The separate
+`nativeSimulator_polynomialTime` theorem also covers malformed DDH requests. -/
 theorem nativeSimulator_haltsWithin (N : RepresentedChooseNormalizer M) (source : Program) (q : Nat → Nat)
     (hSource : ∀ input, HaltsWithin source input (q input.length))
     (n : Nat) (x : X n) (first second last : (embed n x).params.Element) :

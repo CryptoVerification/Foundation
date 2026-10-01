@@ -4,23 +4,8 @@ import Foundation.Machine.GuardedOutput
 
 namespace Machine
 
-private theorem inputRightSuffix_of_run {p : Program} {start finish : Configuration} {used : Nat}
-    (run : RunsFor p start finish used)
-    (hStep : ∀ c d, Step p c d →
-      d.inputTape.right = c.inputTape.right ∨ d.inputTape.right = c.inputTape.right.tail) :
-    ∃ count, finish.inputTape.right = start.inputTape.right.drop count := by
-  induction run with
-  | zero => exact ⟨0, rfl⟩
-  | @succ middle finish steps prior last ih =>
-      obtain ⟨count, hRight⟩ := ih
-      rcases hStep middle finish last with hSame | hTail
-      · exact ⟨count, hSame.trans hRight⟩
-      · refine ⟨count + 1, ?_⟩
-        rw [hTail, hRight]
-        rw [← List.drop_one, List.drop_drop]
-
-private theorem skipUnary_step_inputRight (c d : Configuration) (step : Step skipUnary c d) :
-    d.inputTape.right = c.inputTape.right ∨ d.inputTape.right = c.inputTape.right.tail := by
+private theorem skipUnary_step_input_moveRight (c d : Configuration) (step : Step skipUnary c d) :
+    d.inputTape = c.inputTape ∨ d.inputTape = c.inputTape.moveRight := by
   have hActive : c.halted = false := by
     cases h : c.halted with
     | false => rfl
@@ -33,8 +18,7 @@ private theorem skipUnary_step_inputRight (c d : Configuration) (step : Step ski
     all_goals subst d
     all_goals first
       | exact Or.inl rfl
-      | apply Or.inr; cases hRight : c.inputTape.right <;>
-          simp [Configuration.updateTape, Configuration.advance, Tape.moveRight, hRight]
+      | exact Or.inr rfl
   · have hNone : skipUnary[c.pc]? = none := by
       apply List.getElem?_eq_none
       change 6 ≤ c.pc
@@ -43,8 +27,8 @@ private theorem skipUnary_step_inputRight (c d : Configuration) (step : Step ski
     subst d
     exact Or.inl rfl
 
-private theorem skipFrame_step_inputRight (c d : Configuration) (step : Step skipFrame c d) :
-    d.inputTape.right = c.inputTape.right ∨ d.inputTape.right = c.inputTape.right.tail := by
+private theorem skipFrame_step_input_moveRight (c d : Configuration) (step : Step skipFrame c d) :
+    d.inputTape = c.inputTape ∨ d.inputTape = c.inputTape.moveRight := by
   have hActive : c.halted = false := by
     cases h : c.halted with
     | false => rfl
@@ -57,8 +41,7 @@ private theorem skipFrame_step_inputRight (c d : Configuration) (step : Step ski
     all_goals subst d
     all_goals first
       | exact Or.inl rfl
-      | apply Or.inr; cases hRight : c.inputTape.right <;>
-          simp [Configuration.updateTape, Configuration.advance, Tape.moveRight, hRight]
+      | exact Or.inr rfl
   · have hNone : skipFrame[c.pc]? = none := by
       apply List.getElem?_eq_none
       change 13 ≤ c.pc
@@ -72,14 +55,38 @@ right are an actual suffix of the original cells, including internal blanks. -/
 theorem skipUnary_input_right_suffix {start finish : Configuration} {used : Nat}
     (run : RunsFor skipUnary start finish used) :
     ∃ count, finish.inputTape.right = start.inputTape.right.drop count :=
-  inputRightSuffix_of_run run skipUnary_step_inputRight
+  run.input_right_suffix_of_step (fun c d step => by
+    rcases skipUnary_step_input_moveRight c d step with hSame | hRight
+    · exact Or.inl (congrArg Tape.right hSame)
+    · apply Or.inr
+      rw [hRight]
+      cases hCells : c.inputTape.right <;> simp [Tape.moveRight, hCells])
 
 /-- Frame scanning may consume a truncated payload past a separator, but
 does not write or move left on the input tape. This tracks its exact suffix. -/
 theorem skipFrame_input_right_suffix {start finish : Configuration} {used : Nat}
     (run : RunsFor skipFrame start finish used) :
     ∃ count, finish.inputTape.right = start.inputTape.right.drop count :=
-  inputRightSuffix_of_run run skipFrame_step_inputRight
+  run.input_right_suffix_of_step (fun c d step => by
+    rcases skipFrame_step_input_moveRight c d step with hSame | hRight
+    · exact Or.inl (congrArg Tape.right hSame)
+    · apply Or.inr
+      rw [hRight]
+      cases hCells : c.inputTape.right <;> simp [Tape.moveRight, hCells])
+
+/-- The unary reader advances the whole retained input tape by actual
+one-cell moves. The number of moves is bounded by the charged trace length. -/
+theorem skipUnary_input_moveRight {start finish : Configuration} {used : Nat}
+    (run : RunsFor skipUnary start finish used) :
+    ∃ moves, moves ≤ used ∧ finish.inputTape = (Tape.moveRight^[moves]) start.inputTape :=
+  run.input_moveRight_of_step skipUnary_step_input_moveRight
+
+/-- The frame reader may cross separators on malformed data, but its input
+head still only moves right. Saved input cells are never replaced. -/
+theorem skipFrame_input_moveRight {start finish : Configuration} {used : Nat}
+    (run : RunsFor skipFrame start finish used) :
+    ∃ moves, moves ≤ used ∧ finish.inputTape = (Tape.moveRight^[moves]) start.inputTape :=
+  run.input_moveRight_of_step skipFrame_step_input_moveRight
 
 /-- Physical layout fixture only: caller data can follow a frame through
 blank separators. No instruction loads or normalizes this whole list. -/

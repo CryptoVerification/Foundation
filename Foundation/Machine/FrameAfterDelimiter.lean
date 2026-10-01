@@ -31,15 +31,19 @@ def writeFrameAfterFalseSteps (bits : List Bool) : Nat :=
   3 + writeFrameSteps bits + (2 * bits.length + 4) + 4
 
 set_option maxHeartbeats 600000 in
-theorem writeFrameAfterFalse_runs (savedInput beforeOutput tail : List (Option Bool))
-    (bits : List Bool) (blanks : Nat) :
-    RunsFor writeFrameAfterFalse (writeFrameAfterFalseStart savedInput beforeOutput tail bits blanks)
+private theorem writeFrameAfterFalse_runs_presumed (savedInput beforeOutput tail : List (Option Bool))
+    (bits : List Bool) (blanks : Nat) (previous : Option Bool) :
+    RunsFor writeFrameAfterFalse
+      { (writeFrameAfterFalseStart savedInput beforeOutput tail bits blanks) with
+        inputTape := { afterDelimiterTape savedInput tail bits with left := previous :: savedInput } }
       (writeFrameAfterFalseFinish savedInput beforeOutput tail bits blanks) (writeFrameAfterFalseSteps bits) := by
-  let start := writeFrameAfterFalseStart savedInput beforeOutput tail bits blanks
+  let start : Configuration :=
+    { (writeFrameAfterFalseStart savedInput beforeOutput tail bits blanks) with
+      inputTape := { afterDelimiterTape savedInput tail bits with left := previous :: savedInput } }
   let delimiter : Configuration :=
     { pc := 1, inputTape := {
         left := savedInput
-        current := some false
+        current := previous
         right := bits.map some ++ none :: tail }, outputTape := start.outputTape }
   let erased : Configuration :=
     { delimiter with pc := 2, inputTape := delimiter.inputTape.write none }
@@ -106,10 +110,84 @@ theorem writeFrameAfterFalse_runs (savedInput beforeOutput tail : List (Option B
     ((beforeFrame.trans hFrame).trans hRewind) hBack) hRestore) hForward) hHalt
   simpa only [writeFrameAfterFalseSteps] using run
 
+/-- The correctly delimited fixture is the false-cell specialization of
+an actual trace which also permits any presumed preceding delimiter. -/
+theorem writeFrameAfterFalse_runs (savedInput beforeOutput tail : List (Option Bool))
+    (bits : List Bool) (blanks : Nat) :
+    RunsFor writeFrameAfterFalse (writeFrameAfterFalseStart savedInput beforeOutput tail bits blanks)
+      (writeFrameAfterFalseFinish savedInput beforeOutput tail bits blanks) (writeFrameAfterFalseSteps bits) :=
+  writeFrameAfterFalse_runs_presumed savedInput beforeOutput tail bits blanks (some false)
+
 theorem writeFrameAfterFalse_no_randomBit (tape : TapeId) :
     Instruction.randomBit tape ∉ writeFrameAfterFalse := by
   simp [writeFrameAfterFalse, writeFrame, writeFrameHeader, copyBitstring,
     rewindBitstring, Program.asSubroutine, Instruction.asSubroutine]
+
+private theorem afterDelimiter_cells_split (cells : List (Option Bool)) :
+    ∃ (bits : List Bool) (tail : List (Option Bool)),
+      ∀ i, cells.getD i none = (bits.map some ++ none :: tail).getD i none := by
+  induction cells with
+  | nil => exact ⟨[], [], fun i => by cases i <;> simp⟩
+  | cons cell rest ih =>
+      cases cell with
+      | none => exact ⟨[], rest, fun _ => rfl⟩
+      | some bit =>
+          obtain ⟨bits, tail, hCells⟩ := ih
+          refine ⟨bit :: bits, tail, ?_⟩
+          intro i
+          cases i with
+          | zero => rfl
+          | succ i => simpa only [List.map_cons, List.cons_append, List.getD_cons_succ] using hCells i
+
+/-- Temporarily erasing the presumed preceding delimiter and then framing
+and rewinding restores the current and right-hand input cells, even on
+malformed data. The preceding cell is deliberately written as false, so
+this does not claim preservation of the saved left prefix. An absent outer
+blank can become represented; equality is therefore of physical cells. -/
+theorem writeFrameAfterFalse_halted_input_cells (input : Tape)
+    (beforeOutput : List (Option Bool)) (blanks : Nat)
+    {finish : Configuration} {used : Nat}
+    (run : RunsFor writeFrameAfterFalse
+      ({ inputTape := input,
+         outputTape := { left := beforeOutput, right := List.replicate blanks none } } : Configuration)
+      finish used) (hHalted : finish.halted = true) :
+    finish.inputTape.current = input.current ∧
+      ∀ i, finish.inputTape.right.getD i none = input.right.getD i none := by
+  obtain ⟨bits, tail, hCells⟩ := afterDelimiter_cells_split (input.current :: input.right)
+  let saved := input.left.tail
+  let previous := input.left.headD none
+  let start : Configuration :=
+    { (writeFrameAfterFalseStart saved beforeOutput tail bits blanks) with
+      inputTape := { afterDelimiterTape saved tail bits with left := previous :: saved } }
+  have hCurrent : start.inputTape.current = input.current := by
+    have h := hCells 0
+    cases bits <;> simpa [start, afterDelimiterTape, Tape.moveRight] using h.symm
+  have hRight : ∀ i, start.inputTape.right.getD i none = input.right.getD i none := by
+    intro i
+    have h := hCells (i + 1)
+    cases bits <;> simpa [start, afterDelimiterTape, Tape.moveRight] using h.symm
+  have hLeft : ∀ i, start.inputTape.left.getD i none = input.left.getD i none := by
+    intro i
+    change (previous :: saved).getD i none = input.left.getD i none
+    dsimp only [previous, saved]
+    cases h : input.left with
+    | nil => cases i <;> simp
+    | cons cell rest => simp
+  have hEntry : start.Equivalent
+      ({ inputTape := input,
+         outputTape := { left := beforeOutput, right := List.replicate blanks none } } : Configuration) :=
+    ⟨rfl, rfl, ⟨hCurrent, hLeft, hRight⟩, Tape.Equivalent.refl _⟩
+  have exactRun := writeFrameAfterFalse_runs_presumed saved beforeOutput tail bits blanks previous
+  change RunsFor writeFrameAfterFalse start
+    (writeFrameAfterFalseFinish saved beforeOutput tail bits blanks) (writeFrameAfterFalseSteps bits) at exactRun
+  obtain ⟨actual, actualRun, hActual⟩ := exactRun.exists_equivalent hEntry
+  have hActualHalt : actual.halted = true := hActual.2.1.symm
+  have hUnique := run.halted_finish_eq_of_no_randomBit actualRun
+    hHalted hActualHalt writeFrameAfterFalse_no_randomBit
+  rw [hUnique]
+  refine ⟨hActual.2.2.1.1.symm.trans hCurrent, ?_⟩
+  intro i
+  exact (hActual.2.2.1.2.2 i).symm.trans (hRight i)
 
 theorem writeFrameAfterFalse_eval (savedInput beforeOutput tail : List (Option Bool))
     (bits : List Bool) (blanks : Nat) :
@@ -161,11 +239,15 @@ theorem writeFrameAfterFalse_control_closed (c d : Configuration)
 /-- Temporarily editing the presumed delimiter is also safe for stopping on
 arbitrary finite tapes. Malformed data need not be serialized correctly;
 the actual frame and rewind subroutines still have finite linear cost. -/
-theorem writeFrameAfterFalse_terminates_from_anyTape (input output : Tape) :
+private theorem writeFrameAfterFalse_terminates_layout_core (input output : Tape) :
     ∃ finish used, used ≤ 100000 * (input.cells + output.cells) + 100000 ∧
       RunsFor writeFrameAfterFalse
         ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
-      finish.halted = true := by
+      finish.halted = true ∧
+      (∀ beforeOutput blanks,
+        output = ({ left := beforeOutput, right := List.replicate blanks none } : Tape) →
+        ∃ saved remaining,
+          finish.outputTape = { left := saved, right := List.replicate remaining none }) := by
   let moved : Configuration := { pc := 1, inputTape := input.moveLeft, outputTape := output }
   let erased : Configuration := { moved with pc := 2, inputTape := moved.inputTape.write none }
   let frameStart : Configuration := { erased with pc := 3, inputTape := erased.inputTape.moveRight }
@@ -190,7 +272,7 @@ theorem writeFrameAfterFalse_terminates_from_anyTape (input output : Tape) :
     (by change 0 < 24; decide) rfl frameHalt writeFrame_control_closed
   change RunsFor writeFrameAfterFalse frameStart (framed.resumeAt 28) frameTime at hFrame
   have toRewind := toFrame.trans hFrame
-  obtain ⟨rewound, rewindTime, hRewindTime, rewindRun, rewindHalt, _rewindOutput⟩ :=
+  obtain ⟨rewound, rewindTime, hRewindTime, rewindRun, rewindHalt, rewindOutput⟩ :=
     rewindBitstring_terminates_from framed.inputTape framed.outputTape
   have hRewind := rewindRun.withSubroutine_halted_of_closed
     ([.moveLeft .input, .erase .input, .moveRight .input] ++ writeFrame.asSubroutine 3 28)
@@ -216,7 +298,7 @@ theorem writeFrameAfterFalse_terminates_from_anyTape (input output : Tape) :
   have g : Step writeFrameAfterFalse forward finish := by
     have code : writeFrameAfterFalse[36]? = some .halt := rfl
     simp [Step, successors, next, code, forward, finish, Instruction.next]
-  refine ⟨finish, 3 + frameTime + rewindTime + 4, ?_, ?_, rfl⟩
+  refine ⟨finish, 3 + frameTime + rewindTime + 4, ?_, ?_, rfl, ?_⟩
   · have firstStorage := GuardedCompiler.sourceStorage_le_of_run toFrame
     change frameStart.inputTape.cells + frameStart.outputTape.cells ≤ input.cells + output.cells + 3 at firstStorage
     have frameStorage := GuardedCompiler.sourceStorage_le_of_run toRewind
@@ -226,5 +308,63 @@ theorem writeFrameAfterFalse_terminates_from_anyTape (input output : Tape) :
     omega
   · exact RunsFor.succ (RunsFor.succ (RunsFor.succ
       (RunsFor.succ (toRewind.trans hRewind) d) e) f) g
+  · intro beforeOutput blanks hOutput
+    obtain ⟨exactFrame, exactTime, saved, remaining, _hTime, exactRun,
+      exactHalt, _exactBlank, exactOutput⟩ :=
+      writeFrame_terminates_with_layout frameStart.inputTape beforeOutput blanks
+    have hEntry :
+        ({ inputTape := frameStart.inputTape,
+           outputTape := { left := beforeOutput, right := List.replicate blanks none } } : Configuration) =
+        ({ inputTape := frameStart.inputTape, outputTape := frameStart.outputTape } : Configuration) := by
+      simp only [frameStart, erased, moved]
+      rw [hOutput]
+    rw [hEntry] at exactRun
+    have hFrameEq := frameRun.halted_finish_eq_of_no_randomBit exactRun
+      frameHalt exactHalt writeFrame_no_randomBit
+    refine ⟨saved, remaining, ?_⟩
+    change rewound.outputTape = _
+    rw [rewindOutput, hFrameEq, exactOutput]
+
+/-- Delimiter editing and restoration terminate on arbitrary finite input
+and output tapes. This stopping theorem imposes no protocol validity. -/
+theorem writeFrameAfterFalse_terminates_from_anyTape (input output : Tape) :
+    ∃ finish used, used ≤ 100000 * (input.cells + output.cells) + 100000 ∧
+      RunsFor writeFrameAfterFalse
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true := by
+  obtain ⟨finish, used, hBound, run, hHalted, _hLayout⟩ :=
+    writeFrameAfterFalse_terminates_layout_core input output
+  exact ⟨finish, used, hBound, run, hHalted⟩
+
+/-- Framing after the presumed delimiter preserves a fresh output frontier
+on every finite input tape. The delimiter may be missing or malformed;
+all editing, framing, and rewind transitions are the existing native code.
+No successful parsing or restoration of invalid input is asserted. -/
+theorem writeFrameAfterFalse_terminates_with_output_layout (input : Tape)
+    (beforeOutput : List (Option Bool)) (blanks : Nat) :
+    ∃ finish used saved remaining,
+      used ≤ 100000 *
+        (input.cells + ({ left := beforeOutput, right := List.replicate blanks none } : Tape).cells) + 100000 ∧
+      RunsFor writeFrameAfterFalse
+        ({ inputTape := input,
+           outputTape := { left := beforeOutput, right := List.replicate blanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧
+      finish.outputTape = { left := saved, right := List.replicate remaining none } := by
+  obtain ⟨finish, used, hBound, run, hHalted, hLayout⟩ :=
+    writeFrameAfterFalse_terminates_layout_core input
+      { left := beforeOutput, right := List.replicate blanks none }
+  obtain ⟨saved, remaining, hOutput⟩ := hLayout beforeOutput blanks rfl
+  exact ⟨finish, used, saved, remaining, hBound, run, hHalted, hOutput⟩
+
+
+/-- Every padded execution from the retained caller tapes has halted at the
+same displayed budget. This uses the actual deterministic stopping trace. -/
+theorem writeFrameAfterFalse_haltsFrom_anyTape (input output : Tape) (finish : Configuration)
+    (trace : PaddedRunsFor writeFrameAfterFalse
+      ({ inputTape := input, outputTape := output } : Configuration) finish
+      (100000 * (input.cells + output.cells) + 100000)) : finish.halted = true := by
+  obtain ⟨target, used, hBound, run, hHalted⟩ :=
+    writeFrameAfterFalse_terminates_from_anyTape input output
+  exact run.haltsFrom_of_no_randomBit hHalted writeFrameAfterFalse_no_randomBit hBound finish trace
 
 end Machine

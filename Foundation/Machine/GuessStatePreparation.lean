@@ -111,4 +111,97 @@ theorem prepareGuessState_control_closed (c d : Configuration)
   all_goals subst d
   all_goals simp [Configuration.advance, Configuration.updateTape, hIndex]
 
+
+/-- Restoring three retained blocks and locating the state are safe for
+stopping on any finite caller tapes. Malformed choose data can change the
+located cells, but cannot invalidate the actual linear-time scan bound. -/
+theorem prepareGuessState_terminates_from_anyTape (input output : Tape) :
+    ∃ finish used, used ≤ 1000000 * (input.cells + output.cells) + 1000000 ∧
+      RunsFor prepareGuessState
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true ∧ finish.outputTape = output := by
+  obtain ⟨restored, restoreTime, hRestoreTime, restoreRun, restoreHalt, restoreOutput⟩ :=
+    restoreStoredInput_terminates_from_anyTape input output
+  obtain ⟨located, locateTime, hLocateTime, locateRun, locateHalt, locateOutput⟩ :=
+    prepareCanonicalState_terminates_from_anyTape restored.inputTape restored.outputTape
+  have hRestore := restoreRun.withSubroutine_halted_of_closed
+    [] restoreStoredInput (prepareCanonicalState.asSubroutine 19 38 ++ [.halt]) 19
+    (by change 0 < 18; decide) rfl restoreHalt restoreStoredInput_control_closed
+  change RunsFor prepareGuessState
+    ({ inputTape := input, outputTape := output } : Configuration) (restored.resumeAt 19) restoreTime at hRestore
+  have hLocate := locateRun.withSubroutine_halted_of_closed
+    (restoreStoredInput.asSubroutine 0 19) prepareCanonicalState [.halt] 38
+    (by change 0 < 18; decide) rfl locateHalt prepareCanonicalState_control_closed
+  change RunsFor prepareGuessState (restored.resumeAt 19) (located.resumeAt 38) locateTime at hLocate
+  let finish : Configuration := { located with pc := 38, halted := true }
+  have last : Step prepareGuessState (located.resumeAt 38) finish := by
+    have code : prepareGuessState[38]? = some .halt := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, finish, Instruction.next]
+  refine ⟨finish, restoreTime + locateTime + 1, ?_, RunsFor.succ (hRestore.trans hLocate) last,
+    rfl, locateOutput.trans restoreOutput⟩
+  have hStorage := GuardedCompiler.sourceStorage_le_of_run restoreRun
+  change restored.inputTape.cells + restored.outputTape.cells ≤ input.cells + output.cells + restoreTime at hStorage
+  omega
+
+
+/-- Every padded execution from the retained caller tapes has halted at the
+same displayed budget. This uses the actual deterministic stopping trace. -/
+theorem prepareGuessState_haltsFrom_anyTape (input output : Tape) (finish : Configuration)
+    (trace : PaddedRunsFor prepareGuessState
+      ({ inputTape := input, outputTape := output } : Configuration) finish
+      (1000000 * (input.cells + output.cells) + 1000000)) : finish.halted = true := by
+  obtain ⟨target, used, hBound, run, hHalted, _output⟩ :=
+    prepareGuessState_terminates_from_anyTape input output
+  exact run.haltsFrom_of_no_randomBit hHalted prepareGuessState_no_randomBit hBound finish trace
+
+/-- The three stored blocks may be arbitrary raw bitstrings. After their
+actual restoration, locating the state only advances from that restored
+head position. This retains the earlier request/reply separators even if
+the normalizer's response is malformed. -/
+theorem prepareGuessState_terminates_with_retained_input
+    (before : List (Option Bool)) (first second consumed : List Bool)
+    (current : Option Bool) (right : List (Option Bool)) (output : Tape) :
+    let start := restoreStoredInputStart before first second consumed current right output
+    let restored := restoreStoredInputFinish before first second consumed current right output
+    ∃ finish used moves,
+      used ≤ 1000000 * (start.inputTape.cells + output.cells) + 1000000 ∧
+      RunsFor prepareGuessState start finish used ∧ finish.halted = true ∧
+      finish.outputTape = output ∧ moves ≤ used ∧
+      finish.inputTape = (Tape.moveRight^[moves]) restored.inputTape := by
+  dsimp only
+  let start := restoreStoredInputStart before first second consumed current right output
+  let restored := restoreStoredInputFinish before first second consumed current right output
+  have restoreRun := restoreStoredInput_runs before first second consumed current right output
+  change RunsFor restoreStoredInput start restored (restoreStoredInputSteps first second consumed) at restoreRun
+  obtain ⟨located, locateTime, hLocateTime, locateRun, locateHalt, locateOutput⟩ :=
+    prepareCanonicalState_terminates_from_anyTape restored.inputTape output
+  obtain ⟨moves, hMoves, locateInput⟩ := prepareCanonicalState_input_position locateRun
+  have hRestore := restoreRun.withSubroutine_halted_of_closed
+    [] restoreStoredInput (prepareCanonicalState.asSubroutine 19 38 ++ [.halt]) 19
+    (by change 0 < 18; decide) rfl rfl restoreStoredInput_control_closed
+  change RunsFor prepareGuessState start (restored.resumeAt 19)
+    (restoreStoredInputSteps first second consumed) at hRestore
+  have hLocate := locateRun.withSubroutine_halted_of_closed
+    (restoreStoredInput.asSubroutine 0 19) prepareCanonicalState [.halt] 38
+    (by change 0 < 18; decide) rfl locateHalt prepareCanonicalState_control_closed
+  change RunsFor prepareGuessState (restored.resumeAt 19) (located.resumeAt 38) locateTime at hLocate
+  let finish : Configuration := { located with pc := 38, halted := true }
+  have last : Step prepareGuessState (located.resumeAt 38) finish := by
+    have code : prepareGuessState[38]? = some .halt := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, finish, Instruction.next]
+  refine ⟨finish, restoreStoredInputSteps first second consumed + locateTime + 1, moves,
+    ?_, RunsFor.succ (hRestore.trans hLocate) last, rfl, locateOutput, by omega, locateInput⟩
+  have hStorage := GuardedCompiler.sourceStorage_le_of_run restoreRun
+  change restored.inputTape.cells + output.cells ≤
+    start.inputTape.cells + output.cells + restoreStoredInputSteps first second consumed at hStorage
+  have hRestoreTime : restoreStoredInputSteps first second consumed ≤
+      100 * (start.inputTape.cells + output.cells) + 100 := by
+    dsimp only [restoreStoredInputSteps, start, restoreStoredInputStart, Tape.cells]
+    simp only [List.length_append, List.length_cons, List.length_map, List.length_reverse]
+    omega
+  change locateTime ≤ 1000 * (restored.inputTape.cells + output.cells) + 1000 at hLocateTime
+  change restoreStoredInputSteps first second consumed + locateTime + 1 ≤
+    1000000 * (start.inputTape.cells + output.cells) + 1000000
+  omega
+
 end Machine

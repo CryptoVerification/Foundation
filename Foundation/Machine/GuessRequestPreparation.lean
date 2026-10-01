@@ -189,4 +189,239 @@ theorem prepareGuessRequest_withSubroutine_eval (pre suffix : Program) (returnPc
       (prepareGuessRequest_haltsFrom before beforeOutput n instanceBits tupleTail reply canonical selected product body padding outputBlanks hBlanks),
     prepareGuessRequest_eval _ _ _ _ _ _ _ _ _ _ _ _ hBlanks, PMF.pure_map]
 
+/-- The complete request constructor stops on arbitrary finite caller tapes.
+Each subsequent subroutine receives the actual tapes returned by the prior
+one. Malformed fields do not imply successful protocol serialization or
+readiness for a source invocation; those are separate layout obligations. -/
+theorem prepareGuessRequest_terminates_from_anyTape (input output : Tape) :
+    ∃ finish used, used ≤ 1000000000000000000000000 * (input.cells + output.cells) + 1000000000000000000000000 ∧
+      RunsFor prepareGuessRequest
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true := by
+  obtain ⟨prefixed, prefixTime, hPrefixTime, prefixRun, prefixHalt⟩ :=
+    prepareGuessPrefix_terminates_from_anyTape input output
+  obtain ⟨positioned, positionTime, hPositionTime, positionRun, positionHalt, _positionOutput⟩ :=
+    seekGuessInputScratch_terminates_from_anyTape prefixed.inputTape prefixed.outputTape
+  obtain ⟨framed, frameTime, hFrameTime, frameRun, frameHalt⟩ :=
+    frameSavedMessage_terminates_from_anyTape positioned.inputTape positioned.outputTape
+  have hPrefix := prefixRun.withSubroutine_halted_of_closed
+    [] prepareGuessPrefix (seekGuessInputScratch.asSubroutine 86 120 ++ frameSavedMessage.asSubroutine 120 182 ++ [.halt]) 86
+    (by change 0 < 85; decide) rfl prefixHalt prepareGuessPrefix_control_closed
+  change RunsFor prepareGuessRequest
+    ({ inputTape := input, outputTape := output } : Configuration) (prefixed.resumeAt 86) prefixTime at hPrefix
+  have hPosition := positionRun.withSubroutine_halted_of_closed
+    (prepareGuessPrefix.asSubroutine 0 86) seekGuessInputScratch
+    (frameSavedMessage.asSubroutine 120 182 ++ [.halt]) 120
+    (by change 0 < 33; decide) rfl positionHalt seekGuessInputScratch_control_closed
+  change RunsFor prepareGuessRequest (prefixed.resumeAt 86) (positioned.resumeAt 120) positionTime at hPosition
+  have leading := hPrefix.trans hPosition
+  have hFrame := frameRun.withSubroutine_halted_of_closed
+    (prepareGuessPrefix.asSubroutine 0 86 ++ seekGuessInputScratch.asSubroutine 86 120)
+    frameSavedMessage [.halt] 182
+    (by change 0 < 61; decide) rfl frameHalt frameSavedMessage_control_closed
+  change RunsFor prepareGuessRequest (positioned.resumeAt 120) (framed.resumeAt 182) frameTime at hFrame
+  let finish : Configuration := { framed with pc := 182, halted := true }
+  have last : Step prepareGuessRequest (framed.resumeAt 182) finish := by
+    have code : prepareGuessRequest[182]? = some .halt := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, finish, Instruction.next]
+  refine ⟨finish, prefixTime + positionTime + frameTime + 1, ?_,
+    RunsFor.succ (leading.trans hFrame) last, rfl⟩
+  have prefixStorage := GuardedCompiler.sourceStorage_le_of_run prefixRun
+  have positionStorage := GuardedCompiler.sourceStorage_le_of_run leading
+  change prefixed.inputTape.cells + prefixed.outputTape.cells ≤ input.cells + output.cells + prefixTime at prefixStorage
+  change positioned.inputTape.cells + positioned.outputTape.cells ≤ input.cells + output.cells + (prefixTime + positionTime) at positionStorage
+  omega
+
+theorem prepareGuessRequest_haltsFrom_anyTape (input output : Tape) (finish : Configuration)
+    (trace : PaddedRunsFor prepareGuessRequest
+      ({ inputTape := input, outputTape := output } : Configuration) finish
+      (1000000000000000000000000 * (input.cells + output.cells) + 1000000000000000000000000)) : finish.halted = true := by
+  obtain ⟨target, used, hBound, run, hHalted⟩ := prepareGuessRequest_terminates_from_anyTape input output
+  exact run.haltsFrom_of_no_randomBit hHalted prepareGuessRequest_no_randomBit hBound finish trace
+
+
+/-- Actual public-prefix preparation, even on malformed frames, retains a
+suffix of the saved five bit blocks. The subsequent five native scans reach
+blank input scratch and preserve the prepared output frontier. -/
+theorem seekGuessInputScratch_separated_frontier_after_publicPrefix
+    (input : Tape) (beforeOutput : List (Option Bool)) (outputBlanks : Nat)
+    (prefixFinish : Configuration) (prefixTime : Nat)
+    (prefixRun : RunsFor preparePublicPrefixContext
+      ({ inputTape := input,
+         outputTape := { left := beforeOutput, right := List.replicate outputBlanks none } } : Configuration)
+      prefixFinish prefixTime)
+    (prefixHalt : prefixFinish.halted = true)
+    (first second third fourth fifth : List Bool) (padding count : Nat)
+    (hRight : input.right =
+      (first.map some ++ none :: second.map some ++ none :: third.map some ++
+        none :: fourth.map some ++ none :: fifth.map some ++ none ::
+          List.replicate padding none).drop count) :
+    ∃ finish used afterInput inputRemaining afterOutput outputRemaining,
+      used ≤ 10000 * (prefixFinish.inputTape.cells + prefixFinish.outputTape.cells) + 10000 ∧
+      RunsFor seekGuessInputScratch
+        ({ inputTape := prefixFinish.inputTape, outputTape := prefixFinish.outputTape } : Configuration)
+        finish used ∧ finish.halted = true ∧
+      finish.inputTape = { left := none :: afterInput, right := List.replicate inputRemaining none } ∧
+      finish.outputTape = { left := afterOutput, right := List.replicate outputRemaining none } := by
+  obtain ⟨target, targetTime, savedInput, afterOutput, outputRemaining,
+    _hBound, targetRun, targetHalt, targetCurrent, _targetLeft, targetOutput, offset, targetRight⟩ :=
+    preparePublicPrefixContext_terminates_with_suffix_layout input beforeOutput outputBlanks
+  have hFinish := prefixRun.halted_finish_eq_of_no_randomBit
+    targetRun prefixHalt targetHalt preparePublicPrefixContext_no_randomBit
+  subst prefixFinish
+  have hSuffix : target.inputTape.right =
+      (first.map some ++ none :: second.map some ++ none :: third.map some ++
+        none :: fourth.map some ++ none :: fifth.map some ++ none ::
+          List.replicate padding none).drop (count + offset) := by
+    rw [targetRight, hRight, List.drop_drop]
+  obtain ⟨finish, used, afterInput, inputRemaining, hBound, run, hHalted, hOutput, hInput⟩ :=
+    seekGuessInputScratch_terminates_with_separated_frontier target.inputTape target.outputTape
+      first second third fourth fifth padding (count + offset) true targetCurrent hSuffix
+  exact ⟨finish, used, afterInput, inputRemaining, afterOutput, outputRemaining,
+    hBound, run, hHalted, hInput, hOutput.trans targetOutput⟩
+
+/-- The same continuation certificate for callers that do not need to
+inspect the retained blank separator immediately behind the input head. -/
+theorem seekGuessInputScratch_frontier_after_publicPrefix
+    (input : Tape) (beforeOutput : List (Option Bool)) (outputBlanks : Nat)
+    (prefixFinish : Configuration) (prefixTime : Nat)
+    (prefixRun : RunsFor preparePublicPrefixContext
+      ({ inputTape := input,
+         outputTape := { left := beforeOutput, right := List.replicate outputBlanks none } } : Configuration)
+      prefixFinish prefixTime)
+    (prefixHalt : prefixFinish.halted = true)
+    (first second third fourth fifth : List Bool) (padding count : Nat)
+    (hRight : input.right =
+      (first.map some ++ none :: second.map some ++ none :: third.map some ++
+        none :: fourth.map some ++ none :: fifth.map some ++ none ::
+          List.replicate padding none).drop count) :
+    ∃ finish used afterInput inputRemaining afterOutput outputRemaining,
+      used ≤ 10000 * (prefixFinish.inputTape.cells + prefixFinish.outputTape.cells) + 10000 ∧
+      RunsFor seekGuessInputScratch
+        ({ inputTape := prefixFinish.inputTape, outputTape := prefixFinish.outputTape } : Configuration)
+        finish used ∧ finish.halted = true ∧
+      finish.inputTape = { left := afterInput, right := List.replicate inputRemaining none } ∧
+      finish.outputTape = { left := afterOutput, right := List.replicate outputRemaining none } := by
+  obtain ⟨finish, used, afterInput, inputRemaining, afterOutput, outputRemaining,
+    hBound, run, hHalted, hInput, hOutput⟩ :=
+    seekGuessInputScratch_separated_frontier_after_publicPrefix input beforeOutput outputBlanks
+      prefixFinish prefixTime prefixRun prefixHalt first second third fourth fifth padding count hRight
+  exact ⟨finish, used, none :: afterInput, inputRemaining, afterOutput, outputRemaining,
+    hBound, run, hHalted, hInput, hOutput⟩
+
+/-- Saved-message framing can continue from the actual five-scan return
+after public-prefix assembly. Both tapes end at fresh blank frontiers, even
+when the five retained bit blocks contain malformed fields or replies. The
+explicit suffix premise is a caller invariant, not an assumption that the
+input has a valid cryptographic encoding. -/
+theorem frameSavedMessage_frontier_after_guessScratch
+    (input : Tape) (beforeOutput : List (Option Bool)) (outputBlanks : Nat)
+    (prefixFinish : Configuration) (prefixTime : Nat)
+    (prefixRun : RunsFor preparePublicPrefixContext
+      ({ inputTape := input,
+         outputTape := { left := beforeOutput, right := List.replicate outputBlanks none } } : Configuration)
+      prefixFinish prefixTime)
+    (prefixHalt : prefixFinish.halted = true)
+    (first second third fourth fifth : List Bool) (padding count : Nat)
+    (hRight : input.right =
+      (first.map some ++ none :: second.map some ++ none :: third.map some ++
+        none :: fourth.map some ++ none :: fifth.map some ++ none ::
+          List.replicate padding none).drop count)
+    (scratchFinish : Configuration) (scratchTime : Nat)
+    (scratchRun : RunsFor seekGuessInputScratch
+      ({ inputTape := prefixFinish.inputTape, outputTape := prefixFinish.outputTape } : Configuration)
+      scratchFinish scratchTime)
+    (scratchHalt : scratchFinish.halted = true) :
+    ∃ finish used afterInput inputRemaining afterOutput outputRemaining,
+      used ≤ 1000000 * (scratchFinish.inputTape.cells + scratchFinish.outputTape.cells) + 1000000 ∧
+      RunsFor frameSavedMessage
+        ({ inputTape := scratchFinish.inputTape, outputTape := scratchFinish.outputTape } : Configuration)
+        finish used ∧ finish.halted = true ∧
+      finish.inputTape = { left := afterInput, right := List.replicate inputRemaining none } ∧
+      finish.outputTape = { left := afterOutput, right := List.replicate outputRemaining none } := by
+  obtain ⟨positioned, positionedTime, savedInput, inputBlanks, savedOutput, outputBlanks',
+    _hBound, positionedRun, positionedHalt, hInput, hOutput⟩ :=
+    seekGuessInputScratch_separated_frontier_after_publicPrefix input beforeOutput outputBlanks
+      prefixFinish prefixTime prefixRun prefixHalt first second third fourth fifth padding count hRight
+  have hFinish := scratchRun.halted_finish_eq_of_no_randomBit positionedRun
+    scratchHalt positionedHalt seekGuessInputScratch_no_randomBit
+  subst scratchFinish
+  obtain ⟨finish, used, afterInput, inputRemaining, afterOutput, outputRemaining,
+    hBound, run, hHalted, hFinishInput, hFinishOutput⟩ :=
+    frameSavedMessage_terminates_with_fresh_tapes savedInput savedOutput inputBlanks outputBlanks'
+  refine ⟨finish, used, afterInput, inputRemaining, afterOutput, outputRemaining,
+    ?_, ?_, hHalted, hFinishInput, hFinishOutput⟩
+  · simpa only [hInput, hOutput] using hBound
+  · simpa only [hInput, hOutput] using run
+
+/-- Fresh physical input/output frontiers suffice for the entire native
+guess-request constructor. The saved cells may be malformed: restoration
+exposes five blocks, public-prefix preparation retains their suffix, the
+five scans supply a reserved scratch separator, and saved-body framing
+returns both heads to fresh blank frontiers. -/
+theorem prepareGuessRequest_terminates_from_fresh_tapes
+    (savedInput savedOutput : List (Option Bool)) (inputBlanks outputBlanks : Nat) :
+    let input : Tape := { left := savedInput, right := List.replicate inputBlanks none }
+    let output : Tape := { left := savedOutput, right := List.replicate outputBlanks none }
+    ∃ finish used afterInput remainingInput afterOutput remainingOutput,
+      used ≤ 1000000000000000000000000 * (input.cells + output.cells) + 1000000000000000000000000 ∧
+      RunsFor prepareGuessRequest
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true ∧
+      finish.inputTape = { left := afterInput, right := List.replicate remainingInput none } ∧
+      finish.outputTape = { left := afterOutput, right := List.replicate remainingOutput none } := by
+  dsimp only
+  let input : Tape := { left := savedInput, right := List.replicate inputBlanks none }
+  let output : Tape := { left := savedOutput, right := List.replicate outputBlanks none }
+  obtain ⟨prefixReady, prefixTime, a, b, c, d, e, prefixAfter, prefixBlanks, count,
+    hPrefixTime, prefixRun, prefixHalt, prefixCurrent, prefixOutput, prefixRight⟩ :=
+    prepareGuessPrefix_terminates_from_fresh_tapes savedInput savedOutput inputBlanks outputBlanks
+  obtain ⟨scratchReady, scratchTime, scratchAfter, scratchBlanks,
+    hScratchTime, scratchRun, scratchHalt, scratchOutput, scratchInput⟩ :=
+    seekGuessInputScratch_terminates_with_separated_frontier prefixReady.inputTape prefixReady.outputTape
+      a b c d e inputBlanks count true prefixCurrent prefixRight
+  have hScratchOutput := scratchOutput.trans prefixOutput
+  obtain ⟨framed, frameTime, afterInput, remainingInput, afterOutput, remainingOutput,
+    hFrameTime, frameRun, frameHalt, frameInput, frameOutput⟩ :=
+    frameSavedMessage_terminates_with_fresh_tapes scratchAfter prefixAfter scratchBlanks prefixBlanks
+  have actualFrame : RunsFor frameSavedMessage
+      ({ inputTape := scratchReady.inputTape, outputTape := scratchReady.outputTape } : Configuration)
+      framed frameTime := by
+    rw [scratchInput, hScratchOutput]
+    exact frameRun
+  have hPrefix := prefixRun.withSubroutine_halted_of_closed
+    [] prepareGuessPrefix (seekGuessInputScratch.asSubroutine 86 120 ++
+      frameSavedMessage.asSubroutine 120 182 ++ [.halt]) 86
+    (by change 0 < 85; decide) rfl prefixHalt prepareGuessPrefix_control_closed
+  change RunsFor prepareGuessRequest
+    ({ inputTape := input, outputTape := output } : Configuration) (prefixReady.resumeAt 86) prefixTime at hPrefix
+  have hScratch := scratchRun.withSubroutine_halted_of_closed
+    (prepareGuessPrefix.asSubroutine 0 86) seekGuessInputScratch
+    (frameSavedMessage.asSubroutine 120 182 ++ [.halt]) 120
+    (by change 0 < 33; decide) rfl scratchHalt seekGuessInputScratch_control_closed
+  change RunsFor prepareGuessRequest (prefixReady.resumeAt 86) (scratchReady.resumeAt 120) scratchTime at hScratch
+  have toFrame := hPrefix.trans hScratch
+  have hFrame := actualFrame.withSubroutine_halted_of_closed
+    (prepareGuessPrefix.asSubroutine 0 86 ++ seekGuessInputScratch.asSubroutine 86 120)
+    frameSavedMessage [.halt] 182
+    (by change 0 < 61; decide) rfl frameHalt frameSavedMessage_control_closed
+  change RunsFor prepareGuessRequest (scratchReady.resumeAt 120) (framed.resumeAt 182) frameTime at hFrame
+  let finish : Configuration := { framed with pc := 182, halted := true }
+  have last : Step prepareGuessRequest (framed.resumeAt 182) finish := by
+    have code : prepareGuessRequest[182]? = some .halt := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, finish, Instruction.next]
+  refine ⟨finish, prefixTime + scratchTime + frameTime + 1, afterInput, remainingInput,
+    afterOutput, remainingOutput, ?_, RunsFor.succ (toFrame.trans hFrame) last, rfl, frameInput, frameOutput⟩
+  have prefixStorage := GuardedCompiler.sourceStorage_le_of_run prefixRun
+  change prefixReady.inputTape.cells + prefixReady.outputTape.cells ≤
+    input.cells + output.cells + prefixTime at prefixStorage
+  have scratchStorage := GuardedCompiler.sourceStorage_le_of_run toFrame
+  change scratchReady.inputTape.cells + scratchReady.outputTape.cells ≤
+    input.cells + output.cells + (prefixTime + scratchTime) at scratchStorage
+  change prefixTime ≤ 1000000000000 * (input.cells + output.cells) + 1000000000000 at hPrefixTime
+  rw [← scratchInput, ← hScratchOutput] at hFrameTime
+  change prefixTime + scratchTime + frameTime + 1 ≤
+    1000000000000000000000000 * (input.cells + output.cells) + 1000000000000000000000000
+  omega
+
 end Machine

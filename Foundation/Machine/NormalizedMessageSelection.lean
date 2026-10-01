@@ -64,4 +64,21 @@ theorem selectNormalizedMessage_output_layout (normalizer : Program) (input : Li
   intro finish run
   exact prepareSelectedMessage_output_layout_anyTape _ _ 0 finish run
 
+
+/-- Arbitrary returned normalizer bits, including an empty or malformed
+response, remain a finite raw frontier after selection and field copying.
+The native selector never obtains extra valid-format assumptions here. -/
+theorem selectNormalizedMessage_input_raw_frontier (normalizer : Program) (input : List Bool)
+    (beforeInput savedInput : List (Option Bool)) (c : Configuration) :
+    let returned := (rawResultFrom normalizer input beforeInput (none :: savedInput) c).swapTapes
+    ∀ finish, PaddedRunsFor prepareSelectedMessage (returned.resumeAt 0) finish
+      (400 * (returned.inputTape.cells + returned.outputTape.cells) + 500) →
+      ∃ (remaining : List Bool) (padding : Nat),
+        finish.inputTape.current :: finish.inputTape.right =
+          remaining.map some ++ none :: List.replicate padding none := by
+  dsimp only
+  intro finish run
+  exact prepareSelectedMessage_input_raw_frontier _ _ []
+    (2 * c.outputTape.cells + 2 - c.outputBits.length) rfl finish run
+
 end Machine.GuardedCompiler

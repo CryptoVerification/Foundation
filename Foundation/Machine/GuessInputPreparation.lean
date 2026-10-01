@@ -238,4 +238,140 @@ theorem prepareGuessInput_withSubroutine_eval (pre suffix : Program) (returnPc :
       (prepareGuessInput_haltsFrom before beforeOutput n instanceBits first second last reply message₀ message₁ state selected product padding),
     prepareGuessInput_eval, PMF.pure_map]
 
+theorem prepareGuessInput_no_randomBit (tape : TapeId) :
+    Instruction.randomBit tape ∉ prepareGuessInput := by
+  have hSubroutine (source : Program) (base returnPc : Nat)
+      (h : ∀ tape, Instruction.randomBit tape ∉ source) :
+      Instruction.randomBit tape ∉ source.asSubroutine base returnPc := by
+    intro hm
+    simp only [Program.asSubroutine, List.mem_append, List.mem_map, List.mem_singleton] at hm
+    rcases hm with ⟨i, hi, heq⟩ | heq
+    · have hOriginal : i = Instruction.randomBit tape := by
+        cases i <;> simp_all [Instruction.asSubroutine]
+      exact h tape (hOriginal ▸ hi)
+    · cases heq
+  simp only [prepareGuessInput, List.mem_append, List.mem_singleton, not_or]
+  exact ⟨⟨hSubroutine _ _ _ prepareGuessBody_no_randomBit,
+    hSubroutine _ _ _ prepareGuessRequest_no_randomBit⟩, by simp⟩
+
+/-- The complete native construction of the body and its enclosing request
+stops on arbitrary finite tapes. This certificate uses the real returned
+body configuration as the request constructor's entry, including malformed
+retained input and dirty scratch cells. No valid-input parser premise or
+fresh tape load is used. Readiness for the following guarded adversary call
+is a separate property, not a consequence of stopping alone. -/
+theorem prepareGuessInput_terminates_from_anyTape (input output : Tape) :
+    ∃ finish used,
+      used ≤ 1000000000000000000000000000000000000000000000000000000 * (input.cells + output.cells) +
+        1000000000000000000000000000000000000000000000000000000 ∧
+      RunsFor prepareGuessInput
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true := by
+  obtain ⟨bodyReady, bodyTime, hBodyTime, bodyRun, bodyHalt⟩ :=
+    prepareGuessBody_terminates_from_anyTape input output
+  obtain ⟨requestReady, requestTime, hRequestTime, requestRun, requestHalt⟩ :=
+    prepareGuessRequest_terminates_from_anyTape bodyReady.inputTape bodyReady.outputTape
+  obtain ⟨bodyUsed, hBodyUsed, hBody⟩ := bodyRun.withSubroutine_halted
+    [] prepareGuessBody (prepareGuessRequest.asSubroutine 175 359 ++ [.halt]) 175
+    (Nat.zero_le _) rfl bodyHalt
+  change RunsFor prepareGuessInput
+    ({ inputTape := input, outputTape := output } : Configuration) (bodyReady.resumeAt 175) bodyUsed at hBody
+  obtain ⟨requestUsed, hRequestUsed, hRequest⟩ := requestRun.withSubroutine_halted
+    (prepareGuessBody.asSubroutine 0 175) prepareGuessRequest [.halt] 359
+    (Nat.zero_le _) rfl requestHalt
+  change RunsFor prepareGuessInput (bodyReady.resumeAt 175) (requestReady.resumeAt 359) requestUsed at hRequest
+  let finish : Configuration := { requestReady with pc := 359, halted := true }
+  have last : Step prepareGuessInput (requestReady.resumeAt 359) finish := by
+    have code : prepareGuessInput[359]? = some .halt := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, finish, Instruction.next]
+  refine ⟨finish, bodyUsed + requestUsed + 1, ?_, RunsFor.succ (hBody.trans hRequest) last, rfl⟩
+  have hStorage := GuardedCompiler.sourceStorage_le_of_run bodyRun
+  change bodyReady.inputTape.cells + bodyReady.outputTape.cells ≤ input.cells + output.cells + bodyTime at hStorage
+  omega
+
+theorem prepareGuessInput_haltsFrom_anyTape (input output : Tape) (finish : Configuration)
+    (trace : PaddedRunsFor prepareGuessInput
+      ({ inputTape := input, outputTape := output } : Configuration) finish
+      (1000000000000000000000000000000000000000000000000000000 * (input.cells + output.cells) +
+        1000000000000000000000000000000000000000000000000000000)) : finish.halted = true := by
+  obtain ⟨target, used, hBound, run, hHalted⟩ := prepareGuessInput_terminates_from_anyTape input output
+  exact run.haltsFrom_of_no_randomBit hHalted prepareGuessInput_no_randomBit hBound finish trace
+
+/-- The standalone native guess-request constructor is polynomial time on
+all finite bitstrings. This does not assert the corresponding property of
+the full simulator, whose subsequent guarded calls need layout certificates. -/
+theorem prepareGuessInput_polynomialTime : PolynomialTime prepareGuessInput := by
+  refine ⟨fun m => 1000000000000000000000000000000000000000000000000000000 * (m + 2) +
+    1000000000000000000000000000000000000000000000000000000, ?_, ?_⟩
+  · exact ((PolynomiallyBounded.const 1000000000000000000000000000000000000000000000000000000).mul
+      (PolynomiallyBounded.id.add (PolynomiallyBounded.const 2))).add
+      (PolynomiallyBounded.const 1000000000000000000000000000000000000000000000000000000)
+  · intro input
+    have hAt : HaltsWithin prepareGuessInput input
+        (1000000000000000000000000000000000000000000000000000000 *
+          ((Configuration.initial input).inputTape.cells + (Configuration.initial input).outputTape.cells) +
+          1000000000000000000000000000000000000000000000000000000) :=
+      fun finish run => prepareGuessInput_haltsFrom_anyTape _ _ finish run
+    apply hAt.mono
+    cases input <;> simp [Configuration.initial, Tape.ofBits, Tape.cells]
+    omega
+
+/-- The complete native guess-input constructor returns fresh input and
+output frontiers from the actual five retained raw bit blocks. No block
+needs a valid cryptographic encoding. The request stage receives exactly
+the body stage's returned tapes, including all saved caller cells. -/
+theorem prepareGuessInput_terminates_with_retained_frontiers
+    (before beforeOutput : List (Option Bool))
+    (original reply canonical selected product : List Bool) (inputBlanks outputBlanks : Nat) :
+    let output : Tape := { left := beforeOutput, right := List.replicate outputBlanks none }
+    let start := restoreStoredInputStart
+      (reply.reverse.map some ++ none :: original.reverse.map some ++ none :: before)
+      canonical selected product none (List.replicate inputBlanks none) output
+    ∃ finish used afterInput remainingInput afterOutput remainingOutput,
+      used ≤ 1000000000000000000000000000000000000000000000000000000 *
+        (start.inputTape.cells + output.cells) + 1000000000000000000000000000000000000000000000000000000 ∧
+      RunsFor prepareGuessInput start finish used ∧ finish.halted = true ∧
+      finish.inputTape = { left := afterInput, right := List.replicate remainingInput none } ∧
+      finish.outputTape = { left := afterOutput, right := List.replicate remainingOutput none } := by
+  dsimp only
+  let output : Tape := { left := beforeOutput, right := List.replicate outputBlanks none }
+  let start := restoreStoredInputStart
+    (reply.reverse.map some ++ none :: original.reverse.map some ++ none :: before)
+    canonical selected product none (List.replicate inputBlanks none) output
+  obtain ⟨bodyReady, bodyTime, bodyInputAfter, bodyInputBlanks, bodyOutputAfter, bodyOutputBlanks,
+    hBodyTime, bodyRun, bodyHalt, bodyInput, bodyOutput⟩ :=
+    prepareGuessBody_terminates_with_retained_frontiers before beforeOutput
+      original reply canonical selected product inputBlanks outputBlanks
+  obtain ⟨requestReady, requestTime, afterInput, remainingInput, afterOutput, remainingOutput,
+    hRequestTime, requestRun, requestHalt, requestInput, requestOutput⟩ :=
+    prepareGuessRequest_terminates_from_fresh_tapes bodyInputAfter bodyOutputAfter bodyInputBlanks bodyOutputBlanks
+  have actualRequest : RunsFor prepareGuessRequest
+      ({ inputTape := bodyReady.inputTape, outputTape := bodyReady.outputTape } : Configuration)
+      requestReady requestTime := by
+    rw [bodyInput, bodyOutput]
+    exact requestRun
+  obtain ⟨bodyUsed, hBodyUsed, hBody⟩ := bodyRun.withSubroutine_halted
+    [] prepareGuessBody (prepareGuessRequest.asSubroutine 175 359 ++ [.halt]) 175
+    (Nat.zero_le _) rfl bodyHalt
+  change RunsFor prepareGuessInput start (bodyReady.resumeAt 175) bodyUsed at hBody
+  obtain ⟨requestUsed, hRequestUsed, hRequest⟩ := actualRequest.withSubroutine_halted
+    (prepareGuessBody.asSubroutine 0 175) prepareGuessRequest [.halt] 359
+    (Nat.zero_le _) rfl requestHalt
+  change RunsFor prepareGuessInput (bodyReady.resumeAt 175) (requestReady.resumeAt 359) requestUsed at hRequest
+  let finish : Configuration := { requestReady with pc := 359, halted := true }
+  have last : Step prepareGuessInput (requestReady.resumeAt 359) finish := by
+    have code : prepareGuessInput[359]? = some .halt := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, finish, Instruction.next]
+  refine ⟨finish, bodyUsed + requestUsed + 1, afterInput, remainingInput, afterOutput, remainingOutput,
+    ?_, RunsFor.succ (hBody.trans hRequest) last, rfl, requestInput, requestOutput⟩
+  have bodyStorage := GuardedCompiler.sourceStorage_le_of_run bodyRun
+  change bodyReady.inputTape.cells + bodyReady.outputTape.cells ≤
+    start.inputTape.cells + output.cells + bodyTime at bodyStorage
+  change bodyTime ≤ 1000000000000000000000000000 *
+    (start.inputTape.cells + output.cells) + 1000000000000000000000000000 at hBodyTime
+  rw [← bodyInput, ← bodyOutput] at hRequestTime
+  change bodyUsed + requestUsed + 1 ≤ 1000000000000000000000000000000000000000000000000000000 *
+    (start.inputTape.cells + output.cells) + 1000000000000000000000000000000000000000000000000000000
+  omega
+
 end Machine

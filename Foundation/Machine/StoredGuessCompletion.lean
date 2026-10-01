@@ -203,4 +203,76 @@ theorem finishStoredGuess_withSubroutine_evalOutput (pre suffix : Program) (retu
   simpa only [PMF.map_comp, Function.comp_def, PMF.pure_map,
     Configuration.resumeAt, Configuration.outputBits] using h
 
+/-- Full native terminal processing on arbitrary finite physical tapes.
+Paired rewind, front-block erasure, tagged comparison, back-block cleanup,
+and final halt are all charged. Neither protocol validity nor a matching
+parallel reply copy is required for this all-tape stopping certificate. -/
+theorem finishStoredGuess_terminates_from_anyTape (frontCount backCount : Nat) (input output : Tape) :
+    ∃ finish used,
+      used ≤ 100000000 * (frontCount + 1) * (backCount + 1) * (output.cells + 1) ∧
+      RunsFor (finishStoredGuess frontCount backCount)
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧ finish.halted = true := by
+  obtain ⟨prepared, prepareTime, hPrepareTime, prepareRun, prepareHalt, _prepareLeft⟩ :=
+    prepareStoredGuess_terminates_from_anyTape frontCount input output
+  obtain ⟨cleaned, cleanTime, hCleanTime, cleanRun, cleanHalt⟩ :=
+    finishStoredTaggedGuess_terminates_from_anyTape backCount prepared.inputTape prepared.outputTape
+  let prepare := prepareStoredGuess frontCount
+  let returnPc := prepare.length + 1
+  let pre := prepare.asSubroutine 0 returnPc
+  let cleanup := finishStoredTaggedGuess backCount
+  let finalPc := pre.length + cleanup.length + 1
+  obtain ⟨prepareUsed, hPrepareUsed, first⟩ := prepareRun.withSubroutine_halted
+    [] prepare (cleanup.asSubroutine returnPc finalPc ++ [.halt]) returnPc (Nat.zero_le _) rfl prepareHalt
+  have hPre : pre.length = returnPc := Program.asSubroutine_length _ _ _
+  have firstProgram : Program.withSubroutine [] prepare
+      (cleanup.asSubroutine returnPc finalPc ++ [.halt]) returnPc = finishStoredGuess frontCount backCount := by
+    simp only [Program.withSubroutine, finishStoredGuess, List.length_nil, List.nil_append,
+      pre, prepare, cleanup, finalPc, hPre, returnPc, List.append_assoc]
+  rw [firstProgram] at first
+  change RunsFor (finishStoredGuess frontCount backCount)
+    ({ inputTape := input, outputTape := output } : Configuration) (prepared.resumeAt returnPc) prepareUsed at first
+  obtain ⟨cleanUsed, hCleanUsed, second⟩ := cleanRun.withSubroutine_halted
+    pre cleanup [.halt] finalPc (Nat.zero_le _) rfl cleanHalt
+  have secondProgram : Program.withSubroutine pre cleanup [.halt] finalPc =
+      finishStoredGuess frontCount backCount := rfl
+  rw [secondProgram] at second
+  have hEntry :
+      ({ inputTape := prepared.inputTape, outputTape := prepared.outputTape } : Configuration).rebasePc pre.length =
+      prepared.resumeAt returnPc := by simp [Configuration.rebasePc, Configuration.resumeAt, hPre]
+  rw [hEntry] at second
+  let finish : Configuration := { cleaned with pc := finalPc, halted := true }
+  have last : Step (finishStoredGuess frontCount backCount) (cleaned.resumeAt finalPc) finish := by
+    have code : (finishStoredGuess frontCount backCount)[finalPc]? = some .halt := by
+      rw [← secondProgram]
+      have h := Program.withSubroutine_getElem?_suffix pre cleanup [.halt] finalPc 0
+      simpa only [Nat.add_zero, List.getElem?_cons_zero] using h
+    simp [Step, successors, next, Configuration.resumeAt, finish, code, Instruction.next]
+  refine ⟨finish, prepareUsed + cleanUsed + 1, ?_, RunsFor.succ (first.trans second) last, rfl⟩
+  have hStorage := prepareRun.toPadded.outputTape_cells_le
+  change prepared.outputTape.cells ≤ output.cells + prepareTime at hStorage
+  have hCleanBound := hCleanTime.trans
+    (Nat.mul_le_mul_left ((backCount + 1) * 10000) (Nat.add_le_add_right hStorage 1))
+  have hScaledPrepare := Nat.mul_le_mul_left (backCount + 1) hPrepareTime
+  ring_nf at hPrepareTime hCleanBound hScaledPrepare ⊢
+  omega
+
+theorem finishStoredGuess_no_randomBit (frontCount backCount : Nat) (tape : TapeId) :
+    Instruction.randomBit tape ∉ finishStoredGuess frontCount backCount := by
+  simp [finishStoredGuess, Program.withSubroutine, Program.asSubroutine, Instruction.asSubroutine]
+  constructor
+  · intro instruction hMem hEq
+    cases instruction <;> simp_all [prepareStoredGuess_no_randomBit]
+  · intro instruction hMem hEq
+    cases instruction <;> simp_all [finishStoredTaggedGuess_no_randomBit]
+
+theorem finishStoredGuess_haltsFrom_anyTape (frontCount backCount : Nat) (input output : Tape)
+    (finish : Configuration)
+    (run : PaddedRunsFor (finishStoredGuess frontCount backCount)
+      ({ inputTape := input, outputTape := output } : Configuration) finish
+      (100000000 * (frontCount + 1) * (backCount + 1) * (output.cells + 1))) : finish.halted = true := by
+  obtain ⟨target, used, hBound, actual, hHalt⟩ :=
+    finishStoredGuess_terminates_from_anyTape frontCount backCount input output
+  exact actual.haltsFrom_of_no_randomBit hHalt (finishStoredGuess_no_randomBit frontCount backCount)
+    hBound finish run
+
 end Machine

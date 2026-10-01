@@ -1,5 +1,6 @@
 import Foundation.Machine.DelimitedSkip
 import Foundation.Machine.MessageSelectionPreparation
+import Foundation.Machine.GuardedTrace
 
 namespace Machine
 
@@ -106,5 +107,88 @@ theorem prepareCanonicalState_control_closed (c d : Configuration)
   all_goals try (split at step)
   all_goals subst d
   all_goals simp [Configuration.advance, Configuration.updateTape, hIndex]
+
+set_option maxHeartbeats 600000 in
+/-- Locating the state only advances the actual retained input head. Empty
+fields, missing tags and malformed escaped bits cannot erase earlier blocks
+or move before their stored separators. The move count is bounded by the
+number of native transitions in the supplied trace. -/
+theorem prepareCanonicalState_input_position {start finish : Configuration} {used : Nat}
+    (run : RunsFor prepareCanonicalState start finish used) :
+    ∃ moves, moves ≤ used ∧ finish.inputTape = (Tape.moveRight^[moves]) start.inputTape := by
+  apply run.input_moveRight_of_step
+  intro c d step
+  have hActive : c.halted = false := by
+    cases hh : c.halted with
+    | false => rfl
+    | true => exact False.elim ((no_step_of_halted hh) step)
+  by_cases hPc : c.pc < 18
+  · interval_cases hIndex : c.pc
+    all_goals simp [Step, successors, next, hActive, hIndex, prepareCanonicalState, skipDelimited,
+      Program.asSubroutine, Instruction.asSubroutine, subroutineAddress,
+      Instruction.next, Configuration.tape] at step
+    all_goals try (split at step)
+    all_goals subst d
+    all_goals first
+      | exact Or.inl rfl
+      | exact Or.inr rfl
+  · have hNone : prepareCanonicalState[c.pc]? = none := by
+      apply List.getElem?_eq_none
+      change 18 ≤ c.pc
+      omega
+    simp [Step, successors, next, hActive, hNone] at step
+    subst d
+    exact Or.inl rfl
+
+
+/-- The state locator also stops on malformed responses. Its two escaped
+field scans use finite input-cell bounds and leave the other tape unchanged. -/
+theorem prepareCanonicalState_terminates_from_anyTape (input output : Tape) :
+    ∃ finish used, used ≤ 1000 * (input.cells + output.cells) + 1000 ∧
+      RunsFor prepareCanonicalState
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true ∧ finish.outputTape = output := by
+  let firstStart : Configuration := { pc := 1, inputTape := input.moveRight, outputTape := output }
+  have advance : Step prepareCanonicalState
+      ({ inputTape := input, outputTape := output } : Configuration) firstStart := by
+    have code : prepareCanonicalState[0]? = some (.moveRight .input) := rfl
+    simp [Step, successors, next, code, firstStart, Instruction.next,
+      Configuration.updateTape, Configuration.advance]
+  have toFirst := RunsFor.succ (RunsFor.zero _) advance
+  obtain ⟨first, firstTime, hFirstTime, firstRun, firstHalt, firstOutput⟩ :=
+    skipDelimited_terminates_from_anyTape firstStart.inputTape firstStart.outputTape
+  have hFirst := firstRun.withSubroutine_halted_of_closed
+    [.moveRight .input] skipDelimited (skipDelimited.asSubroutine 9 17 ++ [.halt]) 9
+    (by change 0 < 7; decide) rfl firstHalt skipDelimited_control_closed
+  change RunsFor prepareCanonicalState firstStart (first.resumeAt 9) firstTime at hFirst
+  have toSecond := toFirst.trans hFirst
+  obtain ⟨second, secondTime, hSecondTime, secondRun, secondHalt, secondOutput⟩ :=
+    skipDelimited_terminates_from_anyTape first.inputTape first.outputTape
+  have hSecond := secondRun.withSubroutine_halted_of_closed
+    ([.moveRight .input] ++ skipDelimited.asSubroutine 1 9) skipDelimited [.halt] 17
+    (by change 0 < 7; decide) rfl secondHalt skipDelimited_control_closed
+  change RunsFor prepareCanonicalState (first.resumeAt 9) (second.resumeAt 17) secondTime at hSecond
+  let finish : Configuration := { second with pc := 17, halted := true }
+  have last : Step prepareCanonicalState (second.resumeAt 17) finish := by
+    have code : prepareCanonicalState[17]? = some .halt := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, finish, Instruction.next]
+  refine ⟨finish, 1 + firstTime + secondTime + 1, ?_,
+    RunsFor.succ (toSecond.trans hSecond) last, rfl, secondOutput.trans firstOutput⟩
+  have firstStorage := GuardedCompiler.sourceStorage_le_of_run toFirst
+  change firstStart.inputTape.cells + firstStart.outputTape.cells ≤ input.cells + output.cells + 1 at firstStorage
+  have secondStorage := GuardedCompiler.sourceStorage_le_of_run toSecond
+  change first.inputTape.cells + first.outputTape.cells ≤ input.cells + output.cells + (1 + firstTime) at secondStorage
+  omega
+
+
+/-- Every padded execution from the retained caller tapes has halted at the
+same displayed budget. This uses the actual deterministic stopping trace. -/
+theorem prepareCanonicalState_haltsFrom_anyTape (input output : Tape) (finish : Configuration)
+    (trace : PaddedRunsFor prepareCanonicalState
+      ({ inputTape := input, outputTape := output } : Configuration) finish
+      (1000 * (input.cells + output.cells) + 1000)) : finish.halted = true := by
+  obtain ⟨target, used, hBound, run, hHalted, _output⟩ :=
+    prepareCanonicalState_terminates_from_anyTape input output
+  exact run.haltsFrom_of_no_randomBit hHalted prepareCanonicalState_no_randomBit hBound finish trace
 
 end Machine

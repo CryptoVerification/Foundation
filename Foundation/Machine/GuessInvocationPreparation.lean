@@ -183,4 +183,117 @@ theorem guessFromProductBudget_bound (q : Nat → Nat) (n : Nat)
   rw [hLength] at hCall hPositive ⊢
   nlinarith
 
+/-- All-input analysis envelope for request construction and the actual
+guarded guess call. Storage growth is charged before the source-call bound
+is applied; the source monomial is not part of the finite program. -/
+def guessRetainedBudget (coefficient degree storage : Nat) : Nat :=
+  let prepareTime := 1000000000000000000000000000000000000000000000000000000 * storage +
+    1000000000000000000000000000000000000000000000000000000
+  prepareTime + storedGuessFreshBudget coefficient degree (storage + prepareTime) + 1
+
+theorem guessRetainedBudget_polynomial (coefficient degree : Nat) :
+    PolynomiallyBounded (guessRetainedBudget coefficient degree) := by
+  have hPrepare : PolynomiallyBounded (fun m =>
+      1000000000000000000000000000000000000000000000000000000 * m +
+        1000000000000000000000000000000000000000000000000000000) :=
+    ((PolynomiallyBounded.const 1000000000000000000000000000000000000000000000000000000).mul
+      PolynomiallyBounded.id).add
+        (PolynomiallyBounded.const 1000000000000000000000000000000000000000000000000000000)
+  have hLimit := PolynomiallyBounded.id.add hPrepare
+  have hBase := hLimit.add (PolynomiallyBounded.const 1)
+  have hTime := (PolynomiallyBounded.const coefficient).mul (hBase.pow degree)
+  have hCall := (((PolynomiallyBounded.const 2).mul hLimit).add (PolynomiallyBounded.const 5)).add
+    (((PolynomiallyBounded.const 125).mul hBase).mul
+      ((hTime.add (PolynomiallyBounded.const 1)).pow 2))
+  exact (hPrepare.add hCall).add (PolynomiallyBounded.const 1)
+
+/-- Larger actual caller storage gives a common stopping envelope for all
+returned branches; the compiled source code does not inspect this bound. -/
+theorem guessRetainedBudget_monotone (coefficient degree : Nat) :
+    Monotone (guessRetainedBudget coefficient degree) := by
+  intro first last h
+  have hPrepare := Nat.add_le_add_right
+    (Nat.mul_le_mul_left 1000000000000000000000000000000000000000000000000000000 h)
+    1000000000000000000000000000000000000000000000000000000
+  have hCall := storedGuessFreshBudget_monotone coefficient degree (Nat.add_le_add h hPrepare)
+  exact Nat.add_le_add_right (Nat.add_le_add hPrepare hCall) 1
+
+set_option maxRecDepth 4096 in
+/-- Whole native guess construction and invocation from the five retained
+raw blocks. No DDH parser success or canonical normalizer reply is needed.
+The actual request constructor returns both fresh frontiers; precisely
+those tapes are passed to the guarded source call on every random branch. -/
+theorem guessFromProductCompile_haltsFrom_retained_frontiers (source : Program)
+    (coefficient degree : Nat)
+    (hSource : ∀ request : List Bool,
+      HaltsWithin source request (coefficient * (request.length + 1)^degree))
+    (before beforeOutput : List (Option Bool))
+    (original reply canonical selected product : List Bool) (inputBlanks outputBlanks : Nat) :
+    let output : Tape := { left := beforeOutput, right := List.replicate outputBlanks none }
+    let start := restoreStoredInputStart
+      (reply.reverse.map some ++ none :: original.reverse.map some ++ none :: before)
+      canonical selected product none (List.replicate inputBlanks none) output
+    ∀ finish, PaddedRunsFor (guessFromProductCompile source) start finish
+      (guessRetainedBudget coefficient degree (sourceStorage start)) → finish.halted = true := by
+  dsimp only
+  let output : Tape := { left := beforeOutput, right := List.replicate outputBlanks none }
+  let start := restoreStoredInputStart
+      (reply.reverse.map some ++ none :: original.reverse.map some ++ none :: before)
+      canonical selected product none (List.replicate inputBlanks none) output
+  let storage := sourceStorage start
+  let prepareTime := 1000000000000000000000000000000000000000000000000000000 * storage +
+    1000000000000000000000000000000000000000000000000000000
+  let callTime := storedGuessFreshBudget coefficient degree (storage + prepareTime)
+  obtain ⟨prepared, used, afterInput, remainingInput, afterOutput, remainingOutput,
+    hUsed, prepareRun, prepareHalt, hInput, hOutput⟩ :=
+    prepareGuessInput_terminates_with_retained_frontiers before beforeOutput
+      original reply canonical selected product inputBlanks outputBlanks
+  have hUsedBound : used ≤ prepareTime := hUsed
+  have hPrepare := prepareRun.evalConfigWithin_eq_pure_of_no_randomBit prepareGuessInput_no_randomBit
+  have hFirst (finish : Configuration) (run : PaddedRunsFor prepareGuessInput start finish used) :
+      finish.halted = true :=
+    prepareRun.haltsFrom_of_no_randomBit prepareHalt prepareGuessInput_no_randomBit (Nat.le_refl _) finish run
+  have hStorage := sourceStorage_le_of_run prepareRun
+  have hStorageBound : sourceStorage prepared ≤ storage + prepareTime := by
+    change sourceStorage prepared ≤ storage + used at hStorage
+    omega
+  have hSecond (c : Configuration) (hc : c ∈ (evalConfigWithin prepareGuessInput start used).support)
+      (finish : Configuration) (run : PaddedRunsFor (storedGuessCallCompile source) (c.resumeAt 0) finish callTime) :
+      finish.halted = true := by
+    rw [hPrepare] at hc
+    have heq : c = prepared := by simpa using hc
+    subst c
+    have hSmall := storedGuessCallCompile_haltsFrom_fresh_tapes source coefficient degree hSource
+      afterInput afterOutput remainingInput remainingOutput
+    have hActual :
+        ({ inputTape := { left := afterInput, right := List.replicate remainingInput none },
+           outputTape := { left := afterOutput, right := List.replicate remainingOutput none } } : Configuration) =
+        prepared.resumeAt 0 := by
+      rw [Configuration.resumeAt, hInput, hOutput]
+    rw [hActual] at hSmall
+    have hBound : storedGuessFreshBudget coefficient degree (sourceStorage prepared) ≤ callTime :=
+      storedGuessFreshBudget_monotone coefficient degree hStorageBound
+    have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr run
+    rw [evalConfigWithin_eq_of_le _ _ _ _ hBound hSmall] at hMem
+    exact hSmall finish ((mem_support_evalConfigWithin_iff _ _ _ _).mp hMem)
+  have hLaw := Program.evalConfigWithin_twoStages_configuration prepareGuessInput (storedGuessCallCompile source)
+    start rfl rfl used callTime hFirst hSecond
+  change evalConfigWithin (guessFromProductCompile source) start (used + (callTime + 1)) = _ at hLaw
+  have hSelected (finish : Configuration)
+      (run : PaddedRunsFor (guessFromProductCompile source) start finish (used + (callTime + 1))) :
+      finish.halted = true := by
+    have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr run
+    rw [hLaw, PMF.mem_support_bind_iff] at hMem
+    obtain ⟨middle, _hMiddle, hFinish⟩ := hMem
+    rw [PMF.mem_support_map_iff] at hFinish
+    obtain ⟨target, _hTarget, rfl⟩ := hFinish
+    rfl
+  have hBound : used + (callTime + 1) ≤ guessRetainedBudget coefficient degree storage := by
+    change used + (callTime + 1) ≤ prepareTime + callTime + 1
+    omega
+  intro finish run
+  have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr run
+  rw [evalConfigWithin_eq_of_le _ _ _ _ hBound hSelected] at hMem
+  exact hSelected finish ((mem_support_evalConfigWithin_iff _ _ _ _).mp hMem)
+
 end Machine.GuardedCompiler

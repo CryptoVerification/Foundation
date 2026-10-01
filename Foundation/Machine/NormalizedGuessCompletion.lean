@@ -245,4 +245,156 @@ theorem normalizedMultiplyGuessTailBudget_bound (qMultiply qGuess : Nat → Nat)
     exact h.trans (Nat.mul_le_mul (Nat.mul_le_mul_left 20000 hSize) (Nat.pow_le_pow_left hTime 2))
   exact Nat.max_le.mpr ⟨hBranch false, hBranch true⟩
 
+
+/-- All native selection, prefix restoration, multiplication, guessing and
+finalization work is charged against retained storage. This envelope needs
+no canonical response or group-operation correctness premise. -/
+def normalizedMultiplyGuessRetainedBudget
+    (multiplyCoefficient multiplyDegree guessCoefficient guessDegree storage : Nat) : Nat :=
+  let selectionTime := 400 * storage + 500
+  selectionTime + selectedMultiplyGuessRetainedBudget
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree (storage + selectionTime) + 1
+
+theorem normalizedMultiplyGuessRetainedBudget_polynomial_of_profile
+    (multiplyCoefficient multiplyDegree guessCoefficient guessDegree : Nat)
+    {size : Nat → Nat} (hSize : PolynomiallyBounded size) :
+    PolynomiallyBounded (fun n =>
+      normalizedMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree (size n)) := by
+  have hSelection := ((PolynomiallyBounded.const 400).mul hSize).add (PolynomiallyBounded.const 500)
+  have hContinuation := selectedMultiplyGuessRetainedBudget_polynomial_of_profile
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree (hSize.add hSelection)
+  exact (hSelection.add hContinuation).add (PolynomiallyBounded.const 1)
+
+theorem normalizedMultiplyGuessRetainedBudget_polynomial
+    (multiplyCoefficient multiplyDegree guessCoefficient guessDegree : Nat) :
+    PolynomiallyBounded
+      (normalizedMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree) :=
+  normalizedMultiplyGuessRetainedBudget_polynomial_of_profile
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree PolynomiallyBounded.id
+
+/-- The complete continuation runs directly on arbitrary finite raw
+normalization-response cells and the real saved caller tapes. Native
+selection's two branches each keep a raw input suffix and a fresh output
+frontier, so the whole multiply/guess chain stops on every random branch. -/
+theorem normalizedMultiplyGuessCompile_haltsFrom_raw_frontier
+    (multiplySource guessSource : Program)
+    (multiplyCoefficient multiplyDegree guessCoefficient guessDegree : Nat)
+    (hMultiply : ∀ request : List Bool,
+      HaltsWithin multiplySource request (multiplyCoefficient * (request.length + 1)^multiplyDegree))
+    (hGuess : ∀ request : List Bool,
+      HaltsWithin guessSource request (guessCoefficient * (request.length + 1)^guessDegree))
+    (input : Tape) (savedOutput : List (Option Bool)) (outputBlanks : Nat)
+    (raw : List Bool) (inputBlanks : Nat)
+    (hForward : input.current :: input.right = raw.map some ++ none :: List.replicate inputBlanks none) :
+    let start : Configuration :=
+      { inputTape := input, outputTape := { left := savedOutput, right := List.replicate outputBlanks none } }
+    ∀ finish, PaddedRunsFor (normalizedMultiplyGuessCompile multiplySource guessSource) start finish
+      (normalizedMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree
+        (sourceStorage start)) → finish.halted = true := by
+  dsimp only
+  let output : Tape := { left := savedOutput, right := List.replicate outputBlanks none }
+  let start : Configuration := { inputTape := input, outputTape := output }
+  let storage := sourceStorage start
+  let selectionTime := 400 * storage + 500
+  let continuationTime := selectedMultiplyGuessRetainedBudget
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree (storage + selectionTime)
+  have hFirst (c : Configuration) (run : PaddedRunsFor prepareSelectedMessage start c selectionTime) :
+      c.halted = true := prepareSelectedMessage_haltsFrom_anyTape input output c run
+  have hSecond (c : Configuration)
+      (hc : c ∈ (evalConfigWithin prepareSelectedMessage start selectionTime).support)
+      (d : Configuration)
+      (run : PaddedRunsFor (selectedMultiplyGuessCompile multiplySource guessSource) (c.resumeAt 0) d continuationTime) :
+      d.halted = true := by
+    have selectedRun := (mem_support_evalConfigWithin_iff _ _ _ _).mp hc
+    obtain ⟨after, remaining, hOutput⟩ :=
+      prepareSelectedMessage_output_layout_anyTape input savedOutput outputBlanks c selectedRun
+    obtain ⟨rest, padding, hRest⟩ :=
+      prepareSelectedMessage_input_raw_frontier input output raw inputBlanks hForward c selectedRun
+    have hSmall := selectedMultiplyGuessCompile_haltsFrom_raw_frontier multiplySource guessSource
+      multiplyCoefficient multiplyDegree guessCoefficient guessDegree hMultiply hGuess
+      c.inputTape after remaining rest padding hRest
+    have hEntry :
+        ({ inputTape := c.inputTape,
+           outputTape := { left := after, right := List.replicate remaining none } } : Configuration) =
+        c.resumeAt 0 := by simp only [Configuration.resumeAt, hOutput]
+    rw [hEntry] at hSmall
+    have hStorage := sourceStorage_le_of_padded_run selectedRun
+    change sourceStorage c ≤ storage + selectionTime at hStorage
+    have hTime := selectedMultiplyGuessRetainedBudget_monotone
+      multiplyCoefficient multiplyDegree guessCoefficient guessDegree hStorage
+    change selectedMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree
+      (sourceStorage c) ≤ continuationTime at hTime
+    change ∀ finish, PaddedRunsFor (selectedMultiplyGuessCompile multiplySource guessSource) (c.resumeAt 0) finish
+      (selectedMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree
+        (sourceStorage c)) → finish.halted = true at hSmall
+    have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr run
+    rw [evalConfigWithin_eq_of_le _ _ _ _ hTime hSmall] at hMem
+    exact hSmall d ((mem_support_evalConfigWithin_iff _ _ _ _).mp hMem)
+  have hLaw := Program.evalConfigWithin_twoStages_configuration prepareSelectedMessage
+    (selectedMultiplyGuessCompile multiplySource guessSource) start rfl rfl selectionTime continuationTime hFirst hSecond
+  have hFuel : selectionTime + (continuationTime + 1) =
+      normalizedMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree storage := by
+    change selectionTime + (continuationTime + 1) = selectionTime + continuationTime + 1
+    omega
+  rw [hFuel] at hLaw
+  change evalConfigWithin (normalizedMultiplyGuessCompile multiplySource guessSource) start
+    (normalizedMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree storage) = _ at hLaw
+  intro finish run
+  have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr run
+  rw [hLaw, PMF.mem_support_bind_iff] at hMem
+  obtain ⟨middle, _hMiddle, hFinish⟩ := hMem
+  rw [PMF.mem_support_map_iff] at hFinish
+  obtain ⟨target, _hTarget, rfl⟩ := hFinish
+  rfl
+
+/-- The guarded normalizer's actual returned configuration satisfies the
+raw-frontier interface regardless of its decoded response. All retained
+source scratch cells remain part of the storage charged by the bound. -/
+theorem normalizedMultiplyGuessCompile_fromNormalizer_haltsFrom_raw
+    (normalizer multiplySource guessSource : Program)
+    (multiplyCoefficient multiplyDegree guessCoefficient guessDegree : Nat)
+    (hMultiply : ∀ request : List Bool,
+      HaltsWithin multiplySource request (multiplyCoefficient * (request.length + 1)^multiplyDegree))
+    (hGuess : ∀ request : List Bool,
+      HaltsWithin guessSource request (guessCoefficient * (request.length + 1)^guessDegree))
+    (request : List Bool) (beforeInput savedInput : List (Option Bool)) (result : Configuration) :
+    let returned := (rawResultFrom normalizer request beforeInput (none :: savedInput) result).swapTapes
+    ∀ finish, PaddedRunsFor (normalizedMultiplyGuessCompile multiplySource guessSource) (returned.resumeAt 0) finish
+      (normalizedMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree
+        (sourceStorage returned)) → finish.halted = true := by
+  dsimp only
+  exact normalizedMultiplyGuessCompile_haltsFrom_raw_frontier multiplySource guessSource
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree hMultiply hGuess
+    _ _ 0 [] (2 * result.outputTape.cells + 2 - result.outputBits.length) rfl
+
+
+theorem normalizedMultiplyGuessRetainedBudget_monotone
+    (multiplyCoefficient multiplyDegree guessCoefficient guessDegree : Nat) :
+    Monotone (normalizedMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree) := by
+  intro a b h
+  have hSelection := Nat.add_le_add_right (Nat.mul_le_mul_left 400 h) 500
+  have hContinuation := selectedMultiplyGuessRetainedBudget_monotone
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree (Nat.add_le_add h hSelection)
+  exact Nat.add_le_add_right (Nat.add_le_add hSelection hContinuation) 1
+
+/-- All finite retained prefixes are allowed in a native raw normalizer
+return. Its source scratch is a fresh output frontier; its returned bits
+remain on the input tape, even if no decoded response is available. -/
+theorem normalizedMultiplyGuessCompile_fromRawResult_haltsFrom_raw
+    (normalizer multiplySource guessSource : Program)
+    (multiplyCoefficient multiplyDegree guessCoefficient guessDegree : Nat)
+    (hMultiply : ∀ request : List Bool,
+      HaltsWithin multiplySource request (multiplyCoefficient * (request.length + 1)^multiplyDegree))
+    (hGuess : ∀ request : List Bool,
+      HaltsWithin guessSource request (guessCoefficient * (request.length + 1)^guessDegree))
+    (request : List Bool) (sourceSaved targetSaved : List (Option Bool)) (result : Configuration) :
+    let returned := (rawResultFrom normalizer request sourceSaved targetSaved result).swapTapes
+    ∀ finish, PaddedRunsFor (normalizedMultiplyGuessCompile multiplySource guessSource) (returned.resumeAt 0) finish
+      (normalizedMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree
+        (sourceStorage returned)) → finish.halted = true := by
+  dsimp only
+  exact normalizedMultiplyGuessCompile_haltsFrom_raw_frontier multiplySource guessSource
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree hMultiply hGuess
+    _ _ 0 [] (2 * result.outputTape.cells + 2 - result.outputBits.length) rfl
+
 end Machine.GuardedCompiler

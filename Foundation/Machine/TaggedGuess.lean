@@ -1,6 +1,6 @@
 import Foundation.Machine.Adversary
 import Foundation.Machine.PolynomialTime
-import Foundation.Machine.SubroutineSimulation
+import Foundation.Machine.SubroutineProbability
 
 namespace Machine
 
@@ -409,5 +409,117 @@ theorem finishTaggedGuess_withSubroutine_eval (pre suffix : Program) (returnPc :
     (by simp [finishTaggedGuessStart, readTaggedGuessStart, finishTaggedGuess,
       Program.asSubroutine_length, readTaggedGuess, matchPreviousOutputBit])
     rfl rfl finishTaggedGuess_control_closed finishTaggedGuess_no_randomBit
+
+/-- The tagged-bit parser halts on arbitrary physical tapes, including
+internal blanks and malformed suffixes. It inspects at most three input
+cells. The seven-step bound uses the actual native branch/write/halt code. -/
+theorem readTaggedGuess_haltsFrom_anyTape (input output : Tape) :
+    ∀ finish, PaddedRunsFor readTaggedGuess
+      ({ inputTape := input, outputTape := output } : Configuration) finish 7 → finish.halted = true := by
+  have hLaw : (evalConfigWithin readTaggedGuess
+      ({ inputTape := input, outputTape := output } : Configuration) 7).map Configuration.halted = PMF.pure true := by
+    rcases input with ⟨left, current, right⟩
+    cases current with
+    | none =>
+        simp [PMF.pure_map, evalConfigWithin, stepPMF, next, readTaggedGuess, Instruction.next,
+          Configuration.tape, Configuration.updateTape, Configuration.advance, Tape.write]
+    | some tag =>
+        cases tag with
+        | false =>
+            simp [PMF.pure_map, evalConfigWithin, stepPMF, next, readTaggedGuess, Instruction.next,
+              Configuration.tape, Configuration.updateTape, Configuration.advance, Tape.write]
+        | true =>
+            cases right with
+            | nil =>
+                simp [PMF.pure_map, evalConfigWithin, stepPMF, next, readTaggedGuess, Instruction.next,
+                  Configuration.tape, Configuration.updateTape, Configuration.advance, Tape.moveRight, Tape.write]
+            | cons cell tail =>
+                cases cell with
+                | none =>
+                    simp [PMF.pure_map, evalConfigWithin, stepPMF, next, readTaggedGuess, Instruction.next,
+                      Configuration.tape, Configuration.updateTape, Configuration.advance, Tape.moveRight, Tape.write]
+                | some bit =>
+                    cases bit <;> cases tail with
+                    | nil =>
+                        simp [PMF.pure_map, evalConfigWithin, stepPMF, next, readTaggedGuess, Instruction.next,
+                          Configuration.tape, Configuration.updateTape, Configuration.advance, Tape.moveRight, Tape.write]
+                    | cons cell tail =>
+                        cases cell with
+                        | none =>
+                            simp [PMF.pure_map, evalConfigWithin, stepPMF, next, readTaggedGuess, Instruction.next,
+                              Configuration.tape, Configuration.updateTape, Configuration.advance, Tape.moveRight, Tape.write]
+                        | some further =>
+                            cases further <;>
+                              simp [PMF.pure_map, evalConfigWithin, stepPMF, next, readTaggedGuess, Instruction.next,
+                                Configuration.tape, Configuration.updateTape, Configuration.advance, Tape.moveRight, Tape.write]
+  intro finish run
+  have hMem : finish.halted ∈ ((evalConfigWithin readTaggedGuess
+      ({ inputTape := input, outputTape := output } : Configuration) 7).map Configuration.halted).support := by
+    rw [PMF.mem_support_map_iff]
+    exact ⟨finish, (mem_support_evalConfigWithin_iff _ _ _ _).mpr run, rfl⟩
+  simpa only [hLaw, PMF.support_pure, Set.mem_singleton_iff] using hMem
+
+/-- A malformed saved challenge is also handled by the finite matcher.
+Its longest path has six actual native transitions; every path writes a
+Boolean comparison/default bit before halting. -/
+theorem matchPreviousOutputBit_haltsFrom_anyTape (input output : Tape) :
+    ∀ finish, PaddedRunsFor matchPreviousOutputBit
+      ({ inputTape := input, outputTape := output } : Configuration) finish 6 → finish.halted = true := by
+  have hLaw : (evalConfigWithin matchPreviousOutputBit
+      ({ inputTape := input, outputTape := output } : Configuration) 6).map Configuration.halted = PMF.pure true := by
+    rcases output with ⟨left, current, right⟩
+    cases current with
+    | none =>
+        simp [PMF.pure_map, evalConfigWithin, stepPMF, next, matchPreviousOutputBit, Instruction.next,
+          Configuration.tape, Configuration.updateTape, Configuration.advance, Tape.write]
+    | some bit =>
+        cases bit <;> cases left with
+        | nil =>
+            simp [PMF.pure_map, evalConfigWithin, stepPMF, next, matchPreviousOutputBit, Instruction.next,
+              Configuration.tape, Configuration.updateTape, Configuration.advance, Tape.moveLeft, Tape.write]
+        | cons cell tail =>
+            cases cell with
+            | none =>
+                simp [PMF.pure_map, evalConfigWithin, stepPMF, next, matchPreviousOutputBit, Instruction.next,
+                  Configuration.tape, Configuration.updateTape, Configuration.advance, Tape.moveLeft, Tape.write]
+            | some previous =>
+                cases previous <;>
+                  simp [PMF.pure_map, evalConfigWithin, stepPMF, next, matchPreviousOutputBit, Instruction.next,
+                    Configuration.tape, Configuration.updateTape, Configuration.advance, Tape.moveLeft, Tape.write]
+  intro finish run
+  have hMem : finish.halted ∈ ((evalConfigWithin matchPreviousOutputBit
+      ({ inputTape := input, outputTape := output } : Configuration) 6).map Configuration.halted).support := by
+    rw [PMF.mem_support_map_iff]
+    exact ⟨finish, (mem_support_evalConfigWithin_iff _ _ _ _).mpr run, rfl⟩
+  simpa only [hLaw, PMF.support_pure, Set.mem_singleton_iff] using hMem
+
+/-- Native parsing and comparison also compose on arbitrary physical
+tapes. Malformed guesses and missing saved challenge cells still follow
+one of the bounded native branches; both tapes are passed unchanged between
+the subroutines except for their actual machine transitions. -/
+theorem finishTaggedGuess_haltsFrom_anyTape (input output : Tape) :
+    ∀ finish, PaddedRunsFor finishTaggedGuess
+      ({ inputTape := input, outputTape := output } : Configuration) finish 14 → finish.halted = true := by
+  let start : Configuration := { inputTape := input, outputTape := output }
+  have hSecond (c : Configuration) (_hc : c ∈ (evalConfigWithin readTaggedGuess start 7).support)
+      (finish : Configuration)
+      (run : PaddedRunsFor matchPreviousOutputBit (c.resumeAt 0) finish 6) : finish.halted = true :=
+    matchPreviousOutputBit_haltsFrom_anyTape c.inputTape c.outputTape finish run
+  have hLaw := Program.evalConfigWithin_twoStages_configuration readTaggedGuess matchPreviousOutputBit
+    start rfl rfl 7 6 (readTaggedGuess_haltsFrom_anyTape input output) hSecond
+  change evalConfigWithin finishTaggedGuess start 14 = _ at hLaw
+  intro finish run
+  have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr run
+  rw [hLaw, PMF.mem_support_bind_iff] at hMem
+  obtain ⟨middle, _hMiddle, hFinish⟩ := hMem
+  rw [PMF.mem_support_map_iff] at hFinish
+  obtain ⟨target, _hTarget, rfl⟩ := hFinish
+  rfl
+
+theorem finishTaggedGuess_terminates_from_anyTape (input output : Tape) :
+    ∃ finish used, used ≤ 14 ∧
+      RunsFor finishTaggedGuess ({ inputTape := input, outputTape := output } : Configuration)
+        finish used ∧ finish.halted = true :=
+  exists_halted_run_of_haltsFrom _ _ 14 (finishTaggedGuess_haltsFrom_anyTape input output)
 
 end Machine

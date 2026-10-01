@@ -330,4 +330,73 @@ theorem prepareSelectedMessage_polynomialTime : PolynomialTime prepareSelectedMe
     cases input <;> simp [Configuration.initial, Tape.ofBits, Tape.cells]
     omega
 
+
+/-- A finite contiguous raw response stays contiguous ahead of the input
+head after native rewind, randomized selection and field copying. This
+includes empty responses and malformed escaped fields. Saved caller cells
+behind the head are neither reloaded nor required to be canonical. -/
+theorem prepareSelectedMessage_input_raw_frontier (input output : Tape)
+    (raw : List Bool) (blanks : Nat)
+    (hForward : input.current :: input.right = raw.map some ++ none :: List.replicate blanks none)
+    (finish : Configuration)
+    (run : PaddedRunsFor prepareSelectedMessage
+      ({ inputTape := input, outputTape := output } : Configuration) finish
+      (400 * (input.cells + output.cells) + 500)) :
+    ∃ (remaining : List Bool) (padding : Nat),
+      finish.inputTape.current :: finish.inputTape.right =
+        remaining.map some ++ none :: List.replicate padding none := by
+  let initial : Configuration := { inputTape := input, outputTape := output }
+  let storage := input.cells + output.cells
+  let firstTime := 40 * storage + 50
+  let secondTime := 8 * (storage + firstTime) + 9
+  obtain ⟨selected, hSelected, hSelectedFinish⟩ :=
+    prepareMessageSelection_eval_with_input_layout input output
+  change evalConfigWithin prepareMessageSelection initial firstTime =
+    Foundation.Probability.sampleBit.map selected at hSelected
+  have hFirst (c : Configuration) (trace : PaddedRunsFor prepareMessageSelection initial c firstTime) :
+      c.halted = true := prepareMessageSelection_haltsFrom_anyTape input output c trace
+  have hSecond (c : Configuration)
+      (hc : c ∈ (evalConfigWithin prepareMessageSelection initial firstTime).support)
+      (d : Configuration) (trace : PaddedRunsFor copyMessageField (c.resumeAt 0) d secondTime) :
+      d.halted = true := by
+    have hStorage := GuardedCompiler.sourceStorage_le_of_padded_run
+      ((mem_support_evalConfigWithin_iff _ _ _ _).mp hc)
+    change c.inputTape.cells + c.outputTape.cells ≤ storage + firstTime at hStorage
+    have hBound : 8 * c.inputTape.cells + 9 ≤ secondTime := by dsimp only [secondTime]; omega
+    have hAt (target : Configuration)
+        (targetTrace : PaddedRunsFor copyMessageField (c.resumeAt 0) target (8 * c.inputTape.cells + 9)) :
+        target.halted = true := copyMessageField_haltsFrom_anyTape c.inputTape c.outputTape target targetTrace
+    have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr trace
+    rw [evalConfigWithin_eq_of_le _ _ _ _ hBound hAt] at hMem
+    exact hAt d ((mem_support_evalConfigWithin_iff _ _ _ _).mp hMem)
+  have hLaw := Program.evalConfigWithin_twoStages_configuration prepareMessageSelection copyMessageField initial
+    rfl rfl firstTime secondTime hFirst hSecond
+  change evalConfigWithin prepareSelectedMessage initial (firstTime + (secondTime + 1)) = _ at hLaw
+  have hSmall (target : Configuration)
+      (trace : PaddedRunsFor prepareSelectedMessage initial target (firstTime + (secondTime + 1))) :
+      target.halted = true := by
+    have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr trace
+    rw [hLaw, PMF.mem_support_bind_iff] at hMem
+    obtain ⟨middle, _hMiddle, hTarget⟩ := hMem
+    rw [PMF.mem_support_map_iff] at hTarget
+    obtain ⟨last, _hLast, rfl⟩ := hTarget
+    rfl
+  have hBound : firstTime + (secondTime + 1) ≤ 400 * (input.cells + output.cells) + 500 := by
+    dsimp only [firstTime, secondTime, storage]
+    omega
+  have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr run
+  rw [evalConfigWithin_eq_of_le _ _ _ _ hBound hSmall, hLaw, PMF.mem_support_bind_iff] at hMem
+  obtain ⟨middle, hMiddle, hTarget⟩ := hMem
+  rw [PMF.mem_support_map_iff] at hTarget
+  obtain ⟨last, hLast, rfl⟩ := hTarget
+  rw [hSelected, PMF.mem_support_map_iff] at hMiddle
+  obtain ⟨bit, _hBit, rfl⟩ := hMiddle
+  obtain ⟨rest, padding, hRest⟩ := (hSelectedFinish bit).2.2 raw blanks hForward
+  obtain ⟨moves, _hMoves, hMoved⟩ :=
+    copyMessageField_input_moveRight ((mem_support_evalConfigWithin_iff _ _ _ _).mp hLast)
+  change ∃ (remaining : List Bool) (padding : Nat),
+    last.inputTape.current :: last.inputTape.right = remaining.map some ++ none :: List.replicate padding none
+  rw [hMoved]
+  exact moveRight_iterate_raw_frontier (selected bit).inputTape rest padding moves hRest
+
 end Machine

@@ -383,4 +383,60 @@ theorem preparePublicPrefixContext_terminates_with_layout (input : Tape)
     preparePublicPrefixContext_terminates_with_suffix_layout input savedOutput blanks
   exact ⟨finish, used, savedInput, afterOutput, remaining, hBound, hRun, hHalted, hCurrent, hLeft, hOutput⟩
 
+/-- Native public-prefix assembly also stops when the output counter region
+contains arbitrary finite cells. This stopping statement does not claim
+that malformed caller data provides a fresh region for a guarded call. -/
+theorem preparePublicPrefixContext_terminates_from_anyTape (input output : Tape) :
+    ∃ finish used, used ≤ 100000 * (input.cells + output.cells) + 100000 ∧
+      RunsFor preparePublicPrefixContext
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true := by
+  obtain ⟨unary, unaryTime, hUnaryTime, unaryRun, unaryHalt, _unaryOutput⟩ :=
+    skipUnary_terminates_from_anyTape input output.moveRight
+  obtain ⟨framed, frameTime, hFrameTime, frameRun, frameHalt⟩ :=
+    skipFrame_terminates_from_anyTape unary.inputTape unary.outputTape
+  obtain ⟨saved, saveTime, hSaveTime, saveRun, saveHalt⟩ :=
+    savePublicPrefix_terminates_from_anyTape framed.inputTape framed.outputTape.moveRight
+  let moved : Configuration := { pc := 1, inputTape := input, outputTape := output.moveRight }
+  have first : Step preparePublicPrefixContext
+      ({ inputTape := input, outputTape := output } : Configuration) moved := by
+    have code : preparePublicPrefixContext[0]? = some (.moveRight .output) := rfl
+    simp [Step, successors, next, code, moved, Instruction.next,
+      Configuration.updateTape, Configuration.advance]
+  have hUnary := unaryRun.withSubroutine_halted_of_closed
+    [.moveRight .output] skipUnary
+    (skipFrame.asSubroutine 8 22 ++ [.moveRight .output] ++ savePublicPrefix.asSubroutine 23 41 ++ [.halt]) 8
+    (by change 0 < 6; decide) rfl unaryHalt skipUnary_control_closed
+  change RunsFor preparePublicPrefixContext moved (unary.resumeAt 8) unaryTime at hUnary
+  have leading := (RunsFor.succ (RunsFor.zero _) first).trans hUnary
+  have hFrame := frameRun.withSubroutine_halted_of_closed
+    ([.moveRight .output] ++ skipUnary.asSubroutine 1 8) skipFrame
+    ([.moveRight .output] ++ savePublicPrefix.asSubroutine 23 41 ++ [.halt]) 22
+    (by change 0 < 13; decide) rfl frameHalt skipFrame_control_closed
+  change RunsFor preparePublicPrefixContext (unary.resumeAt 8) (framed.resumeAt 22) frameTime at hFrame
+  let afterMove : Configuration := { pc := 23, inputTape := framed.inputTape, outputTape := framed.outputTape.moveRight }
+  have move : Step preparePublicPrefixContext (framed.resumeAt 22) afterMove := by
+    have code : preparePublicPrefixContext[22]? = some (.moveRight .output) := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, afterMove, Instruction.next,
+      Configuration.updateTape, Configuration.advance]
+  have toSave := RunsFor.succ (leading.trans hFrame) move
+  have hSave := saveRun.withSubroutine_halted_of_closed
+    ([.moveRight .output] ++ skipUnary.asSubroutine 1 8 ++ skipFrame.asSubroutine 8 22 ++ [.moveRight .output])
+    savePublicPrefix [.halt] 41
+    (by change 0 < 17; decide) rfl saveHalt savePublicPrefix_control_closed
+  change RunsFor preparePublicPrefixContext afterMove (saved.resumeAt 41) saveTime at hSave
+  let finish : Configuration := { saved with pc := 41, halted := true }
+  have last : Step preparePublicPrefixContext (saved.resumeAt 41) finish := by
+    have code : preparePublicPrefixContext[41]? = some .halt := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, finish, Instruction.next]
+  refine ⟨finish, 1 + unaryTime + frameTime + 1 + saveTime + 1, ?_,
+    RunsFor.succ (toSave.trans hSave) last, rfl⟩
+  have storageUnary := GuardedCompiler.sourceStorage_le_of_run leading
+  have storageFramed := GuardedCompiler.sourceStorage_le_of_run (leading.trans hFrame)
+  change unary.inputTape.cells + unary.outputTape.cells ≤ input.cells + output.cells + (1 + unaryTime) at storageUnary
+  change framed.inputTape.cells + framed.outputTape.cells ≤ input.cells + output.cells + (1 + unaryTime + frameTime) at storageFramed
+  have outputMove := Tape.cells_moveRight_le output
+  have frameMove := Tape.cells_moveRight_le framed.outputTape
+  omega
+
 end Machine

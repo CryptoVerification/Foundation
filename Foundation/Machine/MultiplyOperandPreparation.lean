@@ -177,12 +177,16 @@ theorem prepareMultiplyMessageFinish_operands_layout (beforeInput savedOutput : 
 /-- Restoration and final-element framing terminate on arbitrary retained
 caller tapes. The resource bound follows the actual configurations between
 subroutines, without assuming a valid stored DDH tuple or normalized reply. -/
-theorem prepareMultiplyOperands_terminates_from_anyTape (input output : Tape) :
+private theorem prepareMultiplyOperands_terminates_layout_core (input output : Tape) :
     ∃ finish used, used ≤ 1000000000000000000 * (input.cells + output.cells) + 1000000000000000000 ∧
       RunsFor prepareMultiplyOperands
         ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
-      finish.halted = true := by
-  obtain ⟨restored, restoreTime, hRestoreTime, restoreRun, restoreHalt, _restoreOutput⟩ :=
+      finish.halted = true ∧
+      (∀ beforeOutput blanks,
+        output = ({ left := beforeOutput, right := List.replicate blanks none } : Tape) →
+        ∃ saved remaining,
+          finish.outputTape = { left := saved, right := List.replicate remaining none }) := by
+  obtain ⟨restored, restoreTime, hRestoreTime, restoreRun, restoreHalt, restoreOutput⟩ :=
     restoreInputBeforeScratch_terminates_from_anyTape input output
   obtain ⟨framed, frameTime, hFrameTime, frameRun, frameHalt⟩ :=
     frameStoredFinalElement_terminates_from_anyTape restored.inputTape restored.outputTape
@@ -199,9 +203,250 @@ theorem prepareMultiplyOperands_terminates_from_anyTape (input output : Tape) :
   have last : Step prepareMultiplyOperands (framed.resumeAt 112) finish := by
     have code : prepareMultiplyOperands[112]? = some .halt := rfl
     simp [Step, successors, next, code, Configuration.resumeAt, finish, Instruction.next]
-  refine ⟨finish, restoreTime + frameTime + 1, ?_, RunsFor.succ (hRestore.trans hFrame) last, rfl⟩
+  refine ⟨finish, restoreTime + frameTime + 1, ?_,
+    RunsFor.succ (hRestore.trans hFrame) last, rfl, ?_⟩
+  · have hStorage := GuardedCompiler.sourceStorage_le_of_run restoreRun
+    change restored.inputTape.cells + restored.outputTape.cells ≤ input.cells + output.cells + restoreTime at hStorage
+    omega
+  · intro beforeOutput blanks hOutput
+    obtain ⟨exactFrame, exactTime, saved, remaining,
+      _hTime, exactRun, exactHalt, exactOutput⟩ :=
+      frameStoredFinalElement_terminates_with_output_layout restored.inputTape beforeOutput blanks
+    have hRestoredOutput : restored.outputTape =
+        { left := beforeOutput, right := List.replicate blanks none } := restoreOutput.trans hOutput
+    rw [← hRestoredOutput] at exactRun
+    have hFrameEq := frameRun.halted_finish_eq_of_no_randomBit exactRun
+      frameHalt exactHalt frameStoredFinalElement_no_randomBit
+    refine ⟨saved, remaining, ?_⟩
+    change framed.outputTape = _
+    rw [hFrameEq, exactOutput]
+
+/-- Native operand assembly stops on arbitrary finite caller tapes. Its
+stopping bound does not assert successful parsing of an invalid DDH tuple. -/
+theorem prepareMultiplyOperands_terminates_from_anyTape (input output : Tape) :
+    ∃ finish used, used ≤ 1000000000000000000 * (input.cells + output.cells) + 1000000000000000000 ∧
+      RunsFor prepareMultiplyOperands
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true := by
+  obtain ⟨finish, used, hBound, run, hHalted, _hLayout⟩ :=
+    prepareMultiplyOperands_terminates_layout_core input output
+  exact ⟨finish, used, hBound, run, hHalted⟩
+
+/-- Operand assembly preserves the fresh output frontier returned by
+message preparation, for every finite input tape. Actual stored-input
+rewinds preserve the other tape, and final-element framing restores its
+frontier even when the public fields or element delimiters are malformed. -/
+theorem prepareMultiplyOperands_terminates_with_output_layout (input : Tape)
+    (beforeOutput : List (Option Bool)) (blanks : Nat) :
+    ∃ finish used saved remaining,
+      used ≤ 1000000000000000000 *
+        (input.cells + ({ left := beforeOutput, right := List.replicate blanks none } : Tape).cells) + 1000000000000000000 ∧
+      RunsFor prepareMultiplyOperands
+        ({ inputTape := input,
+           outputTape := { left := beforeOutput, right := List.replicate blanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧
+      finish.outputTape = { left := saved, right := List.replicate remaining none } := by
+  obtain ⟨finish, used, hBound, run, hHalted, hLayout⟩ :=
+    prepareMultiplyOperands_terminates_layout_core input
+      { left := beforeOutput, right := List.replicate blanks none }
+  obtain ⟨saved, remaining, hOutput⟩ := hLayout beforeOutput blanks rfl
+  exact ⟨finish, used, saved, remaining, hBound, run, hHalted, hOutput⟩
+
+
+/-- Operand preparation on the four raw blocks actually retained by
+message framing. No public-header or tuple validity is assumed. Native
+restoration first exposes those blocks; final-element parsing then advances
+their input head rightward and preserves its current/right cells through
+the temporary delimiter edit. Both stages retain the fresh output frontier. -/
+theorem prepareMultiplyOperands_terminates_from_retained_blocks
+    (before savedOutput : List (Option Bool))
+    (original reply canonical selected : List Bool) (inputBlanks outputBlanks : Nat) :
+    let output : Tape := { left := savedOutput, right := List.replicate outputBlanks none }
+    let start := restoreInputBeforeScratchStart before original reply canonical selected
+      (List.replicate inputBlanks none) output
+    let restored := restoreInputBeforeScratchFinish before original reply canonical selected
+      (List.replicate inputBlanks none) output
+    ∃ finish used saved remaining moves,
+      used ≤ 1000000000000000000 * GuardedCompiler.sourceStorage start + 1000000000000000000 ∧
+      RunsFor prepareMultiplyOperands start finish used ∧ finish.halted = true ∧ moves ≤ used ∧
+      finish.outputTape = { left := saved, right := List.replicate remaining none } ∧
+      finish.inputTape.current = ((Tape.moveRight^[moves]) restored.inputTape).current ∧
+      ∀ i, finish.inputTape.right.getD i none =
+        ((Tape.moveRight^[moves]) restored.inputTape).right.getD i none := by
+  dsimp only
+  let output : Tape := { left := savedOutput, right := List.replicate outputBlanks none }
+  let start := restoreInputBeforeScratchStart before original reply canonical selected
+    (List.replicate inputBlanks none) output
+  let restored := restoreInputBeforeScratchFinish before original reply canonical selected
+    (List.replicate inputBlanks none) output
+  let restoreTime := restoreInputBeforeScratchSteps original reply canonical selected
+  have restoreRun := restoreInputBeforeScratch_runs before original reply canonical selected
+    (List.replicate inputBlanks none) output
+  obtain ⟨framed, frameTime, saved, remaining, moves, hFrameTime,
+    frameRun, frameHalt, hMoves, frameOutput, frameCurrent, frameRight⟩ :=
+    frameStoredFinalElement_terminates_with_input_output_layout restored.inputTape savedOutput outputBlanks
+  have hRestore := restoreRun.withSubroutine_halted_of_closed
+    [] restoreInputBeforeScratch (frameStoredFinalElement.asSubroutine 27 112 ++ [.halt]) 27
+    (by change 0 < 26; decide) rfl rfl restoreInputBeforeScratch_control_closed
+  change RunsFor prepareMultiplyOperands start (restored.resumeAt 27) restoreTime at hRestore
+  have hFrame := frameRun.withSubroutine_halted_of_closed
+    (restoreInputBeforeScratch.asSubroutine 0 27) frameStoredFinalElement [.halt] 112
+    (by change 0 < 84; decide) rfl frameHalt frameStoredFinalElement_control_closed
+  change RunsFor prepareMultiplyOperands (restored.resumeAt 27) (framed.resumeAt 112) frameTime at hFrame
+  let finish : Configuration := { framed with pc := 112, halted := true }
+  have last : Step prepareMultiplyOperands (framed.resumeAt 112) finish := by
+    have code : prepareMultiplyOperands[112]? = some .halt := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, finish, Instruction.next]
+  refine ⟨finish, restoreTime + frameTime + 1, saved, remaining, moves, ?_,
+    RunsFor.succ (hRestore.trans hFrame) last, rfl, by omega, frameOutput, frameCurrent, frameRight⟩
+  have hRestoreTime : restoreTime ≤ 2 * GuardedCompiler.sourceStorage start + 21 := by
+    dsimp only [restoreTime]
+    rw [restoreInputBeforeScratch_steps_eq]
+    simp only [GuardedCompiler.sourceStorage, start, restoreInputBeforeScratchStart,
+      Tape.cells, List.length_append, List.length_cons, List.length_reverse,
+      List.length_map, List.length_replicate]
+    omega
   have hStorage := GuardedCompiler.sourceStorage_le_of_run restoreRun
-  change restored.inputTape.cells + restored.outputTape.cells ≤ input.cells + output.cells + restoreTime at hStorage
+  change restored.inputTape.cells + output.cells ≤ GuardedCompiler.sourceStorage start + restoreTime at hStorage
+  change frameTime ≤ 1000000000000 * (restored.inputTape.cells + output.cells) + 1000000000000 at hFrameTime
+  change restoreTime + frameTime + 1 ≤
+    1000000000000000000 * GuardedCompiler.sourceStorage start + 1000000000000000000
+  omega
+
+/-- Every padded execution from the retained caller tapes has halted at the
+same displayed budget. This uses the actual deterministic stopping trace. -/
+theorem prepareMultiplyOperands_haltsFrom_anyTape (input output : Tape) (finish : Configuration)
+    (trace : PaddedRunsFor prepareMultiplyOperands
+      ({ inputTape := input, outputTape := output } : Configuration) finish
+      (1000000000000000000 * (input.cells + output.cells) + 1000000000000000000)) : finish.halted = true := by
+  obtain ⟨target, used, hBound, run, hHalted⟩ :=
+    prepareMultiplyOperands_terminates_from_anyTape input output
+  exact run.haltsFrom_of_no_randomBit hHalted prepareMultiplyOperands_no_randomBit hBound finish trace
+
+/-- The arbitrary-raw message stage returns exactly the four-block input
+layout accepted by the next native restoration. A contiguous original
+prefix already behind the head is joined to its remaining bits by list
+identity only. No DDH parser, normalization correctness, or fresh load is
+used; the returned output retains its actual assembled request frontier. -/
+theorem prepareMultiplyMessage_terminates_with_restoration_layout
+    (before savedOutput : List (Option Bool))
+    (originalPrefix original reply canonical : List Bool) (inputBlanks outputBlanks : Nat) :
+    let output : Tape := { left := savedOutput, right := List.replicate outputBlanks none }
+    let start := seekStoredInputScratchStart
+      (originalPrefix.reverse.map some ++ none :: before)
+      original reply canonical inputBlanks output
+    ∃ finish used, ∃ (selected : List Bool), ∃ remainingInput afterOutput remainingOutput,
+      used ≤ 200000000 * GuardedCompiler.sourceStorage start + 200000000 ∧
+      RunsFor prepareMultiplyMessage start finish used ∧ finish.halted = true ∧
+      finish.resumeAt 0 = restoreInputBeforeScratchStart before (originalPrefix ++ original)
+        reply canonical selected (List.replicate remainingInput none)
+        { left := afterOutput, right := List.replicate remainingOutput none } := by
+  dsimp only
+  obtain ⟨finish, used, selected, remainingInput, afterOutput, remainingOutput,
+    hBound, run, hHalted, hInput, hOutput⟩ :=
+    prepareMultiplyMessage_terminates_with_retained_frontiers
+      (originalPrefix.reverse.map some ++ none :: before) savedOutput
+      original reply canonical inputBlanks outputBlanks
+  refine ⟨finish, used, selected, remainingInput, afterOutput, remainingOutput,
+    hBound, run, hHalted, ?_⟩
+  simp only [Configuration.resumeAt, restoreInputBeforeScratchStart, hInput, hOutput,
+    List.reverse_append, List.map_append, List.append_assoc, List.cons_append]
+
+/-- Both native preparation stages execute on the same physical caller
+tapes. The message-stage return is resumed directly by operand assembly,
+including arbitrary raw original and reply blocks. Their combined overhead
+has one storage bound and their actual final output has a blank frontier.
+This statement does not assert that the input head is yet ready for a call. -/
+theorem prepareMultiplyMessage_operands_terminate_with_output_layout
+    (before savedOutput : List (Option Bool))
+    (original reply canonical : List Bool) (inputBlanks outputBlanks : Nat) :
+    let output : Tape := { left := savedOutput, right := List.replicate outputBlanks none }
+    let start := seekStoredInputScratchStart before original reply canonical inputBlanks output
+    ∃ messageFinish operandFinish messageTime operandTime saved remaining,
+      messageTime + operandTime ≤
+        1000000000000000000000000000000 * GuardedCompiler.sourceStorage start +
+        1000000000000000000000000000000 ∧
+      RunsFor prepareMultiplyMessage start messageFinish messageTime ∧
+      messageFinish.halted = true ∧
+      RunsFor prepareMultiplyOperands (messageFinish.resumeAt 0) operandFinish operandTime ∧
+      operandFinish.halted = true ∧
+      operandFinish.outputTape = { left := saved, right := List.replicate remaining none } := by
+  dsimp only
+  let output : Tape := { left := savedOutput, right := List.replicate outputBlanks none }
+  let start := seekStoredInputScratchStart before original reply canonical inputBlanks output
+  obtain ⟨messageFinish, messageTime, _selected, _inputRemaining, messageOutput, messageBlanks,
+    hMessageTime, messageRun, messageHalt, _messageInput, hMessageOutput⟩ :=
+    prepareMultiplyMessage_terminates_with_retained_frontiers
+      before savedOutput original reply canonical inputBlanks outputBlanks
+  obtain ⟨operandFinish, operandTime, saved, remaining,
+    hOperandTime, operandRun, operandHalt, hOperandOutput⟩ :=
+    prepareMultiplyOperands_terminates_with_output_layout messageFinish.inputTape messageOutput messageBlanks
+  rw [← hMessageOutput] at operandRun hOperandTime
+  change RunsFor prepareMultiplyOperands (messageFinish.resumeAt 0) operandFinish operandTime at operandRun
+  refine ⟨messageFinish, operandFinish, messageTime, operandTime, saved, remaining, ?_,
+    messageRun, messageHalt, operandRun, operandHalt, hOperandOutput⟩
+  have hStorage := GuardedCompiler.sourceStorage_le_of_run messageRun
+  change GuardedCompiler.sourceStorage messageFinish ≤ GuardedCompiler.sourceStorage start + messageTime at hStorage
+  change messageTime ≤ 200000000 * GuardedCompiler.sourceStorage start + 200000000 at hMessageTime
+  change operandTime ≤ 1000000000000000000 * GuardedCompiler.sourceStorage messageFinish +
+    1000000000000000000 at hOperandTime
+  change messageTime + operandTime ≤
+    1000000000000000000000000000000 * GuardedCompiler.sourceStorage start +
+    1000000000000000000000000000000
+  omega
+
+/-- The actual arbitrary-raw message return feeds operand assembly with
+its four retained blocks. The final input cells are a rightward suffix of
+the restored original/reply/canonical/selected layout. This supplies the
+remaining-input invariant for the following four native call-preparation
+scans without assuming that the original DDH input parses successfully. -/
+theorem prepareMultiplyMessage_operands_terminate_with_input_output_layout
+    (before savedOutput : List (Option Bool))
+    (originalPrefix original reply canonical : List Bool) (inputBlanks outputBlanks : Nat) :
+    let output : Tape := { left := savedOutput, right := List.replicate outputBlanks none }
+    let start := seekStoredInputScratchStart
+      (originalPrefix.reverse.map some ++ none :: before)
+      original reply canonical inputBlanks output
+    ∃ messageFinish operandFinish messageTime operandTime saved remaining moves,
+      ∃ (selected : List Bool) (remainingInput : Nat),
+      let restored := restoreInputBeforeScratchFinish before (originalPrefix ++ original)
+        reply canonical selected (List.replicate remainingInput none) {}
+      messageTime + operandTime ≤
+        1000000000000000000000000000000 * GuardedCompiler.sourceStorage start +
+        1000000000000000000000000000000 ∧
+      RunsFor prepareMultiplyMessage start messageFinish messageTime ∧
+      messageFinish.halted = true ∧
+      RunsFor prepareMultiplyOperands (messageFinish.resumeAt 0) operandFinish operandTime ∧
+      operandFinish.halted = true ∧ moves ≤ operandTime ∧
+      operandFinish.outputTape = { left := saved, right := List.replicate remaining none } ∧
+      operandFinish.inputTape.current = ((Tape.moveRight^[moves]) restored.inputTape).current ∧
+      ∀ i, operandFinish.inputTape.right.getD i none =
+        ((Tape.moveRight^[moves]) restored.inputTape).right.getD i none := by
+  dsimp only
+  let output : Tape := { left := savedOutput, right := List.replicate outputBlanks none }
+  let start := seekStoredInputScratchStart
+    (originalPrefix.reverse.map some ++ none :: before)
+    original reply canonical inputBlanks output
+  obtain ⟨messageFinish, messageTime, selected, remainingInput, messageOutput, messageBlanks,
+    hMessageTime, messageRun, messageHalt, hMessageEntry⟩ :=
+    prepareMultiplyMessage_terminates_with_restoration_layout
+      before savedOutput originalPrefix original reply canonical inputBlanks outputBlanks
+  obtain ⟨operandFinish, operandTime, saved, remaining, moves,
+    hOperandTime, operandRun, operandHalt, hMoves, hOutput, hCurrent, hRight⟩ :=
+    prepareMultiplyOperands_terminates_from_retained_blocks before messageOutput
+      (originalPrefix ++ original) reply canonical selected remainingInput messageBlanks
+  rw [← hMessageEntry] at operandRun hOperandTime
+  have hStorage := GuardedCompiler.sourceStorage_le_of_run messageRun
+  change GuardedCompiler.sourceStorage messageFinish ≤ GuardedCompiler.sourceStorage start + messageTime at hStorage
+  change messageTime ≤ 200000000 * GuardedCompiler.sourceStorage start + 200000000 at hMessageTime
+  change operandTime ≤ 1000000000000000000 * GuardedCompiler.sourceStorage messageFinish +
+    1000000000000000000 at hOperandTime
+  refine ⟨messageFinish, operandFinish, messageTime, operandTime, saved, remaining,
+    moves, selected, remainingInput, ?_, messageRun, messageHalt, operandRun,
+    operandHalt, hMoves, hOutput, hCurrent, hRight⟩
+  change messageTime + operandTime ≤
+    1000000000000000000000000000000 * GuardedCompiler.sourceStorage start +
+    1000000000000000000000000000000
   omega
 
 end Machine

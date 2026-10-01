@@ -1,6 +1,7 @@
 import Foundation.Constructions.ElGamal.ConcreteSecurity
 import Foundation.Constructions.ElGamal.MachineRepresented
 import Foundation.Machine.Security
+import Foundation.Constructions.ElGamal.MachineSimulatorSemantics
 
 namespace ElGamal
 
@@ -182,12 +183,12 @@ theorem secureRepresentedINDCPA_of_secureRepresentedDDH_machineEncodedPPT
     sampling X embed instanceCode requestCode responseCode defaultMessage
     hFaithful JD F T hTargetSize hDDH
 
-/-- The element-based adapters discharge the finite request/response coding
-and decoder state-size premises of the preceding theorem. The remaining
-`T` premise is the actual two-stage machine simulator certificate. The
-`ProgramCompiler.twoCalls` constructor can emit two rebased copies of the
-source code, but no wrapper with the required tape preparation, semantic
-correctness, and runtime proof has yet been constructed. -/
+/-- The element-based adapters discharge finite request/response coding
+and decoder state-size premises. This API retains an externally supplied
+simulation certificate for callers that already have one. The native-code
+version below instead derives all-input polynomial termination and exact
+realization from the represented algorithms and local normalization witness,
+without requiring the external `T`. -/
 theorem secureRepresentedINDCPA_of_secureRepresentedDDH_machineElementPPT
     (sampling : (n : Nat) → (params : DDHParameters) →
       Option (DDHFiniteSampling params))
@@ -224,5 +225,33 @@ theorem secureRepresentedINDCPA_of_secureRepresentedDDH_machineElementPPT
     (responseCodeOfElement_chooseStateSizeFaithful sampling X embed elementCode)
     instanceSize elementSize hInstance hElement hInstancePoly hElementPoly
     F T hDDH
+
+
+/-- Machine-PPT ElGamal security from DDH machine-PPT security, given the
+explicit represented group algorithms and the local choose-normalization
+algorithm. The actual fixed native simulator, its all-bitstring worst-case
+polynomial time and exact semantic compatibility are derived from `M` and
+`N`; there is no external abstract simulator/transformation premise.
+The source class bounds reachable IND-CPA requests, while the source code
+and constructed target code both halt polynomially on all finite inputs.
+DDH hardness and the computational representation remain assumptions. -/
+theorem secureRepresentedINDCPA_of_secureRepresentedDDH_nativeMachinePPT
+    (sampling : (n : Nat) → (params : DDHParameters) → Option (DDHFiniteSampling params))
+    (X : Nat → Type 1)
+    (embed : ∀ n, X n → ConcreteInstance sampling n)
+    (M : RepresentedMachinePrimitives sampling X embed)
+    (N : RepresentedChooseNormalizer M)
+    (F : InstanceFamily (representedINDCPAGoal sampling X embed))
+    (hDDH : SecureOnWithin (representedDDHGoal sampling X embed)
+      (representedDDHInterface sampling X embed M.instanceCode
+        (fun n x => (M.elementCode n x).triple)).pptClass
+      ((representedReduction sampling X embed).mapFamily F)) :
+    SecureOnWithin (representedINDCPAGoal sampling X embed)
+      (representedINDCPAElementPPTClass sampling X embed M.instanceCode M.elementCode) F := by
+  exact (representedReduction sampling X embed).secureOnWithin
+    (representedINDCPAElementPPTClass sampling X embed M.instanceCode M.elementCode)
+    (representedDDHInterface sampling X embed M.instanceCode
+      (fun n x => (M.elementCode n x).triple)).pptClass F
+    N.nativeSimulator_preservesAdmissibility AdvantageBound.id_preservesNegligible hDDH
 
 end ElGamal

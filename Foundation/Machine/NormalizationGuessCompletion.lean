@@ -322,4 +322,180 @@ theorem normalizationChallengeGuessCompile_correct_haltsFrom
   obtain ⟨d, _hd, heq⟩ := hm
   exact (congrArg Prod.fst heq).symm
 
+
+/-- A common polynomial envelope covers the actual normalizer request,
+its returned guarded scratch, and the full selection/multiply/guess tail.
+All bitstring inputs and normalizer responses are permitted. -/
+def normalizationChallengeRetainedBudget
+    (normalizationCoefficient normalizationDegree multiplyCoefficient multiplyDegree guessCoefficient guessDegree storage : Nat) : Nat :=
+  let requestLimit := 200000001 * (storage + 1)
+  let normalizationTime := normalizationCoefficient * (requestLimit + 1)^normalizationDegree
+  let retainedSize := 100 * (requestLimit + normalizationTime + 1)
+  normalizationRetainedBudget normalizationCoefficient normalizationDegree storage +
+    normalizedMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree retainedSize + 1
+
+theorem normalizationChallengeRetainedBudget_polynomial_of_profile
+    (normalizationCoefficient normalizationDegree multiplyCoefficient multiplyDegree guessCoefficient guessDegree : Nat)
+    {size : Nat → Nat} (hSize : PolynomiallyBounded size) :
+    PolynomiallyBounded (fun n => normalizationChallengeRetainedBudget normalizationCoefficient normalizationDegree
+      multiplyCoefficient multiplyDegree guessCoefficient guessDegree (size n)) := by
+  have hLimit := (PolynomiallyBounded.const 200000001).mul (hSize.add (PolynomiallyBounded.const 1))
+  have hTime := (PolynomiallyBounded.const normalizationCoefficient).mul
+    ((hLimit.add (PolynomiallyBounded.const 1)).pow normalizationDegree)
+  have hRetained := (PolynomiallyBounded.const 100).mul
+    ((hLimit.add hTime).add (PolynomiallyBounded.const 1))
+  have hFirst := normalizationRetainedBudget_polynomial_of_profile normalizationCoefficient normalizationDegree hSize
+  have hTail := normalizedMultiplyGuessRetainedBudget_polynomial_of_profile
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree hRetained
+  exact (hFirst.add hTail).add (PolynomiallyBounded.const 1)
+
+theorem normalizationChallengeRetainedBudget_polynomial
+    (normalizationCoefficient normalizationDegree multiplyCoefficient multiplyDegree guessCoefficient guessDegree : Nat) :
+    PolynomiallyBounded (normalizationChallengeRetainedBudget normalizationCoefficient normalizationDegree
+      multiplyCoefficient multiplyDegree guessCoefficient guessDegree) :=
+  normalizationChallengeRetainedBudget_polynomial_of_profile normalizationCoefficient normalizationDegree
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree PolynomiallyBounded.id
+
+theorem normalizationChallengeRetainedBudget_monotone
+    (normalizationCoefficient normalizationDegree multiplyCoefficient multiplyDegree guessCoefficient guessDegree : Nat) :
+    Monotone (normalizationChallengeRetainedBudget normalizationCoefficient normalizationDegree
+      multiplyCoefficient multiplyDegree guessCoefficient guessDegree) := by
+  intro a b h
+  have hLimit := Nat.mul_le_mul_left 200000001 (Nat.add_le_add_right h 1)
+  have hTime := Nat.mul_le_mul_left normalizationCoefficient
+    (Nat.pow_le_pow_left (Nat.add_le_add_right hLimit 1) normalizationDegree)
+  have hRetained := Nat.mul_le_mul_left 100 (Nat.add_le_add_right (Nat.add_le_add hLimit hTime) 1)
+  have hFirst := normalizationRetainedBudget_monotone normalizationCoefficient normalizationDegree h
+  have hTail := normalizedMultiplyGuessRetainedBudget_monotone multiplyCoefficient multiplyDegree guessCoefficient guessDegree hRetained
+  exact Nat.add_le_add_right (Nat.add_le_add hFirst hTail) 1
+
+/-- Native normalization and the entire native challenge/multiply/guess
+continuation stop on every branch of every finite retained choose reply.
+Malformed public data and arbitrary normalizer output bits are included.
+Each stage executes on its actual returned physical tapes; no decoder,
+canonical normalizer correctness or group-operation correctness is used. -/
+theorem normalizationChallengeGuessCompile_haltsFrom_retainedReply
+    (normalizeSource multiplySource guessSource : Program)
+    (normalizationCoefficient normalizationDegree multiplyCoefficient multiplyDegree guessCoefficient guessDegree : Nat)
+    (hNormalizer : ∀ request : List Bool,
+      HaltsWithin normalizeSource request (normalizationCoefficient * (request.length + 1)^normalizationDegree))
+    (hMultiply : ∀ request : List Bool,
+      HaltsWithin multiplySource request (multiplyCoefficient * (request.length + 1)^multiplyDegree))
+    (hGuess : ∀ request : List Bool,
+      HaltsWithin guessSource request (guessCoefficient * (request.length + 1)^guessDegree))
+    (beforeInput savedOutput : List (Option Bool)) (reply : List Bool) (inputBlanks outputBlanks : Nat) :
+    let start : Configuration := {
+      inputTape := {
+        left := reply.reverse.map some ++ none :: beforeInput
+        right := List.replicate inputBlanks none },
+      outputTape := { left := savedOutput, right := List.replicate outputBlanks none } }
+    ∀ finish, PaddedRunsFor (normalizationChallengeGuessCompile normalizeSource multiplySource guessSource) start finish
+      (normalizationChallengeRetainedBudget normalizationCoefficient normalizationDegree
+        multiplyCoefficient multiplyDegree guessCoefficient guessDegree (sourceStorage start)) → finish.halted = true := by
+  dsimp only
+  let start : Configuration := {
+    inputTape := {
+      left := reply.reverse.map some ++ none :: beforeInput
+      right := List.replicate inputBlanks none },
+    outputTape := { left := savedOutput, right := List.replicate outputBlanks none } }
+  let storage := sourceStorage start
+  let q := fun m => normalizationCoefficient * (m + 1)^normalizationDegree
+  let requestLimit := 200000001 * (storage + 1)
+  let normalizationTime := normalizationCoefficient * (requestLimit + 1)^normalizationDegree
+  let retainedSize := 100 * (requestLimit + normalizationTime + 1)
+  let firstTime := normalizationRetainedBudget normalizationCoefficient normalizationDegree storage
+  let tailTime := normalizedMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree retainedSize
+  let stageDist := evalConfigWithin (normalizeChooseCompile normalizeSource) start firstTime
+  let continuation : Configuration → PMF Bool := fun c =>
+    (evalConfigWithin (normalizedMultiplyGuessCompile multiplySource guessSource) (c.resumeAt 0) tailTime).map Configuration.halted
+  have hObserve (c d : Configuration) (h : c.Equivalent d) : continuation c = continuation d := by
+    apply evalConfigWithin_map_eq_of_equivalent
+      (normalizedMultiplyGuessCompile multiplySource guessSource) (c.resumeAt 0) (d.resumeAt 0) _ tailTime
+      Configuration.halted (fun _ _ h => h.2.1)
+    exact (h.withPc 0).withHalted false
+  obtain ⟨request, sourceSaved, targetSaved, hLength, hPrefix, hFuture⟩ :=
+    normalizeChooseCompile_evalObservation_from_retainedReply normalizeSource normalizationCoefficient normalizationDegree
+      hNormalizer beforeInput savedOutput reply inputBlanks outputBlanks continuation hObserve
+  let returned := fun c => {
+    (rawResultFrom normalizeSource request sourceSaved targetSaved c).swapTapes
+    with pc := 95 + (rawCompileOpposite normalizeSource).length + 1, halted := true }
+  let sourceDist := evalConfigWithin normalizeSource (preparedSource request) (q request.length)
+  have hRequest : request.length ≤ requestLimit := hLength
+  have hSourceTime : q request.length ≤ normalizationTime :=
+    Nat.mul_le_mul_left normalizationCoefficient
+      (Nat.pow_le_pow_left (Nat.add_le_add_right hRequest 1) normalizationDegree)
+  have hRaw (c : Configuration) (hc : c ∈ sourceDist.support) : continuation (returned c) = PMF.pure true := by
+    have hSourceStorage := sourceStorage_le_of_padded_run
+      ((mem_support_evalConfigWithin_iff _ _ _ _).mp hc)
+    have hInitial := preparedSource_sourceStorage_le request
+    have hReturned := rawResultFrom_sourceStorage_le normalizeSource request sourceSaved targetSaved c
+    have hStorage : sourceStorage (returned c) ≤ retainedSize := by
+      change sourceStorage c ≤ sourceStorage (preparedSource request) + q request.length at hSourceStorage
+      change sourceSaved.length + targetSaved.length ≤ requestLimit at hPrefix
+      have hReturnStorage : sourceStorage (returned c) =
+          sourceStorage (rawResultFrom normalizeSource request sourceSaved targetSaved c) := by
+        simp only [returned, sourceStorage, Configuration.swapTapes, Nat.add_comm]
+      rw [hReturnStorage]
+      change _ ≤ 100 * (requestLimit + normalizationTime + 1)
+      omega
+    have hSmall := normalizedMultiplyGuessCompile_fromRawResult_haltsFrom_raw
+      normalizeSource multiplySource guessSource multiplyCoefficient multiplyDegree guessCoefficient guessDegree
+      hMultiply hGuess request sourceSaved targetSaved c
+    change ∀ d, PaddedRunsFor (normalizedMultiplyGuessCompile multiplySource guessSource) ((returned c).resumeAt 0) d
+      (normalizedMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree
+        (sourceStorage (returned c))) → d.halted = true at hSmall
+    have hBudget := normalizedMultiplyGuessRetainedBudget_monotone
+      multiplyCoefficient multiplyDegree guessCoefficient guessDegree hStorage
+    have hStop (d : Configuration)
+        (run : PaddedRunsFor (normalizedMultiplyGuessCompile multiplySource guessSource) ((returned c).resumeAt 0) d tailTime) :
+        d.halted = true := by
+      have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr run
+      rw [evalConfigWithin_eq_of_le _ _ _ _ hBudget hSmall] at hMem
+      exact hSmall d ((mem_support_evalConfigWithin_iff _ _ _ _).mp hMem)
+    dsimp only [continuation]
+    calc
+      _ = (evalConfigWithin (normalizedMultiplyGuessCompile multiplySource guessSource)
+          ((returned c).resumeAt 0) tailTime).bind (fun _ => PMF.pure true) := by
+        rw [PMF.map, ← PMF.bindOnSupport_eq_bind, ← PMF.bindOnSupport_eq_bind]
+        congr 1
+        funext d hd
+        change PMF.pure d.halted = PMF.pure true
+        rw [hStop d ((mem_support_evalConfigWithin_iff _ _ _ _).mp hd)]
+      _ = _ := PMF.bind_const _ _
+  have hBind := congrArg (fun distribution : PMF (PMF Bool) => distribution.bind id) hFuture
+  simp only [PMF.bind_map, Function.comp_def, id_eq] at hBind
+  have hContinuation : stageDist.bind continuation = PMF.pure true := by
+    change stageDist.bind continuation = sourceDist.bind (fun c => continuation (returned c)) at hBind
+    rw [hBind]
+    rw [← PMF.bind_const sourceDist (PMF.pure true)]
+    rw [← PMF.bindOnSupport_eq_bind, ← PMF.bindOnSupport_eq_bind]
+    congr 1
+    funext c hc
+    exact hRaw c hc
+  have hFirst := normalizeChooseCompile_haltsFrom_retainedReply normalizeSource normalizationCoefficient normalizationDegree
+    hNormalizer beforeInput savedOutput reply inputBlanks outputBlanks
+  have hSecond (c : Configuration) (hc : c ∈ stageDist.support) (d : Configuration)
+      (run : PaddedRunsFor (normalizedMultiplyGuessCompile multiplySource guessSource) (c.resumeAt 0) d tailTime) :
+      d.halted = true := by
+    have hm : d.halted ∈ (stageDist.bind continuation).support := by
+      rw [PMF.mem_support_bind_iff]
+      refine ⟨c, hc, ?_⟩
+      rw [PMF.mem_support_map_iff]
+      exact ⟨d, (mem_support_evalConfigWithin_iff _ _ _ _).mpr run, rfl⟩
+    rw [hContinuation, PMF.mem_support_pure_iff] at hm
+    exact hm
+  have hLaw := Program.evalConfigWithin_twoStages_configuration (normalizeChooseCompile normalizeSource)
+    (normalizedMultiplyGuessCompile multiplySource guessSource) start rfl rfl firstTime tailTime hFirst hSecond
+  change evalConfigWithin (normalizationChallengeGuessCompile normalizeSource multiplySource guessSource) start
+    (firstTime + (tailTime + 1)) = _ at hLaw
+  intro finish run
+  have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr run
+  change finish ∈ (evalConfigWithin (normalizationChallengeGuessCompile normalizeSource multiplySource guessSource) start
+    (firstTime + tailTime + 1)).support at hMem
+  rw [Nat.add_assoc, hLaw, PMF.mem_support_bind_iff] at hMem
+  obtain ⟨middle, _hMiddle, hFinish⟩ := hMem
+  rw [PMF.mem_support_map_iff] at hFinish
+  obtain ⟨target, _hTarget, rfl⟩ := hFinish
+  rfl
+
 end Machine.GuardedCompiler

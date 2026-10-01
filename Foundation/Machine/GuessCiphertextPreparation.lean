@@ -187,4 +187,143 @@ theorem prepareGuessCiphertextFirst_control_closed (c d : Configuration)
   all_goals subst d
   all_goals simp [Configuration.advance, Configuration.updateTape, hIndex]
 
+
+/-- Restore retained input and append its middle field on arbitrary finite
+tapes. A malformed DDH tuple need not provide a valid ciphertext, but every
+native restoration, frame scan and escaped-field copy still stops. -/
+private theorem prepareGuessCiphertextFirst_terminates_core (input output : Tape) :
+    ∃ finish used, used ≤ 1000000000 * (input.cells + output.cells) + 1000000000 ∧
+      RunsFor prepareGuessCiphertextFirst
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true ∧
+      ∀ before blanks, output = ({ left := before, right := List.replicate blanks none } : Tape) →
+        ∃ after remaining, finish.outputTape = { left := after, right := List.replicate remaining none } := by
+  obtain ⟨restored, restoreTime, hRestoreTime, restoreRun, restoreHalt, restoreOutput⟩ :=
+    restoreStoredInput_terminates_from_anyTape input output
+  obtain ⟨copied, copyTime, hCopyTime, copyRun, copyHalt⟩ :=
+    copyStoredMiddleElement_terminates_from_anyTape restored.inputTape restored.outputTape
+  have hRestore := restoreRun.withSubroutine_halted_of_closed
+    [] restoreStoredInput (copyStoredMiddleElement.asSubroutine 19 74 ++ [.halt]) 19
+    (by change 0 < 18; decide) rfl restoreHalt restoreStoredInput_control_closed
+  change RunsFor prepareGuessCiphertextFirst
+    ({ inputTape := input, outputTape := output } : Configuration) (restored.resumeAt 19) restoreTime at hRestore
+  have hCopy := copyRun.withSubroutine_halted_of_closed
+    (restoreStoredInput.asSubroutine 0 19) copyStoredMiddleElement [.halt] 74
+    (by change 0 < 54; decide) rfl copyHalt copyStoredMiddleElement_control_closed
+  change RunsFor prepareGuessCiphertextFirst (restored.resumeAt 19) (copied.resumeAt 74) copyTime at hCopy
+  let finish : Configuration := { copied with pc := 74, halted := true }
+  have last : Step prepareGuessCiphertextFirst (copied.resumeAt 74) finish := by
+    have code : prepareGuessCiphertextFirst[74]? = some .halt := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, finish, Instruction.next]
+  refine ⟨finish, restoreTime + copyTime + 1, ?_, RunsFor.succ (hRestore.trans hCopy) last, rfl, ?_⟩
+  · have hStorage := GuardedCompiler.sourceStorage_le_of_run restoreRun
+    change restored.inputTape.cells + restored.outputTape.cells ≤ input.cells + output.cells + restoreTime at hStorage
+    omega
+  · intro before blanks hOutput
+    obtain ⟨fresh, freshTime, after, remaining, _hFreshTime, freshRun, freshHalt, freshOutput⟩ :=
+      copyStoredMiddleElement_terminates_with_output_layout restored.inputTape before blanks
+    rw [restoreOutput, hOutput] at copyRun
+    have hSame := copyRun.halted_finish_eq_of_no_randomBit freshRun copyHalt freshHalt copyStoredMiddleElement_no_randomBit
+    refine ⟨after, remaining, ?_⟩
+    change copied.outputTape = _
+    rw [hSame]
+    exact freshOutput
+
+theorem prepareGuessCiphertextFirst_terminates_from_anyTape (input output : Tape) :
+    ∃ finish used, used ≤ 1000000000 * (input.cells + output.cells) + 1000000000 ∧
+      RunsFor prepareGuessCiphertextFirst
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true := by
+  obtain ⟨finish, used, hBound, run, hHalted, _hLayout⟩ := prepareGuessCiphertextFirst_terminates_core input output
+  exact ⟨finish, used, hBound, run, hHalted⟩
+
+/-- Restoring the original input leaves the current output alone, and the
+native middle-field parser/copy retains its fresh output frontier. The input
+may be a malformed tuple rather than an encoded cryptographic instance. -/
+theorem prepareGuessCiphertextFirst_terminates_with_output_layout (input : Tape)
+    (before : List (Option Bool)) (blanks : Nat) :
+    ∃ finish used after remaining,
+      used ≤ 1000000000 * (input.cells +
+        ({ left := before, right := List.replicate blanks none } : Tape).cells) + 1000000000 ∧
+      RunsFor prepareGuessCiphertextFirst
+        ({ inputTape := input, outputTape := { left := before, right := List.replicate blanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧
+      finish.outputTape = { left := after, right := List.replicate remaining none } := by
+  obtain ⟨finish, used, hBound, run, hHalted, hLayout⟩ :=
+    prepareGuessCiphertextFirst_terminates_core input { left := before, right := List.replicate blanks none }
+  obtain ⟨after, remaining, hOutput⟩ := hLayout before blanks rfl
+  exact ⟨finish, used, after, remaining, hBound, run, hHalted, hOutput⟩
+
+/-- A source head reached by right-only state reading still lies over the
+retained request blocks. Restoring three blocks and copying the middle field
+exposes a suffix of those same cells, with virtual blank padding if needed.
+The output frontier is produced by the actual native copy. -/
+theorem prepareGuessCiphertextFirst_terminates_after_input_moves
+    (retained beforeInput : List (Option Bool)) (current : Option Bool)
+    (right beforeOutput : List (Option Bool)) (outputBlanks moves : Nat)
+    (hSeparators : 2 ≤ retained.count none) :
+    let input := (Tape.moveRight^[moves])
+      ({ left := retained ++ none :: beforeInput, current := current, right := right } : Tape)
+    let output : Tape := { left := beforeOutput, right := List.replicate outputBlanks none }
+    ∃ finish used after remaining count padding,
+      used ≤ 1000000000 * (input.cells + output.cells) + 1000000000 ∧
+      RunsFor prepareGuessCiphertextFirst
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true ∧
+      finish.outputTape = { left := after, right := List.replicate remaining none } ∧
+      finish.inputTape.current :: finish.inputTape.right =
+        let rest := (retained.reverse ++ current :: right ++ List.replicate padding none).drop count
+        if rest = [] then [none] else rest := by
+  dsimp only
+  let input := (Tape.moveRight^[moves])
+    ({ left := retained ++ none :: beforeInput, current := current, right := right } : Tape)
+  let output : Tape := { left := beforeOutput, right := List.replicate outputBlanks none }
+  obtain ⟨restored, restoreTime, restoreCount, padding, hRestoreTime, restoreRun, restoreHalt,
+    restoreOutput, restoreStream⟩ :=
+    restoreStoredInput_terminates_after_input_moves retained beforeInput current right
+      output moves hSeparators
+  obtain ⟨copied, copyTime, after, remaining, hCopyTime, copyRun, copyHalt, copyOutput⟩ :=
+    copyStoredMiddleElement_terminates_with_output_layout restored.inputTape beforeOutput outputBlanks
+  obtain ⟨copyMoves, _hMoves, copyInput⟩ := copyStoredMiddleElement_input_position copyRun
+  have actualCopy : RunsFor copyStoredMiddleElement
+      ({ inputTape := restored.inputTape, outputTape := restored.outputTape } : Configuration)
+      copied copyTime := by
+    rw [restoreOutput]
+    exact copyRun
+  have hRestore := restoreRun.withSubroutine_halted_of_closed
+    [] restoreStoredInput (copyStoredMiddleElement.asSubroutine 19 74 ++ [.halt]) 19
+    (by change 0 < 18; decide) rfl restoreHalt restoreStoredInput_control_closed
+  change RunsFor prepareGuessCiphertextFirst
+    ({ inputTape := input, outputTape := output } : Configuration) (restored.resumeAt 19) restoreTime at hRestore
+  have hCopy := actualCopy.withSubroutine_halted_of_closed
+    (restoreStoredInput.asSubroutine 0 19) copyStoredMiddleElement [.halt] 74
+    (by change 0 < 54; decide) rfl copyHalt copyStoredMiddleElement_control_closed
+  change RunsFor prepareGuessCiphertextFirst (restored.resumeAt 19) (copied.resumeAt 74) copyTime at hCopy
+  let finish : Configuration := { copied with pc := 74, halted := true }
+  have last : Step prepareGuessCiphertextFirst (copied.resumeAt 74) finish := by
+    have code : prepareGuessCiphertextFirst[74]? = some .halt := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, finish, Instruction.next]
+  refine ⟨finish, restoreTime + copyTime + 1, after, remaining, restoreCount + copyMoves, padding, ?_,
+    RunsFor.succ (hRestore.trans hCopy) last, rfl, copyOutput, ?_⟩
+  · have hStorage := GuardedCompiler.sourceStorage_le_of_run restoreRun
+    change restored.inputTape.cells + restored.outputTape.cells ≤ input.cells + output.cells + restoreTime at hStorage
+    change restoreTime ≤ 100 * (input.cells + output.cells) + 100 at hRestoreTime
+    change copyTime ≤ 1000000 * (restored.inputTape.cells + output.cells) + 1000000 at hCopyTime
+    change restoreTime + copyTime + 1 ≤ 1000000000 * (input.cells + output.cells) + 1000000000
+    rw [restoreOutput] at hStorage
+    omega
+  · change copied.inputTape.current :: copied.inputTape.right = _
+    rw [copyInput]
+    have hRemaining := GuardedCompiler.moveRight_iterate_remaining restored.inputTape copyMoves
+    dsimp only at hRemaining
+    rw [restoreStream, List.drop_drop] at hRemaining
+    exact hRemaining
+
+theorem prepareGuessCiphertextFirst_haltsFrom_anyTape (input output : Tape) (finish : Configuration)
+    (trace : PaddedRunsFor prepareGuessCiphertextFirst
+      ({ inputTape := input, outputTape := output } : Configuration) finish
+      (1000000000 * (input.cells + output.cells) + 1000000000)) : finish.halted = true := by
+  obtain ⟨target, used, hBound, run, hHalted⟩ := prepareGuessCiphertextFirst_terminates_from_anyTape input output
+  exact run.haltsFrom_of_no_randomBit hHalted prepareGuessCiphertextFirst_no_randomBit hBound finish trace
+
 end Machine

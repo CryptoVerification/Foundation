@@ -115,4 +115,61 @@ theorem finishStoredTaggedGuess_steps_le (blocks : List (List Bool)) (bits : Lis
   rw [finishStoredTaggedGuessSteps, cleanStoredOutputBit_steps]
   omega
 
+/-- Parse, compare, and clean up actual arbitrary finite tapes. Missing
+challenge cells and malformed guess strings do not affect the stopping
+certificate. No known transcript layout is required by this runtime proof. -/
+theorem finishStoredTaggedGuess_terminates_from_anyTape (count : Nat) (input output : Tape) :
+    ∃ finish used,
+      used ≤ (count + 1) * 10000 * (output.cells + 1) ∧
+      RunsFor (finishStoredTaggedGuess count)
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧ finish.halted = true := by
+  obtain ⟨parsed, parseTime, hParseTime, parseRun, parseHalt⟩ :=
+    finishTaggedGuess_terminates_from_anyTape input output
+  obtain ⟨cleaned, cleanTime, hCleanTime, cleanRun, cleanHalt⟩ :=
+    cleanStoredOutputBit_terminates_from_anyTape count parsed.inputTape parsed.outputTape
+  let pre := finishTaggedGuess.asSubroutine 0 28
+  let cleanup := cleanStoredOutputBit count
+  let finalPc := 28 + cleanup.length + 1
+  obtain ⟨parseUsed, hParseUsed, first⟩ := parseRun.withSubroutine_halted
+    [] finishTaggedGuess (cleanup.asSubroutine 28 finalPc ++ [.halt]) 28
+    (Nat.zero_le _) rfl parseHalt
+  have firstProgram : Program.withSubroutine [] finishTaggedGuess
+      (cleanup.asSubroutine 28 finalPc ++ [.halt]) 28 = finishStoredTaggedGuess count := by
+    simp only [finishStoredTaggedGuess, Program.withSubroutine, List.length_nil, List.nil_append,
+      cleanup, finalPc, show (finishTaggedGuess.asSubroutine 0 28).length = 28 from rfl,
+      List.append_assoc]
+  rw [firstProgram] at first
+  change RunsFor (finishStoredTaggedGuess count)
+    ({ inputTape := input, outputTape := output } : Configuration) (parsed.resumeAt 28) parseUsed at first
+  obtain ⟨cleanUsed, hCleanUsed, second⟩ := cleanRun.withSubroutine_halted
+    pre cleanup [.halt] finalPc (Nat.zero_le _) rfl cleanHalt
+  change RunsFor (finishStoredTaggedGuess count) (parsed.resumeAt 28) (cleaned.resumeAt finalPc) cleanUsed at second
+  let finish : Configuration := { cleaned with pc := finalPc, halted := true }
+  have last : Step (finishStoredTaggedGuess count) (cleaned.resumeAt finalPc) finish := by
+    have code : (finishStoredTaggedGuess count)[finalPc]? = some .halt := by
+      change (Program.withSubroutine pre cleanup [.halt] finalPc)[finalPc]? = some .halt
+      have h := Program.withSubroutine_getElem?_suffix pre cleanup [.halt] finalPc 0
+      simpa only [show pre.length = 28 from rfl, Nat.add_zero, List.getElem?_cons_zero, finalPc] using h
+    simp [Step, successors, next, Configuration.resumeAt, finish, code, Instruction.next]
+  refine ⟨finish, parseUsed + cleanUsed + 1, ?_, RunsFor.succ (first.trans second) last, rfl⟩
+  have hStorage := parseRun.toPadded.outputTape_cells_le
+  change parsed.outputTape.cells ≤ output.cells + parseTime at hStorage
+  have hCleanBound := hCleanTime.trans
+    (Nat.mul_le_mul_left ((count + 1) * 100) (Nat.add_le_add_right hStorage 1))
+  nlinarith
+
+theorem finishStoredTaggedGuess_no_randomBit (count : Nat) (tape : TapeId) :
+    Instruction.randomBit tape ∉ finishStoredTaggedGuess count := by
+  simp [finishStoredTaggedGuess, Program.withSubroutine, Program.asSubroutine, Instruction.asSubroutine,
+    finishTaggedGuess, readTaggedGuess, matchPreviousOutputBit]
+  intro instruction hMem hEq
+  cases instruction <;> simp_all [cleanStoredOutputBit_no_randomBit]
+
+theorem finishStoredTaggedGuess_haltsFrom_anyTape (count : Nat) (input output : Tape) (finish : Configuration)
+    (run : PaddedRunsFor (finishStoredTaggedGuess count)
+      ({ inputTape := input, outputTape := output } : Configuration) finish
+      ((count + 1) * 10000 * (output.cells + 1))) : finish.halted = true := by
+  obtain ⟨target, used, hBound, actual, hHalt⟩ := finishStoredTaggedGuess_terminates_from_anyTape count input output
+  exact actual.haltsFrom_of_no_randomBit hHalt (finishStoredTaggedGuess_no_randomBit count) hBound finish run
+
 end Machine

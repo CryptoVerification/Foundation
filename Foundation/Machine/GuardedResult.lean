@@ -34,6 +34,23 @@ def rawResultFrom (source : Program) (input : List Bool)
   { extractOutputFinish (input.reverse.map some ++ beforeInput) beforeOutput c.inputTape c.outputTape with
     pc := resultEntry source + 65 }
 
+
+/-- Physical storage after the charged raw-result extraction, including
+both caller prefixes and the guarded source scratch. No replacement of
+tapes or decoded-response assumption occurs in this size estimate. -/
+theorem rawResultFrom_sourceStorage_le (source : Program) (request : List Bool)
+    (beforeInput beforeOutput : List (Option Bool)) (c : Configuration) :
+    sourceStorage (rawResultFrom source request beforeInput beforeOutput c) ≤
+      20 * (request.length + beforeInput.length + beforeOutput.length + sourceStorage c + 1) := by
+  have hBits := Tape.bits_length_le_cells c.outputTape
+  have hPadding := Nat.sub_le (2 * c.outputTape.cells + 2) c.outputBits.length
+  simp only [rawResultFrom, extractOutputFinish, copyScratchFinish, sourceStorage, Tape.cells,
+    List.length_append, List.length_cons, List.length_nil, List.length_reverse,
+    List.length_map, List.length_replicate, scratchPrefix, encodeTape,
+    VirtualCell.pairTape, encodedLeftCells_length, encodedRightBits_length,
+    Configuration.outputBits] at *
+  omega
+
 def rawResult (source : Program) (input : List Bool) (c : Configuration) : Configuration :=
   { extractOutputFinish (input.reverse.map some) [] c.inputTape c.outputTape with
     pc := resultEntry source + 65 }

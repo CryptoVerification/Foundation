@@ -68,4 +68,69 @@ example (challenge : Bool) :
     [] [] [] 0 [] [] [] [] [] [] [] [] [] [] challenge {} {} 0
     (haltInstruction_haltsWithin _) (emptyResult_correct _) (randomTaggedGuess_haltsWithin _)
 
+-- Two genuine randomized native calls share the retained physical tapes.
+-- This is a stopping test, with no claim that the first call implements a
+-- group operation. All saved strings, including malformed replies, are allowed.
+example (before beforeOutput : List (Option Bool))
+    (originalPrefix original reply canonical selected request : List Bool)
+    (inputBlanks outputBlanks : Nat) :
+    let start := prepareStoredCallStart (originalPrefix.reverse.map some ++ none :: before)
+      beforeOutput original reply canonical selected request inputBlanks outputBlanks
+    ∀ finish, PaddedRunsFor (multiplyThenGuessCompile randomTaggedGuess randomTaggedGuess) start finish
+      (multiplyGuessRetainedBudget 4 0 4 0 (sourceStorage start)) → finish.halted = true :=
+  multiplyThenGuessCompile_haltsFrom_retained_frontiers randomTaggedGuess randomTaggedGuess 4 0 4 0
+    (fun request => by simpa using randomTaggedGuess_haltsWithin request)
+    (fun request => by simpa using randomTaggedGuess_haltsWithin request)
+    _ _ _ _ _ _ _ _ _ _
+
+example : PolynomiallyBounded (multiplyGuessRetainedBudget 4 0 4 0) :=
+  multiplyGuessRetainedBudget_polynomial _ _ _ _
+
+-- The same theorem accepts the exact return of the existing operand
+-- constructor. Its canonical-response slot is an arbitrary raw string;
+-- no decoder or normalization correctness is needed for stopping here.
+example (before savedOutput : List (Option Bool)) (n : Nat)
+    (instanceBits first second last reply canonical selected : List Bool) (blanks : Nat) :
+    let start := (prepareMultiplyOperandsFinish before savedOutput (List.replicate blanks none)
+      n instanceBits first second last reply canonical selected).resumeAt 0
+    ∀ finish, PaddedRunsFor (multiplyThenGuessCompile randomTaggedGuess randomTaggedGuess) start finish
+      (multiplyGuessRetainedBudget 4 0 4 0 (sourceStorage start)) → finish.halted = true := by
+  dsimp only
+  rw [prepareMultiplyOperandsFinish_call_layout]
+  let storedPublicPrefix := encodeSecurityParameter n ++ frame instanceBits ++
+    encodeSecurityParameter (FiniteBitEncoding.delimit first ++ FiniteBitEncoding.delimit second ++ last).length ++
+    FiniteBitEncoding.delimit first ++ FiniteBitEncoding.delimit second
+  have h := multiplyThenGuessCompile_haltsFrom_retained_frontiers randomTaggedGuess randomTaggedGuess 4 0 4 0
+    (fun request => by simpa using randomTaggedGuess_haltsWithin request)
+    (fun request => by simpa using randomTaggedGuess_haltsWithin request)
+    before (none :: selected.reverse.map some ++ none :: savedOutput) storedPublicPrefix last reply canonical selected
+    (encodeSecurityParameter n ++ frame instanceBits ++ frame selected ++ frame last)
+    blanks (instanceBits.length + 1 - (2 * last.length + 1))
+  simpa only [storedPublicPrefix, List.reverse_append, List.map_append, List.append_assoc,
+    List.cons_append, multiplyCallBeforeElement] using h
+
+-- The head is already one cell into four raw retained blocks. No stored
+-- field is required to decode as a DDH tuple or a canonical choose reply.
+-- Both real calls are randomized, and the input has no caller separator
+-- behind it. Only redundant outer blank equivalence is needed for the
+-- complete guess continuation after the three new retained separators.
+example :
+    let input : Tape := {
+      left := [some true]
+      current := some false
+      right := [none, some false, some false, none, some true, none, none] }
+    let start : Configuration := { inputTape := input, outputTape := { left := [some false, some true, none] } }
+    ∀ finish, PaddedRunsFor (multiplyThenGuessCompile randomTaggedGuess randomTaggedGuess) start finish
+      (multiplyGuessRetainedSuffixBudget 4 0 4 0 (sourceStorage start)) → finish.halted = true := by
+  dsimp only
+  apply multiplyThenGuessCompile_haltsFrom_retained_suffix randomTaggedGuess randomTaggedGuess 4 0 4 0
+    (fun request => by simpa using randomTaggedGuess_haltsWithin request)
+    (fun request => by simpa using randomTaggedGuess_haltsWithin request)
+    _ _ 0 [true, false] [false, false] [true] [] 0 1
+  intro i
+  rfl
+
+example : PolynomiallyBounded (multiplyGuessRetainedSuffixBudget 4 0 4 0) :=
+  multiplyGuessRetainedSuffixBudget_polynomial _ _ _ _
+
 end Foundation.Examples.MultiplyGuessCompletion

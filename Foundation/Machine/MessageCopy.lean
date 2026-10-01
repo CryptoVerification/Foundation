@@ -206,4 +206,38 @@ theorem copyMessageField_haltsFrom_with_output_layout (input : Tape)
   subst finish
   exact ⟨hHalt, after, remaining, hOutput⟩
 
+private theorem copyMessageField_step_input_moveRight (c d : Configuration) (step : Step copyMessageField c d) :
+    d.inputTape = c.inputTape ∨ d.inputTape = c.inputTape.moveRight := by
+  have hActive : c.halted = false := by
+    cases h : c.halted with
+    | false => rfl
+    | true => exact False.elim ((no_step_of_halted h) step)
+  by_cases hPc : c.pc < 20
+  · interval_cases hIndex : c.pc
+    all_goals simp [Step, successors, next, hActive, hIndex, copyMessageField,
+      readDelimited, Program.asSubroutine, Instruction.asSubroutine, subroutineAddress,
+      Instruction.next, Configuration.tape] at step
+    all_goals try (split at step)
+    all_goals subst d
+    all_goals first
+      | exact Or.inl rfl
+      | exact Or.inr rfl
+  · have hNone : copyMessageField[c.pc]? = none := by
+      apply List.getElem?_eq_none
+      change 20 ≤ c.pc
+      omega
+    simp [Step, successors, next, hActive, hNone] at step
+    subst d
+    exact Or.inl rfl
+
+/-- Parsing and status cleanup preserve every input cell and only move
+the input head right, even when the selected field is malformed. -/
+theorem copyMessageField_input_moveRight {start finish : Configuration} {used : Nat}
+    (run : PaddedRunsFor copyMessageField start finish used) :
+    ∃ moves, moves ≤ used ∧ finish.inputTape = (Tape.moveRight^[moves]) start.inputTape := by
+  obtain ⟨actualTime, hTime, actual⟩ := run.toRunsFor_le
+  obtain ⟨moves, hMoves, hInput⟩ := actual.input_moveRight_of_step copyMessageField_step_input_moveRight
+  exact ⟨moves, hMoves.trans hTime, hInput⟩
+
+
 end Machine

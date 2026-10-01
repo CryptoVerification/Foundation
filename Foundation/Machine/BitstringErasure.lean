@@ -247,4 +247,147 @@ theorem eraseOutputBlocks_withSubroutine_eval (pre suffix : Program) (returnPc :
     (by change 0 ≤ (eraseOutputBlocks blocks.length).length; omega) rfl (eraseOutputBlocksSteps blocks)
     (eraseOutputBlocks_haltsFrom input before blocks right), eraseOutputBlocks_eval, PMF.pure_map]
 
+private theorem eraseOutputBlock_blank_stop (input output : Tape)
+    (hBlank : output.moveLeft.current = none) :
+    RunsFor eraseOutputBlock ({ inputTape := input, outputTape := output } : Configuration)
+      { pc := 4, inputTape := input, outputTape := output.moveLeft, halted := true } 3 := by
+  let start : Configuration := { inputTape := input, outputTape := output }
+  let moved : Configuration := { start with pc := 1, outputTape := output.moveLeft }
+  let selected : Configuration := { moved with pc := 4 }
+  have first : Step eraseOutputBlock start moved := by
+    simp [Step, successors, next, start, moved, eraseOutputBlock,
+      Instruction.next, Configuration.updateTape, Configuration.advance]
+  have second : Step eraseOutputBlock moved selected := by
+    simp [Step, successors, next, moved, selected, start, eraseOutputBlock,
+      Instruction.next, Configuration.tape, hBlank]
+  have last : Step eraseOutputBlock selected
+      { pc := 4, inputTape := input, outputTape := output.moveLeft, halted := true } := by
+    simp [Step, successors, next, moved, selected, start, eraseOutputBlock, Instruction.next]
+  exact RunsFor.succ (RunsFor.succ (RunsFor.succ (RunsFor.zero _) first) second) last
+
+private theorem eraseOutputBlock_terminates_left (input : Tape)
+    (left : List (Option Bool)) (current : Option Bool) (right : List (Option Bool)) :
+    ∃ finish used,
+      used ≤ 4 * left.length + 3 ∧
+      RunsFor eraseOutputBlock
+        ({ inputTape := input, outputTape := { left := left, current := current, right := right } } : Configuration)
+        finish used ∧ finish.halted = true ∧ finish.inputTape = input ∧
+      finish.outputTape.left.length ≤ left.length := by
+  induction left generalizing current right with
+  | nil =>
+      refine ⟨{
+        pc := 4, inputTape := input,
+        outputTape := ({ current := current, right := right } : Tape).moveLeft, halted := true },
+        3, by simp, eraseOutputBlock_blank_stop _ _ rfl, rfl, rfl, ?_⟩
+      simp [Tape.moveLeft]
+  | cons cell rest ih =>
+      cases cell with
+      | none =>
+          refine ⟨{
+            pc := 4, inputTape := input,
+            outputTape := ({ left := none :: rest, current := current, right := right } : Tape).moveLeft,
+            halted := true }, 3, by simp, eraseOutputBlock_blank_stop _ _ rfl, rfl, rfl, ?_⟩
+          simp [Tape.moveLeft]
+      | some bit =>
+          let start : Configuration :=
+            { inputTape := input, outputTape := { left := some bit :: rest, current := current, right := right } }
+          let moved : Configuration := { start with pc := 1, outputTape := start.outputTape.moveLeft }
+          let selected : Configuration := { moved with pc := 2 }
+          let erased : Configuration := { selected with pc := 3, outputTape := selected.outputTape.write none }
+          have first : Step eraseOutputBlock start moved := by
+            simp [Step, successors, next, start, moved, eraseOutputBlock,
+              Instruction.next, Configuration.updateTape, Configuration.advance]
+          have second : Step eraseOutputBlock moved selected := by
+            cases bit <;> simp [Step, successors, next, moved, selected, start, eraseOutputBlock,
+              Instruction.next, Configuration.tape, Tape.moveLeft]
+          have third : Step eraseOutputBlock selected erased := by
+            simp [Step, successors, next, moved, selected, erased, start, eraseOutputBlock,
+              Instruction.next, Configuration.updateTape, Configuration.advance]
+          have fourth : Step eraseOutputBlock erased
+              { inputTape := input, outputTape := { left := rest, right := current :: right } } := by
+            simp [Step, successors, next, moved, selected, erased, start, eraseOutputBlock,
+              Instruction.next, Tape.moveLeft, Tape.write]
+          obtain ⟨finish, used, hUsed, run, hHalt, hInput, hLeft⟩ := ih none (current :: right)
+          refine ⟨finish, 4 + used, ?_, ?_, hHalt, hInput, ?_⟩
+          · simp only [List.length_cons]
+            omega
+          · exact (RunsFor.succ (RunsFor.succ (RunsFor.succ
+              (RunsFor.succ (RunsFor.zero _) first) second) third) fourth).trans run
+          · simp only [List.length_cons]
+            omega
+
+/-- Native leftward erasure stops on every finite tape, including a missing
+separator. In that case it reaches unused blank space. Each encountered
+bit is charged four transitions; input cells remain unchanged. -/
+theorem eraseOutputBlock_terminates_from_anyTape (input output : Tape) :
+    ∃ finish used,
+      used ≤ 4 * output.left.length + 3 ∧
+      RunsFor eraseOutputBlock ({ inputTape := input, outputTape := output } : Configuration)
+        finish used ∧ finish.halted = true ∧ finish.inputTape = input ∧
+      finish.outputTape.left.length ≤ output.left.length :=
+  eraseOutputBlock_terminates_left input output.left output.current output.right
+
+theorem eraseOutputBlocks_no_randomBit (count : Nat) (tape : TapeId) :
+    Instruction.randomBit tape ∉ eraseOutputBlocks count := by
+  induction count with
+  | zero => simp [eraseOutputBlocks]
+  | succ count ih =>
+      simp [eraseOutputBlocks, Program.asSubroutine, Instruction.asSubroutine, eraseOutputBlock]
+      intro instruction hMem hEq
+      cases instruction <;> simp_all
+
+/-- A fixed number of native erasures also stops on arbitrary finite
+output cells. Missing blocks use unused blanks. The actual input tape is
+preserved, and each stage receives the preceding stage's physical output. -/
+theorem eraseOutputBlocks_terminates_from_anyTape (count : Nat) (input output : Tape) :
+    ∃ finish used,
+      used ≤ (count + 1) * (4 * output.left.length + 5) ∧
+      RunsFor (eraseOutputBlocks count) ({ inputTape := input, outputTape := output } : Configuration)
+        finish used ∧ finish.halted = true ∧ finish.inputTape = input ∧
+      finish.outputTape.left.length ≤ output.left.length := by
+  induction count generalizing output with
+  | zero =>
+      let finish : Configuration := { inputTape := input, outputTape := output, halted := true }
+      refine ⟨finish, 1, by omega, RunsFor.succ (RunsFor.zero _) ?_, rfl, rfl, Nat.le_refl _⟩
+      simp [Step, successors, next, eraseOutputBlocks, finish, Instruction.next]
+  | succ count ih =>
+      obtain ⟨erased, firstTime, hFirstTime, firstRun, firstHalt, firstInput, firstLeft⟩ :=
+        eraseOutputBlock_terminates_from_anyTape input output
+      obtain ⟨returned, tailTime, hTailTime, tailRun, tailHalt, tailInput, tailLeft⟩ :=
+        ih erased.outputTape
+      let returnPc := 6 + (eraseOutputBlocks count).length + 1
+      obtain ⟨firstUsed, hFirstUsed, first⟩ := firstRun.withSubroutine_halted
+        [] eraseOutputBlock ((eraseOutputBlocks count).asSubroutine 6 returnPc ++ [.halt]) 6
+        (Nat.zero_le _) rfl firstHalt
+      change RunsFor (eraseOutputBlocks (count + 1))
+        ({ inputTape := input, outputTape := output } : Configuration) (erased.resumeAt 6) firstUsed at first
+      obtain ⟨tailUsed, hTailUsed, tail⟩ := tailRun.withSubroutine_halted
+        (eraseOutputBlock.asSubroutine 0 6) (eraseOutputBlocks count) [.halt] returnPc
+        (Nat.zero_le _) rfl tailHalt
+      have hEntry :
+          ({ inputTape := input, outputTape := erased.outputTape } : Configuration).rebasePc 6 =
+          erased.resumeAt 6 := by
+        simp [Configuration.rebasePc, Configuration.resumeAt, firstInput]
+      change RunsFor (eraseOutputBlocks (count + 1))
+        (({ inputTape := input, outputTape := erased.outputTape } : Configuration).rebasePc 6)
+        (returned.resumeAt returnPc) tailUsed at tail
+      rw [hEntry] at tail
+      let finish : Configuration := { returned with pc := returnPc, halted := true }
+      have last : Step (eraseOutputBlocks (count + 1)) (returned.resumeAt returnPc) finish := by
+        have code : (eraseOutputBlocks (count + 1))[returnPc]? = some .halt := by
+          change (Program.withSubroutine (eraseOutputBlock.asSubroutine 0 6)
+            (eraseOutputBlocks count) [.halt] returnPc)[returnPc]? = some .halt
+          have h := Program.withSubroutine_getElem?_suffix
+            (eraseOutputBlock.asSubroutine 0 6) (eraseOutputBlocks count) [.halt] returnPc 0
+          simpa only [Program.asSubroutine_length, show eraseOutputBlock.length = 5 from rfl,
+            Nat.reduceAdd, Nat.add_zero, List.getElem?_cons_zero, returnPc] using h
+        simp [Step, successors, next, Configuration.resumeAt, finish, code, Instruction.next]
+      refine ⟨finish, firstUsed + tailUsed + 1, ?_, RunsFor.succ (first.trans tail) last,
+        rfl, tailInput, ?_⟩
+      · have hTailBound := hTailTime.trans
+          (Nat.mul_le_mul_left (count + 1) (Nat.add_le_add_right (Nat.mul_le_mul_left 4 firstLeft) 5))
+        simp only [Nat.add_mul, Nat.one_mul] at hTailBound ⊢
+        omega
+      · exact tailLeft.trans firstLeft
+
 end Machine

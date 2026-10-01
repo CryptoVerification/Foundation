@@ -10,6 +10,50 @@ def skipDelimited : Program :=
   [.branch .input 6 4 1, .moveRight .input, .moveRight .input, .jump 0,
     .moveRight .input, .halt, .halt]
 
+/-- Even a malformed escaped field only advances the input head. The cells
+remaining to its right are a suffix of the actual original finite tape. -/
+private theorem skipDelimited_step_input_moveRight (c d : Configuration)
+    (step : Step skipDelimited c d) :
+    d.inputTape = c.inputTape ∨ d.inputTape = c.inputTape.moveRight := by
+  have hActive : c.halted = false := by
+    cases h : c.halted with
+    | false => rfl
+    | true => exact False.elim ((no_step_of_halted h) step)
+  by_cases hPc : c.pc < 7
+  · interval_cases hIndex : c.pc
+    all_goals simp [Step, successors, next, hActive, hIndex, skipDelimited,
+      Instruction.next, Configuration.tape] at step
+    all_goals try (split at step)
+    all_goals subst d
+    all_goals first
+      | exact Or.inl rfl
+      | exact Or.inr rfl
+  · have hNone : skipDelimited[c.pc]? = none := by
+      apply List.getElem?_eq_none
+      change 7 ≤ c.pc
+      omega
+    simp [Step, successors, next, hActive, hNone] at step
+    subst d
+    exact Or.inl rfl
+
+/-- The remaining input cells form an actual suffix, including blanks. -/
+theorem skipDelimited_input_right_suffix {start finish : Configuration} {used : Nat}
+    (run : RunsFor skipDelimited start finish used) :
+    ∃ count, finish.inputTape.right = start.inputTape.right.drop count :=
+  run.input_right_suffix_of_step (fun c d step => by
+    rcases skipDelimited_step_input_moveRight c d step with hSame | hRight
+    · exact Or.inl (congrArg Tape.right hSame)
+    · apply Or.inr
+      rw [hRight]
+      cases hCells : c.inputTape.right <;> simp [Tape.moveRight, hCells])
+
+/-- Escaped-field reading retains the whole input tape and advances its
+head only by charged one-cell moves, even on a malformed field. -/
+theorem skipDelimited_input_moveRight {start finish : Configuration} {used : Nat}
+    (run : RunsFor skipDelimited start finish used) :
+    ∃ moves, moves ≤ used ∧ finish.inputTape = (Tape.moveRight^[moves]) start.inputTape :=
+  run.input_moveRight_of_step skipDelimited_step_input_moveRight
+
 private def delimitedCells (before cells : List (Option Bool)) : Tape :=
   match cells with
   | [] => { left := before }

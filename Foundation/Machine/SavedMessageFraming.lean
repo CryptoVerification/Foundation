@@ -269,20 +269,64 @@ theorem frameSavedMessage_control_closed (c d : Configuration)
   all_goals subst d
   all_goals simp [Configuration.advance, Configuration.updateTape, hIndex]
 
+private theorem savedMessage_seek_frontier (before : List (Option Bool))
+    (publicBits : List Bool) (padding : Nat) (gap : Bool) (output : Tape) :
+    let tail := if gap then none :: publicBits.map some ++ none :: List.replicate padding none
+      else publicBits.map some ++ none :: List.replicate padding none
+    let input : Tape := { left := before, right := tail }
+    ∃ finish used after remaining,
+      RunsFor GuardedCompiler.seekScratchInput
+        ({ inputTape := input.moveRight.moveRight, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true ∧ finish.outputTape = output ∧
+      finish.inputTape.moveLeft = { left := after, right := List.replicate remaining none } := by
+  let bits := if gap then publicBits else publicBits.tail
+  let rest : List (Option Bool) :=
+    List.replicate (if gap || !publicBits.isEmpty then padding else padding - 1) none
+  let saved := if gap then none :: none :: before
+    else (publicBits.head?.map some).getD none :: none :: before
+  let source : Tape :=
+    { left := before, right := if gap then none :: publicBits.map some ++ none :: List.replicate padding none
+        else publicBits.map some ++ none :: List.replicate padding none }
+  have hEntry :
+      ({ inputTape := source.moveRight.moveRight, outputTape := output } : Configuration) =
+        seekBitstringNextStart saved bits rest output := by
+    rw [seekBitstringNextStart_layout]
+    cases gap <;> cases publicBits with
+    | nil => cases padding <;> simp [source, bits, rest, saved, Tape.moveRight, List.replicate_succ]
+    | cons bit remaining =>
+        cases remaining <;> cases padding <;>
+          simp [source, bits, rest, saved, Tape.moveRight, List.replicate_succ]
+  refine ⟨seekBitstringNextFinish saved bits rest output, 3 * bits.length + 3,
+    bits.reverse.map some ++ saved, max 1 rest.length, ?_, rfl, rfl, ?_⟩
+  · rw [hEntry]
+    exact seekBitstringNext_runs saved bits rest output
+  · rw [seekBitstringNextFinish_layout_cells]
+    dsimp only [rest]
+    cases hPad : (if gap || !publicBits.isEmpty then padding else padding - 1) <;>
+      simp [Tape.moveRight, Tape.moveLeft, List.replicate_succ]
+
 /-- Every native rewind/scan/copy in saved-message framing stops on finite
 tapes, even when delimiters are malformed or the scratch cells are dirty.
 This theorem concerns actual stopping overhead, not successful serialization
 or preservation of an invalid protocol layout. No caller tape is reset. -/
-theorem frameSavedMessage_terminates_from_anyTape (input output : Tape) :
+private theorem frameSavedMessage_terminates_core (input output : Tape) :
     ∃ finish used, used ≤ 1000000 * (input.cells + output.cells) + 1000000 ∧
       RunsFor frameSavedMessage
         ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
-      finish.halted = true := by
-  obtain ⟨first, t₁, h₁, run₁, halt₁, _output₁⟩ := rewindBitstring_terminates_from output input
+      finish.halted = true ∧
+      (∀ savedInput inputBlanks savedOutput outputBlanks,
+        input = ({ left := none :: savedInput, right := List.replicate inputBlanks none } : Tape) →
+        output = ({ left := savedOutput, right := List.replicate outputBlanks none } : Tape) →
+        ∃ (payload : List Bool), ∃ remainingInput afterOutput remainingOutput,
+          finish.inputTape = {
+            left := payload.reverse.map some ++ none :: savedInput
+            right := List.replicate remainingInput none } ∧
+          finish.outputTape = { left := afterOutput, right := List.replicate remainingOutput none }) := by
+  obtain ⟨first, t₁, h₁, run₁, halt₁, output₁⟩ := rewindBitstring_terminates_from output input
   let firstPhysical := first.swapTapes
   let secondStart : Configuration :=
     { pc := 7, inputTape := firstPhysical.inputTape, outputTape := firstPhysical.outputTape.moveLeft.moveLeft }
-  obtain ⟨second, t₂, h₂, run₂, halt₂, _output₂⟩ :=
+  obtain ⟨second, t₂, h₂, run₂, halt₂, output₂⟩ :=
     rewindBitstring_terminates_from secondStart.outputTape secondStart.inputTape
   let secondPhysical := second.swapTapes
   obtain ⟨copied, t₃, h₃, run₃, halt₃⟩ :=
@@ -290,7 +334,7 @@ theorem frameSavedMessage_terminates_from_anyTape (input output : Tape) :
   let copiedPhysical := copied.swapTapes
   let seekStart : Configuration :=
     { pc := 23, inputTape := copiedPhysical.inputTape, outputTape := copiedPhysical.outputTape.moveRight.moveRight }
-  obtain ⟨sought, t₄, h₄, run₄, halt₄, _output₄⟩ :=
+  obtain ⟨sought, t₄, h₄, run₄, halt₄, output₄⟩ :=
     GuardedCompiler.seekScratchInput_terminates_from_anyTape seekStart.outputTape seekStart.inputTape
   let soughtPhysical := sought.swapTapes
   let rewindStart : Configuration :=
@@ -371,18 +415,199 @@ theorem frameSavedMessage_terminates_from_anyTape (input output : Tape) :
     have code : frameSavedMessage[60]? = some .halt := rfl
     simp [Step, successors, next, Configuration.resumeAt, code, finish, Instruction.next]
   refine ⟨finish, ((t₁ + 1 + 1 + t₂ + t₃ + 1 + 1 + t₄ + 1) + t₅) + t₆ + 1, ?_,
-    RunsFor.succ (toFrame.trans frameRun) last, rfl⟩
-  have storage₂ := GuardedCompiler.sourceStorage_le_of_run toSecond
-  have storage₃ := GuardedCompiler.sourceStorage_le_of_run toCopy
-  have storage₄ := GuardedCompiler.sourceStorage_le_of_run toSeek
-  have storage₅ := GuardedCompiler.sourceStorage_le_of_run toRewind
-  have storage₆ := GuardedCompiler.sourceStorage_le_of_run toFrame
-  have left₁ : output.left.length ≤ output.cells := by dsimp only [Tape.cells]; omega
-  have left₂ : secondStart.outputTape.left.length ≤ secondStart.outputTape.cells := by dsimp only [Tape.cells]; omega
-  have left₅ : rewindStart.inputTape.left.length ≤ rewindStart.inputTape.cells := by dsimp only [Tape.cells]; omega
-  simp only [GuardedCompiler.sourceStorage, Configuration.resumeAt] at storage₂ storage₃ storage₄ storage₅ storage₆
-  change t₃ ≤ 6 * secondPhysical.outputTape.cells + 2 at h₃
-  change t₆ ≤ 200 * (rewound.inputTape.cells + rewound.outputTape.cells) + 200 at h₆
-  omega
+    RunsFor.succ (toFrame.trans frameRun) last, rfl, ?_⟩
+  · have storage₂ := GuardedCompiler.sourceStorage_le_of_run toSecond
+    have storage₃ := GuardedCompiler.sourceStorage_le_of_run toCopy
+    have storage₄ := GuardedCompiler.sourceStorage_le_of_run toSeek
+    have storage₅ := GuardedCompiler.sourceStorage_le_of_run toRewind
+    have storage₆ := GuardedCompiler.sourceStorage_le_of_run toFrame
+    have left₁ : output.left.length ≤ output.cells := by dsimp only [Tape.cells]; omega
+    have left₂ : secondStart.outputTape.left.length ≤ secondStart.outputTape.cells := by dsimp only [Tape.cells]; omega
+    have left₅ : rewindStart.inputTape.left.length ≤ rewindStart.inputTape.cells := by dsimp only [Tape.cells]; omega
+    simp only [GuardedCompiler.sourceStorage, Configuration.resumeAt] at storage₂ storage₃ storage₄ storage₅ storage₆
+    change t₃ ≤ 6 * secondPhysical.outputTape.cells + 2 at h₃
+    change t₆ ≤ 200 * (rewound.inputTape.cells + rewound.outputTape.cells) + 200 at h₆
+    omega
+  · intro savedInput inputBlanks savedOutput outputBlanks hInput hOutput
+    obtain ⟨firstExact, publicBits, firstBefore, _hPublicLength, firstExactRun,
+      firstExactHalt, firstExactInput, _firstExactOutput⟩ :=
+      rewindBitstring_terminates_with_layout output input
+    have hFirst := run₁.halted_finish_eq_of_no_randomBit firstExactRun
+      halt₁ firstExactHalt rewindBitstring_no_randomBit
+    have hFirstInput : first.inputTape =
+        { ({ right := publicBits.map some ++ none :: List.replicate outputBlanks none } : Tape).moveRight
+          with left := none :: firstBefore } := by
+      rw [hFirst, firstExactInput, hOutput]
+      rfl
+    have hSecondRight : secondStart.outputTape.right =
+        none :: publicBits.map some ++ none :: List.replicate outputBlanks none := by
+      change first.inputTape.moveLeft.moveLeft.right = _
+      rw [hFirstInput]
+      cases publicBits <;> cases firstBefore <;> simp [Tape.moveRight, Tape.moveLeft]
+    obtain ⟨secondExact, leading, secondBefore, _hLeadingLength, secondExactRun,
+      secondExactHalt, secondExactInput, _secondExactOutput⟩ :=
+      rewindBitstring_terminates_with_layout secondStart.outputTape secondStart.inputTape
+    have hSecond := run₂.halted_finish_eq_of_no_randomBit secondExactRun
+      halt₂ secondExactHalt rewindBitstring_no_randomBit
+    have hSecondInput : second.inputTape =
+        { ({ right := leading.map some ++ secondStart.outputTape.current :: secondStart.outputTape.right } : Tape).moveRight
+          with left := none :: secondBefore } := by
+      rw [hSecond, secondExactInput]
+      rfl
+    have hSecondOther : second.outputTape = input := by
+      rw [output₂]
+      exact output₁
+    have hCopied : ∃ (payload : List Bool) (gap : Bool),
+        copied.inputTape =
+          { left := payload.reverse.map some ++ none :: secondBefore,
+            right := if gap then none :: publicBits.map some ++ none :: List.replicate outputBlanks none
+              else publicBits.map some ++ none :: List.replicate outputBlanks none } ∧
+        copied.outputTape =
+          { left := payload.reverse.map some ++ none :: savedInput,
+            right := List.replicate (inputBlanks - payload.length) none } := by
+      cases hCurrent : secondStart.outputTape.current with
+      | none =>
+          let tail := none :: publicBits.map some ++ none :: List.replicate outputBlanks none
+          have hEntry :
+              ({ inputTape := secondPhysical.outputTape, outputTape := secondPhysical.inputTape } : Configuration) =
+                copySegmentStart (none :: secondBefore) (none :: savedInput) tail leading inputBlanks := by
+            simp only [copySegmentStart_layout, secondPhysical, Configuration.swapTapes,
+              hSecondInput, hSecondOther, hInput, hCurrent, hSecondRight, tail]
+          have segmentRun := copySegment_runs (none :: secondBefore) (none :: savedInput) tail leading inputBlanks
+          rw [← hEntry] at segmentRun
+          have hCopy := run₃.halted_finish_eq_of_no_randomBit segmentRun
+            halt₃ rfl copyBitstring_no_randomBit
+          exact ⟨leading, true, by rw [hCopy]; rfl, by rw [hCopy]; rfl⟩
+      | some bit =>
+          let payload := leading ++ [bit]
+          let tail := publicBits.map some ++ none :: List.replicate outputBlanks none
+          have hEntry :
+              ({ inputTape := secondPhysical.outputTape, outputTape := secondPhysical.inputTape } : Configuration) =
+                copySegmentStart (none :: secondBefore) (none :: savedInput) tail payload inputBlanks := by
+            simp only [copySegmentStart_layout, secondPhysical, Configuration.swapTapes,
+              hSecondInput, hSecondOther, hInput, hCurrent, hSecondRight, payload, tail,
+              List.map_append, List.map_cons, List.map_nil, List.append_assoc,
+              List.cons_append, List.nil_append]
+          have segmentRun := copySegment_runs (none :: secondBefore) (none :: savedInput) tail payload inputBlanks
+          rw [← hEntry] at segmentRun
+          have hCopy := run₃.halted_finish_eq_of_no_randomBit segmentRun
+            halt₃ rfl copyBitstring_no_randomBit
+          exact ⟨payload, false, by rw [hCopy]; rfl, by rw [hCopy]; rfl⟩
+    obtain ⟨payload, gap, hCopyInput, hCopyOutput⟩ := hCopied
+    obtain ⟨frontier, frontierTime, afterOutput, outputRemaining, frontierRun,
+      frontierHalt, _frontierOther, frontierOutput⟩ :=
+      savedMessage_seek_frontier (payload.reverse.map some ++ none :: secondBefore)
+        publicBits outputBlanks gap copied.outputTape
+    have frontierRun' : RunsFor GuardedCompiler.seekScratchInput
+        ({ inputTape := seekStart.outputTape, outputTape := seekStart.inputTape } : Configuration)
+        frontier frontierTime := by
+      change RunsFor GuardedCompiler.seekScratchInput
+        ({ inputTape := copied.inputTape.moveRight.moveRight, outputTape := copied.outputTape } : Configuration)
+        frontier frontierTime
+      rw [hCopyInput]
+      exact frontierRun
+    have hFrontier := run₄.halted_finish_eq_of_no_randomBit frontierRun'
+      halt₄ frontierHalt GuardedCompiler.seekScratchInput_no_randomBit
+    have hRestoredOutput : rewindStart.outputTape =
+        { left := afterOutput, right := List.replicate outputRemaining none } := by
+      change sought.inputTape.moveLeft = _
+      rw [hFrontier]
+      exact frontierOutput
+    have hScratch : rewindStart.inputTape =
+        { left := payload.reverse.map some ++ none :: savedInput,
+          right := List.replicate (inputBlanks - payload.length) none } := by
+      change sought.outputTape = _
+      rw [output₄]
+      exact hCopyOutput
+    have scratchRun := rewindScratch_runs_from savedInput payload none
+      (List.replicate (inputBlanks - payload.length) none) rewindStart.outputTape
+    have hScratchEntry :
+        ({ inputTape := rewindStart.inputTape, outputTape := rewindStart.outputTape } : Configuration) =
+          { inputTape := { left := payload.reverse.map some ++ none :: savedInput, right := List.replicate (inputBlanks - payload.length) none },
+            outputTape := rewindStart.outputTape } := by rw [hScratch]
+    rw [← hScratchEntry] at scratchRun
+    have hRewind := run₅.halted_finish_eq_of_no_randomBit scratchRun
+      halt₅ rfl rewindBitstring_no_randomBit
+    have hFrameEntry :
+        ({ inputTape := rewound.inputTape, outputTape := rewound.outputTape } : Configuration) =
+          writeFrameContextPaddedStart savedInput afterOutput
+            (List.replicate (inputBlanks - payload.length) none) payload outputRemaining := by
+      rw [hRewind, writeFrameContextPaddedStart_layout, hRestoredOutput]
+      cases payload <;> simp [Tape.moveRight]
+    have exactFrameRun := writeFrameContextPadded_runs savedInput afterOutput
+      (List.replicate (inputBlanks - payload.length) none) payload outputRemaining
+    rw [← hFrameEntry] at exactFrameRun
+    have hFrame := run₆.halted_finish_eq_of_no_randomBit exactFrameRun
+      halt₆ rfl writeFrame_no_randomBit
+    refine ⟨payload, inputBlanks - payload.length,
+      (frame payload).reverse.map some ++ afterOutput,
+      outputRemaining - (2 * payload.length + 1), ?_, ?_⟩
+    · change framed.inputTape = _
+      rw [hFrame]
+      rfl
+    · change framed.outputTape = _
+      rw [hFrame]
+      rfl
+
+theorem frameSavedMessage_terminates_from_anyTape (input output : Tape) :
+    ∃ finish used, used ≤ 1000000 * (input.cells + output.cells) + 1000000 ∧
+      RunsFor frameSavedMessage
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true := by
+  obtain ⟨finish, used, hBound, run, hHalted, _hLayout⟩ := frameSavedMessage_terminates_core input output
+  exact ⟨finish, used, hBound, run, hHalted⟩
+
+/-- Saved-message framing preserves fresh frontiers on both physical tapes
+when input scratch has a reserved separator. The saved output cells may be
+arbitrary, and the recovered payload may be empty or malformed. Its actual
+rewind/copy/scan transitions determine the copied block and restored head;
+no valid DDH fields, canonical normalizer reply, or caller reset is assumed. -/
+theorem frameSavedMessage_terminates_with_fresh_tapes
+    (savedInput savedOutput : List (Option Bool)) (inputBlanks outputBlanks : Nat) :
+    ∃ finish used afterInput remainingInput afterOutput remainingOutput,
+      used ≤ 1000000 *
+        (({ left := none :: savedInput, right := List.replicate inputBlanks none } : Tape).cells +
+         ({ left := savedOutput, right := List.replicate outputBlanks none } : Tape).cells) + 1000000 ∧
+      RunsFor frameSavedMessage
+        ({ inputTape := { left := none :: savedInput, right := List.replicate inputBlanks none },
+           outputTape := { left := savedOutput, right := List.replicate outputBlanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧
+      finish.inputTape = { left := afterInput, right := List.replicate remainingInput none } ∧
+      finish.outputTape = { left := afterOutput, right := List.replicate remainingOutput none } := by
+  obtain ⟨finish, used, hBound, run, hHalted, hLayout⟩ :=
+    frameSavedMessage_terminates_core
+      { left := none :: savedInput, right := List.replicate inputBlanks none }
+      { left := savedOutput, right := List.replicate outputBlanks none }
+  obtain ⟨payload, remainingInput, afterOutput, remainingOutput, hInput, hOutput⟩ :=
+    hLayout savedInput inputBlanks savedOutput outputBlanks rfl rfl
+  exact ⟨finish, used, payload.reverse.map some ++ none :: savedInput,
+    remainingInput, afterOutput, remainingOutput, hBound, run, hHalted, hInput, hOutput⟩
+
+/-- Saved-message framing appends precisely one actual contiguous raw block
+before the protected input separator. Earlier stored cells remain unchanged,
+including malformed replies. Both heads finish at fresh blank frontiers;
+this is a physical tape postcondition of the native copy and frame trace. -/
+theorem frameSavedMessage_terminates_with_retained_input
+    (savedInput savedOutput : List (Option Bool)) (inputBlanks outputBlanks : Nat) :
+    ∃ finish used, ∃ (payload : List Bool), ∃ remainingInput afterOutput remainingOutput,
+      used ≤ 1000000 *
+        (({ left := none :: savedInput, right := List.replicate inputBlanks none } : Tape).cells +
+         ({ left := savedOutput, right := List.replicate outputBlanks none } : Tape).cells) + 1000000 ∧
+      RunsFor frameSavedMessage
+        ({ inputTape := { left := none :: savedInput, right := List.replicate inputBlanks none },
+           outputTape := { left := savedOutput, right := List.replicate outputBlanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧
+      finish.inputTape = {
+        left := payload.reverse.map some ++ none :: savedInput
+        right := List.replicate remainingInput none } ∧
+      finish.outputTape = { left := afterOutput, right := List.replicate remainingOutput none } := by
+  obtain ⟨finish, used, hBound, run, hHalted, hLayout⟩ :=
+    frameSavedMessage_terminates_core
+      { left := none :: savedInput, right := List.replicate inputBlanks none }
+      { left := savedOutput, right := List.replicate outputBlanks none }
+  obtain ⟨payload, remainingInput, afterOutput, remainingOutput, hInput, hOutput⟩ :=
+    hLayout savedInput inputBlanks savedOutput outputBlanks rfl rfl
+  exact ⟨finish, used, payload, remainingInput, afterOutput, remainingOutput,
+    hBound, run, hHalted, hInput, hOutput⟩
 
 end Machine

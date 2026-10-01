@@ -248,4 +248,191 @@ theorem completedGuessFromProductBudget_bound (q : Nat → Nat) (n : Nat)
   rw [hLength] at h hPositive hQ ⊢
   nlinarith
 
+/-- All-input stopping envelope for the complete guess continuation.
+The terminal stage is charged on the actual storage grown by the preceding
+randomized invocation, rather than on a freshly loaded reply. -/
+def completedGuessRetainedBudget (coefficient degree storage : Nat) : Nat :=
+  let invokeTime := guessRetainedBudget coefficient degree storage
+  invokeTime + (4500000000 * (storage + invokeTime + 1) + 1)
+
+theorem completedGuessRetainedBudget_polynomial (coefficient degree : Nat) :
+    PolynomiallyBounded (completedGuessRetainedBudget coefficient degree) := by
+  have hInvoke := guessRetainedBudget_polynomial coefficient degree
+  have hStorage := (PolynomiallyBounded.id.add hInvoke).add (PolynomiallyBounded.const 1)
+  exact hInvoke.add (((PolynomiallyBounded.const 4500000000).mul hStorage).add
+    (PolynomiallyBounded.const 1))
+
+theorem completedGuessRetainedBudget_monotone (coefficient degree : Nat) :
+    Monotone (completedGuessRetainedBudget coefficient degree) := by
+  intro first last h
+  have hInvoke := guessRetainedBudget_monotone coefficient degree h
+  have hStorage := Nat.add_le_add_right (Nat.add_le_add h hInvoke) 1
+  exact Nat.add_le_add hInvoke
+    (Nat.add_le_add_right (Nat.mul_le_mul_left 4500000000 hStorage) 1)
+
+/-- The complete native guess continuation stops on every branch from
+arbitrary retained strings. The guessed reply need not be tagged correctly,
+and the terminal processor receives exactly the tapes returned by the call.
+Only the embedded source's all-input monomial stopping bound is assumed. -/
+theorem completedGuessFromProductCompile_haltsFrom_retained_frontiers (source : Program)
+    (coefficient degree : Nat)
+    (hSource : ∀ request : List Bool,
+      HaltsWithin source request (coefficient * (request.length + 1)^degree))
+    (before beforeOutput : List (Option Bool))
+    (original reply canonical selected product : List Bool) (inputBlanks outputBlanks : Nat) :
+    let output : Tape := { left := beforeOutput, right := List.replicate outputBlanks none }
+    let start := restoreStoredInputStart
+      (reply.reverse.map some ++ none :: original.reverse.map some ++ none :: before)
+      canonical selected product none (List.replicate inputBlanks none) output
+    ∀ finish, PaddedRunsFor (completedGuessFromProductCompile source) start finish
+      (completedGuessRetainedBudget coefficient degree (sourceStorage start)) → finish.halted = true := by
+  dsimp only
+  let output : Tape := { left := beforeOutput, right := List.replicate outputBlanks none }
+  let start := restoreStoredInputStart
+      (reply.reverse.map some ++ none :: original.reverse.map some ++ none :: before)
+      canonical selected product none (List.replicate inputBlanks none) output
+  let storage := sourceStorage start
+  let invokeTime := guessRetainedBudget coefficient degree storage
+  let terminalTime := 4500000000 * (storage + invokeTime + 1)
+  have hFirst := guessFromProductCompile_haltsFrom_retained_frontiers source coefficient degree hSource
+    before beforeOutput original reply canonical selected product inputBlanks outputBlanks
+  have hSecond (c : Configuration)
+      (hc : c ∈ (evalConfigWithin (guessFromProductCompile source) start invokeTime).support)
+      (finish : Configuration)
+      (run : PaddedRunsFor (finishStoredGuess 8 4) (c.resumeAt 0) finish terminalTime) :
+      finish.halted = true := by
+    have hStorage := sourceStorage_le_of_padded_run
+      ((mem_support_evalConfigWithin_iff _ _ _ _).mp hc)
+    have hOutput : c.outputTape.cells ≤ storage + invokeTime := by
+      dsimp only [sourceStorage] at hStorage
+      change c.inputTape.cells + c.outputTape.cells ≤ storage + invokeTime at hStorage
+      omega
+    have hSmall : ∀ d, PaddedRunsFor (finishStoredGuess 8 4) (c.resumeAt 0) d
+        (4500000000 * (c.outputTape.cells + 1)) → d.halted = true := by
+      intro d hRun
+      exact finishStoredGuess_haltsFrom_anyTape 8 4 c.inputTape c.outputTape d hRun
+    have hBound : 4500000000 * (c.outputTape.cells + 1) ≤ terminalTime :=
+      Nat.mul_le_mul_left 4500000000 (Nat.add_le_add_right hOutput 1)
+    have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr run
+    rw [evalConfigWithin_eq_of_le _ _ _ _ hBound hSmall] at hMem
+    exact hSmall finish ((mem_support_evalConfigWithin_iff _ _ _ _).mp hMem)
+  have hLaw := Program.evalConfigWithin_twoStages_configuration (guessFromProductCompile source)
+    (finishStoredGuess 8 4) start rfl rfl invokeTime terminalTime hFirst hSecond
+  change evalConfigWithin (completedGuessFromProductCompile source) start
+    (invokeTime + (terminalTime + 1)) = _ at hLaw
+  intro finish run
+  have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr run
+  change finish ∈ (evalConfigWithin (completedGuessFromProductCompile source) start
+    (invokeTime + (terminalTime + 1))).support at hMem
+  rw [hLaw, PMF.mem_support_bind_iff] at hMem
+  obtain ⟨middle, _hMiddle, hFinish⟩ := hMem
+  rw [PMF.mem_support_map_iff] at hFinish
+  obtain ⟨target, _hTarget, rfl⟩ := hFinish
+  rfl
+
+/-- Apply the retained-string stopping certificate directly to the actual
+framed multiplication return. The product is the called machine's raw output;
+no correctness assumption or decoded group element is used for termination.
+The returned source scratch remains on the output tape during the guess. -/
+theorem completedGuessFromProductCompile_returnedFrameResult_haltsFrom_retained
+    (multiplySource guessSource : Program) (coefficient degree : Nat)
+    (hSource : ∀ request : List Bool,
+      HaltsWithin guessSource request (coefficient * (request.length + 1)^degree))
+    (multiplyRequest : List Bool) (beforeOutput before : List (Option Bool))
+    (original reply canonical selected : List Bool) (multiplyResult : Configuration) :
+    let saved := selected.reverse.map some ++ none :: canonical.reverse.map some ++
+      none :: reply.reverse.map some ++ none :: original.reverse.map some ++ none :: before
+    let returned := returnedFrameResult multiplySource multiplyRequest beforeOutput saved multiplyResult
+    ∀ finish, PaddedRunsFor (completedGuessFromProductCompile guessSource) (returned.resumeAt 0) finish
+      (completedGuessRetainedBudget coefficient degree (sourceStorage returned)) → finish.halted = true := by
+  dsimp only
+  let saved := selected.reverse.map some ++ none :: canonical.reverse.map some ++
+    none :: reply.reverse.map some ++ none :: original.reverse.map some ++ none :: before
+  let returned := returnedFrameResult multiplySource multiplyRequest beforeOutput saved multiplyResult
+  let start := restoreStoredInputStart
+    (reply.reverse.map some ++ none :: original.reverse.map some ++ none :: before)
+    canonical selected multiplyResult.outputBits none
+    (List.replicate (2 * multiplyResult.outputTape.cells + 2 - multiplyResult.outputBits.length) none)
+    { left := returned.outputTape.left }
+  have hLayout : returned.resumeAt 0 = start := by
+    simp [returned, returnedFrameResult, frameReturnedResultFinish, saved, start,
+      restoreStoredInputStart, Configuration.resumeAt, List.append_assoc]
+  have hStorage : sourceStorage returned = sourceStorage start := by
+    have h := congrArg sourceStorage hLayout
+    simpa only [sourceStorage, Configuration.resumeAt] using h
+  have hStop := completedGuessFromProductCompile_haltsFrom_retained_frontiers guessSource
+    coefficient degree hSource before returned.outputTape.left original reply canonical selected
+    multiplyResult.outputBits (2 * multiplyResult.outputTape.cells + 2 - multiplyResult.outputBits.length) 0
+  intro finish run
+  change PaddedRunsFor (completedGuessFromProductCompile guessSource) (returned.resumeAt 0) finish
+    (completedGuessRetainedBudget coefficient degree (sourceStorage returned)) at run
+  rw [hLayout, hStorage] at run
+  exact hStop finish run
+
+private theorem cells_append_none_getD (cells : List (Option Bool)) (i : Nat) :
+    cells.getD i none = (cells ++ [none]).getD i none := by
+  induction cells generalizing i with
+  | nil => cases i <;> simp
+  | cons cell rest ih =>
+      cases i with
+      | zero => rfl
+      | succ i => simpa only [List.cons_append, List.getD_cons_succ] using ih i
+
+/-- The complete guess continuation requires only three real retained
+separators behind the framed product. A redundant outer blank gives the
+existing four-block specification without altering any physical tape cell.
+Malformed fields and arbitrary multiplication outputs are permitted. -/
+theorem completedGuessFromProductCompile_returnedFrameResult_haltsFrom_separators
+    (multiplySource guessSource : Program) (coefficient degree : Nat)
+    (hSource : ∀ request : List Bool,
+      HaltsWithin guessSource request (coefficient * (request.length + 1)^degree))
+    (multiplyRequest : List Bool) (beforeOutput savedInput : List (Option Bool))
+    (hSeparators : 3 ≤ savedInput.count none) (multiplyResult : Configuration) :
+    let returned := returnedFrameResult multiplySource multiplyRequest beforeOutput savedInput multiplyResult
+    ∀ finish, PaddedRunsFor (completedGuessFromProductCompile guessSource) (returned.resumeAt 0) finish
+      (completedGuessRetainedBudget coefficient degree (sourceStorage returned + 1)) → finish.halted = true := by
+  dsimp only
+  let returned := returnedFrameResult multiplySource multiplyRequest beforeOutput savedInput multiplyResult
+  let padded := returnedFrameResult multiplySource multiplyRequest beforeOutput (savedInput ++ [none]) multiplyResult
+  obtain ⟨original, reply, canonical, selected, before, hSplit⟩ :=
+    storedInput_four_blocks_of_separators savedInput hSeparators
+  have hEquivalent : (returned.resumeAt 0).Equivalent (padded.resumeAt 0) := by
+    refine ⟨rfl, rfl, ?_, ?_⟩
+    · refine ⟨rfl, ?_, fun _ => rfl⟩
+      intro i
+      change (multiplyResult.outputBits.reverse.map some ++ none :: savedInput).getD i none =
+        (multiplyResult.outputBits.reverse.map some ++ none :: (savedInput ++ [none])).getD i none
+      simpa only [List.append_assoc, List.cons_append] using
+        cells_append_none_getD (multiplyResult.outputBits.reverse.map some ++ none :: savedInput) i
+    · exact Tape.Equivalent.refl _
+  have hStorage : sourceStorage padded = sourceStorage returned + 1 := by
+    simp only [padded, returned, returnedFrameResult, frameReturnedResultFinish, sourceStorage,
+      Tape.cells, List.length_append, List.length_cons, List.length_nil]
+    omega
+  have hStop := completedGuessFromProductCompile_returnedFrameResult_haltsFrom_retained
+    multiplySource guessSource coefficient degree hSource multiplyRequest beforeOutput before
+    original reply canonical selected multiplyResult
+  change ∀ finish, PaddedRunsFor (completedGuessFromProductCompile guessSource)
+    ((returnedFrameResult multiplySource multiplyRequest beforeOutput
+      (selected.reverse.map some ++ none :: canonical.reverse.map some ++ none :: reply.reverse.map some ++
+        none :: original.reverse.map some ++ none :: before) multiplyResult).resumeAt 0) finish
+    (completedGuessRetainedBudget coefficient degree
+      (sourceStorage (returnedFrameResult multiplySource multiplyRequest beforeOutput
+        (selected.reverse.map some ++ none :: canonical.reverse.map some ++ none :: reply.reverse.map some ++
+          none :: original.reverse.map some ++ none :: before) multiplyResult))) → finish.halted = true at hStop
+  rw [← hSplit] at hStop
+  change ∀ finish, PaddedRunsFor (completedGuessFromProductCompile guessSource) (padded.resumeAt 0) finish
+    (completedGuessRetainedBudget coefficient degree (sourceStorage padded)) → finish.halted = true at hStop
+  rw [hStorage] at hStop
+  intro finish run
+  have hMem : finish.halted ∈ ((evalConfigWithin (completedGuessFromProductCompile guessSource)
+      (returned.resumeAt 0) (completedGuessRetainedBudget coefficient degree (sourceStorage returned + 1))).map
+        Configuration.halted).support := by
+    rw [PMF.mem_support_map_iff]
+    exact ⟨finish, (mem_support_evalConfigWithin_iff _ _ _ _).mpr run, rfl⟩
+  rw [evalConfigWithin_map_eq_of_equivalent _ _ _ hEquivalent _ Configuration.halted
+    (fun _ _ h => h.2.1), PMF.mem_support_map_iff] at hMem
+  obtain ⟨target, hTarget, hEq⟩ := hMem
+  exact hEq.symm.trans (hStop target ((mem_support_evalConfigWithin_iff _ _ _ _).mp hTarget))
+
 end Machine.GuardedCompiler

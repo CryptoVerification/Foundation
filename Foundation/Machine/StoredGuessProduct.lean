@@ -1,5 +1,7 @@
 import Foundation.Machine.ContextualInput
 import Foundation.Machine.SegmentCopy
+import Foundation.Machine.GuardedTrace
+import Foundation.Machine.StoredGuessInputScratch
 
 namespace Machine
 
@@ -154,5 +156,284 @@ theorem appendStoredGuessProduct_control_closed (c d : Configuration)
   all_goals try (split at step)
   all_goals subst d
   all_goals simp [Configuration.advance, Configuration.updateTape, hIndex]
+
+
+/-- Appending the stored product also stops on arbitrary finite tapes. All
+four frontier scans and every copied bit are charged native transitions. -/
+private theorem appendStoredGuessProduct_terminates_core (input output : Tape) :
+    let advance := fun t : Tape =>
+      (Tape.moveRight^[((t.current :: t.right).takeWhile Option.isSome).length + 1]) t
+    ∃ finish used, used ≤ 1000000 * (input.cells + output.cells) + 1000000 ∧
+      RunsFor appendStoredGuessProduct
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true ∧ finish.inputTape.current = none ∧
+      finish.inputTape.moveRight = advance (advance (advance (advance (advance input)))) ∧
+      ∀ before blanks, output = ({ left := before, right := List.replicate blanks none } : Tape) →
+        ∃ after remaining, finish.outputTape = { left := after, right := List.replicate remaining none } := by
+  dsimp only
+  obtain ⟨scan1, t1, hTime1, run1, halt1, output1⟩ :=
+    GuardedCompiler.seekScratchInput_terminates_from_anyTape input output
+  have embedded1 := run1.withSubroutine_halted_of_closed
+    [] GuardedCompiler.seekScratchInput (GuardedCompiler.seekScratchInput.asSubroutine 6 12 ++ GuardedCompiler.seekScratchInput.asSubroutine 12 18 ++ GuardedCompiler.seekScratchInput.asSubroutine 18 24 ++ copyBitstring.asSubroutine 24 33 ++ [.halt]) 6
+    (by change 0 < 5; decide) rfl halt1 GuardedCompiler.seekScratchInput_control_closed
+  change RunsFor appendStoredGuessProduct ({ inputTape := input, outputTape := output } : Configuration) (scan1.resumeAt 6) t1 at embedded1
+  have toScan2 := embedded1
+  obtain ⟨scan2, t2, hTime2, run2, halt2, output2⟩ :=
+    GuardedCompiler.seekScratchInput_terminates_from_anyTape scan1.inputTape scan1.outputTape
+  have embedded2 := run2.withSubroutine_halted_of_closed
+    (GuardedCompiler.seekScratchInput.asSubroutine 0 6) GuardedCompiler.seekScratchInput (GuardedCompiler.seekScratchInput.asSubroutine 12 18 ++ GuardedCompiler.seekScratchInput.asSubroutine 18 24 ++ copyBitstring.asSubroutine 24 33 ++ [.halt]) 12
+    (by change 0 < 5; decide) rfl halt2 GuardedCompiler.seekScratchInput_control_closed
+  change RunsFor appendStoredGuessProduct (scan1.resumeAt 6) (scan2.resumeAt 12) t2 at embedded2
+  have toScan3 := toScan2.trans embedded2
+  obtain ⟨scan3, t3, hTime3, run3, halt3, output3⟩ :=
+    GuardedCompiler.seekScratchInput_terminates_from_anyTape scan2.inputTape scan2.outputTape
+  have embedded3 := run3.withSubroutine_halted_of_closed
+    (GuardedCompiler.seekScratchInput.asSubroutine 0 6 ++ GuardedCompiler.seekScratchInput.asSubroutine 6 12) GuardedCompiler.seekScratchInput (GuardedCompiler.seekScratchInput.asSubroutine 18 24 ++ copyBitstring.asSubroutine 24 33 ++ [.halt]) 18
+    (by change 0 < 5; decide) rfl halt3 GuardedCompiler.seekScratchInput_control_closed
+  change RunsFor appendStoredGuessProduct (scan2.resumeAt 12) (scan3.resumeAt 18) t3 at embedded3
+  have toScan4 := toScan3.trans embedded3
+  obtain ⟨scan4, t4, hTime4, run4, halt4, output4⟩ :=
+    GuardedCompiler.seekScratchInput_terminates_from_anyTape scan3.inputTape scan3.outputTape
+  have embedded4 := run4.withSubroutine_halted_of_closed
+    (GuardedCompiler.seekScratchInput.asSubroutine 0 6 ++ GuardedCompiler.seekScratchInput.asSubroutine 6 12 ++ GuardedCompiler.seekScratchInput.asSubroutine 12 18) GuardedCompiler.seekScratchInput (copyBitstring.asSubroutine 24 33 ++ [.halt]) 24
+    (by change 0 < 5; decide) rfl halt4 GuardedCompiler.seekScratchInput_control_closed
+  change RunsFor appendStoredGuessProduct (scan3.resumeAt 18) (scan4.resumeAt 24) t4 at embedded4
+  have toScan5 := toScan4.trans embedded4
+
+  obtain ⟨copied, copyTime, hCopyTime, copyRun, copyHalt⟩ :=
+    copyBitstring_terminates_from_anyTape scan4.inputTape scan4.outputTape
+  have hCopy := copyRun.withSubroutine_halted_of_closed
+    (GuardedCompiler.seekScratchInput.asSubroutine 0 6 ++
+      GuardedCompiler.seekScratchInput.asSubroutine 6 12 ++
+      GuardedCompiler.seekScratchInput.asSubroutine 12 18 ++
+      GuardedCompiler.seekScratchInput.asSubroutine 18 24) copyBitstring [.halt] 33
+    (by change 0 < 8; decide) rfl copyHalt GuardedCompiler.copyBitstring_control_closed
+  change RunsFor appendStoredGuessProduct (scan4.resumeAt 24) (copied.resumeAt 33) copyTime at hCopy
+  let finish : Configuration := { copied with pc := 33, halted := true }
+  have last : Step appendStoredGuessProduct (copied.resumeAt 33) finish := by
+    have code : appendStoredGuessProduct[33]? = some .halt := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, finish, Instruction.next]
+  obtain ⟨hCopyInput, hCopyBlank⟩ :=
+    copyBitstring_halted_input_layout scan4.inputTape scan4.outputTape copied copyTime copyRun copyHalt
+  refine ⟨finish, t1 + t2 + t3 + t4 + copyTime + 1, ?_,
+    RunsFor.succ (toScan5.trans hCopy) last, rfl, hCopyBlank, ?_, ?_⟩
+  · have storage1 := GuardedCompiler.sourceStorage_le_of_run toScan2
+    change scan1.inputTape.cells + scan1.outputTape.cells ≤ input.cells + output.cells + (t1) at storage1
+    have storage2 := GuardedCompiler.sourceStorage_le_of_run toScan3
+    change scan2.inputTape.cells + scan2.outputTape.cells ≤ input.cells + output.cells + (t1 + t2) at storage2
+    have storage3 := GuardedCompiler.sourceStorage_le_of_run toScan4
+    change scan3.inputTape.cells + scan3.outputTape.cells ≤ input.cells + output.cells + (t1 + t2 + t3) at storage3
+    have storage4 := GuardedCompiler.sourceStorage_le_of_run toScan5
+    change scan4.inputTape.cells + scan4.outputTape.cells ≤ input.cells + output.cells + (t1 + t2 + t3 + t4) at storage4
+    omega
+  · let advance := fun t : Tape =>
+      (Tape.moveRight^[((t.current :: t.right).takeWhile Option.isSome).length + 1]) t
+    have input1 := (GuardedCompiler.seekScratchInput_halted_input_layout input output
+      scan1 t1 run1 halt1).1
+    have input2 := (GuardedCompiler.seekScratchInput_halted_input_layout scan1.inputTape scan1.outputTape
+      scan2 t2 run2 halt2).1
+    have input3 := (GuardedCompiler.seekScratchInput_halted_input_layout scan2.inputTape scan2.outputTape
+      scan3 t3 run3 halt3).1
+    have input4 := (GuardedCompiler.seekScratchInput_halted_input_layout scan3.inputTape scan3.outputTape
+      scan4 t4 run4 halt4).1
+    have hNext : copied.inputTape.moveRight = advance scan4.inputTape := by
+      rw [hCopyInput]
+      dsimp only [advance]
+      rw [Function.iterate_succ_apply']
+    change copied.inputTape.moveRight = advance (advance (advance (advance (advance input))))
+    rw [hNext, input4, input3, input2, input1]
+  · intro before blanks hOutput
+    have hEntry := output4.trans (output3.trans (output2.trans (output1.trans hOutput)))
+    obtain ⟨fresh, freshTime, after, remaining, _hFreshTime, freshRun, freshHalt, freshOutput⟩ :=
+      copyBitstring_terminates_with_output_layout scan4.inputTape before blanks
+    rw [hEntry] at copyRun
+    have hSame := copyRun.halted_finish_eq_of_no_randomBit freshRun copyHalt freshHalt copyBitstring_no_randomBit
+    refine ⟨after, remaining, ?_⟩
+    change copied.outputTape = _
+    rw [hSame]
+    exact freshOutput
+
+theorem appendStoredGuessProduct_terminates_from_anyTape (input output : Tape) :
+    ∃ finish used, used ≤ 1000000 * (input.cells + output.cells) + 1000000 ∧
+      RunsFor appendStoredGuessProduct
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true := by
+  obtain ⟨finish, used, hBound, run, hHalted, _hBlank, _hInput, _hLayout⟩ :=
+    appendStoredGuessProduct_terminates_core input output
+  exact ⟨finish, used, hBound, run, hHalted⟩
+
+/-- The native scans leave the other tape unchanged, and copying the actual
+returned product retains its fresh output frontier. The retained blocks need
+not satisfy a cryptographic parsing predicate for this tape-layout fact. -/
+theorem appendStoredGuessProduct_terminates_with_output_layout (input : Tape)
+    (before : List (Option Bool)) (blanks : Nat) :
+    ∃ finish used after remaining,
+      used ≤ 1000000 * (input.cells +
+        ({ left := before, right := List.replicate blanks none } : Tape).cells) + 1000000 ∧
+      RunsFor appendStoredGuessProduct
+        ({ inputTape := input, outputTape := { left := before, right := List.replicate blanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧
+      finish.outputTape = { left := after, right := List.replicate remaining none } := by
+  obtain ⟨finish, used, hBound, run, hHalted, _hBlank, _hInput, hLayout⟩ :=
+    appendStoredGuessProduct_terminates_core input { left := before, right := List.replicate blanks none }
+  obtain ⟨after, remaining, hOutput⟩ := hLayout before blanks rfl
+  exact ⟨finish, used, after, remaining, hBound, run, hHalted, hOutput⟩
+
+/-- Four native scans followed by copying stop on the fifth block's first
+blank. One further mathematical head move identifies precisely the tape
+position returned by five native scans. The extra move is a postcondition,
+not an instruction silently added to this copy routine. -/
+theorem appendStoredGuessProduct_terminates_with_input_layout (input output : Tape) :
+    let advance := fun t : Tape =>
+      (Tape.moveRight^[((t.current :: t.right).takeWhile Option.isSome).length + 1]) t
+    ∃ finish used, used ≤ 1000000 * (input.cells + output.cells) + 1000000 ∧
+      RunsFor appendStoredGuessProduct
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true ∧ finish.inputTape.current = none ∧
+      finish.inputTape.moveRight = advance (advance (advance (advance (advance input)))) := by
+  obtain ⟨finish, used, hBound, run, hHalted, hBlank, hInput, _hLayout⟩ :=
+    appendStoredGuessProduct_terminates_core input output
+  exact ⟨finish, used, hBound, run, hHalted, hBlank, hInput⟩
+
+/-- From a suffix of the five retained bit blocks, the final product copy
+leaves both physical heads at fresh blank frontiers. The source tape is the
+same tape observed by the five-scan certificate, one cell before its return.
+The blocks may contain malformed frames or raw replies; validity is not a
+premise. Fresh output is preserved by actual one-bit copying. -/
+private theorem appendStoredGuessProduct_frontier_of_scan
+    (input : Tape) (beforeOutput : List (Option Bool)) (outputBlanks : Nat)
+    (frontier : Configuration) (frontierTime : Nat) (afterInput : List (Option Bool)) (remaining : Nat)
+    (frontierRun : RunsFor seekGuessInputScratch
+      ({ inputTape := input, outputTape := { left := beforeOutput, right := List.replicate outputBlanks none } } : Configuration)
+      frontier frontierTime)
+    (frontierHalt : frontier.halted = true)
+    (frontierInput : frontier.inputTape =
+      { left := none :: afterInput, right := List.replicate remaining none }) :
+    ∃ finish used afterInput inputRemaining afterOutput outputRemaining,
+      used ≤ 1000000 * (input.cells +
+        ({ left := beforeOutput, right := List.replicate outputBlanks none } : Tape).cells) + 1000000 ∧
+      RunsFor appendStoredGuessProduct
+        ({ inputTape := input, outputTape := { left := beforeOutput, right := List.replicate outputBlanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧
+      finish.inputTape = { left := afterInput, right := List.replicate inputRemaining none } ∧
+      finish.outputTape = { left := afterOutput, right := List.replicate outputRemaining none } := by
+  let output : Tape := { left := beforeOutput, right := List.replicate outputBlanks none }
+  obtain ⟨finish, used, hBound, run, hHalted, hBlank, hInput, hLayout⟩ :=
+    appendStoredGuessProduct_terminates_core input output
+  obtain ⟨afterOutput, outputRemaining, hOutput⟩ := hLayout beforeOutput outputBlanks rfl
+  obtain ⟨scanned, scanTime, _scanBound, scanRun, scanHalt, _scanOutput, scanInput⟩ :=
+    seekGuessInputScratch_terminates_with_input_layout input output
+  have hScanned := scanRun.halted_finish_eq_of_no_randomBit frontierRun
+    scanHalt frontierHalt seekGuessInputScratch_no_randomBit
+  have hNext : finish.inputTape.moveRight =
+      { left := none :: afterInput, right := List.replicate remaining none } := by
+    rw [hInput, ← scanInput, hScanned, frontierInput]
+  have hRightBlank : finish.inputTape.right = List.replicate finish.inputTape.right.length none := by
+    cases hTape : finish.inputTape with
+    | mk left current right =>
+        cases right with
+        | nil => rfl
+        | cons cell rest =>
+            simp only [hTape, Tape.moveRight, Tape.mk.injEq] at hNext
+            rcases hNext with ⟨_hLeft, hCell, hRest⟩
+            simp only [hCell, hRest, List.length_cons, List.length_replicate, List.replicate_succ]
+  refine ⟨finish, used, finish.inputTape.left, finish.inputTape.right.length,
+    afterOutput, outputRemaining, hBound, run, hHalted, ?_, hOutput⟩
+  cases hTape : finish.inputTape with
+  | mk left current right =>
+      have hCurrent : current = none := by simpa only [hTape] using hBlank
+      have hRight : right = List.replicate right.length none := by simpa only [hTape] using hRightBlank
+      change ({ left := left, current := current, right := right } : Tape) = _
+      rw [hCurrent]
+      exact congrArg (fun remaining : List (Option Bool) => ({ left := left, right := remaining } : Tape)) hRight
+
+/-- A suffix of five retained blocks under a bit head supplies the scratch
+position used by the product copy. Neither malformed fields nor an arbitrary
+saved output prefix change the fresh return frontiers. -/
+theorem appendStoredGuessProduct_terminates_with_suffix_frontier
+    (input : Tape) (beforeOutput : List (Option Bool)) (outputBlanks : Nat)
+    (first second third fourth fifth : List Bool) (padding count : Nat) (bit : Bool)
+    (hCurrent : input.current = some bit)
+    (hRight : input.right =
+      (first.map some ++ none :: second.map some ++ none :: third.map some ++
+        none :: fourth.map some ++ none :: fifth.map some ++ none ::
+          List.replicate padding none).drop count) :
+    ∃ finish used afterInput inputRemaining afterOutput outputRemaining,
+      used ≤ 1000000 * (input.cells +
+        ({ left := beforeOutput, right := List.replicate outputBlanks none } : Tape).cells) + 1000000 ∧
+      RunsFor appendStoredGuessProduct
+        ({ inputTape := input, outputTape := { left := beforeOutput, right := List.replicate outputBlanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧
+      finish.inputTape = { left := afterInput, right := List.replicate inputRemaining none } ∧
+      finish.outputTape = { left := afterOutput, right := List.replicate outputRemaining none } := by
+  obtain ⟨frontier, frontierTime, afterInput, remaining, _hBound,
+    frontierRun, frontierHalt, _hOutput, hInput⟩ :=
+    seekGuessInputScratch_terminates_with_separated_frontier input
+      { left := beforeOutput, right := List.replicate outputBlanks none }
+      first second third fourth fifth padding count bit hCurrent hRight
+  exact appendStoredGuessProduct_frontier_of_scan input beforeOutput outputBlanks
+    frontier frontierTime afterInput remaining frontierRun frontierHalt hInput
+
+/-- The blank-head case uses the leading blank and four remaining retained
+blocks. The copy still returns fresh input and output tapes, including when
+the head denotes an empty or truncated last field of an earlier block. -/
+theorem appendStoredGuessProduct_terminates_with_suffix_frontier_of_blank
+    (input : Tape) (beforeOutput : List (Option Bool)) (outputBlanks : Nat)
+    (first second third fourth : List Bool) (padding count : Nat)
+    (hCurrent : input.current = none)
+    (hRight : input.right =
+      (first.map some ++ none :: second.map some ++ none :: third.map some ++
+        none :: fourth.map some ++ none :: List.replicate padding none).drop count) :
+    ∃ finish used afterInput inputRemaining afterOutput outputRemaining,
+      used ≤ 1000000 * (input.cells +
+        ({ left := beforeOutput, right := List.replicate outputBlanks none } : Tape).cells) + 1000000 ∧
+      RunsFor appendStoredGuessProduct
+        ({ inputTape := input, outputTape := { left := beforeOutput, right := List.replicate outputBlanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧
+      finish.inputTape = { left := afterInput, right := List.replicate inputRemaining none } ∧
+      finish.outputTape = { left := afterOutput, right := List.replicate outputRemaining none } := by
+  obtain ⟨frontier, frontierTime, afterInput, remaining, _hBound,
+    frontierRun, frontierHalt, _hOutput, hInput⟩ :=
+    seekGuessInputScratch_terminates_with_separated_frontier_of_blank input
+      { left := beforeOutput, right := List.replicate outputBlanks none }
+      first second third fourth padding count hCurrent hRight
+  exact appendStoredGuessProduct_frontier_of_scan input beforeOutput outputBlanks
+    frontier frontierTime afterInput remaining frontierRun frontierHalt hInput
+
+theorem appendStoredGuessProduct_haltsFrom_anyTape (input output : Tape) (finish : Configuration)
+    (trace : PaddedRunsFor appendStoredGuessProduct
+      ({ inputTape := input, outputTape := output } : Configuration) finish
+      (1000000 * (input.cells + output.cells) + 1000000)) : finish.halted = true := by
+  obtain ⟨target, used, hBound, run, hHalted⟩ := appendStoredGuessProduct_terminates_from_anyTape input output
+  exact run.haltsFrom_of_no_randomBit hHalted appendStoredGuessProduct_no_randomBit hBound finish trace
+
+/-- Full-stream suffix form of the product-copy frontier. It accepts either
+a bit or a blank current cell, and also the virtual blank after all retained
+cells have been consumed. The exact five-scan and native-copy positions
+identify the same fresh input and output frontiers. -/
+theorem appendStoredGuessProduct_terminates_with_stream_frontier
+    (input : Tape) (beforeOutput : List (Option Bool)) (outputBlanks : Nat)
+    (first second third fourth fifth : List Bool) (padding count : Nat)
+    (hStream : input.current :: input.right =
+      let remaining :=
+        (first.map some ++ none :: second.map some ++ none :: third.map some ++
+          none :: fourth.map some ++ none :: fifth.map some ++ none ::
+            List.replicate padding none).drop count
+      if remaining = [] then [none] else remaining) :
+    ∃ finish used afterInput inputRemaining afterOutput outputRemaining,
+      used ≤ 1000000 * (input.cells +
+        ({ left := beforeOutput, right := List.replicate outputBlanks none } : Tape).cells) + 1000000 ∧
+      RunsFor appendStoredGuessProduct
+        ({ inputTape := input, outputTape := { left := beforeOutput, right := List.replicate outputBlanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧
+      finish.inputTape = { left := afterInput, right := List.replicate inputRemaining none } ∧
+      finish.outputTape = { left := afterOutput, right := List.replicate outputRemaining none } := by
+  obtain ⟨frontier, frontierTime, afterInput, remaining, _hBound,
+    frontierRun, frontierHalt, _hOutput, hInput⟩ :=
+    seekGuessInputScratch_terminates_with_stream_frontier input
+      { left := beforeOutput, right := List.replicate outputBlanks none }
+      first second third fourth fifth padding count hStream
+  exact appendStoredGuessProduct_frontier_of_scan input beforeOutput outputBlanks
+    frontier frontierTime afterInput remaining frontierRun frontierHalt hInput
 
 end Machine

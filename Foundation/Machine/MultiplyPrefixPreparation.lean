@@ -1,5 +1,6 @@
 import Foundation.Machine.SelectedInputRestoration
 import Foundation.Machine.ContextualPrefix
+import Foundation.Machine.StoredInputScratch
 
 namespace Machine
 
@@ -140,21 +141,29 @@ theorem selectedMessage_multiplyPrefix_layout (before beforeOutput : List (Optio
 a canonical choose response. The caller supplies only a fresh output
 frontier. Native restoration may reach an unintended malformed block, but
 the contextual parser still stops and produces a fresh request frontier. -/
-theorem prepareMultiplyPrefix_terminates_with_output_layout (input : Tape)
+theorem prepareMultiplyPrefix_terminates_with_input_output_layout (input : Tape)
     (savedOutput : List (Option Bool)) (blanks : Nat) :
-    ∃ finish used after remaining,
+    ∃ (finish : Configuration) (used : Nat) (after : List (Option Bool))
+      (remaining : Nat) (first second third : List Bool),
       used ≤ 200000 * (input.cells +
         ({ left := savedOutput, right := List.replicate blanks none } : Tape).cells) + 200000 ∧
       RunsFor prepareMultiplyPrefix
         ({ inputTape := input, outputTape := { left := savedOutput, right := List.replicate blanks none } } : Configuration)
         finish used ∧ finish.halted = true ∧
-      finish.outputTape = { left := after, right := List.replicate remaining none } := by
+      finish.outputTape = { left := after, right := List.replicate remaining none } ∧
+      finish.inputTape.current = some true ∧
+      first.length + second.length + third.length ≤ input.cells +
+        ({ left := savedOutput, right := List.replicate blanks none } : Tape).cells + used ∧
+      ∃ count, finish.inputTape.right =
+        (first.map some ++ none :: second.map some ++ none :: third.map some ++
+          input.current :: input.right).tail.drop count := by
   let output : Tape := { left := savedOutput, right := List.replicate blanks none }
-  obtain ⟨restored, restoreTime, hRestoreTime, restoreRun, restoreHalt, restoreOutput⟩ :=
-    restoreStoredInput_terminates_from_anyTape input output
+  obtain ⟨restored, restoreTime, first, second, third, _restoreBefore,
+    hRestoreTime, restoreRun, restoreHalt, restoreOutput, restoreInput⟩ :=
+    restoreStoredInput_terminates_with_block_layout input output
   obtain ⟨copied, copyTime, _savedInput, after, remaining, hCopyTime, copyRun,
-    copyHalt, _hInput, _hLeft, copyOutput⟩ :=
-    preparePublicPrefixContext_terminates_with_layout restored.inputTape
+    copyHalt, hInput, _hLeft, copyOutput, hSuffix⟩ :=
+    preparePublicPrefixContext_terminates_with_suffix_layout restored.inputTape
       (none :: savedOutput) (blanks - 1)
   have hAdvance : output.moveRight =
       { left := none :: savedOutput, right := List.replicate (blanks - 1) none } := by
@@ -186,15 +195,201 @@ theorem prepareMultiplyPrefix_terminates_with_output_layout (input : Tape)
       preparePublicPrefixContext, rewindBitstring, skipUnary, skipFrame, savePublicPrefix,
       copyBitstring, Program.asSubroutine, Instruction.asSubroutine,
       Configuration.resumeAt, finish, Instruction.next]
-  refine ⟨finish, restoreTime + 1 + copyTime + 1, after, remaining, ?_,
-    RunsFor.succ ((RunsFor.succ hRestore hMove).trans hCopy) hStop, rfl, copyOutput⟩
-  have hStorage := GuardedCompiler.sourceStorage_le_of_run restoreRun
-  have hMoved := Tape.cells_moveRight_le output
-  rw [← hAdvance] at hCopyTime
-  change restored.inputTape.cells + restored.outputTape.cells ≤ input.cells + output.cells + restoreTime at hStorage
-  change copyTime ≤ 1000 * (restored.inputTape.cells + output.moveRight.cells) + 1000 at hCopyTime
-  rw [restoreOutput] at hStorage
-  change _ ≤ 200000 * (input.cells + output.cells) + 200000
-  omega
+  have hRestoredRight : restored.inputTape.right =
+      (first.map some ++ none :: second.map some ++ none :: third.map some ++
+        input.current :: input.right).tail := by
+    rw [restoreInput]
+    cases first <;> simp [Tape.moveRight, List.cons_append]
+  have hRestoredLength : first.length + second.length + third.length ≤ restored.inputTape.cells := by
+    rw [restoreInput]
+    cases first <;> simp [Tape.cells, Tape.moveRight, List.cons_append] <;> omega
+  refine ⟨finish, restoreTime + 1 + copyTime + 1, after, remaining, first, second, third, ?_,
+    RunsFor.succ ((RunsFor.succ hRestore hMove).trans hCopy) hStop, rfl, copyOutput, hInput, ?_, ?_⟩
+  · have hStorage := GuardedCompiler.sourceStorage_le_of_run restoreRun
+    have hMoved := Tape.cells_moveRight_le output
+    rw [← hAdvance] at hCopyTime
+    change restored.inputTape.cells + restored.outputTape.cells ≤ input.cells + output.cells + restoreTime at hStorage
+    change copyTime ≤ 1000 * (restored.inputTape.cells + output.moveRight.cells) + 1000 at hCopyTime
+    rw [restoreOutput] at hStorage
+    change _ ≤ 200000 * (input.cells + output.cells) + 200000
+    omega
+  · have hStorage := GuardedCompiler.sourceStorage_le_of_run restoreRun
+    change restored.inputTape.cells + restored.outputTape.cells ≤ input.cells + output.cells + restoreTime at hStorage
+    change _ ≤ input.cells + output.cells + (restoreTime + 1 + copyTime + 1)
+    omega
+  · obtain ⟨count, hRight⟩ := hSuffix
+    exact ⟨count, hRight.trans (congrArg (fun cells => cells.drop count) hRestoredRight)⟩
+
+/-- The public fresh-output statement remains available without exposing
+its retained raw input blocks. -/
+theorem prepareMultiplyPrefix_terminates_with_output_layout (input : Tape)
+    (savedOutput : List (Option Bool)) (blanks : Nat) :
+    ∃ finish used after remaining,
+      used ≤ 200000 * (input.cells +
+        ({ left := savedOutput, right := List.replicate blanks none } : Tape).cells) + 200000 ∧
+      RunsFor prepareMultiplyPrefix
+        ({ inputTape := input, outputTape := { left := savedOutput, right := List.replicate blanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧
+      finish.outputTape = { left := after, right := List.replicate remaining none } := by
+  obtain ⟨finish, used, after, remaining, _first, _second, _third,
+    hTime, run, hHalt, hOutput, _hCurrent, _hLength, _hSuffix⟩ :=
+    prepareMultiplyPrefix_terminates_with_input_output_layout input savedOutput blanks
+  exact ⟨finish, used, after, remaining, hTime, run, hHalt, hOutput⟩
+
+
+private theorem cells_append_blank_getD (cells : List (Option Bool)) (count i : Nat) :
+    (cells ++ none :: List.replicate count none).getD i none = cells.getD i none := by
+  induction cells generalizing i with
+  | nil => cases i <;> simp
+  | cons cell rest ih => cases i with
+    | zero => rfl
+    | succ i => exact ih i
+
+private theorem cells_drop_getD (cells : List (Option Bool)) (count i : Nat) :
+    (cells.drop count).getD i none = cells.getD (count + i) none := by
+  induction count generalizing cells with
+  | zero => simp
+  | succ count ih => cases cells with
+    | nil => simp
+    | cons cell rest => simpa only [List.drop_succ_cons, Nat.succ_add, List.getD_cons_succ] using ih rest
+
+private theorem three_blocks_drop_layout (first second third : List Bool) (blanks count : Nat) :
+    ∃ (a b c : List Bool), a.length + b.length + c.length ≤ first.length + second.length + third.length ∧
+      ∀ i, ((first.map some ++ none :: second.map some ++ none :: third.map some ++
+        none :: List.replicate blanks none).drop count).getD i none =
+        (a.map some ++ none :: b.map some ++ none :: c.map some ++ [none]).getD i none := by
+  induction count generalizing first second third with
+  | zero =>
+      refine ⟨first, second, third, Nat.le_refl _, ?_⟩
+      intro i
+      rw [List.drop_zero]
+      have hLeft := cells_append_blank_getD (first.map some ++ none :: second.map some ++ none :: third.map some) blanks i
+      have hRight := cells_append_blank_getD (first.map some ++ none :: second.map some ++ none :: third.map some) 0 i
+      simpa only [List.append_assoc, List.cons_append, List.replicate_zero] using hLeft.trans hRight.symm
+  | succ count ih =>
+      cases first with
+      | cons bit rest =>
+          obtain ⟨a, b, c, hLength, hCells⟩ := ih rest second third
+          refine ⟨a, b, c, ?_, ?_⟩
+          · simp only [List.length_cons]
+            omega
+          · intro i
+            simpa only [List.map_cons, List.cons_append, List.drop_succ_cons] using hCells i
+      | nil =>
+          obtain ⟨a, b, c, hLength, hCells⟩ := ih second third []
+          refine ⟨a, b, c, by simpa only [List.length_nil, Nat.zero_add, Nat.add_zero] using hLength, ?_⟩
+          intro i
+          simp only [List.map_nil, List.nil_append, List.cons_append, List.drop_succ_cons]
+          apply Eq.trans _ (hCells i)
+          rw [cells_drop_getD, cells_drop_getD]
+          have hLeft := cells_append_blank_getD (second.map some ++ none :: third.map some) blanks (count + i)
+          have hRight := cells_append_blank_getD (second.map some ++ none :: third.map some) (blanks + 1) (count + i)
+          simpa only [List.map_nil, List.nil_append, List.append_assoc, List.cons_append,
+            List.replicate_succ] using hLeft.trans hRight.symm
+
+private theorem left_cells_split (cells : List (Option Bool)) :
+    ∃ (bits : List Bool) (before : List (Option Bool)),
+      cells ++ [none] = bits.map some ++ none :: before := by
+  induction cells with
+  | nil => exact ⟨[], [], rfl⟩
+  | cons cell rest ih =>
+      cases cell with
+      | none => exact ⟨[], rest ++ [none], rfl⟩
+      | some bit =>
+          obtain ⟨bits, before, h⟩ := ih
+          exact ⟨bit :: bits, before, by simpa only [List.cons_append, List.map_cons] using congrArg (List.cons (some bit)) h⟩
+
+
+
+/-- An arbitrary finite raw response ahead of the input head leaves at most
+three raw blocks after restoration and contextual prefix parsing. The
+comparison fixture adds only redundant outer blanks, never machine writes;
+its retained prefix and its size come from the actual charged trace. -/
+theorem prepareMultiplyPrefix_terminates_with_retained_frontiers
+    (input : Tape) (savedOutput : List (Option Bool)) (outputBlanks : Nat)
+    (raw : List Bool) (inputBlanks : Nat)
+    (hForward : input.current :: input.right = raw.map some ++ none :: List.replicate inputBlanks none) :
+    ∃ (finish : Configuration) (used : Nat) (before : List (Option Bool))
+      (originalPrefix original reply canonical : List Bool)
+      (after : List (Option Bool)) (remaining : Nat),
+      used ≤ 200000 * (input.cells +
+        ({ left := savedOutput, right := List.replicate outputBlanks none } : Tape).cells) + 200000 ∧
+      RunsFor prepareMultiplyPrefix
+        ({ inputTape := input, outputTape := { left := savedOutput, right := List.replicate outputBlanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧
+      (finish.resumeAt 0).Equivalent
+        (seekStoredInputScratchStart
+          (originalPrefix.reverse.map some ++ none :: before) original reply canonical 0
+          { left := after, right := List.replicate remaining none }) ∧
+      GuardedCompiler.sourceStorage
+        (seekStoredInputScratchStart
+          (originalPrefix.reverse.map some ++ none :: before) original reply canonical 0
+          { left := after, right := List.replicate remaining none }) ≤
+        10000000 * (input.cells +
+          ({ left := savedOutput, right := List.replicate outputBlanks none } : Tape).cells + 1) := by
+  let output : Tape := { left := savedOutput, right := List.replicate outputBlanks none }
+  obtain ⟨finish, used, after, remaining, first, second, third,
+    hTime, run, hHalt, hOutput, hCurrent, hLength, count, hRight⟩ :=
+    prepareMultiplyPrefix_terminates_with_input_output_layout input savedOutput outputBlanks
+  have hRawLength : raw.length ≤ input.cells := by
+    have h := congrArg List.length hForward
+    simp only [List.length_cons, List.length_append, List.length_map, List.length_replicate] at h
+    dsimp only [Tape.cells]
+    omega
+  have hJoined : finish.inputTape.right =
+      (first.map some ++ none :: second.map some ++ none :: (third ++ raw).map some ++
+        none :: List.replicate inputBlanks none).drop (count + 1) := by
+    rw [hRight, hForward]
+    cases first <;> simp [List.map_append, List.append_assoc, List.cons_append]
+  obtain ⟨a, b, c, hBlocks, hCells⟩ :=
+    three_blocks_drop_layout first second (third ++ raw) inputBlanks (count + 1)
+  obtain ⟨prefixBits, before, hLeft⟩ := left_cells_split finish.inputTape.left
+  have hLeftLength := congrArg List.length hLeft
+  simp only [List.length_append, List.length_cons, List.length_map, List.length_nil] at hLeftLength
+  let fixture := seekStoredInputScratchStart
+    (prefixBits.map some ++ none :: before) (true :: a) b c 0
+    { left := after, right := List.replicate remaining none }
+  have hFixture : fixture.inputTape = {
+      left := prefixBits.map some ++ none :: before, current := some true,
+      right := a.map some ++ none :: b.map some ++ none :: c.map some ++ [none] } := by
+    dsimp only [fixture, seekStoredInputScratchStart]
+    rw [seekBitstringNextStart_layout]
+    simp [Tape.moveRight, List.cons_append]
+  have hEquivalent : (finish.resumeAt 0).Equivalent fixture := by
+    refine ⟨rfl, rfl, ?_, ?_⟩
+    · change finish.inputTape.Equivalent fixture.inputTape
+      rw [hFixture]
+      refine ⟨hCurrent, ?_, ?_⟩
+      · intro i
+        have h := cells_append_blank_getD finish.inputTape.left 0 i
+        simpa only [List.replicate_zero, hLeft] using h.symm
+      · intro i
+        rw [hJoined]
+        exact hCells i
+    · change finish.outputTape.Equivalent { left := after, right := List.replicate remaining none }
+      rw [hOutput]
+      exact Tape.Equivalent.refl _
+  have hStorage := GuardedCompiler.sourceStorage_le_of_run run
+  change finish.inputTape.cells + finish.outputTape.cells ≤ input.cells + output.cells + used at hStorage
+  have hFixtureStorage : GuardedCompiler.sourceStorage fixture ≤
+      10000000 * (input.cells + output.cells + 1) := by
+    change used ≤ 200000 * (input.cells + output.cells) + 200000 at hTime
+    change first.length + second.length + third.length ≤ input.cells + output.cells + used at hLength
+    simp only [List.length_append] at hBlocks
+    rw [hOutput] at hStorage
+    dsimp only [GuardedCompiler.sourceStorage, Tape.cells] at hStorage
+    dsimp only [GuardedCompiler.sourceStorage]
+    rw [hFixture]
+    change (prefixBits.map some ++ none :: before).length + 1 +
+      (a.map some ++ none :: b.map some ++ none :: c.map some ++ [none]).length +
+      ({ left := after, right := List.replicate remaining none } : Tape).cells ≤ _
+    simp only [List.length_append, List.length_cons, List.length_map, List.length_nil, Tape.cells, List.length_replicate]
+    dsimp only [output] at hTime hLength hStorage ⊢
+    simp only [Tape.cells, List.length_replicate] at hTime hLength hRawLength hStorage ⊢
+    omega
+  refine ⟨finish, used, before, prefixBits.reverse, true :: a, b, c, after, remaining,
+    hTime, run, hHalt, ?_, ?_⟩
+  · simpa only [List.reverse_reverse] using hEquivalent
+  · simpa only [List.reverse_reverse] using hFixtureStorage
 
 end Machine

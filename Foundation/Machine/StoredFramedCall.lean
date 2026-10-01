@@ -149,6 +149,199 @@ theorem storedFramedCallCompile_haltsFrom (source : Program)
   obtain ⟨c, _hc, hEq⟩ := hMem
   exact hEq.symm
 
+/-- A storage-based envelope for a native call prepared from arbitrary
+retained fields. Preparation and result framing are charged in addition
+to every possible branch of the called program. -/
+def storedFramedCallRetainedBudget (coefficient degree storage : Nat) : Nat :=
+  10000000 * (storage + 1) * (coefficient * (storage + 1)^degree + 1)^2
+
+theorem storedFramedCallRetainedBudget_polynomiallyBounded (coefficient degree : Nat) :
+    PolynomiallyBounded (storedFramedCallRetainedBudget coefficient degree) :=
+  ((PolynomiallyBounded.const 10000000).mul
+    (PolynomiallyBounded.id.add (PolynomiallyBounded.const 1))).mul
+      ((((PolynomiallyBounded.const coefficient).mul
+        ((PolynomiallyBounded.id.add (PolynomiallyBounded.const 1)).pow degree)).add
+          (PolynomiallyBounded.const 1)).pow 2)
+
+theorem storedFramedCallRetainedBudget_monotone (coefficient degree : Nat) :
+    Monotone (storedFramedCallRetainedBudget coefficient degree) := by
+  intro first last h
+  have hBase := Nat.add_le_add_right h 1
+  have hTime := Nat.mul_le_mul_left coefficient (Nat.pow_le_pow_left hBase degree)
+  exact Nat.mul_le_mul (Nat.mul_le_mul_left 10000000 hBase)
+    (Nat.pow_le_pow_left (Nat.add_le_add_right hTime 1) 2)
+
+private theorem storedFramedCallRetainedBudget_covers (coefficient degree storage used : Nat)
+    (request : List Bool) (hUsed : used ≤ 1000000 * storage + 1000000)
+    (hRequest : request.length ≤ storage) :
+    used + (returnedFrameTraceBudget (fun m => coefficient * (m + 1)^degree) request.length + 1) ≤
+      storedFramedCallRetainedBudget coefficient degree storage := by
+  let q := fun m => coefficient * (m + 1)^degree
+  have hSourceTime : q request.length ≤ coefficient * (storage + 1)^degree :=
+    Nat.mul_le_mul_left coefficient (Nat.pow_le_pow_left (Nat.add_le_add_right hRequest 1) degree)
+  have hTime := returnedFrameTraceBudget_bound q request.length
+  have hTimeBound : returnedFrameTraceBudget q request.length ≤
+      200 * (storage + 1) * (coefficient * (storage + 1)^degree + 1)^2 := by
+    apply hTime.trans
+    exact Nat.mul_le_mul (Nat.mul_le_mul_left 200 (by omega))
+      (Nat.pow_le_pow_left (Nat.add_le_add_right hSourceTime 1) 2)
+  have hPositive : 1 ≤ (coefficient * (storage + 1)^degree + 1)^2 := Nat.one_le_pow _ _ (by omega)
+  change used + (returnedFrameTraceBudget q request.length + 1) ≤ _
+  dsimp only [storedFramedCallRetainedBudget]
+  nlinarith
+
+private theorem storedFramedCallCompile_evalObservation_of_preparation {α : Type*}
+    (source : Program) (start prepared : Configuration) (used : Nat)
+    (request : List Bool) (beforeInput savedInput : List (Option Bool))
+    (hPc : start.pc = 0) (hActive : start.halted = false)
+    (run : RunsFor prepareStoredCall start prepared used) (hHalted : prepared.halted = true)
+    (hLayout : (prepared.resumeAt 0).Equivalent
+      (packInputStart (none :: beforeInput) (none :: savedInput) request).swapTapes)
+    (q : Nat → Nat) (hSource : HaltsWithin source request (q request.length))
+    (observe : Configuration → α)
+    (hObserve : ∀ c d, c.Equivalent d → observe c = observe d) :
+    (evalConfigWithin (storedFramedCallCompile source) start
+      (used + (returnedFrameTraceBudget q request.length + 1))).map observe =
+      (evalConfigWithin source (preparedSource request) (q request.length)).map
+        (fun c => observe { returnedFrameResult source request (none :: beforeInput) savedInput c
+          with pc := 31 + (returnedFrameCompile source).length + 1, halted := true }) := by
+  have hPrepare := run.evalConfigWithin_eq_pure_of_no_randomBit prepareStoredCall_no_randomBit
+  have hFirst := run.haltsFrom_of_no_randomBit hHalted prepareStoredCall_no_randomBit (Nat.le_refl used)
+  have hCall := returnedFrameCompile_haltsFrom source request (none :: beforeInput) savedInput q hSource
+  have hSecond (c : Configuration) (hc : c ∈ (evalConfigWithin prepareStoredCall start used).support)
+      (d : Configuration) (trace : PaddedRunsFor (returnedFrameCompile source) (c.resumeAt 0) d
+        (returnedFrameTraceBudget q request.length)) : d.halted = true := by
+    rw [hPrepare, PMF.mem_support_pure_iff] at hc
+    subst c
+    have hMem : d.halted ∈ ((evalConfigWithin (returnedFrameCompile source)
+        (prepared.resumeAt 0) (returnedFrameTraceBudget q request.length)).map Configuration.halted).support := by
+      rw [PMF.mem_support_map_iff]
+      exact ⟨d, (mem_support_evalConfigWithin_iff _ _ _ _).mpr trace, rfl⟩
+    rw [evalConfigWithin_map_eq_of_equivalent (returnedFrameCompile source) _ _ hLayout
+      _ Configuration.halted (fun _ _ h => h.2.1), PMF.mem_support_map_iff] at hMem
+    obtain ⟨target, hTarget, hEq⟩ := hMem
+    exact hEq.symm.trans (hCall target ((mem_support_evalConfigWithin_iff _ _ _ _).mp hTarget))
+  have hLaw := Program.evalConfigWithin_twoStages_configuration prepareStoredCall
+    (returnedFrameCompile source) start hPc hActive used (returnedFrameTraceBudget q request.length)
+    hFirst hSecond
+  change evalConfigWithin (storedFramedCallCompile source) start
+    (used + (returnedFrameTraceBudget q request.length + 1)) = _ at hLaw
+  rw [hLaw, hPrepare, PMF.pure_bind, PMF.map_comp]
+  simp only [Program.asSubroutine_length, show prepareStoredCall.length = 30 from rfl,
+    Function.comp_def]
+  rw [evalConfigWithin_map_eq_of_equivalent (returnedFrameCompile source) _ _ hLayout _
+    (fun c => observe { c with pc := 31 + (returnedFrameCompile source).length + 1, halted := true })
+    (fun c d h => hObserve _ _ ((h.withPc _).withHalted true))]
+  rw [returnedFrameCompile_eval source request (none :: beforeInput) savedInput q hSource, PMF.map_comp]
+  rfl
+
+/-- Malformed retained fields are allowed. Four native input scans reach
+fresh guarded storage, and the actual output rewind determines the called
+request. The called program must halt on every bitstring; no DDH validity
+or canonical-response premise is used. No tapes are reset between stages. -/
+theorem storedFramedCallCompile_haltsFrom_retained_suffix
+    (source : Program) (coefficient degree : Nat)
+    (hSource : ∀ request : List Bool,
+      HaltsWithin source request (coefficient * (request.length + 1)^degree))
+    (input : Tape) (savedOutput : List (Option Bool)) (outputBlanks : Nat)
+    (first second third fourth : List Bool) (inputBlanks moves : Nat)
+    (hCells : ∀ i, (input.current :: input.right).getD i none =
+      ((first.map some ++ none :: second.map some ++ none :: third.map some ++
+        none :: fourth.map some ++ none :: List.replicate inputBlanks none).drop moves).getD i none) :
+    let start : Configuration :=
+      { inputTape := input, outputTape := { left := savedOutput, right := List.replicate outputBlanks none } }
+    ∀ finish, PaddedRunsFor (storedFramedCallCompile source) start finish
+      (storedFramedCallRetainedBudget coefficient degree (sourceStorage start)) → finish.halted = true := by
+  dsimp only
+  let start : Configuration :=
+    { inputTape := input, outputTape := { left := savedOutput, right := List.replicate outputBlanks none } }
+  let storage := sourceStorage start
+  let q := fun m => coefficient * (m + 1)^degree
+  obtain ⟨prepared, used, request, beforeInput, savedInput, hUsed, run, hHalted,
+    hLength, _hCount, _hPrefix, hLayout⟩ := prepareStoredCall_terminates_with_call_layout_of_retained_suffix
+      input savedOutput outputBlanks first second third fourth inputBlanks moves hCells
+  have hRequest : request.length ≤ storage := by
+    simp only [storage, sourceStorage, start, Tape.cells] at *
+    omega
+  have hBound : used + (returnedFrameTraceBudget q request.length + 1) ≤
+      storedFramedCallRetainedBudget coefficient degree storage := by
+    change used ≤ 1000000 * storage + 1000000 at hUsed
+    exact storedFramedCallRetainedBudget_covers coefficient degree storage used request hUsed hRequest
+  have hLaw := storedFramedCallCompile_evalObservation_of_preparation source start prepared used
+    request beforeInput savedInput rfl rfl run hHalted hLayout q (hSource request)
+    Configuration.halted (fun _ _ h => h.2.1)
+  have hSmall (finish : Configuration) (trace : PaddedRunsFor (storedFramedCallCompile source) start finish
+      (used + (returnedFrameTraceBudget q request.length + 1))) : finish.halted = true := by
+    have hMem : finish.halted ∈ ((evalConfigWithin (storedFramedCallCompile source) start
+        (used + (returnedFrameTraceBudget q request.length + 1))).map Configuration.halted).support := by
+      rw [PMF.mem_support_map_iff]
+      exact ⟨finish, (mem_support_evalConfigWithin_iff _ _ _ _).mpr trace, rfl⟩
+    rw [hLaw, PMF.mem_support_map_iff] at hMem
+    obtain ⟨c, _hc, hEq⟩ := hMem
+    exact hEq.symm
+  intro finish trace
+  have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr trace
+  rw [evalConfigWithin_eq_of_le _ _ _ _ hBound hSmall] at hMem
+  exact hSmall finish ((mem_support_evalConfigWithin_iff _ _ _ _).mp hMem)
+
+/-- The actual native call exposes its request and retained caller prefixes
+even on a suffix of malformed fields. This state law supports subsequent
+native continuations. Prefix lengths are bounded by actual preparation
+storage; outer blank equivalence is used only for mathematical observation. -/
+theorem storedFramedCallCompile_evalObservation_of_retained_suffix {α : Type*}
+    (source : Program) (coefficient degree : Nat)
+    (hSource : ∀ request : List Bool,
+      HaltsWithin source request (coefficient * (request.length + 1)^degree))
+    (input : Tape) (savedOutput : List (Option Bool)) (outputBlanks : Nat)
+    (first second third fourth : List Bool) (inputBlanks moves : Nat)
+    (hCells : ∀ i, (input.current :: input.right).getD i none =
+      ((first.map some ++ none :: second.map some ++ none :: third.map some ++
+        none :: fourth.map some ++ none :: List.replicate inputBlanks none).drop moves).getD i none)
+    (observe : Configuration → α)
+    (hObserve : ∀ c d, c.Equivalent d → observe c = observe d) :
+    let start : Configuration :=
+      { inputTape := input, outputTape := { left := savedOutput, right := List.replicate outputBlanks none } }
+    ∃ (request : List Bool) (beforeInput savedInput : List (Option Bool)),
+      request.length ≤ savedOutput.length ∧ 3 ≤ savedInput.count none ∧
+      beforeInput.length + savedInput.length ≤ 1000001 * (sourceStorage start + 1) ∧
+      (evalConfigWithin (storedFramedCallCompile source) start
+        (storedFramedCallRetainedBudget coefficient degree (sourceStorage start))).map observe =
+        (evalConfigWithin source (preparedSource request) (coefficient * (request.length + 1)^degree)).map
+          (fun c => observe { returnedFrameResult source request (none :: beforeInput) savedInput c
+            with pc := 31 + (returnedFrameCompile source).length + 1, halted := true }) := by
+  dsimp only
+  let start : Configuration :=
+    { inputTape := input, outputTape := { left := savedOutput, right := List.replicate outputBlanks none } }
+  let storage := sourceStorage start
+  let q := fun m => coefficient * (m + 1)^degree
+  obtain ⟨prepared, used, request, beforeInput, savedInput, hUsed, run, hHalted,
+    hLength, hCount, hPrefix, hLayout⟩ := prepareStoredCall_terminates_with_call_layout_of_retained_suffix
+      input savedOutput outputBlanks first second third fourth inputBlanks moves hCells
+  have hRequest : request.length ≤ storage := by
+    simp only [storage, sourceStorage, start, Tape.cells] at *
+    omega
+  have hPrefixBound : beforeInput.length + savedInput.length ≤ 1000001 * (storage + 1) := by
+    change used ≤ 1000000 * storage + 1000000 at hUsed
+    change beforeInput.length + savedInput.length ≤ storage + used at hPrefix
+    omega
+  have hBound := storedFramedCallRetainedBudget_covers coefficient degree storage used request hUsed hRequest
+  have hHaltLaw := storedFramedCallCompile_evalObservation_of_preparation source start prepared used
+    request beforeInput savedInput rfl rfl run hHalted hLayout q (hSource request)
+    Configuration.halted (fun _ _ h => h.2.1)
+  have hSmall (finish : Configuration) (trace : PaddedRunsFor (storedFramedCallCompile source) start finish
+      (used + (returnedFrameTraceBudget q request.length + 1))) : finish.halted = true := by
+    have hMem : finish.halted ∈ ((evalConfigWithin (storedFramedCallCompile source) start
+        (used + (returnedFrameTraceBudget q request.length + 1))).map Configuration.halted).support := by
+      rw [PMF.mem_support_map_iff]
+      exact ⟨finish, (mem_support_evalConfigWithin_iff _ _ _ _).mpr trace, rfl⟩
+    rw [hHaltLaw, PMF.mem_support_map_iff] at hMem
+    obtain ⟨c, _hc, hEq⟩ := hMem
+    exact hEq.symm
+  refine ⟨request, beforeInput, savedInput, hLength, hCount, hPrefixBound, ?_⟩
+  rw [evalConfigWithin_eq_of_le _ _ _ _ hBound hSmall]
+  exact storedFramedCallCompile_evalObservation_of_preparation source start prepared used
+    request beforeInput savedInput rfl rfl run hHalted hLayout q (hSource request) observe hObserve
+
 /-- If the called program returns one canonical result, its frame really
 occupies these physical output cells after the whole charged invocation.
 Reading cells here is a mathematical observation, not a machine copy opcode.

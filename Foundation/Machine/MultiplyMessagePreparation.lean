@@ -151,4 +151,76 @@ theorem prepareMultiplyMessage_terminates_from_anyTape (input output : Tape) :
   change sought.inputTape.cells + sought.outputTape.cells ≤ input.cells + output.cells + seekTime at hStorage
   omega
 
+/-- Multiplication-message preparation scans the three actual retained raw
+blocks and appends its recovered selected block without changing them.
+The original and both replies may be malformed. The returned four blocks
+and fresh output frontier are obtained by the native trace, and remain
+available for operand restoration; no new input load or tape reset occurs. -/
+theorem prepareMultiplyMessage_terminates_with_retained_frontiers
+    (before savedOutput : List (Option Bool))
+    (original reply canonical : List Bool) (inputBlanks outputBlanks : Nat) :
+    let output : Tape := { left := savedOutput, right := List.replicate outputBlanks none }
+    let start := seekStoredInputScratchStart before original reply canonical inputBlanks output
+    ∃ finish used, ∃ (selected : List Bool), ∃ remainingInput afterOutput remainingOutput,
+      used ≤ 200000000 * GuardedCompiler.sourceStorage start + 200000000 ∧
+      RunsFor prepareMultiplyMessage start finish used ∧ finish.halted = true ∧
+      finish.inputTape = {
+        left := selected.reverse.map some ++ none :: canonical.reverse.map some ++
+          none :: reply.reverse.map some ++ none :: original.reverse.map some ++ before,
+        right := List.replicate remainingInput none } ∧
+      finish.outputTape = { left := afterOutput, right := List.replicate remainingOutput none } := by
+  dsimp only
+  let output : Tape := { left := savedOutput, right := List.replicate outputBlanks none }
+  let start := seekStoredInputScratchStart before original reply canonical inputBlanks output
+  let sought := seekStoredInputScratchFinish before original reply canonical inputBlanks output
+  let saved := canonical.reverse.map some ++ none :: reply.reverse.map some ++
+    none :: original.reverse.map some ++ before
+  obtain ⟨framed, frameTime, selected, remainingInput, afterOutput, remainingOutput,
+    hFrameTime, frameRun, frameHalt, frameInput, frameOutput⟩ :=
+    frameSavedMessage_terminates_with_retained_input saved savedOutput (inputBlanks - 1) outputBlanks
+  have hFrameEntry :
+      ({ inputTape := { left := none :: saved, right := List.replicate (inputBlanks - 1) none },
+         outputTape := { left := savedOutput, right := List.replicate outputBlanks none } } : Configuration) =
+      ({ inputTape := sought.inputTape, outputTape := sought.outputTape } : Configuration) := by
+    simp [sought, seekStoredInputScratchFinish, saved, output, List.append_assoc]
+  rw [hFrameEntry] at frameRun
+  have seekRun := seekStoredInputScratch_runs before original reply canonical inputBlanks output
+  have hSeek := seekRun.withSubroutine_halted_of_closed
+    [] seekStoredInputScratch (frameSavedMessage.asSubroutine 20 82 ++ [.halt]) 20
+    (by change 0 < 19; decide) rfl rfl seekStoredInputScratch_control_closed
+  change RunsFor prepareMultiplyMessage start (sought.resumeAt 20)
+    (seekStoredInputScratchSteps original reply canonical) at hSeek
+  have hFrame := frameRun.withSubroutine_halted_of_closed
+    (seekStoredInputScratch.asSubroutine 0 20) frameSavedMessage [.halt] 82
+    (by change 0 < 61; decide) rfl frameHalt frameSavedMessage_control_closed
+  change RunsFor prepareMultiplyMessage (sought.resumeAt 20) (framed.resumeAt 82) frameTime at hFrame
+  let finish : Configuration := { framed with pc := 82, halted := true }
+  have last : Step prepareMultiplyMessage (framed.resumeAt 82) finish := by
+    have code : prepareMultiplyMessage[82]? = some .halt := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, finish, Instruction.next]
+  refine ⟨finish, seekStoredInputScratchSteps original reply canonical + frameTime + 1,
+    selected, remainingInput, afterOutput, remainingOutput, ?_,
+    RunsFor.succ (hSeek.trans hFrame) last, rfl, ?_, frameOutput⟩
+  · have hSeekTime : seekStoredInputScratchSteps original reply canonical ≤
+        100 * GuardedCompiler.sourceStorage start + 100 := by
+      rw [seekStoredInputScratch_steps_eq]
+      cases original <;>
+        simp [start, seekStoredInputScratchStart, seekBitstringNextStart_layout, Tape.moveRight,
+          GuardedCompiler.sourceStorage, Tape.cells, List.length_append] <;> omega
+    have hStorage := GuardedCompiler.sourceStorage_le_of_run seekRun
+    change GuardedCompiler.sourceStorage sought ≤
+      GuardedCompiler.sourceStorage start + seekStoredInputScratchSteps original reply canonical at hStorage
+    have hFrameStorage :
+        ({ left := none :: saved, right := List.replicate (inputBlanks - 1) none } : Tape).cells +
+        ({ left := savedOutput, right := List.replicate outputBlanks none } : Tape).cells =
+        GuardedCompiler.sourceStorage sought := by
+      simp [GuardedCompiler.sourceStorage, sought, seekStoredInputScratchFinish, saved, output,
+        List.append_assoc]
+    rw [hFrameStorage] at hFrameTime
+    change seekStoredInputScratchSteps original reply canonical + frameTime + 1 ≤
+      200000000 * GuardedCompiler.sourceStorage start + 200000000
+    omega
+  · change framed.inputTape = _
+    simpa only [saved, List.append_assoc, List.cons_append] using frameInput
+
 end Machine

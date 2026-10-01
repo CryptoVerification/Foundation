@@ -93,4 +93,26 @@ example :
     source.bind (fun c => PMF.pure (true, [taggedGuessValue c.outputBits == bit]))) = _
   simpa only [PMF.map_bind, PMF.bind_map, PMF.pure_map, Function.comp_def] using h
 
+
+/-- The entire native pipeline terminates for every raw finite input, not
+just `demoInput`. All four embedded calls contain native random-bit code,
+and their malformed tagged replies need not be valid protocol encodings. -/
+example (input : List Bool) :
+    HaltsWithin (chooseChallengeGuessCompile randomTaggedGuess randomTaggedGuess
+      randomTaggedGuess randomTaggedGuess) input
+      (chooseChallengeAllInputBudget 4 0 4 0 4 0 4 0 input.length) :=
+  chooseChallengeGuessCompile_haltsWithin_anyInput _ _ _ _ 4 0 4 0 4 0 4 0
+    (fun request => by simpa using randomTaggedGuess_haltsWithin request)
+    (fun request => by simpa using randomTaggedGuess_haltsWithin request)
+    (fun request => by simpa using randomTaggedGuess_haltsWithin request)
+    (fun request => by simpa using randomTaggedGuess_haltsWithin request) input
+
+example : PolynomialTime (chooseChallengeGuessCompile randomTaggedGuess randomTaggedGuess
+    randomTaggedGuess randomTaggedGuess) :=
+  chooseChallengeGuessCompile_polynomialTime_of_monomials _ _ _ _ 4 0 4 0 4 0 4 0
+    (fun request => by simpa using randomTaggedGuess_haltsWithin request)
+    (fun request => by simpa using randomTaggedGuess_haltsWithin request)
+    (fun request => by simpa using randomTaggedGuess_haltsWithin request)
+    (fun request => by simpa using randomTaggedGuess_haltsWithin request)
+
 end Foundation.Examples.ChooseChallengeCompletion

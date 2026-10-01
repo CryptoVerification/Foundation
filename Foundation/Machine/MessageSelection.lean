@@ -303,4 +303,72 @@ theorem selectMessage_haltsFrom_anyTape (input output : Tape) (finish : Configur
   obtain ⟨bit, _hBit, rfl⟩ := hMem
   exact (hHalt bit).1
 
+
+private theorem moveRight_raw_frontier (input : Tape) (raw : List Bool) (blanks : Nat)
+    (h : input.current :: input.right = raw.map some ++ none :: List.replicate blanks none) :
+    ∃ (remaining : List Bool) (padding : Nat),
+      input.moveRight.current :: input.moveRight.right =
+        remaining.map some ++ none :: List.replicate padding none := by
+  cases raw with
+  | nil =>
+      have hRight : input.right = List.replicate blanks none := by
+        simpa only [List.map_nil, List.nil_append, List.tail_cons] using congrArg List.tail h
+      cases blanks with
+      | zero => exact ⟨[], 0, by simp [Tape.moveRight, hRight]⟩
+      | succ blanks => exact ⟨[], blanks, by simp [Tape.moveRight, hRight, List.replicate_succ]⟩
+  | cons bit rest =>
+      have hRight : input.right = rest.map some ++ none :: List.replicate blanks none := by
+        simpa only [List.map_cons, List.cons_append, List.tail_cons] using congrArg List.tail h
+      cases rest with
+      | nil => exact ⟨[], blanks, by simp [Tape.moveRight, hRight]⟩
+      | cons next tail => exact ⟨next :: tail, blanks, by simp [Tape.moveRight, hRight, List.cons_append]⟩
+
+/-- Rightward native head moves keep a finite contiguous raw bitstring
+followed by blank cells contiguous, including after moving beyond its end. -/
+theorem moveRight_iterate_raw_frontier (input : Tape) (raw : List Bool) (blanks moves : Nat)
+    (h : input.current :: input.right = raw.map some ++ none :: List.replicate blanks none) :
+    ∃ (remaining : List Bool) (padding : Nat),
+      ((Tape.moveRight^[moves]) input).current :: ((Tape.moveRight^[moves]) input).right =
+        remaining.map some ++ none :: List.replicate padding none := by
+  induction moves with
+  | zero => exact ⟨raw, blanks, h⟩
+  | succ moves ih =>
+      obtain ⟨remaining, padding, hForward⟩ := ih
+      simpa only [Function.iterate_succ_apply'] using
+        moveRight_raw_frontier ((Tape.moveRight^[moves]) input) remaining padding hForward
+
+private theorem selectMessage_step_input_moveRight (c d : Configuration) (step : Step selectMessage c d) :
+    d.inputTape = c.inputTape ∨ d.inputTape = c.inputTape.moveRight := by
+  have hActive : c.halted = false := by
+    cases h : c.halted with
+    | false => rfl
+    | true => exact False.elim ((no_step_of_halted h) step)
+  by_cases hPc : c.pc < 17
+  · interval_cases hIndex : c.pc
+    all_goals simp [Step, successors, next, hActive, hIndex, selectMessage,
+      skipDelimited, Program.asSubroutine, Instruction.asSubroutine, subroutineAddress,
+      Instruction.next, Configuration.tape] at step
+    all_goals try (split at step)
+    all_goals rcases step with rfl | rfl
+    all_goals first
+      | exact Or.inl rfl
+      | exact Or.inr rfl
+  · have hNone : selectMessage[c.pc]? = none := by
+      apply List.getElem?_eq_none
+      change 17 ≤ c.pc
+      omega
+    simp [Step, successors, next, hActive, hNone] at step
+    subst d
+    exact Or.inl rfl
+
+/-- Native fair-bit selection only moves the input head right; its random
+instruction affects the output tape. Padding after halt adds no moves. -/
+theorem selectMessage_input_moveRight {start finish : Configuration} {used : Nat}
+    (run : PaddedRunsFor selectMessage start finish used) :
+    ∃ moves, moves ≤ used ∧ finish.inputTape = (Tape.moveRight^[moves]) start.inputTape := by
+  obtain ⟨actualTime, hTime, actual⟩ := run.toRunsFor_le
+  obtain ⟨moves, hMoves, hInput⟩ := actual.input_moveRight_of_step selectMessage_step_input_moveRight
+  exact ⟨moves, hMoves.trans hTime, hInput⟩
+
+
 end Machine

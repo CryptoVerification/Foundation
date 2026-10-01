@@ -266,12 +266,19 @@ theorem frameStoredFinalElement_control_closed (c d : Configuration)
 /-- The complete last-element preparation stops on every finite retained
 configuration, even if the tuple fields or the scratch counter are malformed.
 All scans and writes are the existing native subroutines, with no data reset. -/
-theorem frameStoredFinalElement_terminates_from_anyTape (input output : Tape) :
+private theorem frameStoredFinalElement_terminates_layout_core (input output : Tape) :
     ∃ finish used, used ≤ 1000000000000 * (input.cells + output.cells) + 1000000000000 ∧
       RunsFor frameStoredFinalElement
         ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
-      finish.halted = true := by
-  obtain ⟨publicFinish, a, ha, publicRun, publicHalt, _publicOutput⟩ :=
+      finish.halted = true ∧
+      (∀ beforeOutput blanks,
+        output = ({ left := beforeOutput, right := List.replicate blanks none } : Tape) →
+        ∃ saved remaining moves, moves ≤ used ∧
+          finish.outputTape = { left := saved, right := List.replicate remaining none } ∧
+          finish.inputTape.current = ((Tape.moveRight^[moves]) input).current ∧
+          ∀ i, finish.inputTape.right.getD i none =
+            ((Tape.moveRight^[moves]) input).right.getD i none) := by
+  obtain ⟨publicFinish, a, ha, publicRun, publicHalt, publicOutput⟩ :=
     skipUnary_terminates_from_anyTape input output
   have hPublic := publicRun.withSubroutine_halted_of_closed
     [] skipUnary
@@ -297,7 +304,7 @@ theorem frameStoredFinalElement_terminates_from_anyTape (input output : Tape) :
     (by change 0 < 13; decide) rfl frameHalt skipFrame_control_closed
   change RunsFor frameStoredFinalElement frameStart (frameFinish.resumeAt 22) b at hFrame
   have toTuple := toFrame.trans hFrame
-  obtain ⟨tupleFinish, c, hc, tupleRun, tupleHalt, _tupleOutput⟩ :=
+  obtain ⟨tupleFinish, c, hc, tupleRun, tupleHalt, tupleOutput⟩ :=
     skipUnary_terminates_from_anyTape frameFinish.inputTape frameFinish.outputTape
   have hTuple := tupleRun.withSubroutine_halted_of_closed
     (skipUnary.asSubroutine 0 7 ++ [.moveRight .output] ++ skipFrame.asSubroutine 8 22) skipUnary
@@ -306,7 +313,7 @@ theorem frameStoredFinalElement_terminates_from_anyTape (input output : Tape) :
     (by change 0 < 6; decide) rfl tupleHalt skipUnary_control_closed
   change RunsFor frameStoredFinalElement (frameFinish.resumeAt 22) (tupleFinish.resumeAt 29) c at hTuple
   have toFirst := toTuple.trans hTuple
-  obtain ⟨firstFinish, d, hd, firstRun, firstHalt, _firstOutput⟩ :=
+  obtain ⟨firstFinish, d, hd, firstRun, firstHalt, firstOutput⟩ :=
     skipDelimited_terminates_from_anyTape tupleFinish.inputTape tupleFinish.outputTape
   have hFirst := firstRun.withSubroutine_halted_of_closed
     (skipUnary.asSubroutine 0 7 ++ [.moveRight .output] ++ skipFrame.asSubroutine 8 22 ++
@@ -315,7 +322,7 @@ theorem frameStoredFinalElement_terminates_from_anyTape (input output : Tape) :
     (by change 0 < 7; decide) rfl firstHalt skipDelimited_control_closed
   change RunsFor frameStoredFinalElement (tupleFinish.resumeAt 29) (firstFinish.resumeAt 37) d at hFirst
   have toSecond := toFirst.trans hFirst
-  obtain ⟨secondFinish, e, he, secondRun, secondHalt, _secondOutput⟩ :=
+  obtain ⟨secondFinish, e, he, secondRun, secondHalt, secondOutput⟩ :=
     skipDelimited_terminates_from_anyTape firstFinish.inputTape firstFinish.outputTape
   have hSecond := secondRun.withSubroutine_halted_of_closed
     (skipUnary.asSubroutine 0 7 ++ [.moveRight .output] ++ skipFrame.asSubroutine 8 22 ++
@@ -336,17 +343,133 @@ theorem frameStoredFinalElement_terminates_from_anyTape (input output : Tape) :
   have last : Step frameStoredFinalElement (framed.resumeAt 83) finish := by
     have code : frameStoredFinalElement[83]? = some .halt := rfl
     simp [Step, successors, next, code, Configuration.resumeAt, finish, Instruction.next]
-  refine ⟨finish, a + 1 + b + c + d + e + f + 1, ?_, RunsFor.succ (toLast.trans hLast) last, rfl⟩
-  have frameStorage := GuardedCompiler.sourceStorage_le_of_run toFrame
-  change frameStart.inputTape.cells + frameStart.outputTape.cells ≤ input.cells + output.cells + (a + 1) at frameStorage
-  have tupleStorage := GuardedCompiler.sourceStorage_le_of_run toTuple
-  change frameFinish.inputTape.cells + frameFinish.outputTape.cells ≤ input.cells + output.cells + (a + 1 + b) at tupleStorage
-  have firstStorage := GuardedCompiler.sourceStorage_le_of_run toFirst
-  change tupleFinish.inputTape.cells + tupleFinish.outputTape.cells ≤ input.cells + output.cells + (a + 1 + b + c) at firstStorage
-  have secondStorage := GuardedCompiler.sourceStorage_le_of_run toSecond
-  change firstFinish.inputTape.cells + firstFinish.outputTape.cells ≤ input.cells + output.cells + (a + 1 + b + c + d) at secondStorage
-  have lastStorage := GuardedCompiler.sourceStorage_le_of_run toLast
-  change secondFinish.inputTape.cells + secondFinish.outputTape.cells ≤ input.cells + output.cells + (a + 1 + b + c + d + e) at lastStorage
-  omega
+  refine ⟨finish, a + 1 + b + c + d + e + f + 1, ?_,
+    RunsFor.succ (toLast.trans hLast) last, rfl, ?_⟩
+  · have frameStorage := GuardedCompiler.sourceStorage_le_of_run toFrame
+    change frameStart.inputTape.cells + frameStart.outputTape.cells ≤ input.cells + output.cells + (a + 1) at frameStorage
+    have tupleStorage := GuardedCompiler.sourceStorage_le_of_run toTuple
+    change frameFinish.inputTape.cells + frameFinish.outputTape.cells ≤ input.cells + output.cells + (a + 1 + b) at tupleStorage
+    have firstStorage := GuardedCompiler.sourceStorage_le_of_run toFirst
+    change tupleFinish.inputTape.cells + tupleFinish.outputTape.cells ≤ input.cells + output.cells + (a + 1 + b + c) at firstStorage
+    have secondStorage := GuardedCompiler.sourceStorage_le_of_run toSecond
+    change firstFinish.inputTape.cells + firstFinish.outputTape.cells ≤ input.cells + output.cells + (a + 1 + b + c + d) at secondStorage
+    have lastStorage := GuardedCompiler.sourceStorage_le_of_run toLast
+    change secondFinish.inputTape.cells + secondFinish.outputTape.cells ≤ input.cells + output.cells + (a + 1 + b + c + d + e) at lastStorage
+    omega
+  · intro beforeOutput blanks hOutput
+    have hAdvance : frameStart.outputTape =
+        { left := none :: beforeOutput, right := List.replicate (blanks - 1) none } := by
+      dsimp only [frameStart]
+      rw [publicOutput, hOutput]
+      cases blanks <;> simp [Tape.moveRight, List.replicate_succ]
+    obtain ⟨exactFrame, exactFrameTime, frameSaved, frameRemaining,
+      _hFrameTime, exactFrameRun, exactFrameHalt, exactFrameOutput⟩ :=
+      skipFrameCells_terminates_with_layout frameStart.inputTape beforeOutput (blanks - 1)
+    rw [← hAdvance] at exactFrameRun
+    have hFrameEq := frameRun.halted_finish_eq_of_no_randomBit exactFrameRun
+      frameHalt exactFrameHalt skipFrame_no_randomBit
+    have hFrameOutput : frameFinish.outputTape =
+        { left := frameSaved, right := List.replicate frameRemaining none } := by
+      rw [hFrameEq, exactFrameOutput]
+    have hSecondOutput : secondFinish.outputTape =
+        { left := frameSaved, right := List.replicate frameRemaining none } :=
+      secondOutput.trans (firstOutput.trans (tupleOutput.trans hFrameOutput))
+    obtain ⟨exactLast, exactLastTime, saved, remaining,
+      _hLastTime, exactLastRun, exactLastHalt, exactLastOutput⟩ :=
+      writeFrameAfterFalse_terminates_with_output_layout secondFinish.inputTape frameSaved frameRemaining
+    have hLastCells := writeFrameAfterFalse_halted_input_cells
+      secondFinish.inputTape frameSaved frameRemaining exactLastRun exactLastHalt
+    rw [← hSecondOutput] at exactLastRun
+    have hLastEq := lastRun.halted_finish_eq_of_no_randomBit exactLastRun
+      lastHalt exactLastHalt writeFrameAfterFalse_no_randomBit
+    obtain ⟨publicMoves, hPublicMoves, hPublicInput⟩ := skipUnary_input_moveRight publicRun
+    obtain ⟨frameMoves, hFrameMoves, hFrameInput⟩ := skipFrame_input_moveRight frameRun
+    obtain ⟨tupleMoves, hTupleMoves, hTupleInput⟩ := skipUnary_input_moveRight tupleRun
+    obtain ⟨firstMoves, hFirstMoves, hFirstInput⟩ := skipDelimited_input_moveRight firstRun
+    obtain ⟨secondMoves, hSecondMoves, hSecondInput⟩ := skipDelimited_input_moveRight secondRun
+    let moves := secondMoves + firstMoves + tupleMoves + frameMoves + publicMoves
+    have hInput : secondFinish.inputTape = (Tape.moveRight^[moves]) input := by
+      rw [hSecondInput, hFirstInput, hTupleInput, hFrameInput]
+      dsimp only [frameStart]
+      rw [hPublicInput]
+      simp only [moves, Function.iterate_add_apply]
+    refine ⟨saved, remaining, moves, by dsimp only [moves]; omega, ?_, ?_, ?_⟩
+    · change framed.outputTape = _
+      rw [hLastEq, exactLastOutput]
+    · change framed.inputTape.current = _
+      rw [hLastEq]
+      exact hLastCells.1.trans (congrArg Tape.current hInput)
+    · intro i
+      change framed.inputTape.right.getD i none = _
+      rw [hLastEq]
+      exact (hLastCells.2 i).trans (congrArg (fun t : Tape => t.right.getD i none) hInput)
+
+/-- Last-element preparation stops on arbitrary finite caller tapes without
+requiring a correctly encoded DDH input or a well-formed scratch counter. -/
+theorem frameStoredFinalElement_terminates_from_anyTape (input output : Tape) :
+    ∃ finish used, used ≤ 1000000000000 * (input.cells + output.cells) + 1000000000000 ∧
+      RunsFor frameStoredFinalElement
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true := by
+  obtain ⟨finish, used, hBound, run, hHalted, _hLayout⟩ :=
+    frameStoredFinalElement_terminates_layout_core input output
+  exact ⟨finish, used, hBound, run, hHalted⟩
+
+/-- Native final-element framing preserves the blank output frontier for
+all finite input tapes. The unary fields and escaped elements may be
+malformed or cross saved separators. The output counter is bounded by its
+actual reserved blank, and no caller storage is cleared or reloaded. -/
+theorem frameStoredFinalElement_terminates_with_output_layout (input : Tape)
+    (beforeOutput : List (Option Bool)) (blanks : Nat) :
+    ∃ finish used saved remaining,
+      used ≤ 1000000000000 *
+        (input.cells + ({ left := beforeOutput, right := List.replicate blanks none } : Tape).cells) + 1000000000000 ∧
+      RunsFor frameStoredFinalElement
+        ({ inputTape := input,
+           outputTape := { left := beforeOutput, right := List.replicate blanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧
+      finish.outputTape = { left := saved, right := List.replicate remaining none } := by
+  obtain ⟨finish, used, hBound, run, hHalted, hLayout⟩ :=
+    frameStoredFinalElement_terminates_layout_core input
+      { left := beforeOutput, right := List.replicate blanks none }
+  obtain ⟨saved, remaining, _moves, _hMoves, hOutput, _hCurrent, _hRight⟩ :=
+    hLayout beforeOutput blanks rfl
+  exact ⟨finish, used, saved, remaining, hBound, run, hHalted, hOutput⟩
+
+/-- Even malformed final-element parsing returns the remaining input
+cells from a rightward position on the original tape. The final temporary
+delimiter edit leaves current/right cells unchanged. The output remains at
+a fresh frontier; saved input to the left may contain the restored false
+cell, so no stronger whole-tape identity is asserted. -/
+theorem frameStoredFinalElement_terminates_with_input_output_layout (input : Tape)
+    (beforeOutput : List (Option Bool)) (blanks : Nat) :
+    ∃ finish used saved remaining moves,
+      used ≤ 1000000000000 *
+        (input.cells + ({ left := beforeOutput, right := List.replicate blanks none } : Tape).cells) + 1000000000000 ∧
+      RunsFor frameStoredFinalElement
+        ({ inputTape := input,
+           outputTape := { left := beforeOutput, right := List.replicate blanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧ moves ≤ used ∧
+      finish.outputTape = { left := saved, right := List.replicate remaining none } ∧
+      finish.inputTape.current = ((Tape.moveRight^[moves]) input).current ∧
+      ∀ i, finish.inputTape.right.getD i none =
+        ((Tape.moveRight^[moves]) input).right.getD i none := by
+  obtain ⟨finish, used, hBound, run, hHalted, hLayout⟩ :=
+    frameStoredFinalElement_terminates_layout_core input
+      { left := beforeOutput, right := List.replicate blanks none }
+  obtain ⟨saved, remaining, moves, hMoves, hOutput, hCurrent, hRight⟩ :=
+    hLayout beforeOutput blanks rfl
+  exact ⟨finish, used, saved, remaining, moves, hBound, run, hHalted,
+    hMoves, hOutput, hCurrent, hRight⟩
+
+/-- Every padded execution from the retained caller tapes has halted at the
+same displayed budget. This uses the actual deterministic stopping trace. -/
+theorem frameStoredFinalElement_haltsFrom_anyTape (input output : Tape) (finish : Configuration)
+    (trace : PaddedRunsFor frameStoredFinalElement
+      ({ inputTape := input, outputTape := output } : Configuration) finish
+      (1000000000000 * (input.cells + output.cells) + 1000000000000)) : finish.halted = true := by
+  obtain ⟨target, used, hBound, run, hHalted⟩ :=
+    frameStoredFinalElement_terminates_from_anyTape input output
+  exact run.haltsFrom_of_no_randomBit hHalted frameStoredFinalElement_no_randomBit hBound finish trace
 
 end Machine

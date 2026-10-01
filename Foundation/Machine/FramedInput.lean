@@ -608,4 +608,15 @@ theorem skipFrame_terminates_from_anyTape (input output : Tape) :
   simp only [Tape.cells] at ⊢
   omega
 
+
+/-- Every padded execution from the retained caller tapes has halted at the
+same displayed budget. This uses the actual deterministic stopping trace. -/
+theorem skipFrame_haltsFrom_anyTape (input output : Tape) (finish : Configuration)
+    (trace : PaddedRunsFor skipFrame
+      ({ inputTape := input, outputTape := output } : Configuration) finish
+      (20 * (input.cells + output.cells) + 20)) : finish.halted = true := by
+  obtain ⟨target, used, hBound, run, hHalted⟩ :=
+    skipFrame_terminates_from_anyTape input output
+  exact run.haltsFrom_of_no_randomBit hHalted skipFrame_no_randomBit hBound finish trace
+
 end Machine

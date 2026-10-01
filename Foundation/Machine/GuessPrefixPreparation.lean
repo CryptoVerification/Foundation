@@ -145,4 +145,168 @@ theorem prepareGuessPrefix_control_closed (c d : Configuration)
   all_goals subst d
   all_goals simp [Configuration.advance, Configuration.updateTape, hIndex]
 
+/-- Rewind the retained input and append its public prefix on arbitrary
+finite tapes. The returned prefix need not be a valid cryptographic request;
+the bound counts the actual restoration, separator move and native scans. -/
+private theorem prepareGuessPrefix_terminates_core (input output : Tape) :
+    ∃ finish used, used ≤ 1000000000000 * (input.cells + output.cells) + 1000000000000 ∧
+      RunsFor prepareGuessPrefix
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true ∧
+      (∀ before blanks, output = { left := before, right := List.replicate blanks none } →
+        finish.inputTape.current = some true ∧
+        ∃ after remaining,
+          finish.outputTape = { left := after, right := List.replicate remaining none }) := by
+  obtain ⟨restored, restoreTime, hRestoreTime, restoreRun, restoreHalt, restoreOutput⟩ :=
+    restoreGuessInput_terminates_from_anyTape input output
+  obtain ⟨assembled, assembleTime, hAssembleTime, assembleRun, assembleHalt⟩ :=
+    preparePublicPrefixContext_terminates_from_anyTape restored.inputTape restored.outputTape.moveRight
+  have hRestore := restoreRun.withSubroutine_halted_of_closed
+    [] restoreGuessInput ([.moveRight .output] ++ preparePublicPrefixContext.asSubroutine 41 84 ++ [.halt]) 40
+    (by change 0 < 39; decide) rfl restoreHalt restoreGuessInput_control_closed
+  change RunsFor prepareGuessPrefix
+    ({ inputTape := input, outputTape := output } : Configuration) (restored.resumeAt 40) restoreTime at hRestore
+  let moved : Configuration := { pc := 41, inputTape := restored.inputTape, outputTape := restored.outputTape.moveRight }
+  have move : Step prepareGuessPrefix (restored.resumeAt 40) moved := by
+    have code : prepareGuessPrefix[40]? = some (.moveRight .output) := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, moved, Instruction.next,
+      Configuration.updateTape, Configuration.advance]
+  have hAssemble := assembleRun.withSubroutine_halted_of_closed
+    (restoreGuessInput.asSubroutine 0 40 ++ [.moveRight .output]) preparePublicPrefixContext [.halt] 84
+    (by change 0 < 42; decide) rfl assembleHalt preparePublicPrefixContext_control_closed
+  change RunsFor prepareGuessPrefix moved (assembled.resumeAt 84) assembleTime at hAssemble
+  let finish : Configuration := { assembled with pc := 84, halted := true }
+  have last : Step prepareGuessPrefix (assembled.resumeAt 84) finish := by
+    have code : prepareGuessPrefix[84]? = some .halt := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, finish, Instruction.next]
+  refine ⟨finish, restoreTime + 1 + assembleTime + 1, ?_,
+    RunsFor.succ ((RunsFor.succ hRestore move).trans hAssemble) last, rfl, ?_⟩
+  · have hStorage := GuardedCompiler.sourceStorage_le_of_run restoreRun
+    change restored.inputTape.cells + restored.outputTape.cells ≤ input.cells + output.cells + restoreTime at hStorage
+    have outputMove := Tape.cells_moveRight_le restored.outputTape
+    omega
+  · intro before blanks hOutput
+    have hEntry : restored.outputTape.moveRight =
+        { left := none :: before, right := List.replicate (blanks - 1) none } := by
+      rw [restoreOutput, hOutput]
+      cases blanks <;> simp [Tape.moveRight, List.replicate_succ]
+    obtain ⟨assembledFresh, freshTime, savedInput, after, remaining,
+      _hFreshTime, freshRun, freshHalt, freshCurrent, _freshLeft, freshOutput⟩ :=
+      preparePublicPrefixContext_terminates_with_layout restored.inputTape (none :: before) (blanks - 1)
+    rw [hEntry] at assembleRun
+    have hEq := assembleRun.halted_finish_eq_of_no_randomBit freshRun
+      assembleHalt freshHalt preparePublicPrefixContext_no_randomBit
+    change assembled.inputTape.current = some true ∧
+      ∃ after remaining, assembled.outputTape = { left := after, right := List.replicate remaining none }
+    rw [hEq]
+    exact ⟨freshCurrent, after, remaining, freshOutput⟩
+
+theorem prepareGuessPrefix_terminates_from_anyTape (input output : Tape) :
+    ∃ finish used, used ≤ 1000000000000 * (input.cells + output.cells) + 1000000000000 ∧
+      RunsFor prepareGuessPrefix
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true := by
+  obtain ⟨finish, used, hBound, run, hHalted, _hLayout⟩ := prepareGuessPrefix_terminates_core input output
+  exact ⟨finish, used, hBound, run, hHalted⟩
+
+/-- Restoration and public-prefix copying retain fresh output scratch on
+arbitrary finite input tapes. The restored input head is the actual true bit
+used by the following retained-block scans, without a DDH validity premise. -/
+theorem prepareGuessPrefix_terminates_with_output_layout (input : Tape)
+    (before : List (Option Bool)) (blanks : Nat) :
+    ∃ finish used after remaining,
+      used ≤ 1000000000000 * (input.cells +
+        ({ left := before, right := List.replicate blanks none } : Tape).cells) + 1000000000000 ∧
+      RunsFor prepareGuessPrefix
+        ({ inputTape := input, outputTape := { left := before, right := List.replicate blanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧ finish.inputTape.current = some true ∧
+      finish.outputTape = { left := after, right := List.replicate remaining none } := by
+  obtain ⟨finish, used, hBound, run, hHalted, hLayout⟩ :=
+    prepareGuessPrefix_terminates_core input { left := before, right := List.replicate blanks none }
+  obtain ⟨hCurrent, after, remaining, hOutput⟩ := hLayout before blanks rfl
+  exact ⟨finish, used, after, remaining, hBound, run, hHalted, hCurrent, hOutput⟩
+
+theorem prepareGuessPrefix_haltsFrom_anyTape (input output : Tape) (finish : Configuration)
+    (trace : PaddedRunsFor prepareGuessPrefix
+      ({ inputTape := input, outputTape := output } : Configuration) finish
+      (1000000000000 * (input.cells + output.cells) + 1000000000000)) : finish.halted = true := by
+  obtain ⟨target, used, hBound, run, hHalted⟩ := prepareGuessPrefix_terminates_from_anyTape input output
+  exact run.haltsFrom_of_no_randomBit hHalted prepareGuessPrefix_no_randomBit hBound finish trace
+
+/-- From fresh input/output frontiers, five-block restoration followed by
+public-prefix assembly leaves a bit head and a suffix of those five blocks.
+The saved input may contain arbitrary malformed cells. The blocks are those
+exposed by native rewinds, not a decoded DDH tuple supplied by the caller. -/
+theorem prepareGuessPrefix_terminates_from_fresh_tapes
+    (savedInput savedOutput : List (Option Bool)) (inputBlanks outputBlanks : Nat) :
+    let input : Tape := { left := savedInput, right := List.replicate inputBlanks none }
+    let output : Tape := { left := savedOutput, right := List.replicate outputBlanks none }
+    ∃ (finish : Configuration) (used : Nat) (a b c d e : List Bool)
+      (after : List (Option Bool)) (remaining count : Nat),
+      used ≤ 1000000000000 * (input.cells + output.cells) + 1000000000000 ∧
+      RunsFor prepareGuessPrefix
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true ∧ finish.inputTape.current = some true ∧
+      finish.outputTape = { left := after, right := List.replicate remaining none } ∧
+      finish.inputTape.right =
+        (a.map some ++ none :: b.map some ++ none :: c.map some ++
+          none :: d.map some ++ none :: e.map some ++ none :: List.replicate inputBlanks none).drop count := by
+  dsimp only
+  let input : Tape := { left := savedInput, right := List.replicate inputBlanks none }
+  let output : Tape := { left := savedOutput, right := List.replicate outputBlanks none }
+  obtain ⟨restored, restoreTime, a, b, c, d, e, before, hRestoreTime,
+    restoreRun, restoreHalt, restoreOutput, restoreInput⟩ :=
+    restoreGuessInput_terminates_with_block_layout input output
+  obtain ⟨assembled, assembleTime, _saved, after, remaining, hAssembleTime,
+    assembleRun, assembleHalt, assembleCurrent, _assembleLeft, assembleOutput,
+    offset, assembleRight⟩ :=
+    preparePublicPrefixContext_terminates_with_suffix_layout restored.inputTape
+      (none :: savedOutput) (outputBlanks - 1)
+  have hEntry : restored.outputTape.moveRight =
+      ({ left := none :: savedOutput, right := List.replicate (outputBlanks - 1) none } : Tape) := by
+    rw [restoreOutput]
+    cases outputBlanks <;> simp [output, Tape.moveRight, List.replicate_succ]
+  have actualAssemble : RunsFor preparePublicPrefixContext
+      ({ inputTape := restored.inputTape, outputTape := restored.outputTape.moveRight } : Configuration)
+      assembled assembleTime := by
+    rw [hEntry]
+    exact assembleRun
+  have hRestore := restoreRun.withSubroutine_halted_of_closed
+    [] restoreGuessInput ([.moveRight .output] ++ preparePublicPrefixContext.asSubroutine 41 84 ++ [.halt]) 40
+    (by change 0 < 39; decide) rfl restoreHalt restoreGuessInput_control_closed
+  change RunsFor prepareGuessPrefix
+    ({ inputTape := input, outputTape := output } : Configuration) (restored.resumeAt 40) restoreTime at hRestore
+  let moved : Configuration := { pc := 41, inputTape := restored.inputTape, outputTape := restored.outputTape.moveRight }
+  have move : Step prepareGuessPrefix (restored.resumeAt 40) moved := by
+    have code : prepareGuessPrefix[40]? = some (.moveRight .output) := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, moved, Instruction.next,
+      Configuration.updateTape, Configuration.advance]
+  have hAssemble := actualAssemble.withSubroutine_halted_of_closed
+    (restoreGuessInput.asSubroutine 0 40 ++ [.moveRight .output]) preparePublicPrefixContext [.halt] 84
+    (by change 0 < 42; decide) rfl assembleHalt preparePublicPrefixContext_control_closed
+  change RunsFor prepareGuessPrefix moved (assembled.resumeAt 84) assembleTime at hAssemble
+  let finish : Configuration := { assembled with pc := 84, halted := true }
+  have last : Step prepareGuessPrefix (assembled.resumeAt 84) finish := by
+    have code : prepareGuessPrefix[84]? = some .halt := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, finish, Instruction.next]
+  refine ⟨finish, restoreTime + 1 + assembleTime + 1, a, b, c, d, e, after, remaining,
+    1 + offset, ?_, RunsFor.succ ((RunsFor.succ hRestore move).trans hAssemble) last,
+    rfl, assembleCurrent, assembleOutput, ?_⟩
+  · have hStorage := GuardedCompiler.sourceStorage_le_of_run restoreRun
+    change restored.inputTape.cells + restored.outputTape.cells ≤ input.cells + output.cells + restoreTime at hStorage
+    have outputMove := Tape.cells_moveRight_le restored.outputTape
+    rw [← hEntry] at hAssembleTime
+    change restoreTime ≤ 100000 * (input.cells + output.cells) + 100000 at hRestoreTime
+    change restoreTime + 1 + assembleTime + 1 ≤ 1000000000000 * (input.cells + output.cells) + 1000000000000
+    omega
+  · have hStream : restored.inputTape.current :: restored.inputTape.right =
+        a.map some ++ none :: b.map some ++ none :: c.map some ++
+          none :: d.map some ++ none :: e.map some ++ none :: List.replicate inputBlanks none := by
+      rw [restoreInput]
+      cases a <;> simp [input, Tape.moveRight]
+    have hRight := congrArg List.tail hStream
+    change restored.inputTape.right = _ at hRight
+    change assembled.inputTape.right = _
+    rw [assembleRight, hRight, ← List.drop_one, List.drop_drop]
+
 end Machine

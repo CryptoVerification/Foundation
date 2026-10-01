@@ -310,4 +310,143 @@ theorem prepareStoredGuess_length (count : Nat) : (prepareStoredGuess count).len
   simp [prepareStoredGuess, Program.withSubroutine, Program.asSubroutine_length,
     rewindStoredGuess, eraseOutputBlocks_length]; omega
 
+private theorem rewindStoredGuess_blank_stop (input output : Tape)
+    (hBlank : output.moveLeft.current = none) :
+    RunsFor rewindStoredGuess ({ inputTape := input, outputTape := output } : Configuration)
+      { pc := 6, inputTape := input.moveLeft.moveRight, outputTape := output.moveLeft, halted := true } 5 := by
+  let start : Configuration := { inputTape := input, outputTape := output }
+  let a : Configuration := { start with pc := 1, inputTape := input.moveLeft }
+  let b : Configuration := { a with pc := 2, outputTape := output.moveLeft }
+  let c : Configuration := { b with pc := 5 }
+  let d : Configuration := { c with pc := 6, inputTape := input.moveLeft.moveRight }
+  have first : Step rewindStoredGuess start a := by
+    simp [Step, successors, next, rewindStoredGuess, start, a, Instruction.next,
+      Configuration.updateTape, Configuration.advance]
+  have second : Step rewindStoredGuess a b := by
+    simp [Step, successors, next, rewindStoredGuess, start, a, b, Instruction.next,
+      Configuration.updateTape, Configuration.advance]
+  have third : Step rewindStoredGuess b c := by
+    simp [Step, successors, next, rewindStoredGuess, start, a, b, c, Instruction.next,
+      Configuration.tape, hBlank]
+  have fourth : Step rewindStoredGuess c d := by
+    simp [Step, successors, next, rewindStoredGuess, start, a, b, c, d, Instruction.next,
+      Configuration.updateTape, Configuration.advance]
+  have last : Step rewindStoredGuess d
+      { pc := 6, inputTape := input.moveLeft.moveRight, outputTape := output.moveLeft, halted := true } := by
+    simp [Step, successors, next, rewindStoredGuess, start, a, b, c, d, Instruction.next]
+  exact RunsFor.succ (RunsFor.succ (RunsFor.succ (RunsFor.succ
+    (RunsFor.succ (RunsFor.zero _) first) second) third) fourth) last
+
+private theorem rewindStoredGuess_terminates_left (input : Tape)
+    (left : List (Option Bool)) (current : Option Bool) (right : List (Option Bool)) :
+    ∃ finish used,
+      used ≤ 5 * left.length + 5 ∧
+      RunsFor rewindStoredGuess
+        ({ inputTape := input, outputTape := { left := left, current := current, right := right } } : Configuration)
+        finish used ∧ finish.halted = true ∧ finish.outputTape.left.length ≤ left.length := by
+  induction left generalizing input current right with
+  | nil =>
+      refine ⟨{
+        pc := 6, inputTape := input.moveLeft.moveRight,
+        outputTape := ({ current := current, right := right } : Tape).moveLeft, halted := true },
+        5, by simp, rewindStoredGuess_blank_stop _ _ rfl, rfl, ?_⟩
+      simp [Tape.moveLeft]
+  | cons cell rest ih =>
+      cases cell with
+      | none =>
+          refine ⟨{
+            pc := 6, inputTape := input.moveLeft.moveRight,
+            outputTape := ({ left := none :: rest, current := current, right := right } : Tape).moveLeft,
+            halted := true }, 5, by simp, rewindStoredGuess_blank_stop _ _ rfl, rfl, ?_⟩
+          simp [Tape.moveLeft]
+      | some bit =>
+          let start : Configuration :=
+            { inputTape := input, outputTape := { left := some bit :: rest, current := current, right := right } }
+          let a : Configuration := { start with pc := 1, inputTape := input.moveLeft }
+          let b : Configuration := { a with pc := 2, outputTape := start.outputTape.moveLeft }
+          let c : Configuration := { b with pc := 3 }
+          let d : Configuration := { c with pc := 4, outputTape := c.outputTape.write none }
+          have first : Step rewindStoredGuess start a := by
+            simp [Step, successors, next, rewindStoredGuess, start, a, Instruction.next,
+              Configuration.updateTape, Configuration.advance]
+          have second : Step rewindStoredGuess a b := by
+            simp [Step, successors, next, rewindStoredGuess, start, a, b, Instruction.next,
+              Configuration.updateTape, Configuration.advance]
+          have third : Step rewindStoredGuess b c := by
+            cases bit <;> simp [Step, successors, next, rewindStoredGuess, start, a, b, c,
+              Instruction.next, Configuration.tape, Tape.moveLeft]
+          have fourth : Step rewindStoredGuess c d := by
+            simp [Step, successors, next, rewindStoredGuess, start, a, b, c, d,
+              Instruction.next, Configuration.updateTape, Configuration.advance]
+          have fifth : Step rewindStoredGuess d
+              { inputTape := input.moveLeft, outputTape := { left := rest, right := current :: right } } := by
+            simp [Step, successors, next, rewindStoredGuess, start, a, b, c, d,
+              Instruction.next, Tape.moveLeft, Tape.write]
+          obtain ⟨finish, used, hUsed, run, hHalt, hLeft⟩ := ih input.moveLeft none (current :: right)
+          refine ⟨finish, 5 + used, ?_, ?_, hHalt, ?_⟩
+          · simp only [List.length_cons]
+            omega
+          · exact (RunsFor.succ (RunsFor.succ (RunsFor.succ (RunsFor.succ
+              (RunsFor.succ (RunsFor.zero _) first) second) third) fourth) fifth).trans run
+          · simp only [List.length_cons]
+            omega
+
+/-- The paired rewind stops even when the parallel copy or saved separators
+are malformed. Its controlling output head moves left on each iteration;
+the finite represented prefix bounds all actual native transitions. -/
+theorem rewindStoredGuess_terminates_from_anyTape (input output : Tape) :
+    ∃ finish used,
+      used ≤ 5 * output.left.length + 5 ∧
+      RunsFor rewindStoredGuess ({ inputTape := input, outputTape := output } : Configuration)
+        finish used ∧ finish.halted = true ∧ finish.outputTape.left.length ≤ output.left.length :=
+  rewindStoredGuess_terminates_left input output.left output.current output.right
+
+/-- Paired rewind followed by the fixed number of front-block erasures,
+on the very tapes returned by the rewind. Missing/malformed blocks impose
+no validity premise on this stopping and storage-layout certificate. -/
+theorem prepareStoredGuess_terminates_from_anyTape (count : Nat) (input output : Tape) :
+    ∃ finish used,
+      used ≤ (count + 1) * 100 * (output.cells + 1) ∧
+      RunsFor (prepareStoredGuess count) ({ inputTape := input, outputTape := output } : Configuration)
+        finish used ∧ finish.halted = true ∧ finish.outputTape.left.length ≤ output.left.length := by
+  obtain ⟨rewound, rewindTime, hRewindTime, rewindRun, rewindHalt, rewindLeft⟩ :=
+    rewindStoredGuess_terminates_from_anyTape input output
+  obtain ⟨erased, eraseTime, hEraseTime, eraseRun, eraseHalt, _eraseInput, eraseLeft⟩ :=
+    eraseOutputBlocks_terminates_from_anyTape count rewound.inputTape rewound.outputTape
+  let pre := rewindStoredGuess.asSubroutine 0 8
+  let eraser := eraseOutputBlocks count
+  let finalPc := 8 + eraser.length + 1
+  obtain ⟨rewindUsed, hRewindUsed, first⟩ := rewindRun.withSubroutine_halted
+    [] rewindStoredGuess (eraser.asSubroutine 8 finalPc ++ [.halt]) 8 (Nat.zero_le _) rfl rewindHalt
+  have firstProgram : Program.withSubroutine [] rewindStoredGuess
+      (eraser.asSubroutine 8 finalPc ++ [.halt]) 8 = prepareStoredGuess count := by
+    simp only [prepareStoredGuess, Program.withSubroutine, List.length_nil, List.nil_append,
+      eraser, finalPc, show (rewindStoredGuess.asSubroutine 0 8).length = 8 from rfl, List.append_assoc]
+  rw [firstProgram] at first
+  change RunsFor (prepareStoredGuess count)
+    ({ inputTape := input, outputTape := output } : Configuration) (rewound.resumeAt 8) rewindUsed at first
+  obtain ⟨eraseUsed, hEraseUsed, second⟩ := eraseRun.withSubroutine_halted
+    pre eraser [.halt] finalPc (Nat.zero_le _) rfl eraseHalt
+  change RunsFor (prepareStoredGuess count) (rewound.resumeAt 8) (erased.resumeAt finalPc) eraseUsed at second
+  let finish : Configuration := { erased with pc := finalPc, halted := true }
+  have last : Step (prepareStoredGuess count) (erased.resumeAt finalPc) finish := by
+    have code : (prepareStoredGuess count)[finalPc]? = some .halt := by
+      change (Program.withSubroutine pre eraser [.halt] finalPc)[finalPc]? = some .halt
+      have h := Program.withSubroutine_getElem?_suffix pre eraser [.halt] finalPc 0
+      simpa only [show pre.length = 8 from rfl, Nat.add_zero, List.getElem?_cons_zero, finalPc] using h
+    simp [Step, successors, next, Configuration.resumeAt, finish, code, Instruction.next]
+  refine ⟨finish, rewindUsed + eraseUsed + 1, ?_, RunsFor.succ (first.trans second) last,
+    rfl, eraseLeft.trans rewindLeft⟩
+  have hEraseBound := hEraseTime.trans
+    (Nat.mul_le_mul_left (count + 1) (Nat.add_le_add_right (Nat.mul_le_mul_left 4 rewindLeft) 5))
+  have hCells : output.left.length ≤ output.cells := by simp [Tape.cells]; omega
+  nlinarith
+
+theorem prepareStoredGuess_no_randomBit (count : Nat) (tape : TapeId) :
+    Instruction.randomBit tape ∉ prepareStoredGuess count := by
+  simp [prepareStoredGuess, Program.withSubroutine, Program.asSubroutine, Instruction.asSubroutine,
+    rewindStoredGuess]
+  intro instruction hMem hEq
+  cases instruction <;> simp_all [eraseOutputBlocks_no_randomBit]
+
 end Machine

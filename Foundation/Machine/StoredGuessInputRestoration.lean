@@ -1,4 +1,5 @@
 import Foundation.Machine.StoredInputRewind
+import Foundation.Machine.GuardedTrace
 
 namespace Machine
 
@@ -110,5 +111,83 @@ theorem restoreGuessInput_control_closed (c d : Configuration)
   all_goals try (split at step)
   all_goals subst d
   all_goals simp [Configuration.advance, Configuration.updateTape, hIndex]
+
+/-- Both retained-input rewinds stop on arbitrary finite tapes, even when
+malformed blocks make the returned head differ from a protocol boundary.
+The actual other tape is retained throughout the two native subroutines. -/
+private theorem restoreGuessInput_terminates_layout_core (input output : Tape) :
+    ∃ (finish : Configuration) (used : Nat) (a b c d e : List Bool) (before : List (Option Bool)),
+      used ≤ 100000 * (input.cells + output.cells) + 100000 ∧
+      RunsFor restoreGuessInput
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true ∧ finish.outputTape = output ∧
+      finish.inputTape = { ({
+        right := a.map some ++ none :: b.map some ++ none :: c.map some ++
+          none :: d.map some ++ none :: e.map some ++ input.current :: input.right } : Tape).moveRight
+        with left := none :: before } := by
+  obtain ⟨first, firstTime, firstBits, fourthBits, fifthBits, firstBefore,
+    hFirstTime, firstRun, firstHalt, firstOutput, firstInput⟩ :=
+    restoreStoredInput_terminates_with_block_layout input output
+  obtain ⟨second, secondTime, secondFirst, secondSecond, secondThird, secondBefore,
+    hSecondTime, secondRun, secondHalt, secondOutput, secondInput⟩ :=
+    restoreStoredInput_terminates_with_block_layout first.inputTape first.outputTape
+  have hFirst := firstRun.withSubroutine_halted_of_closed
+    [] restoreStoredInput (restoreStoredInput.asSubroutine 19 38 ++ [.halt]) 19
+    (by change 0 < 18; decide) rfl firstHalt restoreStoredInput_control_closed
+  change RunsFor restoreGuessInput
+    ({ inputTape := input, outputTape := output } : Configuration) (first.resumeAt 19) firstTime at hFirst
+  have hSecond := secondRun.withSubroutine_halted_of_closed
+    (restoreStoredInput.asSubroutine 0 19) restoreStoredInput [.halt] 38
+    (by change 0 < 18; decide) rfl secondHalt restoreStoredInput_control_closed
+  change RunsFor restoreGuessInput (first.resumeAt 19) (second.resumeAt 38) secondTime at hSecond
+  let finish : Configuration := { second with pc := 38, halted := true }
+  have last : Step restoreGuessInput (second.resumeAt 38) finish := by
+    have code : restoreGuessInput[38]? = some .halt := rfl
+    simp [Step, successors, next, code, Configuration.resumeAt, finish, Instruction.next]
+  refine ⟨finish, firstTime + secondTime + 1, secondFirst, secondSecond,
+    secondThird ++ firstBits, fourthBits, fifthBits, secondBefore, ?_,
+    RunsFor.succ (hFirst.trans hSecond) last, rfl, secondOutput.trans firstOutput, ?_⟩
+  · have hStorage := GuardedCompiler.sourceStorage_le_of_run firstRun
+    change first.inputTape.cells + first.outputTape.cells ≤ input.cells + output.cells + firstTime at hStorage
+    omega
+  · have firstStream : first.inputTape.current :: first.inputTape.right =
+        firstBits.map some ++ none :: fourthBits.map some ++ none :: fifthBits.map some ++ input.current :: input.right := by
+      rw [firstInput]
+      cases firstBits <;> simp [Tape.moveRight]
+    change second.inputTape = _
+    rw [secondInput, firstStream]
+    simp only [List.map_append, List.append_assoc, List.cons_append]
+
+theorem restoreGuessInput_terminates_from_anyTape (input output : Tape) :
+    ∃ finish used, used ≤ 100000 * (input.cells + output.cells) + 100000 ∧
+      RunsFor restoreGuessInput
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true ∧ finish.outputTape = output := by
+  obtain ⟨finish, used, _a, _b, _c, _d, _e, _before, hBound, run, hHalted, hOutput, _hInput⟩ :=
+    restoreGuessInput_terminates_layout_core input output
+  exact ⟨finish, used, hBound, run, hHalted, hOutput⟩
+
+/-- The two actual three-block rewinds expose five finite bit blocks on any
+caller tape. The overlapping consumed prefix joins the third block, rather
+than introducing an extra separator. This describes saved cells and permits
+virtual blanks when a malformed caller has no earlier real separator. -/
+theorem restoreGuessInput_terminates_with_block_layout (input output : Tape) :
+    ∃ (finish : Configuration) (used : Nat) (a b c d e : List Bool) (before : List (Option Bool)),
+      used ≤ 100000 * (input.cells + output.cells) + 100000 ∧
+      RunsFor restoreGuessInput
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true ∧ finish.outputTape = output ∧
+      finish.inputTape = { ({
+        right := a.map some ++ none :: b.map some ++ none :: c.map some ++
+          none :: d.map some ++ none :: e.map some ++ input.current :: input.right } : Tape).moveRight
+        with left := none :: before } :=
+  restoreGuessInput_terminates_layout_core input output
+
+theorem restoreGuessInput_haltsFrom_anyTape (input output : Tape) (finish : Configuration)
+    (trace : PaddedRunsFor restoreGuessInput
+      ({ inputTape := input, outputTape := output } : Configuration) finish
+      (100000 * (input.cells + output.cells) + 100000)) : finish.halted = true := by
+  obtain ⟨target, used, hBound, run, hHalted, _⟩ := restoreGuessInput_terminates_from_anyTape input output
+  exact run.haltsFrom_of_no_randomBit hHalted restoreGuessInput_no_randomBit hBound finish trace
 
 end Machine

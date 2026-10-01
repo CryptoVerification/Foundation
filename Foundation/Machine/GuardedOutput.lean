@@ -1026,33 +1026,198 @@ private theorem seekScratchInput_cell_from_anyTape (input output : Tape) (cell :
     cases cell <;> simp [Step, successors, next, seekScratchInput, start, selected, moved, Instruction.next]
   exact RunsFor.succ (RunsFor.succ (RunsFor.succ (RunsFor.zero _) h0) h1) h2
 
+private theorem seekScratchInput_exact_cells (left right : List (Option Bool))
+    (current : Option Bool) (output : Tape) :
+    let input : Tape := { left := left, current := current, right := right }
+    let moves := ((current :: right).takeWhile Option.isSome).length + 1
+    RunsFor seekScratchInput
+      ({ inputTape := input, outputTape := output } : Configuration)
+      ({ pc := 4, inputTape := (Tape.moveRight^[moves]) input,
+         outputTape := output, halted := true } : Configuration) (3 * moves) := by
+  induction right generalizing left current with
+  | nil =>
+      let input : Tape := { left := left, current := current }
+      have hCell := seekScratchInput_cell_from_anyTape input output current rfl
+      cases current with
+      | none =>
+          simpa [input, List.takeWhile, Function.iterate_succ_apply] using hCell
+      | some bit =>
+          have hBlank := seekScratchInput_cell_from_anyTape input.moveRight output none rfl
+          simpa [input, List.takeWhile, Function.iterate_succ_apply, Tape.moveRight] using hCell.trans hBlank
+  | cons cell rest ih =>
+      let input : Tape := { left := left, current := current, right := cell :: rest }
+      have hCell := seekScratchInput_cell_from_anyTape input output current rfl
+      cases current with
+      | none =>
+          simpa [input, List.takeWhile, Function.iterate_succ_apply] using hCell
+      | some bit =>
+          have hRest := ih (some bit :: left) cell
+          change RunsFor seekScratchInput
+            ({ inputTape := input.moveRight, outputTape := output } : Configuration)
+            ({ pc := 4, inputTape := (Tape.moveRight^[((cell :: rest).takeWhile Option.isSome).length + 1]) input.moveRight,
+               outputTape := output, halted := true } : Configuration)
+            (3 * (((cell :: rest).takeWhile Option.isSome).length + 1)) at hRest
+          have hMoves : ((some bit :: cell :: rest).takeWhile Option.isSome).length + 1 =
+              (((cell :: rest).takeWhile Option.isSome).length + 1) + 1 := by
+            simp [List.takeWhile, Nat.add_assoc]
+          dsimp only
+          rw [hMoves, Function.iterate_succ_apply]
+          simpa [input, Nat.mul_add, Nat.add_comm] using hCell.trans hRest
+
+/-- Exact head movement and transition count on arbitrary retained input.
+The native scanner consumes the leading bit cells and their first blank;
+it leaves all other cells on the same physical tape. `takeWhile` describes
+that trace mathematically and is not a machine instruction. -/
+theorem seekScratchInput_runs_from_anyTape (input output : Tape) :
+    let moves := ((input.current :: input.right).takeWhile Option.isSome).length + 1
+    RunsFor seekScratchInput
+      ({ inputTape := input, outputTape := output } : Configuration)
+      ({ pc := 4, inputTape := (Tape.moveRight^[moves]) input,
+         outputTape := output, halted := true } : Configuration) (3 * moves) :=
+  seekScratchInput_exact_cells input.left input.right input.current output
+
+/-- Every halted trace of the native scan has the exact retained input
+position computed by its leading bit cells. This identifies an existing
+physical tape, and does not replace it with a new input fixture. -/
+theorem seekScratchInput_halted_input_layout (input output : Tape)
+    (finish : Configuration) (used : Nat)
+    (run : RunsFor seekScratchInput
+      ({ inputTape := input, outputTape := output } : Configuration) finish used)
+    (hHalted : finish.halted = true) :
+    let moves := ((input.current :: input.right).takeWhile Option.isSome).length + 1
+    finish.inputTape = (Tape.moveRight^[moves]) input ∧ finish.outputTape = output := by
+  have hFinish := run.halted_finish_eq_of_no_randomBit
+    (seekScratchInput_runs_from_anyTape input output) hHalted rfl seekScratchInput_no_randomBit
+  rw [hFinish]
+  exact ⟨rfl, rfl⟩
+
+private theorem moveRight_scan_left (left right : List (Option Bool))
+    (current : Option Bool) :
+    let input : Tape := { left := left, current := current, right := right }
+    let leading := (current :: right).takeWhile Option.isSome
+    ((Tape.moveRight^[leading.length + 1]) input).left = none :: leading.reverse ++ left := by
+  induction right generalizing left current with
+  | nil =>
+      cases current <;> simp [List.takeWhile, Function.iterate_succ_apply, Tape.moveRight]
+  | cons cell rest ih =>
+      cases current with
+      | none => simp [List.takeWhile, Tape.moveRight]
+      | some bit =>
+          have hMoves : ((some bit :: cell :: rest).takeWhile Option.isSome).length + 1 =
+              (((cell :: rest).takeWhile Option.isSome).length + 1) + 1 := by
+            simp [List.takeWhile, Nat.add_assoc]
+          dsimp only
+          rw [hMoves, Function.iterate_succ_apply]
+          simpa [Tape.moveRight, List.takeWhile, List.reverse_cons, List.append_assoc] using
+            ih (some bit :: left) cell
+
+/-- The crossed blank remains immediately behind the returned head. All
+leading bit cells and the caller's earlier cells are retained to its left.
+This separator is a postcondition of the actual scan, including when the
+first blank lies outside the explicitly represented finite cells. -/
+theorem seekScratchInput_halted_input_left (input output : Tape)
+    (finish : Configuration) (used : Nat)
+    (run : RunsFor seekScratchInput
+      ({ inputTape := input, outputTape := output } : Configuration) finish used)
+    (hHalted : finish.halted = true) :
+    finish.inputTape.left =
+      none :: ((input.current :: input.right).takeWhile Option.isSome).reverse ++ input.left := by
+  obtain ⟨hInput, _⟩ := seekScratchInput_halted_input_layout input output finish used run hHalted
+  rw [hInput]
+  exact moveRight_scan_left input.left input.right input.current
+
+private theorem moveRight_iterate_right (input : Tape) (moves : Nat) :
+    ((Tape.moveRight^[moves]) input).right = input.right.drop moves := by
+  induction moves generalizing input with
+  | zero => simp
+  | succ moves ih =>
+      rw [Function.iterate_succ_apply, ih]
+      cases input with
+      | mk left current right =>
+          cases right <;> simp [Tape.moveRight]
+
+private theorem moveRight_iterate_current (input : Tape) (moves : Nat) :
+    ((Tape.moveRight^[moves]) input).current =
+      (input.current :: input.right).getD moves none := by
+  induction moves generalizing input with
+  | zero => simp
+  | succ moves ih =>
+      rw [Function.iterate_succ_apply, ih]
+      cases input with
+      | mk left current right =>
+          cases right with
+          | nil => cases moves <;> simp [Tape.moveRight]
+          | cons cell rest => simp [Tape.moveRight]
+
+/-- The cells still visible after right-only head motion are the original
+remaining cells with that many cells consumed. Past the represented end,
+the head observes the one virtual blank rather than a new input payload. -/
+theorem moveRight_iterate_remaining (input : Tape) (moves : Nat) :
+    let remaining := (input.current :: input.right).drop moves
+    ((Tape.moveRight^[moves]) input).current :: ((Tape.moveRight^[moves]) input).right =
+      if remaining = [] then [none] else remaining := by
+  induction moves generalizing input with
+  | zero => simp
+  | succ moves ih =>
+      rw [Function.iterate_succ_apply]
+      have h := ih input.moveRight
+      cases input with
+      | mk left current right =>
+          cases right with
+          | nil =>
+              cases moves with
+              | zero => simp [Tape.moveRight]
+              | succ moves => simpa [Tape.moveRight] using h
+          | cons cell rest => simpa [Tape.moveRight] using h
+
+/-- Exact current-cell and right-suffix observations after the scan. In
+particular an internal blank does not imply that all later cells are blank;
+the original cells beyond that separator remain available to the caller. -/
+theorem seekScratchInput_halted_input_cells (input output : Tape)
+    (finish : Configuration) (used : Nat)
+    (run : RunsFor seekScratchInput
+      ({ inputTape := input, outputTape := output } : Configuration) finish used)
+    (hHalted : finish.halted = true) :
+    let moves := ((input.current :: input.right).takeWhile Option.isSome).length + 1
+    finish.inputTape.current = (input.current :: input.right).getD moves none ∧
+      finish.inputTape.right = input.right.drop moves := by
+  obtain ⟨hInput, _⟩ := seekScratchInput_halted_input_layout input output finish used run hHalted
+  rw [hInput]
+  exact ⟨moveRight_iterate_current input _, moveRight_iterate_right input _⟩
+
+/-- The retained cells after a completed scan are the suffix past the first
+blank. If no represented cells remain, the physical head observes a blank
+with an empty right side. The extra `[none]` records that current cell. -/
+theorem seekScratchInput_halted_input_remaining (input output : Tape)
+    (finish : Configuration) (used : Nat)
+    (run : RunsFor seekScratchInput
+      ({ inputTape := input, outputTape := output } : Configuration) finish used)
+    (hHalted : finish.halted = true) :
+    let remaining := (input.current :: input.right).drop
+      (((input.current :: input.right).takeWhile Option.isSome).length + 1)
+    finish.inputTape.current :: finish.inputTape.right =
+      if remaining = [] then [none] else remaining := by
+  obtain ⟨hInput, _⟩ := seekScratchInput_halted_input_layout input output finish used run hHalted
+  rw [hInput]
+  exact moveRight_iterate_remaining input _
+
 private theorem seekScratchInput_finite_cells (left right : List (Option Bool))
     (current : Option Bool) (output : Tape) :
     ∃ (finish : Configuration) (used : Nat), used ≤ 3 * (right.length + 1) + 3 ∧
       RunsFor seekScratchInput
         ({ inputTape := { left := left, current := current, right := right }, outputTape := output } : Configuration)
         finish used ∧ finish.halted = true ∧ finish.outputTape = output := by
-  induction right generalizing left current with
-  | nil =>
-      let input : Tape := { left := left, current := current }
-      have hCell := seekScratchInput_cell_from_anyTape input output current rfl
-      cases current with
-      | none => exact ⟨_, 3, by simp, hCell, rfl, rfl⟩
-      | some bit =>
-          have hBlank := seekScratchInput_cell_from_anyTape input.moveRight output none rfl
-          exact ⟨_, 6, by simp, hCell.trans hBlank, rfl, rfl⟩
-  | cons cell rest ih =>
-      let input : Tape := { left := left, current := current, right := cell :: rest }
-      have hCell := seekScratchInput_cell_from_anyTape input output current rfl
-      cases current with
-      | none => exact ⟨_, 3, by simp, hCell, rfl, rfl⟩
-      | some bit =>
-          obtain ⟨finish, used, hBound, hRun, hHalted, hOutput⟩ := ih (some bit :: left) cell
-          change RunsFor seekScratchInput
-            ({ inputTape := input.moveRight, outputTape := output } : Configuration) finish used at hRun
-          refine ⟨finish, 3 + used, ?_, hCell.trans hRun, hHalted, hOutput⟩
-          simp only [List.length_cons]
-          omega
+  let input : Tape := { left := left, current := current, right := right }
+  let moves := ((current :: right).takeWhile Option.isSome).length + 1
+  let finish : Configuration :=
+    { pc := 4, inputTape := (Tape.moveRight^[moves]) input,
+      outputTape := output, halted := true }
+  refine ⟨finish, 3 * moves, ?_,
+    seekScratchInput_exact_cells left right current output, rfl, rfl⟩
+  have hPrefix := (List.takeWhile_sublist (l := current :: right) Option.isSome).length_le
+  simp only [List.length_cons] at hPrefix
+  dsimp only [moves]
+  omega
 
 /-- Linear stopping bound after arbitrary retained-tape computation. The
 scan stops at the first physical blank and moves one further cell. Saved

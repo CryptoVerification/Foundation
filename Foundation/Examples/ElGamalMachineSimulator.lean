@@ -1,4 +1,4 @@
-import Foundation.Constructions.ElGamal.MachineSimulatorSemantics
+import Foundation.Constructions.ElGamal.MachineSecurity
 
 namespace ElGamal.Examples.MachineSimulator
 
@@ -31,8 +31,8 @@ example (source : Program) (q : Nat → Nat) (hPolynomial : PolynomiallyBounded 
   N.simulatorBudget_uniform_polynomial source q hPolynomial
 
 /-- The actual compiler realizes the existing Phase 11 adversary family
-with a polynomial evaluation budget. All-bitstring stopping, required by
-machine PPT membership, is a separate remaining obligation. -/
+with a polynomial evaluation budget. The stronger all-bitstring stopping
+and target PPT membership checks follow below. -/
 example (F : InstanceFamily (representedINDCPAGoal sampling X embed))
     (A : AdversaryFamily (representedINDCPAGoal sampling X embed) F)
     (source : Program) (q : Nat → Nat) (hPolynomial : PolynomiallyBounded q)
@@ -48,7 +48,8 @@ example (F : InstanceFamily (representedINDCPAGoal sampling X embed))
 
 /-- The useful reachable-request source class supplies exactly the source
 code, polynomial stopping profile and realization premise consumed above.
-This example asserts target realization, not target PPT membership. -/
+This first check isolates semantic realization; the final check below
+also includes target machine-PPT membership. -/
 example (F : InstanceFamily (representedINDCPAGoal sampling X embed))
     (A : AdversaryFamily (representedINDCPAGoal sampling X embed) F)
     (hA : (representedINDCPAElementPPTClass sampling X embed M.instanceCode M.elementCode).admissible F A) :
@@ -61,5 +62,36 @@ example (F : InstanceFamily (representedINDCPAGoal sampling X embed))
   obtain ⟨targetBudget, hTargetPolynomial, hTargetRealize⟩ :=
     N.nativeSimulator_polynomial_realization F A source q hPolynomial hSource hRealize
   exact ⟨source, targetBudget, hTargetPolynomial, hTargetRealize⟩
+
+
+/-- All finite inputs, including malformed protocol requests, use the same
+fixed simulator code and a single polynomial worst-case stopping profile. -/
+example (source : Program) (q : Nat → Nat) (hPolynomial : PolynomiallyBounded q)
+    (hSource : ∀ input, HaltsWithin source input (q input.length)) :
+    PolynomialTime (N.simulatorCode source) :=
+  N.nativeSimulator_polynomialTime source q hPolynomial hSource
+
+/-- The useful source class maps to actual DDH PPT membership, using native
+code, exact realization and the represented target input-size bound. -/
+example (F : InstanceFamily (representedINDCPAGoal sampling X embed))
+    (A : AdversaryFamily (representedINDCPAGoal sampling X embed) F)
+    (hA : (representedINDCPAElementPPTClass sampling X embed M.instanceCode M.elementCode).admissible F A) :
+    (representedDDHInterface sampling X embed M.instanceCode
+      (fun n x => (M.elementCode n x).triple)).pptClass.admissible
+      ((representedReduction sampling X embed).mapFamily F)
+      ((representedReduction sampling X embed).mapAdversaryFamily F A) :=
+  N.nativeSimulator_preservesAdmissibility.preserves F A hA
+
+/-- The final security transport uses only DDH hardness and the explicit
+computational representation/normalization assumptions. No external `T`
+representing an abstract simulator or resource transformation is supplied. -/
+example (F : InstanceFamily (representedINDCPAGoal sampling X embed))
+    (hDDH : SecureOnWithin (representedDDHGoal sampling X embed)
+      (representedDDHInterface sampling X embed M.instanceCode
+        (fun n x => (M.elementCode n x).triple)).pptClass
+      ((representedReduction sampling X embed).mapFamily F)) :
+    SecureOnWithin (representedINDCPAGoal sampling X embed)
+      (representedINDCPAElementPPTClass sampling X embed M.instanceCode M.elementCode) F :=
+  secureRepresentedINDCPA_of_secureRepresentedDDH_nativeMachinePPT sampling X embed M N F hDDH
 
 end ElGamal.Examples.MachineSimulator

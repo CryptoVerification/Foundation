@@ -217,4 +217,28 @@ theorem nativeSimulator_haltsWithin_inputMonomial (N : RepresentedChooseNormaliz
     List.length_replicate, List.length_nil, FiniteBitEncoding.delimit_length]
   omega
 
+
+/-- The syntactically constructed simulator is polynomial time on every
+finite bitstring, including malformed protocol inputs and arbitrary raw
+source replies. Each call uses its actual request length. The group and
+normalization certificates supply their own all-input stopping bounds;
+no abstract simulator or external program transformation is assumed. -/
+theorem nativeSimulator_polynomialTime (N : RepresentedChooseNormalizer M)
+    (source : Program) (q : Nat → Nat) (hPolynomial : PolynomiallyBounded q)
+    (hSource : ∀ input, HaltsWithin source input (q input.length)) :
+    PolynomialTime (N.simulatorCode source) := by
+  obtain ⟨sourceCoefficient, sourceDegree, hSourceBound⟩ :=
+    MachineAdversaryInterface.global_monomial_of_polynomiallyBounded hPolynomial
+  obtain ⟨normalizationCoefficient, normalizationDegree, hNormalizationBound⟩ :=
+    MachineAdversaryInterface.global_monomial_of_polynomiallyBounded N.budget_polynomial
+  obtain ⟨multiplyCoefficient, multiplyDegree, hMultiplyBound⟩ :=
+    MachineAdversaryInterface.global_monomial_of_polynomiallyBounded M.multiplyBudget_polynomial
+  exact chooseChallengeGuessCompile_polynomialTime_of_monomials source N.program M.multiplyProgram source
+    sourceCoefficient sourceDegree normalizationCoefficient normalizationDegree
+    multiplyCoefficient multiplyDegree sourceCoefficient sourceDegree
+    (fun request => (hSource request).mono (hSourceBound request.length))
+    (fun request => (N.halts request).mono (hNormalizationBound request.length))
+    (fun request => (M.multiplyHalts request).mono (hMultiplyBound request.length))
+    (fun request => (hSource request).mono (hSourceBound request.length))
+
 end ElGamal.RepresentedChooseNormalizer

@@ -211,36 +211,65 @@ private theorem copyBitstring_cell_run (input output : Tape) (bit : Bool)
       exact RunsFor.succ (RunsFor.succ (RunsFor.succ
         (RunsFor.succ (RunsFor.succ (RunsFor.zero _) hSelect) hWrite) hInput) hOutput) hBack
 
+private theorem copyBitstring_fresh_move (before : List (Option Bool)) (blanks : Nat) (bit : Bool) :
+    (({ left := before, right := List.replicate blanks none } : Tape).write (some bit)).moveRight =
+      { left := some bit :: before, right := List.replicate (blanks - 1) none } := by
+  cases blanks <;> simp [Tape.write, Tape.moveRight, List.replicate_succ]
+
 private theorem copyBitstring_finite_run (left right : List (Option Bool))
     (current : Option Bool) (output : Tape) :
     ∃ (finish : Configuration) (used : Nat), used ≤ 6 * (right.length + 1) + 2 ∧
       RunsFor copyBitstring
         ({ inputTape := { left := left, current := current, right := right }, outputTape := output } : Configuration)
-        finish used ∧ finish.halted = true := by
+        finish used ∧ finish.halted = true ∧ finish.inputTape.current = none ∧
+      finish.inputTape = (Tape.moveRight^[((current :: right).takeWhile Option.isSome).length])
+        { left := left, current := current, right := right } ∧
+      ∀ before blanks, output = ({ left := before, right := List.replicate blanks none } : Tape) →
+        ∃ (bits : List Bool) (remaining : Nat),
+          finish.outputTape =
+            { left := bits.reverse.map some ++ before, right := List.replicate remaining none } := by
   induction right generalizing left current output with
   | nil =>
       cases current with
-      | none => exact ⟨_, 2, by simp, copyBitstring_blank_run _ output rfl, rfl⟩
+      | none =>
+          refine ⟨_, 2, by simp, copyBitstring_blank_run _ output rfl, rfl, rfl, rfl, ?_⟩
+          intro before blanks hOutput
+          exact ⟨[], blanks, hOutput⟩
       | some bit =>
           let input : Tape := { left := left, current := some bit }
           have hBit := copyBitstring_cell_run input output bit rfl
           have hBlank := copyBitstring_blank_run input.moveRight (output.write (some bit)).moveRight rfl
-          refine ⟨_, (if bit then 5 else 6) + 2, ?_, hBit.trans hBlank, rfl⟩
-          cases bit <;> decide
+          refine ⟨_, (if bit then 5 else 6) + 2, ?_, hBit.trans hBlank, rfl, rfl, rfl, ?_⟩
+          · cases bit <;> decide
+          · intro before blanks hOutput
+            exact ⟨[bit], blanks - 1, by
+              change (output.write (some bit)).moveRight = _
+              rw [hOutput, copyBitstring_fresh_move]
+              simp⟩
   | cons cell rest ih =>
       cases current with
       | none =>
-          exact ⟨_, 2, by simp, copyBitstring_blank_run _ output rfl, rfl⟩
+          refine ⟨_, 2, by simp, copyBitstring_blank_run _ output rfl, rfl, rfl, rfl, ?_⟩
+          intro before blanks hOutput
+          exact ⟨[], blanks, hOutput⟩
       | some bit =>
           let input : Tape := { left := left, current := some bit, right := cell :: rest }
-          obtain ⟨finish, used, hBound, hRun, hHalted⟩ :=
+          obtain ⟨finish, used, hBound, hRun, hHalted, hInputBlank, hInput, hLayout⟩ :=
             ih (some bit :: left) cell (output.write (some bit)).moveRight
           have hBit := copyBitstring_cell_run input output bit rfl
           change RunsFor copyBitstring
             ({ inputTape := input.moveRight, outputTape := (output.write (some bit)).moveRight } : Configuration)
             finish used at hRun
-          refine ⟨finish, (if bit then 5 else 6) + used, ?_, hBit.trans hRun, hHalted⟩
-          cases bit <;> simp only [List.length_cons, Bool.false_eq_true, ↓reduceIte] <;> omega
+          refine ⟨finish, (if bit then 5 else 6) + used, ?_, hBit.trans hRun,
+            hHalted, hInputBlank, ?_, ?_⟩
+          · cases bit <;> simp only [List.length_cons, Bool.false_eq_true, ↓reduceIte] <;> omega
+          · simpa only [List.takeWhile, Option.isSome_some, Bool.true_eq_false,
+              ↓reduceIte, List.length_cons, Function.iterate_succ_apply, input, Tape.moveRight] using hInput
+          · intro before blanks hOutput
+            obtain ⟨bits, remaining, hFinish⟩ := hLayout (some bit :: before) (blanks - 1)
+              (by rw [hOutput, copyBitstring_fresh_move])
+            refine ⟨bit :: bits, remaining, ?_⟩
+            simpa [List.reverse_cons, List.map_append, List.append_assoc] using hFinish
 
 /-- Linear stopping bound on arbitrary finite tapes, including internal
 blanks and dirty output cells. The scan stops at the first input blank.
@@ -250,10 +279,63 @@ theorem copyBitstring_terminates_from_anyTape (input output : Tape) :
     ∃ (finish : Configuration) (used : Nat), used ≤ 6 * input.cells + 2 ∧
       RunsFor copyBitstring ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
       finish.halted = true := by
-  obtain ⟨finish, used, hBound, hRun, hHalted⟩ :=
+  obtain ⟨finish, used, hBound, hRun, hHalted, _hInputBlank, _hInput, _hLayout⟩ :=
     copyBitstring_finite_run input.left input.right input.current output
   refine ⟨finish, used, ?_, hRun, hHalted⟩
   dsimp only [Tape.cells]
   omega
+
+/-- The source head stops at its first blank after exactly the displayed
+number of one-cell moves. In particular, a halted copy retains the cells
+after that blank. This applies to dirty destinations and malformed fields;
+the list expression describes native movement rather than a tape reset. -/
+theorem copyBitstring_halted_input_layout (input output : Tape)
+    (finish : Configuration) (used : Nat)
+    (run : RunsFor copyBitstring
+      ({ inputTape := input, outputTape := output } : Configuration) finish used)
+    (hHalted : finish.halted = true) :
+    finish.inputTape =
+      (Tape.moveRight^[((input.current :: input.right).takeWhile Option.isSome).length]) input ∧
+      finish.inputTape.current = none := by
+  obtain ⟨target, targetTime, _hBound, targetRun, targetHalt, targetBlank, targetInput, _hLayout⟩ :=
+    copyBitstring_finite_run input.left input.right input.current output
+  have hFinish := run.halted_finish_eq_of_no_randomBit targetRun
+    hHalted targetHalt copyBitstring_no_randomBit
+  rw [hFinish]
+  exact ⟨targetInput, targetBlank⟩
+
+/-- Contiguous copying appends one finite bit block to the caller's saved
+output cells, including when that block is empty. The actual source head
+stops on a blank; the destination retains its blank right frontier. -/
+theorem copyBitstring_terminates_with_retained_output (input : Tape)
+    (before : List (Option Bool)) (blanks : Nat) :
+    ∃ (finish : Configuration) (used : Nat) (bits : List Bool) (remaining : Nat),
+      used ≤ 6 * input.cells + 2 ∧
+      RunsFor copyBitstring
+        ({ inputTape := input, outputTape := { left := before, right := List.replicate blanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧ finish.inputTape.current = none ∧
+      finish.outputTape =
+        { left := bits.reverse.map some ++ before, right := List.replicate remaining none } := by
+  obtain ⟨finish, used, hBound, run, hHalted, hInputBlank, _hInput, hLayout⟩ :=
+    copyBitstring_finite_run input.left input.right input.current
+      { left := before, right := List.replicate blanks none }
+  obtain ⟨bits, remaining, hOutput⟩ := hLayout before blanks rfl
+  refine ⟨finish, used, bits, remaining, ?_, run, hHalted, hInputBlank, hOutput⟩
+  dsimp only [Tape.cells]
+  omega
+
+/-- Contiguous copying on arbitrary finite input tapes preserves a fresh
+output frontier. An internal input blank ends the actual scan without
+requiring a valid protocol field or silently discarding caller storage. -/
+theorem copyBitstring_terminates_with_output_layout (input : Tape)
+    (before : List (Option Bool)) (blanks : Nat) :
+    ∃ finish used after remaining, used ≤ 6 * input.cells + 2 ∧
+      RunsFor copyBitstring
+        ({ inputTape := input, outputTape := { left := before, right := List.replicate blanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧
+      finish.outputTape = { left := after, right := List.replicate remaining none } := by
+  obtain ⟨finish, used, bits, remaining, hBound, run, hHalted, _hInputBlank, hOutput⟩ :=
+    copyBitstring_terminates_with_retained_output input before blanks
+  exact ⟨finish, used, bits.reverse.map some ++ before, remaining, hBound, run, hHalted, hOutput⟩
 
 end Machine

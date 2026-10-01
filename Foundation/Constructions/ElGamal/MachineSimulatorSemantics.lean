@@ -208,8 +208,8 @@ theorem nativeSimulator_realizes (N : RepresentedChooseNormalizer M)
 /-- A polynomial source stopping profile produces a polynomial target
 evaluation budget and the exact Phase 11 transformed adversary family.
 The budget halts every represented DDH request by construction. Membership
-in `pptClass` additionally requires termination on malformed bitstrings,
-which is deliberately not asserted by this theorem. No externally supplied
+in `pptClass` additionally requires the all-bitstring stopping certificate,
+provided by `nativeSimulator_polynomialTime` and used below. No externally supplied
 abstract program transformation is needed for this semantic construction. -/
 theorem nativeSimulator_polynomial_realization (N : RepresentedChooseNormalizer M)
     (F : InstanceFamily (representedINDCPAGoal sampling X embed))
@@ -231,5 +231,31 @@ theorem nativeSimulator_polynomial_realization (N : RepresentedChooseNormalizer 
       ((PolynomiallyBounded.id.add (PolynomiallyBounded.const 1)).pow degree)
   exact ⟨targetBudget, hTargetPolynomial,
     N.nativeSimulator_realizes F A source q targetBudget hSource hRealize hHalts⟩
+
+
+/-- Native code and the explicit computational representation preserve the
+nonvacuous reachable-request IND-CPA machine class. The target witness is
+exactly `simulatorCode source`, with one all-input polynomial stopping
+budget. Its semantic compatibility is the existing native simulation law,
+and its DDH input-size bound follows from the representation lengths. -/
+theorem nativeSimulator_preservesAdmissibility (N : RepresentedChooseNormalizer M) :
+    (representedReduction sampling X embed).PreservesAdmissibility
+      (representedINDCPAElementPPTClass sampling X embed M.instanceCode M.elementCode)
+      (representedDDHInterface sampling X embed M.instanceCode
+        (fun n x => (M.elementCode n x).triple)).pptClass := by
+  constructor
+  intro F A hA
+  obtain ⟨source, q, _sourceSize, hPolynomial, hSource, _hSize, _hChoose, _hGuess, hRealize⟩ := hA
+  obtain ⟨targetBudget, hTargetPolynomial, hTarget⟩ :=
+    N.nativeSimulator_polynomialTime source q hPolynomial hSource
+  obtain ⟨targetSize, hTargetSize⟩ := Machine.ddhReindexedTripleInputSizeBound
+    (concreteDDHSemantics sampling) X (fun n x => (embed n x).params)
+    M.instanceCode M.elementCode M.instanceCodeLength M.elementCodeLength
+    M.instanceCode_length_le M.elementCode_length_le
+    M.instanceCodeLength_polynomial M.elementCodeLength_polynomial
+    ((representedReduction sampling X embed).mapFamily F)
+  refine ⟨N.simulatorCode source, targetBudget, targetSize, hTargetPolynomial, hTarget, hTargetSize, ?_⟩
+  exact N.nativeSimulator_realizes F A source q targetBudget hSource hRealize
+    (fun n x first second last => hTarget _)
 
 end ElGamal.RepresentedChooseNormalizer

@@ -1,5 +1,6 @@
 import Foundation.Machine.DelimitedInput
 import Foundation.Machine.DelimitedOutput
+import Foundation.Machine.DelimitedCopy
 import Foundation.Machine.FramedOutput
 import Foundation.Constructions.ElGamal.MachineRepresented
 
@@ -82,5 +83,66 @@ example (pre suffix : Program) (returnPc : Nat) (bits : List Bool) :
       ((Configuration.initial bits).rebasePc pre.length) (writeFrameSteps bits) =
       PMF.pure ((writeFrameFinish bits).resumeAt returnPc) :=
   writeFrame_withSubroutine_eval _ _ _ _
+
+
+-- Arbitrary caller storage is permitted by the stopping assertion. The
+-- valid-field serialization theorem remains a separate correctness result.
+example (input output : Tape) :
+    ∃ finish used, used ≤ 8 * input.cells + 4 ∧
+      RunsFor writeDelimited
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧
+      finish.halted = true := writeDelimited_terminates_from_anyTape _ _
+
+example (input output : Tape) (finish : Configuration)
+    (trace : PaddedRunsFor writeDelimited
+      ({ inputTape := input, outputTape := output } : Configuration) finish (8 * input.cells + 4)) :
+    finish.halted = true := writeDelimited_haltsFrom_anyTape _ _ _ trace
+
+-- A final marker with no payload still stops while the original caller's
+-- nonblank scratch cells remain part of the actual starting configuration.
+example (output : Tape) :
+    ∃ finish used, used ≤ 22 ∧
+      RunsFor copyDelimited
+        ({ inputTape := { current := some true }, outputTape := output } : Configuration)
+        finish used ∧ finish.halted = true := by
+  simpa [Tape.cells] using copyDelimited_terminates_from_anyTape
+    ({ current := some true } : Tape) output
+
+example (input output : Tape) (finish : Configuration)
+    (trace : PaddedRunsFor copyDelimited
+      ({ inputTape := input, outputTape := output } : Configuration) finish (10 * input.cells + 12)) :
+    finish.halted = true := copyDelimited_haltsFrom_anyTape _ _ _ trace
+
+-- No field-validity premise is needed to track the original retained cells.
+-- A dangling marker or internal blank still leaves an actual input suffix.
+example {start finish : Configuration} {used : Nat}
+    (trace : RunsFor copyDelimited start finish used) :
+    ∃ count, finish.inputTape.right = start.inputTape.right.drop count :=
+  copyDelimited_input_right_suffix trace
+
+-- Writing a malformed field may serialize only its available prefix, but
+-- the native writes keep the blank output frontier needed by later stages.
+example (input : Tape) (before : List (Option Bool)) (blanks : Nat) :
+    ∃ finish used after remaining,
+      used ≤ 8 * input.cells + 4 ∧
+      RunsFor writeDelimited
+        ({ inputTape := input, outputTape := { left := before, right := List.replicate blanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧
+      finish.outputTape = { left := after, right := List.replicate remaining none } :=
+  writeDelimited_terminates_with_output_layout _ _ _
+
+-- Copying into scratch with a reserved separator appends a single finite
+-- bit block. The separator and earlier caller cells remain behind it,
+-- including when malformed input makes the copied block empty.
+example (input : Tape) (before : List (Option Bool)) (blanks : Nat) :
+    ∃ (finish : Configuration) (used : Nat) (bits : List Bool) (remaining : Nat),
+      used ≤ 6 * input.cells + 2 ∧
+      RunsFor copyBitstring
+        ({ inputTape := input,
+           outputTape := { left := none :: before, right := List.replicate blanks none } } : Configuration)
+        finish used ∧ finish.halted = true ∧ finish.inputTape.current = none ∧
+      finish.outputTape =
+        { left := bits.reverse.map some ++ none :: before, right := List.replicate remaining none } :=
+  copyBitstring_terminates_with_retained_output input (none :: before) blanks
 
 end Machine.Examples

@@ -363,4 +363,316 @@ theorem selectedMultiplyGuessBudget_bound (qMultiply qGuess : Nat → Nat)
   simp only [Nat.mul_assoc] at hCallScaled hGuessScaled hTerminalScaled ⊢
   omega
 
+/-- The real message and operand preparation are charged before the
+all-input multiplication/guess stopping envelope. Storage growth is bounded
+by those actual native transitions, including malformed-input scans. -/
+def messageMultiplyGuessRetainedBudget
+    (multiplyCoefficient multiplyDegree guessCoefficient guessDegree storage : Nat) : Nat :=
+  let prepareTime := 1000000000000000000000000000000 * (storage + 1)
+  prepareTime + multiplyGuessRetainedSuffixBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree
+    (storage + prepareTime) + 2
+
+theorem messageMultiplyGuessRetainedBudget_polynomial_of_profile
+    (multiplyCoefficient multiplyDegree guessCoefficient guessDegree : Nat)
+    {size : Nat → Nat} (hSize : PolynomiallyBounded size) :
+    PolynomiallyBounded (fun n =>
+      messageMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree (size n)) := by
+  have hPrepare := (PolynomiallyBounded.const 1000000000000000000000000000000).mul
+    (hSize.add (PolynomiallyBounded.const 1))
+  have hCall := multiplyGuessRetainedSuffixBudget_polynomial_of_profile
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree (hSize.add hPrepare)
+  exact (hPrepare.add hCall).add (PolynomiallyBounded.const 2)
+
+theorem messageMultiplyGuessRetainedBudget_polynomial
+    (multiplyCoefficient multiplyDegree guessCoefficient guessDegree : Nat) :
+    PolynomiallyBounded
+      (messageMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree) :=
+  messageMultiplyGuessRetainedBudget_polynomial_of_profile
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree PolynomiallyBounded.id
+
+theorem messageMultiplyGuessRetainedBudget_monotone
+    (multiplyCoefficient multiplyDegree guessCoefficient guessDegree : Nat) :
+    Monotone (messageMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree) := by
+  intro a b h
+  have hPrepare := Nat.mul_le_mul_left 1000000000000000000000000000000 (Nat.add_le_add_right h 1)
+  have hCall := multiplyGuessRetainedSuffixBudget_monotone
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree (Nat.add_le_add h hPrepare)
+  exact Nat.add_le_add_right (Nat.add_le_add hPrepare hCall) 2
+
+/-- Start at the actual three retained raw blocks after public-prefix
+preparation. The message and operand constructors execute on their real
+returned tapes, then both native calls and guess finalization halt on every
+branch. No raw field is required to have a valid cryptographic encoding. -/
+theorem messageMultiplyGuessCompile_haltsFrom_retained_frontiers
+    (multiplySource guessSource : Program)
+    (multiplyCoefficient multiplyDegree guessCoefficient guessDegree : Nat)
+    (hMultiply : ∀ request : List Bool,
+      HaltsWithin multiplySource request (multiplyCoefficient * (request.length + 1)^multiplyDegree))
+    (hGuess : ∀ request : List Bool,
+      HaltsWithin guessSource request (guessCoefficient * (request.length + 1)^guessDegree))
+    (before savedOutput : List (Option Bool))
+    (originalPrefix original reply canonical : List Bool) (inputBlanks outputBlanks : Nat) :
+    let output : Tape := { left := savedOutput, right := List.replicate outputBlanks none }
+    let start := seekStoredInputScratchStart
+      (originalPrefix.reverse.map some ++ none :: before) original reply canonical inputBlanks output
+    ∀ finish, PaddedRunsFor (messageMultiplyGuessCompile multiplySource guessSource) start finish
+      (messageMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree
+        (sourceStorage start)) → finish.halted = true := by
+  dsimp only
+  let output : Tape := { left := savedOutput, right := List.replicate outputBlanks none }
+  let start := seekStoredInputScratchStart
+    (originalPrefix.reverse.map some ++ none :: before) original reply canonical inputBlanks output
+  let storage := sourceStorage start
+  let prepareTime := 1000000000000000000000000000000 * (storage + 1)
+  let callTime := multiplyGuessRetainedSuffixBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree
+    (storage + prepareTime)
+  obtain ⟨messageFinish, operandFinish, messageTime, operandTime, saved, remaining,
+    moves, selected, remainingInput, hTime, messageRun, messageHalt, operandRun,
+    operandHalt, _hMoves, hOutput, hCurrent, hRight⟩ :=
+    prepareMultiplyMessage_operands_terminate_with_input_output_layout
+      before savedOutput originalPrefix original reply canonical inputBlanks outputBlanks
+  let restored := restoreInputBeforeScratchFinish before (originalPrefix ++ original)
+    reply canonical selected (List.replicate remainingInput none) {}
+  let cells := (originalPrefix ++ original).map some ++ none :: reply.map some ++
+    none :: canonical.map some ++ none :: selected.map some ++ none :: List.replicate remainingInput none
+  have hRaw : restored.inputTape.current :: restored.inputTape.right = cells := by
+    cases hOriginal : originalPrefix ++ original <;>
+      simp [restored, cells, restoreInputBeforeScratchFinish, restoreStoredInputFinish,
+        Tape.moveRight, hOriginal, List.append_assoc]
+  have hMoved : ∀ i,
+      (((Tape.moveRight^[moves]) restored.inputTape).current ::
+        ((Tape.moveRight^[moves]) restored.inputTape).right).getD i none = (cells.drop moves).getD i none := by
+    intro i
+    rw [moveRight_iterate_remaining, hRaw]
+    split
+    · rename_i hEmpty
+      simp [hEmpty]
+    · rfl
+  have hCells : ∀ i, (operandFinish.inputTape.current :: operandFinish.inputTape.right).getD i none =
+      (cells.drop moves).getD i none := by
+    intro i
+    have hPhysical : (operandFinish.inputTape.current :: operandFinish.inputTape.right).getD i none =
+        (((Tape.moveRight^[moves]) restored.inputTape).current ::
+          ((Tape.moveRight^[moves]) restored.inputTape).right).getD i none := by
+      cases i with
+      | zero => simpa only [List.getD_cons_zero] using hCurrent
+      | succ i => simpa only [List.getD_cons_succ] using hRight i
+    exact hPhysical.trans (hMoved i)
+  have hPrepare : messageTime + operandTime ≤ prepareTime := by
+    change messageTime + operandTime ≤ 1000000000000000000000000000000 * storage +
+      1000000000000000000000000000000 at hTime
+    dsimp only [prepareTime]
+    omega
+  have hMessageStorage := sourceStorage_le_of_run messageRun
+  have hOperandStorage := sourceStorage_le_of_run operandRun
+  have hStorage : sourceStorage operandFinish ≤ storage + prepareTime := by
+    change sourceStorage messageFinish ≤ storage + messageTime at hMessageStorage
+    change sourceStorage operandFinish ≤ sourceStorage messageFinish + operandTime at hOperandStorage
+    omega
+  have hCallsSmall := multiplyThenGuessCompile_haltsFrom_retained_suffix multiplySource guessSource
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree hMultiply hGuess
+    operandFinish.inputTape saved remaining (originalPrefix ++ original) reply canonical selected remainingInput moves hCells
+  have hActual :
+      ({ inputTape := operandFinish.inputTape,
+         outputTape := { left := saved, right := List.replicate remaining none } } : Configuration) =
+      operandFinish.resumeAt 0 := by
+    simp only [Configuration.resumeAt, hOutput]
+  rw [hActual] at hCallsSmall
+  have hCallsBound := multiplyGuessRetainedSuffixBudget_monotone
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree hStorage
+  have hCalls (finish : Configuration)
+      (run : PaddedRunsFor (multiplyThenGuessCompile multiplySource guessSource) (operandFinish.resumeAt 0) finish callTime) :
+      finish.halted = true := by
+    have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr run
+    rw [evalConfigWithin_eq_of_le _ _ _ _ hCallsBound hCallsSmall] at hMem
+    exact hCallsSmall finish ((mem_support_evalConfigWithin_iff _ _ _ _).mp hMem)
+  have hOperandEval := operandRun.evalConfigWithin_eq_pure_of_no_randomBit prepareMultiplyOperands_no_randomBit
+  have hOperandFirst := operandRun.haltsFrom_of_no_randomBit operandHalt prepareMultiplyOperands_no_randomBit
+    (Nat.le_refl operandTime)
+  have hOperandSecond (c : Configuration)
+      (hc : c ∈ (evalConfigWithin prepareMultiplyOperands (messageFinish.resumeAt 0) operandTime).support)
+      (d : Configuration)
+      (run : PaddedRunsFor (multiplyThenGuessCompile multiplySource guessSource) (c.resumeAt 0) d callTime) :
+      d.halted = true := by
+    rw [hOperandEval, PMF.mem_support_pure_iff] at hc
+    subst c
+    exact hCalls d run
+  have hOperandLaw := Program.evalConfigWithin_twoStages_configuration prepareMultiplyOperands
+    (multiplyThenGuessCompile multiplySource guessSource) (messageFinish.resumeAt 0) rfl rfl
+    operandTime callTime hOperandFirst hOperandSecond
+  change evalConfigWithin (operandsMultiplyGuessCompile multiplySource guessSource) (messageFinish.resumeAt 0)
+    (operandTime + (callTime + 1)) = _ at hOperandLaw
+  have hOperandStop (finish : Configuration)
+      (run : PaddedRunsFor (operandsMultiplyGuessCompile multiplySource guessSource) (messageFinish.resumeAt 0) finish
+        (operandTime + (callTime + 1))) : finish.halted = true := by
+    have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr run
+    rw [hOperandLaw, PMF.mem_support_bind_iff] at hMem
+    obtain ⟨middle, _hMiddle, hFinish⟩ := hMem
+    rw [PMF.mem_support_map_iff] at hFinish
+    obtain ⟨target, _hTarget, rfl⟩ := hFinish
+    rfl
+  have hMessageEval := messageRun.evalConfigWithin_eq_pure_of_no_randomBit prepareMultiplyMessage_no_randomBit
+  have hMessageFirst := messageRun.haltsFrom_of_no_randomBit messageHalt prepareMultiplyMessage_no_randomBit
+    (Nat.le_refl messageTime)
+  have hMessageSecond (c : Configuration)
+      (hc : c ∈ (evalConfigWithin prepareMultiplyMessage start messageTime).support)
+      (d : Configuration)
+      (run : PaddedRunsFor (operandsMultiplyGuessCompile multiplySource guessSource) (c.resumeAt 0) d
+        (operandTime + (callTime + 1))) : d.halted = true := by
+    rw [hMessageEval, PMF.mem_support_pure_iff] at hc
+    subst c
+    exact hOperandStop d run
+  have hLaw := Program.evalConfigWithin_twoStages_configuration prepareMultiplyMessage
+    (operandsMultiplyGuessCompile multiplySource guessSource) start rfl rfl
+    messageTime (operandTime + (callTime + 1)) hMessageFirst hMessageSecond
+  change evalConfigWithin (messageMultiplyGuessCompile multiplySource guessSource) start
+    (messageTime + ((operandTime + (callTime + 1)) + 1)) = _ at hLaw
+  have hSmall (finish : Configuration)
+      (run : PaddedRunsFor (messageMultiplyGuessCompile multiplySource guessSource) start finish
+        (messageTime + ((operandTime + (callTime + 1)) + 1))) : finish.halted = true := by
+    have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr run
+    rw [hLaw, PMF.mem_support_bind_iff] at hMem
+    obtain ⟨middle, _hMiddle, hFinish⟩ := hMem
+    rw [PMF.mem_support_map_iff] at hFinish
+    obtain ⟨target, _hTarget, rfl⟩ := hFinish
+    rfl
+  have hBound : messageTime + ((operandTime + (callTime + 1)) + 1) ≤
+      messageMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree storage := by
+    change messageTime + ((operandTime + (callTime + 1)) + 1) ≤ prepareTime + callTime + 2
+    omega
+  intro finish run
+  have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr run
+  rw [evalConfigWithin_eq_of_le _ _ _ _ hBound hSmall] at hMem
+  exact hSmall finish ((mem_support_evalConfigWithin_iff _ _ _ _).mp hMem)
+
+
+/-- Charge the real prefix restoration before the malformed raw-block
+message/multiply/guess continuation. The fixture's conservative size bound
+comes from the retained cells of that restoration, not a free tape reset. -/
+def selectedMultiplyGuessRetainedBudget
+    (multiplyCoefficient multiplyDegree guessCoefficient guessDegree storage : Nat) : Nat :=
+  200000 * (storage + 1) +
+    messageMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree
+      (10000000 * (storage + 1)) + 1
+
+theorem selectedMultiplyGuessRetainedBudget_polynomial_of_profile
+    (multiplyCoefficient multiplyDegree guessCoefficient guessDegree : Nat)
+    {size : Nat → Nat} (hSize : PolynomiallyBounded size) :
+    PolynomiallyBounded (fun n =>
+      selectedMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree (size n)) := by
+  have hSuccessor := hSize.add (PolynomiallyBounded.const 1)
+  have hPrepare := (PolynomiallyBounded.const 200000).mul hSuccessor
+  have hContinuation := messageMultiplyGuessRetainedBudget_polynomial_of_profile
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree
+    ((PolynomiallyBounded.const 10000000).mul hSuccessor)
+  exact (hPrepare.add hContinuation).add (PolynomiallyBounded.const 1)
+
+theorem selectedMultiplyGuessRetainedBudget_polynomial
+    (multiplyCoefficient multiplyDegree guessCoefficient guessDegree : Nat) :
+    PolynomiallyBounded
+      (selectedMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree) :=
+  selectedMultiplyGuessRetainedBudget_polynomial_of_profile
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree PolynomiallyBounded.id
+
+theorem selectedMultiplyGuessRetainedBudget_monotone
+    (multiplyCoefficient multiplyDegree guessCoefficient guessDegree : Nat) :
+    Monotone (selectedMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree) := by
+  intro a b h
+  have hSuccessor := Nat.add_le_add_right h 1
+  have hPrepare := Nat.mul_le_mul_left 200000 hSuccessor
+  have hContinuation := messageMultiplyGuessRetainedBudget_monotone
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree (Nat.mul_le_mul_left 10000000 hSuccessor)
+  exact Nat.add_le_add_right (Nat.add_le_add hPrepare hContinuation) 1
+
+/-- Native prefix preparation followed by the full multiplication/guess
+continuation stops on every branch even when the selected response is an
+arbitrary finite raw bitstring. Both embedded programs halt on all of their
+actual requests. The caller's saved input and output prefixes are retained. -/
+theorem selectedMultiplyGuessCompile_haltsFrom_raw_frontier
+    (multiplySource guessSource : Program)
+    (multiplyCoefficient multiplyDegree guessCoefficient guessDegree : Nat)
+    (hMultiply : ∀ request : List Bool,
+      HaltsWithin multiplySource request (multiplyCoefficient * (request.length + 1)^multiplyDegree))
+    (hGuess : ∀ request : List Bool,
+      HaltsWithin guessSource request (guessCoefficient * (request.length + 1)^guessDegree))
+    (input : Tape) (savedOutput : List (Option Bool)) (outputBlanks : Nat)
+    (raw : List Bool) (inputBlanks : Nat)
+    (hForward : input.current :: input.right = raw.map some ++ none :: List.replicate inputBlanks none) :
+    let start : Configuration :=
+      { inputTape := input, outputTape := { left := savedOutput, right := List.replicate outputBlanks none } }
+    ∀ finish, PaddedRunsFor (selectedMultiplyGuessCompile multiplySource guessSource) start finish
+      (selectedMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree
+        (sourceStorage start)) → finish.halted = true := by
+  dsimp only
+  let start : Configuration :=
+    { inputTape := input, outputTape := { left := savedOutput, right := List.replicate outputBlanks none } }
+  let storage := sourceStorage start
+  let continuationTime := messageMultiplyGuessRetainedBudget
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree (10000000 * (storage + 1))
+  obtain ⟨prepared, used, before, originalPrefix, original, reply, canonical, after, remaining,
+    hTime, run, hHalt, hEquivalent, hFixtureSize⟩ :=
+    prepareMultiplyPrefix_terminates_with_retained_frontiers input savedOutput outputBlanks raw inputBlanks hForward
+  let fixture := seekStoredInputScratchStart
+    (originalPrefix.reverse.map some ++ none :: before) original reply canonical 0
+    { left := after, right := List.replicate remaining none }
+  have hMessage := messageMultiplyGuessCompile_haltsFrom_retained_frontiers multiplySource guessSource
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree hMultiply hGuess
+    before after originalPrefix original reply canonical 0 remaining
+  have hMessageTime := messageMultiplyGuessRetainedBudget_monotone
+    multiplyCoefficient multiplyDegree guessCoefficient guessDegree hFixtureSize
+  change messageMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree
+    (sourceStorage fixture) ≤ continuationTime at hMessageTime
+  change ∀ finish, PaddedRunsFor (messageMultiplyGuessCompile multiplySource guessSource) fixture finish
+    (messageMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree
+      (sourceStorage fixture)) → finish.halted = true at hMessage
+  have hFixtureStop (finish : Configuration)
+      (run : PaddedRunsFor (messageMultiplyGuessCompile multiplySource guessSource) fixture finish continuationTime) :
+      finish.halted = true := by
+    have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr run
+    rw [evalConfigWithin_eq_of_le _ _ _ _ hMessageTime hMessage] at hMem
+    exact hMessage finish ((mem_support_evalConfigWithin_iff _ _ _ _).mp hMem)
+  have hContinuation (finish : Configuration)
+      (run : PaddedRunsFor (messageMultiplyGuessCompile multiplySource guessSource) (prepared.resumeAt 0) finish continuationTime) :
+      finish.halted = true := by
+    have hMem : finish.halted ∈ ((evalConfigWithin (messageMultiplyGuessCompile multiplySource guessSource)
+        (prepared.resumeAt 0) continuationTime).map Configuration.halted).support := by
+      rw [PMF.mem_support_map_iff]
+      exact ⟨finish, (mem_support_evalConfigWithin_iff _ _ _ _).mpr run, rfl⟩
+    rw [evalConfigWithin_map_eq_of_equivalent _ _ _ hEquivalent _ Configuration.halted
+      (fun _ _ h => h.2.1), PMF.mem_support_map_iff] at hMem
+    obtain ⟨target, hTarget, hEq⟩ := hMem
+    exact hEq.symm.trans (hFixtureStop target ((mem_support_evalConfigWithin_iff _ _ _ _).mp hTarget))
+  have hFirst := run.haltsFrom_of_no_randomBit hHalt prepareMultiplyPrefix_no_randomBit (Nat.le_refl used)
+  have hEval := run.evalConfigWithin_eq_pure_of_no_randomBit prepareMultiplyPrefix_no_randomBit
+  have hSecond (c : Configuration)
+      (hc : c ∈ (evalConfigWithin prepareMultiplyPrefix start used).support)
+      (d : Configuration)
+      (tailRun : PaddedRunsFor (messageMultiplyGuessCompile multiplySource guessSource) (c.resumeAt 0) d continuationTime) :
+      d.halted = true := by
+    rw [hEval, PMF.mem_support_pure_iff] at hc
+    subst c
+    exact hContinuation d tailRun
+  have hLaw := Program.evalConfigWithin_twoStages_configuration prepareMultiplyPrefix
+    (messageMultiplyGuessCompile multiplySource guessSource) start rfl rfl used continuationTime hFirst hSecond
+  change evalConfigWithin (selectedMultiplyGuessCompile multiplySource guessSource) start
+    (used + (continuationTime + 1)) = _ at hLaw
+  have hSmall (finish : Configuration)
+      (run : PaddedRunsFor (selectedMultiplyGuessCompile multiplySource guessSource) start finish
+        (used + (continuationTime + 1))) : finish.halted = true := by
+    have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr run
+    rw [hLaw, PMF.mem_support_bind_iff] at hMem
+    obtain ⟨middle, _hMiddle, hFinish⟩ := hMem
+    rw [PMF.mem_support_map_iff] at hFinish
+    obtain ⟨target, _hTarget, rfl⟩ := hFinish
+    rfl
+  have hBound : used + (continuationTime + 1) ≤
+      selectedMultiplyGuessRetainedBudget multiplyCoefficient multiplyDegree guessCoefficient guessDegree storage := by
+    change used ≤ 200000 * storage + 200000 at hTime
+    change used + (continuationTime + 1) ≤ 200000 * (storage + 1) + continuationTime + 1
+    omega
+  intro finish run
+  have hMem := (mem_support_evalConfigWithin_iff _ _ _ _).mpr run
+  rw [evalConfigWithin_eq_of_le _ _ _ _ hBound hSmall] at hMem
+  exact hSmall finish ((mem_support_evalConfigWithin_iff _ _ _ _).mp hMem)
+
 end Machine.GuardedCompiler

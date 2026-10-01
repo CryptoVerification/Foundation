@@ -215,4 +215,125 @@ theorem cleanStoredOutputBit_haltsFrom (input : Tape) (blocks : List (List Bool)
   have heq : c = cleanStoredOutputBitFinish input blocks right bit := by simpa using hc
   rw [heq]; rfl
 
+theorem saveCurrentOutputBit_haltsFrom_anyTape (input output : Tape) :
+    ∀ finish, PaddedRunsFor saveCurrentOutputBit
+      ({ inputTape := input, outputTape := output } : Configuration) finish 5 → finish.halted = true := by
+  have hLaw : (evalConfigWithin saveCurrentOutputBit
+      ({ inputTape := input, outputTape := output } : Configuration) 5).map Configuration.halted = PMF.pure true := by
+    rcases output with ⟨left, current, right⟩
+    cases current with
+    | none =>
+        simp [PMF.pure_map, evalConfigWithin, stepPMF, next, saveCurrentOutputBit, Instruction.next,
+          Configuration.tape]
+    | some bit =>
+        cases bit <;>
+          simp [PMF.pure_map, evalConfigWithin, stepPMF, next, saveCurrentOutputBit, Instruction.next,
+            Configuration.tape, Configuration.updateTape, Configuration.advance, Tape.write]
+  intro finish run
+  have hMem : finish.halted ∈ ((evalConfigWithin saveCurrentOutputBit
+      ({ inputTape := input, outputTape := output } : Configuration) 5).map Configuration.halted).support := by
+    rw [PMF.mem_support_map_iff]
+    exact ⟨finish, (mem_support_evalConfigWithin_iff _ _ _ _).mpr run, rfl⟩
+  simpa only [hLaw, PMF.support_pure, Set.mem_singleton_iff] using hMem
+
+theorem writeSavedInputBit_haltsFrom_anyTape (input output : Tape) :
+    ∀ finish, PaddedRunsFor writeSavedInputBit
+      ({ inputTape := input, outputTape := output } : Configuration) finish 3 → finish.halted = true := by
+  have hLaw : (evalConfigWithin writeSavedInputBit
+      ({ inputTape := input, outputTape := output } : Configuration) 3).map Configuration.halted = PMF.pure true := by
+    rcases input with ⟨left, current, right⟩
+    cases current with
+    | none =>
+        simp [PMF.pure_map, evalConfigWithin, stepPMF, next, writeSavedInputBit, Instruction.next,
+          Configuration.tape, Configuration.updateTape, Configuration.advance, Tape.write]
+    | some bit =>
+        cases bit <;>
+          simp [PMF.pure_map, evalConfigWithin, stepPMF, next, writeSavedInputBit, Instruction.next,
+            Configuration.tape, Configuration.updateTape, Configuration.advance, Tape.write]
+  intro finish run
+  have hMem : finish.halted ∈ ((evalConfigWithin writeSavedInputBit
+      ({ inputTape := input, outputTape := output } : Configuration) 3).map Configuration.halted).support := by
+    rw [PMF.mem_support_map_iff]
+    exact ⟨finish, (mem_support_evalConfigWithin_iff _ _ _ _).mpr run, rfl⟩
+  simpa only [hLaw, PMF.support_pure, Set.mem_singleton_iff] using hMem
+
+/-- Actual save/erase/emit cleanup on arbitrary finite tapes. No valid
+comparison bit or known saved-block layout is required for stopping. All
+three native stages use the preceding returned physical configuration. -/
+theorem cleanStoredOutputBit_terminates_from_anyTape (count : Nat) (input output : Tape) :
+    ∃ finish used,
+      used ≤ (count + 1) * 100 * (output.cells + 1) ∧
+      RunsFor (cleanStoredOutputBit count)
+        ({ inputTape := input, outputTape := output } : Configuration) finish used ∧ finish.halted = true := by
+  obtain ⟨saved, saveTime, hSaveTime, saveRun, saveHalt⟩ := exists_halted_run_of_haltsFrom
+    saveCurrentOutputBit _ 5 (saveCurrentOutputBit_haltsFrom_anyTape input output)
+  obtain ⟨erased, eraseTime, hEraseTime, eraseRun, eraseHalt, _eraseInput, _eraseLeft⟩ :=
+    eraseOutputBlocks_terminates_from_anyTape count saved.inputTape saved.outputTape
+  obtain ⟨written, writeTime, hWriteTime, writeRun, writeHalt⟩ := exists_halted_run_of_haltsFrom
+    writeSavedInputBit _ 3 (writeSavedInputBit_haltsFrom_anyTape erased.inputTape erased.outputTape)
+  let eraser := eraseOutputBlocks count
+  let emitPc := 8 + eraser.length + 1
+  let finalPc := emitPc + 6
+  obtain ⟨saveUsed, hSaveUsed, first⟩ := saveRun.withSubroutine_halted
+    [] saveCurrentOutputBit
+      (eraser.asSubroutine 8 emitPc ++ writeSavedInputBit.asSubroutine emitPc finalPc ++ [.halt]) 8
+    (Nat.zero_le _) rfl saveHalt
+  have firstProgram : Program.withSubroutine [] saveCurrentOutputBit
+      (eraser.asSubroutine 8 emitPc ++ writeSavedInputBit.asSubroutine emitPc finalPc ++ [.halt]) 8 =
+      cleanStoredOutputBit count := by
+    simp only [Program.withSubroutine, cleanStoredOutputBit, List.length_nil, List.nil_append,
+      eraser, emitPc, finalPc, List.append_assoc]
+  rw [firstProgram] at first
+  change RunsFor (cleanStoredOutputBit count)
+    ({ inputTape := input, outputTape := output } : Configuration) (saved.resumeAt 8) saveUsed at first
+  obtain ⟨eraseUsed, hEraseUsed, middle⟩ := eraseRun.withSubroutine_halted
+    (saveCurrentOutputBit.asSubroutine 0 8) eraser
+      (writeSavedInputBit.asSubroutine emitPc finalPc ++ [.halt]) emitPc
+    (Nat.zero_le _) rfl eraseHalt
+  have middleProgram : Program.withSubroutine (saveCurrentOutputBit.asSubroutine 0 8) eraser
+      (writeSavedInputBit.asSubroutine emitPc finalPc ++ [.halt]) emitPc = cleanStoredOutputBit count := by
+    simp only [Program.withSubroutine, cleanStoredOutputBit,
+      show (saveCurrentOutputBit.asSubroutine 0 8).length = 8 from rfl,
+      eraser, emitPc, finalPc, List.append_assoc]
+  rw [middleProgram] at middle
+  change RunsFor (cleanStoredOutputBit count) (saved.resumeAt 8) (erased.resumeAt emitPc) eraseUsed at middle
+  let pre := saveCurrentOutputBit.asSubroutine 0 8 ++ eraser.asSubroutine 8 emitPc
+  have hPre : pre.length = emitPc := by
+    simp [pre, emitPc, Program.asSubroutine_length, show saveCurrentOutputBit.length = 7 from rfl, Nat.add_assoc]
+  obtain ⟨writeUsed, hWriteUsed, lastRun⟩ := writeRun.withSubroutine_halted
+    pre writeSavedInputBit [.halt] finalPc (Nat.zero_le _) rfl writeHalt
+  have lastProgram : Program.withSubroutine pre writeSavedInputBit [.halt] finalPc =
+      cleanStoredOutputBit count := by
+    simp only [Program.withSubroutine, hPre, cleanStoredOutputBit, pre, eraser, emitPc, finalPc, List.append_assoc]
+  rw [lastProgram] at lastRun
+  have hEntry :
+      ({ inputTape := erased.inputTape, outputTape := erased.outputTape } : Configuration).rebasePc pre.length =
+      erased.resumeAt emitPc := by simp [Configuration.rebasePc, Configuration.resumeAt, hPre]
+  rw [hEntry] at lastRun
+  let finish : Configuration := { written with pc := finalPc, halted := true }
+  have last : Step (cleanStoredOutputBit count) (written.resumeAt finalPc) finish := by
+    have code : (cleanStoredOutputBit count)[finalPc]? = some .halt := by
+      rw [← lastProgram]
+      have h := Program.withSubroutine_getElem?_suffix pre writeSavedInputBit [.halt] finalPc 0
+      simpa only [hPre, show writeSavedInputBit.length = 5 from rfl, Nat.add_zero,
+        List.getElem?_cons_zero, finalPc] using h
+    simp [Step, successors, next, Configuration.resumeAt, finish, code, Instruction.next]
+  refine ⟨finish, saveUsed + eraseUsed + writeUsed + 1, ?_,
+    RunsFor.succ ((first.trans middle).trans lastRun) last, rfl⟩
+  have hStorage := saveRun.toPadded.outputTape_cells_le
+  change saved.outputTape.cells ≤ output.cells + saveTime at hStorage
+  have hLeft : saved.outputTape.left.length ≤ output.cells + 5 := by
+    have hCells : saved.outputTape.left.length ≤ saved.outputTape.cells := by simp [Tape.cells]; omega
+    omega
+  have hEraseBound := hEraseTime.trans
+    (Nat.mul_le_mul_left (count + 1) (Nat.add_le_add_right (Nat.mul_le_mul_left 4 hLeft) 5))
+  nlinarith
+
+theorem cleanStoredOutputBit_no_randomBit (count : Nat) (tape : TapeId) :
+    Instruction.randomBit tape ∉ cleanStoredOutputBit count := by
+  simp [cleanStoredOutputBit, Program.asSubroutine, Instruction.asSubroutine,
+    saveCurrentOutputBit, writeSavedInputBit]
+  intro instruction hMem hEq
+  cases instruction <;> simp_all [eraseOutputBlocks_no_randomBit]
+
 end Machine
