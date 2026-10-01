@@ -512,6 +512,6 @@ theorem indCPAReindexedReachablePPTClass_preserved
   obtain ⟨targetSize, hTargetPoly⟩ := hTargetSize F
   exact ⟨T.transform p, T.transformBudget budget, targetSize,
     T.budget_polynomiallyBounded hBudget, T.halts p budget hHalts,
-    hTargetPoly, T.realizes F A p budget hRealizes⟩
+    hTargetPoly, T.realizes F A p budget hHalts hRealizes⟩
 
 end Machine

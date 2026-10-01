@@ -12,7 +12,9 @@ open Machine
 relative to two finite-I/O machine adapters. The compiler reads only source
 code, independent of the instance family and security parameter. Its
 structurally recursive interpreter is executable; `transformBudget` is
-analysis data and is not part of the emitted machine code. -/
+analysis data and is not part of the emitted machine code. Semantic
+preservation uses a valid all-input, all-branch source stopping budget;
+arbitrary timeout budgets are not program-realization certificates. -/
 structure MachineProgramTransformation
     {P : CryptoGoal.{u}} {Q : CryptoGoal.{v}}
     (R : Reduction P Q)
@@ -33,6 +35,7 @@ structure MachineProgramTransformation
         (transformBudget q input.length)
   realizes : ∀ (F : InstanceFamily P) (A : AdversaryFamily P F)
       (p : Machine.Program) (q : Nat → Nat),
+    (∀ input : List Bool, Machine.HaltsWithin p input (q input.length)) →
     JP.Realizes F p q A →
     JQ.Realizes (R.mapFamily F) (compiler.run p) (transformBudget q)
       (R.mapAdversaryFamily F A)
@@ -47,7 +50,10 @@ structure MachineProgramTransformation
 without an all-request source input-size map. This is the certificate needed
 for protocols such as two-stage IND-CPA, whose arbitrary caller-supplied
 state makes `JP.InputSizeBound` impossible. Input-size obligations are
-supplied separately when deriving a target PPT class. -/
+supplied separately when deriving a target PPT class. The same-input
+`budget_bound` is an additional certificate: polynomiality of `q` alone does
+not control `q` at larger subroutine inputs from its value at the original
+input length. A compiler must justify that bound for its actual calls. -/
 structure MachineProgramSimulation
     {P : CryptoGoal.{u}} {Q : CryptoGoal.{v}}
     (R : Reduction P Q)
@@ -68,6 +74,7 @@ structure MachineProgramSimulation
         (transformBudget q input.length)
   realizes : ∀ (F : InstanceFamily P) (A : AdversaryFamily P F)
       (p : Machine.Program) (q : Nat → Nat),
+    (∀ input : List Bool, Machine.HaltsWithin p input (q input.length)) →
     JP.Realizes F p q A →
     JQ.Realizes (R.mapFamily F) (compiler.run p) (transformBudget q)
       (R.mapAdversaryFamily F A)
@@ -178,7 +185,7 @@ theorem preservesAdmissibility
   obtain ⟨p, q, size, hq, hHalts, hSize, hRealizes⟩ := hA
   exact ⟨T.transform p, T.transformBudget q, T.mapInputSize F size,
     T.budget_polynomiallyBounded hq, T.halts p q hHalts,
-    T.size_polynomial F size hSize, T.realizes F A p q hRealizes⟩
+    T.size_polynomial F size hSize, T.realizes F A p q hHalts hRealizes⟩
 
 /-- Identity on finite code, analysis budget, and input-size witness. -/
 def id {P : CryptoGoal.{u}}
@@ -191,7 +198,40 @@ def id {P : CryptoGoal.{u}}
   sourceDegree := 1
   budget_bound := by intro q m; simp
   halts := by intro p q h input; exact h input
-  realizes := by intro F A p q h; exact h
+  realizes := by intro F A p q _hHalts h; exact h
+  mapInputSize := by intro F size; exact size
+  size_polynomial := by intro F size h; exact h
+
+/-- A nontrivial, explicit compiler certificate for the identity reduction:
+guarded source simulation with charged raw-input preparation and raw-output
+extraction. It preserves every finite-I/O adapter's semantics under the
+source's valid stopping budget, with metadata `(125, 1, 2)`. -/
+def guarded {P : CryptoGoal.{u}}
+    (J : MachineAdversaryInterface.{u, a, b} P) :
+    (Reduction.id P).MachineProgramTransformation J J where
+  compiler := .guarded
+  transformBudget := GuardedCompiler.rawTraceBudget
+  coefficient := 125
+  securityDegree := 1
+  sourceDegree := 2
+  budget_bound := by
+    intro q m
+    simpa using GuardedCompiler.rawTraceBudget_bound q m
+  halts := by
+    intro p q hHalts input
+    exact GuardedCompiler.rawCompile_haltsWithin p input q (hHalts input)
+  realizes := by
+    intro F A p q hHalts h
+    change J.realizeFamily F (GuardedCompiler.rawCompile p) (GuardedCompiler.rawTraceBudget q) = A
+    change J.realizeFamily F p q = A at h
+    rw [← h]
+    funext n
+    unfold MachineAdversaryInterface.realizeFamily
+    congr 1
+    funext request
+    unfold MachineAdversaryInterface.responseWithin
+    dsimp only
+    rw [GuardedCompiler.rawCompile_evalWithin p (J.machineInput n (F n) request) q (hHalts _)]
   mapInputSize := by intro F size; exact size
   size_polynomial := by intro F size h; exact h
 
@@ -247,10 +287,10 @@ def comp {P : CryptoGoal.{u}} {Q : CryptoGoal.{v}} {S : CryptoGoal.{w}}
     exact T₂.halts (T₁.transform p) (T₁.transformBudget q)
       (T₁.halts p q h) input
   realizes := by
-    intro F A p q h
+    intro F A p q hHalts h
     exact T₂.realizes (R₁.mapFamily F) (R₁.mapAdversaryFamily F A)
       (T₁.transform p) (T₁.transformBudget q)
-      (T₁.realizes F A p q h)
+      (T₁.halts p q hHalts) (T₁.realizes F A p q hHalts h)
   mapInputSize := by
     intro F size
     exact T₂.mapInputSize (R₁.mapFamily F) (T₁.mapInputSize F size)
@@ -321,10 +361,10 @@ def comp {P : CryptoGoal.{u}} {Q : CryptoGoal.{v}} {S : CryptoGoal.{w}}
     exact T₂.halts (T₁.transform p) (T₁.transformBudget q)
       (T₁.halts p q h) input
   realizes := by
-    intro F A p q h
+    intro F A p q hHalts h
     exact T₂.realizes (R₁.mapFamily F) (R₁.mapAdversaryFamily F A)
       (T₁.transform p) (T₁.transformBudget q)
-      (T₁.realizes F A p q h)
+      (T₁.halts p q hHalts) (T₁.realizes F A p q hHalts h)
 
 end MachineProgramSimulation
 

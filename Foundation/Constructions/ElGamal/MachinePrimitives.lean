@@ -132,4 +132,125 @@ theorem sample_polynomialTime
 
 end MachinePrimitives
 
+/-- Arithmetic implementation certificates on a finitely represented
+instance domain. The three finite programs and their budgets are fixed
+before any instance family is chosen. They receive only the encoded current
+instance and operands; correctness holds for every represented instance.
+Thus one compiler may refer to these programs without inspecting `F`.
+This does not supply the protocol wrapper, tape preparation, or an efficient
+algorithm for converting an arbitrary mathematical instance into its code. -/
+structure RepresentedMachinePrimitives
+    (sampling : (n : Nat) → (params : DDHParameters) →
+      Option (DDHFiniteSampling params))
+    (X : Nat → Type 1)
+    (embed : ∀ n, X n → ConcreteInstance sampling n) where
+  instanceCode : ∀ n, Machine.FiniteBitEncoding (X n)
+  instanceCodeLength : Nat → Nat
+  instanceCodeLength_polynomial : PolynomiallyBounded instanceCodeLength
+  instanceCode_length_le : ∀ n (x : X n),
+    ((instanceCode n).encode x).length ≤ instanceCodeLength n
+  elementCode : ∀ n (x : X n),
+    Machine.FiniteBitEncoding ((embed n x).params.Element)
+  scalarCode : ∀ n (x : X n),
+    Machine.FiniteBitEncoding ((embed n x).params.Scalar)
+  elementCodeLength : Nat → Nat
+  elementCodeLength_polynomial : PolynomiallyBounded elementCodeLength
+  elementCode_length_le : ∀ n (x : X n) (a : (embed n x).params.Element),
+    ((elementCode n x).encode a).length ≤ elementCodeLength n
+  scalarCodeLength : Nat → Nat
+  scalarCodeLength_polynomial : PolynomiallyBounded scalarCodeLength
+  scalarCode_length_le : ∀ n (x : X n) (s : (embed n x).params.Scalar),
+    ((scalarCode n x).encode s).length ≤ scalarCodeLength n
+
+  multiplyProgram : Machine.Program
+  multiplyBudget : Nat → Nat
+  multiplyBudget_polynomial : PolynomiallyBounded multiplyBudget
+  multiplyHalts : ∀ input : List Bool,
+    Machine.HaltsWithin multiplyProgram input (multiplyBudget input.length)
+  multiply_correct : ∀ n (x : X n) (a b : (embed n x).params.Element),
+    Machine.evalWithin multiplyProgram
+      (Machine.encodeSecurityParameter n ++
+        Machine.frame ((instanceCode n).encode x) ++
+        Machine.frame ((elementCode n x).encode a) ++
+        Machine.frame ((elementCode n x).encode b))
+      (multiplyBudget (Machine.encodeSecurityParameter n ++
+        Machine.frame ((instanceCode n).encode x) ++
+        Machine.frame ((elementCode n x).encode a) ++
+        Machine.frame ((elementCode n x).encode b)).length) =
+      PMF.pure (some ((elementCode n x).encode ((embed n x).params.mul a b)))
+
+  powerProgram : Machine.Program
+  powerBudget : Nat → Nat
+  powerBudget_polynomial : PolynomiallyBounded powerBudget
+  powerHalts : ∀ input : List Bool,
+    Machine.HaltsWithin powerProgram input (powerBudget input.length)
+  power_correct : ∀ n (x : X n) (a : (embed n x).params.Element)
+      (s : (embed n x).params.Scalar),
+    Machine.evalWithin powerProgram
+      (Machine.encodeSecurityParameter n ++
+        Machine.frame ((instanceCode n).encode x) ++
+        Machine.frame ((elementCode n x).encode a) ++
+        Machine.frame ((scalarCode n x).encode s))
+      (powerBudget (Machine.encodeSecurityParameter n ++
+        Machine.frame ((instanceCode n).encode x) ++
+        Machine.frame ((elementCode n x).encode a) ++
+        Machine.frame ((scalarCode n x).encode s)).length) =
+      PMF.pure (some ((elementCode n x).encode ((embed n x).params.power a s)))
+
+  sampleProgram : Machine.Program
+  sampleBudget : Nat → Nat
+  sampleBudget_polynomial : PolynomiallyBounded sampleBudget
+  sampleHalts : ∀ input : List Bool,
+    Machine.HaltsWithin sampleProgram input (sampleBudget input.length)
+  sample_correct : ∀ n (x : X n),
+    (Machine.evalWithin sampleProgram
+      (Machine.encodeSecurityParameter n ++
+        Machine.frame ((instanceCode n).encode x))
+      (sampleBudget (Machine.encodeSecurityParameter n ++
+        Machine.frame ((instanceCode n).encode x)).length)).map
+      (fun bits => bits.bind (scalarCode n x).decode) =
+      ((embed n x).algebra.sampling.sampleScalar).map some
+
+namespace RepresentedMachinePrimitives
+
+/-- Specialize correctness and input-length bounds to a chosen family while
+retaining exactly the same finite operation programs. No program is selected
+from the family and no classical choice is used. -/
+def forFamily
+    {sampling : (n : Nat) → (params : DDHParameters) →
+      Option (DDHFiniteSampling params)}
+    {X : Nat → Type 1}
+    {embed : ∀ n, X n → ConcreteInstance sampling n}
+    (M : RepresentedMachinePrimitives sampling X embed)
+    (F : (n : Nat) → X n) :
+    MachinePrimitives sampling (fun n => embed n (F n)) where
+  parameterCode := fun n => (M.instanceCode n).encode (F n)
+  parameterCode_polynomial := PolynomiallyBounded.mono
+    (fun n => M.instanceCode_length_le n (F n)) M.instanceCodeLength_polynomial
+  elementCode := fun n => M.elementCode n (F n)
+  scalarCode := fun n => M.scalarCode n (F n)
+  elementCodeLength := M.elementCodeLength
+  elementCodeLength_polynomial := M.elementCodeLength_polynomial
+  elementCode_length_le := fun n => M.elementCode_length_le n (F n)
+  scalarCodeLength := M.scalarCodeLength
+  scalarCodeLength_polynomial := M.scalarCodeLength_polynomial
+  scalarCode_length_le := fun n => M.scalarCode_length_le n (F n)
+  multiplyProgram := M.multiplyProgram
+  multiplyBudget := M.multiplyBudget
+  multiplyBudget_polynomial := M.multiplyBudget_polynomial
+  multiplyHalts := M.multiplyHalts
+  multiply_correct := fun n => M.multiply_correct n (F n)
+  powerProgram := M.powerProgram
+  powerBudget := M.powerBudget
+  powerBudget_polynomial := M.powerBudget_polynomial
+  powerHalts := M.powerHalts
+  power_correct := fun n => M.power_correct n (F n)
+  sampleProgram := M.sampleProgram
+  sampleBudget := M.sampleBudget
+  sampleBudget_polynomial := M.sampleBudget_polynomial
+  sampleHalts := M.sampleHalts
+  sample_correct := fun n => M.sample_correct n (F n)
+
+end RepresentedMachinePrimitives
+
 end ElGamal

@@ -24,6 +24,34 @@ theorem RunsFor.trans {p : Program} {start middle finish : Configuration}
   | succ prior last ih =>
       simpa [Nat.add_assoc] using RunsFor.succ ih last
 
+/-- A positive-length trace has a first actual transition and a remaining
+trace. This is independent of whether that transition uses a random bit. -/
+theorem RunsFor.head {p : Program} {start finish : Configuration}
+    {steps : Nat} (run : RunsFor p start finish (steps + 1)) :
+    ∃ middle, Step p start middle ∧ RunsFor p middle finish steps := by
+  induction steps generalizing finish with
+  | zero =>
+      cases run with
+      | succ prior last =>
+          cases prior with
+          | zero => exact ⟨finish, last, RunsFor.zero _⟩
+  | succ steps ih =>
+      cases run with
+      | succ prior last =>
+          obtain ⟨middle, first, rest⟩ := ih prior
+          exact ⟨middle, first, RunsFor.succ rest last⟩
+
+/-- An already halted state admits only the zero-transition actual trace. -/
+theorem RunsFor.eq_of_halted_start {p : Program}
+    {start finish : Configuration} {steps : Nat}
+    (run : RunsFor p start finish steps) (halted : start.halted = true) :
+    steps = 0 ∧ finish = start := by
+  induction run with
+  | zero => exact ⟨rfl, rfl⟩
+  | succ prior last ih =>
+      rcases ih with ⟨rfl, rfl⟩
+      exact False.elim ((no_step_of_halted halted) last)
+
 /-- The program reaches this exact finite output after this exact number of
 machine transitions. The final transition into `halted = true` is counted. -/
 def HaltsWith (p : Program) (input output : List Bool) (steps : Nat) : Prop :=
@@ -41,6 +69,41 @@ inductive PaddedRunsFor (p : Program) : Configuration → Configuration → Nat 
   | succ {c d e : Configuration} {steps : Nat}
       (prior : PaddedRunsFor p c d steps) (last : PaddedStep p d e) :
       PaddedRunsFor p c e (steps + 1)
+
+/-- Concatenate branch traces inspected at common time bounds. Stutters
+after halt remain bookkeeping, rather than additional operational steps. -/
+theorem PaddedRunsFor.trans {p : Program} {start middle finish : Configuration}
+    {first second : Nat} (left : PaddedRunsFor p start middle first)
+    (right : PaddedRunsFor p middle finish second) :
+    PaddedRunsFor p start finish (first + second) := by
+  induction right with
+  | zero => simpa using left
+  | succ prior last ih => simpa [Nat.add_assoc] using PaddedRunsFor.succ ih last
+
+/-- An actual trace is also a padded trace, with no stutters added. -/
+theorem RunsFor.toPadded {p : Program} {start finish : Configuration}
+    {steps : Nat} (run : RunsFor p start finish steps) :
+    PaddedRunsFor p start finish steps := by
+  induction run with
+  | zero => exact PaddedRunsFor.zero _
+  | succ prior last ih => exact PaddedRunsFor.succ ih (Or.inl last)
+
+/-- A padded trace ending before halt contains no bookkeeping stutters.
+Its entire length therefore counts actual operational transitions. -/
+theorem PaddedRunsFor.toRunsFor_of_running {p : Program}
+    {start finish : Configuration} {steps : Nat}
+    (run : PaddedRunsFor p start finish steps) (hRunning : finish.halted = false) :
+    RunsFor p start finish steps := by
+  induction run with
+  | zero => exact RunsFor.zero _
+  | @succ middle finish steps prior last ih =>
+      rcases last with step | ⟨hHalted, rfl⟩
+      · have hMiddle : middle.halted = false := by
+          cases hh : middle.halted with
+          | false => rfl
+          | true => exact False.elim ((no_step_of_halted hh) step)
+        exact RunsFor.succ (ih hMiddle) step
+      · simp [hRunning] at hHalted
 
 /-- Output-tape storage grows by at most one cell per real transition;
 bookkeeping stutters after halt do not grow it. -/
@@ -212,6 +275,65 @@ noncomputable def evalConfigWithin (p : Program) (c : Configuration) :
   | 0 => PMF.pure c
   | steps + 1 => (evalConfigWithin p c steps).bind (stepPMF p)
 
+/-- Split a fixed transition budget at an intermediate configuration.
+This is composition of execution of the same code; it introduces neither
+free tape preparation nor an extra source of randomness. -/
+theorem evalConfigWithin_add (p : Program) (start : Configuration)
+    (first second : Nat) :
+    evalConfigWithin p start (first + second) =
+      (evalConfigWithin p start first).bind
+        (fun middle => evalConfigWithin p middle second) := by
+  induction second with
+  | zero => simp [evalConfigWithin]
+  | succ second ih =>
+      rw [Nat.add_succ, evalConfigWithin, ih, PMF.bind_bind]
+      rfl
+
+/-- Only the executed address needs to exclude `randomBit` for this
+transition to have a point-mass distribution. Random instructions in
+unvisited caller code impose no restriction. -/
+theorem stepPMF_eq_pure_of_not_randomBit_at {p : Program}
+    {c d : Configuration} (hStep : Step p c d) :
+    (∀ tape, p[c.pc]? ≠ some (.randomBit tape)) →
+    stepPMF p c = PMF.pure d := by
+  intro hNoRandom
+  have hactive : c.halted = false := by
+    cases hh : c.halted with
+    | false => rfl
+    | true => exact False.elim ((no_step_of_halted hh) hStep)
+  have hNext : ∃ target, next p c = some (.inl target) := by
+    cases hi : p[c.pc]? with
+    | none => simp [next, hactive, hi]
+    | some i =>
+        cases i <;> try simp [next, hactive, hi, Instruction.next]
+        exact False.elim (hNoRandom _ hi)
+  obtain ⟨target, hTarget⟩ := hNext
+  have hEq : d = target := by simpa [Step, successors, hTarget] using hStep
+  simp [stepPMF, hTarget, hEq]
+
+/-- A program with no random-bit opcode has a pure one-step distribution
+along every actual transition. No assumption about termination is needed. -/
+theorem stepPMF_eq_pure_of_no_randomBit {p : Program}
+    (hNoRandom : ∀ tape, Instruction.randomBit tape ∉ p)
+    {c d : Configuration} (hStep : Step p c d) :
+    stepPMF p c = PMF.pure d := by
+  apply stepPMF_eq_pure_of_not_randomBit_at hStep
+  intro tape hCode
+  exact hNoRandom tape (List.mem_of_getElem? hCode)
+
+/-- Exact operational traces of deterministic code also give exact PMF
+evaluation. This lemma counts real transitions; it adds no halt padding. -/
+theorem RunsFor.evalConfigWithin_eq_pure_of_no_randomBit {p : Program}
+    {start finish : Configuration} {steps : Nat}
+    (run : RunsFor p start finish steps)
+    (hNoRandom : ∀ tape, Instruction.randomBit tape ∉ p) :
+    evalConfigWithin p start steps = PMF.pure finish := by
+  induction run with
+  | zero => rfl
+  | succ prior last ih =>
+      simp only [evalConfigWithin, ih, PMF.pure_bind]
+      exact stepPMF_eq_pure_of_no_randomBit hNoRandom last
+
 theorem evalConfigWithin_append_halt (p : Program) (start : Configuration)
     (steps : Nat) :
     evalConfigWithin (p ++ [.halt]) start steps =
@@ -259,6 +381,17 @@ noncomputable def evalWithin (p : Program) (input : List Bool) (fuel : Nat) :
     ProbComp (Option (List Bool)) :=
   (evalConfigWithin p (Configuration.initial input) fuel).map fun c =>
     if c.halted then some c.outputBits else none
+
+/-- A halted trace of code without random-bit instructions determines the
+entire output distribution at that exact transition count. -/
+theorem HaltsWith.evalWithin_eq_pure_of_no_randomBit {p : Program}
+    {input output : List Bool} {steps : Nat}
+    (halts : HaltsWith p input output steps)
+    (hNoRandom : ∀ tape, Instruction.randomBit tape ∉ p) :
+    evalWithin p input steps = PMF.pure (some output) := by
+  obtain ⟨finish, run, hHalted, hOutput⟩ := halts
+  have hEval := run.evalConfigWithin_eq_pure_of_no_randomBit hNoRandom
+  simp [evalWithin, hEval, PMF.pure_map, hHalted, hOutput]
 
 theorem evalWithin_append_halt (p : Program) (input : List Bool)
     (fuel : Nat) :
@@ -319,6 +452,63 @@ theorem haltsWithin_of_no_timeout_support (p : Program) (input : List Bool)
         rw [PMF.mem_support_map_iff]
         exact ⟨c, hc, by simp [hHalted]⟩
       exact False.elim (hNone hOutput)
+
+/-- For deterministic code, one halted actual trace proves the universal
+halting bound. Randomized code cannot use this implication without the
+explicit absence-of-random-instructions hypothesis. -/
+theorem HaltsWith.haltsWithin_of_no_randomBit {p : Program}
+    {input output : List Bool} {steps : Nat}
+    (halts : HaltsWith p input output steps)
+    (hNoRandom : ∀ tape, Instruction.randomBit tape ∉ p) :
+    HaltsWithin p input steps := by
+  apply haltsWithin_of_no_timeout_support
+  rw [halts.evalWithin_eq_pure_of_no_randomBit hNoRandom]
+  simp
+
+/-- A larger common budget preserves the complete distribution from an
+arbitrary retained configuration after every native branch has halted. This
+does not reload the tapes or discard their physical blank representation. -/
+theorem evalConfigWithin_eq_of_le (p : Program) (start : Configuration)
+    (fuel budget : Nat) (hLe : fuel ≤ budget)
+    (h : ∀ c, PaddedRunsFor p start c fuel → c.halted = true) :
+    evalConfigWithin p start budget = evalConfigWithin p start fuel := by
+  have haltedEval (c : Configuration) (hc : c.halted = true) (extra : Nat) :
+      evalConfigWithin p c extra = PMF.pure c := by
+    induction extra with
+    | zero => rfl
+    | succ extra ih => simp [evalConfigWithin, ih, stepPMF, next, hc]
+  rw [show budget = fuel + (budget - fuel) by omega, evalConfigWithin_add]
+  rw [← PMF.bindOnSupport_eq_bind]
+  calc
+    _ = (evalConfigWithin p start fuel).bindOnSupport (fun c _ => PMF.pure c) := by
+      congr 1
+      funext c hc
+      exact haltedEval c (h c ((mem_support_evalConfigWithin_iff _ _ _ _).mp hc)) _
+    _ = _ := PMF.bindOnSupport_pure _
+
+/-- Two halted traces of deterministic code from the same retained
+configuration have the same final configuration, even if their transition
+counts differ. No tape cells are reset or reconstructed by this theorem. -/
+theorem RunsFor.halted_finish_eq_of_no_randomBit {p : Program} {start first second : Configuration}
+    {firstTime secondTime : Nat}
+    (hFirst : RunsFor p start first firstTime) (hSecond : RunsFor p start second secondTime)
+    (hFirstHalt : first.halted = true) (hSecondHalt : second.halted = true)
+    (hNoRandom : ∀ tape, Instruction.randomBit tape ∉ p) : first = second := by
+  have hAt (finish : Configuration) (used bound : Nat)
+      (run : RunsFor p start finish used) (hHalted : finish.halted = true) (hLe : used ≤ bound) :
+      evalConfigWithin p start bound = PMF.pure finish := by
+    have hEval := run.evalConfigWithin_eq_pure_of_no_randomBit hNoRandom
+    have hAll (target : Configuration) (trace : PaddedRunsFor p start target used) : target.halted = true := by
+      have hMem := (mem_support_evalConfigWithin_iff p start target used).mpr trace
+      rw [hEval] at hMem
+      have hEq : target = finish := by simpa using hMem
+      simpa only [hEq] using hHalted
+    exact (evalConfigWithin_eq_of_le p start used bound hLe hAll).trans hEval
+  have hEqual : PMF.pure first = PMF.pure second :=
+    (hAt first firstTime (max firstTime secondTime) hFirst hFirstHalt (Nat.le_max_left _ _)).symm.trans
+      (hAt second secondTime (max firstTime secondTime) hSecond hSecondHalt (Nat.le_max_right _ _))
+  have hMem : first ∈ (PMF.pure second).support := by rw [← hEqual]; simp
+  simpa using hMem
 
 /-- Once every branch has halted, further probabilistic evaluation steps
 leave the configuration distribution unchanged. -/
