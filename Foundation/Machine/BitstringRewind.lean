@@ -280,6 +280,21 @@ theorem rewindScratch_runs (before : List (Option Bool)) (bits : List Bool)
   simpa [rewindScratchStart, rewindScratchFinish, scratchRewindFinish] using
     scratch_rewind_run before output bits.reverse none []
 
+/-- The charged rewind leaves the scratch bits under the same head as a
+canonical bit tape. The extra trailing blank is physically represented but
+does not change any cell; the reserved left separator is retained. -/
+theorem rewindScratchFinish_input_equivalent (before : List (Option Bool))
+    (bits : List Bool) (output : Tape) :
+    (rewindScratchFinish before bits output).inputTape.Equivalent
+      { Tape.ofBits bits with left := none :: before } := by
+  cases bits with
+  | nil => exact Tape.Equivalent.refl _
+  | cons bit rest =>
+      refine ⟨rfl, fun _ => rfl, ?_⟩
+      intro i
+      simpa [rewindScratchFinish, Tape.moveRight, Tape.ofBits] using
+        getD_append_blank rest i
+
 theorem rewindBitstring_control_closed (c d : Configuration)
     (hPc : c.pc < rewindBitstring.length) (step : Step rewindBitstring c d)
     (_hRunning : d.halted = false) : d.pc < rewindBitstring.length := by

@@ -132,6 +132,44 @@ theorem sample_polynomialTime
 
 end MachinePrimitives
 
+/-- Exactly the represented operations used by the native ElGamal-to-DDH
+simulator. Multiplication has one fixed finite code, an all-input all-branch
+polynomial stopping bound, and exact correctness on represented operands.
+Scalar sampling and exponentiation are separate obligations for key generation
+and encryption; the simulator does not invoke them. -/
+structure RepresentedSimulatorPrimitives
+    (sampling : (n : Nat) → (params : DDHParameters) →
+      Option (DDHFiniteSampling params))
+    (X : Nat → Type 1)
+    (embed : ∀ n, X n → ConcreteInstance sampling n) where
+  instanceCode : ∀ n, Machine.FiniteBitEncoding (X n)
+  instanceCodeLength : Nat → Nat
+  instanceCodeLength_polynomial : PolynomiallyBounded instanceCodeLength
+  instanceCode_length_le : ∀ n (x : X n),
+    ((instanceCode n).encode x).length ≤ instanceCodeLength n
+  elementCode : ∀ n (x : X n),
+    Machine.FiniteBitEncoding ((embed n x).params.Element)
+  elementCodeLength : Nat → Nat
+  elementCodeLength_polynomial : PolynomiallyBounded elementCodeLength
+  elementCode_length_le : ∀ n (x : X n) (a : (embed n x).params.Element),
+    ((elementCode n x).encode a).length ≤ elementCodeLength n
+  multiplyProgram : Machine.Program
+  multiplyBudget : Nat → Nat
+  multiplyBudget_polynomial : PolynomiallyBounded multiplyBudget
+  multiplyHalts : ∀ input : List Bool,
+    Machine.HaltsWithin multiplyProgram input (multiplyBudget input.length)
+  multiply_correct : ∀ n (x : X n) (a b : (embed n x).params.Element),
+    Machine.evalWithin multiplyProgram
+      (Machine.encodeSecurityParameter n ++
+        Machine.frame ((instanceCode n).encode x) ++
+        Machine.frame ((elementCode n x).encode a) ++
+        Machine.frame ((elementCode n x).encode b))
+      (multiplyBudget (Machine.encodeSecurityParameter n ++
+        Machine.frame ((instanceCode n).encode x) ++
+        Machine.frame ((elementCode n x).encode a) ++
+        Machine.frame ((elementCode n x).encode b)).length) =
+      PMF.pure (some ((elementCode n x).encode ((embed n x).params.mul a b)))
+
 /-- Arithmetic implementation certificates on a finitely represented
 instance domain. The three finite programs and their budgets are fixed
 before any instance family is chosen. They receive only the encoded current
@@ -212,6 +250,27 @@ structure RepresentedMachinePrimitives
       ((embed n x).algebra.sampling.sampleScalar).map some
 
 namespace RepresentedMachinePrimitives
+
+/-- Forget the power and scalar-sampler certificates. The emitted simulator
+uses exactly these retained codes and codecs; no new algorithm is selected. -/
+def toSimulatorPrimitives
+    {sampling : (n : Nat) → (params : DDHParameters) → Option (DDHFiniteSampling params)}
+    {X : Nat → Type 1} {embed : ∀ n, X n → ConcreteInstance sampling n}
+    (M : RepresentedMachinePrimitives sampling X embed) :
+    RepresentedSimulatorPrimitives sampling X embed where
+  instanceCode := M.instanceCode
+  instanceCodeLength := M.instanceCodeLength
+  instanceCodeLength_polynomial := M.instanceCodeLength_polynomial
+  instanceCode_length_le := M.instanceCode_length_le
+  elementCode := M.elementCode
+  elementCodeLength := M.elementCodeLength
+  elementCodeLength_polynomial := M.elementCodeLength_polynomial
+  elementCode_length_le := M.elementCode_length_le
+  multiplyProgram := M.multiplyProgram
+  multiplyBudget := M.multiplyBudget
+  multiplyBudget_polynomial := M.multiplyBudget_polynomial
+  multiplyHalts := M.multiplyHalts
+  multiply_correct := M.multiply_correct
 
 /-- Specialize correctness and input-length bounds to a chosen family while
 retaining exactly the same finite operation programs. No program is selected

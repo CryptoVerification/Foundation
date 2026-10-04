@@ -372,41 +372,6 @@ theorem indCPAReindexedReachablePPTClass_input_polynomial
       size hSize hChooseSize hGuessSize
   exact ⟨p, budget, inputBound, hInputPoly, hChoose, hGuess, hRealizes⟩
 
-/-- The reachable-request refinement still uses one fixed finite machine
-program for the whole family, so it embeds into the existing abstract
-uniform model. -/
-theorem indCPAReindexedReachablePPTClass_admissible_uniform
-    (S : INDCPASemantics ProbComp)
-    (X : Nat → Type 1) (scheme : ∀ n, X n → PKE ProbComp)
-    (instanceCode : ∀ n, FiniteBitEncoding (X n))
-    (requestCode : ∀ n (x : X n),
-      FiniteBitEncoding ((scheme n x).PublicKey ⊕
-        (List Bool × (scheme n x).Ciphertext)))
-    (responseCode : ∀ n (x : X n),
-      FiniteBitEncoding (((scheme n x).Message ×
-        (scheme n x).Message × List Bool) ⊕ Bool))
-    (defaultMessage : ∀ n (x : X n), (scheme n x).Message)
-    (hFaithful : ChooseStateSizeFaithful X scheme responseCode)
-    (F : (n : Nat) → X n)
-    (A : AdversaryFamily ((INDCPA ProbComp S).reindex X scheme) F)
-    (hA : (indCPAReindexedReachablePPTClass S X scheme instanceCode
-      requestCode responseCode defaultMessage hFaithful).admissible F A) :
-    (indCPAReindexedInterface S X scheme instanceCode requestCode
-      responseCode defaultMessage).uniformModel.uniformClass.admissible F A := by
-  rcases hA with ⟨p, budget, _, hBudget, hHalts, _, _, _, hRealizes⟩
-  obtain ⟨c, k, hGlobal⟩ :=
-    MachineAdversaryInterface.global_monomial_of_polynomiallyBounded hBudget
-  let J := indCPAReindexedInterface S X scheme instanceCode
-    requestCode responseCode defaultMessage
-  let globalBudget : Nat → Nat := fun m => c * (m + 1) ^ k
-  have hGlobalHalts : ∀ input : List Bool,
-      HaltsWithin p input (globalBudget input.length) := by
-    intro input
-    exact (hHalts input).mono (hGlobal input.length)
-  have hFuel := J.realizeFamily_budget_eq_of_halts F p budget globalBudget
-    hHalts hGlobalHalts
-  exact ⟨(p, c, k), hFuel.symm.trans hRealizes⟩
-
 /-- The same machine code halts within a polynomial in the security parameter
 on the choose call and on guess calls reached from that choose call. The
 bound is not asserted for arbitrary caller-supplied states. -/

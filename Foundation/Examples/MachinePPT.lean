@@ -25,13 +25,6 @@ example :
   · intro input
     exact (randomOutputBit_haltsWithin_any input).mono (by omega)
 
-example : bitInterface.uniformModel.uniformClass.admissible bitFamily
-    (bitInterface.realizeFamily bitFamily randomOutputBit (fun _ => 2)) :=
-  bitInterface.pptClass_admissible_uniform randomOutputBit_ppt
-
-example : bitInterface.uniformModel.FiniteDescription :=
-  bitInterface.uniformModel_finiteDescription
-
 example : ∃ (p : Machine.Program) (b : Nat → Nat),
     PolynomiallyBounded b ∧
     ∀ n (request : bitInterface.Request n (bitFamily n)),

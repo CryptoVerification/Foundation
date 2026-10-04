@@ -176,7 +176,7 @@ example : (evalConfigWithin (normalizeChooseCompile Machine.Examples.haltImmedia
 example
     {sampling : (n : Nat) → (params : DDHParameters) → Option (DDHFiniteSampling params)}
     {X : Nat → Type 1} {embed : ∀ n, X n → ElGamal.ConcreteInstance sampling n}
-    {M : ElGamal.RepresentedMachinePrimitives sampling X embed}
+    {M : ElGamal.RepresentedSimulatorPrimitives sampling X embed}
     (N : ElGamal.RepresentedChooseNormalizer M) (saved : List (Option Bool))
     (n : Nat) (x : X n) (bit : Bool) (tupleTail rawReply : List Bool) (blanks : Nat) :
     (evalConfigWithin (normalizeChooseCompile N.program)

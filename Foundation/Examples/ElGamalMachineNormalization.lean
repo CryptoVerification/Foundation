@@ -71,7 +71,7 @@ example
     {X : Nat → Type 1}
     {embed : ∀ n, X n → ConcreteInstance sampling n}
     {M : RepresentedMachinePrimitives sampling X embed}
-    (N : RepresentedChooseNormalizer M) : Machine.PolynomialTime N.program :=
+    (N : RepresentedChooseNormalizer M.toSimulatorPrimitives) : Machine.PolynomialTime N.program :=
   N.polynomialTime
 
 /-- The local normalization certificate can be invoked as an ordinary
@@ -83,7 +83,7 @@ example
     {X : Nat → Type 1}
     {embed : ∀ n, X n → ConcreteInstance sampling n}
     {M : RepresentedMachinePrimitives sampling X embed}
-    (N : RepresentedChooseNormalizer M)
+    (N : RepresentedChooseNormalizer M.toSimulatorPrimitives)
     (pre suffix : Machine.Program) (returnPc : Nat)
     (hLayout : ∀ pc, pc ≤ N.program.length → pre.length + pc ≠ returnPc)
     (n : Nat) (x : X n) (bits : List Bool) :

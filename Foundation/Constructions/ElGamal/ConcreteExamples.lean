@@ -28,6 +28,9 @@ def bitAlgebra : FiniteAlgebra bitParams where
   mulLeftEquiv_apply := by intro m t; rfl
   power_mul := by intro x y; cases x <;> cases y <;> rfl
 
+/-- Deliberately failing decryptor for the advantage-equality API check.
+This example does not establish a correct encryption scheme; the actual
+group decryptor and correctness examples are in `CorrectnessExamples`. -/
 def bitDecrypt : bitParams.Scalar →
     (bitParams.Element × bitParams.Element) → Option bitParams.Element :=
   fun _ _ => none

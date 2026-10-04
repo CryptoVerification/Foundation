@@ -27,6 +27,14 @@ def resultBudget (q : Nat → Nat) (m : Nat) : Nat :=
 def rawTraceBudget (q : Nat → Nat) (m : Nat) : Nat :=
   31 * m + 42 + preparedTraceBudget q m + resultBudget q m
 
+/-- A monotone source budget yields a monotone guarded invocation budget. -/
+theorem rawTraceBudget_monotone {q : Nat → Nat} (hq : Monotone q) :
+    Monotone (rawTraceBudget q) := by
+  intro a b h
+  unfold rawTraceBudget preparedTraceBudget resultBudget
+  have hq' := hq h
+  gcongr
+
 /-- Full result with caller-owned prefixes retained on both physical tapes.
 The simulated source sees only its guarded logical tapes. -/
 def rawResultFrom (source : Program) (input : List Bool)

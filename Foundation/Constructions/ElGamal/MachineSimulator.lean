@@ -10,7 +10,7 @@ open Machine Machine.GuardedCompiler
 variable
   {sampling : (n : Nat) → (params : DDHParameters) → Option (DDHFiniteSampling params)}
   {X : Nat → Type 1} {embed : ∀ n, X n → ConcreteInstance sampling n}
-  {M : RepresentedMachinePrimitives sampling X embed}
+  {M : RepresentedSimulatorPrimitives sampling X embed}
 
 /-- Executable finite-code construction. The same source adversary code is
 embedded for choose and guess. Only the fixed normalizer and multiplication

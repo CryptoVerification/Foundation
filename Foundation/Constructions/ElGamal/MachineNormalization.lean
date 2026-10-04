@@ -155,7 +155,7 @@ structure RepresentedChooseNormalizer
       Option (DDHFiniteSampling params)}
     {X : Nat → Type 1}
     {embed : ∀ n, X n → ConcreteInstance sampling n}
-    (M : RepresentedMachinePrimitives sampling X embed) where
+    (M : RepresentedSimulatorPrimitives sampling X embed) where
   program : Machine.Program
   budget : Nat → Nat
   budget_polynomial : PolynomiallyBounded budget
@@ -175,7 +175,7 @@ theorem polynomialTime
       Option (DDHFiniteSampling params)}
     {X : Nat → Type 1}
     {embed : ∀ n, X n → ConcreteInstance sampling n}
-    {M : RepresentedMachinePrimitives sampling X embed}
+    {M : RepresentedSimulatorPrimitives sampling X embed}
     (N : RepresentedChooseNormalizer M) : Machine.PolynomialTime N.program :=
   ⟨N.budget, N.budget_polynomial, N.halts⟩
 
@@ -186,7 +186,7 @@ The support premise refers to the native source execution distribution. -/
 theorem preparedBranch_output
     {sampling : (n : Nat) → (params : DDHParameters) → Option (DDHFiniteSampling params)}
     {X : Nat → Type 1} {embed : ∀ n, X n → ConcreteInstance sampling n}
-    {M : RepresentedMachinePrimitives sampling X embed}
+    {M : RepresentedSimulatorPrimitives sampling X embed}
     (N : RepresentedChooseNormalizer M) (n : Nat) (x : X n) (rawReply : List Bool)
     (c : Machine.Configuration)
     (hc : c ∈ (Machine.evalConfigWithin N.program
@@ -221,7 +221,7 @@ scratch are preserved and no new initialized tape is supplied. -/
 theorem nativeBranch_selectMessage
     {sampling : (n : Nat) → (params : DDHParameters) → Option (DDHFiniteSampling params)}
     {X : Nat → Type 1} {embed : ∀ n, X n → ConcreteInstance sampling n}
-    {M : RepresentedMachinePrimitives sampling X embed}
+    {M : RepresentedSimulatorPrimitives sampling X embed}
     (N : RepresentedChooseNormalizer M) (n : Nat) (x : X n) (rawReply : List Bool)
     (beforeInput savedInput : List (Option Bool)) (c : Machine.Configuration)
     (hc : c ∈ (Machine.evalConfigWithin N.program
@@ -249,7 +249,7 @@ The raw state retained by normalization cannot exceed that response length. -/
 theorem nativeSelection_steps_le
     {sampling : (n : Nat) → (params : DDHParameters) → Option (DDHFiniteSampling params)}
     {X : Nat → Type 1} {embed : ∀ n, X n → ConcreteInstance sampling n}
-    {M : RepresentedMachinePrimitives sampling X embed}
+    {M : RepresentedSimulatorPrimitives sampling X embed}
     (n : Nat) (x : X n) (rawReply : List Bool) :
     let messages := interpretChooseResponse (M.elementCode n x) (embed n x).params.generator rawReply
     Machine.prepareSelectedMessageSteps ((M.elementCode n x).encode messages.1)
@@ -278,7 +278,7 @@ theorem nativeContinuation_correct
       Option (DDHFiniteSampling params)}
     {X : Nat → Type 1}
     {embed : ∀ n, X n → ConcreteInstance sampling n}
-    {M : RepresentedMachinePrimitives sampling X embed}
+    {M : RepresentedSimulatorPrimitives sampling X embed}
     (N : RepresentedChooseNormalizer M) (savedOutput : List (Option Bool))
     (n : Nat) (x : X n) (bit : Bool) (tupleTail rawReply : List Bool) (blanks : Nat) :
     (Machine.evalConfigWithin (Machine.GuardedCompiler.normalizeChooseCompile N.program)

@@ -25,6 +25,28 @@ def undelimit : List Bool → Option (List Bool × List Bool)
   | cons bit rest ih =>
       simpa [delimit, undelimit] using ih
 
+/-- A successful delimiter parse reconstructs the exact input, including
+the unconsumed suffix. -/
+theorem delimit_append_of_undelimit {bits field tail : List Bool}
+    (h : undelimit bits = some (field, tail)) :
+    delimit field ++ tail = bits := by
+  match bits with
+  | [] => simp [undelimit] at h
+  | false :: rest =>
+      simp [undelimit] at h
+      cases h.1
+      cases h.2
+      rfl
+  | [true] => simp [undelimit] at h
+  | true :: bit :: rest =>
+      simp only [undelimit, Option.map_eq_some_iff] at h
+      obtain ⟨pair, hPair, hValue⟩ := h
+      rcases pair with ⟨inner, suffix⟩
+      cases hValue
+      simpa [delimit] using congrArg (fun xs => true :: bit :: xs)
+        (delimit_append_of_undelimit hPair)
+termination_by bits.length
+
 theorem undelimit_tail_length_le (bits field tail : List Bool)
     (h : undelimit bits = some (field, tail)) :
     tail.length ≤ bits.length := by

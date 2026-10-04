@@ -8,7 +8,7 @@ open Machine Machine.GuardedCompiler
 variable
   {sampling : (n : Nat) → (params : DDHParameters) → Option (DDHFiniteSampling params)}
   {X : Nat → Type 1} {embed : ∀ n, X n → ConcreteInstance sampling n}
-  {M : RepresentedMachinePrimitives sampling X embed}
+  {M : RepresentedSimulatorPrimitives sampling X embed}
 
 private theorem monomial_profile {size : Nat → Nat} (hSize : PolynomiallyBounded size)
     (coefficient degree : Nat) : PolynomiallyBounded (fun n => coefficient * (size n + 1)^degree) :=

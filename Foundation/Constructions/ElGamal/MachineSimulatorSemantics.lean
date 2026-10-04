@@ -7,7 +7,7 @@ open Machine Machine.GuardedCompiler
 variable
   {sampling : (n : Nat) → (params : DDHParameters) → Option (DDHFiniteSampling params)}
   {X : Nat → Type 1} {embed : ∀ n, X n → ConcreteInstance sampling n}
-  {M : RepresentedMachinePrimitives sampling X embed}
+  {M : RepresentedSimulatorPrimitives sampling X embed}
 
 /-- The choose response of the existing represented adapter is exactly the
 interpretation of the actual prepared source output PMF. Native execution

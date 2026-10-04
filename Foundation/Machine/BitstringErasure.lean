@@ -80,6 +80,19 @@ def eraseOutputBlockFinish (input : Tape) (before : List (Option Bool))
     (bits : List Bool) (right : List (Option Bool)) : Configuration :=
   eraseBlockFinish input before bits.reverse right
 
+theorem eraseOutputBlockStart_replicate (input : Tape) (count : Nat) :
+    eraseOutputBlockStart input [] (List.replicate count false) [] =
+      { inputTape := input,
+        outputTape := { left := List.replicate count (some false) ++ [none] } } := by
+  simp [eraseOutputBlockStart, eraseBlockState]
+
+theorem eraseOutputBlockFinish_replicate (input : Tape) (count : Nat) :
+    eraseOutputBlockFinish input [] (List.replicate count false) [] =
+      { pc := 4, inputTape := input,
+        outputTape := { right := List.replicate (count + 1) none },
+        halted := true } := by
+  simp [eraseOutputBlockFinish, eraseBlockFinish]
+
 theorem eraseOutputBlock_runs (input : Tape) (before : List (Option Bool))
     (bits : List Bool) (right : List (Option Bool)) :
     RunsFor eraseOutputBlock (eraseOutputBlockStart input before bits right)

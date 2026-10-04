@@ -413,6 +413,50 @@ theorem skipFrame_terminates_with_layout (prefixBits : List (Option Bool)) (inpu
     · simp only [List.length_append, List.length_replicate, List.length_cons]; omega
     · simpa only [skipFrameFinish, payloadTape] using hAdvance
 
+/-- The only time the frame skipper leaves a nonempty counter on its scratch
+tape is when it reaches the end of the input before finding a delimiter.
+Then no following parser can see a bit under the input head. -/
+theorem skipFrame_terminates_clean_or_empty (prefixBits : List (Option Bool))
+    (input : List Bool) :
+    ∃ (finish : Configuration) (used : Nat) (beforeInput : List (Option Bool))
+      (rest : List Bool) (beforeOutput : List (Option Bool)) (blanks : Nat),
+      used ≤ 10 * input.length + 5 ∧
+      RunsFor skipFrame
+        ({ inputTape := { Tape.ofBits input with left := prefixBits } } : Configuration)
+        finish used ∧
+      finish.halted = true ∧
+      finish.inputTape = { Tape.ofBits rest with left := beforeInput } ∧
+      finish.outputTape = { left := beforeOutput, right := List.replicate blanks none } ∧
+      rest.length ≤ input.length ∧
+      (rest = [] ∨ beforeOutput = []) ∧
+      (beforeOutput = [] ∨ ∃ count, beforeOutput = List.replicate count (some true)) := by
+  rcases unary_split input with ⟨count, hInput⟩ | ⟨count, tail, hInput⟩
+  · subst input
+    have hRun := read_unterminated prefixBits count 0
+    have hStart : readState prefixBits 0 (List.replicate count true) =
+        ({ inputTape := { Tape.ofBits (List.replicate count true)
+          with left := prefixBits } } : Configuration) := by
+      simp [readState]
+    rw [hStart] at hRun
+    refine ⟨_, 5 * count + 2, List.replicate count (some true) ++ prefixBits,
+      [], List.replicate count (some true), 0, ?_, hRun, rfl, ?_, ?_, ?_,
+      Or.inl rfl, Or.inr ⟨count, rfl⟩⟩
+    · simp only [List.length_replicate]; omega
+    · simp [readState]
+    · simp [readState]
+    · simp
+  · subst input
+    obtain ⟨before, hAdvance⟩ := advanceTape_suffix
+      (some false :: (List.replicate count (some true) ++ prefixBits)) tail count
+    refine ⟨skipFrameFinish count tail prefixBits, 10 * count + 5, before,
+      tail.drop count, [], count + 1, ?_, skipFrame_runs_from prefixBits count tail,
+      rfl, ?_, rfl, ?_, Or.inr rfl, Or.inl rfl⟩
+    · simp only [List.length_append, List.length_replicate, List.length_cons]; omega
+    · simpa only [skipFrameFinish, payloadTape] using hAdvance
+    · simp only [List.length_drop, List.length_append, List.length_replicate,
+        List.length_cons]
+      omega
+
 
 private theorem skipFrame_consume_blank (input output : Tape) (hBlank : output.current = none) :
     RunsFor skipFrame ({ pc := 7, inputTape := input, outputTape := output } : Configuration)

@@ -20,8 +20,8 @@ variable
 returned operand-assembly configuration. Frontier scans, request rewind,
 guarded execution, and final halt are all instructions of the wrapper.
 The result is the code for `message * T`, in that order. -/
-theorem RepresentedMachinePrimitives.nativeMultiplyFromOperands_eval
-    (M : RepresentedMachinePrimitives sampling X embed)
+theorem RepresentedSimulatorPrimitives.nativeMultiplyFromOperands_eval
+    (M : RepresentedSimulatorPrimitives sampling X embed)
     (before savedOutput : List (Option Bool)) (n : Nat) (x : X n)
     (first second last message : (embed n x).params.Element)
     (reply canonical : List Bool) (blanks : Nat) :
@@ -46,8 +46,8 @@ theorem RepresentedMachinePrimitives.nativeMultiplyFromOperands_eval
 /-- Every random branch of the native represented call halts. The source
 certificate is applied to this assembled request's actual finite length;
 no monotonicity of its budget or meta-level instance oracle is assumed. -/
-theorem RepresentedMachinePrimitives.nativeMultiplyFromOperands_halts
-    (M : RepresentedMachinePrimitives sampling X embed)
+theorem RepresentedSimulatorPrimitives.nativeMultiplyFromOperands_halts
+    (M : RepresentedSimulatorPrimitives sampling X embed)
     (before savedOutput : List (Option Bool)) (n : Nat) (x : X n)
     (first second last message : (embed n x).params.Element)
     (reply canonical : List Bool) (blanks : Nat) (finish : Configuration) :
@@ -67,8 +67,8 @@ theorem RepresentedMachinePrimitives.nativeMultiplyFromOperands_halts
 place the frame of `message * T` in the physical output cells immediately
 behind the head. The same execution retains the stored challenge, canonical
 response, original tuple, and simulated multiplication scratch. -/
-theorem RepresentedMachinePrimitives.nativeMultiplyFramedFromOperands_eval
-    (M : RepresentedMachinePrimitives sampling X embed)
+theorem RepresentedSimulatorPrimitives.nativeMultiplyFramedFromOperands_eval
+    (M : RepresentedSimulatorPrimitives sampling X embed)
     (before savedOutput : List (Option Bool)) (n : Nat) (x : X n)
     (first second last message : (embed n x).params.Element)
     (reply canonical : List Bool) (blanks : Nat) :
@@ -87,8 +87,8 @@ theorem RepresentedMachinePrimitives.nativeMultiplyFramedFromOperands_eval
   exact storedFramedCallCompile_evalFrameCells _ _ _ _ _ _ _ _ _ _ _ M.multiplyBudget
     (M.multiplyHalts _) (M.multiply_correct n x message last)
 
-theorem RepresentedMachinePrimitives.nativeMultiplyFramedFromOperands_halts
-    (M : RepresentedMachinePrimitives sampling X embed)
+theorem RepresentedSimulatorPrimitives.nativeMultiplyFramedFromOperands_halts
+    (M : RepresentedSimulatorPrimitives sampling X embed)
     (before savedOutput : List (Option Bool)) (n : Nat) (x : X n)
     (first second last message : (embed n x).params.Element)
     (reply canonical : List Bool) (blanks : Nat) (finish : Configuration) :
@@ -109,8 +109,8 @@ The actual group-operation certificate determines the ciphertext second
 component; the source guess call consumes that product on the retained tapes.
 The common budget includes every multiplication scratch branch and the full
 native finalization, rather than supplying a separate product bitstring. -/
-theorem RepresentedMachinePrimitives.nativeMultiplyAndGuessFromOperands_eval
-    (M : RepresentedMachinePrimitives sampling X embed)
+theorem RepresentedSimulatorPrimitives.nativeMultiplyAndGuessFromOperands_eval
+    (M : RepresentedSimulatorPrimitives sampling X embed)
     (guessSource : Program) (qGuess : Nat → Nat)
     (chooseRequest normalizeRequest : List Bool)
     (before : List (Option Bool)) (n : Nat) (x : X n)
@@ -153,8 +153,8 @@ select its message, construct the multiplication request, invoke the fixed
 group algorithm and source guess, and emit exactly one comparison bit.
 The efficient multiplication certificate, rather than a free algebraic
 primitive, supplies each branch's encoded ciphertext component. -/
-theorem RepresentedMachinePrimitives.nativeChallengeAndGuessFromNormalizer_eval
-    (M : RepresentedMachinePrimitives sampling X embed)
+theorem RepresentedSimulatorPrimitives.nativeChallengeAndGuessFromNormalizer_eval
+    (M : RepresentedSimulatorPrimitives sampling X embed)
     (chooseSource normalizeSource guessSource : Program) (qGuess : Nat → Nat)
     (chooseRequest normalizeRequest : List Bool) (chooseSaved before : List (Option Bool))
     (n : Nat) (x : X n)
@@ -207,7 +207,7 @@ replies, including malformed outputs, and supplies the canonical default
 policy used by the existing adversary adapter. No normalizer branch or
 encoded product is inserted into the caller's tapes mathematically. -/
 theorem RepresentedChooseNormalizer.nativeNormalizeChallengeAndGuess_eval
-    (M : RepresentedMachinePrimitives sampling X embed) (N : RepresentedChooseNormalizer M)
+    (M : RepresentedSimulatorPrimitives sampling X embed) (N : RepresentedChooseNormalizer M)
     (chooseSource guessSource : Program) (qGuess : Nat → Nat)
     (chooseRequest : List Bool) (chooseSaved : List (Option Bool)) (n : Nat) (x : X n)
     (first second last : (embed n x).params.Element) (reply : List Bool)

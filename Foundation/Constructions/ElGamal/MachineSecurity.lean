@@ -239,7 +239,7 @@ theorem secureRepresentedINDCPA_of_secureRepresentedDDH_nativeMachinePPT
     (sampling : (n : Nat) → (params : DDHParameters) → Option (DDHFiniteSampling params))
     (X : Nat → Type 1)
     (embed : ∀ n, X n → ConcreteInstance sampling n)
-    (M : RepresentedMachinePrimitives sampling X embed)
+    (M : RepresentedSimulatorPrimitives sampling X embed)
     (N : RepresentedChooseNormalizer M)
     (F : InstanceFamily (representedINDCPAGoal sampling X embed))
     (hDDH : SecureOnWithin (representedDDHGoal sampling X embed)

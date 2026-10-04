@@ -1,6 +1,5 @@
 import Foundation.Machine.Adversary
 import Foundation.Machine.PolynomialTime
-import Foundation.Resource.FiniteProgram
 
 universe u v w
 
@@ -56,48 +55,6 @@ noncomputable def pptClass {P : CryptoGoal.{u}}
       (∀ input : List Bool, HaltsWithin p input (q input.length)) ∧
       PolynomiallyBounded size.limit ∧
       J.Realizes F p q A
-
-/-- The old uniformity interface can remember a finite machine code and a
-finite monomial stopping certificate. The latter is analysis data, not a
-machine instruction or a security-parameter-indexed program. -/
-noncomputable def uniformModel {P : CryptoGoal.{u}}
-    (J : MachineAdversaryInterface.{u, v, w} P) :
-    UniformAdversaryModel P where
-  Program := fun _ => Program × Nat × Nat
-  realize := fun F code =>
-    J.realizeFamily F code.1 (fun m => code.2.1 * (m + 1) ^ code.2.2)
-
-@[instance_reducible] private def uniformProgramEncodable {P : CryptoGoal.{u}}
-    (J : MachineAdversaryInterface.{u, v, w} P)
-    (F : InstanceFamily P) : Encodable (J.uniformModel.Program F) := by
-  change Encodable (Program × Nat × Nat)
-  infer_instance
-
-def uniformModel_finiteDescription {P : CryptoGoal.{u}}
-    (J : MachineAdversaryInterface.{u, v, w} P) :
-    J.uniformModel.FiniteDescription where
-  encode := fun F code =>
-    List.replicate (@Encodable.encode _ (uniformProgramEncodable J F) code) true
-  encode_injective := by
-    intro F x y h
-    apply (@Encodable.encode_injective _ (uniformProgramEncodable J F))
-    have hlen := congrArg List.length h
-    simpa only [List.length_replicate] using hlen
-
-theorem pptClass_admissible_uniform {P : CryptoGoal.{u}}
-    (J : MachineAdversaryInterface.{u, v, w} P)
-    {F : InstanceFamily P} {A : AdversaryFamily P F}
-    (h : J.pptClass.admissible F A) :
-    J.uniformModel.uniformClass.admissible F A := by
-  obtain ⟨p, q, _, hq, hSource, _, hRealizes⟩ := h
-  obtain ⟨c, k, hGlobal⟩ := global_monomial_of_polynomiallyBounded hq
-  let bound : Nat → Nat := fun m => c * (m + 1) ^ k
-  have hBound : ∀ input : List Bool,
-      HaltsWithin p input (bound input.length) := by
-    intro input
-    exact (hSource input).mono (hGlobal input.length)
-  have hFuel := J.realizeFamily_budget_eq_of_halts F p q bound hSource hBound
-  exact ⟨(p, c, k), hFuel.symm.trans hRealizes⟩
 
 theorem pptClass_program_polynomialTime {P : CryptoGoal.{u}}
     (J : MachineAdversaryInterface.{u, v, w} P)
