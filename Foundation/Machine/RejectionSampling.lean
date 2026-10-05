@@ -66,6 +66,24 @@ def program : Program :=
   [.branch .input 49 7 1, .moveRight .input, .branch .input 3 5 5,
    .write .output false, .halt, .moveLeft .input, .jump 7] ++ retryBody.map offset
 
+/-- Every active successor remains in the fixed fifty-instruction block.
+This permits an exact control-sensitive native subroutine probability law. -/
+theorem control_closed (c d : Configuration) (hPc : c.pc < program.length)
+    (step : Step program c d) (_hRunning : d.halted = false) : d.pc < program.length := by
+  have hActive : c.halted = false := by
+    cases hh : c.halted with
+    | false => rfl
+    | true => exact False.elim ((no_step_of_halted hh) step)
+  change c.pc < 50 at hPc
+  change d.pc < 50
+  interval_cases hIndex : c.pc
+  all_goals simp [Step, successors, next, hActive, hIndex, program, retryBody, offset,
+    Instruction.next, Configuration.tape] at step
+  all_goals try (split at step)
+  all_goals first
+    | (subst d; simp [Configuration.advance, Configuration.updateTape, hIndex])
+    | (rcases step with rfl | rfl <;> simp [Configuration.advance, Configuration.updateTape, hIndex])
+
 theorem one_haltsWithin : HaltsWithin program [true] 5 := by
   rw [haltsWithin_iff_reachableStates]
   decide

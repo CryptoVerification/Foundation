@@ -27,21 +27,22 @@ private theorem separator_runs (input output : Tape) :
 /-- Both the saved width and canonical modulus are produced by the same
 finite code. The bound charges the two column scans, rewind, separator,
 high-zero erasure, and subroutine control transitions. -/
-theorem runs (first modulus : List Bool) (width q : Nat)
+theorem runs_before (written : List (Option Bool)) (first modulus : List Bool) (width q : Nat)
     (hFirst : first.length = width) (hModulus : modulus.length = width)
     (hPositive : q ≠ 0) (hFit : q < 2^width) :
     ∃ (target : Configuration) (used : Nat), used ≤ 30*width+18 ∧
       RunsFor program
-        (Configuration.initial (BinaryColumnSlotFill.fullSlots first (Binary.encode width q) modulus))
+        ({inputTape := Tape.ofBits (BinaryColumnSlotFill.fullSlots first (Binary.encode width q) modulus),
+          outputTape := {left := written}} : Configuration)
         target used ∧ target.halted = true ∧
       target.outputTape.Equivalent
-        { left := q.bits.reverse.map some ++ none :: List.replicate width (some true)
+        { left := q.bits.reverse.map some ++ none :: (List.replicate width (some true) ++ written)
           right := List.replicate (width-q.bits.length) none } ∧
       target.inputTape.Equivalent
         { left := (BinaryColumnSlotFill.fullSlots first (Binary.encode width q) modulus).reverse.map some } := by
   let columns := (first.zip (Binary.encode width q)).zip modulus
   let bits := BinaryModularAddition.interleave columns
-  let counter : Tape := { left := List.replicate width (some true) }
+  let counter : Tape := { left := List.replicate width (some true) ++ written }
   have emptyLeft : ({ Tape.ofBits bits with left := [] } : Tape) = Tape.ofBits bits := by
     cases bits <;> rfl
   have hColumns : columns.length = width := by simp [columns, hFirst, hModulus]
@@ -50,12 +51,13 @@ theorem runs (first modulus : List Bool) (width q : Nat)
     simp [BinaryColumnSlotFill.fullSlots_length, hFirst, hModulus]
   let gathered : Configuration :=
     { pc := 13, halted := true, inputTape := { left := bits.reverse.map some }, outputTape := counter }
-  have one : RunsFor SecondColumnGather.counterProgram (Configuration.initial bits) gathered (10*width+2) := by
-    have rawRun := SecondColumnGather.runs_counter columns [] []
+  have one : RunsFor SecondColumnGather.counterProgram
+      ({inputTape := Tape.ofBits bits, outputTape := {left := written}} : Configuration) gathered (10*width+2) := by
+    have rawRun := SecondColumnGather.runs_counter columns [] written
     change RunsFor SecondColumnGather.counterProgram
-      ({ inputTape := { Tape.ofBits bits with left := [] }, outputTape := { left := [] } } : Configuration)
+      ({ inputTape := { Tape.ofBits bits with left := [] }, outputTape := { left := written } } : Configuration)
       ({ pc := 13, halted := true, inputTape := { left := bits.reverse.map some ++ [] },
-         outputTape := { left := List.replicate columns.length (some true) ++ [] } } : Configuration) _ at rawRun
+         outputTape := { left := List.replicate columns.length (some true) ++ written } } : Configuration) _ at rawRun
     simpa only [Configuration.initial, gathered, counter, hColumns, List.append_nil, emptyLeft] using rawRun
   have two : RunsFor rewindBitstring (gathered.resumeAt 0)
       (rewindBitstringFinish bits counter) (2*bits.length+4) := by
@@ -77,10 +79,10 @@ theorem runs (first modulus : List Bool) (width q : Nat)
       outputTape := counter.moveRight }
   obtain ⟨canonical, z, hz, lastRun, hHalt, hInput, hOutput⟩ :=
     ScalarModulusColumns.runs first modulus width q []
-      (none :: List.replicate width (some true)) hFirst hModulus hPositive hFit
+      (none :: (List.replicate width (some true) ++ written)) hFirst hModulus hPositive hFit
   have layout :
       ({ inputTape := { Tape.ofBits bits with left := [] }
-         outputTape := { left := none :: List.replicate width (some true) } } : Configuration).Equivalent
+         outputTape := { left := none :: (List.replicate width (some true) ++ written) } } : Configuration).Equivalent
         (separated.resumeAt 0) := by
     refine ⟨rfl, rfl, ?_, ?_⟩
     · simpa only [emptyLeft, separated, Configuration.resumeAt] using hRewoundInput.symm
@@ -96,6 +98,21 @@ theorem runs (first modulus : List Bool) (width q : Nat)
   · exact hActual.2.2.2.symm.trans (hOutput ▸ Tape.Equivalent.refl _)
   · simp only [List.append_nil] at hInput
     simpa only [Configuration.resumeAt, hInput] using hActual.2.2.1.symm
+
+theorem runs (first modulus : List Bool) (width q : Nat)
+    (hFirst : first.length = width) (hModulus : modulus.length = width)
+    (hPositive : q ≠ 0) (hFit : q < 2^width) :
+    ∃ (target : Configuration) (used : Nat), used ≤ 30*width+18 ∧
+      RunsFor program
+        (Configuration.initial (BinaryColumnSlotFill.fullSlots first (Binary.encode width q) modulus))
+        target used ∧ target.halted = true ∧
+      target.outputTape.Equivalent
+        { left := q.bits.reverse.map some ++ none :: List.replicate width (some true)
+          right := List.replicate (width-q.bits.length) none } ∧
+      target.inputTape.Equivalent
+        { left := (BinaryColumnSlotFill.fullSlots first (Binary.encode width q) modulus).reverse.map some } := by
+  simpa only [List.append_nil, Configuration.initial] using runs_before [] first modulus width q
+    hFirst hModulus hPositive hFit
 
 theorem no_randomBit (tape : TapeId) : Instruction.randomBit tape ∉ program := by
   apply Program.followedBy_no_randomBit

@@ -1,6 +1,6 @@
 import Foundation.Machine.FramedScalarInput
 import Foundation.Machine.ScalarSamplePadding
-import Foundation.Machine.SavedRejectionSamplingSemantics
+import Foundation.Machine.ScalarSamplerContinuation
 
 namespace Machine.FramedScalarSampler
 
@@ -9,7 +9,7 @@ invoke the existing exact rejection code, and physically pad its accepted
 result. The linked distribution and expected-time certificates must account
 for the random subroutine's return as well as these deterministic stages. -/
 def program : Program :=
-  (FramedScalarInput.program.followedBy RejectionSampling.program).followedBy ScalarSamplePadding.program
+  FramedScalarInput.program.followedBy ScalarSamplerContinuation.program
 
 /-- An accepted operational sampler branch continues on its actual tapes
 through fixed-width padding. Source random transitions are all charged.
@@ -35,20 +35,19 @@ theorem runs_from_sample (n : Nat) (modulus generator : List Bool) (q : Nat)
   have samplerLayout :
       (RejectionSampling.Saved.initial (List.replicate (n+3) (some true)) q.bits).Equivalent
         (prepared.resumeAt 0) := ⟨rfl, rfl, prepInput.symm, prepOutput.symm⟩
-  obtain ⟨actualSample, v, hv, linked₁, halt₁, input₁, output₁⟩ :=
-    prepRun.followedBy_equivalent sampleRun samplerLayout (Nat.zero_le _) rfl prepHalt sampleHalt
-  have actualInput := input₁.symm.trans sampleInput
-  have actualOutput := output₁.symm.trans sampleOutput
   have hLength : q.bits.length ≤ n+3 := by
     rw [Nat.size_eq_bits_len]
     exact Nat.size_le.mpr hFit
   obtain ⟨padded, z, hz, padRun, padHalt, padOutput⟩ := ScalarSamplePadding.runs (n+3) q.bits sample hLength hSample
   have padLayout :
       ({ inputTape := { left := q.bits.reverse.map some ++ none::List.replicate (n+3) (some true) }
-         outputTape := { left := sample.reverse.map some } } : Configuration).Equivalent (actualSample.resumeAt 0) :=
-    ⟨rfl, rfl, actualInput.symm, actualOutput.symm⟩
+         outputTape := { left := sample.reverse.map some } } : Configuration).Equivalent (accepted.resumeAt 0) :=
+    ⟨rfl, rfl, sampleInput.symm, sampleOutput.symm⟩
+  obtain ⟨paddedTarget, v, hv, linked, halt, _, output⟩ :=
+    sampleRun.followedBy_equivalent padRun padLayout (Nat.zero_le _) rfl sampleHalt padHalt
   obtain ⟨target, used, hUsed, run, hHalt, _, hOutput⟩ :=
-    linked₁.followedBy_equivalent padRun padLayout (Nat.zero_le _) rfl halt₁ padHalt
-  exact ⟨target, used, by omega, run, hHalt, hOutput.bits.symm.trans padOutput⟩
+    prepRun.followedBy_equivalent linked samplerLayout (Nat.zero_le _) rfl prepHalt halt
+  exact ⟨target, used, by omega, run, hHalt,
+    hOutput.bits.symm.trans (output.bits.symm.trans padOutput)⟩
 
 end Machine.FramedScalarSampler

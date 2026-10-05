@@ -19,6 +19,13 @@ def program : Program :=
 def columns (modulus : List Bool) : List Bool :=
   BinaryModularAddition.interleave (modulus.map fun bit => ((false, false), bit))
 
+theorem columns_length (modulus : List Bool) : (columns modulus).length = 3*modulus.length := by
+  induction modulus with
+  | nil => rfl
+  | cons bit rest ih =>
+    simp [columns, BinaryModularAddition.interleave] at *
+    omega
+
 private def state (beforeInput beforeOutput : List (Option Bool))
     (remaining : List Bool) : Configuration :=
   { inputTape := { Tape.ofBits remaining with left := beforeInput },

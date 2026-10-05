@@ -25,7 +25,7 @@ private theorem first_layout (core : Program) : withCore core =
   simp [withCore, pre, firstReturn, Program.withSubroutine,
     Program.asSubroutine_length]
 
-private theorem no_randomBit (tape : TapeId) : Instruction.randomBit tape ∉ program := by
+theorem no_randomBit (tape : TapeId) : Instruction.randomBit tape ∉ program := by
   simp only [program, withCore, Program.withSubroutine, pre,
     List.mem_append, not_or]
   exact ⟨⟨Program.asSubroutine_no_randomBit _ BinaryProductPadded.no_randomBit _ _ tape,

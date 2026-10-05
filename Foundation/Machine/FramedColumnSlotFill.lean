@@ -420,6 +420,58 @@ theorem payload_second (first second modulus tail : List Bool)
                   BinaryModularAddition.interleave, List.reverse_cons,
                   List.map_append, List.append_assoc]
 
+/-- The payload loop also replaces an existing first track. The already
+populated exponent and modulus are preserved, and an arbitrary following
+input suffix is left unread. This permits two powers using one saved scalar. -/
+theorem payload_replace_first (old first second modulus tail : List Bool)
+    (hOld : old.length = modulus.length) (hFirst : first.length = modulus.length)
+    (hSecond : second.length = modulus.length)
+    (beforeInput beforeOutput : List (Option Bool)) :
+    evalConfigWithin program
+      (payloadState beforeInput (first ++ tail)
+        {Tape.ofBits (BinaryColumnSlotFill.fullSlots old second modulus) with left := beforeOutput})
+      (9*first.length+2) =
+    PMF.pure (finish (first.reverse.map some ++ beforeInput) tail
+      {left := (BinaryColumnSlotFill.fullSlots first second modulus).reverse.map some ++ beforeOutput}) := by
+  induction first generalizing old second modulus beforeInput beforeOutput with
+  | nil =>
+    cases modulus with
+    | cons p ps => simp at hFirst
+    | nil =>
+      cases old with
+      | cons a as => simp at hOld
+      | nil =>
+        cases second with
+        | cons b bs => simp at hSecond
+        | nil =>
+          simpa [BinaryColumnSlotFill.fullSlots, BinaryModularAddition.interleave,
+            Tape.ofBits] using payload_end beforeInput tail ({left := beforeOutput} : Tape) rfl
+  | cons bit rest ih =>
+    cases modulus with
+    | nil => simp at hFirst
+    | cons p ps =>
+      cases old with
+      | nil => simp at hOld
+      | cons a as =>
+        cases second with
+        | nil => simp at hSecond
+        | cons b bs =>
+          have hCurrent : ({Tape.ofBits (BinaryColumnSlotFill.fullSlots (a::as) (b::bs) (p::ps)) with left := beforeOutput} : Tape).current ≠ none := by
+            simp [BinaryColumnSlotFill.fullSlots, BinaryModularAddition.interleave, Tape.ofBits]
+          have hStep : (((({Tape.ofBits (BinaryColumnSlotFill.fullSlots (a::as) (b::bs) (p::ps)) with left := beforeOutput} : Tape).write (some bit)).moveRight).moveRight).moveRight =
+              {Tape.ofBits (BinaryColumnSlotFill.fullSlots as bs ps) with left := [some p, some b, some bit] ++ beforeOutput} := by
+            cases as <;> cases bs <;> cases ps <;>
+              simp [BinaryColumnSlotFill.fullSlots, BinaryModularAddition.interleave,
+                Tape.ofBits, Tape.write, Tape.moveRight]
+          have time : 9*(bit::rest).length+2 = 9+(9*rest.length+2) := by simp; omega
+          rw [time, evalConfigWithin_add]
+          simp only [List.cons_append, payload_bit _ _ _ _ hCurrent, PMF.pure_bind, hStep]
+          convert ih as bs ps (by simpa using hOld) (by simpa using hFirst)
+            (by simpa using hSecond) (some bit::beforeInput)
+            ([some p, some b, some bit] ++ beforeOutput) using 1 <;>
+              simp [BinaryColumnSlotFill.fullSlots, BinaryModularAddition.interleave,
+                List.reverse_cons, List.map_append, List.append_assoc]
+
 /-- An unframed exponent is copied into the second arithmetic track by
 entering the existing finite code at its payload loop. The following generator
 and response fields remain unread. -/

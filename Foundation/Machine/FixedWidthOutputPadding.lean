@@ -177,6 +177,55 @@ theorem runs_encoded (width : Nat) (bits : List Bool) (hWidth : bits.length ≤ 
   obtain ⟨target, used, hUsed, run, hHalt, hOutput⟩ := runs width bits hWidth
   exact ⟨target, used, hUsed, run, hHalt, hOutput.trans (output_eq_encode width bits hWidth)⟩
 
+/-- Padding uses only the counter above its protecting blank. Caller data
+below that blank remains physically present on the input tape, allowing
+later arithmetic to recover saved public parameters. -/
+theorem runs_encoded_saved_layout (before : List (Option Bool)) (width : Nat) (bits : List Bool)
+    (hWidth : bits.length ≤ width) :
+    ∃ target used, used ≤ 5*width+3 ∧
+      RunsFor program
+        ({ inputTape := {Tape.ofBits (List.replicate width true) with left := none::before},
+           outputTape := Tape.ofBits bits } : Configuration)
+        target used ∧ target.halted = true ∧
+      target.inputTape = {left := List.replicate width (some true) ++ none::before} ∧
+      target.outputBits = Binary.encode width (Binary.value bits) ∧
+      target.outputTape = {left := (Binary.encode width (Binary.value bits)).reverse.map some} := by
+  have first := scan_runs (none::before) [] width bits hWidth
+  have second := fill_runs (List.replicate bits.length (some true) ++ none::before)
+    (bits.reverse.map some) (width-bits.length)
+  have middle : scanFinish (none::before) [] width bits =
+      fillStart (List.replicate bits.length (some true) ++ none::before)
+        (bits.reverse.map some) (width-bits.length) := by
+    simp [scanFinish, fillStart]
+  rw [middle] at first
+  have run := first.trans second
+  have start : scanStart (none::before) [] width bits =
+      ({inputTape := {Tape.ofBits (List.replicate width true) with left := none::before},
+        outputTape := Tape.ofBits bits} : Configuration) := by
+    cases width <;> cases bits <;> rfl
+  rw [start] at run
+  refine ⟨_, 4*bits.length+1+(5*(width-bits.length)+2), by omega, run, rfl, ?_, ?_⟩
+  · have count : width-bits.length+bits.length = width := by omega
+    simp [fillFinish, ← List.append_assoc, ← List.replicate_add, count]
+  · constructor
+    · simpa [fillFinish, Configuration.outputBits, Tape.bits, List.reverse_append,
+        List.filterMap_append] using output_eq_encode width bits hWidth
+    · rw [← output_eq_encode width bits hWidth]
+      simp [fillFinish, List.reverse_append, List.map_append]
+
+theorem runs_encoded_saved (before : List (Option Bool)) (width : Nat) (bits : List Bool)
+    (hWidth : bits.length ≤ width) :
+    ∃ target used, used ≤ 5*width+3 ∧
+      RunsFor program
+        ({ inputTape := {Tape.ofBits (List.replicate width true) with left := none::before},
+           outputTape := Tape.ofBits bits } : Configuration)
+        target used ∧ target.halted = true ∧
+      target.inputTape = {left := List.replicate width (some true) ++ none::before} ∧
+      target.outputBits = Binary.encode width (Binary.value bits) := by
+  obtain ⟨target, used, bound, run, halted, input, bits, _⟩ :=
+    runs_encoded_saved_layout before width bits hWidth
+  exact ⟨target, used, bound, run, halted, input, bits⟩
+
 theorem no_randomBit (tape : TapeId) : Instruction.randomBit tape ∉ program := by
   simp [program]
 

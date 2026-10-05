@@ -84,4 +84,29 @@ theorem no_randomBit (tape : TapeId) : Instruction.randomBit tape ∉ program :=
     · exact rewindBitstring_no_randomBit
   · exact FixedWidthOutputPadding.no_randomBit
 
+/-- Fixed-budget evaluation of the physical padding code from any retained
+cell-equivalent accepted layout. Redundant blanks do not reload either tape. -/
+theorem eval_from_layout (width : Nat) (modulus sample : List Bool)
+    (hModulus : modulus.length ≤ width) (hSample : sample.length ≤ width)
+    (start : Configuration) (hPc : start.pc = 0) (hActive : start.halted = false)
+    (hInput : start.inputTape.Equivalent
+      {left := modulus.reverse.map some ++ none::List.replicate width (some true)})
+    (hOutput : start.outputTape.Equivalent {left := sample.reverse.map some}) :
+    ∃ finish : Configuration, finish.halted = true ∧
+      finish.outputBits = Binary.encode width (Binary.value sample) ∧
+      evalConfigWithin program start (13*width+17) = PMF.pure finish := by
+  obtain ⟨canonical, used, hUsed, run, hHalt, hBits⟩ := runs width modulus sample hModulus hSample
+  obtain ⟨finish, actualRun, same⟩ := run.exists_equivalent
+    (⟨hPc.symm, hActive.symm, hInput.symm, hOutput.symm⟩ : _)
+  have finishHalt : finish.halted = true := same.2.1.symm.trans hHalt
+  have atUsed := actualRun.evalConfigWithin_eq_pure_of_no_randomBit no_randomBit
+  have allStopped (target : Configuration) (trace : PaddedRunsFor program start target used) :
+      target.halted = true := by
+    have member := (mem_support_evalConfigWithin_iff _ _ _ _).mpr trace
+    rw [atUsed] at member
+    have identical : target = finish := by simpa using member
+    exact identical ▸ finishHalt
+  exact ⟨finish, finishHalt, same.outputBits.symm.trans hBits,
+    (evalConfigWithin_eq_of_le program start used (13*width+17) hUsed allStopped).trans atUsed⟩
+
 end Machine.ScalarSamplePadding

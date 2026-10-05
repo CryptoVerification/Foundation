@@ -1,4 +1,4 @@
-import Foundation.Machine.FramedScalarSampler
+import Foundation.Machine.FramedScalarSamplerSemantics
 
 namespace Foundation.Examples.FramedScalarSampler
 
@@ -52,5 +52,25 @@ example (before : List (Option Bool)) (output : List Bool) :
         (fun a => Binary.encode 2 a.val)) output := by
   let : Nonempty (Fin (Binary.value ([true]++[true]))) := ⟨⟨0, by decide⟩⟩
   simpa only [List.cons_append, List.nil_append, List.length_cons, List.length_nil, Binary.value, Bool.toNat_true, ite_true, Nat.reduceAdd, Nat.reduceMul] using RejectionSampling.Saved.eventualOutputMass_uniform before [true] (by decide) output
+
+/-- The whole native framed program, including preparation and padding,
+has exactly the fixed-width uniform scalar output law. -/
+example (output : List Bool) :
+    outputMassFrom Machine.FramedScalarSampler.program
+      (Configuration.initial (encodeSecurityParameter 3 ++
+        frame (Binary.encode 6 7 ++ Binary.encode 6 3 ++ Binary.encode 6 2))) output =
+      ((Foundation.Probability.uniform (Fin 3)).map (fun a => Binary.encode 6 a.val)) output := by
+  exact Machine.FramedScalarSampler.outputMass_from_frame 3
+    (Binary.encode 6 7) (Binary.encode 6 2) 3 (by simp) (by decide) (by decide) output
+
+/-- Preparation and the final caller halt are included in the expected
+transition count; rejecting branches have not been discarded. -/
+example : expectedSteps Machine.FramedScalarSampler.program
+    (encodeSecurityParameter 3 ++
+      frame (Binary.encode 6 7 ++ Binary.encode 6 3 ++ Binary.encode 6 2)) ≤
+    ((Machine.FramedScalarInput.validBudget 3 (Binary.encode 6 7) (Binary.encode 6 2) +
+      1 + 350 : Nat) : ℝ≥0∞) := by
+  exact Machine.FramedScalarSampler.expectedSteps_from_frame 3
+    (Binary.encode 6 7) (Binary.encode 6 2) 3 (by simp) (by decide) (by decide)
 
 end Foundation.Examples.FramedScalarSampler

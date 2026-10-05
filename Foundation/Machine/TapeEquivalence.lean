@@ -300,6 +300,22 @@ theorem RunsFor.exists_equivalent {p : Program} {start finish other : Configurat
       obtain ⟨target, hLast, hTarget⟩ := last.exists_equivalent hMiddle
       exact ⟨target, RunsFor.succ hPrior hLast, hTarget⟩
 
+/-- Inspection traces transfer across redundant blank representations at
+the same budget. Post-halt stutters remain inspection only. -/
+theorem PaddedRunsFor.exists_equivalent {p : Program}
+    {start finish other : Configuration} {steps : Nat}
+    (run : PaddedRunsFor p start finish steps) (h : start.Equivalent other) :
+    ∃ target, PaddedRunsFor p other target steps ∧ finish.Equivalent target := by
+  induction run with
+  | zero => exact ⟨other, PaddedRunsFor.zero _, h⟩
+  | succ prior last ih =>
+      obtain ⟨middle, hPrior, hMiddle⟩ := ih
+      rcases last with last | ⟨hHalt, rfl⟩
+      · obtain ⟨target, hLast, hTarget⟩ := last.exists_equivalent hMiddle
+        exact ⟨target, PaddedRunsFor.succ hPrior (Or.inl hLast), hTarget⟩
+      · exact ⟨middle, PaddedRunsFor.succ hPrior
+          (Or.inr ⟨hMiddle.2.1.symm.trans hHalt, rfl⟩), hMiddle⟩
+
 /-- One machine step respects tape-cell equivalence, including its exact
 fair-bit probabilities. `k` is any observation of the next configuration
 that depends only on control and tape cells, not redundant outer blanks. -/

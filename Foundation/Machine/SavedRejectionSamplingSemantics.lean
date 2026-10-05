@@ -1,4 +1,5 @@
 import Foundation.Machine.RejectionSamplingSemantics
+import Foundation.Machine.ClosedSubroutineProbability
 
 namespace Machine.RejectionSampling.Saved
 
@@ -300,5 +301,18 @@ theorem eventualOutputMass_uniform (before : List (Option Bool))
   rw [eventualOutputMass_eq before leading hLeading output]
   exact congrArg (fun law : PMF (List Bool) => law output)
     (evalLimit_canonical leading hLeading)
+
+/-- The actual native sampler invocation preserves both tape data and the
+finite-budget return probability. There is no fixed all-branch halting
+assumption: rejected random paths remain inside the sampler block. -/
+theorem eval_invocation (pre suffix : Program) (returnPc : Nat)
+    (hLayout : ∀ pc, pc < program.length → pre.length + pc ≠ returnPc)
+    (before : List (Option Bool)) (modulus : List Bool) (steps : Nat) :
+    evalReturnWithin (Program.withSubroutine pre program suffix returnPc) returnPc
+      ((initial before modulus).rebasePc pre.length) steps =
+      (evalConfigWithin program (initial before modulus) steps).map
+        (fun d => if d.halted then d.resumeAt returnPc else d.rebasePc pre.length) := by
+  exact Program.evalReturnWithin_configuration_eq_of_closed pre program suffix returnPc
+    hLayout control_closed (initial before modulus) (by change 0 < 50; decide) rfl steps
 
 end Machine.RejectionSampling.Saved

@@ -495,4 +495,11 @@ theorem secondBoundaryToFirst_runs_any (input output : Tape) :
     omega
   · simpa [Configuration.swapTapes, Configuration.resumeAt] using hPreserved
 
+theorem toFirst_no_randomBit (tape : TapeId) : Instruction.randomBit tape ∉ toFirst := by
+  cases tape <;> simp [toFirst, rewindBitstring, Program.swapTapes, Instruction.swapTapes]
+
+theorem secondBoundaryToFirst_no_randomBit (tape : TapeId) : Instruction.randomBit tape ∉ secondBoundaryToFirst := by
+  cases tape <;> simp [secondBoundaryToFirst, source, rewindBitstring, Program.swapTapes,
+    Instruction.swapTapes, Program.withSubroutine, Program.asSubroutine, Instruction.asSubroutine]
+
 end Machine.OutputColumnRewind

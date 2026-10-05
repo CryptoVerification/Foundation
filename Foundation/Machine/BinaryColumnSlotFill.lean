@@ -271,4 +271,7 @@ theorem fillTape_first_full (old first second modulus : List Bool)
                   simp [fullSlots, BinaryModularAddition.interleave,
                     List.map_append, List.append_assoc]
 
+theorem no_randomBit (tape : TapeId) : Instruction.randomBit tape ∉ program := by
+  cases tape <;> decide
+
 end Machine.BinaryColumnSlotFill

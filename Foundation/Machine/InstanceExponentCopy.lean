@@ -105,7 +105,44 @@ theorem runs_exponent (exponent modulus tail : List Bool)
   exact ⟨{ ideal.resumeAt finalPc with halted := true }, used,
     by omega, wrapped, rfl, rfl, rfl⟩
 
-private theorem no_randomBit (tape : TapeId) : Instruction.randomBit tape ∉ program := by
+theorem runs_into_first (first exponent modulus tail : List Bool)
+    (hFirst : first.length = modulus.length)
+    (hExponent : exponent.length = modulus.length) (before : List (Option Bool)) :
+    ∃ target used, used ≤ 9 * exponent.length + 5 ∧
+      RunsFor program
+        (entry before (exponent ++ tail) (Tape.ofBits (BinaryColumnSlotFill.firstSlots first modulus)))
+        target used ∧ target.halted = true ∧
+      target.inputTape = { Tape.ofBits tail with left := exponent.reverse.map some ++ before } ∧
+      target.outputTape = { left := none ::
+        (BinaryColumnSlotFill.fullSlots first exponent modulus).reverse.map some } := by
+  let ideal : Configuration :=
+    { pc := 16,
+      inputTape := { Tape.ofBits tail with left := exponent.reverse.map some ++ before },
+      outputTape := { left := none ::
+        (BinaryColumnSlotFill.fullSlots first exponent modulus).reverse.map some },
+      halted := true }
+  have hCopy := FramedColumnSlotFill.runs_payload_second first exponent modulus tail hFirst hExponent before []
+  obtain ⟨u, hu, run⟩ := hCopy
+  have hEmpty (bits : List Bool) : ({ Tape.ofBits bits with left := [] } : Tape) = Tape.ofBits bits := by
+    cases bits <;> rfl
+  change RunsFor FramedColumnSlotFill.program
+    ({ pc := 5, inputTape := { Tape.ofBits (exponent ++ tail) with left := before },
+       outputTape := ({ Tape.ofBits (BinaryColumnSlotFill.firstSlots first modulus) with left := [] } : Tape).moveRight } : Configuration)
+    { pc := 16,
+      inputTape := { Tape.ofBits tail with left := exponent.reverse.map some ++ before },
+      outputTape := { left := none ::
+        (BinaryColumnSlotFill.fullSlots first exponent modulus).reverse.map some ++ [] },
+      halted := true } u at run
+  rw [hEmpty] at run
+  have sourceRun : RunsFor FramedColumnSlotFill.program
+      (payload before (exponent ++ tail) (Tape.ofBits (BinaryColumnSlotFill.firstSlots first modulus))) ideal u := by
+    simpa [payload, ideal] using run
+  obtain ⟨used, hUsed, wrapped⟩ := wrap_run before (exponent ++ tail)
+    (Tape.ofBits (BinaryColumnSlotFill.firstSlots first modulus)) ideal u sourceRun rfl
+  exact ⟨{ ideal.resumeAt finalPc with halted := true }, used,
+    by omega, wrapped, rfl, rfl, rfl⟩
+
+theorem no_randomBit (tape : TapeId) : Instruction.randomBit tape ∉ program := by
   have hCore : ∀ t, Instruction.randomBit t ∉ FramedColumnSlotFill.program := by
     intro t
     cases t <;> decide

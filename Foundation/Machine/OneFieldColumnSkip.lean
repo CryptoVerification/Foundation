@@ -246,4 +246,26 @@ theorem haltsWithin (bits : List Bool) :
 theorem polynomialTime : PolynomialTime program := by
   exact ⟨fun _ => 8, PolynomiallyBounded.const 8, haltsWithin⟩
 
+theorem runs_columns (columns : List BinaryModularAddition.Column)
+    (skipped tail : List Bool) (hLength : skipped.length = columns.length)
+    (beforeInput beforeOutput : List (Option Bool)) :
+    ∃ used, used ≤ 6*columns.length+2 ∧
+      RunsFor program
+        ({inputTape := {Tape.ofBits (skipped++tail) with left := beforeInput}, outputTape := {Tape.ofBits (BinaryModularAddition.interleave columns) with left := beforeOutput}} : Configuration)
+        ({pc := 6, inputTape := {Tape.ofBits tail with left := skipped.reverse.map some ++ beforeInput}, outputTape := {left := (BinaryModularAddition.interleave columns).reverse.map some ++ beforeOutput}, halted := true} : Configuration) used := by
+  have ev := eval_columns columns skipped tail hLength beforeInput beforeOutput
+  have member : finish
+      {Tape.ofBits tail with left := skipped.reverse.map some ++ beforeInput}
+      {left := (BinaryModularAddition.interleave columns).reverse.map some ++ beforeOutput} ∈
+      (evalConfigWithin program (state
+        {Tape.ofBits (skipped++tail) with left := beforeInput}
+        {Tape.ofBits (BinaryModularAddition.interleave columns) with left := beforeOutput})
+        (6*columns.length+2)).support := by
+    rw [ev]
+    simp
+  exact ((mem_support_evalConfigWithin_iff _ _ _ _).mp member).toRunsFor_le
+
+theorem no_randomBit (tape : TapeId) : Instruction.randomBit tape ∉ program := by
+  cases tape <;> decide
+
 end Machine.OneFieldColumnSkip
