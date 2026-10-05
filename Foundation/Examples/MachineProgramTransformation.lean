@@ -1,5 +1,5 @@
-import Foundation.Machine.ProgramTransformation
-import Foundation.Machine.Security
+import Foundation.Crypto.Semantics.Machine.ProgramTransformation
+import Foundation.Crypto.Semantics.Machine.Security
 import Foundation.Examples.MachinePPT
 
 namespace Machine.Examples

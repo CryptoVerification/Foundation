@@ -1,4 +1,4 @@
-import Foundation.Machine.ScalarSamplerContinuationDistribution
+import Foundation.Crypto.Semantics.Machine.ScalarSamplerContinuationDistribution
 
 namespace Foundation.Examples.ScalarSamplerContinuation
 

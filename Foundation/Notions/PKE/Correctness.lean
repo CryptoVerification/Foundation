@@ -1,5 +1,5 @@
 import Foundation.Notions.PKE.Basic
-import Foundation.Probability.Comp
+import Foundation.Crypto.Semantics.Probability.Comp
 
 open Foundation.Probability
 

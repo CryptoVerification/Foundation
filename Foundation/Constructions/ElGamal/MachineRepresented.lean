@@ -1,7 +1,7 @@
 import Foundation.Constructions.ElGamal.ConcreteReduction
-import Foundation.Machine.CryptoInterfaces
-import Foundation.Machine.INDCPAReachability
-import Foundation.Machine.Security
+import Foundation.Crypto.Semantics.Machine.CryptoInterfaces
+import Foundation.Crypto.Semantics.Machine.INDCPAReachability
+import Foundation.Crypto.Semantics.Machine.Security
 
 namespace ElGamal
 

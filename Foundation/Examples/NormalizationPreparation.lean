@@ -1,4 +1,4 @@
-import Foundation.Machine.NormalizationInvocation
+import Foundation.Crypto.Semantics.Machine.NormalizationInvocation
 import Foundation.Constructions.ElGamal.MachineNormalization
 import Foundation.Examples.MachinePolynomialTime
 

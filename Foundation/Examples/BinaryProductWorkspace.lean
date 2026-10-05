@@ -1,4 +1,4 @@
-import Foundation.Machine.BinaryProductGather
+import Foundation.Crypto.Semantics.Machine.BinaryProductGather
 
 namespace Machine.Examples.BinaryProductWorkspace
 

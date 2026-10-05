@@ -1,4 +1,4 @@
-import Foundation.Machine.DelimitedWidthCheck
+import Foundation.Crypto.Semantics.Machine.DelimitedWidthCheck
 
 namespace Foundation.Examples.DelimitedWidthCheck
 

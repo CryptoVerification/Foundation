@@ -1,4 +1,4 @@
-import Foundation.Core.Goal
+import Foundation.Crypto.Core.Goal
 import Foundation.Assumptions.DDH.Basic
 
 open scoped ENNReal

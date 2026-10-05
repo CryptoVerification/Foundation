@@ -1,4 +1,4 @@
-import Foundation.Security.Reduction
+import Foundation.Crypto.Semantics.Security.Reduction
 import Foundation.Examples.Relations
 import Foundation.Notions.PKE.Relations
 import Foundation.Notions.Signature.Relations

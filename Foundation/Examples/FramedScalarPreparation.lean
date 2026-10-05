@@ -1,4 +1,4 @@
-import Foundation.Machine.FramedScalarPreparation
+import Foundation.Crypto.Semantics.Machine.FramedScalarPreparation
 
 namespace Foundation.Examples.FramedScalarPreparation
 

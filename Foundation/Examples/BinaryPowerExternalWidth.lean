@@ -1,4 +1,4 @@
-import Foundation.Machine.BinaryPowerExternalWidth
+import Foundation.Crypto.Semantics.Machine.BinaryPowerExternalWidth
 
 namespace Machine.Examples.BinaryPowerExternalWidth
 

@@ -1,4 +1,4 @@
-import Foundation.Core.SecurityBound
+import Foundation.Crypto.Core.SecurityBound
 import Foundation.Assumptions.DDH.DDH
 
 open scoped ENNReal

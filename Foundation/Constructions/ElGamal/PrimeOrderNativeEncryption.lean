@@ -1,5 +1,5 @@
 import Foundation.Constructions.ElGamal.PrimeOrderScalarSampler
-import Foundation.Machine.NativeEncryption
+import Foundation.Crypto.Semantics.Machine.NativeEncryption
 
 namespace ElGamal.PrimeOrderRepresentation
 

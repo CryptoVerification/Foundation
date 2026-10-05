@@ -1,5 +1,5 @@
-import Foundation.Machine.TapeEquivalence
-import Foundation.Machine.BitstringCopy
+import Foundation.Crypto.Semantics.Machine.TapeEquivalence
+import Foundation.Crypto.Semantics.Machine.BitstringCopy
 import Foundation.Examples.BitMachineExecution
 
 namespace Machine.Examples

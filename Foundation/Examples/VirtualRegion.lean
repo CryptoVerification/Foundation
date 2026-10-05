@@ -1,5 +1,5 @@
-import Foundation.Machine.VirtualRegion
-import Foundation.Machine.SubroutineSimulation
+import Foundation.Crypto.Semantics.Machine.VirtualRegion
+import Foundation.Crypto.Semantics.Machine.SubroutineSimulation
 import Foundation.Examples.VirtualCell
 
 namespace Machine.Examples

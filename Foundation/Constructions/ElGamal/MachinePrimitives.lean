@@ -1,6 +1,6 @@
 import Foundation.Constructions.ElGamal.ConcreteReduction
-import Foundation.Machine.PPT
-import Foundation.Machine.Encoding
+import Foundation.Crypto.Semantics.Machine.PPT
+import Foundation.Crypto.Semantics.Machine.Encoding
 
 namespace ElGamal
 

@@ -1,4 +1,4 @@
-import Foundation.Machine.BinaryHighZeroTrim
+import Foundation.Crypto.Semantics.Machine.BinaryHighZeroTrim
 
 namespace Foundation.Examples.ScalarWidth
 

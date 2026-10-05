@@ -1,4 +1,4 @@
-import Foundation.Resource.FiniteProgram
+import Foundation.Crypto.Semantics.Resource.FiniteProgram
 import Foundation.Examples.ProgramResource
 
 namespace Foundation.Examples.FiniteProgram

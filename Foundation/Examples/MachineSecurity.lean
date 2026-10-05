@@ -1,4 +1,4 @@
-import Foundation.Machine.Security
+import Foundation.Crypto.Semantics.Machine.Security
 import Foundation.Examples.MachineProgramTransformation
 
 namespace Machine.Examples

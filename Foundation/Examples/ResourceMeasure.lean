@@ -1,5 +1,5 @@
-import Foundation.Resource.Measure
-import Foundation.Security.Asymptotic
+import Foundation.Crypto.Semantics.Resource.Measure
+import Foundation.Crypto.Semantics.Security.Asymptotic
 import Foundation.Examples.AdversaryFamily
 
 namespace Foundation.Examples.ResourceMeasure

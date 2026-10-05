@@ -1,4 +1,4 @@
-import Foundation.Machine.RejectionSamplingSemantics
+import Foundation.Crypto.Semantics.Machine.RejectionSamplingSemantics
 
 set_option maxRecDepth 4096
 

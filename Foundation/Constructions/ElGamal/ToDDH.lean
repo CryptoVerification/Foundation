@@ -1,6 +1,6 @@
 import Foundation.Assumptions.DDH.DDH
 import Foundation.Constructions.ElGamal.Basic
-import Foundation.Notions.PKE.INDCPA
+import Foundation.Notions.PKE.INDCPA.Goal
 
 /-- Simulate an ElGamal IND-CPA challenge from a DDH challenge.
 

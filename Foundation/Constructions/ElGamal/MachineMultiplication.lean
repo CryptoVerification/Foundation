@@ -1,10 +1,10 @@
 import Foundation.Constructions.ElGamal.MachinePrimitives
-import Foundation.Machine.MultiplyCallPreparation
-import Foundation.Machine.StoredCallInvocation
-import Foundation.Machine.StoredFramedCall
-import Foundation.Machine.MultiplyGuessCompletion
-import Foundation.Machine.NormalizedGuessCompletion
-import Foundation.Machine.NormalizationGuessCompletion
+import Foundation.Crypto.Semantics.Machine.MultiplyCallPreparation
+import Foundation.Crypto.Semantics.Machine.StoredCallInvocation
+import Foundation.Crypto.Semantics.Machine.StoredFramedCall
+import Foundation.Crypto.Semantics.Machine.MultiplyGuessCompletion
+import Foundation.Crypto.Semantics.Machine.NormalizedGuessCompletion
+import Foundation.Crypto.Semantics.Machine.NormalizationGuessCompletion
 import Foundation.Constructions.ElGamal.MachineNormalization
 
 namespace ElGamal

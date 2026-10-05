@@ -1,5 +1,5 @@
 import Foundation.Constructions.ElGamal.PrimeOrderScalarSampler
-import Foundation.Machine.NativeKeygen
+import Foundation.Crypto.Semantics.Machine.NativeKeygen
 
 set_option maxHeartbeats 2000000
 set_option maxRecDepth 8192

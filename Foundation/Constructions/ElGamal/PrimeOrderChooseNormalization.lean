@@ -1,19 +1,19 @@
 import Foundation.Constructions.ElGamal.PrimeOrderArithmetic
 import Foundation.Constructions.ElGamal.MachineNormalization
-import Foundation.Machine.BinaryIsOne
-import Foundation.Machine.BinaryPowerIsOne
-import Foundation.Machine.DelimitedTripleWidthCheck
-import Foundation.Machine.ChooseFirstWidthPrefix
-import Foundation.Machine.ChooseTwoWidthsPrefix
-import Foundation.Machine.DelimitedTapeComparison
-import Foundation.Machine.ChooseSecondRangeCheck
-import Foundation.Machine.ChooseTwoRanges
-import Foundation.Machine.ChooseRangeValidation
-import Foundation.Machine.ChooseRangeDecision
-import Foundation.Machine.ChooseWidthDecision
-import Foundation.Machine.ChooseAcceptedOutput
-import Foundation.Machine.ChooseDefaultOutput
-import Foundation.Machine.FramedChooseDefaultOutput
+import Foundation.Crypto.Semantics.Machine.BinaryIsOne
+import Foundation.Crypto.Semantics.Machine.BinaryPowerIsOne
+import Foundation.Crypto.Semantics.Machine.DelimitedTripleWidthCheck
+import Foundation.Crypto.Semantics.Machine.ChooseFirstWidthPrefix
+import Foundation.Crypto.Semantics.Machine.ChooseTwoWidthsPrefix
+import Foundation.Crypto.Semantics.Machine.DelimitedTapeComparison
+import Foundation.Crypto.Semantics.Machine.ChooseSecondRangeCheck
+import Foundation.Crypto.Semantics.Machine.ChooseTwoRanges
+import Foundation.Crypto.Semantics.Machine.ChooseRangeValidation
+import Foundation.Crypto.Semantics.Machine.ChooseRangeDecision
+import Foundation.Crypto.Semantics.Machine.ChooseWidthDecision
+import Foundation.Crypto.Semantics.Machine.ChooseAcceptedOutput
+import Foundation.Crypto.Semantics.Machine.ChooseDefaultOutput
+import Foundation.Crypto.Semantics.Machine.FramedChooseDefaultOutput
 
 namespace ElGamal.PrimeOrderRepresentation
 

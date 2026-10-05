@@ -1,7 +1,7 @@
-import Foundation.Machine.PPT
+import Foundation.Crypto.Semantics.Machine.PPT
 import Foundation.Examples.MachineAdversary
 import Foundation.Examples.MachinePolynomialTime
-import Foundation.Security.Asymptotic
+import Foundation.Crypto.Semantics.Security.Asymptotic
 
 namespace Machine.Examples
 

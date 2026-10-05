@@ -1,5 +1,5 @@
-import Foundation.Machine.FiniteRandomness
-import Foundation.Machine.Adversary
+import Foundation.Crypto.Semantics.Machine.FiniteRandomness
+import Foundation.Crypto.Semantics.Machine.Adversary
 import Foundation.Examples.BitMachineExecution
 
 namespace Machine.Examples

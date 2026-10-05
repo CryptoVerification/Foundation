@@ -1,6 +1,6 @@
-import Foundation.Resource.ProgramReduction
+import Foundation.Crypto.Semantics.Resource.ProgramReduction
 import Foundation.Examples.UniformReduction
-import Foundation.Security.Reduction
+import Foundation.Crypto.Semantics.Security.Reduction
 
 namespace Foundation.Examples.ProgramResourceReduction
 

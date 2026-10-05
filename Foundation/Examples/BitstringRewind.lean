@@ -1,5 +1,5 @@
-import Foundation.Machine.BitstringCopy
-import Foundation.Machine.BitstringRewind
+import Foundation.Crypto.Semantics.Machine.BitstringCopy
+import Foundation.Crypto.Semantics.Machine.BitstringRewind
 
 namespace Machine.Examples
 

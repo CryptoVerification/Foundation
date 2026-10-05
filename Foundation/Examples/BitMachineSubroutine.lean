@@ -1,7 +1,7 @@
-import Foundation.Machine.SubroutineRuntime
-import Foundation.Machine.SubroutineProbability
-import Foundation.Machine.Execution
-import Foundation.Machine.Compiler
+import Foundation.Crypto.Semantics.Machine.SubroutineRuntime
+import Foundation.Crypto.Semantics.Machine.SubroutineProbability
+import Foundation.Crypto.Semantics.Machine.Execution
+import Foundation.Crypto.Semantics.Machine.Compiler
 import Foundation.Examples.BitMachineExecution
 
 namespace Machine.Examples

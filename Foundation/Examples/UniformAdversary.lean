@@ -1,5 +1,5 @@
-import Foundation.Resource.Uniformity
-import Foundation.Security.Asymptotic
+import Foundation.Crypto.Semantics.Resource.Uniformity
+import Foundation.Crypto.Semantics.Security.Asymptotic
 
 namespace Foundation.Examples.UniformAdversary
 

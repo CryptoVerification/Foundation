@@ -1,5 +1,5 @@
 import Foundation.Constructions.ElGamal.PrimeOrderScalarSampler
-import Foundation.Machine.SavedFramedScalarSamplerSemantics
+import Foundation.Crypto.Semantics.Machine.SavedFramedScalarSamplerSemantics
 
 namespace ElGamal.PrimeOrderRepresentation
 

@@ -1,6 +1,6 @@
 import Foundation.Constructions.ElGamal.MachineNormalization
-import Foundation.Machine.GuessBodyPreparation
-import Foundation.Machine.GuessInputPreparation
+import Foundation.Crypto.Semantics.Machine.GuessBodyPreparation
+import Foundation.Crypto.Semantics.Machine.GuessInputPreparation
 
 namespace Machine.Examples
 

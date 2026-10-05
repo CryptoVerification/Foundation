@@ -1,4 +1,4 @@
-import Foundation.Core.Reduction
+import Foundation.Crypto.Core.Reduction
 
 open scoped ENNReal
 

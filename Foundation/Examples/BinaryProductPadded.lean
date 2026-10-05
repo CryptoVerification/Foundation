@@ -1,4 +1,4 @@
-import Foundation.Machine.BinaryProductPadded
+import Foundation.Crypto.Semantics.Machine.BinaryProductPadded
 
 namespace Machine.Examples.BinaryProductPadded
 

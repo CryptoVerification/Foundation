@@ -1,7 +1,7 @@
-import Foundation.Machine.ChooseCheckContinuation
-import Foundation.Machine.ChooseSavedCheck
-import Foundation.Machine.ChooseAcceptedOutput
-import Foundation.Machine.FramedChooseDefaultOutput
+import Foundation.Crypto.Semantics.Machine.ChooseCheckContinuation
+import Foundation.Crypto.Semantics.Machine.ChooseSavedCheck
+import Foundation.Crypto.Semantics.Machine.ChooseAcceptedOutput
+import Foundation.Crypto.Semantics.Machine.FramedChooseDefaultOutput
 
 namespace Examples.ChooseCheckContinuation
 

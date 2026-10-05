@@ -1,6 +1,6 @@
 import Foundation.Constructions.ElGamal.ConcreteSecurity
 import Foundation.Constructions.ElGamal.MachineRepresented
-import Foundation.Machine.Security
+import Foundation.Crypto.Semantics.Machine.Security
 import Foundation.Constructions.ElGamal.MachineSimulatorSemantics
 
 namespace ElGamal

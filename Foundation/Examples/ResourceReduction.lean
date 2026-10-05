@@ -1,5 +1,5 @@
-import Foundation.Resource.Reduction
-import Foundation.Security.Reduction
+import Foundation.Crypto.Semantics.Resource.Reduction
+import Foundation.Crypto.Semantics.Security.Reduction
 import Foundation.Examples.AsymptoticReduction
 
 namespace Foundation.Examples.ResourceReduction

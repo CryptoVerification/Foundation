@@ -1,8 +1,8 @@
-import Foundation.Machine.BinaryAddition
-import Foundation.Machine.BinarySubtraction
-import Foundation.Machine.BinaryDoubleReduction
-import Foundation.Machine.BinaryModularAddition
-import Foundation.Machine.BinaryModularProduct
+import Foundation.Crypto.Semantics.Machine.BinaryAddition
+import Foundation.Crypto.Semantics.Machine.BinarySubtraction
+import Foundation.Crypto.Semantics.Machine.BinaryDoubleReduction
+import Foundation.Crypto.Semantics.Machine.BinaryModularAddition
+import Foundation.Crypto.Semantics.Machine.BinaryModularProduct
 
 namespace Machine.Examples
 

@@ -1,4 +1,4 @@
-import Foundation.Resource.ProgramMeasure
+import Foundation.Crypto.Semantics.Resource.ProgramMeasure
 import Foundation.Examples.UniformAdversary
 
 namespace Foundation.Examples.ProgramResource

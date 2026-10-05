@@ -1,5 +1,5 @@
-import Foundation.Machine.NormalizedMessageSelection
-import Foundation.Machine.MultiplyPrefixPreparation
+import Foundation.Crypto.Semantics.Machine.NormalizedMessageSelection
+import Foundation.Crypto.Semantics.Machine.MultiplyPrefixPreparation
 import Foundation.Constructions.ElGamal.MachineNormalization
 
 namespace Foundation.Examples.MessageSelection

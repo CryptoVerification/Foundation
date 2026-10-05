@@ -1,4 +1,4 @@
-import Foundation.Security.Reduction
+import Foundation.Crypto.Semantics.Security.Reduction
 import Foundation.Examples.Relations
 
 open scoped ENNReal

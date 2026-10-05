@@ -1,5 +1,5 @@
 import Foundation.Constructions.ElGamal.ConcreteReduction
-import Foundation.Security.Reduction
+import Foundation.Crypto.Semantics.Security.Reduction
 
 namespace ElGamal
 

@@ -1,4 +1,4 @@
-import Foundation.Machine.GuardedTransfer
+import Foundation.Crypto.Semantics.Machine.GuardedTransfer
 
 namespace Machine.Examples
 

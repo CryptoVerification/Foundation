@@ -1,6 +1,6 @@
-import Foundation.Machine.INDCPAReachability
+import Foundation.Crypto.Semantics.Machine.INDCPAReachability
 import Foundation.Examples.BitMachineExecution
-import Foundation.Security.Asymptotic
+import Foundation.Crypto.Semantics.Security.Asymptotic
 
 namespace Machine.Examples
 

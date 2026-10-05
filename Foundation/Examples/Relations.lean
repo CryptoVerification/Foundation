@@ -1,5 +1,5 @@
-import Foundation.Core.SecurityBound
-import Foundation.Relation.Equivalence
+import Foundation.Crypto.Core.SecurityBound
+import Foundation.Crypto.Core.Relation.Equivalence
 
 open scoped ENNReal
 

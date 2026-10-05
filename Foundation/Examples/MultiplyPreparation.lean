@@ -1,9 +1,9 @@
 import Foundation.Constructions.ElGamal.MachineMultiplication
 import Foundation.Examples.MachinePolynomialTime
-import Foundation.Machine.GuessStatePreparation
-import Foundation.Machine.SelectedMultiplyCompletion
-import Foundation.Machine.NormalizedGuessCompletion
-import Foundation.Machine.NormalizationGuessCompletion
+import Foundation.Crypto.Semantics.Machine.GuessStatePreparation
+import Foundation.Crypto.Semantics.Machine.SelectedMultiplyCompletion
+import Foundation.Crypto.Semantics.Machine.NormalizedGuessCompletion
+import Foundation.Crypto.Semantics.Machine.NormalizationGuessCompletion
 import Foundation.Examples.GuessCompletion
 
 namespace Foundation.Examples.MultiplyPreparation

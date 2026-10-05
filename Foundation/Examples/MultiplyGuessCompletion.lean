@@ -1,4 +1,4 @@
-import Foundation.Machine.MultiplyGuessCompletion
+import Foundation.Crypto.Semantics.Machine.MultiplyGuessCompletion
 import Foundation.Examples.GuessCompletion
 
 namespace Foundation.Examples.MultiplyGuessCompletion

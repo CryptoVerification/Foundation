@@ -1,4 +1,4 @@
-import Foundation.Probability.Comp
+import Foundation.Crypto.Semantics.Probability.Comp
 
 namespace Foundation.Examples.Probability
 

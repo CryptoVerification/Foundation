@@ -1,4 +1,4 @@
-import Foundation.Machine.NativeKeygen
+import Foundation.Crypto.Semantics.Machine.NativeKeygen
 import Foundation.Constructions.ElGamal.PrimeOrderNativeKeygen
 
 namespace Foundation.Examples.NativeKeygen

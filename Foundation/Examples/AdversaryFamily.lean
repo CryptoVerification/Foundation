@@ -1,5 +1,5 @@
-import Foundation.Resource.Adversary
-import Foundation.Asymptotics.Negligible
+import Foundation.Crypto.Semantics.Security.Bound
+import Foundation.Crypto.Semantics.Asymptotic.Negligible
 
 open scoped ENNReal
 

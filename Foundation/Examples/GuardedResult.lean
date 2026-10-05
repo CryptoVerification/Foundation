@@ -1,5 +1,5 @@
-import Foundation.Machine.Compiler
-import Foundation.Machine.Adversary
+import Foundation.Crypto.Semantics.Machine.Compiler
+import Foundation.Crypto.Semantics.Machine.Adversary
 import Foundation.Examples.BitMachineExecution
 import Foundation.Examples.MachinePolynomialTime
 

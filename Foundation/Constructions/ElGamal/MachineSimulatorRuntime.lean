@@ -1,5 +1,5 @@
 import Foundation.Constructions.ElGamal.MachineSimulator
-import Foundation.Machine.PPT
+import Foundation.Crypto.Semantics.Machine.PPT
 
 namespace ElGamal.RepresentedChooseNormalizer
 

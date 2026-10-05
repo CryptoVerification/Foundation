@@ -1,6 +1,6 @@
 import Foundation.Constructions.ElGamal.INDCPA
 import Foundation.Assumptions.DDH.Examples
-import Foundation.Notions.PKE.Examples
+import Foundation.Notions.PKE.INDCPA.Examples
 
 open scoped ENNReal
 

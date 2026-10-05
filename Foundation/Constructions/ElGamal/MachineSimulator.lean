@@ -1,7 +1,7 @@
 import Foundation.Constructions.ElGamal.MachineMultiplication
-import Foundation.Machine.ChooseChallengeCompletion
-import Foundation.Machine.ChooseChallengeRuntime
-import Foundation.Machine.Compiler
+import Foundation.Crypto.Semantics.Machine.ChooseChallengeCompletion
+import Foundation.Crypto.Semantics.Machine.ChooseChallengeRuntime
+import Foundation.Crypto.Semantics.Machine.Compiler
 
 namespace ElGamal.RepresentedChooseNormalizer
 

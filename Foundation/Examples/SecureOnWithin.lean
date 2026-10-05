@@ -1,4 +1,4 @@
-import Foundation.Security.Asymptotic
+import Foundation.Crypto.Semantics.Security.Asymptotic
 import Foundation.Examples.AdversaryFamily
 
 namespace Foundation.Examples.SecureOnWithin

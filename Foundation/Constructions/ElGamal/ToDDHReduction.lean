@@ -1,6 +1,6 @@
 import Foundation.Constructions.ElGamal.INDCPA
 import Foundation.Constructions.ElGamal.ToDDH
-import Foundation.Relation.ReducesTo
+import Foundation.Crypto.Core.Relation.ReducesTo
 
 open scoped ENNReal
 

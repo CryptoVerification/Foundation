@@ -1,5 +1,5 @@
 import Foundation.Assumptions.DDH.DDH
-import Foundation.Probability.Comp
+import Foundation.Crypto.Semantics.Probability.Comp
 
 open Foundation.Probability
 open scoped ENNReal

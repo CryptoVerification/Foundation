@@ -1,4 +1,4 @@
-import Foundation.Machine.StoredGuessLayout
+import Foundation.Crypto.Semantics.Machine.StoredGuessLayout
 
 namespace Foundation.Examples.StoredGuessCompletion
 

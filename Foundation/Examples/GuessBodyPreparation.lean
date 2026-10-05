@@ -1,4 +1,4 @@
-import Foundation.Machine.GuessBodyPreparation
+import Foundation.Crypto.Semantics.Machine.GuessBodyPreparation
 import Foundation.Constructions.ElGamal.MachineRepresented
 
 namespace Machine.Examples

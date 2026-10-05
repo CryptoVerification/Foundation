@@ -1,4 +1,4 @@
-import Foundation.Machine.ChooseTwoFields
+import Foundation.Crypto.Semantics.Machine.ChooseTwoFields
 
 namespace Foundation.Examples.ChooseTwoFields
 

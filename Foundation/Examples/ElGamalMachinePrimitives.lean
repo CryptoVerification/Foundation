@@ -1,6 +1,6 @@
 import Foundation.Constructions.ElGamal.MachinePrimitives
 import Foundation.Constructions.ElGamal.MachineRepresented
-import Foundation.Machine.SubroutineProbability
+import Foundation.Crypto.Semantics.Machine.SubroutineProbability
 
 namespace ElGamal.Examples
 

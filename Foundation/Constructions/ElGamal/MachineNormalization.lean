@@ -1,7 +1,7 @@
 import Foundation.Constructions.ElGamal.MachinePrimitives
 import Foundation.Constructions.ElGamal.MachineRepresented
-import Foundation.Machine.GuardedGuess
-import Foundation.Machine.NormalizedMessageSelection
+import Foundation.Crypto.Semantics.Machine.GuardedGuess
+import Foundation.Crypto.Semantics.Machine.NormalizedMessageSelection
 
 namespace ElGamal
 

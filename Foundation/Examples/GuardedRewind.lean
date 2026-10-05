@@ -1,4 +1,4 @@
-import Foundation.Machine.GuardedRewind
+import Foundation.Crypto.Semantics.Machine.GuardedRewind
 
 namespace Machine.Examples
 

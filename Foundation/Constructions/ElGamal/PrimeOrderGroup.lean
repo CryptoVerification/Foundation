@@ -1,5 +1,5 @@
 import Foundation.Constructions.ElGamal.Correctness
-import Foundation.Machine.BinaryEncoding
+import Foundation.Crypto.Semantics.Machine.BinaryEncoding
 import Mathlib.FieldTheory.Finite.Basic
 
 namespace ElGamal

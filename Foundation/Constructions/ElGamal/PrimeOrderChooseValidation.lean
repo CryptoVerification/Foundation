@@ -1,6 +1,6 @@
 import Foundation.Constructions.ElGamal.PrimeOrderChooseNormalization
-import Foundation.Machine.ChooseValidation
-import Foundation.Machine.ChooseSafeValidation
+import Foundation.Crypto.Semantics.Machine.ChooseValidation
+import Foundation.Crypto.Semantics.Machine.ChooseSafeValidation
 
 namespace ElGamal.PrimeOrderRepresentation
 

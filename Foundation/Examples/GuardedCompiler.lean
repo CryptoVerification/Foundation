@@ -1,4 +1,4 @@
-import Foundation.Machine.GuardedSimulation
+import Foundation.Crypto.Semantics.Machine.GuardedSimulation
 import Foundation.Examples.VirtualCell
 
 namespace Machine.Examples

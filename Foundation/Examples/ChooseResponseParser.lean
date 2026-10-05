@@ -1,4 +1,4 @@
-import Foundation.Machine.ChooseResponseParser
+import Foundation.Crypto.Semantics.Machine.ChooseResponseParser
 
 namespace Foundation.Examples.ChooseResponseParser
 

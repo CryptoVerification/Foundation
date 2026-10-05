@@ -1,4 +1,4 @@
-import Foundation.Machine.NormalizationGuessCompletion
+import Foundation.Crypto.Semantics.Machine.NormalizationGuessCompletion
 import Foundation.Examples.GuessCompletion
 
 namespace Foundation.Examples.NormalizationGuessCompletion

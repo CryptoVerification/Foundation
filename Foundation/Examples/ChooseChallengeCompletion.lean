@@ -1,5 +1,5 @@
-import Foundation.Machine.ChooseChallengeCompletion
-import Foundation.Machine.ChooseChallengeRuntime
+import Foundation.Crypto.Semantics.Machine.ChooseChallengeCompletion
+import Foundation.Crypto.Semantics.Machine.ChooseChallengeRuntime
 import Foundation.Examples.NormalizationGuessCompletion
 import Foundation.Constructions.ElGamal.Concrete
 

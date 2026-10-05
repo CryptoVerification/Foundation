@@ -1,6 +1,6 @@
 import Foundation.Constructions.ElGamal.ToDDH
 import Foundation.Assumptions.DDH.Concrete
-import Foundation.Notions.PKE.ConcreteINDCPA
+import Foundation.Notions.PKE.INDCPA.Concrete
 
 open Foundation.Probability
 

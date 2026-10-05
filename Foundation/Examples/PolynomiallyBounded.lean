@@ -1,4 +1,4 @@
-import Foundation.Asymptotics.PolynomiallyBounded
+import Foundation.Crypto.Semantics.Asymptotic.PolynomiallyBounded
 
 open Filter
 

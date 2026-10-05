@@ -1,4 +1,4 @@
-import Foundation.Machine.LimitExecution
+import Foundation.Crypto.Semantics.Machine.LimitExecution
 import Foundation.Examples.BitMachineExecution
 
 namespace Machine.Examples

@@ -1,6 +1,6 @@
 import Foundation.Constructions.ElGamal.PrimeOrderGroup
 import Foundation.Constructions.ElGamal.MachineRepresented
-import Foundation.Machine.RejectionSamplingSemantics
+import Foundation.Crypto.Semantics.Machine.RejectionSamplingSemantics
 
 namespace ElGamal.PrimeOrderRepresentation
 

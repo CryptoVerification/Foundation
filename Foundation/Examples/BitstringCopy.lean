@@ -1,5 +1,5 @@
-import Foundation.Machine.BitstringCopy
-import Foundation.Machine.SubroutineRuntime
+import Foundation.Crypto.Semantics.Machine.BitstringCopy
+import Foundation.Crypto.Semantics.Machine.SubroutineRuntime
 
 namespace Machine.Examples
 

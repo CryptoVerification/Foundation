@@ -1,5 +1,5 @@
-import Foundation.Resource.Reduction
-import Foundation.Asymptotics.AdvantageBound
+import Foundation.Crypto.Semantics.Resource.Reduction
+import Foundation.Crypto.Semantics.Asymptotic.AdvantageBound
 import Foundation.Examples.Relations
 import Foundation.Notions.PKE.Relations
 import Foundation.Notions.Signature.Relations

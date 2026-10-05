@@ -1,4 +1,4 @@
-import Foundation.Machine.PolynomialTime
+import Foundation.Crypto.Semantics.Machine.PolynomialTime
 import Foundation.Examples.BitMachineExecution
 
 namespace Machine.Examples

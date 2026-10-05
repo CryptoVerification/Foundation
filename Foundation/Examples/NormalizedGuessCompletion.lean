@@ -1,4 +1,4 @@
-import Foundation.Machine.NormalizedGuessCompletion
+import Foundation.Crypto.Semantics.Machine.NormalizedGuessCompletion
 import Foundation.Examples.GuessCompletion
 import Foundation.Constructions.ElGamal.Concrete
 

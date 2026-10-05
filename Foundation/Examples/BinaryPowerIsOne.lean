@@ -1,4 +1,4 @@
-import Foundation.Machine.BinaryPowerIsOne
+import Foundation.Crypto.Semantics.Machine.BinaryPowerIsOne
 
 namespace Foundation.Examples.BinaryPowerIsOne
 

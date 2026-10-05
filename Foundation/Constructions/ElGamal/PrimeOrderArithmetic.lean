@@ -1,15 +1,15 @@
 import Foundation.Constructions.ElGamal.PrimeOrderRepresentation
-import Foundation.Machine.BinaryProductExternalWidth
-import Foundation.Machine.BinaryPowerExternalWidth
-import Foundation.Machine.FramedInstanceCopy
-import Foundation.Machine.PrimeModulusProjection
-import Foundation.Machine.FramedModulusCopy
-import Foundation.Machine.FramedFirstOperandCopy
-import Foundation.Machine.FramedSecondOperandCopy
-import Foundation.Machine.BinaryColumnSlotFill
-import Foundation.Machine.FramedProductColumns
-import Foundation.Machine.FramedProductMultiply
-import Foundation.Machine.FramedProductSafeMultiply
+import Foundation.Crypto.Semantics.Machine.BinaryProductExternalWidth
+import Foundation.Crypto.Semantics.Machine.BinaryPowerExternalWidth
+import Foundation.Crypto.Semantics.Machine.FramedInstanceCopy
+import Foundation.Crypto.Semantics.Machine.PrimeModulusProjection
+import Foundation.Crypto.Semantics.Machine.FramedModulusCopy
+import Foundation.Crypto.Semantics.Machine.FramedFirstOperandCopy
+import Foundation.Crypto.Semantics.Machine.FramedSecondOperandCopy
+import Foundation.Crypto.Semantics.Machine.BinaryColumnSlotFill
+import Foundation.Crypto.Semantics.Machine.FramedProductColumns
+import Foundation.Crypto.Semantics.Machine.FramedProductMultiply
+import Foundation.Crypto.Semantics.Machine.FramedProductSafeMultiply
 import Foundation.Constructions.ElGamal.MachinePrimitives
 
 namespace ElGamal.PrimeOrderRepresentation

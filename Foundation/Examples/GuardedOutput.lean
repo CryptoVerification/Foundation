@@ -1,4 +1,4 @@
-import Foundation.Machine.GuardedOutput
+import Foundation.Crypto.Semantics.Machine.GuardedOutput
 
 namespace Machine.Examples
 

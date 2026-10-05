@@ -1,6 +1,6 @@
-import Foundation.Machine.SavedFramedScalarSampler
-import Foundation.Machine.SavedRejectionSamplingSemantics
-import Foundation.Machine.OverwriteInputField
+import Foundation.Crypto.Semantics.Machine.SavedFramedScalarSampler
+import Foundation.Crypto.Semantics.Machine.SavedRejectionSamplingSemantics
+import Foundation.Crypto.Semantics.Machine.OverwriteInputField
 
 namespace Foundation.Examples.SavedFramedScalarSampler
 

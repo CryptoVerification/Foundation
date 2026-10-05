@@ -1,11 +1,11 @@
-import Foundation.Machine.ProtocolPrefix
-import Foundation.Machine.Encoding
-import Foundation.Machine.OppositeCall
-import Foundation.Machine.ChoosePreparation
-import Foundation.Machine.DDHChooseCall
-import Foundation.Machine.ChooseInvocation
+import Foundation.Crypto.Semantics.Machine.ProtocolPrefix
+import Foundation.Crypto.Semantics.Machine.Encoding
+import Foundation.Crypto.Semantics.Machine.OppositeCall
+import Foundation.Crypto.Semantics.Machine.ChoosePreparation
+import Foundation.Crypto.Semantics.Machine.DDHChooseCall
+import Foundation.Crypto.Semantics.Machine.ChooseInvocation
 import Foundation.Examples.MachinePolynomialTime
-import Foundation.Machine.PPT
+import Foundation.Crypto.Semantics.Machine.PPT
 
 namespace Foundation.Examples.ProtocolPreparation
 

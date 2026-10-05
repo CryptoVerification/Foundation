@@ -1,4 +1,4 @@
-import Foundation.Machine.BinaryPowerProgramSemantics
+import Foundation.Crypto.Semantics.Machine.BinaryPowerProgramSemantics
 
 namespace Machine.Examples.BinaryPower
 

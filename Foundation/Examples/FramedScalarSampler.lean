@@ -1,4 +1,4 @@
-import Foundation.Machine.FramedScalarSamplerSemantics
+import Foundation.Crypto.Semantics.Machine.FramedScalarSamplerSemantics
 
 namespace Foundation.Examples.FramedScalarSampler
 

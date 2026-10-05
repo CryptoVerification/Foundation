@@ -1,4 +1,4 @@
-import Foundation.Machine.ExpectedExecution
+import Foundation.Crypto.Semantics.Machine.ExpectedExecution
 import Foundation.Examples.BitMachineExecution
 
 namespace Machine.Examples

@@ -1,5 +1,5 @@
-import Foundation.Resource.UniformReduction
-import Foundation.Security.Reduction
+import Foundation.Crypto.Semantics.Resource.UniformReduction
+import Foundation.Crypto.Semantics.Security.Reduction
 
 namespace Foundation.Examples.UniformReduction
 

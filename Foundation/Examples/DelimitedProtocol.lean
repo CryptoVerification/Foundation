@@ -1,7 +1,7 @@
-import Foundation.Machine.DelimitedInput
-import Foundation.Machine.DelimitedOutput
-import Foundation.Machine.DelimitedCopy
-import Foundation.Machine.FramedOutput
+import Foundation.Crypto.Semantics.Machine.DelimitedInput
+import Foundation.Crypto.Semantics.Machine.DelimitedOutput
+import Foundation.Crypto.Semantics.Machine.DelimitedCopy
+import Foundation.Crypto.Semantics.Machine.FramedOutput
 import Foundation.Constructions.ElGamal.MachineRepresented
 
 namespace Machine.Examples

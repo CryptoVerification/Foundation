@@ -1,4 +1,4 @@
-import Foundation.Machine.GuessInvocationPreparation
+import Foundation.Crypto.Semantics.Machine.GuessInvocationPreparation
 import Foundation.Constructions.ElGamal.MachineRepresented
 import Foundation.Examples.MachinePolynomialTime
 

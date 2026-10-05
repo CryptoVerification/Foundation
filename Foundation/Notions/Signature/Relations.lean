@@ -1,6 +1,6 @@
-import Foundation.Notions.Signature.EUFtoStrong
-import Foundation.Notions.Signature.Examples
-import Foundation.Notions.Signature.StrongExamples
+import Foundation.Notions.Signature.StrongEUFCMA.FromEUFCMA
+import Foundation.Notions.Signature.EUFCMA.Examples
+import Foundation.Notions.Signature.StrongEUFCMA.Examples
 
 open scoped ENNReal
 

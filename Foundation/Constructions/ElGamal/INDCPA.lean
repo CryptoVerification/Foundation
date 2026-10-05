@@ -1,6 +1,6 @@
-import Foundation.Core.SecurityBound
+import Foundation.Crypto.Core.SecurityBound
 import Foundation.Constructions.ElGamal.Basic
-import Foundation.Notions.PKE.INDCPA
+import Foundation.Notions.PKE.INDCPA.Goal
 
 open scoped ENNReal
 

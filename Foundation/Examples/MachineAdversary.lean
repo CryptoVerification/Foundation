@@ -1,4 +1,4 @@
-import Foundation.Machine.CryptoInterfaces
+import Foundation.Crypto.Semantics.Machine.CryptoInterfaces
 import Foundation.Examples.BitMachineExecution
 
 namespace Machine.Examples

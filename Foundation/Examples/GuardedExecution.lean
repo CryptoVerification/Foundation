@@ -1,4 +1,4 @@
-import Foundation.Machine.GuardedExecution
+import Foundation.Crypto.Semantics.Machine.GuardedExecution
 import Foundation.Examples.BitMachineExecution
 import Foundation.Examples.MachinePolynomialTime
 

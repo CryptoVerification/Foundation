@@ -1,4 +1,4 @@
-import Foundation.Machine.BinaryProductSemantics
+import Foundation.Crypto.Semantics.Machine.BinaryProductSemantics
 
 namespace Machine.Examples.BinaryProduct
 

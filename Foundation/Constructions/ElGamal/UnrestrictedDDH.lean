@@ -1,5 +1,5 @@
 import Foundation.Constructions.ElGamal.Concrete
-import Foundation.Security.Asymptotic
+import Foundation.Crypto.Semantics.Security.Asymptotic
 
 namespace ElGamal
 

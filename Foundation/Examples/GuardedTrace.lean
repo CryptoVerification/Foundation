@@ -1,4 +1,4 @@
-import Foundation.Machine.GuardedTrace
+import Foundation.Crypto.Semantics.Machine.GuardedTrace
 import Foundation.Examples.GuardedTape
 
 namespace Machine.Examples

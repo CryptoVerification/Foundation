@@ -1,5 +1,5 @@
 import Foundation.Examples.UniformAdversary
-import Foundation.Resource.Measure
+import Foundation.Crypto.Semantics.Resource.Measure
 
 namespace Foundation.Examples.UniformPolynomialAdversary
 

@@ -1,4 +1,4 @@
-import Foundation.Machine.FramedInput
+import Foundation.Crypto.Semantics.Machine.FramedInput
 
 namespace Machine.Examples
 

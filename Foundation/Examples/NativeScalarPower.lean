@@ -1,5 +1,5 @@
-import Foundation.Machine.ScalarGeneratorPower
-import Foundation.Machine.ReturnFramedPower
+import Foundation.Crypto.Semantics.Machine.ScalarGeneratorPower
+import Foundation.Crypto.Semantics.Machine.ReturnFramedPower
 import Foundation.Constructions.ElGamal.PrimeOrderSavedScalarSampler
 
 namespace Examples.NativeScalarPower

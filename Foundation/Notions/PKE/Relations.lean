@@ -1,6 +1,6 @@
-import Foundation.Notions.PKE.CPAtoCCA2
-import Foundation.Notions.PKE.Examples
-import Foundation.Notions.PKE.CCAExamples
+import Foundation.Notions.PKE.INDCCA2.FromINDCPA
+import Foundation.Notions.PKE.INDCPA.Examples
+import Foundation.Notions.PKE.INDCCA2.Examples
 
 open scoped ENNReal
 
