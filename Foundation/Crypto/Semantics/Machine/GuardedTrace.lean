@@ -157,6 +157,14 @@ theorem initial_sourceStorage_le (input : List Bool) :
       simp [sourceStorage, Configuration.initial, Tape.ofBits, Tape.cells]
       omega
 
+/-- An execution from raw input retains at most one extra tape cell per step. -/
+theorem sourceStorage_le_of_initial_run {source : Program} {input : List Bool}
+    {finish : Configuration} {steps : Nat}
+    (run : RunsFor source (Configuration.initial input) finish steps) :
+    sourceStorage finish ≤ input.length + 2 + steps :=
+  (sourceStorage_le_of_run run).trans
+    (Nat.add_le_add_right (initial_sourceStorage_le input) steps)
+
 /-- Every source execution within its input-length budget has a matching
 compiled execution within the displayed polynomial majorant. The start
 state is explicitly the encoded source state; it is not a raw machine

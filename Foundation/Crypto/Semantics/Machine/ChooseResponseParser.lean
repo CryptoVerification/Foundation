@@ -33,8 +33,7 @@ private theorem final_step (c : Configuration) :
     Step program (c.resumeAt finalReturn)
       { c.resumeAt finalReturn with halted := true } := by
   have hLookup : program[finalReturn]? = some .halt := by native_decide
-  simp [Step, successors, next, Configuration.resumeAt, hLookup,
-    Instruction.next]
+  exact Step.resumeAt_halt c finalReturn hLookup
 
 private theorem no_randomBit (tape : TapeId) :
     Instruction.randomBit tape ∉ program := by
@@ -69,16 +68,9 @@ theorem runs_any (raw : List Bool) :
       (finish.resumeAt finalReturn) returned₂ := by
     simpa [second_layout, firstReturn, Program.asSubroutine_length,
       Configuration.resumeAt, Configuration.rebasePc] using embedded₂
-  have hStorage := Machine.GuardedCompiler.sourceStorage_le_of_run run₁
-  have hInitial : Machine.GuardedCompiler.sourceStorage (Configuration.initial raw) ≤
-      raw.length + 2 := by
-    cases raw <;>
-      simp [Machine.GuardedCompiler.sourceStorage, Configuration.initial,
-        Tape.cells, Tape.ofBits] <;> omega
+  have hStorage := Machine.GuardedCompiler.sourceStorage_le_of_initial_run run₁
   have hCells : after.inputTape.cells + after.outputTape.cells ≤
-      raw.length + 2 + used₁ := by
-    dsimp only [Machine.GuardedCompiler.sourceStorage] at hStorage hInitial
-    omega
+      raw.length + 2 + used₁ := hStorage
   have hBound : returned₁ + returned₂ + 1 ≤ budget raw.length := by
     dsimp only [budget, ChooseResponsePrefix.budget] at *
     omega

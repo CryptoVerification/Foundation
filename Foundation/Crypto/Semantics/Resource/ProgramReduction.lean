@@ -1,5 +1,6 @@
 import Foundation.Crypto.Semantics.Resource.ProgramMeasure
 import Foundation.Crypto.Semantics.Resource.UniformReduction
+import Foundation.Crypto.Semantics.Resource.PolynomialBound
 
 universe u v w a b c
 
@@ -57,47 +58,11 @@ def comp {P : CryptoGoal.{u}} {Q : CryptoGoal.{v}} {S : CryptoGoal.{w}}
   sourceDegree := B₁.sourceDegree * B₂.sourceDegree
   bound := by
     intro F prog n
-    let s := CP.profile F prog n
-    let t := CQ.profile (R₁.mapFamily F) (T₁.transform F prog) n
-    let u := CS.profile ((R₁.comp R₂).mapFamily F)
-      ((T₁.comp T₂).transform F prog) n
-    let X := (n + 1) ^ B₁.securityDegree * (s + 1) ^ B₁.sourceDegree
-    have ht : t ≤ B₁.coefficient * X := by
-      simpa only [t, X, s, mul_assoc] using B₁.bound F prog n
-    have hX : 1 ≤ X := by
-      dsimp [X, s]
-      calc
-        1 = 1 * 1 := by simp
-        _ ≤ (n + 1) ^ B₁.securityDegree *
-            (CP.profile F prog n + 1) ^ B₁.sourceDegree :=
-          Nat.mul_le_mul
-            (Nat.one_le_pow' B₁.securityDegree n)
-            (Nat.one_le_pow' B₁.sourceDegree (CP.profile F prog n))
-    have htPlus : t + 1 ≤ (B₁.coefficient + 1) * X := by
-      calc
-        t + 1 ≤ B₁.coefficient * X + 1 := Nat.add_le_add_right ht 1
-        _ ≤ B₁.coefficient * X + X := Nat.add_le_add_left hX _
-        _ = (B₁.coefficient + 1) * X := by simp [Nat.add_mul]
-    have hu : u ≤ B₂.coefficient * (n + 1) ^ B₂.securityDegree *
-        (t + 1) ^ B₂.sourceDegree := by
-      change CS.profile (R₂.mapFamily (R₁.mapFamily F))
-        (T₂.transform (R₁.mapFamily F) (T₁.transform F prog)) n ≤
-          B₂.coefficient * (n + 1) ^ B₂.securityDegree *
-            (CQ.profile (R₁.mapFamily F) (T₁.transform F prog) n + 1) ^
-              B₂.sourceDegree
-      exact B₂.bound (R₁.mapFamily F) (T₁.transform F prog) n
-    calc
-      u ≤ B₂.coefficient * (n + 1) ^ B₂.securityDegree *
-          (t + 1) ^ B₂.sourceDegree := hu
-      _ ≤ B₂.coefficient * (n + 1) ^ B₂.securityDegree *
-          ((B₁.coefficient + 1) * X) ^ B₂.sourceDegree :=
-        Nat.mul_le_mul_left _ (Nat.pow_le_pow_left htPlus _)
-      _ = (B₂.coefficient * (B₁.coefficient + 1) ^ B₂.sourceDegree) *
-          (n + 1) ^ (B₂.securityDegree + B₁.securityDegree * B₂.sourceDegree) *
-          (CP.profile F prog n + 1) ^ (B₁.sourceDegree * B₂.sourceDegree) := by
-        dsimp [X, s]
-        simp only [mul_pow, pow_mul, pow_add]
-        ac_rfl
+    exact ResourcePolynomialBound.comp_le n _ _ _
+      B₁.coefficient B₁.securityDegree B₁.sourceDegree
+      B₂.coefficient B₂.securityDegree B₂.sourceDegree
+      (B₁.bound F prog n)
+      (B₂.bound (R₁.mapFamily F) (T₁.transform F prog) n)
 
 /-- A polynomial source-program profile makes the explicit resource
 majorant polynomially bounded. -/
@@ -114,22 +79,8 @@ theorem majorant_polynomiallyBounded
     PolynomiallyBounded (fun n =>
       B.coefficient * (n + 1) ^ B.securityDegree *
         (CP.profile F prog n + 1) ^ B.sourceDegree) := by
-  have hSourcePlusOne : PolynomiallyBounded
-      (fun n => CP.profile F prog n + 1) :=
-    PolynomiallyBounded.add hSource (PolynomiallyBounded.const 1)
-  have hSourcePower : PolynomiallyBounded
-      (fun n => (CP.profile F prog n + 1) ^ B.sourceDegree) :=
-    PolynomiallyBounded.pow hSourcePlusOne B.sourceDegree
-  have hParameterPlusOne : PolynomiallyBounded (fun n => n + 1) :=
-    PolynomiallyBounded.add PolynomiallyBounded.id
-      (PolynomiallyBounded.const 1)
-  have hParameterPower : PolynomiallyBounded
-      (fun n => (n + 1) ^ B.securityDegree) :=
-    PolynomiallyBounded.pow hParameterPlusOne B.securityDegree
-  exact PolynomiallyBounded.mul
-    (PolynomiallyBounded.mul
-      (PolynomiallyBounded.const B.coefficient) hParameterPower)
-    hSourcePower
+  exact ResourcePolynomialBound.polynomiallyBounded hSource
+    B.coefficient B.securityDegree B.sourceDegree
 
 /-- The same transformed program both realizes the mapped adversary family
 and has polynomially bounded target-program resource. -/

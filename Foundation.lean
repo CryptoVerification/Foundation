@@ -170,6 +170,7 @@ import Foundation.Crypto.Semantics.Resource.ProgramMeasure
 import Foundation.Crypto.Semantics.Resource.UniformReduction
 import Foundation.Crypto.Semantics.Resource.ProgramReduction
 import Foundation.Crypto.Semantics.Resource.Measure
+import Foundation.Crypto.Semantics.Resource.PolynomialBound
 import Foundation.Crypto.Semantics.Resource.Reduction
 import Foundation.Crypto.Semantics.Security.Asymptotic
 import Foundation.Crypto.Semantics.Security.Reduction

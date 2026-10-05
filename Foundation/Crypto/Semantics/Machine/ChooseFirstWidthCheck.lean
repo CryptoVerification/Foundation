@@ -25,8 +25,7 @@ private theorem final_step (c : Configuration) :
     Step program (c.resumeAt finalPc)
       { c.resumeAt finalPc with halted := true } := by
   have hLookup : program[finalPc]? = some .halt := by native_decide
-  simp [Step, successors, next, Configuration.resumeAt, hLookup,
-    Instruction.next]
+  exact Step.resumeAt_halt c finalPc hLookup
 
 private theorem no_randomBit (tape : TapeId) :
     Instruction.randomBit tape ∉ program := by

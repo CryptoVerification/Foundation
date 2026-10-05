@@ -30,8 +30,7 @@ private theorem final_step (c : Configuration) :
     Step program (c.resumeAt finalPc)
       { c.resumeAt finalPc with halted := true } := by
   have hLookup : program[finalPc]? = some .halt := by native_decide
-  simp [Step, successors, next, Configuration.resumeAt,
-    hLookup, Instruction.next]
+  exact Step.resumeAt_halt c finalPc hLookup
 
 private theorem no_randomBit (tape : TapeId) :
     Instruction.randomBit tape ∉ program := by
@@ -241,16 +240,9 @@ theorem runs_any (raw : List Bool) :
       rfl
     rw [hStart] at hEmbedded
     exact hEmbedded
-  have hStorage := Machine.GuardedCompiler.sourceStorage_le_of_run run₁
-  have hInitial : Machine.GuardedCompiler.sourceStorage
-      (Configuration.initial raw) ≤ raw.length + 2 := by
-    cases raw <;>
-      simp [Machine.GuardedCompiler.sourceStorage, Configuration.initial,
-        Tape.cells, Tape.ofBits] <;> omega
+  have hStorage := Machine.GuardedCompiler.sourceStorage_le_of_initial_run run₁
   have hCells : after.inputTape.cells + after.outputTape.cells ≤
-      raw.length + 2 + used₁ := by
-    dsimp only [Machine.GuardedCompiler.sourceStorage] at hStorage hInitial
-    omega
+      raw.length + 2 + used₁ := hStorage
   have hBound : returned₁ + returned₂ + 1 ≤ budget raw.length := by
     dsimp only [budget] at *
     dsimp [Tape.cells] at hCells

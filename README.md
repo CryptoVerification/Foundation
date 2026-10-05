@@ -30,6 +30,8 @@ Foundation/
 
 今後の論理体系は `Crypto/Logic`、その健全性・完全性などの証明は `Crypto/Meta` を配置先とします。`Models`、`Theories`、`Zoo` は、それぞれモデルの具体化、暗号学的理論、証明済みの含意・同値・分離の整理に使う予定です。
 
+資源上界の合成に必要な数値計算は、[PolynomialBound.lean](Foundation/Crypto/Semantics/Resource/PolynomialBound.lean) にまとめています。攻撃者に対する資源上界とプログラムに対する資源上界は、この共通補題を使います。機械実行の証明では、`Step.halt` と `Step.resumeAt_halt` が停止命令の実行を扱います。`GuardedCompiler.sourceStorage_le_of_initial_run` は、入力から実行した後のテープ容量を入力長と操作回数で評価します。
+
 ## セットアップ
 
 ```sh

@@ -45,6 +45,12 @@ def Configuration.resumeAt (returnPc : Nat) (c : Configuration) :
     (c : Configuration) :
     (c.resumeAt returnPc).halted = false := rfl
 
+/-- Returning to an explicit halt finishes the caller in one actual step. -/
+theorem Step.resumeAt_halt {p : Program} (c : Configuration) (returnPc : Nat)
+    (hLookup : p[returnPc]? = some .halt) :
+    Step p (c.resumeAt returnPc) { c.resumeAt returnPc with halted := true } :=
+  Step.halt rfl hLookup
+
 /-- Sequential instructions leave control flow to the following address.
 The branch, jump, and halt instructions require separate return cases. -/
 def Instruction.IsSequential : Instruction → Prop

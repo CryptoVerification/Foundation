@@ -35,8 +35,7 @@ private theorem final_step (c : Configuration) :
       { c.resumeAt finalReturn with halted := true } := by
   have hLookup : program[finalReturn]? = some .halt := by
     native_decide
-  simp [Step, successors, next, Configuration.resumeAt, hLookup,
-    Instruction.next]
+  exact Step.resumeAt_halt c finalReturn hLookup
 
 /-- Native layout theorem on the exact request shape expected by the
 represented normalizer. The arbitrary response body itself is retained. -/
@@ -120,14 +119,9 @@ theorem runs_any (raw : List Bool) :
       (finish.resumeAt finalReturn) returned₂ := by
     simpa [second_layout, firstReturn, Program.asSubroutine_length,
       Configuration.resumeAt, Configuration.rebasePc] using embedded₂
-  have hStorage := Machine.GuardedCompiler.sourceStorage_le_of_run run₁
-  have hInitial :
-      Machine.GuardedCompiler.sourceStorage (Configuration.initial raw) ≤ raw.length + 2 := by
-    cases raw <;>
-      simp [Machine.GuardedCompiler.sourceStorage, Configuration.initial,
-        Tape.cells, Tape.ofBits] <;> omega
+  have hStorage := Machine.GuardedCompiler.sourceStorage_le_of_initial_run run₁
   have hCells : after.inputTape.cells ≤ raw.length + 2 + used₁ := by
-    dsimp only [Machine.GuardedCompiler.sourceStorage] at hStorage hInitial
+    dsimp only [Machine.GuardedCompiler.sourceStorage] at hStorage
     omega
   have hBound : returned₁ + returned₂ + 1 ≤ budget raw.length := by
     dsimp only [budget, FramedArithmeticPrefix.budget] at *

@@ -217,6 +217,12 @@ def Step (p : Program) (c d : Configuration) : Prop :=
 instance (p : Program) (c d : Configuration) : Decidable (Step p c d) :=
   inferInstanceAs (Decidable (d ∈ successors p c))
 
+/-- An explicit halt instruction takes one actual step from a running state. -/
+theorem Step.halt {p : Program} {c : Configuration}
+    (hRunning : c.halted = false) (hLookup : p[c.pc]? = some .halt) :
+    Step p c { c with halted := true } := by
+  simp [Step, successors, next, hRunning, hLookup, Instruction.next]
+
 theorem no_step_of_halted {p : Program} {c d : Configuration}
     (h : c.halted = true) : ¬ Step p c d := by
   simp [Step, successors, next, h]
