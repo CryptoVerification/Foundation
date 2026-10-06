@@ -112,6 +112,32 @@ def blocks (sourceLength : Nat) : Nat → Program → Program
   | sourcePc, i :: rest => block sourceLength sourcePc i ++
       blocks sourceLength (sourcePc + 1) rest
 
+/-- Stack-safe code generation. The accumulator contains the emitted prefix
+in reverse order; only a fixed-width block is traversed at each iteration. -/
+def blocksTR.go (sourceLength : Nat) : Nat → Program → Program → Program
+  | _, [], acc => acc.reverse
+  | sourcePc, i :: rest, acc =>
+      go sourceLength (sourcePc + 1) rest
+        (List.reverseAux (block sourceLength sourcePc i) acc)
+
+def blocksTR (sourceLength sourcePc : Nat) (source : Program) : Program :=
+  blocksTR.go sourceLength sourcePc source []
+
+theorem blocksTR.go_eq (sourceLength sourcePc : Nat) (source acc : Program) :
+    blocksTR.go sourceLength sourcePc source acc =
+      acc.reverse ++ blocks sourceLength sourcePc source := by
+  induction source generalizing sourcePc acc with
+  | nil => simp [blocksTR.go, blocks]
+  | cons i rest ih =>
+      simp only [blocksTR.go, ih, List.reverseAux_eq, List.reverse_append,
+        List.reverse_reverse, blocks, List.append_assoc]
+
+/-- Keep the recursive specification for proofs, and use the proved
+tail-recursive equivalent in all subsequently compiled code. -/
+@[csimp] theorem blocks_eq_blocksTR : blocks = blocksTR := by
+  funext sourceLength sourcePc source
+  simpa [blocksTR] using (blocksTR.go_eq sourceLength sourcePc source []).symm
+
 theorem blocks_length (sourceLength sourcePc : Nat) (source : Program) :
     (blocks sourceLength sourcePc source).length = blockSize * source.length := by
   induction source generalizing sourcePc with
