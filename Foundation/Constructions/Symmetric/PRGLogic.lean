@@ -1,5 +1,6 @@
 import Foundation.Crypto.Logic.General.Backends
 import Foundation.Crypto.Meta.General.ResourceSecurity
+import Foundation.Crypto.Logic.Presented.Resources
 
 /-! Registration of one-time PRG encryption in the machine-independent logic.
 Both premises are PRG distinguishing goals with the original public messages.
@@ -63,12 +64,49 @@ underlying security assertion and public instance family are identical. -/
   length := 2
   claim _ := ⟨Object.prg, F⟩
 
+/-- The proof parameters and context contain no generator or security game. -/
+abbrev pureParameters : CryptoLogic.Presented.Parameters language where
+  Family := fun _ => Unit
+  unary := fun _ _ => ()
+  left := fun _ _ => ()
+  right := fun _ _ => ()
+
+abbrev pureContext : CryptoLogic.Presented.Context pureParameters where
+  length := 2
+  claim _ := ⟨Object.prg, ()⟩
+
+def presentedDerivation : CryptoLogic.Presented.Derivation pureParameters pureContext
+    Object.encryption () :=
+  CryptoLogic.Presented.Derivation.binary (P := pureParameters) (Γ := pureContext) Binary.encryption ()
+    (Foundation.Logic.Derivation.hypothesis
+      (T := CryptoLogic.Presented.presentation pureParameters) (Γ := pureContext) 0)
+    (Foundation.Logic.Derivation.hypothesis
+      (T := CryptoLogic.Presented.presentation pureParameters) (Γ := pureContext) 1)
+
+noncomputable def familyInterpretation (G : Generator) (time : Nat → Nat)
+    (F : InstanceFamily G.encryptionGoal) :
+    CryptoLogic.Presented.Interpretation pureParameters (signature G time) where
+  family := fun {X} _ => match X with
+    | .encryption => F
+    | .prg => F
+  unary := by
+    intro X Y r _
+    induction r with
+    | identity X => rfl
+    | primitive e => nomatch e
+    | seq first second hf hs =>
+        change _ = (second.eval (signature G time)).reduction.mapFamily
+          ((first.eval (signature G time)).reduction.mapFamily _)
+        rw [← hf, ← hs]
+  left := by intro X Y Z e _; cases e; rfl
+  right := by intro X Y Z e _; cases e; rfl
+
+/-- The public API now interprets a proof in the semantics-independent
+calculus. The resulting compilers and registered security tree are unchanged. -/
 @[macro_inline] def derivation (G : Generator) (time : Nat → Nat)
     (F : InstanceFamily G.encryptionGoal) :
     Derivation (signature G time) (context G time F) Object.encryption F :=
-  Derivation.binary (S := signature G time) (Γ := context G time F) Binary.encryption F
-    (Derivation.hypothesis (S := signature G time) (Γ := context G time F) ⟨0, by change 0 < 2; decide⟩)
-    (Derivation.hypothesis (S := signature G time) (Γ := context G time F) ⟨1, by change 1 < 2; decide⟩)
+  (familyInterpretation G time F).legacy presentedDerivation
 
 /-- The explicit semantic tree accompanies exactly the pure emitted plan. -/
 noncomputable def tree (G : Generator) (time : Nat → Nat)
