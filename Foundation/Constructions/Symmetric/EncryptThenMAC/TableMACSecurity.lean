@@ -26,11 +26,8 @@ noncomputable def keyEquiv (width : Nat) : Bits (2 * width) ≃ Key width :=
   Equiv.ofBijective splitKey (splitKey_bijective width)
 
 theorem uniform_pair {α β : Type*} [Fintype α] [Nonempty α] [Fintype β] [Nonempty β] :
-    (uniform α).bind (fun a => (uniform β).map (fun b => (a, b))) = uniform (α × β) := by
-  classical
-  ext ⟨a, b⟩
-  simp [PMF.bind_apply, PMF.map_apply, uniform, ENNReal.mul_inv,
-    Prod.mk.injEq, ite_and, mul_ite]
+    (uniform α).bind (fun a => (uniform β).map (fun b => (a, b))) = uniform (α × β) :=
+  Foundation.Probability.uniform_pair
 
 /-- The two secret rows are independent uniform tags. -/
 theorem keygen_independent (width : Nat → Nat) (n : Nat) :
@@ -43,8 +40,7 @@ theorem keygen_independent (width : Nat → Nat) (n : Nat) :
 /-- Guessing a fixed uniform tag has probability exactly the inverse tag count. -/
 theorem guess_probability (width : Nat) (tag : Bits width) :
     eventProb (uniform (Bits width)) (· = tag) = (2 ^ width : ℝ≥0∞)⁻¹ := by
-  classical
-  simp [eventProb, uniform, Set.indicator_apply, Bits]
+  simpa [Bits] using Foundation.Probability.uniform_guess tag
 
 /-- Fix the disclosed row and resample only the undisclosed row. -/
 def rowKey {width : Nat} (request : Bool) (tag hidden : Bits width) : Key width :=
@@ -81,12 +77,8 @@ theorem fresh_probability (width : Nat → Nat) (n : Nat) (request : Bool)
 theorem eventProb_bind_le {α β : Type*} (p : PMF α) (f : α → PMF β)
     (event : β → Prop) (bound : ℝ≥0∞)
     (h : ∀ a, eventProb (f a) event ≤ bound) :
-    eventProb (p.bind f) event ≤ bound := by
-  unfold eventProb
-  rw [PMF.toOuterMeasure_bind_apply]
-  calc
-    _ ≤ ∑' a, p a * bound := ENNReal.tsum_le_tsum (fun a => mul_le_mul_right (h a) (p a))
-    _ = bound := by rw [ENNReal.tsum_mul_right, p.tsum_coe, one_mul]
+    eventProb (p.bind f) event ≤ bound :=
+  Foundation.Probability.eventProb_bind_le p f event bound h
 
 noncomputable def zeroResult {width : Nat} (p : Program Bool (Bits width) (Bool × Bits width)) :
     PMF (Bool × Bits width) :=
@@ -217,43 +209,23 @@ theorem mac_advantage_le (width : Nat → Nat) (n : Nat)
     macAdvantage OneBitEncryption.scheme (scheme width) n attacks ≤ (2 ^ (width n) : ℝ≥0∞)⁻¹ := by
   unfold macAdvantage
   rw [macGame_as_bind]
-  unfold eventProb
-  rw [PMF.toOuterMeasure_bind_apply]
-  calc
-    _ ≤ ∑' attack, attacks attack * (2 ^ (width n) : ℝ≥0∞)⁻¹ := by
-      apply ENNReal.tsum_le_tsum
-      intro attack
-      by_cases ha : attacks attack = 0
-      · simp [ha]
-      · exact mul_le_mul_right (forgery_le width n attack
-          (h attack ((PMF.mem_support_iff _ _).mpr ha))) (attacks attack)
-    _ = _ := by rw [ENNReal.tsum_mul_right, attacks.tsum_coe, one_mul]
+  exact Foundation.Probability.eventProb_bind_le_of_support attacks (forgeryGame width n)
+    (fun record => macWins OneBitEncryption.scheme (scheme width) record.1 record.2)
+    _ (fun attack hAttack => forgery_le width n attack (h attack hAttack))
 
 /-- Once encryption is exhausted, every subsequent public query fails and
 therefore generates no signing query at all. -/
 theorem exhausted_queries (width : Nat → Nat) (n : Nat) (key : Bool)
     (attack : IntegrityAttack OneBitEncryption.scheme (scheme width) n) :
     (reduceIntegrity OneBitEncryption.scheme (scheme width) key true attack).BoundedQueries 0 := by
-  induction attack with
-  | done candidate => exact .done _ _
-  | query request next ih =>
-      have he : OneBitEncryption.scheme.encrypt n key true request = (true, none) := rfl
-      simpa only [reduceIntegrity, he] using ih none
-  | coin next ih => exact .coin _ _ ih
+  exact OneBitEncryption.oneUseContract.exhausted_queries (scheme width) n key attack
 
 /-- Any finite source attack, even with many failed requests, yields a
 reduction with at most one actual signing query. -/
 theorem reduction_queries (width : Nat → Nat) (n : Nat) (key : Bool)
     (attack : IntegrityAttack OneBitEncryption.scheme (scheme width) n) :
     (reduceIntegrity OneBitEncryption.scheme (scheme width) key false attack).BoundedQueries 1 := by
-  induction attack with
-  | done candidate => exact .done _ _
-  | query request next ih =>
-      have he : OneBitEncryption.scheme.encrypt n key false request =
-          (true, some (Bool.xor key request)) := rfl
-      rw [reduceIntegrity, he]
-      exact .query _ _ 0 (fun tag => exhausted_queries width n key _)
-  | coin next ih => exact .coin _ _ ih
+  exact OneBitEncryption.oneUseContract.reduction_queries (scheme width) n key attack
 
 theorem reduction_advantage_le (width : Nat → Nat) (n : Nat)
     (attack : IntegrityAttack OneBitEncryption.scheme (scheme width) n) :

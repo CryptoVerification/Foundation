@@ -1,4 +1,6 @@
 import Foundation.Constructions.Symmetric.EncryptThenMAC.IntegrityGameObservation
+import Foundation.Crypto.Semantics.Invariant
+import Foundation.Crypto.Semantics.Oracle.History
 
 /-! The real signing history is identified with successful public responses.
 This invariant concerns complete ciphertext/tag pairs, including chronological
@@ -20,18 +22,20 @@ theorem logicalQuery_history (oracle : State → Bool → PMF (State × List Boo
     (machine : Configuration) (request : List Bool) (width : Nat) (start final : LogicalFrame State)
     (hStart : HistoryInvariant width start) (hFinal : final ∈ (logicalQuery oracle key machine request start).support) :
     HistoryInvariant width final := by
+  change Foundation.History.Agreement (fun pair => (pair.1, decodeTag width pair.2))
+    (fun pair => decodeResponse width pair.2) start.signingTrace start.sourceTrace at hStart
   cases hu : start.used with
   | true =>
       simp only [logicalQuery, hu, ↓reduceIte, PMF.mem_support_pure_iff] at hFinal
       subst final
-      simpa [HistoryInvariant, publicHistory, decodeResponse, List.reverse_cons, List.filterMap_append] using hStart
+      exact Foundation.History.failure _ _ _ _ (request, [false]) hStart rfl
   | false =>
       simp only [logicalQuery, hu, Bool.false_eq_true, ↓reduceIte, PMF.mem_support_map_iff] at hFinal
       obtain ⟨answer, _, he⟩ := hFinal
       subst final
-      change signedHistory width start.signingTrace = publicHistory width start.sourceTrace at hStart
-      simpa [HistoryInvariant, signedHistory, publicHistory, decodeResponse,
-        List.reverse_cons, List.map_append] using hStart
+      exact Foundation.History.success _ _ _ _
+        (Bool.xor key (request.headD false), answer.2)
+        (request, true :: Bool.xor key (request.headD false) :: answer.2) hStart rfl
 
 theorem logicalStep_history (code : SourceCode) (oracle : State → Bool → PMF (State × List Bool))
     (key : Bool) (width : Nat) (start final : LogicalFrame State)
@@ -60,15 +64,9 @@ theorem logical_eval_history (code : SourceCode) (oracle : State → Bool → PM
     (hStart : HistoryInvariant width start)
     (hFinal : final ∈ (TimedExecution.eval (logicalStep code oracle key) count start).support) :
     HistoryInvariant width final := by
-  induction count generalizing start with
-  | zero =>
-      simp only [TimedExecution.eval, PMF.mem_support_pure_iff] at hFinal
-      subst final
-      exact hStart
-  | succ count ih =>
-      rw [TimedExecution.eval, PMF.mem_support_bind_iff] at hFinal
-      obtain ⟨middle, hMiddle, hFinal⟩ := hFinal
-      exact ih middle (logicalStep_history code oracle key width start middle hStart hMiddle) hFinal
+  exact TimedExecution.eval_preserves _ _
+    (fun start hStart final hFinal => logicalStep_history code oracle key width start final hStart hFinal)
+    count start final hStart hFinal
 
 theorem logicalInitial_history (width : Nat) (state : State) (input : List Bool) :
     HistoryInvariant width (logicalInitial state input) := rfl
@@ -80,10 +78,11 @@ theorem native_history (code : SourceCode) (oracle : State → Bool → PMF (Sta
     (final : Frame State)
     (hFinal : final ∈ (eval code oracle (count * (5 * width + 36)) (LogicalFrame.embed key start)).support) :
     signedHistory width final.signingTrace = publicHistory width final.sourceTrace := by
-  rw [realized_source_execution code oracle key width hTags count start hStops, PMF.mem_support_map_iff] at hFinal
-  obtain ⟨source, hSource, he⟩ := hFinal
-  subst final
-  exact logical_eval_history code oracle key width count start source hStart hSource
+  exact TimedExecution.realized_invariant _ _ (LogicalFrame.embed key)
+    (fun frame : Frame State => signedHistory width frame.signingTrace = publicHistory width frame.sourceTrace)
+    (realized_source_execution code oracle key width hTags count start hStops)
+    (fun source hSource => logical_eval_history code oracle key width count start source hStart hSource)
+    final hFinal
 
 theorem initialized_native_history (code : SourceCode) (oracle : State → Bool → PMF (State × List Bool))
     (width : Nat) (hTags : TagLength oracle width) (count : Nat) (state : State) (input : List Bool)

@@ -1,4 +1,5 @@
 import Foundation.Constructions.Symmetric.EncryptThenMAC.PrivacySourceExecution
+import Foundation.Crypto.Semantics.Oracle.ReificationExecution
 
 /-! Identify the proof-level source execution with the existing finite
 interactive source machine. Layout is erased; external raw history is opaque
@@ -35,22 +36,11 @@ theorem logical_eval_view {State : Type u} {width : Nat} (code : Source.Code)
     (count : Nat) (frame : LogicalFrame State) :
     (TimedExecution.eval (logicalStep code oracle key) count frame).map LogicalFrame.view =
       CryptoOracle.Interactive.Reification.eval code (authenticatedOracle oracle key) count frame.view := by
-  induction count generalizing frame with
-  | zero => simp [TimedExecution.eval, PMF.pure_map, CryptoOracle.Interactive.Reification.eval_zero]
-  | succ count ih =>
-      rw [TimedExecution.eval, PMF.map_bind]
-      simp only [ih]
-      change ((logicalStep code oracle key frame).bind
-        (CryptoOracle.Interactive.Reification.eval code (authenticatedOracle oracle key) count ∘ LogicalFrame.view)) = _
-      rw [← PMF.bind_map, logicalStep_view]
-      by_cases ht : CryptoOracle.Interactive.Reification.terminal frame.control = true
-      · simp only [ht, ↓reduceIte, PMF.pure_bind]
-        rw [CryptoOracle.Interactive.Reification.eval_terminal code _ count frame.view ht,
-          CryptoOracle.Interactive.Reification.eval_terminal code _ (count + 1) frame.view ht]
-      · simp only [ht, Bool.false_eq_true, ↓reduceIte]
-        conv_rhs => rw [CryptoOracle.Interactive.Reification.eval]
-        simp only [LogicalFrame.view, ht, Bool.false_eq_true, ↓reduceIte,
-          CryptoOracle.Interactive.Reification.step_eq_perform]
+  rw [← CryptoOracle.Interactive.Reification.timed_eval_eq]
+  exact TimedExecution.eval_map _ _ LogicalFrame.view
+    (fun frame => by
+      simpa only [CryptoOracle.Interactive.Reification.timedStep, LogicalFrame.view] using
+        logicalStep_view code oracle key frame) count frame
 
 /-- Transfer the ordinary source-machine stopping witness; no new stopping
 predicate on a different logical machine need be assumed by the caller. -/

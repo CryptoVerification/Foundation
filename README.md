@@ -35,6 +35,38 @@ Foundation/
 
 この具体例について、[認証表の偽造確率](Foundation/Constructions/Symmetric/EncryptThenMAC/TableMACSecurity.lean) と [1ビット暗号化の完全秘匿性](Foundation/Constructions/Symmetric/EncryptThenMAC/OneBitSecurity.lean) も証明しています。認証への問い合わせが高々1回なら、幅 `w` ビットのタグの偽造確率は `2^(-w)` 以下です。一回の暗号化が成功した後は追加要求が失敗応答になるため、元の攻撃者が複数回要求しても、この帰着の認証問い合わせは高々1回です。[具体的な合成安全性](Foundation/Constructions/Symmetric/EncryptThenMAC/ConcreteSecurity.lean) は、暗号化の識別優位が厳密にゼロであることと認証の上界を合成規則に代入し、有限コードの攻撃者に対する上界 `2^(-w)` を、計算困難性の仮定なしに導きます。
 
+方式間の再利用に向けて、[部品の実行契約](Foundation/Crypto/Semantics/Procedure.lean) は、入力と出力の型、機械の完全な配置、実際の費用分布と上界を保持します。途中の終了配置が次の実行へ進む場合も合成でき、データのコピーは配置の一致だけで省略できません。[有限コードの呼び出し](Foundation/Crypto/Semantics/Machine/ProcedureCall.lean) は、既存の命令列の実行と終了後の制御移譲を接続し、移譲に1段階を数えます。[一回限りの暗号化の共通定理](Foundation/Constructions/Symmetric/EncryptThenMAC/OneUsePrivacy.lean) は、鍵・平文・暗号文・状態の型を限定せずに適応的な攻撃への完全秘匿性を導きます。既存の1ビット方式と [任意長のワンタイムパッド](Foundation/Constructions/Symmetric/EncryptThenMAC/OneUsePad.lean) が同じ定理を使います。これらは部品と意味論の一般化です。任意長の方式について帰着機械全体と資源証拠を生成する接続は、引き続き構成する必要があります。
+
+[有限コードを順に実行する制御](Foundation/Crypto/Semantics/Machine/Sequence.lean) は、部品間で入力・出力テープをそのまま引き継ぎます。命令位置と終了フラグの変更に1段階を数えます。次の部品の入口配置との一致を証明して初めて部品を合成でき、入力準備やコピーが必要なら、そのための実際のコードを加える必要があります。[二つのコードの実行例](Foundation/Examples/NativeSequence.lean) は、最初のコードの乱数ビットを、次のコードが同じテープ上で読み取って反転させる全実行を証明します。
+
+[状態の条件の保存](Foundation/Crypto/Semantics/Invariant.lean)、[全実行の分布の対応](Foundation/Crypto/Semantics/Simulation.lean)、および [秘密側と公開側の履歴の対応](Foundation/Crypto/Semantics/Oracle/History.lean) も方式に依存しない共通定理です。既存の認証側の履歴証明と、秘密性側・認証側の攻撃者の状態の観測へ適用しています。一段階の分布の対応や実装の全配置の分布の一致は、各実装が証明する必要があります。
+
+[呼び出し元の状態の保持](Foundation/Crypto/Semantics/Framing.lean) は、部品に保存した呼び出し元の状態を渡さず、全実行中にその状態を保持します。[具体例](Foundation/Examples/SavedCaller.lean) は、完全な機械配置を保持した鍵生成と二つのコードの実行を証明します。保存状態への入口の処理、入力準備、および応答のコピーの費用は別途証明する必要があります。
+
+[コピーの実行契約](Foundation/Crypto/Semantics/Machine/CopyContracts.lean) は、既存の有限コピーコードを部品として使えるようにします。区切りの後のデータを残すコピーと、入力の先頭へ戻るコピーについて、完全な入口・出口配置と費用を保持します。入力の先頭へ戻る [共通のコードと証明](Foundation/Crypto/Semantics/Machine/RetainedCopy.lean) は、既存の暗号方式の鍵コピーでも再利用します。これらの契約の入口に必要な配置は、呼び出し元が実際の処理で用意する必要があります。
+
+[問い合わせと再開の共通契約](Foundation/Crypto/Semantics/Oracle/QueryTransfer.lean) は、攻撃者の実際の呼び出し命令、要求の読み取り、外部問い合わせ、応答の書き込みとヘッドの復帰を接続します。要求長を `R` ビット、応答長の上界を `B` ビットとすると、制御の上界は `2*R+3*B+6` 段階です。問い合わせ先の内部計算の費用は別扱いです。[部品の応答を取り出す制御](Foundation/Crypto/Semantics/Machine/ResponseExport.lean) は、停止した部品の物理的な出力テープを先頭へ戻し、空白まで読み取り、応答の順序を復元します。長さ `L` ビットについて制御移譲を含めて `3*L+4` 段階です。[適用例](Foundation/Examples/ResponseExport.lean) は、任意幅 `w` の乱数生成とパッド暗号の暗号化を同じ制御へ接続し、それぞれ `8*w+6`、`11*w+6` 段階の上界を証明します。暗号化の入力準備と、これらの共通制御から帰着全体を生成する接続は引き続き必要です。
+
+[部品から攻撃者への応答](Foundation/Crypto/Semantics/Oracle/NativeCallback.lean) は、部品の実行、物理テープからの応答の取り出し、攻撃者側への書き込み、再開を一つの制御へ接続します。部品の時間上界を `T`、応答長の上界を `B` ビットとすると、上界は `T+6*B+7` 段階です。部品が早く終了した場合は、実際の終了時点から応答を返し、残りの時間で攻撃者を実行します。[全実行の適用例](Foundation/Examples/NativeCallback.lean) は、任意幅 `w` の乱数生成とパッド暗号の暗号化から、再開した攻撃者の実際の停止命令までを、それぞれ `11*w+10`、`14*w+10` 段階で証明します。この契約の入口には部品の入力が準備済みである条件が残ります。元の攻撃者の要求を入力準備へ渡す処理、複数回の呼び出しを扱う帰着全体、および論理の資源証拠への登録は引き続き必要です。
+
+[二つの入力の物理的な準備](Foundation/Crypto/Semantics/Machine/PairPreparation.lean) は、別々のテープのビットを一セルずつ読んで交互に書き込み、元の二つのテープと準備したテープのヘッドを先頭へ戻します。各入力が `w` ビットなら制御の時間は `12*w+3` 段階です。長さの不一致は明示的に拒否し、正常終了では区切りの後の全セルも保持します。[パッド暗号への適用](Foundation/Examples/PairPreparation.lean) は、準備した実際のテープ上で既存の暗号化コードが停止し、正しい暗号文を出すことを証明します。末尾の空白の表現を無料で変更する処理はありません。
+
+[準備から応答までの共通制御](Foundation/Crypto/Semantics/Oracle/PreparedCallback.lean) は、別々の入力テープから実際の入力を準備し、暗号部品を実行し、応答を攻撃者へ返して再開する一回の呼び出しを接続します。準備した物理配置と部品の入口の一致を証明する条件があり、実行時には実際のバッファを渡します。[完全な配置を扱う暗号化契約](Foundation/Crypto/Semantics/Machine/PreparedXor.lean) は、末尾の空白と後続のセルを保持した入力上で既存の暗号化コードを実行します。[全実行の例](Foundation/Examples/PreparedCallback.lean) は、任意幅 `w` の鍵と平文が別々のテープにある入口から、攻撃者の実際の停止命令まで `26*w+14` 段階で接続します。元の鍵・平文テープの全セルも保持します。鍵生成、元の攻撃者から始める帰着全体の費用と分布、複数回の問い合わせ、および安全性論理の資源証拠への登録は引き続き必要です。
+
+[元の呼び出しからの入口](Foundation/Crypto/Semantics/Oracle/SourceEntry.lean) は、攻撃者の実際の呼び出し命令から要求を取り出し、元の要求テープを共通の入力準備へ渡す制御です。要求長 `R` ビットについて `2*R+4` 段階で、命令位置の更新、要求の読み取りと順序の復元、準備への制御移譲を証明します。[任意幅の適用例](Foundation/Examples/SourceEntry.lean) は、実際の平文要求から、鍵と要求を持つ準備処理の入口へ接続します。応答の書き込み後に攻撃者へ戻す移譲にも1段階を数えます。使用済み状態と拒否応答、鍵生成、および安全性論理への登録は引き続き必要です。
+
+[外側の制御での呼び出し契約](Foundation/Crypto/Semantics/Oracle/SourceCallback.lean) は、実際の準備・部品実行・応答処理・攻撃者への復帰を、最初の復帰時点までの費用分布として構成します。元の呼び出し命令を含める `invoke` は、任意の攻撃者の命令列と保存する命令位置を扱い、残りの時間で外側の攻撃者を実行します。[パッド暗号の全実行](Foundation/Examples/SourceCallback.lean) は、実際の呼び出し命令から再開後の停止命令まで、任意幅 `w` について `28*w+19` 段階で接続します。鍵生成と、一回限りの使用を強制する状態の制御は、この例には含めません。
+
+[成功・拒否の共通応答](Foundation/Crypto/Semantics/Machine/ResponsePacket.lean) は、拒否を `[false]`、正常応答を `true :: payload` として区別します。空の正常応答も拒否とは異なります。符号化と復号の往復、余分なビットを持つ拒否の不正判定、および各セルの書き込みとヘッド移動を別々に数える有限制御の実行を証明します。本文が `L` ビットなら書き込みは `2*L+3` 段階、拒否は3段階です。これは新しい応答用テープへ書く部品の契約であり、既存の暗号化出力からの取り出し、応答の配送、使用済み状態の制御への接続は別途必要です。
+
+[不正な長さの入力への拒否処理](Foundation/Crypto/Semantics/Machine/PreparationCheck.lean) は、入力準備の拒否時に実際の二つの入力テープと作業バッファを保持し、各ヘッドを戻してから共通の拒否応答をテープへ書きます。短い方の入力が `m` ビットなら上界は `12*m+10` 段階です。元の入力テープは区切りの後のセルまで復元します。正常入力の準備は同じ制御で従来の `12*w+3` 段階です。外側の攻撃者への拒否応答の配送と使用済み状態への接続は引き続き必要です。
+
+[拒否応答から攻撃者への復帰](Foundation/Crypto/Semantics/Oracle/FailureCallback.lean) は、不正な長さの入力の準備、ヘッドの復帰、拒否応答の物理的な書き込み、テープからの応答の取り出し、攻撃者への書き込みと再開を同じ制御で接続します。短い入力が `m` ビットなら上界は `12*m+24` 段階で、実際の費用分布を保持して残りの時間で攻撃者を実行します。[全実行の例](Foundation/Examples/FailureCallback.lean) は、再開した攻撃者の停止命令まで `12*m+25` 段階で実行し、秘密データ用テープと元の要求テープを保持します。入口は要求が既に捕捉された配置であり、外側の呼び出し命令と使用済み状態の接続は引き続き必要です。
+
+[一回限りの使用を強制する外側の制御](Foundation/Crypto/Semantics/Oracle/OneUseSource.lean) は、実際の呼び出し命令から要求を捕捉し、正常な長さの要求を受け付けた時点で使用済みにします。使用済みの要求は暗号化部品へ渡さず、物理的な拒否応答を返します。任意の実行時間と問い合わせ先について受付は高々一回で、使用済み状態は元へ戻りません。[共通の受付回数の定理](Foundation/Crypto/Semantics/OneUseCounter.lean) は証明用の回数を記録しても実行分布を変えないことを証明します。[二回の呼び出しの全実行](Foundation/Examples/OneUseSource.lean) は、使用済みの鍵に対して二回拒否して実際に停止し、最初の要求長 `R` ビットについて `2*R+47` 段階です。正常・拒否の応答を扱う [共通制御](Foundation/Crypto/Semantics/Oracle/CheckedCallback.lean) の正常経路について、任意長の暗号化部品の分布と資源上界の契約を接続する証明は引き続き必要です。
+
+[正常応答の分布と費用の契約](Foundation/Crypto/Semantics/Oracle/CheckedResponse.lean) は、任意の暗号化部品の実行、応答の取り出し、成功の印の実際の書き込み、攻撃者への配送と再開を、正常・拒否の共通制御へ接続します。部品の上界が `T` 段階、本文の上界が `B` ビットなら、部品開始から再開まで `T+11*B+22` 段階です。復帰配置の分布は、部品の出力分布の各応答に成功の印を付けた分布に一致します。[任意長のパッド暗号への適用](Foundation/Examples/CheckedResponse.lean) は、入力準備済みの配置から実際の停止命令まで `19*w+25` 段階で証明します。この契約は入力準備済みの配置を入口にします。
+
 小さな安全性論理を `Crypto/Logic`、導出からの帰着構成と健全性の証明を `Crypto/Meta` に配置しています。帰着の式は恒等・登録済み帰着・合成からなり、安全性の導出は仮定の使用と帰着による輸送からなります。導出から、使用した仮定、有限の帰着コンパイラ、多項式停止予算、優位性の損失を取り出します。既存の ElGamal と具体的な素数位数の群にも接続しています。`CompactProgram` は、約1477億命令になる具体的な帰着コードを展開せず、証明付きの長さと命令取得を提供します。定義・保証の範囲・確認方法は [安全性論理の説明](docs/crypto-logic.md) に記載しています。停止予算は解析用データであり、初版では係数・次数の数値計算や一般の完全性を要求しません。
 
 二前提の拡張は、一人の攻撃者から二つの攻撃者を構成し、二つの優位性の損失付きの和で元の優位性を抑えます。導出から各仮定へのプログラムと停止予算を取り出し、仮定の置換によるコードと上界の合成を証明しています。三つの確率的な実験の区別困難性を具体例として確認しています。
@@ -107,3 +139,7 @@ DDH 側の `representedDDHInterface … .pptClass` 上の安全性から、ElGam
 
 Victor Shoup, *Sequences of Games: A Tool for Taming Complexity in Security Proofs*, 2006-01-18 版、IACR ePrint 2004/332。
 [論文 PDF](https://eprint.iacr.org/2004/332.pdf) の §1 は効率的な攻撃者と negligibility、§3.1 は公開鍵暗号の correctness、§3.2 は ElGamal の復号、§3.3 は計算量を制限した DDH 仮定と安全性証明を扱います。
+
+[一回限りの制御での入力準備と正常応答](Foundation/Crypto/Semantics/Oracle/OneUsePreparation.lean) は、別々の物理テープからの入力準備、長さ確認後の利用済み状態への変更、任意の計算部品、応答の配送と再開を接続します。部品の入口が実際の準備済みバッファと一致する証明を要求します。鍵と要求がそれぞれ `w` ビット、部品の時間上界が `T` 段階、応答本文の上界が `B` ビットなら、入力準備開始から再開まで `12*w+T+11*B+27` 段階です。[任意長のパッド暗号への適用](Foundation/Examples/OneUsePreparation.lean) は、この区間の上界 `31*w+29` 段階と、暗号文・応答履歴・利用済み状態を含む復帰配置の分布を証明します。鍵生成、呼び出し元の要求送信、拒否経路との全実行の接続、全体の記憶量上界と論理への登録は引き続き未完了です。
+
+[利用状態を保持する共通配送](Foundation/Crypto/Semantics/Oracle/OneUseDelivery.lean) は、正常応答と拒否応答の双方で使います。既に書かれた `L` ビットの応答テープから取り出し、呼び出し元へ配送・復帰する上界は `6*L+8` 段階です。[不正長の拒否](Foundation/Crypto/Semantics/Oracle/OneUseRejection.lean) は、実際の入力準備開始から拒否応答の配送・復帰まで `12*m+25` 段階を証明します。`m` は鍵と要求のビット長の小さい方です。鍵テープを復元し、未使用状態のまま再開します。残余時間は実際の呼び出し元を実行します。[拒否後の停止の具体例](Foundation/Examples/OneUseRejection.lean) は、この区間と停止命令を合わせて `12*m+26` 段階で証明します。要求送信と鍵生成はこの区間に含みません。

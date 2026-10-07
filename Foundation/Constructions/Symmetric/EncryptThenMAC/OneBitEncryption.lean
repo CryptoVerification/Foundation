@@ -1,5 +1,6 @@
 import Foundation.Constructions.Symmetric.EncryptThenMAC.Semantics
 import Foundation.Constructions.Symmetric.OneTimePadNative
+import Foundation.Constructions.Symmetric.EncryptThenMAC.OneUseEncryption
 
 /-! A one-use one-bit pad with an explicit exhaustion state. The native
 primitive implements encryption, its updated state, and the failure marker.
@@ -25,6 +26,12 @@ noncomputable def scheme : Encryption where
       subst ciphertext
       cases key <;> cases message <;> rfl
     · simp at h
+
+def oneUseContract : OneUseEncryption scheme where
+  exhausted := fun _ => true
+  ciphertext := fun _ key message => Bool.xor key message
+  first := by intros; rfl
+  used := by intros; rfl
 
 namespace Native
 open Machine

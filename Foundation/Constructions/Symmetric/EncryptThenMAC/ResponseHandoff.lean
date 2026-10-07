@@ -1,6 +1,7 @@
 import Foundation.Constructions.Symmetric.EncryptThenMAC.PrivateKeyCopy
 import Foundation.Constructions.Symmetric.EncryptThenMAC.AuthenticateResponse
 import Foundation.Crypto.Semantics.Machine.Masking
+import Foundation.Crypto.Semantics.Machine.PairPreparation
 
 /-! A private response controller. Key copying uses the actual native code;
 the prepared response tape is rewound cell by cell before authentication.
@@ -91,19 +92,9 @@ theorem rewind_eval (left : List Bool) (current : Option Bool) (right : List (Op
       rw [ih]
       simp [List.reverse_cons, List.map_append, List.append_assoc]
 
-private theorem getD_append_blank (cells : List (Option Bool)) (i : Nat) :
-    (cells ++ [none]).getD i none = cells.getD i none := by
-  induction cells generalizing i with
-  | nil => cases i <;> simp
-  | cons cell cells ih => cases i with
-    | zero => rfl
-    | succ i => exact ih i
-
 theorem prepared_equivalent (bits : List Bool) :
-    (fromCells (bits.map some ++ [none])).Equivalent (Tape.ofBits bits) := by
-  cases bits with
-  | nil => exact Tape.Equivalent.refl _
-  | cons bit bits => exact ⟨rfl, fun _ => rfl, getD_append_blank (bits.map some)⟩
+    (fromCells (bits.map some ++ [none])).Equivalent (Tape.ofBits bits) :=
+  Machine.PairPreparation.prepared_equivalent bits
 
 def header : Option Bool → List Bool
   | none => [false]
