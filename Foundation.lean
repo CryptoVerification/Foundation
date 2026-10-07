@@ -581,3 +581,8 @@ import Foundation.Examples.EncryptThenMACIntegrityBackend
 
 import Foundation.Constructions.Symmetric.EncryptThenMAC.ConcreteOperational
 import Foundation.Examples.EncryptThenMACConcreteOperational
+
+import Foundation.Constructions.Symmetric.EncryptThenMAC.TableMACSecurity
+import Foundation.Constructions.Symmetric.EncryptThenMAC.OneBitSecurity
+import Foundation.Constructions.Symmetric.EncryptThenMAC.ConcreteSecurity
+import Foundation.Examples.EncryptThenMACConcreteSecurity
