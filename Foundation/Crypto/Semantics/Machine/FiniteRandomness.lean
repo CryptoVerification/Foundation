@@ -1,4 +1,5 @@
 import Foundation.Crypto.Semantics.Machine.Execution
+import Foundation.Crypto.Semantics.Probability.Facts
 import Mathlib.Data.Fintype.BigOperators
 import Mathlib.Data.Nat.Prime.Basic
 
@@ -36,24 +37,12 @@ def runWithBits (p : Program) (start : Configuration) :
 
 theorem uniform_map_equiv {α β : Type*}
     [Fintype α] [Nonempty α] [Fintype β] [Nonempty β] (e : α ≃ β) :
-    (uniform α).map e = uniform β := by
-  classical
-  ext b
-  rw [PMF.map_apply, tsum_eq_single (e.symm b)]
-  · simp [uniform, Fintype.card_congr e]
-  · intro a ha
-    simp only [ite_eq_right_iff]
-    intro h
-    exact False.elim (ha (by simpa using congrArg e.symm h.symm))
+    (uniform α).map e = uniform β := Foundation.Probability.uniform_map_equiv e
 
 private theorem uniform_pair {α β : Type*}
     [Fintype α] [Nonempty α] [Fintype β] [Nonempty β] :
     (uniform α).bind (fun a => (uniform β).map (fun b => (a, b))) =
-      uniform (α × β) := by
-  classical
-  ext ⟨a, b⟩
-  simp [PMF.bind_apply, PMF.map_apply, uniform, ENNReal.mul_inv,
-    Prod.mk.injEq, ite_and, mul_ite]
+      uniform (α × β) := Foundation.Probability.uniform_pair
 
 private def bitsConsEquiv (rounds : Nat) :
     (Bool × (Fin rounds → Bool)) ≃ (Fin (rounds + 1) → Bool) where
