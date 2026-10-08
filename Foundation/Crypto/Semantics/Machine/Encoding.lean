@@ -4,6 +4,18 @@ namespace Machine.FiniteBitEncoding
 
 universe u v
 
+/-- Reuse a faithful code through a representation with a left inverse.
+The representation may contain redundant or unused values. -/
+def retract {α : Type u} {β : Type v} (E : FiniteBitEncoding β)
+    (pack : α → β) (unpack : β → α) (h : ∀ x, unpack (pack x) = x) : FiniteBitEncoding α where
+  encode := E.encode ∘ pack
+  decode := fun bits => (E.decode bits).map unpack
+  decode_encode := by intro x; simp [Function.comp_def, E.decode_encode, h]
+
+@[simp] theorem retract_encode_length {α : Type u} {β : Type v} (E : FiniteBitEncoding β)
+    (pack : α → β) (unpack : β → α) (h : ∀ x, unpack (pack x) = x) (x : α) :
+    ((E.retract pack unpack h).encode x).length = (E.encode (pack x)).length := rfl
+
 /-- Prefix-free framing of a finite bitstring. Every data bit is preceded by
 `true`, and a final `false` ends the field. This is a mathematical encoding;
 the machine-step cost of producing it is not claimed here. -/

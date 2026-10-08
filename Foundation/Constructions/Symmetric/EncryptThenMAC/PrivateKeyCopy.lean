@@ -1,4 +1,5 @@
 import Foundation.Crypto.Semantics.Machine.RetainedCopy
+import Foundation.Crypto.Semantics.Machine.RetainedCopyComponent
 
 /-! Compatibility names for the shared native copy implementation. Secret
 keys must still be copied into a private destination. The finite instructions,
@@ -26,6 +27,11 @@ def restored (cells : List (Option Bool)) : Tape :=
   ⟨[none], cells.headD none, cells.tail⟩
 
 theorem code_eq_shared : code = Machine.RetainedCopy.code := rfl
+
+noncomputable def component : Machine.NativeComponent (List Bool × List (Option Bool)) Machine.Configuration :=
+  Machine.RetainedCopy.Component.component
+
+theorem component_code : component.procedure.code = code := rfl
 
 def finish (key : List Bool) (outputBefore : List (Option Bool)) : Configuration :=
   { pc := 11, halted := true, inputTape := restored (key.map some ++ [none]),
