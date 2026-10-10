@@ -1,0 +1,34 @@
+Axiom audit: Heunen finite quantum foundation
+Date: 2026-10-08 (Asia/Tokyo)
+Lean: 4.33.0
+mathlib: db584cd6d46c92f209a44c0f1c829460d327499d
+Command: lake env lean Foundation/Quantum/Audit.lean
+Exit status: 0
+Declarations checked: 24
+Allowed standard axioms: propext, Classical.choice, Quot.sound
+Project-defined axioms / sorryAx: none
+
+'Foundation.Quantum.matrixMonoidal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.matrixPairing' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.matrixRigid' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.matrixSymmetric' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Op.snake_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Op.snake_right' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.standardClassical' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.dagger_compact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Op.mix_dagger_epi' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Law.valid' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Proof.qkd' depends on axioms: [propext]
+'Foundation.Quantum.sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.interpretation_substitute' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.qkd_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.qkdMix' depends on axioms: [propext]
+'Foundation.Quantum.Derived.expansion' depends on axioms: [propext]
+'Foundation.Quantum.Derived.interpretation_expansion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Op.linear_dagger' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.qkd_hilbert' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Examples.qkd_mix' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Examples.measured_mix' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Examples.classical_copy_not_clone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Examples.no_zero_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Examples.distinct_proofs' depends on axioms: [propext]

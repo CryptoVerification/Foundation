@@ -1161,3 +1161,9 @@ import Foundation.Crypto.Logic.General.FirstArrivalObservedBackend
 import Foundation.Crypto.Logic.General.FreshMaskAdaptiveFirstArrivalBackend
 
 import Foundation.Examples.FreshMaskAdaptiveRegisteredSecurity
+
+import Foundation.Quantum.Audit
+
+import Foundation.Quantum.ExtensionAudit
+
+import Foundation.Quantum.GoalAudit
