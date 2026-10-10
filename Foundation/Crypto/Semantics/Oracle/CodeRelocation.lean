@@ -22,6 +22,24 @@ def instruction (base : Nat) : Instruction → Instruction
 
 def host (before code : Code) : Code := before ++ code.map (instruction before.length)
 
+/-- Nested code placements add their absolute jump/branch offsets. -/
+theorem instruction_add (base offset : Nat) (op : Instruction) :
+    instruction base (instruction offset op) = instruction (base + offset) op := by
+  cases op with
+  | call => rfl
+  | native op => cases op <;> simp [instruction, native, Nat.add_assoc]
+
+/-- Linking finite instruction lists is associative, including every
+absolute jump target in the final continuation. -/
+theorem host_assoc (first second third : Code) :
+    host (host first second) third = host first (host second third) := by
+  simp only [host, List.length_append, List.length_map, List.map_append,
+    List.map_map, List.append_assoc]
+  congr 2
+  apply List.map_congr_left
+  intro op _
+  exact (instruction_add first.length second.length op).symm
+
 theorem lookup (before code : Code) (pc : Nat) :
     (host before code)[before.length + pc]? = (code[pc]?).map (instruction before.length) := by
   unfold host
@@ -91,9 +109,26 @@ theorem transition_eq {State : Type u} (before code : Code) (source : Configurat
       cases hl : tape.left <;> simp [transition, frame, control, transitionResult, Machine.Configuration.rebasePc, hl]
   | finished bit => rfl
 
+/-- Placement at address zero leaves every retained control frame intact. -/
+@[simp] theorem frame_zero {State : Type*} (source : Configuration State) : frame 0 source = source := by
+  rcases source with ⟨state, source, trace⟩
+  cases source <;> simp [frame, control, Machine.Configuration.rebasePc]
+
+/-- Successive placements add their absolute address offsets. -/
+theorem frame_add {State : Type*} (base offset : Nat) (source : Configuration State) :
+    frame base (frame offset source) = frame (base + offset) source := by
+  rcases source with ⟨state, source, trace⟩
+  cases source <;> simp [frame, control, Machine.Configuration.rebasePc, Nat.add_assoc]
+
 theorem terminal (base : Nat) (source : Control) :
     Reification.terminal (control base source) = Reification.terminal source := by
   cases source <;> rfl
+
+/-- Relocating code retains the actual native output packet. -/
+theorem packet (base : Nat) (source : Control) :
+    Reification.packet (control base source) = Reification.packet source := by
+  cases source <;> simp [control, Reification.packet, Machine.Configuration.rebasePc,
+    Machine.Configuration.outputBits]
 
 /-- Every source transition, including randomized and oracle transitions,
 is preserved by placement after the leading instruction list. -/
@@ -130,6 +165,19 @@ theorem eval {State : Type u} (before code : Code) (oracle : BitOracle State)
 
 theorem code_length (before code : Code) : (host before code).length = before.length + code.length := by
   simp [host]
+
+/-- Relocation preserves the property of using only ordinary native
+instructions, both in the leading component and in its continuation. -/
+theorem host_native (before source : Code)
+    (hb : ∀ instruction ∈ before, ∃ native, instruction = .native native)
+    (hs : ∀ instruction ∈ source, ∃ native, instruction = .native native) :
+    ∀ instruction ∈ host before source, ∃ native, instruction = .native native := by
+  intro op member
+  simp only [host, List.mem_append, List.mem_map] at member
+  rcases member with leading | ⟨original, member, rfl⟩
+  · exact hb op leading
+  · obtain ⟨native, rfl⟩ := hs original member
+    exact ⟨_, rfl⟩
 
 /-- All retained tapes and temporary lists have the same size. Finite code
 and the representation of program-counter integers are separate resources. -/

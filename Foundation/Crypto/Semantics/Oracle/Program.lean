@@ -86,8 +86,9 @@ theorem BoundedQueries.trace_length_le {p : Program Request Response Result} {q 
 /-- Without any oracle queries, the result distribution is independent of
 both the oracle and its hidden initial state. Local coins are still allowed. -/
 theorem BoundedQueries.zero_run_result_eq {p : Program Request Response Result}
-    (h : p.BoundedQueries 0) (left right : Oracle Request Response State)
-    (leftState rightState : State) :
+    (h : p.BoundedQueries 0) {RightState : Type*}
+    (left : Oracle Request Response State) (right : Oracle Request Response RightState)
+    (leftState : State) (rightState : RightState) :
     (p.run left leftState).map Outcome.result =
       (p.run right rightState).map Outcome.result := by
   induction p generalizing leftState rightState with

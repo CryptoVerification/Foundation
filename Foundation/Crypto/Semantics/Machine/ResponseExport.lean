@@ -106,6 +106,33 @@ theorem run (code : Program) (machine : Configuration) (packet : List Bool)
   rw [hc', PMF.pure_bind]
   simpa using reverse code packet.reverse []
 
+/-- Export a packet whose head is already at its first cell. This is the
+physical layout left by an interactive response loader. No tape reset or
+semantic packet extraction is performed by the exporter. -/
+theorem run_fromHead (code : Program) (machine : Configuration) (packet : List Bool)
+    (hHalt : machine.halted = true)
+    (hTape : machine.outputTape = fromCells (packet.map some ++ [none])) :
+    eval (step code) (2 * packet.length + 4) (.running machine) =
+      PMF.pure (.returned packet) := by
+  rw [show 2 * packet.length + 4 = 1 + (1 + ((packet.length + 1) + (packet.length + 1))) by omega,
+    eval_add]
+  have first : eval (step code) 1 (.running machine) =
+      PMF.pure (.rewinding (fromCells (packet.map some ++ [none]))) := by
+    simp [eval, step, hHalt, hTape]
+  rw [first, PMF.pure_bind, eval_add]
+  have rewound : eval (step code) 1 (.rewinding (fromCells (packet.map some ++ [none]))) =
+      PMF.pure (.collecting (fromCells (packet.map some ++ [none])) []) := by
+    simp [eval, step, fromCells]
+  rw [rewound, PMF.pure_bind, eval_add]
+  have collected := collect code packet [] [] []
+  simp only [List.append_nil] at collected
+  have collected' : eval (step code) (packet.length + 1)
+      (.collecting (fromCells (packet.map some ++ [none])) []) =
+      PMF.pure (.reversing packet.reverse []) := by
+    simpa only [fromCells] using collected
+  rw [collected', PMF.pure_bind]
+  simpa using reverse code packet.reverse []
+
 variable {Input : Type u} {Output : Type v}
 
 noncomputable def body (P : Machine.Procedure Input Output)

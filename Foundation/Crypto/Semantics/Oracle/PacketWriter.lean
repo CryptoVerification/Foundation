@@ -40,30 +40,6 @@ theorem forward_erase (bits : List Bool) (machine : Machine.Configuration) :
           Machine.Tape.moveRight, ht, List.reverse_cons, List.map_append, List.append_assoc,
           Nat.mul_add, Nat.add_assoc, Nat.add_comm, Nat.add_left_comm]
 
-private def rewindTape (before cells : List (Option Bool)) (cell : Option Bool)
-    (after : List (Option Bool)) : Machine.Tape :=
-  { left := before, current := (cells ++ cell :: after).headD none,
-    right := (cells ++ cell :: after).tail }
-
-private theorem rewind (cells before after : List (Option Bool)) (cell : Option Bool)
-    (machine : Machine.Configuration) :
-    execute (List.replicate cells.length (.left .output))
-      { machine with outputTape := { left := cells.reverse ++ before, current := cell, right := after } } =
-      { machine with pc := machine.pc + cells.length, outputTape := rewindTape before cells cell after } := by
-  induction cells generalizing before machine with
-  | nil => simp [execute, rewindTape]
-  | cons first cells ih =>
-      rw [List.length_cons]
-      -- Reversing the list puts its last cell at the head. Execute the
-      -- shorter rewind first, then the remaining single left movement.
-      have hr : List.replicate (cells.length + 1) (Action.left .output) =
-          List.replicate cells.length (Action.left .output) ++ [Action.left .output] := by simp [List.replicate_add]
-      rw [hr, execute_append]
-      simp only [List.reverse_cons, List.append_assoc, List.singleton_append]
-      rw [ih (first :: before)]
-      cases cells <;> simp [execute, apply, rewindTape, Machine.Configuration.updateTape,
-        Machine.Configuration.advance, Machine.Tape.moveLeft, Nat.add_assoc]
-
 theorem writes_packet (bits : List Bool) (machine : Machine.Configuration) :
     execute (actions bits) machine =
       { machine with
@@ -72,11 +48,11 @@ theorem writes_packet (bits : List Bool) (machine : Machine.Configuration) :
           (machine.outputTape.right.drop bits.length) bits } := by
   unfold actions
   rw [execute_append, forward_erase]
-  have h := rewind (bits.map some) machine.outputTape.left
+  have h := rewind_output (bits.map some) machine.outputTape.left
     (machine.outputTape.right.drop bits.length) none
     { machine with pc := machine.pc + (2 * bits.length + 1) }
   rw [show 3 * bits.length = 2 * bits.length + bits.length by omega]
-  simpa [List.length_map, List.map_reverse, RequestExport.packetTape, rewindTape,
+  simpa [List.length_map, List.map_reverse, RequestExport.packetTape, rewindOutputTape,
     Nat.mul_add, Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using h
 
 end CryptoOracle.Interactive.PacketWriter

@@ -60,6 +60,64 @@ theorem instruction_next (action : Action) (machine : Machine.Configuration) :
   | right which => rfl
   | write which cell => cases cell <;> rfl
 
+/-- Execute one tape action in the public controller, with no private callback
+wrapper. This is the same native instruction and transition as `one` below. -/
+theorem public_one {State : Type u} (host : Code) (oracle : BitOracle State)
+    (state : State) (trace : List (List Bool × List Bool))
+    (action : Action) (machine : Machine.Configuration)
+    (hActive : machine.halted = false)
+    (hInstruction : host[machine.pc]? = some (.native (instruction action))) :
+    Reification.timedStep host oracle ⟨state, .running machine, trace⟩ =
+      PMF.pure ⟨state, .running (apply action machine), trace⟩ := by
+  simp [Reification.timedStep, Reification.terminal, Reification.perform,
+    Reification.action, transition, hActive, hInstruction, instruction_next]
+
+/-- The existing straight-line code also runs directly in a public oracle
+machine. No source halt, free tape reset, or host computation is inserted. -/
+theorem public_run {State : Type u} (oracle : BitOracle State)
+    (state : State) (trace : List (List Bool × List Bool))
+    (before after : Code) (actions : List Action) (machine : Machine.Configuration)
+    (hPc : machine.pc = before.length) (hActive : machine.halted = false) :
+    TimedExecution.eval (Reification.timedStep (before ++ code actions ++ after) oracle) actions.length
+      (⟨state, .running machine, trace⟩ : Configuration State) =
+      PMF.pure ⟨state, .running (execute actions machine), trace⟩ := by
+  induction actions generalizing before machine with
+  | nil => rfl
+  | cons action actions ih =>
+      rw [List.length_cons, TimedExecution.eval]
+      rw [public_one _ oracle state trace action machine hActive (by simp [hPc, code])]
+      rw [PMF.pure_bind]
+      have h := ih (before ++ [.native (instruction action)]) (apply action machine)
+        (by simp [apply_pc, hPc]) (by rw [apply_halted]; exact hActive)
+      simpa only [code, List.map_cons, List.append_assoc, List.cons_append, List.nil_append, execute] using h
+
+/-- Rewind previously traversed output cells while preserving arbitrary
+left prefixes, blank cells and the complete right tail. Each cell costs one
+ordinary native movement. Extracted from the existing packet writer. -/
+def rewindOutputTape (before cells : List (Option Bool)) (cell : Option Bool)
+    (after : List (Option Bool)) : Machine.Tape :=
+  { left := before, current := (cells ++ cell :: after).headD none,
+    right := (cells ++ cell :: after).tail }
+
+theorem rewind_output (cells before after : List (Option Bool)) (cell : Option Bool)
+    (machine : Machine.Configuration) :
+    execute (List.replicate cells.length (.left .output))
+      { machine with outputTape := { left := cells.reverse ++ before, current := cell, right := after } } =
+      { machine with pc := machine.pc + cells.length, outputTape := rewindOutputTape before cells cell after } := by
+  induction cells generalizing before machine with
+  | nil => simp [execute, rewindOutputTape]
+  | cons first cells ih =>
+      rw [List.length_cons]
+      -- Reversing the list puts its last cell at the head. Execute the
+      -- shorter rewind first, then the remaining single left movement.
+      have hr : List.replicate (cells.length + 1) (Action.left .output) =
+          List.replicate cells.length (Action.left .output) ++ [Action.left .output] := by simp [List.replicate_add]
+      rw [hr, execute_append]
+      simp only [List.reverse_cons, List.append_assoc, List.singleton_append]
+      rw [ih (first :: before)]
+      cases cells <;> simp [execute, apply, rewindOutputTape, Machine.Configuration.updateTape,
+        Machine.Configuration.advance, Machine.Tape.moveLeft, Nat.add_assoc]
+
 variable {State : Type u} (native : Machine.Program) (oracle : BitOracle State)
     (key : Machine.Tape) (state : State) (trace : List (List Bool × List Bool))
 

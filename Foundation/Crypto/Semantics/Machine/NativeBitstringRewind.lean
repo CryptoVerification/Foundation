@@ -77,3 +77,59 @@ theorem storage_peak (input : Input) (elapsed : Nat)
     (by rw [initial_cells]) (by omega))
 
 end Machine.NativeBitstringRewind
+
+/-! The same four instructions with a physically represented separator.
+Unlike outer-blank equivalence, this contract retains arbitrary saved cells
+beyond the separator exactly. The trace is the existing scratch rewind. -/
+namespace Machine.NativeBitstringRewind.Scratch
+open Foundation.Probability TimedExecution
+
+structure Input extends NativeBitstringRewind.Input where
+  saved : List (Option Bool)
+
+def initial (input : Input) : Configuration :=
+  { inputTape := {left := input.bits.reverse.map some ++ none :: input.saved, current := input.current, right := input.right}, outputTape := input.other }
+
+def finish (input : Input) : Configuration :=
+  { pc := 3, inputTape := ({left := input.saved, right := input.bits.map some ++ input.current :: input.right} : Tape).moveRight,
+    outputTape := input.other, halted := true }
+
+theorem trace (input : Input) :
+    RunsFor rewindBitstring (initial input) (finish input) (2 * input.bits.length + 4) :=
+  rewindScratch_runs_from input.saved input.bits input.current input.right input.other
+
+theorem run (input : Input) :
+    evalConfigWithin rewindBitstring (initial input) (2 * input.bits.length + 4) =
+      PMF.pure (finish input) :=
+  (trace input).evalConfigWithin_eq_pure_of_no_randomBit rewindBitstring_no_randomBit
+
+noncomputable def component : NativeComponent Input Configuration :=
+  NativeComponent.ofFixed rewindBitstring initial (fun _ output => output)
+    (fun input => PMF.pure (finish input)) (fun input => 2 * input.bits.length + 4)
+    (fun input => by simpa only [PMF.pure_map] using run input)
+    (by decide) (fun _ => by change 0 < 4; decide) (fun _ => rfl)
+    (by intro input output h
+        rw [PMF.mem_support_pure_iff] at h
+        subst output
+        rfl)
+
+theorem code_eq : component.procedure.code = NativeBitstringRewind.component.procedure.code := rfl
+
+/-- Saved cells contribute to storage, but do not lengthen the scan. -/
+theorem initial_cells (input : Input) :
+    (initial input).tapeCells = input.bits.length + input.saved.length +
+      input.right.length + input.other.cells + 2 := by
+  simp [initial, Configuration.tapeCells, Tape.cells]
+  omega
+
+theorem storage_peak (input : Input) (elapsed : Nat)
+    (within : elapsed ≤ 2 * input.bits.length + 4) (target : Configuration)
+    (support : target ∈ (TimedExecution.eval (stepPMF rewindBitstring) elapsed (initial input)).support) :
+    (NativeEncodedResources.completeEncoding.encode (rewindBitstring, target)).length ≤
+      NativeBitstringRewind.bitBound
+        (input.bits.length + input.saved.length + input.right.length + input.other.cells + 1) := by
+  have h := NativeEncodedResources.peak rewindBitstring _ elapsed within _ target support
+  exact h.trans (NativeEncodedResources.bound_mono _ (Nat.le_refl 0)
+    (by rw [initial_cells]) (by omega))
+
+end Machine.NativeBitstringRewind.Scratch

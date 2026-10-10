@@ -114,8 +114,8 @@ def binary {Z : CryptoLogic.SecurityObject.{u, v, w}}
 end Native
 
 /-- Exact full-time/query interface of the interactive oracle machine. -/
-noncomputable def interactiveObject {Request Response State : Type u}
-    {P : CryptoOracle.Protocol Request Response State}
+noncomputable def interactiveObject {Request Response State RightState : Type u}
+    {P : CryptoOracle.Protocol Request Response State RightState}
     (J : CryptoOracle.WholeInterface P) (time queries : Nat → Nat) :
     General.SecurityObject.{u, 0} system .interactive where
   goal := CryptoOracle.goal P
@@ -139,7 +139,7 @@ noncomputable def interactiveObject {Request Response State : Type u}
 
 namespace Interactive
 
-variable {Request Response State : Type u} {P : CryptoOracle.Protocol Request Response State}
+variable {Request Response State RightState : Type u} {P : CryptoOracle.Protocol Request Response State RightState}
   {J : CryptoOracle.WholeInterface P} {time queries : Nat → Nat}
 
 def witness (W : CryptoOracle.WholeWitness J time queries F A) :
@@ -153,8 +153,8 @@ def original (W : (interactiveObject J time queries).Witness F A) :
 @[simp] theorem original_witness (W : CryptoOracle.WholeWitness J time queries F A) :
     original (witness W) = W := by cases W; rfl
 
-noncomputable def reduction {Request' Response' State' : Type u}
-    {Q : CryptoOracle.Protocol Request' Response' State'} {JQ : CryptoOracle.WholeInterface Q}
+noncomputable def reduction {Request' Response' State' RightState' : Type u}
+    {Q : CryptoOracle.Protocol Request' Response' State' RightState'} {JQ : CryptoOracle.WholeInterface Q}
     {r : Reduction (CryptoOracle.goal P) (CryptoOracle.goal Q)} {targetTime targetQueries : Nat → Nat}
     (T : CryptoOracle.WholeReduction P Q r J JQ time queries targetTime targetQueries)
     (hLoss : r.loss.PreservesNegligible) :

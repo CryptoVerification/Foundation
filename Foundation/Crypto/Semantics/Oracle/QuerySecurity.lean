@@ -14,22 +14,23 @@ open scoped ENNReal
 universe u v w a b c d e f
 
 /-- The adversary sees responses but does not receive either hidden state.
-Each world retains its own state across all adaptive calls. -/
-structure GamePair (Request Response State : Type u) where
+Each world retains its own state across all adaptive calls. The two hidden
+state types may differ; the default retains same-state protocols. -/
+structure GamePair (Request Response State : Type u) (RightState : Type u := State) where
   left : Oracle Request Response State
-  right : Oracle Request Response State
+  right : Oracle Request Response RightState
   leftInitial : State
-  rightInitial : State
+  rightInitial : RightState
 
 /-- Public instances are separate from the experiment's oracle functions.
 They can therefore have finite encodings without encoding arbitrary PMFs. -/
-structure Protocol (Request Response State : Type u) where
+structure Protocol (Request Response State : Type u) (RightState : Type u := State) where
   Instance : Nat → Type u
-  games : ∀ n, Instance n → GamePair Request Response State
+  games : ∀ n, Instance n → GamePair Request Response State RightState
 
-variable {Request Response State : Type u}
+variable {Request Response State RightState : Type u}
 
-noncomputable def goal (P : Protocol Request Response State) : CryptoGoal.{u} where
+noncomputable def goal (P : Protocol Request Response State RightState) : CryptoGoal.{u} where
   Instance := P.Instance
   Adversary := fun _ _ => Program Request Response Bool
   advantage n I A := probabilityGap
@@ -38,13 +39,13 @@ noncomputable def goal (P : Protocol Request Response State) : CryptoGoal.{u} wh
     (eventProb ((A.run (P.games n I).right (P.games n I).rightInitial).map Outcome.result)
       (· = true))
 
-def queryClass (P : Protocol Request Response State) (q : Nat → Nat) :
+def queryClass (P : Protocol Request Response State RightState) (q : Nat → Nat) :
     AdversaryClass (goal P) where
   admissible _ A := ∀ n, (A n).BoundedQueries (q n)
 
 /-- No-query adversaries have zero distinguishing advantage in every pair
 of oracle experiments, even if they draw local random coins. -/
-theorem zeroQueries_secure (P : Protocol Request Response State)
+theorem zeroQueries_secure (P : Protocol Request Response State RightState)
     (F : InstanceFamily (goal P)) :
     BoundedByOnWithin (goal P) (queryClass P (fun _ => 0)) F (fun _ => 0) := by
   intro A hA n
@@ -55,16 +56,16 @@ theorem zeroQueries_secure (P : Protocol Request Response State)
 
 /-- Concrete `(resource bounds, query bound, advantage bound)` security.
 Both conditions concern the same adversary family. -/
-def ResourceQuerySecure {Request Response State : Type u}
-    {P : Protocol Request Response State}
+def ResourceQuerySecure {Request Response State RightState : Type u}
+    {P : Protocol Request Response State RightState}
     (J : MachineAdversaryInterface.{u, a, b} (goal P))
     (R : ResourceBounds) (q : Nat → Nat)
     (F : InstanceFamily (goal P)) (ε : Nat → ℝ≥0∞) : Prop :=
   BoundedByOnWithin (goal P)
     ((J.resourceClass R).inter (queryClass P q)) F ε
 
-theorem ResourceQuerySecure.mono {Request Response State : Type u}
-    {P : Protocol Request Response State}
+theorem ResourceQuerySecure.mono {Request Response State RightState : Type u}
+    {P : Protocol Request Response State RightState}
     {J : MachineAdversaryInterface.{u, a, b} (goal P)}
     {R S : ResourceBounds} {q q' : Nat → Nat}
     {F : InstanceFamily (goal P)} {ε δ : Nat → ℝ≥0∞}
@@ -75,8 +76,8 @@ theorem ResourceQuerySecure.mono {Request Response State : Type u}
   exact (h A ⟨hA.1.mono hRS, fun m => (hA.2 m).mono (hqq' m)⟩ n).trans (hεδ n)
 
 /-- The query part of admissibility bounds actual execution in either world. -/
-theorem admitted_trace_length_le {Request Response State : Type u}
-    {P : Protocol Request Response State}
+theorem admitted_trace_length_le {Request Response State RightState : Type u}
+    {P : Protocol Request Response State RightState}
     {J : MachineAdversaryInterface.{u, a, b} (goal P)}
     {R : ResourceBounds} {q : Nat → Nat}
     {F : InstanceFamily (goal P)}
@@ -91,8 +92,8 @@ theorem admitted_trace_length_le {Request Response State : Type u}
 /-- Uniform machine resources and query preservation are separate obligations.
 Query preservation is about the program executed by the target security goal. -/
 structure QueryReduction
-    {Request Response State : Type u} {Request' Response' State' : Type v}
-    (P : Protocol Request Response State) (Q : Protocol Request' Response' State')
+    {Request Response State RightState : Type u} {Request' Response' State' RightState' : Type v}
+    (P : Protocol Request Response State RightState) (Q : Protocol Request' Response' State' RightState')
     (r : Reduction (goal P) (goal Q))
     (JP : MachineAdversaryInterface.{u, a, b} (goal P))
     (JQ : MachineAdversaryInterface.{v, c, d} (goal Q))
@@ -104,8 +105,8 @@ structure QueryReduction
 
 namespace QueryReduction
 
-variable {Request Response State : Type u} {Request' Response' State' : Type v}
-  {P : Protocol Request Response State} {Q : Protocol Request' Response' State'}
+variable {Request Response State RightState : Type u} {Request' Response' State' RightState' : Type v}
+  {P : Protocol Request Response State RightState} {Q : Protocol Request' Response' State' RightState'}
   {r : Reduction (goal P) (goal Q)}
   {JP : MachineAdversaryInterface.{u, a, b} (goal P)}
   {JQ : MachineAdversaryInterface.{v, c, d} (goal Q)}
@@ -126,8 +127,8 @@ noncomputable def id (J : MachineAdversaryInterface.{u, a, b} (goal P))
   machine := Reduction.ResourceProgramReduction.id J R
   queries := Reduction.id_preservesAdmissibility _ _
 
-noncomputable def comp {Request'' Response'' State'' : Type w}
-    {S : Protocol Request'' Response'' State''}
+noncomputable def comp {Request'' Response'' State'' RightState'' : Type w}
+    {S : Protocol Request'' Response'' State'' RightState''}
     {s : Reduction (goal Q) (goal S)}
     {JS : MachineAdversaryInterface.{w, e, f} (goal S)}
     {final : ResourceBounds} {finalQueries : Nat → Nat}

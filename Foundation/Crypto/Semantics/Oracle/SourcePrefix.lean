@@ -80,6 +80,17 @@ noncomputable def localProcedure : Procedure (step code oracle) (Input code orac
     (fun input => TimedExecution.eval (step code oracle) input.budget input.start) Input.budget
     (fun _ => (PMF.map_id _).symm)
 
+/-- Reuse the source's actual first request/termination boundary in any
+continuing runtime with the same pre-boundary source transitions. -/
+noncomputable def liftTo {Target : Type*} (targetStep : Target → PMF Target)
+    (targetBoundary : Target → Bool) (embed : Configuration State → Target)
+    (hBoundary : ∀ frame, targetBoundary (embed frame) = boundary frame)
+    (hStep : ∀ frame, boundary frame = false →
+      targetStep (embed frame) = (step code oracle frame).map embed) :=
+  (localProcedure code oracle).liftBoundary boundary (fun input _ h => input.complete _ h)
+    (fun frame h => by simp [step, h]) (fun _ frame => frame) (fun _ _ => rfl)
+    targetStep targetBoundary embed hBoundary hStep
+
 def targetBoundary : OneUseSource.Control State → Bool
   | .source _ _ frame => boundary frame
   | _ => true
@@ -87,10 +98,8 @@ def targetBoundary : OneUseSource.Control State → Bool
 variable (native : Machine.Program) (key : Machine.Tape)
 
 noncomputable def procedure :=
-  (localProcedure code oracle).liftBoundary boundary (fun input _ h => input.complete _ h)
-    (fun frame h => by simp [step, h]) (fun _ frame => frame) (fun _ _ => rfl)
-    (OneUseSource.step native code oracle) targetBoundary (OneUseSource.Control.source false key)
-    (fun _ => rfl)
+  liftTo code oracle (OneUseSource.step native code oracle) targetBoundary
+    (OneUseSource.Control.source false key) (fun _ => rfl)
     (fun frame h => by
       cases hc : frame.control <;> simp_all [boundary, step, OneUseSource.step])
 

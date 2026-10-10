@@ -59,6 +59,55 @@ private theorem frame_cap (ES : FiniteBitEncoding State) (stateSize : State → 
 
 def bound (factor constant cap : Nat) : Nat := 200 * cap ^ 2 + (1000 + factor) * cap + constant + 500
 
+/-- Storage envelopes may be nonlinear in the linearly growing extent. -/
+def boundWith (componentBound savedBound : Nat → Nat) (cap : Nat) : Nat :=
+  200 * cap ^ 2 + 800 * cap + 400 + 2 * savedBound cap + componentBound cap
+
+theorem length_cap_with_bounds (EC : FiniteBitEncoding Component) (ES : FiniteBitEncoding State) (EK : FiniteBitEncoding Saved)
+    (componentSize : Component → Nat) (stateSize : State → Nat) (savedSize : Saved → Nat)
+    (componentBound savedBound : Nat → Nat)
+    (hComponentMono : Monotone componentBound) (hSavedMono : Monotone savedBound)
+    (hComponent : ∀ component, (EC.encode component).length ≤ componentBound (componentSize component))
+    (hState : ∀ state, (ES.encode state).length ≤ stateSize state)
+    (hSaved : ∀ retained, (EK.encode retained).length ≤ savedBound (savedSize retained))
+    (outer : PacketResponseSource.Control Component State Saved) (cap : Nat)
+    (hCap : PacketResponseGrowth.size componentSize stateSize savedSize outer ≤ cap) :
+    ((encoding EC ES EK).encode outer).length ≤ boundWith componentBound savedBound cap := by
+  cases outer with
+  | source retained frame =>
+      have hs := hSaved retained
+      have hkCap := hSavedMono (show savedSize retained ≤ cap by
+        simp only [PacketResponseGrowth.size] at hCap; omega)
+      have hf := frame_cap ES stateSize hState frame cap (by
+        simp only [PacketResponseGrowth.size] at hCap; omega)
+      simp only [encoding, fields, FiniteBitEncoding.sum_encode_inl_length, FiniteBitEncoding.prod_encode_length]
+      simp only [PacketResponseGrowth.size] at hCap
+      unfold boundWith
+      omega
+  | processing caller state trace request component =>
+      simp only [PacketResponseGrowth.size] at hCap
+      have hm := native_cap caller cap (by omega)
+      have ht := trace_cap trace cap (by omega)
+      have hs := hState state
+      have hc := hComponent component
+      have hcCap := hComponentMono (show componentSize component ≤ cap by omega)
+      simp only [encoding, fields, FiniteBitEncoding.sum_encode_inr_length, FiniteBitEncoding.sum_encode_inl_length,
+        FiniteBitEncoding.prod_encode_length, ConfigurationEncoding.bits, id_eq]
+      unfold boundWith
+      omega
+  | returning retained caller state trace loader =>
+      simp only [PacketResponseGrowth.size] at hCap
+      have hm := native_cap caller cap (by omega)
+      have ht := trace_cap trace cap (by omega)
+      have hs := hState state
+      have hk := hSaved retained
+      have hkCap := hSavedMono (show savedSize retained ≤ cap by omega)
+      have hl := NativePacketService.Resources.encoding_length loader
+      simp only [encoding, fields, FiniteBitEncoding.sum_encode_inr_length,
+        FiniteBitEncoding.prod_encode_length]
+      unfold boundWith
+      omega
+
 theorem length_cap (EC : FiniteBitEncoding Component) (ES : FiniteBitEncoding State) (EK : FiniteBitEncoding Saved)
     (componentSize : Component → Nat) (stateSize : State → Nat) (savedSize : Saved → Nat)
     (factor constant : Nat)
@@ -68,40 +117,14 @@ theorem length_cap (EC : FiniteBitEncoding Component) (ES : FiniteBitEncoding St
     (outer : PacketResponseSource.Control Component State Saved) (cap : Nat)
     (hCap : PacketResponseGrowth.size componentSize stateSize savedSize outer ≤ cap) :
     ((encoding EC ES EK).encode outer).length ≤ bound factor constant cap := by
-  cases outer with
-  | source retained frame =>
-      have hs := hSaved retained
-      have hf := frame_cap ES stateSize hState frame cap (by
-        simp only [PacketResponseGrowth.size] at hCap; omega)
-      simp only [encoding, fields, FiniteBitEncoding.sum_encode_inl_length, FiniteBitEncoding.prod_encode_length]
-      simp only [PacketResponseGrowth.size] at hCap
-      unfold bound
-      rw [Nat.add_mul]
-      omega
-  | processing caller state trace request component =>
-      simp only [PacketResponseGrowth.size] at hCap
-      have hm := native_cap caller cap (by omega)
-      have ht := trace_cap trace cap (by omega)
-      have hs := hState state
-      have hc := hComponent component
-      have hMul := Nat.mul_le_mul_left factor (show componentSize component ≤ cap by omega)
-      simp only [encoding, fields, FiniteBitEncoding.sum_encode_inr_length, FiniteBitEncoding.sum_encode_inl_length,
-        FiniteBitEncoding.prod_encode_length, ConfigurationEncoding.bits, id_eq]
-      unfold bound
-      rw [Nat.add_mul]
-      omega
-  | returning retained caller state trace loader =>
-      simp only [PacketResponseGrowth.size] at hCap
-      have hm := native_cap caller cap (by omega)
-      have ht := trace_cap trace cap (by omega)
-      have hs := hState state
-      have hk := hSaved retained
-      have hl := NativePacketService.Resources.encoding_length loader
-      simp only [encoding, fields, FiniteBitEncoding.sum_encode_inr_length,
-        FiniteBitEncoding.prod_encode_length]
-      unfold bound
-      rw [Nat.add_mul]
-      omega
+  have he := length_cap_with_bounds EC ES EK componentSize stateSize savedSize
+    (fun size => factor * size + constant) id
+    (by intro a b h; exact Nat.add_le_add_right (Nat.mul_le_mul_left factor h) constant)
+    (by intro a b h; exact h) hComponent hState hSaved outer cap hCap
+  dsimp only [boundWith, id_eq] at he
+  unfold bound
+  rw [Nat.add_mul]
+  omega
 
 def completeEncoding (EC : FiniteBitEncoding Component) (ES : FiniteBitEncoding State) (EK : FiniteBitEncoding Saved) :
     FiniteBitEncoding (Code × Machine.Program × PacketResponseSource.Control Component State Saved) :=
@@ -110,6 +133,13 @@ def completeEncoding (EC : FiniteBitEncoding Component) (ES : FiniteBitEncoding 
 def bitBound (code : Code) (native : Machine.Program) (factor constant initialSize horizon increment : Nat) : Nat :=
   2 * (StructuredCodeStorage.codeEncoding.encode code).length +
     2 * (StructuredCodeEncoding.program.encode native).length + 2 + bound factor constant (initialSize + horizon * increment)
+
+/-- Complete storage envelope with arbitrary monotone component and saved-data bounds. -/
+def bitBoundWith (code : Code) (native : Machine.Program)
+    (componentBound savedBound : Nat → Nat) (initialSize horizon increment : Nat) : Nat :=
+  2 * (StructuredCodeStorage.codeEncoding.encode code).length +
+    2 * (StructuredCodeEncoding.program.encode native).length + 2 +
+      boundWith componentBound savedBound (initialSize + horizon * increment)
 
 theorem bitBound_mono (code : Code) (native : Machine.Program) (factor constant : Nat)
     {initial nextInitial time nextTime increment nextIncrement : Nat}

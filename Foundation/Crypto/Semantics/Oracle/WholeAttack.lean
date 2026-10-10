@@ -13,12 +13,12 @@ open scoped ENNReal
 
 universe u v w
 
-variable {Request Response State : Type u}
+variable {Request Response State RightState : Type u}
 
 /-- Finite encodings of public inputs and oracle messages. Decoding and
 encoding at the oracle boundary are challenger operations. Local transfer,
 decision making and message construction are interactive machine operations. -/
-structure WholeInterface (P : Protocol Request Response State) where
+structure WholeInterface (P : Protocol Request Response State RightState) where
   instanceEncoding : ∀ n, FiniteBitEncoding (P.Instance n)
   requestEncoding : FiniteBitEncoding Request
   responseEncoding : FiniteBitEncoding Response
@@ -26,33 +26,42 @@ structure WholeInterface (P : Protocol Request Response State) where
 
 namespace WholeInterface
 
-variable {P : Protocol Request Response State}
+variable {P : Protocol Request Response State RightState}
 
 def input (J : WholeInterface P) (n : Nat) (I : P.Instance n) : List Bool :=
   encodeSecurityParameter n ++ frame ((J.instanceEncoding n).encode I)
 
-noncomputable def bitOracle (J : WholeInterface P) (oracle : Oracle Request Response State) :
-    Interactive.BitOracle State :=
+noncomputable def bitOracle {RuntimeState : Type u} (J : WholeInterface P)
+    (oracle : Oracle Request Response RuntimeState) : Interactive.BitOracle RuntimeState :=
   fun state bits =>
     (oracle state ((J.requestEncoding.decode bits).getD J.fallbackRequest)).map fun response =>
       (response.1, J.responseEncoding.encode response.2)
 
-def encodeOutcome (J : WholeInterface P) (outcome : Outcome Request Response Bool State) :
-    Interactive.Observation State :=
+def encodeOutcome {RuntimeState : Type u} (J : WholeInterface P)
+    (outcome : Outcome Request Response Bool RuntimeState) : Interactive.Observation RuntimeState :=
   ⟨some outcome.result, outcome.state,
     outcome.trace.map (fun (request, response) =>
       (J.requestEncoding.encode request, J.responseEncoding.encode response))⟩
 
-def world (P : Protocol Request Response State) (n : Nat) (I : P.Instance n) (right : Bool) :
-    Oracle Request Response State := if right then (P.games n I).right else (P.games n I).left
+/-- World selection determines the opaque state type. The two states are
+never boxed into an artificial common representation. -/
+abbrev WorldState (_P : Protocol Request Response State RightState) : Bool → Type u
+  | false => State
+  | true => RightState
 
-def initialState (P : Protocol Request Response State) (n : Nat) (I : P.Instance n)
-    (right : Bool) : State :=
-  if right then (P.games n I).rightInitial else (P.games n I).leftInitial
+def world (P : Protocol Request Response State RightState) (n : Nat) (I : P.Instance n) :
+    (right : Bool) → Oracle Request Response (WorldState P right)
+  | false => (P.games n I).left
+  | true => (P.games n I).right
+
+def initialState (P : Protocol Request Response State RightState) (n : Nat) (I : P.Instance n) :
+    (right : Bool) → WorldState P right
+  | false => (P.games n I).leftInitial
+  | true => (P.games n I).rightInitial
 
 noncomputable def execution (J : WholeInterface P) (code : Interactive.Code)
     (n : Nat) (I : P.Instance n) (right : Bool) (fuel : Nat) :
-    ProbComp (Interactive.Configuration State) :=
+    ProbComp (Interactive.Configuration (WorldState P right)) :=
   Interactive.eval code (J.bitOracle (world P n I right))
     (Interactive.Configuration.initial (initialState P n I right) (J.input n I)) fuel
 
@@ -61,7 +70,7 @@ end WholeInterface
 /-- One fixed code, outside the security-parameter quantifier, implements all
 local computation. Both worlds must complete without timeout. The observable
 law includes the entire encoded transcript, not just the output bit. -/
-structure WholeWitness {P : Protocol Request Response State} (J : WholeInterface P)
+structure WholeWitness {P : Protocol Request Response State RightState} (J : WholeInterface P)
     (time queries : Nat → Nat) (F : InstanceFamily (goal P))
     (A : AdversaryFamily (goal P) F) where
   code : Interactive.Code
@@ -69,7 +78,7 @@ structure WholeWitness {P : Protocol Request Response State} (J : WholeInterface
     Interactive.HaltsWithin code (J.bitOracle (WholeInterface.world P n (F n) right))
       (Interactive.Configuration.initial (WholeInterface.initialState P n (F n) right)
         (J.input n (F n))) (time n)
-  queries : ∀ n right (finish : Interactive.Configuration State),
+  queries : ∀ n right (finish : Interactive.Configuration (WholeInterface.WorldState P right)),
     finish ∈ (J.execution code n (F n) right (time n)).support →
       finish.reverseTrace.length ≤ queries n
   realizes : ∀ n right,
@@ -77,24 +86,24 @@ structure WholeWitness {P : Protocol Request Response State} (J : WholeInterface
       ((A n).run (WholeInterface.world P n (F n) right)
         (WholeInterface.initialState P n (F n) right)).map J.encodeOutcome
 
-def wholeClass {P : Protocol Request Response State} (J : WholeInterface P)
+def wholeClass {P : Protocol Request Response State RightState} (J : WholeInterface P)
     (time queries : Nat → Nat) : AdversaryClass (goal P) where
   admissible F A := Nonempty (WholeWitness J time queries F A)
 
-def WholeSecure {P : Protocol Request Response State} (J : WholeInterface P)
+def WholeSecure {P : Protocol Request Response State RightState} (J : WholeInterface P)
     (time queries : Nat → Nat) (F : InstanceFamily (goal P)) (ε : Nat → ℝ≥0∞) : Prop :=
   BoundedByOnWithin (goal P) (wholeClass J time queries) F ε
 
 namespace WholeWitness
 
-variable {P : Protocol Request Response State} {J : WholeInterface P}
+variable {P : Protocol Request Response State RightState} {J : WholeInterface P}
   {time queries : Nat → Nat} {F : InstanceFamily (goal P)}
   {A : AdversaryFamily (goal P) F}
 
 /-- The query bound applies to the original typed experiment as well as to
 the native implementation: realization preserves the entire transcript. -/
 theorem trace_length_le (W : WholeWitness J time queries F A) (n : Nat) (right : Bool)
-    (outcome : Outcome Request Response Bool State)
+    (outcome : Outcome Request Response Bool (WholeInterface.WorldState P right))
     (hSupport : outcome ∈ ((A n).run (WholeInterface.world P n (F n) right)
       (WholeInterface.initialState P n (F n) right)).support) :
     outcome.trace.length ≤ queries n := by
@@ -105,7 +114,7 @@ theorem trace_length_le (W : WholeWitness J time queries F A) (n : Nat) (right :
     exact ⟨outcome, hSupport, rfl⟩
   rw [← W.realizes n right, PMF.mem_support_map_iff] at hEncoded
   obtain ⟨finish, hFinish, hEq⟩ := hEncoded
-  have hLength := congrArg (fun o : Interactive.Observation State => o.trace.length) hEq
+  have hLength := congrArg (fun o : Interactive.Observation (WholeInterface.WorldState P right) => o.trace.length) hEq
   have hLength' : finish.reverseTrace.length = outcome.trace.length := by
     simpa [Interactive.observe, WholeInterface.encodeOutcome] using hLength
   rw [← hLength']
@@ -147,7 +156,7 @@ def mono (W : WholeWitness J time queries F A)
 
 end WholeWitness
 
-theorem WholeSecure.mono {P : Protocol Request Response State} {J : WholeInterface P}
+theorem WholeSecure.mono {P : Protocol Request Response State RightState} {J : WholeInterface P}
     {time time' queries queries' : Nat → Nat}
     {F : InstanceFamily (goal P)} {ε δ : Nat → ℝ≥0∞}
     (h : WholeSecure J time' queries' F ε) (ht : ∀ n, time n ≤ time' n)
@@ -158,8 +167,8 @@ theorem WholeSecure.mono {P : Protocol Request Response State} {J : WholeInterfa
 
 /-- A reduction's executable part receives only finite interactive code.
 The mapped witness must certify precisely that compiler's output. -/
-structure WholeReduction {Request' Response' State' : Type v}
-    (P : Protocol Request Response State) (Q : Protocol Request' Response' State')
+structure WholeReduction {Request' Response' State' RightState' : Type v}
+    (P : Protocol Request Response State RightState) (Q : Protocol Request' Response' State' RightState')
     (r : Reduction (goal P) (goal Q)) (JP : WholeInterface P) (JQ : WholeInterface Q)
     (sourceTime sourceQueries targetTime targetQueries : Nat → Nat) where
   compiler : Interactive.Compiler
@@ -170,8 +179,8 @@ structure WholeReduction {Request' Response' State' : Type v}
 
 namespace WholeReduction
 
-variable {Request' Response' State' : Type v}
-  {P : Protocol Request Response State} {Q : Protocol Request' Response' State'}
+variable {Request' Response' State' RightState' : Type v}
+  {P : Protocol Request Response State RightState} {Q : Protocol Request' Response' State' RightState'}
   {r : Reduction (goal P) (goal Q)} {JP : WholeInterface P} {JQ : WholeInterface Q}
   {sourceTime sourceQueries targetTime targetQueries : Nat → Nat}
 
@@ -213,8 +222,8 @@ noncomputable def id (J : WholeInterface P) (time queries : Nat → Nat) :
   mapWitness := fun _ _ W => W
   code_eq := by intro F A W; rfl
 
-noncomputable def comp {Request'' Response'' State'' : Type w}
-    {S : Protocol Request'' Response'' State''} {s : Reduction (goal Q) (goal S)}
+noncomputable def comp {Request'' Response'' State'' RightState'' : Type w}
+    {S : Protocol Request'' Response'' State'' RightState''} {s : Reduction (goal Q) (goal S)}
     {JS : WholeInterface S} {finalTime finalQueries : Nat → Nat}
     (T : WholeReduction P Q r JP JQ sourceTime sourceQueries targetTime targetQueries)
     (U : WholeReduction Q S s JQ JS targetTime targetQueries finalTime finalQueries) :

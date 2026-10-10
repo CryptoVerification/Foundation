@@ -22,11 +22,7 @@ def boundary : ReusableResponseSource.Control Component State Saved → Bool
   | _ => true
 
 noncomputable def procedure :=
-  (SourcePrefix.localProcedure code oracle).liftBoundary SourcePrefix.boundary
-    (fun input _ h => input.complete _ h)
-    (fun frame h => by simp [SourcePrefix.step, h])
-    (fun _ frame => frame) (fun _ _ => rfl)
-    (outerStep componentStep begin ready native code oracle) boundary
+  SourcePrefix.liftTo code oracle (outerStep componentStep begin ready native code oracle) boundary
     (ReusableResponseSource.Control.source retained) (fun _ => rfl)
     (by intro frame h; cases hc : frame.control <;>
       simp_all [SourcePrefix.boundary, SourcePrefix.step, outerStep, ReusableResponseSource.step])

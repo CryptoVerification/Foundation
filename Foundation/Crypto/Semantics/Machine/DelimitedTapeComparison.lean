@@ -47,6 +47,40 @@ def program : Program :=
      .write .input false, .halt,
      .write .input false, .halt]
 
+/-- Select the Boolean decision written at the delimiter. The comparison
+blocks and all control addresses are shared with the original comparator;
+only the three final decision bits differ. Malformed input still rejects. -/
+def programWithDecision (decision : Ordering → Bool) : Program :=
+  block .eq ++ block .lt ++ block .gt ++
+    [.write .input (decision .eq), .halt,
+     .write .input (decision .lt), .halt,
+     .write .input (decision .gt), .halt,
+     .write .input false, .halt]
+
+theorem program_eq_decision : program = programWithDecision (fun order => order == Ordering.lt) := rfl
+
+theorem decision_code_length (decision : Ordering → Bool) :
+    (programWithDecision decision).length = 59 := rfl
+
+/-- Every active successor remains in this finite code, for every choice
+of decision bits and even on malformed tapes. This is a control guarantee,
+not a termination assertion on malformed inputs. -/
+theorem decision_control_closed (decision : Ordering → Bool) (start target : Configuration)
+    (inside : start.pc < (programWithDecision decision).length)
+    (actual : Step (programWithDecision decision) start target)
+    (active : target.halted = false) : target.pc < (programWithDecision decision).length := by
+  have running : start.halted = false := by
+    cases h : start.halted
+    · rfl
+    · exact False.elim ((no_step_of_halted h) actual)
+  have pc : start.pc < 59 := inside
+  interval_cases h : start.pc <;>
+    simp [Step, successors, next, running, programWithDecision, block, address,
+      finishAddress, h, Instruction.next, Configuration.advance, Configuration.updateTape] at actual
+  all_goals
+    subst target
+    simp_all [programWithDecision, block] <;> split <;> decide
+
 def state (prior : Ordering) (beforeInput beforeOutput : List (Option Bool))
     (input output : List Bool) : Configuration :=
   { pc := address prior,
@@ -68,6 +102,28 @@ def done (prior : Ordering) (beforeInput : List (Option Bool))
       (some (prior == Ordering.lt)),
     outputTape := { Tape.ofBits output with left := beforeOutput }, halted := true }
 
+/-- Actual retained tapes after the selected decision is written. -/
+def doneWithDecision (decision : Ordering → Bool) (prior : Ordering)
+    (beforeInput beforeOutput : List (Option Bool)) (tail output : List Bool) : Configuration :=
+  { pc := finishAddress prior + 1,
+    inputTape := ({ Tape.ofBits (false :: tail) with left := beforeInput }).write (some (decision prior)),
+    outputTape := { Tape.ofBits output with left := beforeOutput }, halted := true }
+
+private theorem decision_pair (decision : Ordering → Bool) (prior : Ordering) (beforeInput beforeOutput : List (Option Bool))
+    (candidate modulus : Bool) (input output : List Bool) :
+    evalConfigWithin (programWithDecision decision)
+      (state prior beforeInput beforeOutput
+        (true :: candidate :: input) (modulus :: output)) 7 =
+      PMF.pure (state (BinaryComparison.update prior candidate modulus)
+        (some candidate :: some true :: beforeInput)
+        (some modulus :: beforeOutput) input output) := by
+  cases prior <;> cases candidate <;> cases modulus <;>
+    cases input <;> cases output <;>
+    simp [evalConfigWithin, stepPMF, next, programWithDecision, block, state,
+      address, finishAddress, BinaryComparison.update, Instruction.next,
+      Configuration.advance, Configuration.tape, Configuration.updateTape,
+      Tape.ofBits, Tape.moveRight, PMF.pure_bind]
+
 private theorem pair (prior : Ordering) (beforeInput beforeOutput : List (Option Bool))
     (candidate modulus : Bool) (input output : List Bool) :
     evalConfigWithin program
@@ -76,12 +132,20 @@ private theorem pair (prior : Ordering) (beforeInput beforeOutput : List (Option
       PMF.pure (state (BinaryComparison.update prior candidate modulus)
         (some candidate :: some true :: beforeInput)
         (some modulus :: beforeOutput) input output) := by
-  cases prior <;> cases candidate <;> cases modulus <;>
-    cases input <;> cases output <;>
-    simp [evalConfigWithin, stepPMF, next, program, block, state,
-      address, finishAddress, BinaryComparison.update, Instruction.next,
+  exact decision_pair (fun order => order == Ordering.lt) prior beforeInput beforeOutput
+    candidate modulus input output
+
+private theorem decision_end_field (decision : Ordering → Bool) (prior : Ordering)
+    (beforeInput beforeOutput : List (Option Bool))
+    (tail output : List Bool) :
+    evalConfigWithin (programWithDecision decision)
+      (state prior beforeInput beforeOutput (false :: tail) output) 3 =
+      PMF.pure (doneWithDecision decision prior beforeInput beforeOutput tail output) := by
+  cases prior <;> cases tail <;> cases output <;>
+    simp [evalConfigWithin, stepPMF, next, programWithDecision, block, state,
+      address, finishAddress, doneWithDecision, Instruction.next,
       Configuration.advance, Configuration.tape, Configuration.updateTape,
-      Tape.ofBits, Tape.moveRight, PMF.pure_bind]
+      Tape.ofBits, Tape.write, PMF.pure_bind]
 
 private theorem end_field (prior : Ordering)
     (beforeInput beforeOutput : List (Option Bool))
@@ -89,11 +153,7 @@ private theorem end_field (prior : Ordering)
     evalConfigWithin program
       (state prior beforeInput beforeOutput (false :: tail) output) 3 =
       PMF.pure (done prior beforeInput beforeOutput tail output) := by
-  cases prior <;> cases tail <;> cases output <;>
-    simp [evalConfigWithin, stepPMF, next, program, block, state,
-      address, finishAddress, done, Instruction.next,
-      Configuration.advance, Configuration.tape, Configuration.updateTape,
-      Tape.ofBits, Tape.write, PMF.pure_bind]
+  exact decision_end_field (fun order => order == Ordering.lt) prior beforeInput beforeOutput tail output
 
 /-- A matching-width pair leaves the same numerical comparison as the
 existing interleaved-input comparator. No mathematical comparison is a
@@ -173,6 +233,66 @@ theorem delimit_eq_marked (bits : List Bool) :
   | nil => rfl
   | cons bit rest ih => simp [FiniteBitEncoding.delimit, marked, ih]
 
+/-- Exact physical layout immediately after writing the decision, either
+before or after the final halt. This shared induction supplies both the
+semantic execution law and the adjacent pre-halt law. -/
+theorem eval_decision_stage_layout (decision : Ordering → Bool) (halt : Bool) (prior : Ordering)
+    (beforeInput beforeOutput : List (Option Bool))
+    (candidate modulus tail suffix : List Bool)
+    (hWidth : candidate.length = modulus.length) :
+    evalConfigWithin (programWithDecision decision)
+      (state prior beforeInput beforeOutput
+        (FiniteBitEncoding.delimit candidate ++ tail) (modulus ++ suffix))
+      (7 * candidate.length + 2 + halt.toNat) =
+      PMF.pure ({ doneWithDecision decision (BinaryComparison.compare prior (candidate.zip modulus))
+        ((marked candidate).reverse.map some ++ beforeInput)
+        (modulus.reverse.map some ++ beforeOutput) tail suffix with halted := halt }) := by
+  induction candidate generalizing prior beforeInput beforeOutput modulus with
+  | nil =>
+      cases modulus with
+      | nil =>
+          cases halt <;> cases prior <;> cases tail <;> cases suffix <;>
+            simp [evalConfigWithin, stepPMF, next, programWithDecision, block, state,
+              marked, BinaryComparison.compare, FiniteBitEncoding.delimit,
+              address, finishAddress, doneWithDecision, Instruction.next,
+              Configuration.advance, Configuration.tape, Configuration.updateTape,
+              Tape.ofBits, Tape.write, PMF.pure_bind]
+      | cons bit rest => simp at hWidth
+  | cons bit rest ih =>
+      cases modulus with
+      | nil => simp at hWidth
+      | cons modulusBit modulusRest =>
+          have hRest : rest.length = modulusRest.length := by
+            simpa using hWidth
+          have hBudget : 7 * (bit :: rest).length + 2 + halt.toNat =
+              7 + (7 * rest.length + 2 + halt.toNat) := by simp; omega
+          rw [hBudget, evalConfigWithin_add]
+          simp only [FiniteBitEncoding.delimit, List.cons_append,
+            decision_pair, PMF.pure_bind]
+          simpa [BinaryComparison.compare, marked, List.reverse_append,
+            List.map_append, List.append_assoc] using
+            ih (BinaryComparison.update prior bit modulusBit)
+              (some bit :: some true :: beforeInput)
+              (some modulusBit :: beforeOutput) modulusRest hRest
+
+/-- The exact physical tapes after a successful equal-width comparison.
+The modulus and all following output cells are retained; the input
+delimiter contains the decision bit. -/
+theorem eval_decision_layout (decision : Ordering → Bool) (prior : Ordering)
+    (beforeInput beforeOutput : List (Option Bool))
+    (candidate modulus tail suffix : List Bool)
+    (hWidth : candidate.length = modulus.length) :
+    evalConfigWithin (programWithDecision decision)
+      (state prior beforeInput beforeOutput
+        (FiniteBitEncoding.delimit candidate ++ tail) (modulus ++ suffix))
+      (7 * candidate.length + 3) =
+      PMF.pure (doneWithDecision decision (BinaryComparison.compare prior (candidate.zip modulus))
+        ((marked candidate).reverse.map some ++ beforeInput)
+        (modulus.reverse.map some ++ beforeOutput) tail suffix) := by
+  simpa only [Bool.toNat_true, Nat.add_assoc, Nat.reduceAdd, doneWithDecision] using
+    eval_decision_stage_layout decision true prior beforeInput beforeOutput
+      candidate modulus tail suffix hWidth
+
 /-- The exact physical tapes after a successful equal-width comparison.
 The modulus and all following output cells are retained; the input
 delimiter contains the decision bit. -/
@@ -187,28 +307,8 @@ theorem eval_equal_width_layout (prior : Ordering)
       PMF.pure (done (BinaryComparison.compare prior (candidate.zip modulus))
         ((marked candidate).reverse.map some ++ beforeInput)
         (modulus.reverse.map some ++ beforeOutput) tail suffix) := by
-  induction candidate generalizing prior beforeInput beforeOutput modulus with
-  | nil =>
-      cases modulus with
-      | nil => simpa [marked, BinaryComparison.compare, FiniteBitEncoding.delimit]
-          using end_field prior beforeInput beforeOutput tail suffix
-      | cons bit rest => simp at hWidth
-  | cons bit rest ih =>
-      cases modulus with
-      | nil => simp at hWidth
-      | cons modulusBit modulusRest =>
-          have hRest : rest.length = modulusRest.length := by
-            simpa using hWidth
-          have hBudget : 7 * (bit :: rest).length + 3 =
-              7 + (7 * rest.length + 3) := by simp; omega
-          rw [hBudget, evalConfigWithin_add]
-          simp only [FiniteBitEncoding.delimit, List.cons_append,
-            pair, PMF.pure_bind]
-          simpa [BinaryComparison.compare, marked, List.reverse_append,
-            List.map_append, List.append_assoc] using
-            ih (BinaryComparison.update prior bit modulusBit)
-              (some bit :: some true :: beforeInput)
-              (some modulusBit :: beforeOutput) modulusRest hRest
+  exact eval_decision_layout (fun order => order == Ordering.lt) prior beforeInput beforeOutput
+    candidate modulus tail suffix hWidth
 
 private theorem pair_any (prior : Ordering) (input output : Tape)
     (candidate modulus : Bool)

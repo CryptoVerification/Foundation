@@ -1,4 +1,5 @@
 import Foundation.Constructions.Symmetric.PRFCounter
+import Foundation.Crypto.Semantics.Probability.FiniteFunction
 
 /-! Perfect ideal privacy from fresh counter inputs to a single random
 function table. Resampling is an analysis identity, never a machine operation. -/
@@ -8,62 +9,13 @@ open scoped ENNReal
 set_option backward.isDefEq.respectTransparency false
 set_option maxHeartbeats 1000000
 
-private theorem uniform_equiv {α : Type} [Fintype α] [Nonempty α] (e : α ≃ α) :
-    (uniform α).map e = uniform α := by
-  classical
-  ext x
-  rw [PMF.map_apply]
-  have unique (a : α) : x = e a ↔ a = e.symm x := by
-    constructor
-    · intro h
-      rw [h, e.symm_apply_apply]
-    · intro h
-      rw [h, e.apply_symm_apply]
-  simp_rw [unique]
-  simp [uniform]
-
-private def maskEquiv {capacity length : Nat} (index : Fin capacity) (mask : Bits length) :
-    (Fin capacity → Bits length) ≃ (Fin capacity → Bits length) where
-  toFun table := Function.update table index (Bits.xor mask (table index))
-  invFun table := Function.update table index (Bits.xor mask (table index))
-  left_inv table := by
-    funext j
-    by_cases h : j = index
-    · subst j; simp
-    · simp [Function.update_of_ne h]
-  right_inv table := by
-    funext j
-    by_cases h : j = index
-    · subst j; simp
-    · simp [Function.update_of_ne h]
-
 /-- A single random-function entry can be independently refreshed without
 changing the uniform table distribution. -/
 theorem uniform_resample {capacity length : Nat} (index : Fin capacity) :
     (uniform (Fin capacity → Bits length)).bind (fun table =>
       (uniform (Bits length)).map (fun pad => Function.update table index pad)) =
-    uniform (Fin capacity → Bits length) := by
-  classical
-  have htable (table : Fin capacity → Bits length) :
-      (uniform (Bits length)).map (fun pad => Function.update table index pad) =
-      (uniform (Bits length)).map (fun mask => maskEquiv index mask table) := by
-    conv_lhs =>
-      arg 2
-      rw [← Bits.uniform_xor (table index)]
-    rw [PMF.map_comp]
-    congr 1
-    funext mask
-    simp only [Function.comp_def, maskEquiv, Equiv.coe_fn_mk, Bits.xor_comm]
-  simp_rw [htable]
-  change ((uniform (Fin capacity → Bits length)).bind fun table =>
-    (uniform (Bits length)).bind fun mask => PMF.pure (maskEquiv index mask table)) = _
-  rw [PMF.bind_comm]
-  have hmask (mask : Bits length) :
-      (uniform (Fin capacity → Bits length)).bind
-        (fun table => PMF.pure (maskEquiv index mask table)) =
-      uniform (Fin capacity → Bits length) := uniform_equiv (maskEquiv index mask)
-  simp_rw [hmask]
-  simp
+    uniform (Fin capacity → Bits length) :=
+  uniform_function_resample index
 
 /-- Once the counter advances, old entries cannot affect the output law. -/
 theorem run_future_congr {capacity length : Nat} (left right : Fin capacity → Bits length)
@@ -99,14 +51,8 @@ theorem uniform_fresh {capacity length : Nat} {Result : Type}
     (h : ∀ table pad, f pad (Function.update table index pad) = f pad table) :
     (uniform (Fin capacity → Bits length)).bind (fun table => f (table index) table) =
     (uniform (Bits length)).bind (fun pad =>
-      (uniform (Fin capacity → Bits length)).bind (f pad)) := by
-  classical
-  conv_lhs =>
-    arg 1
-    rw [← uniform_resample index]
-  simp only [PMF.bind_bind, PMF.bind_map, Function.comp_def, Function.update_self]
-  simp_rw [h]
-  exact PMF.bind_comm _ _ _
+      (uniform (Fin capacity → Bits length)).bind (f pad)) :=
+  uniform_function_fresh index f h
 
 noncomputable def freshOracle (capacity length : Nat) :
     Oracle (Request length) (Response length) Nat :=

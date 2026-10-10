@@ -1,5 +1,89 @@
 import Foundation.Basic
 import Foundation.Crypto.Semantics.Probability.Comp
+import Foundation.Crypto.Semantics.Probability.FiniteFunction
+import Foundation.Crypto.Semantics.Oracle.RandomOracle
+import Foundation.Crypto.Semantics.Oracle.RandomOracleFinite
+import Foundation.Crypto.Semantics.Oracle.RandomOracleContext
+import Foundation.Crypto.Semantics.Oracle.RandomOracleValues
+import Foundation.Crypto.Semantics.Oracle.RandomOracleGuessing
+import Foundation.Crypto.Semantics.Oracle.RandomOracleCollision
+import Foundation.Crypto.Semantics.Oracle.RandomOracleFiniteCollision
+import Foundation.Constructions.Hash.PrefixFree
+import Foundation.Constructions.Hash.OracleWorlds
+import Foundation.Constructions.Hash.Indifferentiability
+import Foundation.Constructions.Hash.SimulatorInvariant
+import Foundation.Constructions.Hash.TrackedReal
+import Foundation.Constructions.Hash.IndexedReal
+import Foundation.Constructions.Hash.LatentIdeal
+import Foundation.Constructions.Hash.LatentGuessing
+import Foundation.Constructions.Hash.LatentResources
+import Foundation.Constructions.Hash.LatentGraph
+import Foundation.Constructions.Hash.FactoredReal
+import Foundation.Constructions.Hash.RealCoordinates
+import Foundation.Constructions.Hash.CoordinateRealWorld
+import Foundation.Constructions.Hash.LatentRelation
+import Foundation.Constructions.Hash.LatentPublication
+import Foundation.Constructions.Hash.LatentLiterals
+import Foundation.Constructions.Hash.LatentRecognition
+import Foundation.Constructions.Hash.LatentDataLoop
+import Foundation.Constructions.Hash.LatentPublicTerminal
+import Foundation.Constructions.Hash.CoordinateTerminal
+import Foundation.Constructions.Hash.CoordinateAllocation
+import Foundation.Constructions.Hash.LatentPairedStep
+import Foundation.Constructions.Hash.LatentStructure
+import Foundation.Constructions.Hash.CoordinateInvariant
+import Foundation.Constructions.Hash.CoordinateAgreement
+import Foundation.Constructions.Hash.QueryIndifferentiability
+import Foundation.Constructions.Hash.WholeExecution
+import Foundation.Constructions.Hash.NativeIdealResources
+import Foundation.Constructions.Hash.NativeProcedure
+import Foundation.Constructions.Hash.NativeRuntimeProcedure
+import Foundation.Constructions.Hash.NativeRuntimePacketService
+import Foundation.Constructions.Hash.NativeRuntimeLoadedInput
+import Foundation.Constructions.Hash.NativeRuntimeLaunchedExecution
+import Foundation.Constructions.Hash.NativeRuntimeTransfer
+import Foundation.Constructions.Hash.NativeRuntimeEquivalentInput
+import Foundation.Constructions.Hash.NativeRuntimeLinkedHash
+import Foundation.Constructions.Hash.NativeRuntimeRawExecution
+import Foundation.Constructions.Hash.NativeRuntimeCellExport
+import Foundation.Constructions.Hash.NativeRuntimeRawExport
+import Foundation.Constructions.Hash.NativeRuntimeRawExportTime
+import Foundation.Constructions.Hash.NativeRuntimeRawProcedure
+import Foundation.Constructions.Hash.NativeRuntimeRawResources
+import Foundation.Constructions.Hash.NativeRuntimeRawPacket
+import Foundation.Constructions.Hash.NativeRuntimeRawService
+import Foundation.Constructions.Hash.NativeRuntimeRawServiceResources
+import Foundation.Constructions.Hash.NativePublicWorld
+import Foundation.Constructions.Hash.NativePublicWorldService
+import Foundation.Constructions.Hash.NativePublicWorldResources
+import Foundation.Constructions.Hash.NativePublicWorldPacket
+import Foundation.Constructions.Hash.NativePublicWorldRound
+import Foundation.Crypto.Semantics.Oracle.SourcePrefixStraightLine
+import Foundation.Crypto.Semantics.Oracle.PacketResponseHalt
+import Foundation.Constructions.Hash.NativeAdaptivePublicCaller
+import Foundation.Constructions.Hash.NativeAdaptivePublicExecution
+import Foundation.Constructions.Hash.NativeAdaptivePublicHalt
+import Foundation.Constructions.Hash.NativeAdaptivePublicResources
+import Foundation.Constructions.Hash.NativeSimulatorRandom
+import Foundation.Constructions.Hash.NativeSimulatorKeyComparison
+import Foundation.Constructions.Hash.NativeSimulatorLookupCode
+import Foundation.Constructions.Hash.NativeSimulatorLookupStages
+import Foundation.Constructions.Hash.NativeSimulatorLookup
+import Foundation.Constructions.Hash.NativeSimulatorLookupResources
+import Foundation.Constructions.Hash.NativeSimulatorRememberResources
+import Foundation.Constructions.Hash.NativeSimulatorFreshAfterLookup
+import Foundation.Crypto.Semantics.Oracle.NativeCodeOracleIndependence
+import Foundation.Constructions.Hash.FiniteHashWorld
+import Foundation.Constructions.Hash.CoupledWorlds
+import Foundation.Crypto.Semantics.Oracle.FiniteRequests
+import Foundation.Crypto.Semantics.Oracle.FiniteContextRequests
+import Foundation.Crypto.Semantics.Oracle.FiniteExtension
+import Foundation.Crypto.Semantics.Oracle.CoupledRun
+import Foundation.Constructions.Hash.SimulatorOrder
+import Foundation.Crypto.Semantics.Probability.Coupling
+import Foundation.Constructions.Symmetric.SecretPrefixMAC
+import Foundation.Constructions.Symmetric.SecretPrefixMACKeyHit
+import Foundation.Constructions.Symmetric.SecretPrefixMACReduction
 import Foundation.Examples.Probability
 import Foundation.Crypto.Semantics.Machine.Basic
 import Foundation.Crypto.Semantics.Machine.Compiler
@@ -442,6 +526,7 @@ import Foundation.Examples.ResourceSecurity
 import Foundation.Examples.MachineResourceReduction
 import Foundation.Examples.OracleQueries
 import Foundation.Examples.WholeOracleAttack
+import Foundation.Examples.HeterogeneousWholeOracleAttack
 import Foundation.Examples.GuardedCompilerExecution
 import Foundation.Crypto.Semantics.Machine.CompactProgram
 import Foundation.Crypto.Semantics.Machine.ReifyCompactProgram
@@ -1161,3 +1246,26 @@ import Foundation.Crypto.Logic.General.FirstArrivalObservedBackend
 import Foundation.Crypto.Logic.General.FreshMaskAdaptiveFirstArrivalBackend
 
 import Foundation.Examples.FreshMaskAdaptiveRegisteredSecurity
+
+import Foundation.Constructions.Symmetric.SecretPrefixMACConstructedSecurity
+import Foundation.Constructions.Symmetric.SecretPrefixMACPublicSecurity
+
+import Foundation.Constructions.Hash.NativeSimulatorRememberResponse
+
+import Foundation.Constructions.Hash.NativeSimulatorFreshResponse
+
+import Foundation.Constructions.Hash.NativeSimulatorFreshAfterLookupResponse
+import Foundation.Constructions.Hash.NativeSimulatorLookupFreshResponse
+import Foundation.Constructions.Hash.NativeSimulatorLookupHitResponse
+import Foundation.Constructions.Hash.NativeSimulatorLookupDispatch
+import Foundation.Constructions.Hash.NativeSimulatorLookupDispatchPacket
+import Foundation.Constructions.Hash.NativeSimulatorLookupRestore
+import Foundation.Constructions.Hash.NativeSimulatorLookupRestoredHit
+
+import Foundation.Constructions.Hash.NativeSimulatorLookupContextRestore
+
+import Foundation.Crypto.Semantics.Oracle.NativeCodeTapeEquivalence
+
+import Foundation.Constructions.Hash.NativeSimulatorQueryLoading
+
+import Foundation.Constructions.Hash.NativeSimulatorQueryLoadingResources
