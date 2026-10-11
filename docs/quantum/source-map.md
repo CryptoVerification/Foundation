@@ -927,3 +927,50 @@ Bouman–Fehr §6 本文p.21の、訂正の公開メッセージと検査ビッ�
 | `QKD/PairwiseReconciledRawExamples.public_record`, `bob_from_public`, `recovered_physical`, `restored_public_output` | 非零の末尾を持つ公開記録からの7ビットの実際の復号。具体的なコヒーレントな4信号の攻撃の物理的な生鍵の直接処理。距離上界 `1/2` は有用な鍵長の例ではない。 |
 
 元の全位置の生鍵の公開情報から選別・検査集合を定める処理との同定、全構成の平均、元の実状態からの標本誤差の再合成、復号後の両者の鍵と受理・中止を含む全出力への接続は後続範囲です。復号なしの全出力の定理を、復号後の全出力の定理として扱いません。
+
+## 指数集中・閉じた形の重み付き誤差
+
+| 原典・追加数学の参照 | Lean 宣言 | 証明した範囲と残る義務 |
+| --- | --- | --- |
+| 二択の種に対する一様積分布上の母函数分解（追加数学） | `QKD/Hoeffding.mgf_factor`, `mgf_weighted_le` | `∑_s exp(r·∑_i a_i(s_i)) = ∏_i (exp(r·a_i 0) + exp(r·a_i 1))` と `∑_s exp(r·weightDifference q s) ≤ 2ⁿ exp(r²n/2)`。誤りパターンの independence は仮定しない。 |
+| 同 | `QKD/Hoeffding.exp_pair_le`, `sum_cons`, `sum_cons_inner`, `sum_fin_succ`, `sum_fin_two`, `prod_fin_split` | 解析中核 `exp a + exp(-a) ≤ 2 exp(a²/2)` と座標分割。mathlib の `Real.cosh_le_exp_half_sq` と `Complex.two_cosh` を利用。 |
+| Bouman–Fehr §6 本文p.21・付録B.5 の第一成分 | `QKD/PairwiseDeviationSplit.classical_decomposition_bound_exp` | 選択子成分を `2 exp(-t²/(2n))` で評価。非復元抽版 Hoeffding は未達成。 |
+| 選別集合平均の閉じた形（追加数学） | `QKD/WeightedClosed.weightedCoefficientClosed`, `weightedPrivacyErrorClosed`, `countWeightedError_le_closed`, `weightedPrivacyError_le_closed` | 有限和・最大値・列挙のない上界。最短の許容できる選別数で誤り訂正因子、最大の選別数で支持半径を評価。 |
+| 全誤差式の閉じた形（追加数学） | `QKD/WeightedClosed.real_secure_closed` | 衝突項・標本項・秘密増幅項がすべて閉じた式。標本項は従来の多項式 `gapBound` のまま。 |
+| 数値例（追加数学） | `QKD/WeightedClosedExamples.thousand_privacy_closed`, `attacked_full_secure_closed`, `four_signal_privacy_closed` | 1000信号・20ビット出力鍵で秘密増幅誤差 `2^-51` 以下。4信号の攻撃での正確な評価。 |
+
+非零の鍵長で小さい総誤差、通信の認証と誤差の合成、第5章全体、一般の無限次元のトレース級状態と量子操作は後続範囲です。
+
+## 公開通信の認証の素子
+
+| 原典・追加数学の参照 | Lean 宣言 | 証明した範囲と残る義務 |
+| --- | --- | --- |
+| BB84 の前提である改変されない認証済み公開通信（追加数学） | `QKD/MessageAuthentication.Key`, `keyPMF`, `tag`, `verify`, `keyBits` | 線形ハッシュの鍵・符号・検証の素子。行列鍵のビット数は `メッセージ長 × 符号長`。完全な Wegman–Carter 方式は未実装。 |
+| 同 | `QKD/MessageAuthentication.forge_bound`, `forge_accepts` | 固定した相異なるメッセージの衝突確率は正確に `2^(-符号長)`。固定した共通符号での同時受理の上界。観測後の適応的偽造への条件付き上界ではない。 |
+| 同 | `QKD/MessageAuthentication.tag_uniform_of_ne_zero` | 各固定非零メッセージの符号の周辺分布は一様。零メッセージは常に零符号。 |
+| 同 | `QKD/MessageAuthentication.tag_add`, `reuse_forges`, `reuse_forge_prob` | 符号の加法性と加算したメッセージの確率1の受理。加算後のメッセージの新規性は定理の前提で保証しない。 |
+| 補助 | `QKD/MessageAuthentication.eventProb_le`, `eventProb_of_all`, `verify_tags_of_eq` | 事象の包含による確率上界、全事象の確率1、同じ値で受理された二つの符号の一致。 |
+
+適応的な改変への認証安全性、公開記録・検査値・誤り訂正の通信との合成、認証誤差と鍵消費の合成、非零の鍵長で小さい総誤差、第5章全体、一般の無限次元のトレース級状態と量子操作は後続範囲です。
+
+## 母関数による支持の上界と選別集合平均の縮約
+
+| 原典・追加数学の参照 | Lean 宣言 | 証明した範囲と残る義務 |
+| --- | --- | --- |
+| Bouman–Fehr §6 本文p.21の秘密増幅と公開情報の費用、付録B.5 本文pp.25–26の位相の重みの制限 | `QKD/BinaryWeightedVolume.weight_sum`, `volume_weighted`, `volume_bound`, `volume_quarter` | 二値列の母函数 `(1+t)^n` による半径以下の個数の上界。半径が信号数を超える場合も扱う。二項係数の和の閉じた式や二値エントロピー関数は使わない。 |
+| 同じ箇所の作用素の上界の係数 | `QKD/PairwiseWeightedPrivacy.weightedCoefficient`, `weightedPrivacyError`, `coefficientVolume_le_weighted`, `privacyError_le_weighted` | 支持の正確な二項係数和を有理指数で上から評価した、公開費用込みの係数。誤り訂正のパリティ、公開する端数、検査値の候補数を含む。 |
+| 同じ箇所の全構成の平均 | `QKD/FullReconciledWeighted.conditionalWeightedError`, `globalWeightedError`, `conditional_privacy_le_weighted`, `global_privacy_le_weighted`, `real_secure_weighted` | 各枝と全選別集合の実際の分布による平均の上界。元の実状態の全出力への標本誤差の2倍との合成。 |
+| 選別集合の一様分布の分解（追加数学） | `QKD/SiftingCountAverage.uniform_sifting_count`, `countWeightedError`, `globalWeightedError_count`, `real_secure_count` | 全部分集合の平均を大きさだけの二項分布の1次元の有限和に縮約する等式。有限和は残り、部分集合や選択列は列挙しない。 |
+| 数値例（追加数学） | `QKD/PairwiseWeightedExamples.thousand_privacy_bound`, `actual_thousand_privacy`, `four_sifting_two`, `attacked_full_secure` | 1000信号・100検査・20ビット出力・許容誤り0での秘密増幅誤差 `2^-51` 以下。4信号の一致個数の分布 `3/8`。2信号の共同攻撃への全出力の適用。 |
+
+1次元の有限和を閉じた式で評価し、標本誤差と合わせて非零の鍵長と小さい総誤差を示すこと、原典の指数型上界、通信の認証、第5章全体、一般の無限次元のトレース級状態と量子操作は後続範囲です。
+
+## Bernoulli 選択による指数集中の基礎
+
+| 原典・追加数学の参照 | Lean 宣言 | 証明した範囲と残る義務 |
+| --- | --- | --- |
+| 指数集中の補助解析（追加数学） | `QKD/SamplingBernoulli.hoeffding_lemma` | `p ∈ [0,1]` の中心化 Bernoulli 母関数を `exp(t²/8)` 以下に評価。すべての実数 `t` に適用。 |
+| 独立な部分集合選択（追加数学） | `QKD/SamplingBernoulli.bernoulliWeight`, `bernoulliWeight_nonneg`, `bernoulliWeight_factors`, `bernoulliWeight_sum` | 部分集合重みの定義・非負性・局所積分解・総和1。 |
+| 同 | `QKD/SamplingBernoulli.bernoulliWeight_mgf` | 任意の固定誤り集合に対する母関数の正確な積分解。誤り集合自体の独立性は仮定しない。 |
+
+Chernoff の裾評価、固定サイズへの条件付けとその確率下界、`Sampling.fullSample` への接続は後続範囲です。非復元抽出の指数型上界および小さい総誤差の達成は未完了です。

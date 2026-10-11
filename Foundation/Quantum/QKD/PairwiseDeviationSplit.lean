@@ -1,4 +1,5 @@
 import Foundation.Quantum.QKD.PairwiseWeightDeviation
+import Foundation.Quantum.QKD.Hoeffding
 
 /-! Integer-scaled decomposition of the actual fixed-size pairwise sampling
 event. The selector marginal is the original uniform seed. Only the first
@@ -87,6 +88,34 @@ theorem classical_decomposition_bound {n : Nat} (k gap : Nat) (hk : k ≤ n)
       positivity
   rw [selector_event k hk (fun s => t < |weightDifference q s|)] at hunion
   linarith [weightDifference_tail q t ht]
+
+/-- The exponential (Hoeffding-type) version of the same decomposition: the
+selector component is bounded by `2 * exp (-(t^2)/(2*n))` instead of the
+polynomial `n / t^2`. Only the first component is bounded analytically;
+sampling without replacement remains an explicit event. -/
+theorem classical_decomposition_bound_exp {n : Nat} (k gap : Nat) (hk : k ≤ n)
+    (q : Pattern n) (u t : ℝ) (ht : 0 < t) (hn : 0 < n) (hgap : u + k*t ≤ gap) :
+    (eventProb (distribution n k hk) (bad k gap q)).toReal ≤
+      2 * Real.exp (-(t^2)/(2*n)) +
+        (eventProb (distribution n k hk) (fun c => u < |sampleDifference k q c|)).toReal := by
+  classical
+  have hunion : (eventProb (distribution n k hk) (bad k gap q)).toReal ≤
+      (eventProb (distribution n k hk) (fun c => t < |weightDifference q c.1|)).toReal +
+      (eventProb (distribution n k hk) (fun c => u < |sampleDifference k q c|)).toReal := by
+    rw [eventProb_toReal, eventProb_toReal, eventProb_toReal, ← Finset.sum_add_distrib]
+    apply Finset.sum_le_sum
+    intro c _
+    by_cases hb : bad k gap q c
+    · have hs := bad_split k gap q c u t hgap hb
+      rcases hs with hs | hs
+      · simp only [hb, hs, ite_true]
+        split_ifs <;> linarith [show 0 ≤ (distribution n k hk c).toReal from ENNReal.toReal_nonneg]
+      · simp only [hb, hs, ite_true]
+        split_ifs <;> linarith [show 0 ≤ (distribution n k hk c).toReal from ENNReal.toReal_nonneg]
+    · simp only [hb, ite_false]
+      positivity
+  rw [selector_event k hk (fun s => t < |weightDifference q s|)] at hunion
+  linarith [Hoeffding.weightDifference_tail_exp q t ht hn]
 
 end
 end Foundation.Quantum.QKD.PairwiseSampling

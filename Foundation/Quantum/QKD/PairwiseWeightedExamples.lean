@@ -6,9 +6,9 @@ noncomputable section
 open PairwiseReconciledVerification FullReconciledSecurity
 set_option backward.isDefEq.respectTransparency false
 
+set_option exponentiation.threshold 2048 in
 /-- Twenty output bits; the complete public disclosure charge is included.
 This numerical example concerns PA only, not the total sampling error. -/
-set_option exponentiation.threshold 2048 in
 theorem thousand_privacy_bound :
     weightedPrivacyError 1000 20 20 100 1000 900 0 (1/16) ≤ (1/2:ℝ)^51 := by
   apply weightedPrivacyError_le

@@ -1,3 +1,7 @@
+import Foundation.Quantum.QKD.SamplingBernoulli
+import Foundation.Quantum.QKD.MessageAuthentication
+import Foundation.Quantum.QKD.WeightedClosedExamples
+import Foundation.Quantum.QKD.PairwiseWeightedExamples
 import Foundation.Quantum.QKD.PairwiseVolumeExamples
 import Foundation.Quantum.QKD.PairwiseAnalyticExamples
 import Foundation.Quantum.QKD.PairwiseDeviationExamples
@@ -2359,3 +2363,81 @@ that the BB84, internal-locale, or infinite-channel objectives are complete. -/
 #print axioms Foundation.Quantum.QKD.PairwiseVolumeExamples.twelve_radius_four
 #print axioms Foundation.Quantum.QKD.PairwiseVolumeExamples.noisy_accepted_support
 #print axioms Foundation.Quantum.QKD.PairwiseVolumeExamples.attacked_full_secure
+
+#print axioms Foundation.Quantum.QKD.BinaryWeightVolume.weight_sum
+#print axioms Foundation.Quantum.QKD.BinaryWeightVolume.volume_weighted
+#print axioms Foundation.Quantum.QKD.BinaryWeightVolume.volume_bound
+#print axioms Foundation.Quantum.QKD.BinaryWeightVolume.volume_quarter
+#print axioms Foundation.Quantum.QKD.PairwiseReconciledVerification.weightedCoefficient
+#print axioms Foundation.Quantum.QKD.PairwiseReconciledVerification.weightedPrivacyError
+#print axioms Foundation.Quantum.QKD.PairwiseReconciledVerification.weightedPrivacyError_le
+#print axioms Foundation.Quantum.QKD.PairwiseReconciledVerification.remainder_count
+#print axioms Foundation.Quantum.QKD.PairwiseReconciledVerification.complement_card
+#print axioms Foundation.Quantum.QKD.PairwiseReconciledVerification.coefficientVolume_le_weighted
+#print axioms Foundation.Quantum.QKD.PairwiseReconciledVerification.privacyError_le_weighted
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.configuration_zero_of_card_ne
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.conditionalWeightedError
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.globalWeightedError
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.conditional_privacy_le_weighted
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.global_privacy_le_weighted
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.real_secure_weighted
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.uniform_sifting_count
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.countWeightedError
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.globalWeightedError_count
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.real_secure_count
+#print axioms Foundation.Quantum.QKD.PairwiseWeightedExamples.thousand_privacy_bound
+#print axioms Foundation.Quantum.QKD.PairwiseWeightedExamples.actual_thousand_privacy
+#print axioms Foundation.Quantum.QKD.PairwiseWeightedExamples.four_sifting_two
+#print axioms Foundation.Quantum.QKD.PairwiseWeightedExamples.attacked_full_secure
+
+#print axioms Foundation.Quantum.QKD.Hoeffding.sum_cons
+#print axioms Foundation.Quantum.QKD.Hoeffding.exp_pair_le
+#print axioms Foundation.Quantum.QKD.Hoeffding.sum_fin_succ
+#print axioms Foundation.Quantum.QKD.Hoeffding.sum_fin_two
+#print axioms Foundation.Quantum.QKD.Hoeffding.prod_fin_split
+#print axioms Foundation.Quantum.QKD.Hoeffding.sum_cons_inner
+#print axioms Foundation.Quantum.QKD.Hoeffding.coeff
+#print axioms Foundation.Quantum.QKD.Hoeffding.signedBit_coeff
+#print axioms Foundation.Quantum.QKD.Hoeffding.coeff_flip
+#print axioms Foundation.Quantum.QKD.Hoeffding.coeff_sq_le_one
+#print axioms Foundation.Quantum.QKD.Hoeffding.weightDifference_eq_sum
+#print axioms Foundation.Quantum.QKD.Hoeffding.mgf_factor
+#print axioms Foundation.Quantum.QKD.Hoeffding.mgf_weighted_le
+#print axioms Foundation.Quantum.QKD.Hoeffding.weightDifference_tail_exp
+
+#print axioms Foundation.Quantum.QKD.PairwiseSampling.classical_decomposition_bound_exp
+
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.publicBits_mono
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.supportRadius_mono
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.weightedCoefficientClosed
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.weightedPrivacyErrorClosed
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.weightedCoefficientClosed_nonneg
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.weightedPrivacyErrorClosed_nonneg
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.weightedCoefficient_le_closed
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.weightedPrivacyError_le_closed
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.countWeightedError_le_closed
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.weightedPrivacyErrorClosed_le
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.real_secure_closed
+
+#print axioms Foundation.Quantum.QKD.PairwiseWeightedExamples.thousand_privacy_closed
+#print axioms Foundation.Quantum.QKD.PairwiseWeightedExamples.attacked_full_secure_closed
+#print axioms Foundation.Quantum.QKD.PairwiseWeightedExamples.four_sifting_two
+#print axioms Foundation.Quantum.QKD.PairwiseWeightedExamples.four_signal_privacy_closed
+
+#print axioms Foundation.Quantum.QKD.Authentication.keyBits
+#print axioms Foundation.Quantum.QKD.Authentication.eventProb_of_all
+#print axioms Foundation.Quantum.QKD.Authentication.eventProb_le
+#print axioms Foundation.Quantum.QKD.Authentication.verify_tags_of_eq
+#print axioms Foundation.Quantum.QKD.Authentication.forge_bound
+#print axioms Foundation.Quantum.QKD.Authentication.forge_accepts
+#print axioms Foundation.Quantum.QKD.Authentication.tag_uniform_of_ne_zero
+#print axioms Foundation.Quantum.QKD.Authentication.tag_add
+#print axioms Foundation.Quantum.QKD.Authentication.reuse_forges
+#print axioms Foundation.Quantum.QKD.Authentication.reuse_forge_prob
+
+#print axioms Foundation.Quantum.QKD.Bernoulli.hoeffding_lemma
+#print axioms Foundation.Quantum.QKD.Bernoulli.bernoulliWeight
+#print axioms Foundation.Quantum.QKD.Bernoulli.bernoulliWeight_nonneg
+#print axioms Foundation.Quantum.QKD.Bernoulli.bernoulliWeight_factors
+#print axioms Foundation.Quantum.QKD.Bernoulli.bernoulliWeight_sum
+#print axioms Foundation.Quantum.QKD.Bernoulli.bernoulliWeight_mgf
