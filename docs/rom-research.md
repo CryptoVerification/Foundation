@@ -2382,3 +2382,26 @@ Still missing: the backward search itself (a loop over the private table that
 walks from the response flag leftwards over candidate records, applying the
 concrete check per candidate and stopping at the first agreement), the
 reverse-order copy primitive, and the ideal-hash call.
+
+### `compareWithTail` body layer (same session, before commit)
+
+DELIVERED, VERIFIED: the body half of the terminal check that the caller runs
+once the head already moved off the retained response-flag cell.
+
+- `compareWithTail bits sc mc = compareCode sc.length (sc ++ mc) bits` — the
+  comparison blocks with both continuations as the tail. Its length, native,
+  agreement run, and disagreement run are all one-liners from `compareCode_length`,
+  `compareCode_native`, `compare_run`, `compare_run_mismatch`.
+- `reverse_record_eq_checkBitsOf`: a data-marked record's reversed packet IS
+  the check's compared cells (this is the `messagePrefix`-style table-region
+  invariant the plan needed).
+- `checkInput_run_record`: the concrete check's agreement run for the record's
+  own region.
+
+Not yet composed: `check_after_rewind` (rewind + flag move + body, in the
+`withBody_run` shape) — the intermediate `have` syntax tripped the parser twice,
+so it was dropped and left for the next session. The four building blocks are
+all in place, so composing is a straight rewrite chain.
+
+Verification status at this commit: full build 4054 jobs, axiom audit 1542
+declarations, no sorryAx, only propext / Classical.choice / Quot.sound.

@@ -1,6 +1,8 @@
 import Foundation.Constructions.Hash.NativeSimulatorQueryPacket
+import Foundation.Constructions.Hash.NativeSimulatorFreshAfterLookup
 import Foundation.Crypto.Semantics.Oracle.TerminalCopy
 import Foundation.Crypto.Semantics.Oracle.CodeRelocation
+import Foundation.Crypto.Semantics.Oracle.NativeCode
 
 /-! The fixed terminal recognition check of the simulator's missing branch.
 One closed code is built by relocating one closed code, so no absolute
@@ -11,6 +13,7 @@ construction parameters. A cell that disagrees leaves the whole comparison
 immediately, at the caller's mismatch continuation. -/
 namespace Foundation.Hash.Native.SimulatorTerminalCheck
 open Machine CryptoOracle CryptoOracle.Interactive Foundation.Probability TimedExecution Foundation.Symmetric
+open SimulatorFreshAfterLookup
 set_option backward.isDefEq.respectTransparency false
 set_option maxHeartbeats 1000000
 
@@ -426,6 +429,50 @@ of a data-marked record's packet cells. -/
 def checkInput (input : CompressionInput (Bits κ) (Bits n))
     (successCode mismatchCode : Code) : Code :=
   checkCode (checkBits input.1 input.2.2) successCode mismatchCode
+
+/-- The comparison blocks with the caller's two continuations as the tail.
+This is the body a caller runs once the head already moved left off the
+retained response-flag cell, so the flag is already collected on the right. -/
+def compareWithTail (bits : List Bool) (successCode mismatchCode : Code) : Code :=
+  compareCode (successCode.length) (successCode ++ mismatchCode) bits
+
+theorem compareWithTail_length (bits : List Bool) (successCode mismatchCode : Code) :
+    (compareWithTail bits successCode mismatchCode).length =
+      2 * bits.length + successCode.length + mismatchCode.length := by
+  rw [compareWithTail, compareCode_length]
+  simp [List.length_append]
+  omega
+
+theorem compareWithTail_native (bits : List Bool) (successCode mismatchCode : Code)
+    (hSuccess : ∀ i ∈ successCode, ∃ op, i = .native op)
+    (hMismatch : ∀ i ∈ mismatchCode, ∃ op, i = .native op) :
+    ∀ i ∈ compareWithTail bits successCode mismatchCode, ∃ op, i = .native op :=
+  compareCode_native _ _ _ (fun i hi =>
+    (List.mem_append.mp hi).elim (fun h => hSuccess i h) (fun h => hMismatch i h))
+
+theorem compareWithTail_run (oracle : BitOracle State) (state : State)
+    (trace : List (List Bool × List Bool)) (bits : List Bool)
+    (successCode mismatchCode : Code) (before' right : List (Option Bool)) :
+    TimedExecution.eval (Reification.timedStep (compareWithTail bits successCode mismatchCode) oracle)
+      (2 * bits.length)
+      (⟨state, .running { pc := 0, outputTape := seekFrontier right (bits.map some ++ before') }, trace⟩ : Configuration State) =
+      PMF.pure ⟨state, .running { pc := 2 * bits.length, outputTape := seekFrontier (bits.reverse.map some ++ right) before' }, trace⟩ :=
+  compare_run oracle state trace (successCode.length) bits (successCode ++ mismatchCode) before' right
+
+theorem compareWithTail_run_mismatch (oracle : BitOracle State) (state : State)
+    (trace : List (List Bool × List Bool)) (bits : List Bool)
+    (successCode mismatchCode : Code) (before' right : List (Option Bool)) :
+    ∀ (k : Nat) (actual : List (Option Bool)),
+      k < bits.length → k < actual.length →
+      (∀ j, j < k → actual[j]? = (bits[j]?).map some) →
+      actual[k]? ≠ (bits[k]?).map some →
+      TimedExecution.eval (Reification.timedStep (compareWithTail bits successCode mismatchCode) oracle)
+        (2 * k + 1)
+        (⟨state, .running { pc := 0, outputTape := seekFrontier right (actual ++ before') }, trace⟩ : Configuration State) =
+        PMF.pure (⟨state, .running { pc := 2 * bits.length + successCode.length, outputTape := seekFrontier ((actual.take k).reverse ++ right) (actual.drop k ++ before') }, trace⟩ : Configuration State) := by
+  intro k actual hkB hkA hAgree hDiff
+  exact compare_run_mismatch oracle state trace (successCode.length) k bits
+    (successCode ++ mismatchCode) before' right actual hkB hkA hAgree hDiff
 
 /-- A data-marked record's packet, reversed, is the check's compared cells.
 The record's data marker is the check's marker cell. -/

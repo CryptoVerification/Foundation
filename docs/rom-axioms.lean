@@ -2532,6 +2532,16 @@ import Foundation.Crypto.Semantics.Oracle.PacketWriter
 
 #print axioms Foundation.Hash.Native.SimulatorTerminalCheck.reverse_record_eq_checkBitsOf
 
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.compareWithTail_length
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.compareWithTail_native
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.compareWithTail_run
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.compareWithTail_run_mismatch
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.reverse_record_eq_checkBitsOf
+
 #print axioms Foundation.Hash.Native.SimulatorTerminalCheck.reverse_record_length
 
 #print axioms Foundation.Hash.Native.SimulatorTerminalCheck.checkCode_run
