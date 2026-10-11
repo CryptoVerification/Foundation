@@ -1282,3 +1282,11 @@ import Foundation.Constructions.Hash.NativeSimulatorQueryRound
 
 import Foundation.Crypto.Semantics.Oracle.TerminalCopy
 import Foundation.Constructions.Hash.NativeSimulatorTerminalCheck
+import Foundation.Constructions.Hash.NativeSimulatorTerminalCheckFramed
+import Foundation.Constructions.Hash.NativeSimulatorTerminalGuard
+import Foundation.Constructions.Hash.NativeSimulatorNonterminalFresh
+import Foundation.Constructions.Hash.NativeSimulatorPredecessorRecord
+import Foundation.Constructions.Hash.MessagePrefixLoop
+import Foundation.Crypto.Semantics.Oracle.OutputSeekFlag
+import Foundation.Crypto.Semantics.Oracle.ReverseOutputCopy
+import Foundation.Crypto.Semantics.Oracle.RawTapeEquality

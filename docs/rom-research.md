@@ -1,5 +1,71 @@
 # ランダムオラクル構成の研究記録
 
+## 最短接続経路の実装（2026-10-12）
+
+経路と各段階の到達条件を `docs/rom-shortest-path.md` に分離しました。
+問い合わせ意味論の最終安全性定理を変更せず、以下を追加しました。
+
+- `NativeSimulatorTerminalGuard`：固定 terminal の反転ペイロードと true マーカーだけを検査。
+  連鎖値を IV と一致させる誤った入口条件は使いません。`actual_eq_expected_iff` が
+  `terminalMessage` の入口述語を厳密に特徴付けます。表を保持した一致／不一致路、
+  継続番地の正しい relocation、不一致後の元のフラグ位置への復帰を証明しました。
+- `NativeSimulatorTerminalCheckFramed`：入力テープを保持した不一致路も追加しました。
+- `OutputSeekFlag`：固定4命令ループで空白まで右へ走査し、フラグ位置へ戻ります。
+  `recover` は不一致が起きた位置に依存せず全問い合わせセルを復元します。
+- `NativeSimulatorNonterminalFresh`：実際にガードが拒否した問い合わせを、ヘッド回復から
+  既存の局所一様乱数生成・表先頭への追加まで接続。巻き戻し入口からの全状態分布も証明。
+  正のタグ幅を要求し、終端として入口条件を満たす問い合わせの鎖探索は未実装です。
+- `ReverseOutputCopy`：出力ヘッドを左、入力ヘッドを右へ動かす固定幅コピー。
+  `5*width` 遷移、`7*width` 命令。元の領域とコピー先の接尾辞を保持します。
+  コピー先の空白領域を確保済みであることは入口条件であり、無料の領域確保はしません。
+- `RawTapeEquality`：固定14命令の幅非依存ループ。生の表応答フィールドを実行時 target と比較。
+  表側の応答直後に区切りがなくても、幅が等しければ次レコードを破壊しません。
+  両方の文字列と表の接尾辞を保持し、query 側の空白に判定結果を書いて終了します。
+  native 実行への対応、制御閉包、`NativeComponent`、`5*width+5` 遷移の上界を証明。
+- `NativeSimulatorPredecessorRecord`：元の符号化表の key を実際の移動命令で越えて
+  raw 応答比較へ接続。コード長 `2*(n+κ+1)+16`、時間上界 `7*n+2*κ+9`。
+  これは一レコードの応答一致検査であり、false マーカーによる候補選別・全表ループは未完了。
+- `MessagePrefixLoop`：表順序で最初のデータ辺を選び、block を回収済み suffix に prepending する
+  tail-recursive 参照実装。全ての表（衝突・循環を含む）で `messagePrefix` および
+  `simulatorProgram` と厳密に一致することを証明。探索回数は fuel 以下、レコード検査は
+  `fuel*table.length` 以下。これは参照アルゴリズムの精密化であり、通常命令のループ実現ではありません。
+
+検証：全体ビルド4062ジョブ成功、公理監査1582件の依存出力、エラー・`sorryAx` なし。
+新規主要定理は `propext`・`Classical.choice`・`Quot.sound` のみに依存します。
+`git diff --check` 成功。公開 import と監査へ登録しました。
+
+**最終目標はまだ未達です。** 次の不足は全表の前駆辺検索・ターゲット復元と、
+参照再構成ループを通常命令へ実現する証明です。その後、理想ハッシュ呼出し、
+完全な理想世界サービス、資源評価、uniform な WholeWitness/WholeReduction、
+MAC の emitted code と認証済み論理登録を接続します。
+
+## 追加の到達点（2026-10-12：表を保持した終端比較への接続）
+
+`NativeSimulatorTerminalCheckFramed.lean` に、任意の入力テープを保持する
+`compare_run_framed`、任意のフラグ値を保持する `checkCode_run_framed`、
+既存の表巻き戻しから比較までを合成する `check_after_rewind` を追加しました。
+巻き戻し後の入力テープには全私有表と左側の空白が残り、外部状態と履歴も保持します。
+空白から応答フラグへ戻る既存の1遷移に加え、フラグからキーへ左移動する1遷移が必要です。
+比較の終了までの予算は `rewindSteps table + 1 + (1 + 2*(κ+1+n))` です。
+この定理は探索失敗かつマーカーが true の問い合わせの自身のパケットについての一致路です。
+
+以前の記録の「table-region invariant」「messagePrefix-style invariant」という表現は
+範囲を広く述べすぎていました。`reverse_record_eq_checkBitsOf` は反転パケットの配置等式です。
+`record_region_agrees` は以前は同じ式同士の反射的等式だったため、今回、反転パケットを
+`some` で符号化した実際のセルと `checkBits` の期待セルとの各位置の等式へ修正しました。
+これらは私有表の前駆データ辺を辿る `messagePrefix` のループ不変条件ではありません。
+また、この構成では false がデータ辺、true が終端マーカーです。
+
+次は固定した initial・terminal と実行時問い合わせとの一致／不一致の接続、入力表を保持した
+不一致路とヘッド回復、前駆データ辺の検索・メッセージ再構成です。
+理想ハッシュ呼出し、二窓口の理想世界サービス、WholeWitness、MAC 帰着のコード生成・論理登録は
+引き続き未完了です。
+
+検証：全体 `lake build` は4055ジョブで成功しました。
+`lake env lean docs/rom-axioms.lean` は1546件の公理依存出力を生成し、エラーと
+`sorryAx` はありません。追加した実行定理の依存は
+`propext`・`Classical.choice`・`Quot.sound` のみです。`git diff --check` も成功しました。
+
 ## 最新の到達点（2026-10-10）
 
 最新の追加は、保持した物理表を使い回すシミュレータの一巡のサービスです。`NativeSimulatorQueryService.lean` は、要求受付、表探索・命中/未登録の実際の分岐、乱数生成と表先頭への書込み、物理的な応答返却までを、既存の `PacketResponseService` へ接続します。返却した保存フレームは入力テープの先頭に完全な更新後の表を保持し、`simulatorService_frame` がセル等価性まで保証します。`NativeSimulatorQueryRound.lean` は、呼出し元が実際に選んだ生の要求捕捉から、所有権移行、一巡のネイティブ評価、呼出し元への応答読込みまでの一つの実行契約を与えます。予算は `selection.budget + (1 + replyCap)` 遷移で、実際の費用の合計を用いる残予算法則も証明しました。型付き要求の符号化の単射性を `compressionPacket_injective` として分離しています。探索済み三モジュールも公開入口と公理監査へ登録しました。全体ビルド4052ジョブ、公理監査1521個の異なる宣言が成功しました。終端認識と認識済みメッセージの理想ハッシュ呼出し、二窓口の理想世界サービス、MAC 帰着のコード生成、認証済み論理規則への登録は未完了です。一巡のサービスの呼出し元を含む全途中状態の符号長上界も未完了で、既存の `PacketResponseResources.peak_with_bounds` は成分の入口が保存値を引き継がない形を仮定するため、私有表を機械テープで保持する今回の成分へはそのまま適用できません。詳細は末尾に記録しています。

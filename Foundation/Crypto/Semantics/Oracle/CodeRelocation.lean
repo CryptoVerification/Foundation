@@ -22,6 +22,15 @@ def instruction (base : Nat) : Instruction → Instruction
 
 def host (before code : Code) : Code := before ++ code.map (instruction before.length)
 
+@[simp] theorem instruction_zero (op : Instruction) : instruction 0 op = op := by
+  cases op with
+  | call => rfl
+  | native op => cases op <;> simp [instruction, native]
+
+@[simp] theorem host_nil (code : Code) : host [] code = code := by
+  have h : instruction 0 = id := funext instruction_zero
+  simp [host, h]
+
 /-- Nested code placements add their absolute jump/branch offsets. -/
 theorem instruction_add (base offset : Nat) (op : Instruction) :
     instruction base (instruction offset op) = instruction (base + offset) op := by

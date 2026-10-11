@@ -488,15 +488,17 @@ theorem reverse_record_length (input : CompressionInput (Bits κ) (Bits n))
   rw [recordBits_length input]
   omega
 
-/-- The compared region, read from a data-marked record, is the record's own
-packet reversed: every visited cell is the expected cell. This is the
-table-region invariant the backward search loop needs. -/
+/-- The reversed packet's actual tape cells agree with the expected comparison
+cells when the packet marker is true. This is a packet-layout fact, not yet a
+predecessor-chain invariant for `messagePrefix`. -/
 theorem record_region_agrees (input : CompressionInput (Bits κ) (Bits n))
-    (_hMarker : input.2.1 = true) :
+    (hMarker : input.2.1 = true) :
     ∀ j, j < κ + 1 + n →
-      ((recordBits input).reverse)[j]? = ((recordBits input).reverse)[j]? := by
+      ((recordBits input).reverse.map some)[j]? =
+        ((checkBits input.1 input.2.2)[j]?).map some := by
   intro j _
-  rfl
+  rw [reverse_record_eq_checkBitsOf input hMarker]
+  simp
 
 /-- The record's own check always agrees: its region is its own reversed
 packet, so the walk ends at the successor. -/

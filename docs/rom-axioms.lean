@@ -6,6 +6,14 @@ import Foundation.Constructions.Hash.NativeSimulatorQueryService
 import Foundation.Constructions.Hash.NativeSimulatorQueryRound
 import Foundation.Crypto.Semantics.Oracle.TerminalCopy
 import Foundation.Constructions.Hash.NativeSimulatorTerminalCheck
+import Foundation.Constructions.Hash.NativeSimulatorTerminalCheckFramed
+import Foundation.Constructions.Hash.NativeSimulatorTerminalGuard
+import Foundation.Constructions.Hash.NativeSimulatorNonterminalFresh
+import Foundation.Constructions.Hash.NativeSimulatorPredecessorRecord
+import Foundation.Constructions.Hash.MessagePrefixLoop
+import Foundation.Crypto.Semantics.Oracle.OutputSeekFlag
+import Foundation.Crypto.Semantics.Oracle.ReverseOutputCopy
+import Foundation.Crypto.Semantics.Oracle.RawTapeEquality
 import Foundation.Constructions.Hash.NativeSimulatorQueryLoading
 import Foundation.Crypto.Semantics.Oracle.NativeCodeTapeEquivalence
 import Foundation.Constructions.Hash.NativeSimulatorLookupContextRestore
@@ -2547,3 +2555,53 @@ import Foundation.Crypto.Semantics.Oracle.PacketWriter
 #print axioms Foundation.Hash.Native.SimulatorTerminalCheck.checkCode_run
 
 #print axioms Foundation.Hash.Native.SimulatorTerminalCheck.checkCode_run_mismatch
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.record_region_agrees
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.compare_run_framed
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.checkCode_run_framed
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.check_after_rewind
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.compare_head_differ_framed
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.compare_cell_agree_framed
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.compare_run_mismatch_framed
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalGuard.actual_eq_expected_iff
+#print axioms Foundation.Hash.Native.SimulatorTerminalGuard.code_length
+#print axioms Foundation.Hash.Native.SimulatorTerminalGuard.code_native
+#print axioms Foundation.Hash.Native.SimulatorTerminalGuard.compareCode_link
+#print axioms Foundation.Hash.Native.SimulatorTerminalGuard.code_rejected_host
+#print axioms Foundation.Hash.Native.SimulatorTerminalGuard.accepted_run
+#print axioms Foundation.Hash.Native.SimulatorTerminalGuard.rejected_run
+#print axioms Foundation.Hash.Native.SimulatorTerminalGuard.rejected_recovered
+#print axioms Foundation.Hash.Native.SimulatorNonterminalFresh.guardSteps_bound
+#print axioms Foundation.Hash.Native.SimulatorNonterminalFresh.rejected_run
+#print axioms Foundation.Hash.Native.SimulatorNonterminalFresh.rejected_after_rewind
+
+#print axioms CryptoOracle.Interactive.OutputSeekFlag.run
+#print axioms CryptoOracle.Interactive.OutputSeekFlag.recover
+#print axioms CryptoOracle.Interactive.ReverseOutputCopy.code_length
+#print axioms CryptoOracle.Interactive.ReverseOutputCopy.run
+#print axioms CryptoOracle.Interactive.RawTapeEquality.run
+#print axioms CryptoOracle.Interactive.RawTapeEquality.steps_bound
+#print axioms CryptoOracle.Interactive.RawTapeEquality.native_run
+#print axioms CryptoOracle.Interactive.RawTapeEquality.result_status
+#print axioms CryptoOracle.Interactive.RawTapeEquality.component
+
+#print axioms Foundation.Hash.Native.SimulatorPredecessorRecord.code_length
+#print axioms Foundation.Hash.Native.SimulatorPredecessorRecord.code_native
+#print axioms Foundation.Hash.Native.SimulatorPredecessorRecord.steps_bound
+#print axioms Foundation.Hash.Native.SimulatorPredecessorRecord.run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorRecord.status
+
+#print axioms Foundation.Hash.MessagePrefixLoop.find_eq
+#print axioms Foundation.Hash.MessagePrefixLoop.find_sound
+#print axioms Foundation.Hash.MessagePrefixLoop.find_inspections_le
+#print axioms Foundation.Hash.MessagePrefixLoop.run_eq
+#print axioms Foundation.Hash.MessagePrefixLoop.run_bounds
+#print axioms Foundation.Hash.MessagePrefixLoop.reconstruct_eq
+#print axioms Foundation.Hash.MessagePrefixLoop.run_message_length
+#print axioms Foundation.Hash.MessagePrefixLoop.terminal_eq
+#print axioms Foundation.Hash.MessagePrefixLoop.simulator_eq
