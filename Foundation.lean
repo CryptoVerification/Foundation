@@ -1269,3 +1269,16 @@ import Foundation.Crypto.Semantics.Oracle.NativeCodeTapeEquivalence
 import Foundation.Constructions.Hash.NativeSimulatorQueryLoading
 
 import Foundation.Constructions.Hash.NativeSimulatorQueryLoadingResources
+
+import Foundation.Constructions.Hash.NativeSimulatorDispatchQueryLoading
+
+import Foundation.Constructions.Hash.NativeSimulatorQueryPacket
+
+import Foundation.Constructions.Hash.NativeSimulatorQueryPacketResources
+
+import Foundation.Constructions.Hash.NativeSimulatorQueryService
+
+import Foundation.Constructions.Hash.NativeSimulatorQueryRound
+
+import Foundation.Crypto.Semantics.Oracle.TerminalCopy
+import Foundation.Constructions.Hash.NativeSimulatorTerminalCheck

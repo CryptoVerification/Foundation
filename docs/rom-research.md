@@ -1,6 +1,10 @@
 # ランダムオラクル構成の研究記録
 
-## 最新の到達点（2026-10-09）
+## 最新の到達点（2026-10-10）
+
+最新の追加は、保持した物理表を使い回すシミュレータの一巡のサービスです。`NativeSimulatorQueryService.lean` は、要求受付、表探索・命中/未登録の実際の分岐、乱数生成と表先頭への書込み、物理的な応答返却までを、既存の `PacketResponseService` へ接続します。返却した保存フレームは入力テープの先頭に完全な更新後の表を保持し、`simulatorService_frame` がセル等価性まで保証します。`NativeSimulatorQueryRound.lean` は、呼出し元が実際に選んだ生の要求捕捉から、所有権移行、一巡のネイティブ評価、呼出し元への応答読込みまでの一つの実行契約を与えます。予算は `selection.budget + (1 + replyCap)` 遷移で、実際の費用の合計を用いる残予算法則も証明しました。型付き要求の符号化の単射性を `compressionPacket_injective` として分離しています。探索済み三モジュールも公開入口と公理監査へ登録しました。全体ビルド4052ジョブ、公理監査1521個の異なる宣言が成功しました。終端認識と認識済みメッセージの理想ハッシュ呼出し、二窓口の理想世界サービス、MAC 帰着のコード生成、認証済み論理規則への登録は未完了です。一巡のサービスの呼出し元を含む全途中状態の符号長上界も未完了で、既存の `PacketResponseResources.peak_with_bounds` は成分の入口が保存値を引き継がない形を仮定するため、私有表を機械テープで保持する今回の成分へはそのまま適用できません。詳細は末尾に記録しています。
+
+## 以前の到達点（2026-10-09）
 
 最新の追加は、保持した物理表への次の要求の実書込みと、既存の表探索・巻き戻しコードへの接続です。`NativeSimulatorQueryLoading.lean` は、制御移行の1遷移と既存のセル単位の書込み・巻き戻しを数え、停止時刻、状態・履歴・セルの分布、次の探索に表を再利用できる条件を証明します。`NativeSimulatorQueryLoadingResources.lean` は制御移行前と全途中状態の実際の符号長を評価します。全体ビルド4047ジョブ、公理監査1640宣言が成功しました。乱数による表更新・応答返却までを反復するサービス全体、終端認識、MAC 帰着のコード生成は未完了です。詳細は末尾に記録しています。
 
@@ -2156,3 +2160,225 @@ n は応答と連鎖値のビット数、κ は圧縮入力のペイロードの
 主張A.10は異なるメッセージの連鎖終点の衝突を除外する性質です。主張A.11は、完成した構成の表項目が順方向に生成されたことを、B3、B4、C1、C3、C4、C1′ などの失敗条件から導きます。その上で中継器を理想ハッシュからシミュレータによる構成の実行へ置き換えます。後段の理想ハッシュへの依存を除いた後、同じ鍵での入力・出力衝突の確率を用いて理想暗号へ置き換えます。論文の漸近的な誤差は `O(q^2*ℓ^2/2^min(n,n′))` です。具体的な定数や後段呼出しを含む問い合わせ数の計算を、今回の Q=`q*ℓ` と同一視しません。
 
 A.12は同じ理想暗号を二つの異なる初期値で使う、論文で HMAC と呼ぶハッシュ構成です。原典は A.8 の証明を参照し、追加の失敗条件が必要だと述べる短い証明です。追加条件の全一覧とその個別の確率評価は、この補題の本文には展開されていません。したがって今回、完全な形式証明や明示的な定数をこの記述から取り込んだという主張はしません。既存研究の証明構造の確認であり、これらの構成の Lean への移植や外部コードの取り込みはありません。9本すべての外部証明コードとライセンスの確認が完了したという記録にも変えていません。
+
+## 反復する一巡のシミュレータサービス（2026-10-10）
+
+### 前回までの登録と未接続モジュール
+
+前回の作業で検証済みだった `NativeSimulatorQueryPacket.lean`、`NativeSimulatorQueryPacketResources.lean`、`NativeSimulatorDispatchQueryLoading.lean` は、公開入口 `Foundation.lean` と `docs/rom-axioms.lean` へ未登録でした。本次これらを登録し、全体ビルドと公理監査を通した上で、一巡のサービスへ進みました。
+
+### 一巡のサービス
+
+`NativeSimulatorQueryService.lean` は、入口 `.admitting` から物理的な応答返却までの一巡回を、既存の `PacketResponseService` の成分として接続します。`read`・`beginRound` は保存フレームの機械（私有表を先頭に保持する）を用い、`simulatorPacketProcedure` は最初の物理的な応答返却の同時分布を保持します。`simulatorService_packet` は、返却済み応答・更新後の表・理想状態・再開した呼出し元の同時分布が、固定した候補シミュレータ `compressionSimulator` の分布と一致することを証明します。私有表は磁気テープ上の物理表現のまま保持し、ホスト側で数学的な表を再構成しません。分岐条件（表の未登録かつ終端未認識）は証明側の前提として与え、機械コード内で判定したとは主張しません。
+
+保存フレームの入力テープの符号長を数える資源評価と、呼出し元の履歴を別に持つ構成へは、本次まだ接続していません。サービスは `prior`（成分内部の履歴）と呼出し元の履歴を別引数に取り、次の巡では返却フレームの `reverseTrace` と更新後の表を用います。
+
+### 一巡の実行契約
+
+`NativeSimulatorQueryRound.lean` は、要求捕捉（`SourcePrefix`）、所有権移行の1遷移、一巡のサービス、呼出し元への応答読込みを一つの実行契約へ合成します。`Retained` は保存フレームとその入力テープ上の私有表の対応をまとめた構造です。`SimulatorAdmissible` は捕捉された生の要求が型付き圧縮入力の符号化であることと応答予算を課す明示的な条件で、任意の生のビット列の復号や停止性は仮定しません。`compressionPacket_injective` は型付き入力から生の要求への符号化の単射性を証明し、証明書の選択が実行時の要求と一致する根拠に使います。
+
+`simulatorSourceRound_semantics_of_pure` は、要求選択が決定的な具体的なコードについて、一巡の出力分布が一巡のサービスの分布と一致することを証明します。これは前回の二窓口の実世界サービスと同じ形で、反復的な全対話の構成部品です。
+
+### 検証結果
+
+`NativeSimulatorQueryService.lean` と `NativeSimulatorQueryRound.lean` を公開入口と公理監査へ登録した後、プロジェクト全体の `lake build` は4052ジョブで成功しました。ログは `/tmp/foundation-rom-round-full-build.log` です。正常終了後の `lake env lean docs/rom-axioms.lean` は1521個の異なる宣言について成功し、40宣言は公理に依存せず、残る宣言の依存公理は `propext`、`Classical.choice`、`Quot.sound` の範囲です。`sorryAx`、追加の公理、型検査エラーはありません。ログは `/tmp/foundation-rom-round-axioms.log` です。新しいモジュールに警告はなく、既存モジュールの警告は残っています。`git diff --check` も成功しました。
+
+残る中心的な作業は、終端認識（`messagePrefix` の後方探索）の通常命令コード、認識済み終端の理想ハッシュ呼出し分岐、二窓口の理想世界サービス、MAC 帰着の具体的コード、認証済み論理規則への登録、全対話の資源評価です。今回の一巡のサービスを、反復する全対話や最終的な置換定理の完成とは扱いません。
+
+呼出し元と応答読込みを含む符号長評価も検討しました。`NativeSimulatorQueryServiceResources.lean` として、成分の符号化・寸法・増加、入口寸法、応答寸法、呼出し元の完全符号化を用意し、`PacketResponseResources.peak_with_bounds` へ接続するところまで進めました。ただし、この共通定理の入口寸法条件は「成分の入口が保存値の機械を引き継がない」形を要求します。理想世界のシミュレータは私有表を機械のテープで保持するため入口で保存機械をそのまま引き継ぎ、要求長と保存機械の寸法が同時に入るため、定数の増分ではこの形を満たしません。公開表を状態側へ移す再設計、または私有表を毎回テープへ書く入口の設計と、その資源評価が必要です。この理由から、当該モジュールは未完成として削除し、全体ビルドへは含めていません。
+
+## 終端認識の設計調査と障害の記録（2026-10-10）
+
+終端認識（`messagePrefix` の後方探索）の機械実装へ着手し、既存資産の制約を確認しました。以下は調査結果の記録で、未完成の実装は追加していません。
+
+### 既存資産でそのまま使えない点
+
+1. 表の物理配置（`SimulatorLookup.entryBits`：レコード標識 `true`、キー `n+κ+1` ビット、区切り空白、応答 `n` ビット）では、応答の直後に区切り空白がありません。既存の等値比較器 `DelimitedTapeEquality` は候補側の区切り空白で終了するため、エントリの応答を現在値とそのまま比較できません。後方探索の一回の比較には、(a) 応答の直後のセルへ一時的に空白を書いて比較後に元の標識を戻す（保存先のセルが必要）、(b) 固定幅比較器を新設する、のいずれかが必要です。
+2. オラクル呼出し（`.call`）は `CallExecution.resumed` で出力テープを応答の読込み結果へ置き換えます。したがって表更新コード（`SimulatorRemember.code`）が必要とする質問キー（出力テープの左側に保持）が失われます。終端子分岐では、呼出し前にキーを入力テープの左側へ退避し、呼出し後に出力テープへ戻す二回のコピーが必要です。`MarkedBackwardCopy` は標識付きコピーのため、そのままでは使えません。
+3. 後方探索は `h` から `initial` へ塊を逆順に集めるため、理想ハッシュへ送る要求（`runtimeInputBits`：各塊の前に `false`、最後に `true`）は逆順コピーが必要です。逆順コピーの既存成分はありません。
+
+### 実装可能な狭い特殊分岐
+
+質問の連鎖値が初期値に等しい場合、`messagePrefix initial table fuel initial = some []` が任意の燃料で成立します。この場合に限れば、要求は `[true]` だけで、後方探索・逆順コピー・固定幅比較器がすべて不要になり、既存の等値比較なしでハードコードされた初期値比較（各ビット2命令）で分岐できます。これは終端子認識の正当な部分場合ですが、`admissible` 前提を完全に外すものではありません。
+
+方針 (A) を採用し、部品の実装を進めています。
+
+### 追加した部品（検証済み）
+
+`Foundation/Crypto/Semantics/Oracle/TerminalCopy.lean` に、終端認識で必要な有限コードの部品を追加しました。公開入口と公理監査へ登録し、全体ビルド4053ジョブ・公理監査1525宣言で成功しています。
+
+- `readOutput_cell_run`・`readOutput_run`：出力テープを読み入力テープへ右方向に書くコピー。既存のセル命令（`FixedWidthCopy.cellCodeWith true false`）はテープ役割と移動方向を引数に取るため、実行法則だけを追加しました。質問キーの退避と、表の値位置への応答の書き込みに使います。
+- `cellLeft`・`cellLeft_run`：出力テープの現在セルを固定ビットと比較し左へ動かす2命令。不一致・空白は明示の故障番地へ分岐します。ペイロードの一致判定と、連鎖値と初期値の一致判定に使います。
+- `cellBoth`・`cellBoth_run`：入力テープと出力テープの現在セルを互いに比較し、両者を右へ動かす7命令。一致時は5遷移で次のビット比較へ進みます。後方探索でエントリの応答と現在の連鎖値を比べるのに使います。
+
+### 後方探索の具体設計（2026-10-10 追加）
+
+探索失敗後の配置は、既存の `SimulatorFreshAfterLookup` の接頭部（巻き戻し5命令＋フラグ移動1命令）の直後です。出力テープは左側に `false(応答フラグ) :: キー.reverse :: 既存出力` を持ち、ヘッドはフラグセルにあります。以下、左へ動くほどキーの先頭へ近づきます。
+
+1. **生の要求ビット列の確認**：以降の探索は、要求が `compressionPacket query ++ [false]` という構文を持つことを前提とします（型付きの `query` への復号は証明側のみ）。不正な構文については安全性の結論を主張しません。
+2. **終端子の判定**：ヘッドを1セル左へ動かした後、`cellLeft` を `terminal.toList.reverse ++ [true] ++ initial.toList.reverse` の順に並べます。不一致は明示の故障番地へ飛び、故障路は既存の `NativeBitstringSeekEnd`（右へ空白まで走査）でフラグ位置へ戻してから、既存の局所乱数分支へ継続します。
+3. **比較の向き**：上記の左走査で通過したキーのセルは右側領域へ移るため、連鎖値は右から `chain_0, chain_1, ...` の順に読めます。表の各エントリでも、応答の開始位置まで右へ動けば `resp_0, resp_1, ...` の順に読めます。したがって両テープを右へ動かす `cellBoth` がそのまま使えます。
+4. **反復**：一イテレーションは、エントリの応答開始位置までの右移動、`cellBoth` の反復、不一致時は次のエントリのマーカーヘの移動、一致時は（入力ヘッドを `n+κ+2` セル左へ戻してエントリの連鎖値の先頭へ）`FixedWidthCopy` で出力側の連鎖値を更新し、マーカーを1セル右へ動かしてペイロードを `false` マーカー付きで出力テープのバッファへ追加します。その後、両ヘッドを探索開始位置へ戻します。バッファの長さはループの不変条件で運びます。
+5. **要求の構築**：後方探索は `h` から `initial` へ塊を逆順に集めるため、バッファは `false b_{L-1} ... false b_0` の順です。理想ハッシュへの要求は `runtimeInputBits m = false b_0 ... false b_{L-1} true` なので、両ヘッドが逆方向へ動く copies（バッファを右から左へ読み、要求領域を左から右へ書く）が必要です。これは既存にない部品で、`cellBoth` と同型の新しい命令ブロックとして追加します。
+6. **表更新と呼出し**：`.call` は出力テープを応答で置き換えるため、質問キーは事前に入力テープの左側へ退避（`readOutput_run` の左向き版、既存の `MarkedBackwardCopy` の標識なし版）し、呼出し後に出力テープへ戻します。その後、既存の `SimulatorRemember` 相当のコードで `(query, 応答)` を表先頭へ書きます。
+
+### テープ表現の規約（2026-10-10 に確定）
+
+`FixedWidthCopy.frontier left cells = ⟨left, cells.headD none, cells.tail⟩` です。したがって `frontier` は「ヘッドが cells[0]、残りは右側」という右向き読みの規約で、`frontier_move` も `moveRight` 側です。既存の `FixedWidthCopy.run` はこの規約で入力を読み、`backward_run` は `backwardFrontier` を使います。
+
+左向き読み（`cellLeft` の比較）に必要な規約は「ヘッドが cells[last]、cells[0..last-1] は左側に自然順」です。これは `⟨cells.dropLast.map some ++ before, cells.getLast, right⟩` と書け、一度の `moveLeft` で `leftCells cells.dropLast before (cells.getLast :: right)` になります。全セルを読み終えると `⟨before.tail, before.headD none, cells.map some ++ right⟩` になります。空のセル列は扱わない（`checkBits` は常に `κ+1+n ≥ 1` 個）ため、帰納法の基台を別に用意します。
+
+### 比較コードの構成で確定した設計（2026-10-10 追加）
+
+`cellLeft`・`cellBoth` は命令列の先頭位置（`base`）を引数に取るため、既存の `cellLeft_run`・`cellBoth_run` は「命令列の接頭部の長さ = base」という形で接続します。反復コードでは base が 2 ずつ増えるため、接頭部を持たない「コード本体が base から始まる」形の補題（`cellLeft_run'`：コード = `cellLeft base fault b ++ after`、pc = base）を `TerminalCopy` へ追加すると、帰納法の番地計算が不要になります。
+
+左方向比较（`cellLeft`）の実行補題は、次の形で空場合を含めて成立します。
+
+- 入口：`{left := bits.tail.map some ++ before, current := bits.head?, right := right}`（ヘッドが最初に比較するセル）
+- 出口：`{left := before.tail, current := before.headD none, right := bits.reverse.map some ++ right}`
+
+ただし `bits ≠ []` を仮定し、帰納法のcons場合で `rest` が空のときは `cases before <;> rfl`、空でないときはそのまま再帰する構成にします。`List.head?` は `List.head`（`bits ≠ [] → Bool`）と型が異なる点に注意します。
+
+終端子判定の後は、ヘッドが質問キーの左隣セルにあります。故障路は既存の `NativeBitstringSeekEnd`（右へ空白まで走査）でフラグ位置へ戻せます。
+
+### 比較コードの実装で残る技術的細節（2026-10-10 時点）
+
+`NativeSimulatorTerminalCheck.lean` を2回試作し、いずれも未完成として削除しました。原因は命令番地の書籍繰りです。`cellLeft base fault b` の分岐先は `base+1` を絶対番地で参照するため、既存の `cellLeft_run` は「命令列の接頭部の長さ = base」という形でしか接続できません。反復コードではビットごとに base が2増えるため、帰納法の各段で `compareLeftCode (before.length + 2) fault rest` と `(before ++ cellLeft before.length fault b) ++ compareLeftCode (before ++ cellLeft ...).length fault rest` を `List.length_append`・`cellLeft_length`・`List.append_assoc` で揃える必要があります。2回目の試作ではこの操作が `simp only ... at hstep ⊢` で競合し、コード列の cellLeft 成分が落ちる不具合が残りました。
+
+次の実装では、compareLeftCode を「接頭部を持たない絶対番地の閉じたコード」として構成する方法を採ります。つまり `cellLeft` の分岐先を相対番地（次の命令位置）に変更した `cellLeftRel` を `TerminalCopy` へ追加し、コード全体を `CodeRelocation` で必要な番地へ配置します。`CodeRelocation.host` は分岐・ジャンプの絶対番地を加算して移すことが証明済みなので、帰納法は相対番地のままで進められます。
+
+### 残る実装
+
+1. `TerminalCopy` に相対番地版の `cellLeftRel` とその執行補題を追加する。
+2. 上記の比較コードを `NativeSimulatorTerminalCheck.lean` として実装する（故障路は `NativeBitstringSeekEnd` で回復）。
+2. 上記 4 の反復コードと、`messagePrefix` との不変条件付き対応。
+3. 上記 5 の逆順 copies 部品。
+4. 上記 6 のキー退避・表更新・物理的な応答返却との統合と、`compressionSimulator` の完全な分岐一致。この対応完成后に `admissible` 前提が外れます。
+
+## 2026-10-12 session (terminal recognition check)
+
+DELIVERED, VERIFIED: `Foundation/Constructions/Hash/NativeSimulatorTerminalCheck.lean`
+(209 lines, registered in `Foundation.lean` + `docs/rom-axioms.lean`, full build 4054
+jobs, audit 1531 declarations, dependencies only propext / Classical.choice /
+Quot.sound, no sorryAx, `git diff --check` clean).
+
+Design change that finally worked, and why the earlier attempts failed:
+
+1. **Nested relocation instead of absolute addresses.** `compareCode faultAfter tail`
+   is built by *recursion on the bit list with the tail threaded through the last
+   component*: `compareCode faultAfter tail (b :: rest) = host (cellRel (faultAfter +
+   2 * rest.length + 2) b) (compareCode faultAfter tail rest)`. Each block relocates
+   the remaining blocks, so no iteration ever carries an address-carrying prefix.
+   Both earlier attempts failed because a block's branch target had to be expressed
+   as an absolute address (the `+ 2 * rest.length` arithmetic), which does not
+   survive `compareCode_length` on a symbolic list and forced per-block `have`s.
+2. **Per-block fault derived from the remaining length.** The block's own frame is
+   `cellRel fault b = cellLeft 0 fault b` with `fault = faultAfter + 2*rest.length + 2`,
+   i.e. the mismatch target is "end of the whole comparison, plus the caller's
+   offset", expressed inside the block frame. After one `host` step every block's
+   mismatch target is the same absolute address.
+3. **`seekFrontier`-style state shapes.** Instead of hand-building zippers
+   (`{left := ..., current := ..., right := ...}`) and then rewriting them apart,
+   both the hypothesis and the conclusion of the run lemmas are written with the
+   aux def `seekFrontier right cells := {left := cells.tail, current := cells.headD
+   none, right := right}` plus the one-step law `seekFrontier_move`. This is the same
+   trick as `FixedWidthCopy.frontier` / `backwardFrontier` and it is the only reason
+   the induction's cons case closes with `simp only [...]` + `rfl`.
+4. **Fuel is `2 * bits.length`, not the whole `tail` length.** The agreement run only
+   needs the blocks' budget; the tail's continuation is a separate lemma. Previous
+   statement used `2*bits.length + tail.length`, which couples the run theorem to
+   the continuation and breaks `rfl`-level rewriting.
+5. **Cell-level stepping is `TerminalCopy.cellLeft_run` verbatim** (same `before ++
+   cellLeft ++ after` shape, `2` fuel, `rfl rfl rfl` hypotheses), so no new
+   transition lemma was needed. The old approach tried to reprove the branch on
+   `.output` for one fixed bit inside the induction; that is what made the
+   `simp only [CellLeft_next_one]`-style rewrites fail.
+6. `TimedExecution.eval_add` + `PMF.pure_bind` order matters: rewrite the fuel sum
+   and `eval_add` *first*, then the single-step equation, then `pure_bind`. Rewriting
+   `pure_bind` before `eval_add` fails.
+
+Theorems available (names are `Foundation.Hash.Native.SimulatorTerminalCheck.*`):
+`checkBits`, `checkBits_ne_nil`, `seekFrontier`, `seekFrontier_move`, `cellRel`,
+`compareCode`, `compareCode_length`, `compareCode_native`, `compare_run`, `checkCode`,
+`checkCode_length`, `checkCode_native`, `checkCode_run`.
+
+What is deliberately NOT in this file yet:
+- The *mismatch* run (`checkCode_run` only states the agreement path). The
+  mismatch address is already baked into the code (it is the start of
+  `mismatchCode`), but the run lemma for it is not proved.
+- `code`/`checkBits`-instantiated length/native facts for concrete `Bits n`, `Bits κ`.
+- Any integration with `NativeSimulatorFreshAfterLookup` (rewind + flag) or the
+  ideal-hash call; `checkCode`'s success/mismatch continuations are still opaque
+  `Code` parameters.
+
+### Mismatch run (same session, later)
+
+DELIVERED, VERIFIED: mismatch half of the terminal check.
+
+- `compare_cell_agree`: one agreeing cell costs two instructions and shifts the
+  walk left (the induction step's shared lemma).
+- `compare_head_differ`: one disagreeing cell leaves the whole comparison at
+  the block's own fault address, in ONE instruction, touching no tape cell.
+  Its statement has no `compareCode` in it (only `host (cellRel fault b)`), so
+  it does not depend on the recursion and cannot drift out of date.
+- `compare_run_mismatch`: the composed disagreement run, inducted on the number
+  `k` of already-agreed cells (NOT on the bit list). The statement is stated
+  over an `actual : List (Option Bool)` region that may contain arbitrary cells,
+  with the agreeing prefix given by `∀ j < k. actual[j]? = some (bits[j]?)` and
+  the single disagreement at `k`. That shape (region + position) is what the
+  later search loop needs: it knows the region it walked, not the expected
+  bits.
+- `checkCode_run` (agreement) and `checkCode_run_mismatch` (disagreement) both
+  compose the flag move (`checkCode_step`, private) with the corresponding
+  compare-level run through `CodeRelocation.eval`. In the disagreement case the
+  final packet is the caller's `mismatchCode`, which sits at the address
+  `1 + 2*bits.length + successCode.length` in the check's frame.
+
+Key facts that made the two run lemmas fit each other:
+- every block's fault target is `faultAfter + 2 * rest.length + 2` in the block's
+  own frame, and the nested `host` relocation adds `2` per level, so all blocks
+  in `compareCode` share the absolute target `2 * bits.length + faultAfter`,
+  i.e. exactly the byte after the success code;
+- the tape shape convention (`seekFrontier`) is the same in hypothesis and
+  conclusion, so the induction closes with `simp only [...]` + `omega`;
+- fuel of the disagreement run is `2 * k + 1`, not `2 * k + 2`: the last block
+  only executes its branch, never its `moveLeft`.
+
+Current theorem set (all verified, no sorryAx):
+`checkBits`, `checkBits_ne_nil`, `seekFrontier`, `seekFrontier_move`, `cellRel`,
+`compareCode`, `compareCode_length`, `compareCode_native`, `compare_run`,
+`compare_cell_agree`, `compare_head_differ`, `compare_run_mismatch`, `checkCode`,
+`checkCode_length`, `checkCode_native`, `checkCode_run`, `checkCode_run_mismatch`.
+
+Still missing before this can be wired into the simulator's missing branch:
+concrete `Bits n` / `Bits κ` instantiations of the length and nativeness facts,
+and the table-region invariant that says the real record's last `κ+1+n` cells are
+exactly `checkBits initial terminal` (that is the `messagePrefix` invariant from
+the plan).
+
+### Concrete `checkInput` layer (same session, later)
+
+DELIVERED, VERIFIED: the concrete per-input instantiation, which is what the
+simulator's missing branch composes against.
+
+- `recordBits input` = the record packet `input.1.toList ++ input.2.1 ::
+  input.2.2.toList`, and `reverse_record_eq_checkBitsOf`: a data-marked
+  record's reversed packet IS the check's compared cells. This is the
+  *table-region invariant* the plan needed: the walk reads the record's own
+  last `κ + 1 + n` cells and every one of them is the expected cell.
+- `reverse_record_length`, `recordBits_length` (both `List.length` only).
+- `checkInput input successCode mismatchCode = checkCode (checkBits input.1
+  input.2.2) successCode mismatchCode`.
+- `checkInput_run_record`: given `input.2.1 = true`, the concrete check's
+  agreement run for the record's own region. Compose with `checkCode_run`.
+
+Wiring note for the search loop: the region invariant is stated for a list of
+Bools (`recordBits`) that is `input`-specific, so the loop's induction is over
+records, not over abstract bit lists. The composition is
+
+  `checkInput_run_record input hMarker ... ` applied at each candidate record.
+
+Still missing: the backward search itself (a loop over the private table that
+walks from the response flag leftwards over candidate records, applying the
+concrete check per candidate and stopping at the first agreement), the
+reverse-order copy primitive, and the ideal-hash call.

@@ -1,4 +1,11 @@
 import Foundation.Constructions.Hash.NativeSimulatorQueryLoadingResources
+import Foundation.Constructions.Hash.NativeSimulatorDispatchQueryLoading
+import Foundation.Constructions.Hash.NativeSimulatorQueryPacket
+import Foundation.Constructions.Hash.NativeSimulatorQueryPacketResources
+import Foundation.Constructions.Hash.NativeSimulatorQueryService
+import Foundation.Constructions.Hash.NativeSimulatorQueryRound
+import Foundation.Crypto.Semantics.Oracle.TerminalCopy
+import Foundation.Constructions.Hash.NativeSimulatorTerminalCheck
 import Foundation.Constructions.Hash.NativeSimulatorQueryLoading
 import Foundation.Crypto.Semantics.Oracle.NativeCodeTapeEquivalence
 import Foundation.Constructions.Hash.NativeSimulatorLookupContextRestore
@@ -2404,3 +2411,129 @@ import Foundation.Crypto.Semantics.Oracle.PacketWriter
 #print axioms CryptoOracle.Interactive.NativeCode.local_only_step
 
 #print axioms CryptoOracle.Interactive.NativeCode.local_only_eval
+
+#print axioms Foundation.Hash.Native.SimulatorDispatchQueryLoading.native_run
+
+#print axioms Foundation.Hash.Native.SimulatorDispatchQueryLoading.native_first_joint
+
+#print axioms Foundation.Hash.Native.SimulatorDispatchQueryLoading.native_returned
+
+#print axioms Foundation.Hash.Native.SimulatorDispatchQueryLoading.native_layout
+
+#print axioms Foundation.Hash.Native.SimulatorDispatchQueryLoading.native_export
+
+#print axioms Foundation.Hash.Native.SimulatorDispatchQueryLoading.response_correct_with_table
+
+#print axioms Foundation.Hash.Native.SimulatorDispatchQueryLoading.native_first_full
+
+#print axioms Foundation.Hash.Native.SimulatorDispatchQueryLoading.steps_le
+
+#print axioms Foundation.Hash.Native.SimulatorQueryPacket.native_first
+
+#print axioms Foundation.Hash.Native.SimulatorQueryPacket.export_stage
+
+#print axioms Foundation.Hash.Native.SimulatorQueryPacket.stage_run
+
+#print axioms Foundation.Hash.Native.SimulatorQueryPacket.first_joint
+
+#print axioms Foundation.Hash.Native.SimulatorQueryPacket.run
+
+#print axioms Foundation.Hash.Native.SimulatorQueryPacket.response_correct_with_table
+
+#print axioms Foundation.Hash.Native.SimulatorQueryPacket.returned_layout
+
+#print axioms Foundation.Hash.Native.SimulatorQueryPacket.steps_le
+
+#print axioms Foundation.Hash.Native.SimulatorQueryPacket.running_encoding_length
+
+#print axioms Foundation.Hash.Native.SimulatorQueryPacket.encoded_peak
+
+#print axioms Foundation.Hash.Native.SimulatorQueryPacket.first_encoded
+
+#print axioms Foundation.Hash.Native.SimulatorQueryService.simulatorPacketProcedure_costed
+
+#print axioms Foundation.Hash.Native.SimulatorQueryService.simulatorPacketHandler_exact
+
+#print axioms Foundation.Hash.Native.SimulatorQueryService.simulatorPacketHandler_budget
+
+#print axioms Foundation.Hash.Native.SimulatorQueryService.simulatorService_entry
+
+#print axioms Foundation.Hash.Native.SimulatorQueryService.simulatorService_budget
+
+#print axioms Foundation.Hash.Native.SimulatorQueryService.simulatorService_costed
+
+#print axioms Foundation.Hash.Native.SimulatorQueryService.simulatorService_operational
+
+#print axioms Foundation.Hash.Native.SimulatorQueryService.simulatorService_packet
+
+#print axioms Foundation.Hash.Native.SimulatorQueryService.simulatorService_law
+
+#print axioms Foundation.Hash.Native.SimulatorQueryService.simulatorService_frame
+
+#print axioms Foundation.Hash.Native.SimulatorQueryRound.simulatorSourcePrefix
+
+#print axioms Foundation.Hash.Native.SimulatorQueryRound.simulatorWaitingService_semantics
+
+#print axioms Foundation.Hash.Native.SimulatorQueryRound.simulatorResponse_entry
+
+#print axioms Foundation.Hash.Native.SimulatorQueryRound.simulatorResponse_exit
+
+#print axioms Foundation.Hash.Native.SimulatorQueryRound.simulatorResponse_budget
+
+#print axioms Foundation.Hash.Native.SimulatorQueryRound.simulatorSourcePrefix_operational
+
+#print axioms Foundation.Hash.Native.SimulatorQueryRound.simulatorWaitingService_operational
+
+#print axioms Foundation.Hash.Native.SimulatorQueryRound.simulatorResponse_operational
+
+#print axioms Foundation.Hash.Native.SimulatorQueryRound.simulatorCertifiedPrefix
+
+#print axioms Foundation.Hash.Native.SimulatorQueryRound.simulatorSourceRound
+
+#print axioms Foundation.Hash.Native.SimulatorQueryRound.simulatorSourceRound_entry
+
+#print axioms Foundation.Hash.Native.SimulatorQueryRound.simulatorSourceRound_budget
+
+#print axioms Foundation.Hash.Native.SimulatorQueryRound.simulatorCertifiedPrefix_erase
+
+#print axioms Foundation.Hash.Native.SimulatorQueryRound.simulatorSourceRound_semantics
+
+#print axioms Foundation.Hash.Native.SimulatorQueryRound.simulatorSourceRound_operational
+
+#print axioms Foundation.Hash.Native.SimulatorQueryRound.simulatorSourceRound_law
+
+#print axioms Foundation.Hash.Native.SimulatorQueryRound.simulatorSourceRound_semantics_of_pure
+
+#print axioms Foundation.Hash.Native.SimulatorQueryRound.compressionPacket_injective
+
+#print axioms CryptoOracle.Interactive.TerminalCopy.readOutput_cell_run
+
+#print axioms CryptoOracle.Interactive.TerminalCopy.readOutput_run
+
+#print axioms CryptoOracle.Interactive.TerminalCopy.cellLeft_run
+
+#print axioms CryptoOracle.Interactive.TerminalCopy.cellBoth_run
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.compareCode_length
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.compareCode_native
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.compare_run
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.compare_cell_agree
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.compare_head_differ
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.compare_run_mismatch
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.checkBits_ne_nil
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.checkInput_run_record
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.reverse_record_eq_checkBitsOf
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.reverse_record_length
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.checkCode_run
+
+#print axioms Foundation.Hash.Native.SimulatorTerminalCheck.checkCode_run_mismatch
