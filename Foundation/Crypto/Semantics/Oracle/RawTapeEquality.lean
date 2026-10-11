@@ -1,6 +1,8 @@
 import Foundation.Crypto.Semantics.Oracle.FixedWidthCopy
 import Foundation.Crypto.Semantics.Oracle.NativeCode
 import Foundation.Crypto.Semantics.Machine.NativeFixedComponent
+import Foundation.Crypto.Semantics.Oracle.HaltReturn
+import Foundation.Crypto.Semantics.BoundaryExactTime
 
 /-! Compare a raw candidate field against an equally wide raw query followed
 by a blank. Only the query needs a delimiter: a private table's response field
@@ -161,6 +163,80 @@ theorem steps_bound (candidate query : List Bool) (width : candidate.length = qu
           simp only [steps]
           split <;> simp only [List.length_cons] <;> omega
 
+theorem steps_positive (candidate query : List Bool) : 0 < steps candidate query := by
+  cases candidate <;> cases query <;> simp only [steps]
+  all_goals try decide
+  split <;> omega
+
+/-- The failure loop's exact active state immediately before its final halt. -/
+theorem skip_before_halt (oracle : BitOracle State) (state : State)
+    (trace : List (List Bool × List Bool))
+    (candidate query : List Bool) (width : candidate.length = query.length)
+    (leftInput leftOutput inputTail outputTail : List (Option Bool)) :
+    TimedExecution.eval (Reification.timedStep code oracle) (4 * query.length + 2)
+      (⟨state, .running { pc := 6, inputTape := FixedWidthCopy.frontier leftInput (candidate.map some ++ inputTail), outputTape := FixedWidthCopy.frontier leftOutput (query.map some ++ none :: outputTail) }, trace⟩ : Configuration State) =
+      PMF.pure (NativeCode.frame state trace { finish candidate query leftInput leftOutput inputTail outputTail false with halted := false }) := by
+  induction query generalizing candidate leftInput leftOutput with
+  | nil =>
+      cases candidate with
+      | cons a rest => simp at width
+      | nil =>
+          simp [code, NativeCode.code, program, TimedExecution.eval, Reification.timedStep,
+            Reification.terminal, Reification.perform, Reification.action, transition,
+            Machine.Instruction.next, Machine.Configuration.tape, Machine.Configuration.updateTape,
+            Machine.Configuration.advance, finish, NativeCode.frame, FixedWidthCopy.frontier,
+            ResponseLoading.fromCells, Tape.write]
+  | cons b rest ih =>
+      cases candidate with
+      | nil => simp at width
+      | cons a remaining =>
+          have hw : remaining.length = rest.length := by simpa using width
+          rw [show 4 * (b :: rest).length + 2 = 4 + (4 * rest.length + 2) from by simp; omega,
+            TimedExecution.eval_add]
+          simp only [List.map_cons, List.cons_append]
+          rw [skip_iteration, PMF.pure_bind, ih remaining hw (some a :: leftInput) (some b :: leftOutput)]
+          simp [finish, NativeCode.frame, List.reverse_cons, List.map_append, List.append_assoc]
+
+/-- Agreement and disagreement both reach their actual halt instruction with
+the comparison flag already written. This permits a real return jump. -/
+theorem before_halt (oracle : BitOracle State) (state : State)
+    (trace : List (List Bool × List Bool))
+    (candidate query : List Bool) (width : candidate.length = query.length)
+    (leftInput leftOutput inputTail outputTail : List (Option Bool)) :
+    TimedExecution.eval (Reification.timedStep code oracle) (steps candidate query - 1)
+      (⟨state, .running { inputTape := FixedWidthCopy.frontier leftInput (candidate.map some ++ inputTail), outputTape := FixedWidthCopy.frontier leftOutput (query.map some ++ none :: outputTail) }, trace⟩ : Configuration State) =
+      PMF.pure (NativeCode.frame state trace { finish candidate query leftInput leftOutput inputTail outputTail (decide (candidate = query)) with halted := false }) := by
+  induction candidate generalizing query leftInput leftOutput with
+  | nil =>
+      cases query with
+      | cons b rest => simp at width
+      | nil =>
+          simp [steps, code, NativeCode.code, program, TimedExecution.eval, Reification.timedStep,
+            Reification.terminal, Reification.perform, Reification.action, transition,
+            Machine.Instruction.next, Machine.Configuration.tape, Machine.Configuration.updateTape,
+            Machine.Configuration.advance, finish, NativeCode.frame, FixedWidthCopy.frontier,
+            ResponseLoading.fromCells, Tape.write]
+  | cons a rest ih =>
+      cases query with
+      | nil => simp at width
+      | cons b remaining =>
+          have hw : rest.length = remaining.length := by simpa using width
+          by_cases hab : a = b
+          · subst b
+            have hp := steps_positive rest remaining
+            rw [steps, if_pos rfl,
+              show 5 + steps rest remaining - 1 = 5 + (steps rest remaining - 1) from by omega,
+              TimedExecution.eval_add]
+            simp only [List.map_cons, List.cons_append]
+            rw [agree_iteration, PMF.pure_bind, ih remaining hw (some a :: leftInput) (some a :: leftOutput)]
+            simp [finish, NativeCode.frame, List.reverse_cons, List.map_append, List.append_assoc]
+          · rw [steps, if_neg hab,
+              show 2 + (4 * (b :: remaining).length + 3) - 1 = 2 + (4 * (b :: remaining).length + 2) from by omega,
+              TimedExecution.eval_add]
+            rw [differ_step oracle state trace _ _ a b rfl rfl hab, PMF.pure_bind,
+              skip_before_halt oracle state trace (a :: rest) (b :: remaining) width]
+            simp [hab]
+
 structure Input where
   candidate : List Bool
   query : List Bool
@@ -206,6 +282,50 @@ theorem native_run (input : Input) :
 
 theorem result_status (input : Input) :
     (result input).outputTape.current = some (decide (input.candidate = input.query)) := rfl
+
+/-- Replace the actual halt by an executed return jump into a relocated caller
+continuation; no free resumption or artificial halt padding is used. -/
+theorem return_run (oracle : BitOracle State) (state : State)
+    (trace : List (List Bool × List Bool)) (input : Input) (tail : Code) :
+    TimedExecution.eval (Reification.timedStep (HaltReturn.host code tail) oracle)
+      (steps input.candidate input.query) (NativeCode.frame state trace (start input)) =
+      PMF.pure (NativeCode.frame state trace ((result input).resumeAt code.length)) := by
+  have hp := before_halt oracle state trace input.candidate input.query input.width
+    input.leftInput input.leftOutput input.inputTail input.outputTail
+  have hh : code[({ result input with halted := false } : Machine.Configuration).pc]? = some (.native .halt) := by
+    unfold result finish
+    cases h : decide (input.candidate = input.query) <;> rfl
+  have hreturn := HaltReturn.return_run code tail oracle state trace (start input)
+    { result input with halted := false } (steps input.candidate input.query - 1) rfl hp hh
+  have hpositive := steps_positive input.candidate input.query
+  rw [show steps input.candidate input.query - 1 + 1 = steps input.candidate input.query from by omega] at hreturn
+  exact hreturn
+
+/-- The execution length is the actual first-halt clock, including the physical
+comparison flag, table cursor, opaque state and prior transcript. -/
+theorem first_joint (oracle : BitOracle State) (state : State)
+    (trace : List (List Bool × List Bool)) (input : Input) :
+    runToBoundary (Reification.timedStep code oracle)
+      (fun frame => Reification.terminal frame.control)
+      (steps input.candidate input.query) (NativeCode.frame state trace (start input)) =
+      PMF.pure (NativeCode.frame state trace (result input), steps input.candidate input.query) := by
+  have hp := before_halt oracle state trace input.candidate input.query input.width
+    input.leftInput input.leftOutput input.inputTail input.outputTail
+  have hr := run oracle state trace input.candidate input.query input.width
+    input.leftInput input.leftOutput input.inputTail input.outputTail
+  change TimedExecution.eval (Reification.timedStep code oracle) (steps input.candidate input.query - 1)
+    (NativeCode.frame state trace (start input)) = PMF.pure (NativeCode.frame state trace { result input with halted := false }) at hp
+  change TimedExecution.eval (Reification.timedStep code oracle) (steps input.candidate input.query)
+    (NativeCode.frame state trace (start input)) = PMF.pure (NativeCode.frame state trace (result input)) at hr
+  have hpositive := steps_positive input.candidate input.query
+  have htime : steps input.candidate input.query - 1 + 1 = steps input.candidate input.query := by omega
+  have h := runToBoundary_joint_of_adjacent (Reification.timedStep code oracle)
+    (fun frame => Reification.terminal frame.control) (NativeCode.frame state trace (start input))
+    (steps input.candidate input.query - 1)
+    (by intro frame hterminal; simp [Reification.timedStep, hterminal])
+    (by intro frame hsupport; rw [hp, PMF.mem_support_pure_iff] at hsupport; subst frame; rfl)
+    (by intro frame hsupport; rw [htime, hr, PMF.mem_support_pure_iff] at hsupport; subst frame; rfl)
+  simpa only [htime, hr, PMF.pure_map] using h
 
 /-- A genuine native component, ready for charged subroutine linking. -/
 noncomputable def component : NativeComponent Input Machine.Configuration :=

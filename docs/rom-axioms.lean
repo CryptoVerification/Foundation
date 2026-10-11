@@ -10,10 +10,13 @@ import Foundation.Constructions.Hash.NativeSimulatorTerminalCheckFramed
 import Foundation.Constructions.Hash.NativeSimulatorTerminalGuard
 import Foundation.Constructions.Hash.NativeSimulatorNonterminalFresh
 import Foundation.Constructions.Hash.NativeSimulatorPredecessorRecord
+import Foundation.Constructions.Hash.NativeSimulatorPredecessorFilter
+import Foundation.Constructions.Hash.NativeSimulatorPredecessorCandidate
 import Foundation.Constructions.Hash.MessagePrefixLoop
 import Foundation.Crypto.Semantics.Oracle.OutputSeekFlag
 import Foundation.Crypto.Semantics.Oracle.ReverseOutputCopy
 import Foundation.Crypto.Semantics.Oracle.RawTapeEquality
+import Foundation.Crypto.Semantics.Oracle.RestoreRawQuery
 import Foundation.Constructions.Hash.NativeSimulatorQueryLoading
 import Foundation.Crypto.Semantics.Oracle.NativeCodeTapeEquivalence
 import Foundation.Constructions.Hash.NativeSimulatorLookupContextRestore
@@ -2605,3 +2608,32 @@ import Foundation.Crypto.Semantics.Oracle.PacketWriter
 #print axioms Foundation.Hash.MessagePrefixLoop.run_message_length
 #print axioms Foundation.Hash.MessagePrefixLoop.terminal_eq
 #print axioms Foundation.Hash.MessagePrefixLoop.simulator_eq
+
+#print axioms Foundation.Hash.Native.SimulatorPredecessorFilter.entry_layout
+#print axioms Foundation.Hash.Native.SimulatorPredecessorFilter.beforeMarker_length
+#print axioms Foundation.Hash.Native.SimulatorPredecessorFilter.code_length
+#print axioms Foundation.Hash.Native.SimulatorPredecessorFilter.code_native
+#print axioms Foundation.Hash.Native.SimulatorPredecessorFilter.run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorFilter.toResponse_run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorFilter.skipRemaining_run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorFilter.guardedCode_length
+#print axioms Foundation.Hash.Native.SimulatorPredecessorFilter.empty_run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorFilter.guarded_run
+
+#print axioms CryptoOracle.Interactive.RawTapeEquality.before_halt
+#print axioms CryptoOracle.Interactive.RawTapeEquality.return_run
+#print axioms CryptoOracle.Interactive.RawTapeEquality.first_joint
+#print axioms CryptoOracle.Interactive.RestoreRawQuery.code_length
+#print axioms CryptoOracle.Interactive.RestoreRawQuery.code_native
+#print axioms CryptoOracle.Interactive.RestoreRawQuery.run
+
+#print axioms Foundation.Hash.Native.SimulatorPredecessorCandidate.code_length
+#print axioms Foundation.Hash.Native.SimulatorPredecessorCandidate.code_native
+#print axioms Foundation.Hash.Native.SimulatorPredecessorCandidate.run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorCandidate.restore_run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorCandidate.callback_length
+#print axioms Foundation.Hash.Native.SimulatorPredecessorCandidate.callback_native
+#print axioms Foundation.Hash.Native.SimulatorPredecessorCandidate.select_run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorCandidate.callback_rejected_run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorCandidate.rejected_steps_bound
+#print axioms Foundation.Hash.Native.SimulatorPredecessorCandidate.rejected_next_run

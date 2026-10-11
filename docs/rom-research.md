@@ -1,5 +1,38 @@
 # ランダムオラクル構成の研究記録
 
+## 一レコードの前駆辺候補処理の区切り（2026-10-12）
+
+`NativeSimulatorPredecessorFilter`、`NativeSimulatorPredecessorCandidate`、
+`RestoreRawQuery` を追加し、既存の `RawTapeEquality` を返却可能な部品へ拡張しました。
+
+- `guardedCode` / `empty_run` / `guarded_run`：元の物理表のリストマーカーを先に読む。
+  表末尾の false なら missing 分岐へ1命令で進み、true の実項目では
+  `2*n+2` 回の実際の入力移動でキー内のデータ／終端マーカーへ到達し、
+  false（データ）／true（終端）を読み分けます。出力の実行時 target は不変です。
+- `entry_layout` がエスケープ済み連鎖値とマーカー位置を、元の `entryBits` に対応させます。
+  マーカーまでのコード長は `2*n+3`、リストマーカーのガードを含めると `2*n+4`。
+- `toResponse_run` はデータ候補から raw 応答へ `2*κ+2` 遷移で進みます。
+  `skipRemaining_run` は終端項目の残り全セルを `2*κ+n+2` 遷移で越え、次の元の表マーカーへ進みます。
+  どちらも入力表の全セルと出力 target を保持します。
+- `RawTapeEquality.before_halt` と `first_joint` は両分岐の最後の本物の halt と
+  正確な最初の停止時刻を証明します。`return_run` はその halt を実際の return jump に変換します。
+  ホストで機械を再開したり、余分な halt padding を挟んだりしません。
+- `NativeSimulatorPredecessorCandidate.run` はマーカー位置から応答比較と返却を合成。
+  `select_run` は実際に書かれた比較フラグで found／復元側へ分岐します。
+  `callback_rejected_run` と `rejected_next_run` は不一致後、フラグを空白へ戻し、
+  target の先頭へ戻って次の継続入口へ進むことを同一コードの実行として証明します。
+  入力ヘッドは次の表マーカーに残り、通過した全項目は元のまま左側に保持されます。
+  マーカー読取り後から不一致を処理して次の継続へ入るまでの上界は `6*n+2*κ+9` 遷移です。
+
+ここでの「次へ」は caller が与える継続コードの入口であり、全表の反復実行を証明した意味ではありません。
+完成したのは一レコードの候補選別・比較・結果分岐・target 復元の部品と物理的な接続契約です。
+同じ有限コードで表を反復するループと `MessagePrefixLoop.find` との最初の一致の対応、
+選ばれたレコードから previous/block を取り出す処理は引き続き未完了です。
+
+検証：全体ビルド4065ジョブ成功、公理監査1608件の依存出力、エラー・`sorryAx` なし。
+今回の主要定理は `propext`・`Classical.choice`・`Quot.sound` のみに依存。
+公開 import・監査・最短経路の記録を更新し、`git diff --check` も成功しました。
+
 ## 最短接続経路の実装（2026-10-12）
 
 経路と各段階の到達条件を `docs/rom-shortest-path.md` に分離しました。

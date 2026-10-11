@@ -20,14 +20,21 @@
    `NativeSimulatorNonterminalFresh.rejected_after_rewind` が既存の乱数生成・表追加へ接続する。
    各継続コードは `CodeRelocation.host` で結合し、不一致路の内部番地も正しく移す。
 
-2. **前駆辺を一つ選ぶ表走査を完成する。部品は今回追加、走査自体は未完了。**
+2. **前駆辺を一つ選ぶ表走査を完成する。一レコードの選別・比較・復元は完成、全表反復は未完了。**
    `RawTapeEquality.component` は固定14命令で、生の応答フィールドと、
    空白で終わる実行時ターゲットを比較する。
    幅の一致を入口条件として、入力表の次のマーカー・全接尾辞を保存する。
    `NativeSimulatorPredecessorRecord.run` は元の record marker・delimited key を
    実際の移動命令で越えて、この比較器へ入る。
-   次に必要なのは false のデータマーカーによる候補選別、比較後のターゲット復元、
-   不一致なら次レコードへ、一致なら previous と block を取り出すループ。
+   `NativeSimulatorPredecessorFilter.guarded_run` は表末尾の false マーカーを先に判定し、
+   非空項目では false のデータマーカー／true の終端マーカーを実際の命令で選別する。
+   `skipRemaining_run` は終端項目を飛ばし、`toResponse_run` は候補の応答位置へ進む。
+   `RawTapeEquality.return_run` は実際の halt を return jump に変え、`first_joint` は
+   実際の最初の停止時刻を保証する。
+   `NativeSimulatorPredecessorCandidate.select_run` は実際の比較フラグによる制御分岐を証明し、
+   `rejected_next_run` は不一致後のターゲット復元と次の継続入口までを同一コードで実行する。
+   次に必要なのは、この一レコード処理を繰り返す同一有限コードと表順序の帰納法、
+   一致した項目から previous と block を取り出す処理。
    選ぶ順序は `dataEdges.lookup` と同じ表の先頭からの順序でなければならない。
    全表を含む資源上界もこの段階で証明する。
 
@@ -70,7 +77,7 @@
 
 ## 現在の範囲
 
-上記の1と、2・3の再利用部品／参照精密化を実装した。
+上記の1、2の一レコード処理、3の再利用部品／参照精密化を実装した。
 通常命令の完全な前駆辺検索・メッセージ再構成、完全な理想世界、
 新たな WholeWitness/WholeReduction、MAC のコード生成・論理登録は未完了。
 この区別を保持したまま、2 → 3 → 4 → 5 → 6 の順に接続する。
