@@ -1,5 +1,86 @@
 # ランダムオラクル構成の研究記録
 
+## 通常命令による再構成ループ・停止・全状態資源評価（2026-10-12）
+
+`NativeSimulatorReconstruct.lean` で、選択キー抽出から再構成の反復へ接続しました。
+固定幅 n/κ と公の IV に対する同じ有限コードを、任意の有限表・実行時 target・fuel に使います。
+コード長は `17*n+18*κ+69`。表長・fuel に応じたコード複製やホスト側の再開はありません。
+
+- `LeftBlankRewind.run`：固定4命令で空白境界まで左へ走査し、実右移動で先頭へ戻る。
+  入力表の巻戻しと IV 不一致後の出力 target 復元に使う。
+- `UnaryFuel.consume_run` / `empty_run`：表先頭の左の空白境界を越えた unary counter を読む。
+  消費済みセルは false、未消費セルは true。非零なら一つの true を実書込みで false に変え、
+  表先頭へ戻る。消費済み used に対し `6*used+7` 遷移、零判定は `3*used+3` 遷移。
+- `ForwardConstantCheck.match_run` / `rejected_run`：実行時 target と固定 IV の一致を比較する。
+  不一致では読み進めた全 target セルを実巻戻しで復元する。これは鎖探索の基底判定であり、
+  終端問い合わせ入口の terminal/payload ガードとは別の判定。
+- `cycle_run`：IV 不一致 → fuel 一単位消費 → 同じ全表検索 → previous/block 抽出 →
+  私有表先頭への巻戻し → IV 判定入口への実 back-edge を同一コードで合成する。
+  再開用 halt だけを先頭への jump に変更し、成功・辺欠落・fuel 消尽の halt は残す。
+- `accepted_run` / `empty_run` / `missing_run`：三つの停止路の全物理状態を証明する。
+  IV 判定は fuel 判定より先なので、fuel=0 でも IV 到達は空 suffix を含む成功。
+- `run` / `run_at_budget`：任意の表（衝突・循環を含む）で `MessagePrefixLoop.run` の結果を
+  実行時の成功フラグと encoded suffix として返し、実際に停止する。外部状態と全旧履歴を保持する。
+  `retainsTable` は全元表セルの順序と値が保存されることを保証する。
+- `reconstruct_eq` / `message_law`：空 suffix・used=0 からの機械実行の観測分布は
+  元の `messagePrefix initial table fuel target` の pure 分布と厳密に一致する。
+- `procedure` / `procedure_costed`：同じ emitted code の全物理状態を返す実行契約へ登録する。
+  endpoint の選択は実行証明に裏付けられ、参照答えから機械状態を生成する契約ではない。
+
+公の遷移予算：
+`(fuel+1) * (table.length*(17*n+8*κ+26)+20*n+10*κ+50+6*(fuel+used))`。
+`encoded_peak` / `encoded_finish` はこの予算内の全途中状態と停止状態について、
+コード・両テープ・counter・回収 suffix・不透明な外部状態・全旧履歴の符号長を評価する。
+上界は `NativeCode.storageBound code initialSize budget`。外部 oracle は呼ばないので、
+その内部資源挙動について追加の実現仮定を要求しない。
+
+検証：全体 `lake build` は4076ジョブ成功。`lake env lean docs/rom-axioms.lean` は
+1893件の公理依存出力（公理なしの宣言を含む）、エラー・`sorryAx` なし。
+今回の監査対象の全証明は `propext`・`Classical.choice`・`Quot.sound` のみに依存する。
+新規モジュールの単体ビルドに警告なし。公開 import・監査へ登録し、`git diff --check` も成功。
+
+入口契約は、表の左の空白のさらに左に `false^used ++ true^fuel ++ [none]` の物理 counter、
+出力に raw target・空白・`encodeList (fixedBits κ) suffix` を持つこと。
+この入口からの反復実行は完成した。元の終端問い合わせサービスから counter/suffix を準備する接続、
+元キーの退避、理想ハッシュ call、応答の表更新、`admissible` 除去、uniform WholeWitness/WholeReduction、
+MAC コード生成・認証済み論理登録は次段階で接続する。
+
+## 選択キーの命令レベル抽出と再構成一ステップ（2026-10-12）
+
+`BackwardFieldCopy`、`NativeSimulatorPredecessorExtract`、
+`NativeSimulatorPredecessorLookupExtract` を追加しました。
+
+- `BackwardFieldCopy.run` / `run_host`：入力を左向きに読み、出力へ左向きに書き込む。
+  raw モードは全セル、escaped モードは stride-two の実移動で true/bit を復号する。
+  `writeLeft_finish` は古い target の scratch セルを実際の書込みで全て上書きし、
+  保存した右側 suffix を保持する。raw はセルあたり7命令・5遷移、escaped は8命令・6遷移。
+- `SimulatorPredecessorExtract.run`：選択応答の直後の入力カーソルから、block の escaped field を
+  コピーし、リスト要素マーカー true と空白区切りを書き、previous を raw target として復号する。
+  コード長は継続を除いて `9*n+14*κ+15`、時間は正確に `7*n+10*κ+13` 遷移。
+  `finish_input` は元の全表セルと選択 record marker への復帰、`finish_output` は
+  raw previous・空白・true・delimited block・旧 suffix の配置を保証する。幅ゼロも含む。
+- `SimulatorPredecessorLookupExtract.lookup_return` / `run`：全表検索の found halt だけを
+  抽出コード入口への実 jump に変更し、同一コード内で検索と抽出を合成する。
+  表順序の最初の一致（衝突・重複を含む）と、全外部状態・旧履歴・表セルを保持する。
+  継続を除くコード長は `14*n+18*κ+44`。成功路の時間は
+  `table.length*(8*n+2*κ+14)+8*n+10*κ+16` 以下。
+- `finish_encoded` / `reconstruct_step`：機械出力は raw previous と
+  `encodeList (fixedBits κ) (block :: suffix)` の配置であり、参照 `MessagePrefixLoop.run` の
+  target 更新・block-prepend 一ステップと厳密に対応する。
+- `missing_run`：辺欠落時の halt は維持され、抽出命令へは入らない。
+  `code_native` は継続が native のとき全合成コードも通常命令だけであることを保証する。
+
+検証：全体 `lake build` は4072ジョブ成功。`lake env lean docs/rom-axioms.lean` は
+1847件の公理依存出力（公理なしの宣言を含む）、エラー・`sorryAx` なし。
+今回の主要定理は `propext`・`Classical.choice`・`Quot.sound` のみに依存する。
+公開 import・監査へ登録し、`git diff --check` も成功しました。
+
+出力入口は target 前の `[none]` を scratch とし、空白判定フラグの右に保存した suffix を要求する。
+検索開始時は入力表の先頭、成功後は選択 record marker に戻るので、反復には表先頭へ戻す
+実命令と IV 判定・fuel 制御が必要。ここで証明したのは再構成の一ステップであり、
+機械再構成ループ全体、合成コードの全途中状態の符号長評価、理想ハッシュ呼出し、
+`admissible` 除去、WholeWitness/WholeReduction、MAC コード生成・論理登録は引き続き未完了です。
+
 ## 全表の前駆データ辺検索（2026-10-12）
 
 `NativeSimulatorPredecessorLookup.lean` に、同じ有限コードによる全表走査を追加しました。

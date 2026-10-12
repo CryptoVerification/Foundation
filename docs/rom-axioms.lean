@@ -14,6 +14,13 @@ import Foundation.Constructions.Hash.NativeSimulatorPredecessorFilter
 import Foundation.Constructions.Hash.NativeSimulatorPredecessorCandidate
 import Foundation.Constructions.Hash.NativeSimulatorPredecessorStep
 import Foundation.Constructions.Hash.NativeSimulatorPredecessorLookup
+import Foundation.Crypto.Semantics.Oracle.BackwardFieldCopy
+import Foundation.Constructions.Hash.NativeSimulatorPredecessorExtract
+import Foundation.Constructions.Hash.NativeSimulatorPredecessorLookupExtract
+import Foundation.Crypto.Semantics.Oracle.LeftBlankRewind
+import Foundation.Crypto.Semantics.Oracle.UnaryFuel
+import Foundation.Crypto.Semantics.Oracle.ForwardConstantCheck
+import Foundation.Constructions.Hash.NativeSimulatorReconstruct
 import Foundation.Constructions.Hash.MessagePrefixLoop
 import Foundation.Crypto.Semantics.Oracle.OutputSeekFlag
 import Foundation.Crypto.Semantics.Oracle.ReverseOutputCopy
@@ -2685,3 +2692,81 @@ import Foundation.Crypto.Semantics.Oracle.PacketWriter
 #print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.run_at_cap
 #print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.encoded_peak
 #print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.encoded_first
+
+#print axioms CryptoOracle.Interactive.BackwardFieldCopy.writeLeft_append
+#print axioms CryptoOracle.Interactive.BackwardFieldCopy.writeLeft_finish
+#print axioms CryptoOracle.Interactive.BackwardFieldCopy.code_length
+#print axioms CryptoOracle.Interactive.BackwardFieldCopy.code_native
+#print axioms CryptoOracle.Interactive.BackwardFieldCopy.cell_run
+#print axioms CryptoOracle.Interactive.BackwardFieldCopy.run
+#print axioms CryptoOracle.Interactive.BackwardFieldCopy.run_host
+#print axioms CryptoOracle.Interactive.BackwardFieldCopy.advance_input
+#print axioms Foundation.Hash.Native.SimulatorPredecessorExtract.entry_layout
+#print axioms Foundation.Hash.Native.SimulatorPredecessorExtract.escaped_source
+#print axioms Foundation.Hash.Native.SimulatorPredecessorExtract.code_length
+#print axioms Foundation.Hash.Native.SimulatorPredecessorExtract.code_native
+#print axioms Foundation.Hash.Native.SimulatorPredecessorExtract.prelude_run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorExtract.payload_run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorExtract.between_run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorExtract.previous_run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorExtract.final_run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorExtract.run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorExtract.finish_input
+#print axioms Foundation.Hash.Native.SimulatorPredecessorExtract.finish_output
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookupExtract.code_length
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookupExtract.code_native
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookupExtract.found_cursor
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookupExtract.lookup_return
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookupExtract.run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookupExtract.steps_bound
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookupExtract.finish_encoded
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookupExtract.reconstruct_step
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookupExtract.missing_cursor
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookupExtract.missing_run
+
+#print axioms CryptoOracle.Interactive.LeftBlankRewind.body_native
+#print axioms CryptoOracle.Interactive.LeftBlankRewind.cell_run
+#print axioms CryptoOracle.Interactive.LeftBlankRewind.run
+#print axioms CryptoOracle.Interactive.UnaryFuel.left_run
+#print axioms CryptoOracle.Interactive.UnaryFuel.right_run
+#print axioms CryptoOracle.Interactive.UnaryFuel.prepare_run
+#print axioms CryptoOracle.Interactive.UnaryFuel.consume_cell
+#print axioms CryptoOracle.Interactive.UnaryFuel.finish_run
+#print axioms CryptoOracle.Interactive.UnaryFuel.consume_run
+#print axioms CryptoOracle.Interactive.UnaryFuel.empty_run
+#print axioms CryptoOracle.Interactive.UnaryFuel.code_native
+#print axioms CryptoOracle.Interactive.ForwardConstantCheck.compareCode_length
+#print axioms CryptoOracle.Interactive.ForwardConstantCheck.match_run
+#print axioms CryptoOracle.Interactive.ForwardConstantCheck.mismatch_run
+#print axioms CryptoOracle.Interactive.ForwardConstantCheck.recover_run
+#print axioms CryptoOracle.Interactive.ForwardConstantCheck.rejected_run
+#print axioms CryptoOracle.Interactive.ForwardConstantCheck.code_native
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.source_length
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.code_length
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.code_native
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.accepted_before
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.rejected_prepare
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.next_before_restart
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.begin_search
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.restart_halt
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.cycle_run
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.accepted_run
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.failed_before
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.empty_run
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.missing_layout
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.missing_next_before
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.missing_run
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.start_retains
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.table_payload_length
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.cycle_bound
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.run
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.run_at_budget
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.read_represents
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.reconstruct_eq
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.encoded_peak
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.encoded_finish
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.finish_run
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.finish_represents
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.procedure
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.procedure_costed
+#print axioms Foundation.Hash.Native.SimulatorReconstruct.message_law

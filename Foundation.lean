@@ -1290,6 +1290,13 @@ import Foundation.Constructions.Hash.NativeSimulatorPredecessorFilter
 import Foundation.Constructions.Hash.NativeSimulatorPredecessorCandidate
 import Foundation.Constructions.Hash.NativeSimulatorPredecessorStep
 import Foundation.Constructions.Hash.NativeSimulatorPredecessorLookup
+import Foundation.Crypto.Semantics.Oracle.BackwardFieldCopy
+import Foundation.Constructions.Hash.NativeSimulatorPredecessorExtract
+import Foundation.Constructions.Hash.NativeSimulatorPredecessorLookupExtract
+import Foundation.Crypto.Semantics.Oracle.LeftBlankRewind
+import Foundation.Crypto.Semantics.Oracle.UnaryFuel
+import Foundation.Crypto.Semantics.Oracle.ForwardConstantCheck
+import Foundation.Constructions.Hash.NativeSimulatorReconstruct
 import Foundation.Constructions.Hash.MessagePrefixLoop
 import Foundation.Crypto.Semantics.Oracle.OutputSeekFlag
 import Foundation.Crypto.Semantics.Oracle.ReverseOutputCopy

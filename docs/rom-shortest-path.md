@@ -39,21 +39,36 @@
    `selected_layout` は選ばれた項目の符号化キーと残り表の物理配置を保証する。
    時間は `table.length*(8*n+2*κ+14)+n+3` 以下で、正確な最初の停止時刻と
    全途中状態・停止状態の符号長上界も証明した。
-   次に必要なのは、一致した項目の残っているキーから previous と block を実際の命令で取り出す処理。
+   `NativeSimulatorPredecessorExtract.run` は選択キーから previous/block を通常命令で取り出す。
+   `NativeSimulatorPredecessorLookupExtract.run` は found halt を実 jump に変え、検索と抽出を合成する。
+   合成コード長は継続を除いて `14*n+18*κ+44`、成功時間は
+   `table.length*(8*n+2*κ+14)+8*n+10*κ+16` 以下。辺欠落の halt は保持する。
 
-3. **再構成ループを通常命令へ落とす。参照ループの精密化は今回証明、機械版は未完了。**
+3. **再構成ループを通常命令へ落とす。入口契約からの反復・停止・全状態資源評価まで証明済み。**
    `MessagePrefixLoop.find_eq` は先頭から最初の一致を選ぶことを証明する。
    `run_eq` の不変条件は、残り fuel・現在 target・回収済み suffix に対して
    `run.message = (messagePrefix fuel target).map (fun blocks => blocks ++ suffix)`。
    前駆辺を見つけたら block を suffix の先頭へ積むので、最後にブロック列を再反転する必要はない。
    `run_bounds` は最大 fuel 回の探索、最大 `fuel * table.length` 回のレコード検査を保証する。
    これはレコード単位の参照費用であり、CPU 遷移予算ではない。
+   `NativeSimulatorPredecessorLookupExtract.reconstruct_step` は実検索・抽出の出力が
+   raw previous と `encodeList (fixedBits κ) (block :: suffix)` になることを証明する。
+   target 前の `[none]` と古い target セルは実書込みで消費する scratch、右の suffix は保持する。
+   `NativeSimulatorReconstruct.cycle_run` は選択 record marker から表先頭への実巻戻し、
+   固定 IV 比較、入力テープ上の unary fuel 消費、次の反復への実 back-edge を同一コードで接続する。
+   コード長は `17*n+18*κ+69`、表長・fuel に依存しない。IV 判定は fuel 消費より先に行う。
+   `run` / `run_at_budget` は任意の衝突・循環を含む有限表で参照ループと同じ結果を返して停止する。
+   `reconstruct_eq` / `message_law` は元 `messagePrefix` と機械観測分布の一致を保証する。
+   遷移上界は `(fuel+1)*(table.length*(17*n+8*κ+26)+20*n+10*κ+50+6*(fuel+used))`。
+   `encoded_peak` / `encoded_finish` は全途中状態／停止状態のコード・counter・表・両テープ・外部状態・履歴を評価する。
    IV 到達は空メッセージを含む成功、辺欠落・fuel 消尽は失敗。
    衝突・循環があっても参照実装と同じ結果になることを要求する。
    `ReverseOutputCopy.run` は片方のヘッドを左、もう片方を右へ動かすコピー部品を提供する。
    コピー先の空白領域は別途実際の命令で確保する必要があり、無料ではない。
 
 4. **理想ハッシュ呼出しと表更新を接続する。未完了。**
+   終端ガード成功路から、再構成入口の unary counter と空 suffix を実際に準備する。
+   上記ループの入口契約は、この物理配置を caller が供給することを要求している。
    回収したメッセージを公開パケットへ符号化し、元の問い合わせキーを退避してから `.call` する。
    応答読込みが出力テープを置換するため、キーを同じテープに残したまま呼び出さない。
    `SimulatorRemember`・応答返却の既存部品を再利用し、`compressionSimulator_eq` と
@@ -80,7 +95,7 @@
 
 ## 現在の範囲
 
-上記の1、2の全表走査と最初の一致、3の再利用部品／参照精密化を実装した。
-選択したキーの取り出しと通常命令によるメッセージ再構成、完全な理想世界、
+上記の1、2の全表走査・選択キー抽出、3の入口契約からの機械再構成反復と資源評価を実装した。
+終端サービスからの再構成入口準備・理想ハッシュ呼出し、完全な理想世界、
 新たな WholeWitness/WholeReduction、MAC のコード生成・論理登録は未完了。
 この区別を保持したまま、2 → 3 → 4 → 5 → 6 の順に接続する。
