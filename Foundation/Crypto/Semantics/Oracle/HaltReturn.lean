@@ -25,6 +25,12 @@ theorem source_lookup (source tail : Code) (pc : Nat) (inside : pc < source.leng
 theorem host_length (source tail : Code) : (host source tail).length = source.length + tail.length := by
   simp [host]
 
+theorem body_lookup (source tail : Code) (pc : Nat) :
+    (host source tail)[source.length + pc]? = (tail[pc]?).map (CodeRelocation.instruction source.length) := by
+  unfold host
+  rw [List.getElem?_append_right (by simp)]
+  simp
+
 theorem active_step_of_fetch {State : Type*} (source target : Code)
     (same : ∀ (pc : Nat) (op : CryptoOracle.Interactive.Instruction), source[pc]? = some op → op ≠ .native .halt → target[pc]? = some op)
     (oracle : BitOracle State)

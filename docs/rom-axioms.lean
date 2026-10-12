@@ -12,11 +12,15 @@ import Foundation.Constructions.Hash.NativeSimulatorNonterminalFresh
 import Foundation.Constructions.Hash.NativeSimulatorPredecessorRecord
 import Foundation.Constructions.Hash.NativeSimulatorPredecessorFilter
 import Foundation.Constructions.Hash.NativeSimulatorPredecessorCandidate
+import Foundation.Constructions.Hash.NativeSimulatorPredecessorStep
+import Foundation.Constructions.Hash.NativeSimulatorPredecessorLookup
 import Foundation.Constructions.Hash.MessagePrefixLoop
 import Foundation.Crypto.Semantics.Oracle.OutputSeekFlag
 import Foundation.Crypto.Semantics.Oracle.ReverseOutputCopy
 import Foundation.Crypto.Semantics.Oracle.RawTapeEquality
 import Foundation.Crypto.Semantics.Oracle.RestoreRawQuery
+import Foundation.Crypto.Semantics.Oracle.CodePrefixExecution
+import Foundation.Crypto.Semantics.Oracle.SelectiveHaltReturn
 import Foundation.Constructions.Hash.NativeSimulatorQueryLoading
 import Foundation.Crypto.Semantics.Oracle.NativeCodeTapeEquivalence
 import Foundation.Constructions.Hash.NativeSimulatorLookupContextRestore
@@ -2637,3 +2641,47 @@ import Foundation.Crypto.Semantics.Oracle.PacketWriter
 #print axioms Foundation.Hash.Native.SimulatorPredecessorCandidate.callback_rejected_run
 #print axioms Foundation.Hash.Native.SimulatorPredecessorCandidate.rejected_steps_bound
 #print axioms Foundation.Hash.Native.SimulatorPredecessorCandidate.rejected_next_run
+
+#print axioms CryptoOracle.Interactive.CodePrefixExecution.append_active
+#print axioms CryptoOracle.Interactive.SelectiveHaltReturn.nonhalt
+#print axioms CryptoOracle.Interactive.SelectiveHaltReturn.active_eval
+#print axioms CryptoOracle.Interactive.SelectiveHaltReturn.return_run
+#print axioms CryptoOracle.Interactive.SelectiveHaltReturn.halt_run
+#print axioms CryptoOracle.Interactive.SelectiveHaltReturn.code_native
+#print axioms Foundation.Hash.Native.SimulatorPredecessorCandidate.code_link
+#print axioms Foundation.Hash.Native.SimulatorPredecessorCandidate.callback_link
+#print axioms Foundation.Hash.Native.SimulatorPredecessorCandidate.found_context_eval
+#print axioms Foundation.Hash.Native.SimulatorPredecessorCandidate.next_context_eval
+
+#print axioms Foundation.Hash.Native.SimulatorPredecessorStep.code_length
+#print axioms Foundation.Hash.Native.SimulatorPredecessorStep.guard_run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorStep.terminal_before_halt
+#print axioms Foundation.Hash.Native.SimulatorPredecessorStep.found_before_halt
+#print axioms Foundation.Hash.Native.SimulatorPredecessorStep.rejected_before_halt
+#print axioms Foundation.Hash.Native.SimulatorPredecessorStep.empty_before_halt
+#print axioms Foundation.Hash.Native.SimulatorPredecessorStep.data_next_halt
+#print axioms Foundation.Hash.Native.SimulatorPredecessorStep.terminal_next_halt
+#print axioms Foundation.Hash.Native.SimulatorPredecessorStep.found_halt
+#print axioms Foundation.Hash.Native.SimulatorPredecessorStep.missing_halt
+#print axioms Foundation.Hash.Native.SimulatorPredecessorStep.record_before_halt
+#print axioms Foundation.Hash.Native.SimulatorPredecessorStep.recordBefore_halt
+#print axioms Foundation.Hash.Native.SimulatorPredecessorStep.recordTime_bound
+#print axioms Foundation.Hash.Native.SimulatorPredecessorStep.pc_formulas
+#print axioms Foundation.Hash.Native.SimulatorPredecessorStep.code_native
+
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.code_length
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.code_native
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.record_run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.empty_run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.run
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.steps_bound
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.finish_status_lookup
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.finish_halted
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.selected_layout
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.procedure
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.procedure_costed
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.before_halt
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.first_joint
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.run_at_cap
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.encoded_peak
+#print axioms Foundation.Hash.Native.SimulatorPredecessorLookup.encoded_first

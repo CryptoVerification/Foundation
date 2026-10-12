@@ -1,5 +1,37 @@
 # ランダムオラクル構成の研究記録
 
+## 全表の前駆データ辺検索（2026-10-12）
+
+`NativeSimulatorPredecessorLookup.lean` に、同じ有限コードによる全表走査を追加しました。
+`NativeSimulatorPredecessorStep` は4つの実際の halt 箇所を持つ一巡です。
+発見・表末尾の halt を残し、不一致・終端スキップの2箇所だけを先頭への jump に変える
+`SelectiveHaltReturn` を使って反復します。コード長は表長とターゲット値によらず
+`5*n+4*κ+29` 命令です。表長に応じたコード複製・ホスト側の再開・無料のヘッド再配置は行いません。
+
+主要な証明：
+- `run`：任意の有限な型付き圧縮表について、走査終了時の全機械状態を厳密に与えます。
+  全履歴と不透明な外部状態を保持し、終端マーカーの項目は候補から除きます。
+- `finish_status_lookup`：結果フラグは元の `(dataEdges table).lookup target` の有無と一致。
+- `selected_layout`：成功時は元の表順序で最初の一致を選びます。先行する項目はすべて不一致で、
+  選択された `((previous,(false,block)),target)` の符号化キーと応答が、返却した入力ヘッドの
+  左側にそのまま残り、残りの表が右側に残ります。衝突・重複応答がある表も含みます。
+- `steps_bound`：全遷移数は `table.length*(8*n+2*κ+14)+n+3` 以下。
+- `before_halt` / `first_joint`：正確な最初の native halt の時刻と、全状態・旧履歴を同時に保持。
+- `run_at_cap`：公の表長上限による共通予算でも、停止後の結果分布は同じです。
+- `procedure` / `procedure_costed`：実際の固定コードを、完全な物理状態を返す実行契約へ登録。
+  論理上の前駆辺をホストで計算して機械の出力に置き換える契約にはしていません。
+- `encoded_peak` / `encoded_first`：コード、両テープ、不透明な外部状態、全旧履歴の符号長を
+  全途中状態と最初の停止状態について評価します。外部理想オラクルの実行はこの走査では使いません。
+
+検証：全体ビルド4069ジョブ成功、公理監査1649件の依存出力、エラー・`sorryAx` なし。
+新規主要定理の依存は `propext`・`Classical.choice`・`Quot.sound` のみです。
+公開 import・監査・最短経路の記録を更新し、`git diff --check` も成功しました。
+
+前駆辺を選ぶ検索はここまでで証明済みです。次は、選ばれたキーの previous と block を
+通常命令で取り出し、`MessagePrefixLoop.run` に対応する再構成ループへ接続します。
+メッセージ再構成、理想ハッシュ呼出し、`admissible` の除去、完全な理想世界サービス、
+WholeWitness／WholeReduction、MAC 帰着のコード生成・論理登録はまだ未完了です。
+
 ## 一レコードの前駆辺候補処理の区切り（2026-10-12）
 
 `NativeSimulatorPredecessorFilter`、`NativeSimulatorPredecessorCandidate`、

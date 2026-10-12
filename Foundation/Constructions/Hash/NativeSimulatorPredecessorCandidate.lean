@@ -259,4 +259,65 @@ theorem rejected_next_run (oracle : BitOracle State) (state : State)
     simp [List.reverse_append, List.map_append, List.append_assoc]
   rw [htable]
 
+/-- Extend a candidate's continuation without duplicating the candidate code. -/
+theorem code_link (κ : Nat) (tail extra : Code) :
+    CodeRelocation.host (code κ tail) extra = code κ (CodeRelocation.host tail extra) := by
+  have h (tail : Code) : HaltReturn.host RawTapeEquality.code tail =
+      CodeRelocation.host (RawTapeEquality.code.map (HaltReturn.instruction RawTapeEquality.code.length)) tail := by
+    simp only [HaltReturn.host, CodeRelocation.host, List.length_map]
+  simp only [code, SimulatorPredecessorFilter.advanceCode, h]
+  rw [CodeRelocation.host_assoc, CodeRelocation.host_assoc]
+
+theorem callback_link (width : Nat) (found next extra : Code) :
+    CodeRelocation.host (callback width found next) extra =
+      callback width found (CodeRelocation.host next extra) := by
+  simp only [callback, RestoreRawQuery.code]
+  rw [CodeRelocation.host_assoc, CodeRelocation.host_assoc, CodeRelocation.host_assoc]
+
+/-- Enter the already selected found branch in its actual placed context. -/
+theorem found_context_eval (oracle : BitOracle State) (κ width : Nat) (found next : Code)
+    (fuel : Nat) (start : Configuration State) :
+    TimedExecution.eval (Reification.timedStep (code κ (callback width found next)) oracle) fuel
+      (CodeRelocation.frame (2 * κ + 2) (CodeRelocation.frame RawTapeEquality.code.length
+        (CodeRelocation.frame 1 start))) =
+      (TimedExecution.eval (Reification.timedStep (CodeRelocation.host found (RestoreRawQuery.code width next)) oracle)
+        fuel start).map (fun c => CodeRelocation.frame (2 * κ + 2)
+          (CodeRelocation.frame RawTapeEquality.code.length (CodeRelocation.frame 1 c))) := by
+  rw [code, SimulatorPredecessorFilter.advanceCode]
+  have placed := CodeRelocation.eval (StraightLine.code (List.replicate (2 * κ + 2) (.right .input)))
+    (HaltReturn.host RawTapeEquality.code (callback width found next)) oracle fuel
+    (CodeRelocation.frame RawTapeEquality.code.length (CodeRelocation.frame 1 start))
+  rw [show (StraightLine.code (List.replicate (2 * κ + 2) (.right .input))).length = 2 * κ + 2 from by
+    simp [StraightLine.code]] at placed
+  rw [placed, HaltReturn.body_eval, callback]
+  have selected := CodeRelocation.eval
+    [.native (.branch .output (1 + found.length) (1 + found.length) 1)]
+    (CodeRelocation.host found (RestoreRawQuery.code width next)) oracle fuel start
+  simp only [List.length_cons, List.length_nil] at selected
+  rw [selected, PMF.map_comp, PMF.map_comp]
+  rfl
+
+/-- Enter the already selected next-record branch in its actual placed context. -/
+theorem next_context_eval (oracle : BitOracle State) (κ width : Nat) (found next : Code)
+    (fuel : Nat) (start : Configuration State) :
+    TimedExecution.eval (Reification.timedStep (code κ (callback width found next)) oracle) fuel
+      (CodeRelocation.frame (2 * κ + 2) (CodeRelocation.frame RawTapeEquality.code.length
+        (CodeRelocation.frame (callbackRejectedPrefix found).length
+          (CodeRelocation.frame (StraightLine.code (RestoreRawQuery.actions width)).length start)))) =
+      (TimedExecution.eval (Reification.timedStep next oracle) fuel start).map (fun c =>
+        CodeRelocation.frame (2 * κ + 2) (CodeRelocation.frame RawTapeEquality.code.length
+          (CodeRelocation.frame (callbackRejectedPrefix found).length
+            (CodeRelocation.frame (StraightLine.code (RestoreRawQuery.actions width)).length c)))) := by
+  rw [code, SimulatorPredecessorFilter.advanceCode]
+  have placed := CodeRelocation.eval (StraightLine.code (List.replicate (2 * κ + 2) (.right .input)))
+    (HaltReturn.host RawTapeEquality.code (callback width found next)) oracle fuel
+    (CodeRelocation.frame RawTapeEquality.code.length
+      (CodeRelocation.frame (callbackRejectedPrefix found).length
+        (CodeRelocation.frame (StraightLine.code (RestoreRawQuery.actions width)).length start)))
+  rw [show (StraightLine.code (List.replicate (2 * κ + 2) (.right .input))).length = 2 * κ + 2 from by
+    simp [StraightLine.code]] at placed
+  rw [placed, HaltReturn.body_eval, callback_rejected_host, CodeRelocation.eval,
+    RestoreRawQuery.code, CodeRelocation.eval, PMF.map_comp, PMF.map_comp, PMF.map_comp]
+  rfl
+
 end Foundation.Hash.Native.SimulatorPredecessorCandidate

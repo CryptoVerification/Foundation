@@ -55,6 +55,11 @@ theorem lookup (before code : Code) (pc : Nat) :
   rw [List.getElem?_append_right (by omega)]
   simp
 
+theorem lookup_prefix (before code : Code) (pc : Nat) (inside : pc < before.length) :
+    (host before code)[pc]? = before[pc]? := by
+  unfold host
+  rw [List.getElem?_append_left inside]
+
 theorem native_next (base : Nat) (original : Machine.Instruction) (machine : Machine.Configuration) :
     (native base original).next (machine.rebasePc base) =
       Machine.rebaseStepResult base (original.next machine) := by
