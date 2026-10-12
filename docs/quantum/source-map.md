@@ -974,3 +974,35 @@ Bouman–Fehr §6 本文p.21の、訂正の公開メッセージと検査ビッ�
 | 同 | `QKD/SamplingBernoulli.bernoulliWeight_mgf` | 任意の固定誤り集合に対する母関数の正確な積分解。誤り集合自体の独立性は仮定しない。 |
 
 Chernoff の裾評価、固定サイズへの条件付けとその確率下界、`Sampling.fullSample` への接続は後続範囲です。非復元抽出の指数型上界および小さい総誤差の達成は未完了です。
+
+## 非復元抽出の指数評価と有用な有限長 BB84
+
+| 原典・追加数学の参照 | Lean 宣言 | 証明した範囲と残る義務 |
+| --- | --- | --- |
+| Bouman–Fehr 付録B.5 本文pp.25–26の第2成分（追加の証明構成） | `QKD/SamplingExponential.fullSample_mgf_expansion`, `fullSample_subset_real`, `choose_ratio_le`, `powerset_sum_card`, `fullSample_mgf_le` | 固定サイズの同時包含確率で母関数を展開し、同じ平均の `k` Bernoulli 試行による上側母関数の上界へ帰着。誤りの独立性・確率的優越・未証明の条件付け確率下界を仮定しない。 |
+| 同 | `QKD/SamplingExponential.centered_mgf_le`, `exponential_markov`, `centered_upper_tail_exp`, `centered_compl`, `centered_tail_exp` | 実際の `fullSample` に対する `2 exp(-2u²/(n²k))`。補集合で下側の裾を評価。 |
+| Bouman–Fehr §6と付録B.5の標本誤差の合成 | `QKD/ExponentialSecurity.sampleDifference_tail_exp`, `classical_exponential`, `errorBound_exponential`, `exponentialGapBound_mono`, `sampling_error_exponential`, `real_secure_exponential` | 全誤りパターンと実際の選別分布へ接続。全出力の実状態・理想鍵比較。 |
+| 訂正の公開費用と秘密増幅（追加数学） | `QKD/UsefulBB84.six_bit_decay`, `weightedCoefficient_dyadic_le`, `weightedPrivacyError_budget`, `countWeightedError_budget`, `real_secure_exponential_budget` | 枝の実際の選別長による漏洩課金と整数予算。最終的な総誤差式に有限和を残さない。 |
+| 具体的な有限長主定理（追加数学） | `QKD/UsefulBB84.secure`, `privacy_budget`, `sampling_error_small`, `output_positive` | 25,165,824信号・3,145,728検査・65,536ビット出力、総誤差 `2^-60` 以下。任意の有限クラウス・ブロック攻撃。認証済み公開通信が前提。 |
+| 非自明性の確認（追加数学） | `QKD/UsefulBB84Availability.sifting_eligible_half`, `sifting_eligible`, `error_free_raw_accepts`, `error_free_raw_keys_agree`, `error_free_verification`, `errorFreeRecords`, `error_free_records_success`, `secure_with_eligible_sifting` | 実際の選別法で必要長を満たす確率は `1/2` 以上。誤りなしの古典記録では実際の受理・訂正・検証も通る。物理的な無攻撃量子実験との同定は後続範囲。 |
+
+上記の指数上界と有用な安全性パラメータは証明済みです。物理的正直実行の完全性は下記の補強で接続しました。雑音下の鍵生成率、認証鍵消費と誤差の合成は別の義務として残ります。
+
+## 先行研究レビュー
+
+研究上の位置づけと文献比較は [literature-review.md](literature-review.md) を参照してください。BB84 の直接の形式検証研究、量子定理証明基盤、有限鍵安全性の数学、圏論的合成を分け、要旨・本文・公開コード・未解決の検索候補を区別しています。これは原典と Lean 宣言の対応記録を補う調査であり、外部プロジェクトの全体ビルド・公理監査や世界初の認定ではありません。
+
+## 標準距離・物理的正直実行・論文成果物
+
+| 原典・追加数学 | Lean モジュール・宣言 | 対応 |
+| --- | --- | --- |
+| 有限次元のスペクトル分解・Helstrom の二値識別（標準数学の追加形式化） | `TraceDistance.spectral_positive/spectral_self`, `parts_difference/parts_trace_sum`, `effect_bound`, `positiveEffect_attains`, `Density.stateApprox_iff_traceDistance_le` | mathlib の Hermitian スペクトル定理を使い、全二値効果の上界と達成する正スペクトル射影を構成 |
+| 正値平方根の一意性（mathlib の再利用） | `TraceDistanceNorm.absolute_square`, `sqrt_gram_eq_absolute`, `traceNorm_eq_sqrt_gram`, `Density.traceDistance_eq_half_traceNorm` | `Re Tr sqrt(ΔᴴΔ)` と固有値絶対値和の同定、標準係数 `1/2`。既存の核や一般行列の大域ノルムを変更しない |
+| 既存理想状態への接続（追加形式化） | `QKD/BB84Completion.IdealKey.secure_iff_traceDistance`, `UsefulBB84.secure_traceDistance/secure_half_traceNorm` | 元の全状態と同じ中止保持の理想化について数値 `2^-60` |
+| 誤りなし準備・測定（追加形式化） | `QKD/HonestBB84.attack/discard_attack`, `relativeGate_zero`, `decoded_entry`, `supported_matched` | 任意長の恒等送信と独立基底測定。選別位置の正しさを実際の測定分布の支持から証明 |
+| 無攻撃の物理実験と古典記録の同定 | 同 `raw_output_eq`, `conditional_outcome`, `outcome_eq_records/outcome_eq_errorFreeRecords` | 選別外の結果は生鍵出力で忘れられる。量子測定を古典的な全ビット一致で置き換える仮定はなし |
+| 最終受理確率 | `QKD/BB84Completion.randomized_read_event`, `AcceptedAbort.acceptance_probability`, `FullReconciledHash.acceptance_probability`, `UsefulBB84.honest_success` | 読み出したブロックの質量から、訂正・検証・PA・両公開種を含む全量子出力の受理確率 `≥1/2` |
+| 規約の検証と監査入口 | `QKD/BB84Completion.traceDistance_orthogonal_qubits`, `QKD/BB84PaperAudit.lean` | 直交ビット距離1と主定理15宣言の公理監査 |
+
+[固定版コード比較](code-comparison.md)と[再現手順](artifact.md)に、比較対象の版、
+所在不明の FVQKD の調査結果、全依存・ソースの固定、監査出力の検証手順を記録しています。

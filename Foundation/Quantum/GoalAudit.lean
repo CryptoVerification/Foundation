@@ -1,3 +1,4 @@
+import Foundation.Quantum.QKD.BB84PaperAudit
 import Foundation.Quantum.QKD.SamplingBernoulli
 import Foundation.Quantum.QKD.MessageAuthentication
 import Foundation.Quantum.QKD.WeightedClosedExamples
@@ -2441,3 +2442,111 @@ that the BB84, internal-locale, or infinite-channel objectives are complete. -/
 #print axioms Foundation.Quantum.QKD.Bernoulli.bernoulliWeight_factors
 #print axioms Foundation.Quantum.QKD.Bernoulli.bernoulliWeight_sum
 #print axioms Foundation.Quantum.QKD.Bernoulli.bernoulliWeight_mgf
+
+#print axioms Foundation.Quantum.QKD.Sampling.choose_ratio_le
+#print axioms Foundation.Quantum.QKD.Sampling.fullSample_subset_real
+#print axioms Foundation.Quantum.QKD.Sampling.powerset_sum_card
+#print axioms Foundation.Quantum.QKD.Sampling.fullSample_mgf_expansion
+#print axioms Foundation.Quantum.QKD.Sampling.fullSample_mgf_le
+#print axioms Foundation.Quantum.QKD.Sampling.centered_mgf_le
+#print axioms Foundation.Quantum.QKD.Sampling.exponential_markov
+#print axioms Foundation.Quantum.QKD.Sampling.centered_upper_tail_exp
+#print axioms Foundation.Quantum.QKD.Sampling.centered_compl
+#print axioms Foundation.Quantum.QKD.Sampling.centered_tail_exp
+
+#print axioms Foundation.Quantum.QKD.PairwiseSampling.sampleDifference_tail_exp
+#print axioms Foundation.Quantum.QKD.PairwiseSampling.exponentialGapBound
+#print axioms Foundation.Quantum.QKD.PairwiseSampling.classical_exponential
+#print axioms Foundation.Quantum.QKD.PairwiseSampling.errorBound_exponential
+#print axioms Foundation.Quantum.QKD.PairwiseSampling.exponentialGapBound_mono
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.sampling_error_exponential
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.real_secure_exponential
+
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.six_bit_decay
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.weightedCoefficient_dyadic_le
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.weightedPrivacyError_budget
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.countWeightedError_budget
+#print axioms Foundation.Quantum.QKD.FullReconciledSecurity.real_secure_exponential_budget
+
+#print axioms Foundation.Quantum.QKD.UsefulBB84.signals
+#print axioms Foundation.Quantum.QKD.UsefulBB84.tests
+#print axioms Foundation.Quantum.QKD.UsefulBB84.minKey
+#print axioms Foundation.Quantum.QKD.UsefulBB84.verificationBits
+#print axioms Foundation.Quantum.QKD.UsefulBB84.outputBits
+#print axioms Foundation.Quantum.QKD.UsefulBB84.gap
+#print axioms Foundation.Quantum.QKD.UsefulBB84.securityError
+#print axioms Foundation.Quantum.QKD.UsefulBB84.output_positive
+#print axioms Foundation.Quantum.QKD.UsefulBB84.sifting_cutoff_below_mean
+#print axioms Foundation.Quantum.QKD.UsefulBB84.privacy_budget
+#print axioms Foundation.Quantum.QKD.UsefulBB84.sampling_error_small
+#print axioms Foundation.Quantum.QKD.UsefulBB84.secure
+
+#print axioms Foundation.Quantum.QKD.UsefulBB84.sifting_eligible_half
+#print axioms Foundation.Quantum.QKD.UsefulBB84.sifting_eligible
+#print axioms Foundation.Quantum.QKD.UsefulBB84.error_free_raw_accepts
+#print axioms Foundation.Quantum.QKD.UsefulBB84.error_free_raw_keys_agree
+#print axioms Foundation.Quantum.QKD.UsefulBB84.error_free_verification
+#print axioms Foundation.Quantum.QKD.UsefulBB84.errorFreeRecords
+#print axioms Foundation.Quantum.QKD.UsefulBB84.error_free_records_success
+#print axioms Foundation.Quantum.QKD.UsefulBB84.secure_with_eligible_sifting
+
+#print axioms Foundation.Quantum.HermitianTrace.spectralMatrix
+#print axioms Foundation.Quantum.HermitianTrace.spectral_positive
+#print axioms Foundation.Quantum.HermitianTrace.spectral_trace
+#print axioms Foundation.Quantum.HermitianTrace.spectral_sub
+#print axioms Foundation.Quantum.HermitianTrace.spectral_self
+#print axioms Foundation.Quantum.HermitianTrace.traceNorm
+#print axioms Foundation.Quantum.HermitianTrace.positivePart
+#print axioms Foundation.Quantum.HermitianTrace.negativePart
+#print axioms Foundation.Quantum.HermitianTrace.parts_difference
+#print axioms Foundation.Quantum.HermitianTrace.parts_trace_sum
+#print axioms Foundation.Quantum.HermitianTrace.positive_trace_half
+#print axioms Foundation.Quantum.HermitianTrace.effect_trace_bounds
+#print axioms Foundation.Quantum.HermitianTrace.effect_bound
+#print axioms Foundation.Quantum.HermitianTrace.spectral_one
+#print axioms Foundation.Quantum.HermitianTrace.spectral_product_trace
+#print axioms Foundation.Quantum.HermitianTrace.positiveEffect
+#print axioms Foundation.Quantum.HermitianTrace.positiveEffect_attains
+#print axioms Foundation.Quantum.Density.differenceHermitian
+#print axioms Foundation.Quantum.Density.traceDistance
+#print axioms Foundation.Quantum.Density.difference_trace_zero
+#print axioms Foundation.Quantum.Density.effect_le_traceDistance
+#print axioms Foundation.Quantum.Density.exists_effect_attaining_traceDistance
+#print axioms Foundation.Quantum.Density.stateApprox_iff_traceDistance_le
+#print axioms Foundation.Quantum.Density.traceDistance_self
+#print axioms Foundation.Quantum.Density.traceDistance_le_one
+#print axioms Foundation.Quantum.HermitianTrace.spectral_mul
+#print axioms Foundation.Quantum.HermitianTrace.absolute
+#print axioms Foundation.Quantum.HermitianTrace.absolute_positive
+#print axioms Foundation.Quantum.HermitianTrace.absolute_square
+#print axioms Foundation.Quantum.HermitianTrace.sqrt_gram_eq_absolute
+#print axioms Foundation.Quantum.HermitianTrace.traceNorm_eq_sqrt_gram
+#print axioms Foundation.Quantum.matrixTraceNorm
+#print axioms Foundation.Quantum.Density.traceDistance_eq_half_traceNorm
+#print axioms Foundation.Quantum.QKD.HonestBB84.appendUnit
+#print axioms Foundation.Quantum.QKD.HonestBB84.appendUnit_isometry
+#print axioms Foundation.Quantum.QKD.HonestBB84.attack
+#print axioms Foundation.Quantum.QKD.HonestBB84.discard_attack
+#print axioms Foundation.Quantum.QKD.HonestBB84.relativeGate
+#print axioms Foundation.Quantum.QKD.HonestBB84.relativeGate_succ
+#print axioms Foundation.Quantum.QKD.HonestBB84.relativeGate_zero
+#print axioms Foundation.Quantum.QKD.HonestBB84.conjugate_basis_entry
+#print axioms Foundation.Quantum.QKD.HonestBB84.decoded_entry
+#print axioms Foundation.Quantum.QKD.HonestBB84.supported_matched
+#print axioms Foundation.Quantum.QKD.HonestBB84.raw_output_eq
+#print axioms Foundation.Quantum.QKD.HonestBB84.conditional_outcome
+#print axioms Foundation.Quantum.QKD.HonestBB84.seedEquiv
+#print axioms Foundation.Quantum.QKD.HonestBB84.records
+#print axioms Foundation.Quantum.QKD.HonestBB84.outcome_eq_records
+#print axioms Foundation.Quantum.QKD.HonestBB84.outcome_eq_errorFreeRecords
+#print axioms Foundation.Quantum.QKD.IdealKey.secure_iff_traceDistance
+#print axioms Foundation.Quantum.QKD.readDensity_event
+#print axioms Foundation.Quantum.QKD.discardMiddle_event
+#print axioms Foundation.Quantum.QKD.randomized_read_event
+#print axioms Foundation.Quantum.QKD.AcceptedAbort.acceptance_probability
+#print axioms Foundation.Quantum.QKD.FullReconciledHash.acceptance_probability
+#print axioms Foundation.Quantum.QKD.UsefulBB84.secure_traceDistance
+#print axioms Foundation.Quantum.QKD.UsefulBB84.secure_half_traceNorm
+#print axioms Foundation.Quantum.QKD.UsefulBB84.honest_raw_success
+#print axioms Foundation.Quantum.QKD.UsefulBB84.honest_success
+#print axioms Foundation.Quantum.QKD.traceDistance_orthogonal_qubits

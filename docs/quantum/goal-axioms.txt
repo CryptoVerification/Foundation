@@ -3765,3 +3765,135 @@
 'Foundation.Quantum.QKD.Bernoulli.bernoulliWeight_factors' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Foundation.Quantum.QKD.Bernoulli.bernoulliWeight_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Foundation.Quantum.QKD.Bernoulli.bernoulliWeight_mgf' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.Sampling.choose_ratio_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.Sampling.fullSample_subset_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.Sampling.powerset_sum_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.Sampling.fullSample_mgf_expansion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.Sampling.fullSample_mgf_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.Sampling.centered_mgf_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.Sampling.exponential_markov' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.Sampling.centered_upper_tail_exp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.Sampling.centered_compl' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.Sampling.centered_tail_exp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.PairwiseSampling.sampleDifference_tail_exp' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Foundation.Quantum.QKD.PairwiseSampling.exponentialGapBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.PairwiseSampling.classical_exponential' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Foundation.Quantum.QKD.PairwiseSampling.errorBound_exponential' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Foundation.Quantum.QKD.PairwiseSampling.exponentialGapBound_mono' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Foundation.Quantum.QKD.FullReconciledSecurity.sampling_error_exponential' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Foundation.Quantum.QKD.FullReconciledSecurity.real_secure_exponential' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Foundation.Quantum.QKD.FullReconciledSecurity.six_bit_decay' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.FullReconciledSecurity.weightedCoefficient_dyadic_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Foundation.Quantum.QKD.FullReconciledSecurity.weightedPrivacyError_budget' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Foundation.Quantum.QKD.FullReconciledSecurity.countWeightedError_budget' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Foundation.Quantum.QKD.FullReconciledSecurity.real_secure_exponential_budget' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Foundation.Quantum.QKD.UsefulBB84.signals' does not depend on any axioms
+'Foundation.Quantum.QKD.UsefulBB84.tests' does not depend on any axioms
+'Foundation.Quantum.QKD.UsefulBB84.minKey' does not depend on any axioms
+'Foundation.Quantum.QKD.UsefulBB84.verificationBits' does not depend on any axioms
+'Foundation.Quantum.QKD.UsefulBB84.outputBits' does not depend on any axioms
+'Foundation.Quantum.QKD.UsefulBB84.gap' does not depend on any axioms
+'Foundation.Quantum.QKD.UsefulBB84.securityError' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.UsefulBB84.output_positive' does not depend on any axioms
+'Foundation.Quantum.QKD.UsefulBB84.sifting_cutoff_below_mean' does not depend on any axioms
+'Foundation.Quantum.QKD.UsefulBB84.privacy_budget' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.UsefulBB84.sampling_error_small' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.UsefulBB84.secure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.UsefulBB84.sifting_eligible_half' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.UsefulBB84.sifting_eligible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.UsefulBB84.error_free_raw_accepts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.UsefulBB84.error_free_raw_keys_agree' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.UsefulBB84.error_free_verification' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.UsefulBB84.errorFreeRecords' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.UsefulBB84.error_free_records_success' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Foundation.Quantum.QKD.UsefulBB84.secure_with_eligible_sifting' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Foundation.Quantum.HermitianTrace.spectralMatrix' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.spectral_positive' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.spectral_trace' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.spectral_sub' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.spectral_self' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.traceNorm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.positivePart' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.negativePart' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.parts_difference' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.parts_trace_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.positive_trace_half' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.effect_trace_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.effect_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.spectral_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.spectral_product_trace' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.positiveEffect' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.positiveEffect_attains' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Density.differenceHermitian' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Density.traceDistance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Density.difference_trace_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Density.effect_le_traceDistance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Density.exists_effect_attaining_traceDistance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Foundation.Quantum.Density.stateApprox_iff_traceDistance_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Density.traceDistance_self' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Density.traceDistance_le_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.spectral_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.absolute' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.absolute_positive' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.absolute_square' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.sqrt_gram_eq_absolute' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.HermitianTrace.traceNorm_eq_sqrt_gram' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.matrixTraceNorm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.Density.traceDistance_eq_half_traceNorm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.HonestBB84.appendUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.HonestBB84.appendUnit_isometry' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.HonestBB84.attack' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.HonestBB84.discard_attack' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.HonestBB84.relativeGate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.HonestBB84.relativeGate_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.HonestBB84.relativeGate_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.HonestBB84.conjugate_basis_entry' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.HonestBB84.decoded_entry' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.HonestBB84.supported_matched' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.HonestBB84.raw_output_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.HonestBB84.conditional_outcome' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.HonestBB84.seedEquiv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.HonestBB84.records' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.HonestBB84.outcome_eq_records' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.HonestBB84.outcome_eq_errorFreeRecords' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Foundation.Quantum.QKD.IdealKey.secure_iff_traceDistance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.readDensity_event' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.discardMiddle_event' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.randomized_read_event' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.AcceptedAbort.acceptance_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.FullReconciledHash.acceptance_probability' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Foundation.Quantum.QKD.UsefulBB84.secure_traceDistance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.UsefulBB84.secure_half_traceNorm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.UsefulBB84.honest_raw_success' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.UsefulBB84.honest_success' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Foundation.Quantum.QKD.traceDistance_orthogonal_qubits' depends on axioms: [propext, Classical.choice, Quot.sound]
