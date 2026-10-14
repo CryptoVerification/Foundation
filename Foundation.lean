@@ -1297,6 +1297,11 @@ import Foundation.Crypto.Semantics.Oracle.LeftBlankRewind
 import Foundation.Crypto.Semantics.Oracle.UnaryFuel
 import Foundation.Crypto.Semantics.Oracle.ForwardConstantCheck
 import Foundation.Constructions.Hash.NativeSimulatorReconstruct
+import Foundation.Crypto.Semantics.Oracle.RightBlankSeek
+import Foundation.Crypto.Semantics.Oracle.UnaryCounterTransfer
+import Foundation.Constructions.Hash.NativeSimulatorTableCount
+import Foundation.Constructions.Hash.NativeSimulatorFuelPrepare
+import Foundation.Constructions.Hash.NativeSimulatorTerminalFuel
 import Foundation.Constructions.Hash.MessagePrefixLoop
 import Foundation.Crypto.Semantics.Oracle.OutputSeekFlag
 import Foundation.Crypto.Semantics.Oracle.ReverseOutputCopy

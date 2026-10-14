@@ -67,8 +67,13 @@
    コピー先の空白領域は別途実際の命令で確保する必要があり、無料ではない。
 
 4. **理想ハッシュ呼出しと表更新を接続する。未完了。**
-   終端ガード成功路から、再構成入口の unary counter と空 suffix を実際に準備する。
-   上記ループの入口契約は、この物理配置を caller が供給することを要求している。
+   `NativeSimulatorTerminalFuel.accepted_run` は終端ガード成功路からの実行時表長計数・unary counter 初期化を接続する。
+   同じ有限コードで全レコードを数え、input は `UnaryFuel.tape table.length 0 tableCells` になる。
+   元 query は保持し、一時 output counter は実消去する。成功時間は
+   `table.length*(12*n+8*κ+29)+n+2*κ+18`。全途中状態の符号長も評価する。
+   `NativeSimulatorFuelPrepare.with_reconstruct_law` は、target と encoded empty suffix を供給した入口から
+   実 fuel 初期化・再構成を合成し、元 `messagePrefix` と観測分布の一致を証明する。
+   終端ガードの counter-ready 出口から、キー退避後に空 suffix を作る接続はまだ必要。
    回収したメッセージを公開パケットへ符号化し、元の問い合わせキーを退避してから `.call` する。
    応答読込みが出力テープを置換するため、キーを同じテープに残したまま呼び出さない。
    `SimulatorRemember`・応答返却の既存部品を再利用し、`compressionSimulator_eq` と
@@ -96,6 +101,6 @@
 ## 現在の範囲
 
 上記の1、2の全表走査・選択キー抽出、3の入口契約からの機械再構成反復と資源評価を実装した。
-終端サービスからの再構成入口準備・理想ハッシュ呼出し、完全な理想世界、
+終端成功路の実 fuel 初期化も接続した。キー退避・空 suffix 配置・理想ハッシュ呼出し、完全な理想世界、
 新たな WholeWitness/WholeReduction、MAC のコード生成・論理登録は未完了。
 この区別を保持したまま、2 → 3 → 4 → 5 → 6 の順に接続する。

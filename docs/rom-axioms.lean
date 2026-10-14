@@ -21,6 +21,11 @@ import Foundation.Crypto.Semantics.Oracle.LeftBlankRewind
 import Foundation.Crypto.Semantics.Oracle.UnaryFuel
 import Foundation.Crypto.Semantics.Oracle.ForwardConstantCheck
 import Foundation.Constructions.Hash.NativeSimulatorReconstruct
+import Foundation.Crypto.Semantics.Oracle.RightBlankSeek
+import Foundation.Crypto.Semantics.Oracle.UnaryCounterTransfer
+import Foundation.Constructions.Hash.NativeSimulatorTableCount
+import Foundation.Constructions.Hash.NativeSimulatorFuelPrepare
+import Foundation.Constructions.Hash.NativeSimulatorTerminalFuel
 import Foundation.Constructions.Hash.MessagePrefixLoop
 import Foundation.Crypto.Semantics.Oracle.OutputSeekFlag
 import Foundation.Crypto.Semantics.Oracle.ReverseOutputCopy
@@ -2770,3 +2775,41 @@ import Foundation.Crypto.Semantics.Oracle.PacketWriter
 #print axioms Foundation.Hash.Native.SimulatorReconstruct.procedure
 #print axioms Foundation.Hash.Native.SimulatorReconstruct.procedure_costed
 #print axioms Foundation.Hash.Native.SimulatorReconstruct.message_law
+
+#print axioms CryptoOracle.Interactive.BackwardFieldCopy.advance_output
+#print axioms CryptoOracle.Interactive.RightBlankSeek.cell_run
+#print axioms CryptoOracle.Interactive.RightBlankSeek.run
+#print axioms CryptoOracle.Interactive.RightBlankSeek.body_native
+#print axioms CryptoOracle.Interactive.UnaryCounterTransfer.cell_run
+#print axioms CryptoOracle.Interactive.UnaryCounterTransfer.run
+#print axioms CryptoOracle.Interactive.UnaryCounterTransfer.body_native
+#print axioms Foundation.Hash.Native.SimulatorTableCount.body_length
+#print axioms Foundation.Hash.Native.SimulatorTableCount.entry_length
+#print axioms Foundation.Hash.Native.SimulatorTableCount.prelude_run
+#print axioms Foundation.Hash.Native.SimulatorTableCount.record_run
+#print axioms Foundation.Hash.Native.SimulatorTableCount.run
+#print axioms Foundation.Hash.Native.SimulatorTableCount.body_native
+#print axioms Foundation.Hash.Native.SimulatorFuelPrepare.code_length
+#print axioms Foundation.Hash.Native.SimulatorFuelPrepare.rewind_run
+#print axioms Foundation.Hash.Native.SimulatorFuelPrepare.transfer_prepare
+#print axioms Foundation.Hash.Native.SimulatorFuelPrepare.transfer_run
+#print axioms Foundation.Hash.Native.SimulatorFuelPrepare.finish_run
+#print axioms Foundation.Hash.Native.SimulatorFuelPrepare.run
+#print axioms Foundation.Hash.Native.SimulatorFuelPrepare.link
+#print axioms Foundation.Hash.Native.SimulatorFuelPrepare.code_native
+#print axioms Foundation.Hash.Native.SimulatorFuelPrepare.blank_frontier_equivalent
+#print axioms Foundation.Hash.Native.SimulatorFuelPrepare.finish_equivalent
+#print axioms Foundation.Hash.Native.SimulatorFuelPrepare.observe_equivalent
+#print axioms Foundation.Hash.Native.SimulatorFuelPrepare.with_reconstruct_law
+#print axioms Foundation.Hash.Native.SimulatorFuelPrepare.encoded_peak
+#print axioms Foundation.Hash.Native.SimulatorTerminalFuel.guard_host
+#print axioms Foundation.Hash.Native.SimulatorTerminalFuel.guardPrefix_length
+#print axioms Foundation.Hash.Native.SimulatorTerminalFuel.move_run
+#print axioms Foundation.Hash.Native.SimulatorTerminalFuel.body_run
+#print axioms Foundation.Hash.Native.SimulatorTerminalFuel.accepted_run
+#print axioms Foundation.Hash.Native.SimulatorTerminalFuel.key_preserved
+#print axioms Foundation.Hash.Native.SimulatorTerminalFuel.code_length
+#print axioms Foundation.Hash.Native.SimulatorTerminalFuel.code_native
+#print axioms Foundation.Hash.Native.SimulatorTerminalFuel.counter_ready
+#print axioms Foundation.Hash.Native.SimulatorTerminalFuel.steps_eq
+#print axioms Foundation.Hash.Native.SimulatorTerminalFuel.encoded_peak

@@ -179,4 +179,18 @@ theorem advance_input (cells sourceRight sourceLeft : List (Option Bool)) (machi
       simp [List.reverse_cons, List.append_assoc]
       omega
 
+theorem advance_output (cells sourceRight sourceLeft : List (Option Bool)) (machine : Machine.Configuration) :
+    StraightLine.execute (List.replicate cells.length (.left .output))
+      { machine with outputTape := FixedWidthCopy.backwardFrontier sourceRight (cells ++ sourceLeft) } =
+      { machine with pc := machine.pc + cells.length, outputTape := FixedWidthCopy.backwardFrontier (cells.reverse ++ sourceRight) sourceLeft } := by
+  induction cells generalizing sourceRight machine with
+  | nil => simp [StraightLine.execute]
+  | cons cell rest ih =>
+      simp only [List.length_cons, List.replicate_succ, StraightLine.execute, List.cons_append,
+        StraightLine.apply, Machine.Configuration.updateTape, Machine.Configuration.advance, backward_move]
+      have h := ih (cell :: sourceRight) { machine with pc := machine.pc + 1 }
+      rw [h]
+      simp [List.reverse_cons, List.append_assoc]
+      omega
+
 end CryptoOracle.Interactive.BackwardFieldCopy

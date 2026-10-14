@@ -1,5 +1,43 @@
 # ランダムオラクル構成の研究記録
 
+## 終端成功路からの実行時 fuel 初期化（2026-10-14）
+
+`NativeSimulatorTableCount`、`NativeSimulatorFuelPrepare`、`NativeSimulatorTerminalFuel` と、
+`RightBlankSeek`、`UnaryCounterTransfer` を追加しました。
+再構成入口の fuel をホストで配置する代わりに、元の物理表のリストマーカーを実際に走査して作ります。
+
+- `SimulatorTableCount.run`：固定幅 `w=3*n+2*κ+4` の各レコードを、同じ有限コードで一つずつ越える。
+  レコードごとに output の空白領域へ unary true を一つ書き、表末尾の false で返却する。
+  コード長は継続を除いて `w+4`、正確な時間は `table.length*(w+4)+1`。
+  終端項目・衝突・重複も含む元の全表長を数える。
+- `SimulatorFuelPrepare.run`：表の巻戻し、counter の input 左側への実コピー、output の一時 counter の
+  実消去、counter 境界を越えて表先頭へ戻る走査を同一コードで合成する。
+  出口 input は正確に `UnaryFuel.tape table.length 0 tableCells`。元の表・保存した query セルは保持する。
+  コード長は継続を除いて `3*n+2*κ+27`、正確な時間は `table.length*(12*n+8*κ+29)+14`。
+- `blank_frontier_equivalent` / `finish_equivalent`：実消去で残った有限表現の空白セルについてセル等価性を証明する。
+  無料のテープ正規化は行わず、物理表現はそのまま同じ native code を実行する。
+- `with_reconstruct_law`：output に raw target・空白・encoded empty suffix を供給した入口では、
+  実行時計数・fuel 初期化から既存の再構成コードへ fall-through し、元の
+  `messagePrefix initial table table.length target` と観測分布が一致する。
+- `SimulatorTerminalFuel.accepted_run`：固定 terminal のガード成功から、連鎖値を越える実左移動で
+  一時 counter 用の空白境界を確保し、上記の実行時 fuel 初期化へ接続する。
+  `key_preserved` は元の問い合わせ packet と false 応答フラグが一ビットも失われないことを保証する。
+  継続・拒否コードを除く長さは `4*n+4*κ+31`、成功路の正確な時間は
+  `table.length*(12*n+8*κ+29)+n+2*κ+18`。
+- `encoded_peak`：両準備コードについて、元 query、一時 counter と input counter、元表、
+  コード、不透明な外部状態、全旧履歴を含む全途中状態の符号長を評価する。
+
+検証：全体 `lake build` は4081ジョブ成功。`lake env lean docs/rom-axioms.lean` は
+1930件の公理依存出力（公理なしの宣言を含む）、エラー・`sorryAx` なし。
+今回の監査対象は `propext`・`Classical.choice`・`Quot.sound` のみに依存する。
+公開 import・監査へ登録し、`git diff --check` も成功しました。
+
+ここで二つの入口を区別する。終端ガードからの出口は **元問い合わせを保持した counter-ready 状態**。
+`with_reconstruct_law` の入口は **target と encoded suffix が既に配置された状態**。
+その間には、元キーを保護領域へ実際に退避してから空 suffix を作る接続がまだ必要。
+次は保存領域を再構成中にも保持する契約とキー退避を接続し、理想ハッシュ call・応答表更新へ進む。
+`admissible` 除去、完全な理想世界、uniform WholeWitness/WholeReduction、MAC コード生成・論理登録は未完了。
+
 ## 通常命令による再構成ループ・停止・全状態資源評価（2026-10-12）
 
 `NativeSimulatorReconstruct.lean` で、選択キー抽出から再構成の反復へ接続しました。
