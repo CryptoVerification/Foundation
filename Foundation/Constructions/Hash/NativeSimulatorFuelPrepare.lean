@@ -118,7 +118,7 @@ theorem finish_run (oracle : BitOracle State) (state : State)
   have hm : TimedExecution.eval (Reification.timedStep (CodeRelocation.host [.native (.moveRight .output)] tail) oracle) 1
       (NativeCode.frame state trace ready) = PMF.pure (CodeRelocation.frame 1 (NativeCode.frame state trace (finish table query))) := by
     cases query <;>
-      simp [CodeRelocation.host, copied, ready, finish, UnaryFuel.tape, UnaryFuel.counter,
+      simp [CodeRelocation.host, copied, ready, finish, UnaryFuel.tape, UnaryFuel.tapeWith, UnaryFuel.counterWith,
         TimedExecution.eval, Reification.timedStep, Reification.terminal, NativeCode.frame,
         Reification.perform, Reification.action, transition, Machine.Instruction.next,
         Machine.Configuration.advance, Machine.Configuration.updateTape, Tape.moveRight,
@@ -232,7 +232,9 @@ theorem with_reconstruct_law (oracle : BitOracle State) (state : State)
     cases hc : frame.control <;>
       simp [SimulatorReconstruct.observe, CodeRelocation.frame, CodeRelocation.control,
         hc, SimulatorReconstruct.readResult, Machine.Configuration.rebasePc]
-  rw [hf, eq, SimulatorReconstruct.message_law]
+  rw [hf, eq]
+  simp only [SimulatorReconstruct.start]
+  rw [SimulatorReconstruct.message_law]
 
 def steps (table : CompressionTable (Bits κ) (Bits n)) : Nat :=
   table.length * (4 * SimulatorTableCount.width n κ + 13) + 14

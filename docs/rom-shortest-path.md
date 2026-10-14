@@ -73,7 +73,13 @@
    `table.length*(12*n+8*κ+29)+n+2*κ+18`。全途中状態の符号長も評価する。
    `NativeSimulatorFuelPrepare.with_reconstruct_law` は、target と encoded empty suffix を供給した入口から
    実 fuel 初期化・再構成を合成し、元 `messagePrefix` と観測分布の一致を証明する。
-   終端ガードの counter-ready 出口から、キー退避後に空 suffix を作る接続はまだ必要。
+   `NativeSimulatorKeyProtect.run` は counter-ready 出口から元 packet を input の fuel 終端空白の外へ
+   実コピーし、表先頭へ戻ってから output に空 suffix を配置する。
+   `UnaryFuel.counterWith` / `NativeSimulatorReconstruct.startWith` の保存領域契約が、
+   各反復境界と全停止路で元キーを保持する。同じ再構成コード・遷移予算を使う。
+   `NativeSimulatorTerminalReconstruct.accepted_law` / `stopped_key` は終端ガードから再構成停止までを
+   同一コードで接続し、外部状態・全履歴・保存キー・`terminalMessage` の結果を同時に保証する。
+   コード長は `31*n+33*κ+131+rejected.length`、全途中状態の符号長も評価する。
    回収したメッセージを公開パケットへ符号化し、元の問い合わせキーを退避してから `.call` する。
    応答読込みが出力テープを置換するため、キーを同じテープに残したまま呼び出さない。
    `SimulatorRemember`・応答返却の既存部品を再利用し、`compressionSimulator_eq` と
@@ -101,6 +107,7 @@
 ## 現在の範囲
 
 上記の1、2の全表走査・選択キー抽出、3の入口契約からの機械再構成反復と資源評価を実装した。
-終端成功路の実 fuel 初期化も接続した。キー退避・空 suffix 配置・理想ハッシュ呼出し、完全な理想世界、
+終端成功路からの実 fuel 初期化・保護キー退避・空 suffix 配置・再構成停止まで接続した。
+理想ハッシュ呼出しと保存キーの実回収・応答表更新、完全な理想世界、
 新たな WholeWitness/WholeReduction、MAC のコード生成・論理登録は未完了。
 この区別を保持したまま、2 → 3 → 4 → 5 → 6 の順に接続する。

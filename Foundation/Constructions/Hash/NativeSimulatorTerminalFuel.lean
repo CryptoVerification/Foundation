@@ -20,6 +20,9 @@ def guardPrefix (terminal : Bits κ) (accepted : Code) : Code :=
   CodeRelocation.host [.native (.moveLeft .output)]
     (SimulatorTerminalCheck.compareCode accepted.length [] (SimulatorTerminalGuard.expected terminal))
 
+theorem body_link (n κ : Nat) (tail : Code) : body n κ tail = CodeRelocation.host (body n κ []) tail := by
+  rw [body, SimulatorFuelPrepare.link, ← CodeRelocation.host_assoc]; rfl
+
 def queryCells (target : Bits n) (terminal : Bits κ) : List (Option Bool) :=
   (compressionPacket (target, (true, terminal))).map some ++ [some false, none]
 def flagStart (target : Bits n) (terminal : Bits κ)

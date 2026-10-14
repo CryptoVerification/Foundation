@@ -25,10 +25,13 @@ def restartPc (initial : Bits n) (κ : Nat) : Nat :=
 def code (initial : Bits n) (κ : Nat) : Code :=
   SelectiveHaltReturn.code (source initial κ) 0 (fun pc => pc == restartPc initial κ)
 
-def start (table : CompressionTable (Bits κ) (Bits n)) (fuel used : Nat)
+def startWith (savedContext : List (Option Bool)) (table : CompressionTable (Bits κ) (Bits n)) (fuel used : Nat)
     (target : Bits n) (suffix : List (Bits κ)) : Machine.Configuration :=
-  { inputTape := UnaryFuel.tape fuel used ((SimulatorLookup.tableBits table).map some),
+  { inputTape := UnaryFuel.tapeWith savedContext fuel used ((SimulatorLookup.tableBits table).map some),
     outputTape := SimulatorPredecessorLookupExtract.targetMessage target suffix }
+
+def start (table : CompressionTable (Bits κ) (Bits n)) (fuel used : Nat)
+    (target : Bits n) (suffix : List (Bits κ)) : Machine.Configuration := startWith [] table fuel used target suffix
 
 theorem source_length (initial : Bits n) (κ : Nat) : (source initial κ).length = 17 * n + 18 * κ + 69 := by
   simp [source, ForwardConstantCheck.code, ForwardConstantCheck.compareCode_length,
@@ -78,6 +81,10 @@ def flagTape (target : Bits n) (suffix : List (Bits κ)) (flag : Bool) : Tape :=
   { left := target.toList.reverse.map some ++ [none], current := some flag,
     right := (FiniteBitEncoding.encodeList (fixedBits κ) suffix).map some }
 
+section SavedContext
+variable {savedContext : List (Option Bool)}
+local notation "start" => startWith savedContext
+
 theorem accepted_before (oracle : BitOracle State) (state : State)
     (trace : List (List Bool × List Bool)) (initial : Bits n)
     (table : CompressionTable (Bits κ) (Bits n)) (fuel used : Nat) (suffix : List (Bits κ)) :
@@ -93,13 +100,13 @@ theorem accepted_before (oracle : BitOracle State) (state : State)
   simp only [Bits.length_toList] at hr
   rw [show 2 * n + 1 = 2 * n + 1 from rfl, TimedExecution.eval_add]
   change (TimedExecution.eval (Reification.timedStep (ForwardConstantCheck.compareCode _ _ _) oracle) _ _).bind _ = _
-  simp only [start, SimulatorPredecessorLookupExtract.targetMessage] at hr ⊢
+  simp only [startWith, SimulatorPredecessorLookupExtract.targetMessage] at hr ⊢
   rw [hr, PMF.pure_bind]
   rw [source, ForwardConstantCheck.code, ForwardConstantCheck.link]
   have placed := CodeRelocation.eval (ForwardConstantCheck.compareCode accepted.length [] initial.toList)
     (CodeRelocation.host accepted (ForwardConstantCheck.recover (UnaryFuel.code (next n κ) (failed n)))) oracle 1
     (NativeCode.frame state trace { inputTape := (start table fuel used initial suffix).inputTape, outputTape := FixedWidthCopy.frontier (initial.toList.reverse.map some ++ [none]) (none :: (FiniteBitEncoding.encodeList (fixedBits κ) suffix).map some) })
-  simp only [ForwardConstantCheck.compareCode_length, Bits.length_toList, List.length_nil, Nat.add_zero, start] at placed
+  simp only [ForwardConstantCheck.compareCode_length, Bits.length_toList, List.length_nil, Nat.add_zero, startWith] at placed
   rw [placed]
   simp [accepted, CodeRelocation.host, NativeCode.frame, TimedExecution.eval,
     Reification.timedStep, Reification.terminal, Reification.perform, Reification.action,
@@ -133,7 +140,7 @@ theorem rejected_prepare (oracle : BitOracle State) (state : State)
     accepted (UnaryFuel.code (next n κ) (failed n)) (start table fuel used target suffix).inputTape
     (none :: (FiniteBitEncoding.encodeList (fixedBits κ) suffix).map some) (by simp) hne
   refine ⟨k, by simpa using hk, ?_⟩
-  simpa only [source, start, SimulatorPredecessorLookupExtract.targetMessage, fuelPrefix,
+  simpa only [source, startWith, SimulatorPredecessorLookupExtract.targetMessage, fuelPrefix,
     recoveryPrefix, guardPrefix, CodeRelocation.code_length, LeftBlankRewind.body_length,
     List.length_cons, List.length_nil] using hr
 
@@ -163,7 +170,7 @@ theorem next_before_restart (oracle : BitOracle State) (state : State)
         (NativeCode.frame state trace (start table fuel used target suffix)) =
         PMF.pure (CodeRelocation.frame ((SimulatorPredecessorLookupExtract.code n κ []).length + 4)
           (NativeCode.frame state trace (start table fuel used previous (block :: suffix)))) := by
-  let counter := UnaryFuel.counter fuel used
+  let counter := UnaryFuel.counterWith savedContext fuel used
   let saved := (FiniteBitEncoding.encodeList (fixedBits κ) suffix).map some
   obtain ⟨before, after, ht, _, hr⟩ := SimulatorPredecessorLookupExtract.run oracle state trace target previous block table
     (none :: counter) saved rewind hf
@@ -208,7 +215,7 @@ theorem next_before_restart (oracle : BitOracle State) (state : State)
   rw [htime]
   simp only [rewind, LeftBlankRewind.put]
   rw [hw, PMF.pure_map]
-  simp only [start, UnaryFuel.tape, counter, CodeRelocation.frame, CodeRelocation.control,
+  simp only [startWith, UnaryFuel.tapeWith, counter, CodeRelocation.frame, CodeRelocation.control,
     NativeCode.frame, Machine.Configuration.rebasePc, Nat.add_zero]
 
 def searchPrefix (initial : Bits n) (κ : Nat) : Code :=
@@ -233,18 +240,18 @@ theorem begin_search (oracle : BitOracle State) (state : State)
         (NativeCode.frame state trace (start table (fuel + 1) used target suffix)) =
         PMF.pure (CodeRelocation.frame (searchPrefix initial κ).length
           (NativeCode.frame state trace (start table fuel (used + 1) target suffix))) := by
-  obtain ⟨k, hk, hp⟩ := rejected_prepare oracle state trace initial target table (fuel + 1) used suffix hn
+  obtain ⟨k, hk, hp⟩ := rejected_prepare (savedContext := savedContext) oracle state trace initial target table (fuel + 1) used suffix hn
   refine ⟨k, hk, ?_⟩
   have hne : (SimulatorLookup.tableBits table).map some ≠ [] := by simpa using table_nonempty table
   cases hc : (SimulatorLookup.tableBits table).map some with
   | nil => contradiction
   | cons head rest =>
-      have hf := UnaryFuel.consume_run oracle state trace (next n κ) (failed n) fuel used head rest
+      have hf := UnaryFuel.consume_run (savedContext := savedContext) oracle state trace (next n κ) (failed n) fuel used head rest
         (SimulatorPredecessorLookupExtract.targetMessage target suffix)
       have hf' : TimedExecution.eval (Reification.timedStep (UnaryFuel.code (next n κ) (failed n)) oracle)
           (6 * used + 7) (NativeCode.frame state trace (start table (fuel + 1) used target suffix)) =
           PMF.pure (CodeRelocation.frame 11 (NativeCode.frame state trace (start table fuel (used + 1) target suffix))) := by
-        simpa only [start, hc, UnaryFuel.cursor] using hf
+        simpa only [startWith, hc, UnaryFuel.cursor] using hf
       rw [source_fuel_host] at hp ⊢
       have h := SimulatorPredecessorExtract.seq_run oracle (fuelPrefix initial) _ _ _ _ _ _ hp hf'
       simpa only [searchPrefix, CodeRelocation.code_length, UnaryFuel.body_length,
@@ -285,8 +292,8 @@ theorem cycle_run (oracle : BitOracle State) (state : State)
             (3 * (before.flatMap SimulatorLookup.entryBits).length + 5)) + 1)
         (NativeCode.frame state trace (start table (fuel + 1) used target suffix)) =
         PMF.pure (NativeCode.frame state trace (start table fuel (used + 1) previous (block :: suffix))) := by
-  obtain ⟨k, hk, hp⟩ := begin_search oracle state trace initial target table fuel used suffix hn
-  obtain ⟨before, after, ht, hs⟩ := next_before_restart oracle state trace target previous block table fuel (used + 1) suffix hf
+  obtain ⟨k, hk, hp⟩ := begin_search (savedContext := savedContext) oracle state trace initial target table fuel used suffix hn
+  obtain ⟨before, after, ht, hs⟩ := next_before_restart (savedContext := savedContext) oracle state trace target previous block table fuel (used + 1) suffix hf
   refine ⟨k, before, after, hk, ht, ?_⟩
   have ha := CodePrefixExecution.append_active (next n κ)
     ((failed n).map (CodeRelocation.instruction (next n κ).length)) oracle
@@ -307,12 +314,12 @@ theorem cycle_run (oracle : BitOracle State) (state : State)
       (CodeRelocation.frame ((SimulatorPredecessorLookupExtract.code n κ []).length + 4)
         (NativeCode.frame state trace (start table fuel (used + 1) previous (block :: suffix)))) = NativeCode.frame state trace result := by
     simp [result, NativeCode.frame, CodeRelocation.frame, CodeRelocation.control, Machine.Configuration.rebasePc,
-      restart_offset, start]
+      restart_offset, startWith]
   rw [hresult, ← source_search_host] at h
   have hr := SelectiveHaltReturn.return_run (source initial κ) 0 (fun pc => pc == restartPc initial κ)
     oracle state trace (start table (fuel + 1) used target suffix) result _ rfl h
     (by simpa [result] using restart_halt (κ := κ) initial) (by simp [result])
-  simpa only [code, result, Machine.Configuration.resumeAt, start] using hr
+  simpa only [code, result, Machine.Configuration.resumeAt, startWith] using hr
 
 theorem retained_halt (oracle : BitOracle State) (state : State)
     (trace : List (List Bool × List Bool)) (initial : Bits n)
@@ -342,7 +349,7 @@ theorem accepted_run (oracle : BitOracle State) (state : State)
     rw [hg]; rfl
   have hn : 2 * n + 1 ≠ restartPc initial κ := by rw [restartPc_eq]; omega
   have h := retained_halt oracle state trace initial _ _ _ rfl
-    (accepted_before oracle state trace initial table fuel used suffix) hh hn
+    (accepted_before (savedContext := savedContext) oracle state trace initial table fuel used suffix) hh hn
   simpa only [show 2 * n + 1 + 1 = 2 * n + 2 by omega] using h
 
 theorem failed_before (oracle : BitOracle State) (state : State)
@@ -386,12 +393,12 @@ theorem empty_run (oracle : BitOracle State) (state : State)
         (NativeCode.frame state trace (start table 0 used target suffix)) =
         PMF.pure (NativeCode.frame state trace
           { pc := (emptyPrefix initial κ).length + (n + 1),
-            inputTape := { current := none, right := List.replicate used (some false) ++ none :: (SimulatorLookup.tableBits table).map some },
+            inputTape := { left := savedContext, current := none, right := List.replicate used (some false) ++ none :: (SimulatorLookup.tableBits table).map some },
             outputTape := flagTape target suffix false, halted := true }) := by
-  obtain ⟨k, hk, hp⟩ := rejected_prepare oracle state trace initial target table 0 used suffix hn
+  obtain ⟨k, hk, hp⟩ := rejected_prepare (savedContext := savedContext) oracle state trace initial target table 0 used suffix hn
   refine ⟨k, hk, ?_⟩
   have hne : (SimulatorLookup.tableBits table).map some ≠ [] := by simpa using table_nonempty table
-  let input : Tape := { current := none, right := List.replicate used (some false) ++ none :: (SimulatorLookup.tableBits table).map some }
+  let input : Tape := { left := savedContext, current := none, right := List.replicate used (some false) ++ none :: (SimulatorLookup.tableBits table).map some }
   have hf : TimedExecution.eval (Reification.timedStep (UnaryFuel.code (next n κ) (failed n)) oracle)
       (3 * used + 3) (NativeCode.frame state trace (start table 0 used target suffix)) =
       PMF.pure (CodeRelocation.frame (11 + (next n κ).length)
@@ -399,7 +406,7 @@ theorem empty_run (oracle : BitOracle State) (state : State)
     cases hc : (SimulatorLookup.tableBits table).map some with
     | nil => contradiction
     | cons head rest =>
-        simpa only [start, hc, input, UnaryFuel.cursor] using UnaryFuel.empty_run oracle state trace (next n κ) (failed n) used head rest (SimulatorPredecessorLookupExtract.targetMessage target suffix)
+        simpa only [startWith, hc, input, UnaryFuel.cursor] using UnaryFuel.empty_run (savedContext := savedContext) oracle state trace (next n κ) (failed n) used head rest (SimulatorPredecessorLookupExtract.targetMessage target suffix)
   rw [source_fuel_host] at hp
   have hpre := SimulatorPredecessorExtract.seq_run oracle (fuelPrefix initial) _ _ _ _ _ _ hp hf
   have hoff : (emptyPrefix initial κ).length = (fuelPrefix initial).length + (11 + (next n κ).length) := by
@@ -455,10 +462,10 @@ theorem missing_next_before (oracle : BitOracle State) (state : State)
       (SimulatorPredecessorLookup.steps target table - 1)
       (NativeCode.frame state trace (start table fuel used target suffix)) =
       PMF.pure (NativeCode.frame state trace
-        { SimulatorPredecessorLookup.finish target (none :: UnaryFuel.counter fuel used)
+        { SimulatorPredecessorLookup.finish target (none :: UnaryFuel.counterWith savedContext fuel used)
           [none] ((FiniteBitEncoding.encodeList (fixedBits κ) suffix).map some) table with halted := false }) := by
   have hp := SimulatorPredecessorLookup.before_halt oracle state trace target table
-    (none :: UnaryFuel.counter fuel used) [none] ((FiniteBitEncoding.encodeList (fixedBits κ) suffix).map some)
+    (none :: UnaryFuel.counterWith savedContext fuel used) [none] ((FiniteBitEncoding.encodeList (fixedBits κ) suffix).map some)
   have he := SelectiveHaltReturn.active_eval (SimulatorPredecessorLookup.code n κ)
     (SimulatorPredecessorLookup.code n κ).length (fun pc => pc == SimulatorPredecessorStep.foundPc n κ)
     oracle (SimulatorPredecessorLookup.steps target table - 1)
@@ -501,19 +508,19 @@ theorem missing_run (oracle : BitOracle State) (state : State)
         (NativeCode.frame state trace (start table (fuel + 1) used target suffix)) =
         PMF.pure (NativeCode.frame state trace
           { pc := (searchPrefix initial κ).length + SimulatorPredecessorStep.missingPc n κ,
-            inputTape := { left := (table.flatMap SimulatorLookup.entryBits).reverse.map some ++ none :: UnaryFuel.counter fuel (used + 1), current := some false },
+            inputTape := { left := (table.flatMap SimulatorLookup.entryBits).reverse.map some ++ none :: UnaryFuel.counterWith savedContext fuel (used + 1), current := some false },
             outputTape := flagTape target suffix false, halted := true }) := by
-  obtain ⟨k, hk, hp⟩ := begin_search oracle state trace initial target table fuel used suffix hn
+  obtain ⟨k, hk, hp⟩ := begin_search (savedContext := savedContext) oracle state trace initial target table fuel used suffix hn
   refine ⟨k, hk, ?_⟩
-  have hs := missing_next_before oracle state trace target table fuel (used + 1) suffix hf
+  have hs := missing_next_before (savedContext := savedContext) oracle state trace target table fuel (used + 1) suffix hf
   rw [source_search_host] at hp
   have h := SimulatorPredecessorExtract.seq_run oracle (searchPrefix initial κ) _ _ _ _ _ _ hp hs
-  let before : Machine.Configuration := { pc := (searchPrefix initial κ).length + SimulatorPredecessorStep.missingPc n κ, inputTape := { left := (table.flatMap SimulatorLookup.entryBits).reverse.map some ++ none :: UnaryFuel.counter fuel (used + 1), current := some false }, outputTape := flagTape target suffix false }
+  let before : Machine.Configuration := { pc := (searchPrefix initial κ).length + SimulatorPredecessorStep.missingPc n κ, inputTape := { left := (table.flatMap SimulatorLookup.entryBits).reverse.map some ++ none :: UnaryFuel.counterWith savedContext fuel (used + 1), current := some false }, outputTape := flagTape target suffix false }
   have hpc := SimulatorPredecessorLookupExtract.missing_cursor target table
-    (none :: UnaryFuel.counter fuel (used + 1)) [none] ((FiniteBitEncoding.encodeList (fixedBits κ) suffix).map some) hf
-  have hl := missing_layout target table (none :: UnaryFuel.counter fuel (used + 1)) suffix hf
+    (none :: UnaryFuel.counterWith savedContext fuel (used + 1)) [none] ((FiniteBitEncoding.encodeList (fixedBits κ) suffix).map some) hf
+  have hl := missing_layout target table (none :: UnaryFuel.counterWith savedContext fuel (used + 1)) suffix hf
   have hframe : CodeRelocation.frame (searchPrefix initial κ).length
-      (NativeCode.frame state trace { SimulatorPredecessorLookup.finish target (none :: UnaryFuel.counter fuel (used + 1))
+      (NativeCode.frame state trace { SimulatorPredecessorLookup.finish target (none :: UnaryFuel.counterWith savedContext fuel (used + 1))
         [none] ((FiniteBitEncoding.encodeList (fixedBits κ) suffix).map some) table with halted := false }) = NativeCode.frame state trace before := by
     simp only [NativeCode.frame, CodeRelocation.frame, CodeRelocation.control, Machine.Configuration.rebasePc,
       before, hpc, hl.1, hl.2]
@@ -543,14 +550,25 @@ theorem frontier_content (left cells : List (Option Bool)) (hn : cells ≠ []) :
 
 theorem start_retains (table : CompressionTable (Bits κ) (Bits n)) (fuel used : Nat)
     (target : Bits n) (suffix : List (Bits κ)) : retainsTable table (start table fuel used target suffix).inputTape := by
-  refine ⟨(none :: UnaryFuel.counter fuel used).reverse, ?_⟩
+  refine ⟨(none :: UnaryFuel.counterWith savedContext fuel used).reverse, ?_⟩
   exact frontier_content _ _ (by simpa using table_nonempty table)
 
 def Represents (table : CompressionTable (Bits κ) (Bits n)) (message : Option (List (Bits κ)))
     (machine : Machine.Configuration) : Prop :=
   machine.halted = true ∧ machine.outputTape.current = some message.isSome ∧
     (∀ blocks, message = some blocks → machine.outputTape.right = (FiniteBitEncoding.encodeList (fixedBits κ) blocks).map some) ∧
-    retainsTable table machine.inputTape
+    retainsTable table machine.inputTape ∧
+    ∃ remaining, tapeContent machine.inputTape = savedContext.reverse ++ remaining
+
+local notation "Represents" => SimulatorReconstruct.Represents (savedContext := savedContext)
+
+theorem start_protects (table : CompressionTable (Bits κ) (Bits n)) (fuel used : Nat)
+    (target : Bits n) (suffix : List (Bits κ)) :
+    ∃ remaining, tapeContent (start table fuel used target suffix).inputTape = savedContext.reverse ++ remaining := by
+  refine ⟨(none :: UnaryFuel.counter fuel used).reverse ++ (SimulatorLookup.tableBits table).map some, ?_⟩
+  change tapeContent (FixedWidthCopy.frontier (none :: UnaryFuel.counterWith savedContext fuel used) _) = _
+  rw [frontier_content _ _ (by simpa using table_nonempty table), UnaryFuel.counterWith_eq_append]
+  simp [List.reverse_append, List.reverse_cons, List.append_assoc]
 
 def roundBound (table : CompressionTable (Bits κ) (Bits n)) (cap : Nat) : Nat :=
   table.length * (17 * n + 8 * κ + 26) + 20 * n + 10 * κ + 50 + 6 * cap
@@ -593,27 +611,31 @@ theorem accepted_represents (table : CompressionTable (Bits κ) (Bits n)) (fuel 
     Represents table (some suffix)
       { pc := 2 * n + 1, inputTape := (start table fuel used initial suffix).inputTape,
         outputTape := flagTape initial suffix true, halted := true } := by
-  refine ⟨rfl, rfl, ?_, start_retains table fuel used initial suffix⟩
+  refine ⟨rfl, rfl, ?_, start_retains table fuel used initial suffix, start_protects table fuel used initial suffix⟩
   intro blocks he; cases Option.some.inj he; rfl
 
 theorem empty_represents (table : CompressionTable (Bits κ) (Bits n)) (used : Nat)
     (target : Bits n) (suffix : List (Bits κ)) (pc : Nat) :
     Represents table none
-      { pc := pc, inputTape := { current := none, right := List.replicate used (some false) ++ none :: (SimulatorLookup.tableBits table).map some },
+      { pc := pc, inputTape := { left := savedContext, current := none, right := List.replicate used (some false) ++ none :: (SimulatorLookup.tableBits table).map some },
         outputTape := flagTape target suffix false, halted := true } := by
-  refine ⟨rfl, rfl, (by intro blocks he; cases he), ?_⟩
-  refine ⟨none :: List.replicate used (some false) ++ [none], ?_⟩
-  simp [tapeContent, List.append_assoc]
+  refine ⟨rfl, rfl, (by intro blocks he; cases he), ?_, ?_⟩
+  · refine ⟨savedContext.reverse ++ none :: List.replicate used (some false) ++ [none], ?_⟩
+    simp [tapeContent, List.append_assoc]
+  · exact ⟨_, rfl⟩
 
 theorem missing_represents (table : CompressionTable (Bits κ) (Bits n)) (fuel used : Nat)
     (target : Bits n) (suffix : List (Bits κ)) (pc : Nat) :
     Represents table none
-      { pc := pc, inputTape := { left := (table.flatMap SimulatorLookup.entryBits).reverse.map some ++ none :: UnaryFuel.counter fuel used, current := some false },
+      { pc := pc, inputTape := { left := (table.flatMap SimulatorLookup.entryBits).reverse.map some ++ none :: UnaryFuel.counterWith savedContext fuel used, current := some false },
         outputTape := flagTape target suffix false, halted := true } := by
-  refine ⟨rfl, rfl, (by intro blocks he; cases he), ?_⟩
-  refine ⟨(UnaryFuel.counter fuel used).reverse ++ [none], ?_⟩
-  simp [tapeContent, SimulatorLookup.tableBits, List.reverse_append, ← List.map_reverse,
-    List.map_append, List.append_assoc]
+  refine ⟨rfl, rfl, (by intro blocks he; cases he), ?_, ?_⟩
+  · refine ⟨(UnaryFuel.counterWith savedContext fuel used).reverse ++ [none], ?_⟩
+    simp [tapeContent, SimulatorLookup.tableBits, List.reverse_append, ← List.map_reverse,
+      List.map_append, List.append_assoc]
+  · refine ⟨(UnaryFuel.counter fuel used).reverse ++ [none] ++ (SimulatorLookup.tableBits table).map some, ?_⟩
+    simp [tapeContent, SimulatorLookup.tableBits, UnaryFuel.counterWith_eq_append, List.reverse_append,
+      ← List.map_reverse, List.map_append, List.append_assoc]
 
 /-- Exact bounded simulation of the reference reconstruction on every finite
 table, including cycles, collisions, zero-width digests and empty messages.
@@ -633,7 +655,7 @@ theorem run (oracle : BitOracle State) (state : State)
         · have hb := round_le_budget table 0 used
           unfold roundBound at hb; omega
         · simpa only [MessagePrefixLoop.run, ↓reduceIte] using accepted_represents table 0 used initial suffix
-      · obtain ⟨k, hk, hr⟩ := empty_run oracle state trace initial target table used suffix ht
+      · obtain ⟨k, hk, hr⟩ := empty_run (savedContext := savedContext) oracle state trace initial target table used suffix ht
         refine ⟨_, _, ?_, hr, ?_⟩
         · have hb := round_le_budget table 0 used
           unfold roundBound at hb; omega
@@ -647,7 +669,7 @@ theorem run (oracle : BitOracle State) (state : State)
         · simpa only [MessagePrefixLoop.run, ↓reduceIte] using accepted_represents table (fuel + 1) used initial suffix
       · cases hf : (MessagePrefixLoop.find target table).1 with
         | none =>
-            obtain ⟨k, hk, hr⟩ := missing_run oracle state trace initial target table fuel used suffix ht hf
+            obtain ⟨k, hk, hr⟩ := missing_run (savedContext := savedContext) oracle state trace initial target table fuel used suffix ht hf
             refine ⟨_, _, ?_, hr, ?_⟩
             · have hb := round_le_budget table (fuel + 1) used
               have hs := SimulatorPredecessorLookup.steps_bound target table
@@ -657,7 +679,7 @@ theorem run (oracle : BitOracle State) (state : State)
                 missing_represents table fuel (used + 1) target suffix ((searchPrefix initial κ).length + SimulatorPredecessorStep.missingPc n κ)
         | some pair =>
             rcases pair with ⟨previous, block⟩
-            obtain ⟨k, before, after, hk, htable, hcycle⟩ := cycle_run oracle state trace initial target previous block table fuel used suffix ht hf
+            obtain ⟨k, before, after, hk, htable, hcycle⟩ := cycle_run (savedContext := savedContext) oracle state trace initial target previous block table fuel used suffix ht hf
             obtain ⟨time, result, hb, hr, hout⟩ := ih (used + 1) previous (block :: suffix)
             refine ⟨(((5 * k + 4) + (6 * used + 7)) + (SimulatorPredecessorLookup.steps target table + (7 * n + 10 * κ + 13) + (3 * (before.flatMap SimulatorLookup.entryBits).length + 5)) + 1) + time, result, ?_, ?_, ?_⟩
             · have hc := cycle_bound table before after target previous block k used fuel hk htable
@@ -675,7 +697,7 @@ theorem run_at_budget (oracle : BitOracle State) (state : State)
       TimedExecution.eval (Reification.timedStep (code initial κ) oracle) (budget table fuel used)
         (NativeCode.frame state trace (start table fuel used target suffix)) = PMF.pure (NativeCode.frame state trace result) ∧
       Represents table (MessagePrefixLoop.run initial table fuel target suffix).message result := by
-  obtain ⟨time, result, hb, hr, hout⟩ := run oracle state trace initial table fuel used target suffix
+  obtain ⟨time, result, hb, hr, hout⟩ := run (savedContext := savedContext) oracle state trace initial table fuel used target suffix
   refine ⟨result, ?_, hout⟩
   have ha : Reification.timedStep (code initial κ) oracle (NativeCode.frame state trace result) =
       PMF.pure (NativeCode.frame state trace result) := by
@@ -713,8 +735,8 @@ theorem reconstruct_eq (oracle : BitOracle State) (state : State)
         (NativeCode.frame state trace (start table fuel 0 target [])) = PMF.pure (NativeCode.frame state trace result) ∧
       readResult κ result = messagePrefix initial table fuel target ∧ result.halted = true ∧
       retainsTable table result.inputTape := by
-  obtain ⟨result, hr, hout⟩ := run_at_budget oracle state trace initial table fuel 0 target []
-  refine ⟨result, hr, ?_, hout.1, hout.2.2.2⟩
+  obtain ⟨result, hr, hout⟩ := run_at_budget (savedContext := savedContext) oracle state trace initial table fuel 0 target []
+  refine ⟨result, hr, ?_, hout.1, hout.2.2.2.1⟩
   rw [read_represents _ _ _ hout, MessagePrefixLoop.run_eq]
   simp
 
@@ -747,7 +769,7 @@ theorem encoded_finish (E : FiniteBitEncoding State) (stateSize : State → Nat)
         NativeCode.storageBound (code initial κ)
           (NativePacketComponent.Resources.frameSize stateSize (NativeCode.frame state trace (start table fuel used target suffix)))
           (budget table fuel used) := by
-  obtain ⟨result, hr, hout⟩ := run_at_budget oracle state trace initial table fuel used target suffix
+  obtain ⟨result, hr, hout⟩ := run_at_budget (savedContext := savedContext) oracle state trace initial table fuel used target suffix
   refine ⟨result, hr, hout, ?_⟩
   exact encoded_peak E stateSize hState oracle state trace initial target table fuel used suffix _ (Nat.le_refl _) _
     (by rw [hr]; simp)
@@ -761,20 +783,20 @@ structure Input (n κ : Nat) where
 
 noncomputable def finish (oracle : BitOracle State) (state : State)
     (trace : List (List Bool × List Bool)) (initial : Bits n) (input : Input n κ) : Machine.Configuration :=
-  Classical.choose (run_at_budget oracle state trace initial input.table input.fuel input.used input.target input.suffix)
+  Classical.choose (run_at_budget (savedContext := savedContext) oracle state trace initial input.table input.fuel input.used input.target input.suffix)
 
 theorem finish_run (oracle : BitOracle State) (state : State)
     (trace : List (List Bool × List Bool)) (initial : Bits n) (input : Input n κ) :
     TimedExecution.eval (Reification.timedStep (code initial κ) oracle) (budget input.table input.fuel input.used)
       (NativeCode.frame state trace (start input.table input.fuel input.used input.target input.suffix)) =
-      PMF.pure (NativeCode.frame state trace (finish oracle state trace initial input)) :=
-  (Classical.choose_spec (run_at_budget oracle state trace initial input.table input.fuel input.used input.target input.suffix)).1
+      PMF.pure (NativeCode.frame state trace (finish (savedContext := savedContext) oracle state trace initial input)) :=
+  (Classical.choose_spec (run_at_budget (savedContext := savedContext) oracle state trace initial input.table input.fuel input.used input.target input.suffix)).1
 
 theorem finish_represents (oracle : BitOracle State) (state : State)
     (trace : List (List Bool × List Bool)) (initial : Bits n) (input : Input n κ) :
     Represents input.table (MessagePrefixLoop.run initial input.table input.fuel input.target input.suffix).message
-      (finish oracle state trace initial input) :=
-  (Classical.choose_spec (run_at_budget oracle state trace initial input.table input.fuel input.used input.target input.suffix)).2
+      (finish (savedContext := savedContext) oracle state trace initial input) :=
+  (Classical.choose_spec (run_at_budget (savedContext := savedContext) oracle state trace initial input.table input.fuel input.used input.target input.suffix)).2
 
 /-- A full-state execution contract for the emitted fixed code. The selected
 endpoint is certified by its execution, not populated from a reference answer. -/
@@ -784,14 +806,14 @@ noncomputable def procedure (oracle : BitOracle State) (state : State)
   TimedExecution.Procedure.ofFixed _
     (fun (input : Input n κ) => NativeCode.frame state trace (start input.table input.fuel input.used input.target input.suffix))
     (fun _ (result : Machine.Configuration) => NativeCode.frame state trace result)
-    (fun (input : Input n κ) => PMF.pure (finish oracle state trace initial input))
+    (fun (input : Input n κ) => PMF.pure (finish (savedContext := savedContext) oracle state trace initial input))
     (fun (input : Input n κ) => budget input.table input.fuel input.used)
-    (fun input => by simpa only [PMF.pure_map] using finish_run oracle state trace initial input)
+    (fun input => by simpa only [PMF.pure_map] using finish_run (savedContext := savedContext) oracle state trace initial input)
 
 theorem procedure_costed (oracle : BitOracle State) (state : State)
     (trace : List (List Bool × List Bool)) (initial : Bits n) (input : Input n κ) :
-    (procedure oracle state trace initial).costed input =
-      PMF.pure (finish oracle state trace initial input, budget input.table input.fuel input.used) := by
+    (procedure (savedContext := savedContext) oracle state trace initial).costed input =
+      PMF.pure (finish (savedContext := savedContext) oracle state trace initial input, budget input.table input.fuel input.used) := by
   simp [procedure, TimedExecution.Procedure.ofFixed, PMF.pure_map]
 
 def observe (κ : Nat) (frame : Configuration State) : Option (List (Bits κ)) :=
@@ -805,8 +827,9 @@ theorem message_law (oracle : BitOracle State) (state : State)
     (TimedExecution.eval (Reification.timedStep (code initial κ) oracle) (budget table fuel 0)
       (NativeCode.frame state trace (start table fuel 0 target []))).map (observe κ) =
       PMF.pure (messagePrefix initial table fuel target) := by
-  obtain ⟨result, hr, hread, _, _⟩ := reconstruct_eq oracle state trace initial target table fuel
+  obtain ⟨result, hr, hread, _, _⟩ := reconstruct_eq (savedContext := savedContext) oracle state trace initial target table fuel
   rw [hr, PMF.pure_map]
   simpa only [observe, NativeCode.frame] using congrArg PMF.pure hread
 
+end SavedContext
 end Foundation.Hash.Native.SimulatorReconstruct

@@ -38,4 +38,56 @@ theorem host_last_halt (before tail : Code) (positive : 0 < tail.length)
     CodeRelocation.lookup, last]
   rfl
 
+/-- Interpreter exits are distinct from native halted machine frames. A
+certified execution ending in a machine frame cannot have fetched past the
+source block, even if it already executed a native halt. -/
+def exited (control : Control) : Bool :=
+  match control with
+  | .finished _ => true
+  | _ => false
+
+theorem append_step_of_no_exit (source after : Code) (oracle : BitOracle State)
+    (start : Configuration State)
+    (nextActive : ∀ out ∈ (Reification.timedStep source oracle start).support, exited out.control = false) :
+    Reification.timedStep (source ++ after) oracle start = Reification.timedStep source oracle start := by
+  rcases start with ⟨state, control, trace⟩
+  cases control with
+  | running machine =>
+      by_cases hh : machine.halted = true
+      · simp [Reification.timedStep, Reification.terminal, hh]
+      · have ha : machine.halted = false := by simpa using hh
+        cases hf : source[machine.pc]? with
+        | none =>
+            have hs : (⟨state, .finished false, trace⟩ : Configuration State) ∈
+                (Reification.timedStep source oracle ⟨state, .running machine, trace⟩).support := by
+              simp [Reification.timedStep, Reification.terminal, ha, Reification.perform,
+                Reification.action, transition, hf]
+            have hb := nextActive _ hs
+            contradiction
+        | some op =>
+            have hi : machine.pc < source.length := (List.getElem?_eq_some_iff.mp hf).1
+            have hg : (source ++ after)[machine.pc]? = some op := by rw [List.getElem?_append_left hi, hf]
+            simp [Reification.timedStep, Reification.terminal, ha, Reification.perform,
+              Reification.action, transition, hf, hg]
+  | sending => rfl
+  | reversing => rfl
+  | awaiting => rfl
+  | loading => rfl
+  | advancing => rfl
+  | rewinding => rfl
+  | finished => rfl
+
+theorem append_running_final (source after : Code) (oracle : BitOracle State)
+    (fuel : Nat) (start : Configuration State)
+    (final : ∀ out ∈ (TimedExecution.eval (Reification.timedStep source oracle) fuel start).support,
+      exited out.control = false) :
+    TimedExecution.eval (Reification.timedStep (source ++ after) oracle) fuel start =
+      TimedExecution.eval (Reification.timedStep source oracle) fuel start := by
+  apply eval_congr_of_active_final _ _ (fun frame => exited frame.control) _ _ fuel start final
+  · intro frame he
+    rcases frame with ⟨state, control, trace⟩
+    cases control <;> simp_all [exited, Reification.timedStep, Reification.terminal]
+  · intro frame _ hn
+    exact append_step_of_no_exit source after oracle frame hn
+
 end CryptoOracle.Interactive.CodePrefixExecution

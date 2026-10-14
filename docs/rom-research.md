@@ -1,5 +1,52 @@
 # ランダムオラクル構成の研究記録
 
+## 元キーの保護領域への退避・空 suffix 配置・終端再構成接続（2026-10-14）
+
+`NativeSimulatorKeyProtect` と `NativeSimulatorTerminalReconstruct` を追加しました。
+元問い合わせ packet は input の fuel 終端空白よりさらに左へ実コピーします。
+保存したキーと fuel は別の空白で隔て、再構成の counter 消費・表検索・巻戻しから保持します。
+
+- `UnaryFuel.counterWith` / `tapeWith`：fuel 終端空白より左に任意の保存セル列を持てるように一般化する。
+  同じ11命令の fuel 消費を使い、fuel 消尽では終端空白に止まって保存列を左に保持する。
+  既存の `counter` / `tape` は保存列 `[]` の互換入口。
+- `SimulatorReconstruct.startWith` / `Represents`：同じ再構成コードの全実行証明を保存領域付きへ一般化する。
+  成功・fuel 消尽・辺欠落の全停止路と各反復境界で、保存列の逆順が input 全セル列の先頭に残る。
+  コード長・遷移予算は変更せず、保存セルの符号長は入口サイズに含めて評価する。
+- `LeftBlankAllocate.run`：fuel の true 列を実左走査し、終端空白からさらに一回左へ動いて保存用セルへ入る。
+  元の空白区切りは保持する。無料の領域確保は行わない。
+- `SimulatorKeyProtect.copy_run`：output の元 packet を固定幅の実 branch/read/write で input 左側へコピーする。
+  source の元 packet と表・fuel を保持し、保存列は `packet.reverse.map some ++ [none]` になる。
+- `restore_run` / `suffix_run`：保存キーと fuel の二つの空白境界を実右走査して表先頭へ戻った後、
+  元の output マーカー・payload・応答フラグ領域に空白区切りと encoded empty suffix を書き、残りを実消去する。
+  元キーの退避はこの上書きより前に完了する。消去で残った余分な空白セルは物理状態に保持する。
+- `SimulatorKeyProtect.run`：上記全段を継続コードへ fall-through する一つの通常命令プログラムとして合成する。
+  コード長は継続を除いて `10*n+11*κ+31`、正確な時間は `11*n+12*κ+6*fuel+26` 遷移。
+- `with_reconstruct_law`：キー退避・空 suffix 配置から同じ再構成コードへ接続し、
+  停止・外部状態・全旧履歴・保存済み元キー・元 `messagePrefix` の結果を同時に観測する分布を証明する。
+- `SimulatorTerminalReconstruct.accepted_law` / `stopped_key`：固定 terminal のガード成功、
+  実表長計数、fuel 初期化、キー退避、空 suffix 配置、再構成の全経路を同一コードで合成する。
+  全 supported 停止状態は元の外部状態・全旧履歴を持つ halted machine frame であり、
+  input から元 packet を回収でき、output の読取りは `terminalMessage` と一致する。
+  辺欠落・fuel 消尽でも元キーは保持される。衝突・循環・幅ゼロを含む。
+- `CodePrefixExecution.append_running_final`：native halt とインタプリタの範囲外終了を区別して、
+  machine frame で終わる証明済み実行を追加コードの前に配置する。拒否継続への誤った落下は起きない。
+- `encoded_peak`：終端ガードから再構成停止までの全途中状態について、元表・counter・保護キー・
+  growing suffix・コード・不透明な外部状態・旧履歴を含む符号長上界を証明する。
+
+合成コード長は `31*n+33*κ+131+rejected.length`（拒否を1命令の halt にすると `31*n+33*κ+132`）。
+公の遷移予算は `SimulatorTerminalReconstruct.steps table`、すなわち
+`table.length*(12*n+8*κ+35)+12*n+14*κ+44+SimulatorReconstruct.budget table table.length 0`。
+表長や fuel によるコード展開・ホスト側の再開・テープ正規化は行わない。
+
+検証：全体 `lake build` は4085ジョブ成功。`lake env lean docs/rom-axioms.lean` は
+1963件の公理依存出力（公理なしの宣言を含む）、エラー・`sorryAx` なし。
+今回の監査対象は `propext`・`Classical.choice`・`Quot.sound` のみに依存する。
+保存領域 `[]` の既存入口を含む全体ビルド・公開 import・監査を更新し、`git diff --check` も成功。
+
+次は、保護したキーを実際に回収して理想ハッシュ call 後の応答と結び、元の圧縮表へ登録する接続。
+理想ハッシュ call、全分岐の応答表更新、`admissible` 除去、完全な理想世界、
+uniform WholeWitness/WholeReduction、MAC コード生成・認証済み論理登録は未完了。
+
 ## 終端成功路からの実行時 fuel 初期化（2026-10-14）
 
 `NativeSimulatorTableCount`、`NativeSimulatorFuelPrepare`、`NativeSimulatorTerminalFuel` と、
