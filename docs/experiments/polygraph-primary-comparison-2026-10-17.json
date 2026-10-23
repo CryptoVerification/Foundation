@@ -1,0 +1,239 @@
+{
+  "date": "2026-10-17",
+  "kind": "targeted primary-literature comparison, not a systematic review",
+  "records": [
+    {
+      "id": "lafont-circuits-2003",
+      "title": "Towards an Algebraic Theory of Boolean Circuits",
+      "authors": [
+        "Yves Lafont"
+      ],
+      "year": 2003,
+      "url": "https://www.i2m.univ-amu.fr/perso/yves.lafont/pub/circuits.pdf",
+      "read_text": [
+        "section 2.3 Theorem 3 and canonical-form proof discussion",
+        "appendix A.3 selected global-conflict and critical-peak discussion",
+        "appendix A.4 terms versus diagrams"
+      ],
+      "visual_pages_one_based": [
+        36
+      ],
+      "established_overlap": "Finite generators/relations for finite-set wiring and systematic translation of equational theories to diagrams are prior results.",
+      "not_established_here": [
+        "No reproduction or formal verification of all 68 critical peaks.",
+        "No new bounded higher basis for our actual proof syntax.",
+        "No transfer of cartesian function equations to arbitrary stochastic/stateful boxes."
+      ],
+      "pdf_sha256": "0ca8f495502bc0ae949c974daaac5dd221c3ae541b9b05e4c1a4d805b87e288e",
+      "pdf_bytes": 439049,
+      "full_paper_read": false,
+      "artifact_reproduced": false
+    },
+    {
+      "id": "graphical-crypto-2019",
+      "title": "Graphical Methods in Device-Independent Quantum Cryptography",
+      "authors": [
+        "Spencer Breiner",
+        "Carl A. Miller",
+        "Neil J. Ross"
+      ],
+      "year": 2019,
+      "url": "https://www.mathstat.dal.ca/~neilr/Papers/Graphicalcrypto.pdf",
+      "read_text": [
+        "abstract and selected introduction",
+        "section 4.2 Lemmas 4.5 and 4.6, Theorem 4.7 statements and textual diagram-proof explanation",
+        "section 4.3 formalization and section 5 conclusion"
+      ],
+      "visual_pages_one_based": [
+        17
+      ],
+      "established_overlap": "A cryptographic proof represented by higher-dimensional diagrams and partially checked in Globular predates this project. The paper describes a k=2 skeleton, not a complete machine-checked quantitative semantics.",
+      "not_established_here": [
+        "No artifact execution or reconstruction of their 60-step sequence.",
+        "No quantum semantics implemented in Foundation."
+      ],
+      "pdf_sha256": "1c4f6b8271776e783c7330937861524ca95b4da1c081b90a29a08862fc70061d",
+      "pdf_bytes": 1068319,
+      "full_paper_read": false,
+      "artifact_reproduced": false
+    },
+    {
+      "id": "pous-string-diagrams-2026",
+      "title": "String Diagrams for Monoidal Categories, in Rocq",
+      "authors": [
+        "Damien Pous"
+      ],
+      "year": 2026,
+      "publication_date": "2026-07-16",
+      "url": "https://drops.dagstuhl.de/storage/00lipics/lipics-vol382-itp2026/LIPIcs.ITP.2026.28/LIPIcs.ITP.2026.28.pdf",
+      "doi": "10.4230/LIPIcs.ITP.2026.28",
+      "read_text": [
+        "abstract/introduction and section 2.3 formalization",
+        "section 5.3 normalizer correctness, restriction on empty-output nodes, and stated lack of completeness proof",
+        "section 5.4 graphical rewrite export and composing monoids",
+        "section 7 future work"
+      ],
+      "visual_pages_one_based": [
+        12
+      ],
+      "established_overlap": "Graphical rewriting translated to textual formal proofs, structural automation, and parallel rewrite grouping already have a proof-assistant implementation.",
+      "not_established_here": [
+        "The paper explicitly does not prove completeness of its mcat tactic; empty-target cases can fail.",
+        "Its general-box monoidal language and our one-sort pure-wiring completeness are different scopes. Neither is claimed to subsume the other.",
+        "No artifact build or runtime comparison performed."
+      ],
+      "pdf_sha256": "b47cf5bc38c718d661074e3746839e72961821f672dab84534a89c1487fc9831",
+      "pdf_bytes": 810898,
+      "full_paper_read": false,
+      "artifact_reproduced": false
+    },
+    {
+      "id": "uc-categorical-2026",
+      "title": "UC, Categorically: Rigorous Diagrammatic Proofs",
+      "authors": [
+        "Pooya Farshim",
+        "Martti Karvonen",
+        "Andre Knispel",
+        "Markulf Kohlweiss",
+        "Philip Wadler"
+      ],
+      "year": 2026,
+      "version": "arXiv:2608.04521v1",
+      "publication_date": "2026-08-05",
+      "url": "https://arxiv.org/pdf/2608.04521v1",
+      "read_text": [
+        "abstract/introduction",
+        "Definitions III.2-III.4",
+        "Theorem III.7 statement and textual proof",
+        "Theorems III.11 and III.12 statements, equational and diagrammatic proofs",
+        "Definition III.13 and Theorem III.14 for global resources",
+        "selected conclusion/outlook"
+      ],
+      "visual_pages_one_based": [
+        8
+      ],
+      "established_overlap": "Rigorous diagrammatic security composition, sequential/parallel secure emulations, and composition with global resources are prior results.",
+      "not_established_here": [
+        "No full reading of all Section IV translation details.",
+        "No reproduction of artifacts or claim of a proof-assistant formalization of the whole paper.",
+        "Their computational-indistinguishability framework differs from our concrete exact retained PMF laws. This difference alone does not establish novelty."
+      ],
+      "pdf_sha256": "9ba7f8ae966102532874a6566aee289bb7892f5670ec9df99d56e38d1048ceb7",
+      "pdf_bytes": 399530,
+      "full_paper_read": false,
+      "artifact_reproduced": false
+    }
+  ],
+  "candidate_claims": {
+    "diagrammatic_cryptographic_proof_alone": "excluded as a novelty claim by prior examples",
+    "diagram_to_formal_proof_export_alone": "excluded as a novelty claim by an existing tool",
+    "finite_equational_wiring_presentation_alone": "excluded as a novelty claim by prior mathematics",
+    "shared_global_resource_security_composition_alone": "excluded as a novelty claim by prior framework",
+    "automatic_sound_obligation_extraction_and_local_certificate_repair_with_measured_cost": "unproved candidate; no priority or exclusivity conclusion"
+  },
+  "next_decision": "Specify a proof-diagram input language and a computed dependency boundary. Compare both correctness and certificate costs with ordinary modular proof reuse before extending the implementation.",
+  "no_new_lean_claims": true,
+  "verification": {
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      }
+    },
+    "new_lean_files": 0,
+    "new_build_run": false,
+    "new_performance_measurements": false
+  }
+}

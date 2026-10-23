@@ -1,0 +1,40 @@
+{
+  "finite_local_tables_and_laws_checked": 11106,
+  "independent_verification": "absorbing-chain equations for every output probability and expected cost",
+  "lookahead_strictly_cheaper_instances": 10596,
+  "lookahead_never_more_expensive": true,
+  "complete_Schnorr_transcript_laws_checked": 384,
+  "executable_witness_free_sampler_checks": 384,
+  "unequal_classes": {
+    "uncorrected_output_law": {
+      "(0, 0)": "2/7",
+      "(0, 1)": "5/14",
+      "(0, 2)": "5/14"
+    },
+    "corrected_guess_distribution": {
+      "0": "5/9",
+      "1": "4/9"
+    },
+    "exact_expected_checks": "6"
+  },
+  "previous_example_joint_correction": {
+    "context_zero_probability": "1/4",
+    "joint_proposal": {
+      "(0, 0)": "1/4",
+      "(1, 0)": "3/8",
+      "(1, 1)": "3/8"
+    },
+    "expected_checks": "5",
+    "lookahead_expected_checks": "4"
+  },
+  "scope": "known finite first-challenge table depending only on public tags; fixed two-stage restart structure",
+  "preprocessing_oracle_queries_in_cost": false,
+  "generic_adaptive_or_commitment_dependent_verifier_supported": false,
+  "full_machine_semantics_Lean_checked": false,
+  "newness_established": false,
+  "infinity_category_necessity_proved": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/local-rewinding-compiler.py": "9afc8debb4c03642fc2c0de6ed6ab035cb539a057715dc74f9fef7f6cd66f5ba",
+    "Foundation/Examples/LocalRewindingCompiler.lean": "d200f24fec202222277ac0cfd7f331f3b416756ce31b5ccdc96d25891a175361"
+  }
+}

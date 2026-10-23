@@ -1,0 +1,213 @@
+{
+  "kind": "structural_alias_wiring_before_resuming_one_live_shared_oracle_continuation",
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Semantics/Oracle/SharedReference.lean": "aeeba907965c17e9bb2ea78b5c5fa5a480690d0a6f0158b165b3563e8bf8e349",
+    "Foundation/Crypto/Semantics/Oracle/SharedReferenceCache.lean": "828738de479a9db05a31233f24006644edcc77514c69785f97370cdd87fab4f3",
+    "Foundation/Crypto/Semantics/Oracle/SharedReferenceSwitch.lean": "c056ba1bc865978038f02b2f9f99f4ef19d246063a7b71234911ad84cbc1aabd",
+    "Foundation/Examples/RandomFunctionMACSharedReferences.lean": "e51e3fbb0c071a8c6ac0f16f5c725b323078aa56d812cf98cd6a4f894a4f5c12"
+  },
+  "public_theorems": [
+    "CryptoOracle.SharedReference.erase_borrow",
+    "CryptoOracle.SharedReference.borrowed_bound",
+    "CryptoOracle.SharedReference.run_erase",
+    "CryptoOracle.SharedReference.run_eq",
+    "CryptoOracle.SharedReference.readPair_bound",
+    "CryptoOracle.SharedReference.readPair_run",
+    "CryptoOracle.SharedReference.readPair_results",
+    "CryptoOracle.SharedReference.resetReads_results",
+    "CryptoOracle.SharedReference.shared_not_reset",
+    "CryptoOracle.RandomOracle.Representation.SharedSwitch.operational_joint",
+    "CryptoOracle.RandomOracle.Representation.SharedSwitch.forget_view",
+    "CryptoOracle.RandomOracle.Representation.SharedSwitch.decoded_joint",
+    "CryptoOracle.RandomOracle.Representation.SharedSwitch.final_game",
+    "CryptoOracle.RandomOracle.Representation.SharedSwitch.cell_joint",
+    "Foundation.Symmetric.RandomFunctionMACSharedReferences.diagram_game",
+    "Foundation.Symmetric.RandomFunctionMACSharedReferences.same_actual_game",
+    "Foundation.Symmetric.RandomFunctionMACSharedReferences.same_declared_game",
+    "Foundation.Symmetric.RandomFunctionMACSharedReferences.decoded_joint",
+    "Foundation.Symmetric.RandomFunctionMACSharedReferences.final_game",
+    "Foundation.Symmetric.RandomFunctionMACSharedReferences.physical_query_bound",
+    "Foundation.Symmetric.RandomFunctionMACSharedReferences.alias_cache_hit"
+  ],
+  "claims": {
+    "erasing_reference_annotations_recovers_exact_program": "CryptoOracle.SharedReference.erase_borrow",
+    "same_syntactic_query_bound": "CryptoOracle.SharedReference.borrowed_bound",
+    "complete_result_state_physical_trace_law": "CryptoOracle.SharedReference.run_erase",
+    "two_reads_share_one_updated_cache": "CryptoOracle.SharedReference.readPair_run",
+    "reset_cache_is_different": "CryptoOracle.SharedReference.shared_not_reset",
+    "actual_live_execution_equals_original_switch_with_alias_observation": "CryptoOracle.RandomOracle.Representation.SharedSwitch.operational_joint",
+    "same_retained_prefix_selection_final_joint": "CryptoOracle.RandomOracle.Representation.SharedSwitch.decoded_joint",
+    "structural_cell_equality_before_live_resume": "CryptoOracle.RandomOracle.Representation.SharedSwitch.cell_joint",
+    "actual_mac_structural_diagram": "Foundation.Symmetric.RandomFunctionMACSharedReferences.diagram_game",
+    "actual_mac_matches_raw_declaration": "Foundation.Symmetric.RandomFunctionMACSharedReferences.same_declared_game",
+    "actual_mac_full_old_game": "Foundation.Symmetric.RandomFunctionMACSharedReferences.final_game",
+    "actual_mac_physical_trace_at_most_four_queries": "Foundation.Symmetric.RandomFunctionMACSharedReferences.physical_query_bound",
+    "either_alias_reads_recoded_entry": "Foundation.Symmetric.RandomFunctionMACSharedReferences.alias_cache_hit"
+  },
+  "operational_interface": {
+    "reference": "Singleton symbolic Ref.root for the one authority served by the current oracle. No cache contents in the token; not a heap address or security capability.",
+    "service": "Request (reference,input) calls world(updated_state,input). It neither allocates nor resets a per-reference cache.",
+    "borrow": "Traverse the exact captured Program; attach a reference to each existing query; preserve responses, adaptive continuations, query order, and local coins; increment routing position only on queries.",
+    "cut": "Run original prefix to actual pause point; compute structural reference view and routing; choose original policy label; recode actual cache; execute original remaining syntax once through the reference service.",
+    "retained": "Alias observation, same actual prefix with captured continuation/cache/trace, same label, full final result/cache/physical transcript.",
+    "mac": "Actual first-response cut, previous generated local declaration and codec family, original remaining adaptive query/repeated request/verification. Alternating selection from the two alias-output positions.",
+    "raw_reference_transcripts": "run_erase projects logical reference-tagged requests to the original input interface. Tokens are singleton, but physical transcript equality rather than token erasure is the compared interface.",
+    "diagnostic": "readPair is a separate two-query program demonstrating one insertion and cached reuse. resetReads deliberately starts each query from []. It is not substituted for the MAC suffix."
+  },
+  "runtime_checks": [
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "expected": "(true, [true, true, true])",
+      "meaning": "Execute alias-view wiring and routing across three suffix positions. This does not simulate the PMF or native MAC execution.",
+      "passed": true
+    }
+  ],
+  "boundaries": [
+    "One symbolic authority only: all Ref values are the same token. No multi-object heap, allocation, pointer alias analysis, deallocation, concurrent controllers or independently owned state handles.",
+    "Discard removes an alias-output position, not the authoritative cache. Tensor is composition of pure reference wiring, not parallel independent probabilistic controllers.",
+    "The real cache remains outside the wiring values and is passed serially by Program.run. The model does not assert a linear type system for arbitrary Lean programs.",
+    "No new native implementation, CPU-time/resource bound for alias routing, recoding, or new representation service. Existing native runtime bounds are not transferred here.",
+    "No completeness/higher coherence of the finite primitive structural basis. No exclusive higher-dimensional proof-size, repair-work or runtime advantage.",
+    "Ordinary shared lemmas and state-threading suffice for the service/erasure proofs. No new literature reading or publication-novelty determination in this turn."
+  ],
+  "novelty": "Unconfirmed. Concrete extension from completed-record views to wiring references before a single captured continuation actually resumes.",
+  "remaining": [
+    "primitive finite-basis completeness and higher coherence without global reconstruction",
+    "multiple live state objects, state-dependent sharing, and controller composition",
+    "native realization and execution bounds for the representation edits",
+    "fair proof-construction/repair comparisons with ordinary shared lemmas"
+  ],
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4320,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 1450,
+    "new_public_theorems": 21,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "axiom_allowlist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "dependency_closures": {
+      "Foundation.Crypto.Semantics.Oracle.SharedReference": [
+        "Foundation.Crypto.Semantics.Oracle.Program",
+        "Foundation.Crypto.Semantics.Oracle.QueryMap",
+        "Foundation.Crypto.Semantics.Oracle.SharedReference",
+        "Foundation.Crypto.Semantics.Probability.Comp"
+      ],
+      "Foundation.Crypto.Semantics.Oracle.SharedReferenceCache": [
+        "Foundation.Crypto.Semantics.Oracle.Program",
+        "Foundation.Crypto.Semantics.Oracle.QueryMap",
+        "Foundation.Crypto.Semantics.Oracle.RandomOracle",
+        "Foundation.Crypto.Semantics.Oracle.SharedReference",
+        "Foundation.Crypto.Semantics.Oracle.SharedReferenceCache",
+        "Foundation.Crypto.Semantics.Probability.Comp",
+        "Foundation.Crypto.Semantics.Probability.Copyability",
+        "Foundation.Crypto.Semantics.Probability.Facts"
+      ],
+      "Foundation.Crypto.Semantics.Oracle.SharedReferenceSwitch": [
+        "Foundation.Crypto.Semantics.Oracle.Composition",
+        "Foundation.Crypto.Semantics.Oracle.Program",
+        "Foundation.Crypto.Semantics.Oracle.QueryFootprint",
+        "Foundation.Crypto.Semantics.Oracle.QueryMap",
+        "Foundation.Crypto.Semantics.Oracle.QueryPrefix",
+        "Foundation.Crypto.Semantics.Oracle.RandomOracle",
+        "Foundation.Crypto.Semantics.Oracle.RandomOracleRepresentation",
+        "Foundation.Crypto.Semantics.Oracle.RepresentationLocality",
+        "Foundation.Crypto.Semantics.Oracle.RepresentationSwitch",
+        "Foundation.Crypto.Semantics.Oracle.SharedReference",
+        "Foundation.Crypto.Semantics.Oracle.SharedReferenceSwitch",
+        "Foundation.Crypto.Semantics.Oracle.StateMap",
+        "Foundation.Crypto.Semantics.Probability.Comp",
+        "Foundation.Crypto.Semantics.Probability.Facts",
+        "Foundation.Logic.Polygraph.StructuralTransport"
+      ]
+    },
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      }
+    }
+  }
+}

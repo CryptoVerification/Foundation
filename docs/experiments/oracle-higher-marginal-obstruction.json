@@ -1,0 +1,133 @@
+{
+  "date": "2026-10-18",
+  "source_sha256": {
+    "Foundation/Examples/HigherMarginalObstruction.lean": "80c23736bc83586a395e4e06d3d7518567ada75f7e005336ccde5ccb74ae3cd1",
+    "docs/experiments/higher-marginal-obstruction.py": "d17ad4240a1c8c289360bfa3236939b6d4d190cb5c41362fc8c776e20f21785d"
+  },
+  "audited_public_declarations": [
+    "Foundation.Examples.HigherMarginalObstruction.target_nonnegative",
+    "Foundation.Examples.HigherMarginalObstruction.target_normalized",
+    "Foundation.Examples.HigherMarginalObstruction.target_pairs_uniform",
+    "Foundation.Examples.HigherMarginalObstruction.target_score",
+    "Foundation.Examples.HigherMarginalObstruction.global_score_nonpositive",
+    "Foundation.Examples.HigherMarginalObstruction.marginal_score",
+    "Foundation.Examples.HigherMarginalObstruction.realized_score_nonpositive",
+    "Foundation.Examples.HigherMarginalObstruction.no_joint",
+    "Foundation.Examples.HigherMarginalObstruction.pushforward_nonnegative",
+    "Foundation.Examples.HigherMarginalObstruction.pushforward_marginal",
+    "Foundation.Examples.HigherMarginalObstruction.no_common_output_simulator",
+    "Foundation.Examples.HigherMarginalObstruction.context_aware_exact",
+    "Foundation.Examples.HigherMarginalObstruction.support_has_global_assignment"
+  ],
+  "verification": {
+    "target_build": {
+      "command": "nix develop path:. -c lake build Foundation.Examples.HigherMarginalObstruction",
+      "exit_code": 0,
+      "jobs": 2596,
+      "new_warnings": 0
+    },
+    "axiom_audit": {
+      "command": "nix develop path:. -c lake env lean /tmp/foundation-higher-marginal-obstruction-audit.lean",
+      "exit_code": 0,
+      "selected_theorems": 13,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "exact_rational_check": {
+      "command": "python3 docs/experiments/higher-marginal-obstruction.py",
+      "exit_code": 0
+    },
+    "root_import_registered": false,
+    "aggregate_audit_registered": false,
+    "full_library_build_rerun": false,
+    "old_source_records_verified": 83,
+    "old_source_hash_entries_verified": 352
+  },
+  "formal_results": [
+    "The prescribed uniform-even-parity triple law is normalized and nonnegative.",
+    "All pair projections are independent uniform distributions.",
+    "No nonnegative rational four-bit law realizes all four prescribed triple laws.",
+    "Any finite-seed common four-bit output induces a global nonnegative rational law; consequently no such simulator realizes the local laws.",
+    "A context-aware two-fair-bit simulator realizes every requested triple law exactly.",
+    "The all-zero assignment is in every local support; the obstruction uses nonnegative probabilities, not absence of any global support assignment."
+  ],
+  "mathematical_and_exact_certificate_results_not_formalized_in_Lean": {
+    "global_assignments_checked": 16,
+    "local_assignments_per_context": 8,
+    "contexts": 4,
+    "all_pair_marginals": "uniform 1/4",
+    "target_score_per_context": "3/4",
+    "global_score_certificate": {
+      "0000": 0,
+      "0001": -3,
+      "0010": -3,
+      "0011": 0,
+      "0100": -3,
+      "0101": 0,
+      "0110": 0,
+      "0111": 0,
+      "1000": -3,
+      "1001": 0,
+      "1010": 0,
+      "1011": 0,
+      "1100": 0,
+      "1101": 0,
+      "1110": 0,
+      "1111": -12
+    },
+    "minimum_worst_context_total_variation": "3/16",
+    "achieving_joint": {
+      "0000": "1/4",
+      "0111": "3/16",
+      "1011": "3/16",
+      "1101": "3/16",
+      "1110": "3/16"
+    },
+    "achieving_errors": [
+      "3/16",
+      "3/16",
+      "3/16",
+      "3/16"
+    ],
+    "context_aware_escape": "exact sampler from two fair bits",
+    "single_test_ideal_acceptance": "15/16",
+    "single_test_global_acceptance_upper": "3/4",
+    "single_test_distinguishing_gap_lower": "3/16",
+    "support_only_global_assignment_exists": true,
+    "higher_cohomology_class_computed": false,
+    "cryptographic_reduction_bridge_proved": false
+  },
+  "feasibility_verdict": {
+    "restricted_simulator_impossibility": "demonstrated",
+    "automatic_bridge_from_arbitrary_cryptographic_reductions": "invalid without an additional forcing theorem; equal fair-bit games admit identity reductions despite an externally inconsistent triple-correlation specification",
+    "current_mac_general_reduction_separation": "unsupported; existing common-function replay construction gives a joint for the selected program transformations",
+    "higher_cohomology_invariant": "not constructed; higher arity is not identified with higher cohomological degree",
+    "next_required_result": "derive unavoidable correlation or causal constraints from a specified natural cryptographic reduction class, including all permitted context-dependent behavior",
+    "novelty": "not established; general marginal obstruction and resource simulation principles have prior work"
+  },
+  "literature_read_scope": [
+    {
+      "url": "https://arxiv.org/html/1111.3620v2",
+      "scope": "Section 4 propositions 4.3 and 4.5 and limitations in Section 8; selected sections, not full paper"
+    },
+    {
+      "url": "https://arxiv.org/html/1705.07918",
+      "scope": "General framework and Theorem 2 statement; selected sections, not full paper"
+    },
+    {
+      "url": "https://arxiv.org/html/1904.10035",
+      "scope": "Section IV-D Definition 18 and Theorem 20 with relevant proof paragraphs; selected sections, not full paper"
+    },
+    {
+      "url": "https://people.seas.harvard.edu/~salil/research/blackbox-abs.html",
+      "scope": "Author abstract; linked PDF retrieved but extracted text garbled, definitions not claimed read"
+    },
+    {
+      "url": "https://eprint.iacr.org/2013/101.pdf",
+      "scope": "Primary-source abstract visible in search; direct retrieval failed, no full-text claim"
+    }
+  ]
+}

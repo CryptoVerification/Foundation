@@ -1,0 +1,68 @@
+{
+  "target_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitSimplexCertificate",
+  "targeted_lake_build_passed": true,
+  "lean_toolchain": "leanprover/lean4:v4.33.0",
+  "axioms_per_theorem": {
+    "four_weights_large": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "unit_barycenter_diameter": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "unit_barycenter_pair": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "perfect_simplex_jump": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "approximate_simplex_jump": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "sharpTetrahedron_barycenter": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "sharpTetrahedron_joint_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "sharpTetrahedron_attains": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "sorry_or_additional_axioms_in_listed_theorems": false,
+  "certificate": "four unit signed vectors, nonnegative coefficients summing to one, zero weighted mean",
+  "perfect_cipher_joint_TV_pair_lower_bound": "2/3",
+  "approximate_cipher_internal_TV_pair_lower_bound": "margin/3",
+  "actual_joint_probability_distance_used": true,
+  "explicit_sharp_certificate_checked": true,
+  "sharp_certificate_has_nondyadic_probabilities": true,
+  "zero_barycenter_extracted_from_boundary": false,
+  "Caratheodory_reduction_checked": false,
+  "topological_nonextension_checked": false,
+  "Foundation_bounded_machine_realization_checked": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/classical-bit-encryption-lean-simplex.py": "bba09e7a83abf1feffda87dbb64ae153d8dfe1f535e85c8f03c0a7779206701d",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitSimplexCertificate.lean": "e5ebeb7ca2c9ed2b37e47e4a654b8d010cd405bc9312f3b6989084e34b3a741c",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepairStability.lean": "d83db5cc70fbda328ccd400f5232f7aa6b3ea9058da0f3b5b02da2d673e7f50b",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepair.lean": "459aa24b50357f54d78ce8faf35ebbf96164a3971bc6b6aebd19524f69921a07",
+    "/Users/hiro/workspace/Foundation/lakefile.toml": "b537fcdfd0e540cfd6f310d771aff1eb8fc24ab107a421b02cfa42cf131a9411",
+    "/Users/hiro/workspace/Foundation/lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
+    "/Users/hiro/workspace/Foundation/lake-manifest.json": "ef3799fa73ec244f1db2063a084e5c03ab1196e16604e883952f870179bff929"
+  }
+}

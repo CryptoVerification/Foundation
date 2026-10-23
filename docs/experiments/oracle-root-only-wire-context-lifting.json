@@ -1,0 +1,401 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Logic/Polygraph/FourNaturality.lean": "2500de17a5a4712e20f660d9e921dd07a7f8bfdf20952fd958f1a696dea65226",
+    "Foundation/Examples/MixedCircuitWireFrameNaturality.lean": "e3e2a71e14c34edc30404f3721306e2d81af44e4ab981f69ff66a05aa65b65b9",
+    "Foundation/Examples/MixedCircuitRootWireDefinitions.lean": "0eff2abc41014f589985412cac35c2f96ea6d3cb531e3b3cdecda6695354c982",
+    "Foundation/Examples/MixedCircuitRootWireElimination.lean": "c7ea7c1da12c98c7f5830c8ff399f8e2bb1076a69e7acf79ef2b92d0d6214045"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.Cell",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.ExactCell",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.ExactCell.cell",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.ExactCell.mk",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.ExactCell.support_eq",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.Generator",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.Generator.definition",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.Generator.existing",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.PriorBasis",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.baseBasis",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.basis",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.castRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.castRight_definitions",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.castRight_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.definitions",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.definitions_whisker",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminatePrimitive",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminatePrimitive_definitions",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminateStep",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminateStep_definitions",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminateTrack",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminateTrack_definitions",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminateWireStep",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminateWireStep_definitions",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminateWireStep_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.elimination_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.embedPrior",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.embedPrior_definitions",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.embedPrior_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.expandComparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.expandComparison_definitions",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.expandComparison_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.generatorDefinitions",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.liftComparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.liftComparison_definitions",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.liftComparison_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.macro_seqLeft",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.macro_seqRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.macro_tensorLeft",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.macro_tensorRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.apply",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.cartNaturality",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.cartNaturality_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.cartStep",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.cartStepNaturality",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.cartStepNaturality_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.cartTrack",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.compiled_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.fusion",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.fusion_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.oldNaturality",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.oldNaturality_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.oldStep",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.place",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.place_needs",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.seqLeft",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.seqRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.tensorLeft",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.tensorRight",
+    "Foundation.Logic.Polygraph.FourNaturality.cancelPrefix",
+    "Foundation.Logic.Polygraph.FourNaturality.invertSquare",
+    "Foundation.Logic.Polygraph.FourNaturality.map_map",
+    "Foundation.Logic.Polygraph.FourNaturality.natural",
+    "Foundation.Logic.Polygraph.FourNaturality.undoInversePrefix",
+    "Foundation.Logic.Polygraph.FourNaturality.undoLeft",
+    "Foundation.Logic.Polygraph.FourNaturality.undoRight"
+  ],
+  "public_theorems": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.castRight_definitions",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.castRight_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.definitions_whisker",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminatePrimitive_definitions",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminateStep_definitions",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminateTrack_definitions",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminateWireStep_definitions",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminateWireStep_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.elimination_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.embedPrior_definitions",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.embedPrior_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.expandComparison_definitions",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.expandComparison_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.liftComparison_definitions",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.liftComparison_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.macro_seqLeft",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.macro_seqRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.macro_tensorLeft",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.macro_tensorRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.cartNaturality_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.cartStepNaturality_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.compiled_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.fusion_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.oldNaturality_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.place_needs",
+    "Foundation.Logic.Polygraph.FourNaturality.map_map"
+  ],
+  "claims": [
+    "Generic Four groupoid cancellation, square inversion and single-step-to-track naturality are derived operations, not new whole-track generators.",
+    "Four typed internal wire frames have actual mixed placement and fusion edges. Their old/cartesian single-step naturality uses the existing eight fusion local forms.",
+    "Naturality for an arbitrary cartesian proof track is recursively generated using only those step squares and groupoid operations, with empty guard support.",
+    "The new definition basis extends the prior unified partial basis by Rewrite.Root-only definition generators: the eleven context-free old wire forms. It does not include the previous contextual-definition basis.",
+    "Internal-context lifting of any old wire Step is derived using fusion square pasting, mixed whiskering, common-prefix cancellation and unit laws. No contextual old Step is a new definition generator.",
+    "Every derived internal comparison has empty support and uses exactly one of the newly added context-free definition roots, independent of context depth.",
+    "Whole mixed Steps/Tracks are eliminated using this root-only basis, preserving exact guard sets. The number of new definition-root uses equals the old-wire primitive usage count in the input track.",
+    "Existing prior higher comparisons transfer compositionally to expanded boundary tracks with exact support; their new definition-root usage is the sum of the two boundary old-wire usage counts.",
+    "The unchanged first-level mapper retains the previously proved zero legacy-label result and factor-twenty rewrite-use bound.",
+    "Updated checked-model repair retains arbitrary correlated past and original shared state/input."
+  ],
+  "basis_contract": {
+    "new_definition_argument": "Rewrite.Root only, eleven parameterized context-free forms",
+    "prior_basis": "StatefulWiring.basis (before contextual wire-definition extension)",
+    "not_included": "OldDefinitions.basis and its contextual-definition eliminators",
+    "derived_internal_frames": [
+      "seq left",
+      "seq right",
+      "tensor left",
+      "tensor right"
+    ],
+    "prior_fusion_naturality_forms_used": 8,
+    "new_definition_uses_per_contextual_old_step": 1,
+    "internal_comparison_guards": 0
+  },
+  "concrete_diagnostic": {
+    "old_root": "interchange",
+    "internal_frames": [
+      "seq left",
+      "seq right",
+      "tensor left",
+      "tensor right"
+    ],
+    "new_context_free_definition_uses": 1,
+    "expanded_legacy_uses": 0,
+    "expanded_rewrite_uses": 20,
+    "guards": 0,
+    "total_higher_constructors": 2793
+  },
+  "limits": [
+    "This is relative to the existing parameterized old/cartesian one-step fusion naturality families, which retain actual typed wire-step/context payload. It is not a complete root-only presentation of every prior generator or all internal cartesian critical pairs.",
+    "There are eleven new definition forms but infinitely many typed parameter instances; arbitrary wire/context/boundary data is not bounded by that count.",
+    "One new definition use is not one total higher constructor: the concrete four-frame proof has 2793 constructors, excluding payload. No size or speed advantage is inferred.",
+    "The first-level factor twenty counts rewrite occurrences including inverse uses, not total proof constructors, bytes, costs or forward simulation.",
+    "Expanded boundary tracks are old-wire-free; the higher comparison internals may still retain prior-library generators. No projection of the entire higher basis or global higher conservativity/completeness is proved.",
+    "The unified rewriting relation remains nonterminating under unrestricted expansion; remaining association/suffix/pure-wire overlaps and global finite coherence remain open.",
+    "Stateful repair is endpoint equality inside an updated checked model. It does not automatically compare code-changing reductions, error budgets or full native/oracle-internal runtime.",
+    "Ordinary shared proofs can use the same local constructions. Fair total-cost comparison and primary-theorem novelty are not settled."
+  ],
+  "novelty": {
+    "status": "unconfirmed",
+    "interpretation": "A concrete removal of the previous contextual-definition assumption using root-only definitions and prior finite local forms; not claimed as a new general naturality/groupoid/definitional-presentation principle or an intrinsic compression theorem. Full original research scope remains active."
+  },
+  "literature_this_step": "No new external primary-source review. This step constructs the relative root-only internal lifting and verifies its guards and definition-use accounting.",
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4457,
+    "build_log": "/tmp/foundation-root-only-wire-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-root-only-wire-audit.log",
+    "audit_declarations": 3811,
+    "new_modules": 4,
+    "new_selected_declarations": 67,
+    "new_authored_theorems": 26,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "old_contextual_basis_and_eliminator_references_in_new_root_only_sources": [],
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "source_count": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-context.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-overlap-classification.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-fusion-conservative-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-typed-cartesian-wiring-completeness.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-cartesian-local-higher-discard-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-path-repair-novelty-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-mixed-directed-computational-extraction.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mac-native-quantitative-contracts.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mac-native-code-changing-transport.json": {
+        "source_count": 7,
+        "mismatches": []
+      },
+      "oracle-stateful-chronological-history-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-mixed-single-state-native-execution.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-stateful-unified-wiring-fusion.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-unified-fusion-overlap-resolution.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-bounded-old-wire-elimination.json": {
+        "source_count": 4,
+        "mismatches": []
+      }
+    },
+    "imported_warnings": "Preexisting imported warnings remain outside these new sources; no whole-project warning-free claim."
+  }
+}

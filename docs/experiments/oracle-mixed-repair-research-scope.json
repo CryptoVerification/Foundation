@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-17",
+  "scope": "Selected primary-source sections only; a research specification, not a proved theorem or novelty clearance.",
+  "sources": [
+    {
+      "title": "Free gs-Monoidal Categories and Free Markov Categories",
+      "authors": [
+        "Tobias Fritz",
+        "Wendong Liang"
+      ],
+      "url": "https://link.springer.com/article/10.1007/s10485-023-09717-0",
+      "doi": "10.1007/s10485-023-09717-0",
+      "inspected": "Selected HTML text: Definition 2.1, Theorem 4.1 and selected proof discussion; Section 6 normalization; Lemma 6.5 and Theorem 6.6. Previously inspected portions rechecked.",
+      "not_inspected": "Full text/full proof, image diagrams and reproduction of artifacts.",
+      "implication": "Copy/discard diagram interpretation is preexisting; not itself a central novelty claim. A universal property is not silently substituted for an annotated higher-path coherence theorem."
+    },
+    {
+      "title": "Coherent confluence modulo relations and double groupoids",
+      "authors": [
+        "Benjamin Dupont",
+        "Philippe Malbos"
+      ],
+      "url": "https://arxiv.org/abs/1810.08184",
+      "pdf_url": "https://arxiv.org/pdf/1810.08184",
+      "version": "1810.08184v3, 2021-10-04, from PDF header",
+      "downloaded_pdf_sha256": "434142627f55ec1678ef0aefb93b6929b9bb6414b9444e40989439e80f081134",
+      "extracted_text_sha256": "78a87ebc388ff3823525f26150da753105d94abec9459ad26fb4310f32ba26e4",
+      "inspected": "Definitions 4.2.1, 4.3.8 and 5.1.3; Theorem 5.2.3 and selected proof; Sections 6.1-6.2 including Theorem 6.2.2 and Corollary 6.2.4, selected proof steps.",
+      "not_inspected": "Whole paper, visual diagrams and reproducible implementation.",
+      "implication": "Coherence modulo has explicit normalization, convergence and extension hypotheses. Extension includes E-action, Peiffer squares, E-side coherence; no automatic finite mixed crypto basis inferred."
+    }
+  ],
+  "queries": [
+    "Tobias Fritz synthetic approach Markov kernels conditional independence deterministic copy naturality 2020",
+    "Fritz Liang free gs monoidal categories free Markov categories string diagrams theorem 2023",
+    "Squier theorem modulo cartesian polygraphs critical branchings copying erasing Guiraud Malbos",
+    "Dupont Malbos coherent confluence modulo relations polygraphs Squier 2020",
+    "Guiraud polygraphs cartesian categories rewriting circuits finite derivation type"
+  ],
+  "fetch_limitations": [
+    "web open of arXiv HTML for 1810.08184 failed; PDF fetched directly and selected extracted text inspected.",
+    "TAC 22/18 PDF not accessible via web tool; no theorem-level claim from that PDF is made."
+  ],
+  "novelty_status": "unconfirmed",
+  "proposed_theorem_status": "not proved; several prerequisites are absent",
+  "research_note": "docs/polygraphic-mixed-repair-specification.md",
+  "research_note_sha256": "a22f6dc10f69a1f00bde976c323c630f31eb9411b9edfa9ab7b63c35255de0fa",
+  "ai_assistance": true
+}

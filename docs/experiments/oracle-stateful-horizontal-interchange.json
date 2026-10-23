@@ -1,0 +1,274 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Semantics/Oracle/StatefulDiagramHorizontal.lean": "ec20456b7cf768f3163087998a81e7c6b4a9dff1fd26aa56465b510f6915c018",
+    "Foundation/Examples/StatefulDiagramHorizontal.lean": "0e34e36c2a26bad621ebf6a1c5b410a9a81f1630e94034fcaf69f67797c52a60"
+  },
+  "audited_public_declarations": [
+    "CryptoOracle.StatefulDiagram.Exchange.prefix",
+    "CryptoOracle.StatefulDiagram.Exchange.suffix",
+    "CryptoOracle.StatefulDiagram.Exchange.suffix_trans",
+    "CryptoOracle.StatefulDiagram.Exchange.suffix_symm",
+    "CryptoOracle.StatefulDiagram.Exchange.suffix_refl",
+    "CryptoOracle.StatefulDiagram.Exchange.prefix_trans",
+    "CryptoOracle.StatefulDiagram.Exchange.prefix_symm",
+    "CryptoOracle.StatefulDiagram.Exchange.prefix_refl",
+    "CryptoOracle.StatefulDiagram.Exchange.prefix_count",
+    "CryptoOracle.StatefulDiagram.Exchange.suffix_count",
+    "CryptoOracle.StatefulDiagram.horizontalLeft",
+    "CryptoOracle.StatefulDiagram.horizontalRight",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.assoc",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.undoSuffix",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.undoForwardPrefix",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.undoInversePrefix",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.cancelPrefix",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.invertSquare",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.stackSquares",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.composeSquares",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.invertLeft",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.invertSecond",
+    "CryptoOracle.StatefulDiagram.interchangeWithSwap",
+    "CryptoOracle.StatefulDiagram.horizontalInterchange",
+    "CryptoOracle.StatefulDiagram.separated_boundary_counts",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.squareCount",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.stackSquares_count",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.composeSquares_count",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.invertLeft_count",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.invertSecond_count",
+    "CryptoOracle.StatefulDiagram.interchangeWithSwap_count",
+    "CryptoOracle.StatefulDiagram.horizontalInterchange_count",
+    "CryptoOracle.StatefulDiagram.adjacentInterchangeOld",
+    "CryptoOracle.StatefulDiagram.adjacentInterchangeOld_count",
+    "CryptoOracle.StatefulDiagram.horizontal_execution_sound",
+    "CryptoOracle.StatefulDiagram.horizontal_obligations",
+    "Foundation.Examples.StatefulDiagramHorizontal.signature",
+    "Foundation.Examples.StatefulDiagramHorizontal.leftSwap",
+    "Foundation.Examples.StatefulDiagramHorizontal.rightSwap",
+    "Foundation.Examples.StatefulDiagramHorizontal.leftFirst",
+    "Foundation.Examples.StatefulDiagramHorizontal.rightFirst",
+    "Foundation.Examples.StatefulDiagramHorizontal.separatedCell",
+    "Foundation.Examples.StatefulDiagramHorizontal.leftWithBacktrack",
+    "Foundation.Examples.StatefulDiagramHorizontal.rightWithInverses",
+    "Foundation.Examples.StatefulDiagramHorizontal.compositeCell",
+    "Foundation.Examples.StatefulDiagramHorizontal.root_count",
+    "Foundation.Examples.StatefulDiagramHorizontal.composite_count",
+    "Foundation.Examples.StatefulDiagramHorizontal.blocker_not_crossed",
+    "Foundation.Examples.StatefulDiagramHorizontal.actual_shared_store_law",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.base",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.refl",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.symm",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.trans",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.comp",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.inverse",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.prefix",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.suffix",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.separated"
+  ],
+  "public_theorems": [
+    "CryptoOracle.StatefulDiagram.Exchange.suffix_trans",
+    "CryptoOracle.StatefulDiagram.Exchange.suffix_symm",
+    "CryptoOracle.StatefulDiagram.Exchange.suffix_refl",
+    "CryptoOracle.StatefulDiagram.Exchange.prefix_trans",
+    "CryptoOracle.StatefulDiagram.Exchange.prefix_symm",
+    "CryptoOracle.StatefulDiagram.Exchange.prefix_refl",
+    "CryptoOracle.StatefulDiagram.Exchange.prefix_count",
+    "CryptoOracle.StatefulDiagram.Exchange.suffix_count",
+    "CryptoOracle.StatefulDiagram.separated_boundary_counts",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.stackSquares_count",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.composeSquares_count",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.invertLeft_count",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.invertSecond_count",
+    "CryptoOracle.StatefulDiagram.interchangeWithSwap_count",
+    "CryptoOracle.StatefulDiagram.horizontalInterchange_count",
+    "CryptoOracle.StatefulDiagram.adjacentInterchangeOld_count",
+    "CryptoOracle.StatefulDiagram.horizontal_execution_sound",
+    "CryptoOracle.StatefulDiagram.horizontal_obligations",
+    "Foundation.Examples.StatefulDiagramHorizontal.root_count",
+    "Foundation.Examples.StatefulDiagramHorizontal.composite_count",
+    "Foundation.Examples.StatefulDiagramHorizontal.blocker_not_crossed",
+    "Foundation.Examples.StatefulDiagramHorizontal.actual_shared_store_law"
+  ],
+  "claims": {
+    "horizontal_paths": "Exchange.prefix/suffix retain arbitrary unchanged context; horizontalLeft and horizontalRight perform two supplied checked paths on concatenated finite words in opposite edit orders.",
+    "bounded_root": "HorizontalCoherence explicitly extends ExchangeCoherence by one separated primitive-square form and compositional/context closures. Its root arguments are two primitive swaps with arbitrary unchanged prefix/suffix in their components, not two arbitrary paths. Both boundaries contain exactly two expanded swaps.",
+    "generated_interchange": "horizontalInterchange recursively constructs a higher comparison of the two horizontal edit orders for all finite raw Exchange paths. Reflexivity, composition and formal inverse cases are covered. General-path interchange is derived from the primitive square and structural laws, not postulated as a root.",
+    "construction_count": "The generated comparison uses exactly p.swapCount * q.swapCount occurrences of the NEW separated primitive square. This is a construction-specific count of this one root form only.",
+    "nonminimality_boundary": "For adjacent pairs with empty intervening context, adjacentInterchangeOld constructs the same boundary comparison using the old far root and zero new separated squares. The generic construction uses one. Thus the product count is not a minimal-size invariant.",
+    "semantics": "The concatenated source and target execute with identical complete-store PMF laws for arbitrary typed kernels and every initial store. Required fresh obligation IDs also agree. No assumption of probabilistic or state independence between the two whole components is made.",
+    "example": "A middle operation reads all five slots and cannot exchange with its neighbors. Local swaps 0/1 and 3/4 are compared without moving anything across that middle operation. A second example adds backtracking, inverse and reflexivity constructors and exercises the derived general-path cases."
+  },
+  "runtime_checks": [
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "expected": "(2, 2, 4, 4, 1, 3, false, false)",
+      "meaning": [
+        "primitive swap count of left-first simple edit",
+        "primitive swap count of right-first simple edit",
+        "primitive swap count of left-first composite edit",
+        "primitive swap count of right-first composite edit",
+        "new separated squares in simple comparison",
+        "new separated squares in generated composite comparison",
+        "neighbor exchange across the middle reader rejected",
+        "other neighbor exchange across the middle reader rejected"
+      ],
+      "passed": true
+    }
+  ],
+  "scope": [
+    "The higher result is in the explicit extended HorizontalCoherence relation. It is not asserted already derivable in ExchangeCoherence, and no non-derivability theorem for the general separated root in that older relation is supplied.",
+    "Primitive root boundaries have constant expanded swap counts but arbitrary unchanged contexts and operation labels. This is a bounded schematic form, not finitely many concrete generators or proof of finite derivation type.",
+    "General horizontal interchange does not establish that all parallel paths in one exchange component are connected. Primitive-swap/selected-head-extraction comparisons and their assembly into global coherence remain pending.",
+    "No copy/discard, arbitrary cryptographic-box, approximate-game, dynamic scheduling or native runtime extension is established.",
+    "Square count excludes structural laws, old embedded higher diagrams, input path sizes, unchanged contexts, proof sharing, bytes and checking costs. It is not a total certificate-size bound or evidence of an exclusive higher-dimensional advantage.",
+    "The example is a typed shared-store diagnostic, not a new MAC query reordering. Earlier actual caller/cache/trace laws and inputs are unchanged."
+  ],
+  "literature_this_step": {
+    "title": "String Diagrams for Monoidal Categories, in Rocq",
+    "author": "Damien Pous",
+    "publication_date": "2026-07-16",
+    "primary_url": "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ITP.2026.28",
+    "pdf_url": "https://drops.dagstuhl.de/storage/00lipics/lipics-vol382-itp2026/LIPIcs.ITP.2026.28/LIPIcs.ITP.2026.28.pdf",
+    "pdf_sha256": "b47cf5bc38c718d661074e3746839e72961821f672dab84534a89c1487fc9831",
+    "read_scope": "Rechecked selected text in section 2.1: tensor bifunctoriality and the exchange equation for the two application orders. Publisher metadata re-opened. No full-paper, new figure or artifact reproduction claim.",
+    "retrieval": "Web PDF click timed out; used the earlier local cached PDF/text after verifying its PDF hash matches the previous primary-comparison record.",
+    "comparison": "Exchange of horizontal edit order is a familiar structural principle; the newly derived implementation-specific interchange and root count do not by themselves establish publication novelty. No full formal translation to the Rocq artifact or cost comparison was performed."
+  },
+  "novelty": "Unconfirmed. Global bounded higher coherence, proof-edit assumption tracking, cryptographic case studies and fair comparative certificate/checking costs remain required.",
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4348,
+    "build_log": "/tmp/foundation-stateful-horizontal-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-stateful-horizontal-audit.log",
+    "audit_declarations": 1850,
+    "new_public_declarations": 59,
+    "new_public_theorems": 22,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {
+      "Foundation/Crypto/Semantics/Oracle/StatefulDiagramHorizontal.lean": [],
+      "Foundation/Examples/StatefulDiagramHorizontal.lean": []
+    },
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "inputs": 3,
+        "mismatches": []
+      }
+    }
+  }
+}

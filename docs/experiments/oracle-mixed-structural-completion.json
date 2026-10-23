@@ -1,0 +1,364 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Logic/Polygraph/StructuralWireRewrite.lean": "229975f9a150989181c6f72c1edbd07f695f0707dad74112936dc02928bdfdd9",
+    "Foundation/Examples/MixedCircuitStructuralRules.lean": "0b4978abf6a3cc86abcb406892e4797b273bc247bf37fdab243a484194785356",
+    "Foundation/Examples/MixedCircuitStructuralFork.lean": "24f74a2f106ac109d6f0cd95714c93a46a7ed0ff505cb505e917b49c53337cbc",
+    "Foundation/Crypto/Logic/Polygraph/MixedCircuitPresentedHigher.lean": "523317411899e56f72f76cd7984651fc5e74952e25dca97ba54b75d3ee0519a0",
+    "Foundation/Examples/MixedCircuitStructuralCompletion.lean": "0c08812cb50bf03788b487e7e4b2df4d5190e6488dd78f151ceb5ecfd7ea5843"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.CompletionCell",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Definition",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Definition.suffix",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Profile",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Profile.eliminate",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Profile.schedule",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Profile.seq",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Profile.tensor",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Profile.wire",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Rule",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Rule.assoc",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Rule.crypto",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Rule.fuseSeq",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Rule.fuseTensor",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Rule.suffix",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Rule.wire",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.WireEdit",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.assocFirst",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.associated_no_candidates",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.candidates",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.completedJoin",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.completedResidual",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.completionBasis",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.copy_naive_unjoinable",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.criticalCell",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.criticalCell_constructorCount",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.criticalCell_fresh",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.criticalCell_repaired",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.criticalCell_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.cryptoFirst",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.definition_expands",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.direct_no_candidates",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.discard_naive_unjoinable",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.expandPrimitive",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.expandPrimitive_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.expandStep",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.expandStep_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.expandTrack",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.expandTrack_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.extendModel",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.forkAssociated",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.forkDirect",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.forkSource",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.fork_distinct",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.model",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.naive_unjoinable",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.not_root_rigid",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.primitive_candidate",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.profile",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.rootCandidate",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.rules",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.step_candidate",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.stopped_of_no_candidates",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.tailAssoc",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.tailCrypto",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.tailSuffix",
+    "CryptoLogic.Polygraph.MixedCircuit.HigherBasis",
+    "CryptoLogic.Polygraph.MixedCircuit.HigherBasis.Generator",
+    "CryptoLogic.Polygraph.MixedCircuit.HigherBasis.covered",
+    "CryptoLogic.Polygraph.MixedCircuit.HigherBasis.mk",
+    "CryptoLogic.Polygraph.MixedCircuit.HigherBasis.requirements",
+    "CryptoLogic.Polygraph.MixedCircuit.PresentedCell",
+    "CryptoLogic.Polygraph.MixedCircuit.PresentedCell.boundaries",
+    "CryptoLogic.Polygraph.MixedCircuit.PresentedCell.constructorCount",
+    "CryptoLogic.Polygraph.MixedCircuit.PresentedCell.repaired",
+    "CryptoLogic.Polygraph.MixedCircuit.PresentedCell.repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.PresentedCell.support",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.assocUnassoc",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.code",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.copyAssoc",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.copyDiscardLeft",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.copyDiscardRight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.copySwap",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.interchange",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.leftUnit",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.rightUnit",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.seqAssoc",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.sound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.tensorIdentity",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.unassocAssoc",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Step",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Step.root",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Step.seqLeft",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Step.seqRight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Step.sound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Step.source_composite",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Step.tensorLeft",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Step.tensorRight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.composite"
+  ],
+  "public_theorems": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.associated_no_candidates",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.copy_naive_unjoinable",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.criticalCell_constructorCount",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.criticalCell_fresh",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.criticalCell_repaired",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.criticalCell_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.definition_expands",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.direct_no_candidates",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.discard_naive_unjoinable",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.expandPrimitive_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.expandStep_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.expandTrack_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.fork_distinct",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.naive_unjoinable",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.not_root_rigid",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.primitive_candidate",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.step_candidate",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.stopped_of_no_candidates",
+    "CryptoLogic.Polygraph.MixedCircuit.PresentedCell.boundaries",
+    "CryptoLogic.Polygraph.MixedCircuit.PresentedCell.repaired",
+    "CryptoLogic.Polygraph.MixedCircuit.PresentedCell.repaired_joint",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.sound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Step.sound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Step.source_composite"
+  ],
+  "claims": [
+    "Eleven directed pure-wire local forms with four context placements are sound; the two associator inverse cancellation forms repair an omission in the older nine-form language. Completeness and termination of these forms are not established.",
+    "One mixed catalogue now admits actual wire edits, wire/circuit sequential and tensor fusion, arbitrary mixed association, and MAC contraction; its optional suffix contraction is a local completion.",
+    "Without the suffix completion, association and MAC contraction have distinct forward-irreducible descendants after either copy or discard, even with all eleven wire forms and both fusion rules available. The catalogue does not satisfy the earlier RootRigid hypothesis.",
+    "Every completed-catalogue primitive, contextual step, and reversible proof track expands into an old-catalogue proof track with exactly the same finite requirement set. The expansion of suffix contraction is inverse association then contextual MAC contraction.",
+    "Any checked model of the uncompleted catalogue extends to the completed catalogue without new local semantic assumptions, using the expanded old proof.",
+    "A single typed parameterized suffix-definition generator has boundaries whose expansions are definitionally identical old proof tracks. The actual association/MAC critical square is derived from it and proof-groupoid laws.",
+    "For every stage n and typed continuation t, the constructed critical cell uses twelve higher syntax constructors and has support exactly {n,n+1} union t.needs. Constructor counts exclude boundary-track, circuit, wire, requirement and library payloads.",
+    "Generic dependency accounting for explicitly supplied higher generators includes intermediate proof tracks and derives updated-kernel repair, including arbitrary correlated past data and original input.",
+    "The critical-cell repair theorem requires only changed members of its declared support, cached old conditions, transfer outside the changed set, and an updated checked old-catalogue model."
+  ],
+  "compiled_guarded_diagnostics": [
+    {
+      "module": "Foundation.Examples.MixedCircuitStructuralFork",
+      "value": [
+        0,
+        0,
+        2,
+        2,
+        0,
+        1
+      ],
+      "meaning": "For stage zero with a copy continuation: naive descendant candidate counts, original/residual support cardinalities, and the two completed joining-route lengths."
+    },
+    {
+      "module": "Foundation.Examples.MixedCircuitStructuralCompletion",
+      "value": [
+        2,
+        2
+      ],
+      "meaning": "Critical-cell support cardinality at stage zero after copy and discard respectively."
+    },
+    {
+      "module": "Foundation.Examples.MixedCircuitStructuralCompletion",
+      "value": true,
+      "meaning": "Expanding the stage-zero suffix rewrite after copy retains its exact support."
+    }
+  ],
+  "limits": [
+    "Only the exhibited association/MAC peak is completed. No global termination, confluence, finite mixed homotopy basis, complete wire-equation presentation, or arbitrary-track coherence theorem is claimed.",
+    "The finite schema has infinitely many typed instances. HigherBasis does not itself require a finite family. No arbitrary parallel-path comparison is made a generator.",
+    "No forward join in the naive catalogue is not semantic inequality or absence of a reversible proof track. Formal inverse reverses an equality-preserving proof rewrite, never probabilistic execution.",
+    "The candidate flag and candidate count over-approximate possible rewrites. Zero rules out steps; positivity does not certify an actual step.",
+    "Dependency accounting is conservative and not a minimal-obligation or minimum-cost theorem. Its semantic consequence is kernel equality in the updated model, not equality between old and updated models or equality of arbitrary couplings.",
+    "The existing actual MAC base kernels and conditions are retained, including full state and trace. No new security bound, attack/query order, computational reduction implementation, native continuing machine execution, or actual runtime result is proved here.",
+    "Twelve constructors is a count of this constructed higher term only. No total serialized size, shared-DAG checking complexity, independent ordinary comparison, or dimension-exclusive advantage is established.",
+    "The earlier RootRigid-based normalization cannot be applied to this enlarged catalogue. Further structural and mixed critical overlaps require separate work."
+  ],
+  "novelty": {
+    "status": "unconfirmed",
+    "finding": "A concrete mixed critical obstruction, its conservative completion, and dependency-preserving higher repair are now formalized. No priority claim is made for completion, groupoid coherence, or local repair principles.",
+    "next_evidence": "Classify the remaining structural/mixed overlaps and prove finite coverage; connect computational and continuing-machine contracts; compare ordinary proofs with the same local information and sharing; audit primary-source theorem statements."
+  },
+  "literature_this_step": "No new external primary-source theorem review in this implementation step. Earlier planning lookups do not constitute a completed novelty audit.",
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4394,
+    "build_log": "/tmp/foundation-structural-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-structural-audit.log",
+    "audit_declarations": 2680,
+    "new_modules": 5,
+    "new_selected_declarations": 90,
+    "new_authored_theorems": 24,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      }
+    },
+    "imported_warnings": "Existing warnings outside the five new sources were replayed by the whole-project build; no claim of a warning-free repository is made.",
+    "final_source_and_prior_hashes_rechecked": true,
+    "new_document_links_exist": true,
+    "git_diff_check": "passed"
+  }
+}

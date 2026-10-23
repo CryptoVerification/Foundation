@@ -1,0 +1,72 @@
+{
+  "target_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitNormalizedBoundary",
+  "targeted_lake_build_passed": true,
+  "lean_toolchain": "leanprover/lean4:v4.33.0",
+  "axioms_per_theorem": {
+    "normalized_boundary_forces_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "interpolate_inclusion": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "interpolate_ne_zero_of_face_hulls": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "normalized_subcomplex_forces_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "normalized_subcomplex_perfect_edge": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "normalized_subcomplex_approximate_edge": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "normalized_cone_perfect_edge": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "normalized_cone_approximate_edge": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "sorry_or_additional_axioms_in_listed_theorems": false,
+  "boundary_raw_l1_mass_required_to_equal_one": false,
+  "normalized_boundary_condition_checked": true,
+  "subcomplex_inclusion_and_boundary_matching_derived": true,
+  "zero_avoidance_required_only_as_local_boundary_face_hull_condition": true,
+  "separate_global_boundary_equality_required": false,
+  "boundary_nonnullity_remains_explicit_premise": true,
+  "perfect_edge_joint_TV_lower_bound": "2/3",
+  "approximate_edge_internal_TV_lower_bound": "margin/3",
+  "concrete_boundary_nonnullity_checked": false,
+  "Foundation_bounded_machine_realization_checked": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/classical-bit-encryption-lean-normalized.py": "26d89fff4ef9053f7de14919d771562919f22330c6351773be5d9a0916ba4b01",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitNormalizedBoundary.lean": "f20e61ad98612e5aa5dab5610ba7e15ec684f982cc724c5fb642ce9671e5625b",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitSimplicialInterpolation.lean": "d1124720e2e06c81ea1c478a00259c866e3eb01ed29ffd9a4697dc6aae8de323",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitBoundaryCertificate.lean": "965e273b18c96a70e8d4f80e540bf80c70e42626edcbf12fc76cf1bdf9dd5c43",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitConvexCertificate.lean": "61a9d1ba588d70e16fb4c75cf187baf6616de2e9eae0e8310acfecd804946950",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitSimplexCertificate.lean": "e5ebeb7ca2c9ed2b37e47e4a654b8d010cd405bc9312f3b6989084e34b3a741c",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepairStability.lean": "d83db5cc70fbda328ccd400f5232f7aa6b3ea9058da0f3b5b02da2d673e7f50b",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepair.lean": "459aa24b50357f54d78ce8faf35ebbf96164a3971bc6b6aebd19524f69921a07",
+    "/Users/hiro/workspace/Foundation/lakefile.toml": "b537fcdfd0e540cfd6f310d771aff1eb8fc24ab107a421b02cfa42cf131a9411",
+    "/Users/hiro/workspace/Foundation/lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
+    "/Users/hiro/workspace/Foundation/lake-manifest.json": "ef3799fa73ec244f1db2063a084e5c03ab1196e16604e883952f870179bff929"
+  }
+}

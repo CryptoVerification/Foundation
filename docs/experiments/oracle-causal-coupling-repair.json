@@ -1,0 +1,150 @@
+{
+  "kind": "timing_of_information_repair_separation",
+  "date": "2026-10-17",
+  "claims": {
+    "arbitrary_cut_price": "Foundation.Probability.SelectedCouplingGraph.CausalRepair.cut_price",
+    "pointwise_minimum": "Foundation.Probability.SelectedCouplingGraph.CausalRepair.pointwise_optimal",
+    "arbitrary_randomized_early_cut_law": "Foundation.Probability.SelectedCouplingGraph.CausalRepair.before_price_law",
+    "quantifier_separation": "Foundation.Probability.SelectedCouplingGraph.CausalRepair.pointwise_not_precommitted",
+    "actual_mac_prefix": "Foundation.Symmetric.RandomFunctionMACCausalRepair.actual_prefix",
+    "actual_response_profile_uniform": "Foundation.Symmetric.RandomFunctionMACCausalRepair.challenge_uniform",
+    "actual_prefix_cost_law": "Foundation.Symmetric.RandomFunctionMACCausalRepair.before_cost_law",
+    "full_original_game_preserved": "Foundation.Symmetric.RandomFunctionMACCausalRepair.full_run_game",
+    "same_full_run_cost_law": "Foundation.Symmetric.RandomFunctionMACCausalRepair.full_run_cost_law",
+    "same_full_run_expensive_probability": "Foundation.Symmetric.RandomFunctionMACCausalRepair.full_run_expensive_probability",
+    "model": {
+      "graph": "One fan triangle; requested edge has weight zero; two other weights are 1 and M, interchanged by a fair future profile.",
+      "meaningful_comparison": "M > 1",
+      "pointwise_after_response": "Cost exactly 1 in both futures",
+      "before_response": "Every private randomized policy on separating cuts yields cost 1 or M with mass 1/2 each. Policy may depend on the caller coin.",
+      "cost_is": "Synthetic selected-correspondence edge-change weight, not running time or forgery probability",
+      "actual_mac": "Same 8-message/256-tag target; profile is bit zero of the actual first response; full remaining two signing queries and verification run with the committed cut retained."
+    },
+    "comparison": "Both ordinary and diagram methods must respect the same information restriction. This separates two information regimes, not proof systems.",
+    "not_claimed": [
+      "Novel causal optimization principle",
+      "Exclusive higher-dimensional advantage",
+      "Necessity of the synthetic cost/commitment model in the original security proof",
+      "New forgery probability bound",
+      "New native policy or encoded-cache implementation/time bound",
+      "General multistage policy compiler or optimizer",
+      "Refutation of the existing post-history pointwise theorems"
+    ]
+  },
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4282,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 1128,
+    "new_audit_declarations": [
+      "Foundation.Probability.SelectedCouplingGraph.CausalRepair.cut_separates",
+      "Foundation.Probability.SelectedCouplingGraph.CausalRepair.cut_price",
+      "Foundation.Probability.SelectedCouplingGraph.CausalRepair.normalized_price",
+      "Foundation.Probability.SelectedCouplingGraph.CausalRepair.after_observation_cost",
+      "Foundation.Probability.SelectedCouplingGraph.CausalRepair.price_lower",
+      "Foundation.Probability.SelectedCouplingGraph.CausalRepair.pointwise_optimal",
+      "Foundation.Probability.SelectedCouplingGraph.CausalRepair.before_observation_worst",
+      "Foundation.Probability.SelectedCouplingGraph.CausalRepair.fixed_price_law",
+      "Foundation.Probability.SelectedCouplingGraph.CausalRepair.independent_price_law",
+      "Foundation.Probability.SelectedCouplingGraph.CausalRepair.before_price_law",
+      "Foundation.Probability.SelectedCouplingGraph.CausalRepair.after_price_law",
+      "Foundation.Probability.SelectedCouplingGraph.CausalRepair.expensive_probability",
+      "Foundation.Probability.SelectedCouplingGraph.CausalRepair.causal_gap",
+      "Foundation.Probability.SelectedCouplingGraph.CausalRepair.pointwise_not_precommitted",
+      "Foundation.Symmetric.RandomFunctionMACCausalRepair.actual_prefix",
+      "Foundation.Symmetric.RandomFunctionMACCausalRepair.challenge_uniform",
+      "Foundation.Symmetric.RandomFunctionMACCausalRepair.prefix_preserved",
+      "Foundation.Symmetric.RandomFunctionMACCausalRepair.response_cost_law",
+      "Foundation.Symmetric.RandomFunctionMACCausalRepair.before_cost_law",
+      "Foundation.Symmetric.RandomFunctionMACCausalRepair.after_cost_law",
+      "Foundation.Symmetric.RandomFunctionMACCausalRepair.timing_gap",
+      "Foundation.Symmetric.RandomFunctionMACCausalRepair.full_run_prefix",
+      "Foundation.Symmetric.RandomFunctionMACCausalRepair.full_run_game",
+      "Foundation.Symmetric.RandomFunctionMACCausalRepair.full_run_cost_law",
+      "Foundation.Symmetric.RandomFunctionMACCausalRepair.full_run_expensive_probability"
+    ],
+    "missing_audit_outputs": [],
+    "axiom_dependencies": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "temporary_build_log": "/tmp/foundation-causal-build.log",
+    "temporary_audit_log": "/tmp/foundation-causal-audit.log"
+  },
+  "source_sha256": {
+    "Foundation/Examples/CausalCouplingRepair.lean": "d07668ebc4106ed4e8e6f135190bacdc9112888cf35ad46b2cffb27c172e586d",
+    "Foundation/Examples/RandomFunctionMACCausalRepair.lean": "1593d864bfcb3e385278f5f74295fc27aa7236e16a14cff177f4f8c6df27cd2c"
+  },
+  "unchanged_previous_inputs": [
+    {
+      "record": "docs/experiments/oracle-ordinary-program-comparison.json",
+      "source_count": 1,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-optimal-coupling-repair-search.json",
+      "source_count": 3,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-operational-representation-repair.json",
+      "source_count": 3,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-checked-coupling-repair-game.json",
+      "source_count": 4,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-selected-coupling-repair.json",
+      "source_count": 6,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-interaction-encoding-comparison.json",
+      "source_count": 4,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-interaction-replay-scope.json",
+      "source_count": 10,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-proof-edits-benchmark.json",
+      "source_count": 6,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-proof-edits-benchmark-replication.json",
+      "source_count": 6,
+      "mismatches": []
+    }
+  ],
+  "neutral_model_dependencies": {
+    "local_dependency_count": 5,
+    "diagram_related_imports": []
+  },
+  "primary_sources": [
+    {
+      "url": "https://arxiv.org/html/1606.04062",
+      "version": "v2",
+      "title": "Causal transport in discrete time and applications",
+      "reading_scope": [
+        "Section 1",
+        "Definition 2.2",
+        "Statement of Theorem 2.7"
+      ],
+      "complete_paper_read": false,
+      "artifact_rebuilt": false,
+      "interpretation": "Information restrictions on couplings and causal optimization are prior work. No novelty claimed for the distinction itself."
+    }
+  ],
+  "search_queries": [
+    "causal optimal transport nonanticipative couplings adapted information optimal transport Backhoff Beiglbock Pammer"
+  ],
+  "novelty_status": "Unconfirmed. The result identifies an additional specification obligation for proof edits, not a high-dimensional advantage.",
+  "ai_assistance": "Formalization, implementation, source checking, verification, and documentation used AI assistance."
+}

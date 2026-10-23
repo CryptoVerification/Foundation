@@ -1,0 +1,289 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Logic/Polygraph/MixedCircuitComputational.lean": "1ca1c1051cc1eb8fc0dd55dee94299387eec516857e53e705c1080360c89a7cc",
+    "Foundation/Crypto/Logic/Polygraph/MixedCircuitComputationalHigher.lean": "87536d4389742a4d44b98c2430d7d2e61d3c616360c57e7b0d4f6045ae9da876",
+    "Foundation/Examples/ComputationalOrientationBoundary.lean": "53b2772ff3f88ad767b1ee02510813d4d7d163716d805d1832377c50aa626de2"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.General.Backends.OrientationBoundary.forward_exists_no_reverse",
+    "CryptoLogic.General.Backends.OrientationBoundary.masking_closed",
+    "CryptoLogic.General.Backends.OrientationBoundary.no_reverse_compiler",
+    "CryptoLogic.General.Backends.OrientationBoundary.no_reverse_reduction",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Basis",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Basis.Generator",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Basis.covered",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Basis.mk",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Basis.support",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Cell",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Cell.boundaries",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Cell.comp",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Cell.generator",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Cell.refl",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Cell.support",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Cell.symm",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Cell.trans",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.HigherModel",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.HigherModel.base",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.HigherModel.comparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.HigherModel.mk",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Model",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Model.machine",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Model.mk",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Model.object",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Model.step",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.bounded",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.compare",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.executes",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.extract",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.extract_comp",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.extract_single",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.realizes",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.repaired",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.repaired_comparison"
+  ],
+  "public_theorems": [
+    "CryptoLogic.General.Backends.OrientationBoundary.forward_exists_no_reverse",
+    "CryptoLogic.General.Backends.OrientationBoundary.masking_closed",
+    "CryptoLogic.General.Backends.OrientationBoundary.no_reverse_compiler",
+    "CryptoLogic.General.Backends.OrientationBoundary.no_reverse_reduction",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.Cell.boundaries",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.bounded",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.compare",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.executes",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.extract_comp",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.extract_single",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.realizes",
+    "CryptoLogic.Polygraph.MixedCircuit.Computational.repaired_comparison"
+  ],
+  "claims": [
+    "An explicit computational Model assigns a SecurityObject to each actual mixed circuit and a CertifiedReduction to each actual contextual Step under its finite conditions. These step contracts are required inputs, not consequences of stochastic CheckedModel validity.",
+    "extract structurally composes local certified reductions along an actual directed MixedCircuit.Path. It does not take a whole-path reduction as input and does not interpret inverse RewriteTracks.",
+    "extract_single and extract_comp compare extracted reductions extensionally: public-instance families, dependent adversary/code/resource/execution packets, emitted code and actual nonlinear advantage transformers. Compiler syntax itself need not be equal.",
+    "executes and realizes expose the backend-specific execution and semantic certificates for precisely the emitted code; bounded transports the target bound through the actual extracted loss function. No new concrete native time bound is synthesized by these general theorems.",
+    "A directed Basis carries explicit generator supports covering both forward path boundaries. Its Cell closure has reflection, generators, comparison symmetry/transitivity and path composition, but no reversal of computational reduction arrows. Internal comparison requirements are retained.",
+    "Given a HigherModel checking each explicit local diagram computationally, compare constructs a CertifiedComparison for the extracted boundary reductions. repaired_comparison retains internal conditions and rechecks their intersection with the change set within the same updated model.",
+    "For the existing real PRG reduction objects, a native-to-masking forward CertifiedReduction exists, while no reverse CertifiedReduction exists in the current Backends.system registry, since no masking-to-native Compiler can be built from its registered primitives and composition."
+  ],
+  "limits": [
+    "The entire MAC/structural/fusion mixed catalogue has not been instantiated as the new computational Model or HigherModel. In particular every contextual computational step and every local diagram comparison remains an explicit proof obligation for that concrete model.",
+    "The new Basis is not automatically finite or complete. No transfer of all existing Four/PresentedCell data, remaining root/fixed-gate overlap coverage, full mixed coherence or whole-system confluence is established.",
+    "The no-reverse theorem is relative to the present registered code system and the specified PRG SecurityObjects. It is not an impossibility result for all code systems, extensions or other representations. Reversing a comparison of two forward reductions remains valid.",
+    "The PRG orientation theorem is a concrete witness of an interface restriction, not a concrete instantiation of the full mixed MAC model. Existing PRG reductions and their native masking certificates are reused without new security assumptions.",
+    "Generic execution predicates retain whatever the concrete SecurityObject supplies. Actual caller computation, shared-state invariants, whole continuing-machine execution and its time bounds must still be proved when instantiating contextual contracts. No distribution coupling follows from CertifiedComparison.",
+    "Model updates are assumed computationally checked. The condition intersection is not a total update-time bound. No total certificate-byte metric, fair ordinary/shared comparison or new crypto advantage bound is provided."
+  ],
+  "novelty": {
+    "status": "unconfirmed",
+    "finding": "Actual directed mixed paths now have a compositional computational interpreter and supported local comparisons repair their extracted reductions. The concrete PRG backend demonstrates why formal reversibility of proof tracks must not be promoted to reversibility of executable reductions. General interpretation and composition alone are not asserted as novel.",
+    "next_evidence": "Instantiate the MAC computational/contextual contracts against the same caller/native execution; certify local diagrams, finish pure and mixed overlap coverage, compare total costs with equal-information shared ordinary proofs and complete theorem-level priority reduction."
+  },
+  "literature_this_step": "No new external primary-source theorem review. This step implements the directed computational bridge and a concrete registry-relative orientation boundary.",
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4423,
+    "build_log": "/tmp/foundation-directed-extraction-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-directed-extraction-audit.log",
+    "audit_declarations": 3185,
+    "new_modules": 3,
+    "new_selected_declarations": 35,
+    "new_authored_theorems": 12,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "source_count": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-context.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-overlap-classification.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-fusion-conservative-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-typed-cartesian-wiring-completeness.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-cartesian-local-higher-discard-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-path-repair-novelty-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      }
+    },
+    "imported_warnings": "The build replays existing imported warnings outside the new sources; no warning-free whole-project claim is made."
+  }
+}

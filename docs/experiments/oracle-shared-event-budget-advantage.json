@@ -1,0 +1,491 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Semantics/Probability/SharedEventBudget.lean": "8830485e86479b1ba1b742377d91b4fbd6dc97b67997cb1651d7b1b25a126cc1",
+    "Foundation/Crypto/Logic/Polygraph/GameProofJointEventBudget.lean": "525a14eaf771fc4c4f7895699c7e221a202dc771a48fe633c63ce41eee485034",
+    "Foundation/Examples/RandomFunctionMACSharedEventBudget.lean": "5ee69d0feee7c8bf4f4558900f29daff65fe20c1ec6ed6385e7d3e11253085bd",
+    "Foundation/Examples/SharedEventBudgetIndependence.lean": "794550d69c77c23a0cbdcac049822178ee3a40b6deed172a3ee8a12ca7ddf243",
+    "Foundation/Examples/RandomFunctionMACEncodedEventBudget.lean": "403fff03437f18dcd7c2d585ba21002d7daeb9d7219b872cdede59f0e2eb0a43"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Realization",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Realization.bad",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Realization.mk",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Realization.plan",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Realization.root",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Realization.value",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Request",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Request.mk",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Request.path",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Request.source",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Request.target",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.failure",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.failure_covered",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.family_bound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.support",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.Out",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.adaptive_selection_bound",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.decode",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.decode_encode",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.encode",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.encode_injective",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.encodedModel",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.failure_iff",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.guessAttack",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.guess_success_exact",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.joint_gap_exact",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.joint_observation_gap",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.leftBundle",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.occurrence_bound",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.rightBundle",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.simultaneous_bound",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.simultaneous_exact",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.Transcript",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.byte_bound",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.different_iff",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.displayed_256_views",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.erase",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.erase_eq",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.failure_iff",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.law",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.layout",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.model",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.occurrence_bound",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.requests",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.simultaneous_bound",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.strict_budget_improvement",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.support_singleton",
+    "Foundation.Examples.SharedEventBudgetIndependence.cannot_merge_independent",
+    "Foundation.Examples.SharedEventBudgetIndependence.independent",
+    "Foundation.Examples.SharedEventBudgetIndependence.independent_failure",
+    "Foundation.Examples.SharedEventBudgetIndependence.shared_failure",
+    "Foundation.Probability.SharedEventBudget.budget",
+    "Foundation.Probability.SharedEventBudget.byte_strict",
+    "Foundation.Probability.SharedEventBudget.covers",
+    "Foundation.Probability.SharedEventBudget.occurs",
+    "Foundation.Probability.SharedEventBudget.repeated_budget",
+    "Foundation.Probability.SharedEventBudget.union_bound"
+  ],
+  "public_theorems": [
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Realization.plan",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.failure_covered",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.family_bound",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.adaptive_selection_bound",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.decode_encode",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.encode_injective",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.failure_iff",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.guess_success_exact",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.joint_gap_exact",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.joint_observation_gap",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.occurrence_bound",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.simultaneous_bound",
+    "Foundation.Examples.RandomFunctionMACEncodedEventBudget.simultaneous_exact",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.byte_bound",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.different_iff",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.displayed_256_views",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.erase_eq",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.failure_iff",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.occurrence_bound",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.simultaneous_bound",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.strict_budget_improvement",
+    "Foundation.Examples.RandomFunctionMACSharedEventBudget.support_singleton",
+    "Foundation.Examples.SharedEventBudgetIndependence.cannot_merge_independent",
+    "Foundation.Examples.SharedEventBudgetIndependence.independent_failure",
+    "Foundation.Examples.SharedEventBudgetIndependence.shared_failure",
+    "Foundation.Probability.SharedEventBudget.byte_strict",
+    "Foundation.Probability.SharedEventBudget.covers",
+    "Foundation.Probability.SharedEventBudget.repeated_budget",
+    "Foundation.Probability.SharedEventBudget.union_bound"
+  ],
+  "claims": [
+    "A finite event-support budget on one explicit joint probability space bounds any failure covered by the union of its named bad predicates.",
+    "A joint realization assigns every game vertex a function of the same World. Every root equality is proved off its actual charge events. Induction on the retained Plan syntax derives path agreement off its charge support.",
+    "For any finite family of typed Plan requests, probability of any endpoint disagreement is bounded by the sum of prices over the union of distinct event labels, provided the local event probability bounds and joint realization.",
+    "For arbitrary adaptive random-function MAC attacks with a nonempty finite tag space, all positive numbers of indexed views of the same complete transcript have simultaneous failure at most inverse tag cardinality. The original table, signing history and public trace are retained.",
+    "A separate valid per-view union calculation on exactly the same joint law, sharing the same local MAC lemma, yields n times inverse tag cardinality. The singleton event-support expression is strictly smaller for byte tags and n>1.",
+    "The concrete 256 views reversibly translate every table and trace tag by an offset in Fin 256. The family is not 256 independent MAC runs.",
+    "For any event on the whole vector of 256 encoded complete outcomes, the probability gap between real and forced-reject observations is at most 1/256. Transcript-dependent choice of a view has the same bound.",
+    "A concrete no-signing attack guesses message 0 and tag 0. Its actual joint failure and a particular joint observation gap are exactly 1/256, so the uniform joint bound is attained.",
+    "The per-view additive expression is 1 for 256 views; the joint event-support expression is 1/256. Both derivations permit reuse of the same local MAC bound.",
+    "Two independent fair Boolean draws have union failure 3/4, whereas a copied draw has union failure 1/2. The independent failure cannot be bounded by 1/2, ruling out merging event labels without the shared sample premise."
+  ],
+  "comparison": {
+    "metric": "Certified simultaneous statistical-error upper bound, not proof size or runtime",
+    "baseline": "Valid per-view additive union budgeting with unrestricted reuse of the same MAC lemma",
+    "method": "Joint-realization event-support budgeting, counting each actual named event on the common World once",
+    "same_inputs": "Same adaptive attack, complete sampled transcript, 256 reversible tag encodings, local MAC lemma and simultaneous observation target",
+    "baseline_bound": "256*(1/256)=1",
+    "joint_bound": "1/256",
+    "attained_joint_failure": "1/256",
+    "ordinary_shared_control": "Ordinary event reasoning that exploits the same common event can derive the joint bound too; no universal or dimension-exclusive superiority is claimed."
+  },
+  "limits": [
+    "This is a strict comparison against occurrence-additive probability accounting. It does not establish an advantage over every ordinary shared proof or every possible union-bound derivation.",
+    "The underlying single-execution ideal random-function MAC security bound is the existing 1/|Tag| theorem. No improved bound for that underlying experiment, multiple independent forgery attempts, PRF reduction, native code or execution time is supplied.",
+    "The joint realization is an explicit semantic premise, instantiated for the complete MAC transcript. Pairwise coupling data, common textual labels, or equal marginals do not imply it.",
+    "The adaptive view selector observes a mathematical completed transcript and chooses a representation; it does not expose the secret table to the original attacker or let it revise its forgery.",
+    "The current construction uses the existing directed Plan syntax and a joint semantic witness. It does not derive that witness from the finite higher basis or prove that a higher dimension is necessary.",
+    "No proof-size, certificate-byte, generation-time, checking-time or maintenance-cost superiority is established. Previous exact ordinary/geometric erasure controls remain valid.",
+    "Union bounds and separating event reasoning from probability reasoning are established prior methods. Novelty is unconfirmed. Only the cited primary abstract and bibliographic page were inspected this step; no full-paper reading or independent review occurred.",
+    "The original remaining scope is unchanged: full finite structural/mixed coverage, actual tensor/re-normalization comparisons, code-changing reductions and loss/resource contracts, continuing oracle/keygen execution, fair proof-cost comparison and theorem-level novelty assessment."
+  ],
+  "literature_this_step": {
+    "primary": "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ICALP.2016.107",
+    "title": "A Program Logic for Union Bounds",
+    "authors": "Barthe, Gaboardi, Gregoire, Hsu and Strub",
+    "year": 2016,
+    "read_scope": "Publisher bibliographic page and abstract only; no full paper or theorem comparison",
+    "interpretation": "Do not claim union-event reasoning itself as a new principle."
+  },
+  "verification": {
+    "target_command": "nix develop path:. -c lake build Foundation.Examples.RandomFunctionMACEncodedEventBudget Foundation.Examples.SharedEventBudgetIndependence",
+    "target_jobs": 2741,
+    "target_log": "/tmp/foundation-mac-encoded-event-target.log",
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4572,
+    "build_log": "/tmp/foundation-shared-event-advantage-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-shared-event-advantage-audit.log",
+    "audit_declarations": 5227,
+    "new_modules": 5,
+    "new_selected_declarations": 57,
+    "new_authored_theorems": 29,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "prior_source_hash_checks": {
+      "oracle-product-critical-coherence.json": {
+        "source_count": 9,
+        "mismatches": []
+      },
+      "oracle-stateful-unified-wiring-fusion.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-information-schedule-comparison.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-mixed-path-repair-novelty-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mac-native-code-changing-transport.json": {
+        "source_count": 7,
+        "mismatches": []
+      },
+      "oracle-expansion-loop-coherence.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-mixed-fusion-conservative-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-full-outcome-native-repair.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-directed-computational-extraction.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-single-state-native-execution.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-compact-mac-security.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "source_count": 10,
+        "mismatches": []
+      },
+      "oracle-output-observation-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mac-analysis-native-compilation.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-cartesian-local-higher-discard-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-context.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-unified-association-overlap-resolution.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-mixed-wire-pass-naturality.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-presented-wire-compatibility.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-path-valued-residuals.json": {
+        "source_count": 9,
+        "mismatches": []
+      },
+      "oracle-categorical-critical-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-chronological-history-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-substitution-associativity-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-compact-mac-execution.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-legacy-wire-interoperability.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-substitution-right-unit-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-wire-pass-research.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-root-only-wire-context-lifting.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-substitution-unit-coherence.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-unified-fusion-overlap-resolution.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-overlap-classification.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-lift-selection-coherence.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-expansion-critical-coherence.json": {
+        "source_count": 7,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-bounded-old-wire-elimination.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-identity-projection-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-distribution-critical-coherence.json": {
+        "source_count": 8,
+        "mismatches": []
+      },
+      "oracle-tensor-projection-peak.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-sequential-fusion-wire-pass.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-mac-linked-analysis-execution.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mac-native-quantitative-contracts.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-cartesian-coherence-obstruction.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-typed-cartesian-wiring-completeness.json": {
+        "source_count": 6,
+        "mismatches": []
+      }
+    },
+    "imported_warnings": "Existing imported warnings remain."
+  },
+  "material_passport": {
+    "type": "Conditional strict simultaneous-error accounting comparison, typed joint-event model, reversible MAC views and independence counterexample",
+    "status": "Verified within explicit comparator; original research goal remains incomplete",
+    "provenance": "AI-assisted research, implementation and reporting",
+    "human_read_scope": "unknown",
+    "independent_review": "not performed"
+  }
+}

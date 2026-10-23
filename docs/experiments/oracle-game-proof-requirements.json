@@ -1,0 +1,399 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Logic/Polygraph/GameProofRequirements.lean": "40baae0d17cfe9c7664522cdcd4e7b97bd94382b22d0841c5e5ed1e91c32d4ff",
+    "Foundation/Crypto/Logic/Polygraph/GameProofInterpretation.lean": "e1d8bb9e68bac11825383c885b6bf619ddf7fb93086c56d33455fb7bc8cb30d2",
+    "Foundation/Crypto/Logic/Polygraph/GameProofHigher.lean": "d019dc9af2936f6eac0b61c8fcd672e18b96f37168911af2861bf41b38482d68",
+    "Foundation/Examples/GameProofHigherRequirements.lean": "b83ceaf36daa38cd52cc21377e992aeb793c8b87ee77462eb4a26c0d95393d79",
+    "Foundation/Examples/GameProofMACRequirements.lean": "e07659a1f228efc2657717ab8b9d86e76069e5d7b97ba6f288ffd319b7dc86fe",
+    "Foundation/Examples/GameProofBudgetBoundary.lean": "35f1bdcbca8770cbee5e93f727b7bfee4a190de88dc3543b29a7c09c92e7571a"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Layout",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.needs",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.charges",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Holds",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Holds.restrict",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.fresh",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.checkReuse",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.repair",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.reuse",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.totalCharge",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.totalCharge_add",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Model",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.evaluate",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.evaluate_loss",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.evaluate_sound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Relator",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.needs",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.endpoint_needs",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.charge_eq",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.totalCharge_eq",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.fresh",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.checkReuse",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.HigherModel",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.evaluateCell",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.evaluateCell_sound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.repaired_comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.repaired_bound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.reused_comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.layout",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.identityPlan",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.mapPlan",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.relators",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.roundTrip",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.alternative",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.condition",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.endpoints_need_nothing",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.interior_condition",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.old_conditions",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.missing_new_condition",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.endpoint_check_accepts",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.diagram_check_rejects",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.alternative_check_accepts",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.baseModel",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.model",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.new_local_rule_impossible",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.Vertex",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.Atom",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.layout",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.scheduledPlan",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.directPlan",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.relators",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.diagram",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.generated_needs",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.generated_fresh",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.price",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.condition",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.eliminateGiven",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.game",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.baseModel",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.model",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.cached_conditions",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.unchanged_condition",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.rechecked_condition",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.repairedConditions",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.scheduledRealization",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.directRealization",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.repairedDiagram",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.repaired_loss",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.repaired_probability_bound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.repaired_joint",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.layout",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.doubled",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.empty",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.double_charge",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.no_charge_preserving_contraction",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.chargedFlip",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.loop",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.loop_kernel",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.loop_loss",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.no_loss_preserving_contraction",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.model",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.doubled_realization",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Layout.mk",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Layout.source",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Layout.target",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Layout.needs",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Layout.charges",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.identity",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.atom",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.seq",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Model.mk",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Model.game",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Model.atom",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Model.atom_loss",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Relator.mk",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Relator.source",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Relator.target",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Relator.left",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Relator.right",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Relator.needs",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Relator.balanced",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.rule",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.refl",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.symm",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.trans",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.seq",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.assoc",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.leftUnit",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.rightUnit",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.HigherModel.mk",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.HigherModel.base",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.HigherModel.comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.Vertex.start",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.Vertex.middle",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.Vertex.finish",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.Atom.schedule",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.Atom.last",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.Atom.first"
+  ],
+  "public_theorems": [
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Holds.restrict",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.repair",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.reuse",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.totalCharge_add",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.evaluate_loss",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.evaluate_sound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.endpoint_needs",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.charge_eq",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.totalCharge_eq",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.evaluateCell_sound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.repaired_comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.repaired_bound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.reused_comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.endpoints_need_nothing",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.interior_condition",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.old_conditions",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.missing_new_condition",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.endpoint_check_accepts",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.diagram_check_rejects",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.alternative_check_accepts",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.new_local_rule_impossible",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.generated_needs",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.generated_fresh",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.cached_conditions",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.unchanged_condition",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.rechecked_condition",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.repairedConditions",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.repaired_loss",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.repaired_probability_bound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.repaired_joint",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.double_charge",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.no_charge_preserving_contraction",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.loop_kernel",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.loop_loss",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.no_loss_preserving_contraction",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.doubled_realization"
+  ],
+  "claims": {
+    "pure_metadata": "A directed Plan records declared finite condition-ID sets and symbolic multiset error charges. Sequential composition unions conditions and adds charges; repeated uses of the same budget ID retain multiplicity. Metadata evaluation contains no PMF execution.",
+    "conditional_interpretation": "A checked Model realizes each named atom as an existing directed GameCoherence.Path under exactly its declared condition proofs and proves its loss equals the sum of current prices for its charge multiset. evaluate_loss and evaluate_sound connect the plan to the actual conditional-kernel semantics and probability-gap bound.",
+    "higher_requirements": "A named Relator has explicit parallel plans, an extra condition set and a charge-balance proof. Cell.needs retains boundary and internal conditions through higher composition. Boundary-plan needs are subsets of Cell.needs; they need not exhaust it.",
+    "higher_semantics": "HigherModel requires each local relator to produce an existing Cell4 under the declared proofs. evaluateCell and evaluateCell_sound reconstruct equality of conditional kernels and assigned losses, not just equality of endpoint marginals.",
+    "charge_preservation": "Every symbolic Cell preserves the entire charge multiset and therefore its total under any current price function. This relation is intentionally restricted to charge-preserving comparisons, not arbitrary error improvement.",
+    "repair": "repaired_comparison and repaired_bound use cached old conditions, explicit transfers outside the declared changed set, and fresh proofs on Cell.needs intersect changed. They certify the updated paths and a bound at current prices. Empty-intersection reuse is also proved.",
+    "interior_counterexample": "A round-trip higher diagram from an identity plan back to itself has empty boundary-plan needs but one interior comparison condition. Switching an identity map to a fair-bit flip preserves the same endpoint marginal, invalidates the interior conditional-kernel comparison, and makes diagram reuse reject while endpoint-only reuse accepts. A different reflexive diagram remains reusable.",
+    "budget_boundary": "For every charge-balanced relator catalog, the doubled charged self-loop cannot be compared to the identity plan because charge cardinalities are 2 and 0. In an actual semantic model, two fair-bit flips have identity conditional kernel but assigned loss 1, while identity has loss 0; no loss-preserving Cell4 connects them. The inflated 1/2 bound per flip is deliberately loose, so this is not a claim of nonzero actual endpoint error.",
+    "actual_mac": "For the existing full adaptive MAC game, compare changing the intermediate preparation order then eliminating forgery with eliminating forgery directly. The local security inequalities are supplied as named condition proofs. Rechecking the intermediate-order condition and transferring the unchanged source-order condition reconstructs equal conditional kernels, equal source/final joint laws and the existing 1/256 gap bound. No independent product of two MAC instances is used in this new example."
+  },
+  "runtime_checks": [
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "expected": "(0, 1, 1, true, false, true)",
+      "meaning": [
+        "outer identity-plan condition count",
+        "round-trip higher-diagram condition count",
+        "fresh higher condition count",
+        "endpoint-only reuse accepts",
+        "old higher diagram reuse rejects",
+        "alternative reflexive diagram reuse accepts"
+      ],
+      "passed": true
+    },
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "expected": "(2, 1, false, 1)",
+      "meaning": [
+        "declared security conditions in the MAC comparison",
+        "fresh condition after the intermediate preparation order changes",
+        "zero-new-proof reuse rejects",
+        "symbolic charges in the scheduled elimination route"
+      ],
+      "passed": true
+    },
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "expected": "(2, 0, 0)",
+      "meaning": [
+        "charge multiplicity of the doubled self-loop",
+        "charge multiplicity of the identity",
+        "condition count of the doubled uniform example"
+      ],
+      "passed": true
+    }
+  ],
+  "scope": [
+    "The condition sets are declared by the atom/relator catalog and propagated structurally. They are not extracted from opaque Lean proof terms or arbitrary host programs and are not claimed semantically minimal.",
+    "The changed condition IDs and proof transfer outside them are explicit inputs. There is no automatic semantic diff of arbitrary propositions or models; the updated conditional atom/relator realizers must themselves be verified.",
+    "Pure layout and relator catalog stay fixed during repair. Updating games, kernels, conditions or prices is allowed through a checked updated Model/HigherModel. This proves the new proof, not equality of all old and new endpoint games.",
+    "Relators must preserve symbolic charges. Kernel-equal paths with different chosen error ledgers need a separate error-improvement rule; general approximate game paths are directed and have no inverse execution constructor.",
+    "The earlier complete exchange-fragment basis is not automatically a complete basis for this conditional probabilistic syntax. No global mixed-cryptographic coherence, copy/discard completion or finite concrete generator claim is made.",
+    "The MAC order is the prior coordinate/prepared-set construction order of an already sampled secret function. It does not exchange the adaptive attacker queries. Original attack, state, trace and native caller implementations remain unchanged.",
+    "The MAC example preserves the existing 1/256 upper bound and is not a new cryptanalytic bound. One fresh condition among two declared IDs is not a proof-byte, DAG-size, checking-time or exclusive higher-dimensional advantage.",
+    "The counterexamples distinguish reuse of one existing diagram from availability of another proof. Rejecting that diagram is not claiming the outer endpoint statement is false.",
+    "Native CPU time, computational assumptions requiring certified reductions, automatic discovery of local relators, complete repair minimality and fair shared-proof baseline cost comparisons remain outstanding."
+  ],
+  "literature_this_step": [
+    {
+      "title": "SSProve official repository",
+      "url": "https://github.com/SSProve/ssprove",
+      "read_scope": "Selected official README: framework/publication pointers, included extensions, verification and paper-to-formalization mapping. No paper theorem audit or artifact build in this step.",
+      "comparison": "Modular foundational cryptographic proof frameworks already exist; do not claim novelty from modular reuse alone or assert this artifact lacks the new feature without a theorem-level comparison."
+    },
+    {
+      "title": "Quantitative Algebraic Reasoning",
+      "authors": [
+        "Radu Mardare",
+        "Prakash Panangaden",
+        "Gordon Plotkin"
+      ],
+      "year": 2016,
+      "doi": "10.1145/2933575.2934518",
+      "url": "https://www.research.ed.ac.uk/en/publications/quantitative-algebraic-reasoning/",
+      "read_scope": "University bibliographic record and author abstract only. The linked accepted manuscript returned HTTP 403 and was not read.",
+      "comparison": "Error-indexed equational reasoning is a known comparison area. No claim about the full paper rules or exact subsumption of this implementation is drawn from the abstract."
+    }
+  ],
+  "novelty": "Unconfirmed. The implementation now includes declared interior higher-condition repair and symbolic error accounting with a real MAC instance and verified failure boundaries; publication priority and a comparative cost advantage remain unresolved.",
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4359,
+    "build_log": "/tmp/foundation-game-requirements-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-game-requirements-audit.log",
+    "audit_declarations": 2001,
+    "new_public_declarations": 120,
+    "new_public_theorems": 36,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {
+      "Foundation/Crypto/Logic/Polygraph/GameProofRequirements.lean": [],
+      "Foundation/Crypto/Logic/Polygraph/GameProofInterpretation.lean": [],
+      "Foundation/Crypto/Logic/Polygraph/GameProofHigher.lean": [],
+      "Foundation/Examples/GameProofHigherRequirements.lean": [],
+      "Foundation/Examples/GameProofMACRequirements.lean": [],
+      "Foundation/Examples/GameProofBudgetBoundary.lean": []
+    },
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "inputs": 5,
+        "mismatches": []
+      }
+    }
+  }
+}

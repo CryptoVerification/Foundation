@@ -1,0 +1,71 @@
+{
+  "build_command": "nix develop path:. -c lake build Foundation.Examples.NestedRewindingCost",
+  "build_success": true,
+  "build_jobs": 3006,
+  "new_module_warnings": 0,
+  "theorems_audited": 10,
+  "axiom_dependencies": {
+    "Foundation.Examples.NestedRewindingCost.cost_nonnegative": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.NestedRewindingCost.cost_closed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.NestedRewindingCost.corrected_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.NestedRewindingCost.defect_nonpositive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.NestedRewindingCost.fair_cost_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.NestedRewindingCost.success_cost_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.NestedRewindingCost.two_branch_excess": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.NestedRewindingCost.bounded_defect_transfer": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.NestedRewindingCost.queries_map_scale": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.NestedRewindingCost.optimal_ledger_cost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "registered_in_root_module": false,
+  "formalized_scope": "Arithmetic ledger certificate, signed deviation transfer, two-branch arithmetic, recursive cost profile.",
+  "operational_crypto_embedding_lean_checked": false,
+  "DL_reduction_lean_checked": false,
+  "canonical_simulator_distribution_lean_checked": false,
+  "newness_established": false,
+  "infinity_category_necessity_proved": false,
+  "source_sha256": {
+    "Foundation/Examples/NestedRewindingCost.lean": "dbdf280caa7a963f324540df7487c86fa13fe26657884a8efb116b8ea325ad29",
+    "docs/experiments/nested-rewinding-cost.py": "61017a6ed2b5395e54acbd6182bc174aa47ec25c4ad4ced8e6855098eb659e6b",
+    "docs/experiments/nested-rewinding-cost.json": "4a588a27e53270de440827d1634ff9aad6eaaf16a0efe2f63468fd2447c63fb0"
+  }
+}

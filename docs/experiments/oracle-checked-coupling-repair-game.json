@@ -1,0 +1,155 @@
+{
+  "kind": "checked_coupling_repair_and_full_mac_game_observation",
+  "date": "2026-10-17",
+  "claims": {
+    "checked_repair_soundness": "Foundation.Crypto.Semantics.Probability.SelectedCouplingCertificate.sound",
+    "certificate_existence_completeness": "Foundation.Crypto.Semantics.Probability.SelectedCouplingCertificate.complete",
+    "fan_generated_minimum": "Foundation.Probability.SelectedCouplingGraph.Fan.Checked.minimum",
+    "reference_program_decomposition": "Foundation.Symmetric.RandomFunctionMACRepairGame.target_decomposition",
+    "reference_full_game": "Foundation.Symmetric.RandomFunctionMACRepairGame.reference_game_law",
+    "original_function_retained": "Foundation.Symmetric.RandomFunctionMACRepairGame.games_original",
+    "all_vertex_full_game_laws": "Foundation.Symmetric.RandomFunctionMACRepairGame.vertex_game_law",
+    "same_joint_full_edge_laws": "Foundation.Symmetric.RandomFunctionMACRepairGame.edge_game_law",
+    "checked_adaptive_repair": "Foundation.Symmetric.RandomFunctionMACRepairGame.checked_repair",
+    "fan_generated_game": "Foundation.Symmetric.RandomFunctionMACRepairGame.fan_generated",
+    "physical_observation_connection": "Foundation.Symmetric.RandomFunctionMACRepairNative.vertex_physical_observation",
+    "inherited_security": "Foundation.Symmetric.RandomFunctionMACRepairNative.vertex_security",
+    "comparison": "Ordinary shared-lemma reasoning may use the same supplied-cut checker and full-game maps. No exclusive diagram advantage established.",
+    "not_claimed": [
+      "Novelty established",
+      "Optimal cut search for arbitrary graphs",
+      "Automatic graph extraction from arbitrary cryptographic program edits",
+      "Proof-size or proof-maintenance separation",
+      "A joint of all physical configurations and elapsed times",
+      "Time-observing contextual equivalence",
+      "Native keyed evaluator or new cryptographic bound",
+      "Finite completeness of all structural transformations"
+    ]
+  },
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4273,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 1053,
+    "new_audit_declarations": [
+      "Foundation.Probability.SelectedCouplingGraph.Certificate.validates_iff",
+      "Foundation.Probability.SelectedCouplingGraph.Certificate.sound",
+      "Foundation.Probability.SelectedCouplingGraph.Certificate.unchanged",
+      "Foundation.Probability.SelectedCouplingGraph.Certificate.complete",
+      "Foundation.Probability.SelectedCouplingGraph.Fan.Checked.shifted_original",
+      "Foundation.Probability.SelectedCouplingGraph.Fan.Checked.generated_labels",
+      "Foundation.Probability.SelectedCouplingGraph.Fan.Checked.cut_cost",
+      "Foundation.Probability.SelectedCouplingGraph.Fan.Checked.accepts",
+      "Foundation.Probability.SelectedCouplingGraph.Fan.Checked.rejects_unchanged",
+      "Foundation.Probability.SelectedCouplingGraph.Fan.Checked.minimum",
+      "Foundation.Probability.SelectedCouplingGraph.Fan.Checked.concrete_accepts",
+      "Foundation.Probability.SelectedCouplingGraph.Fan.Checked.concrete_rejects_budget",
+      "Foundation.Symmetric.RandomFunctionMACRepairGame.target_decomposition",
+      "Foundation.Symmetric.RandomFunctionMACRepairGame.reference_game_law",
+      "Foundation.Symmetric.RandomFunctionMACRepairGame.games_original",
+      "Foundation.Symmetric.RandomFunctionMACRepairGame.vertex_game_law",
+      "Foundation.Symmetric.RandomFunctionMACRepairGame.edge_game_law",
+      "Foundation.Symmetric.RandomFunctionMACRepairGame.vertex_continuation",
+      "Foundation.Symmetric.RandomFunctionMACRepairGame.checked_repair",
+      "Foundation.Symmetric.RandomFunctionMACRepairGame.fan_generated",
+      "Foundation.Symmetric.RandomFunctionMACRepairNative.vertex_physical_observation",
+      "Foundation.Symmetric.RandomFunctionMACRepairNative.vertex_security"
+    ],
+    "missing_audit_outputs": [],
+    "axiom_dependencies": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "temporary_build_log": "/tmp/foundation-repair-game-build.log",
+    "temporary_audit_log": "/tmp/foundation-repair-game-audit.log"
+  },
+  "source_sha256": {
+    "Foundation/Crypto/Semantics/Probability/SelectedCouplingCertificate.lean": "0893ca930dac6606c1503e3f2d0c6bdf937ed8197e07775fbca90790dfd7b19f",
+    "Foundation/Examples/SelectedCouplingRepairCertificate.lean": "7683a226f1ec1d82830aa32b3487a523491d4d6dae0893fe6b30fbdbc9a0aa48",
+    "Foundation/Examples/RandomFunctionMACRepairGame.lean": "b193dc10a4b6679c97935039e6b49e41b9bfac7e64bee48c3081f2359fa7423d",
+    "Foundation/Examples/RandomFunctionMACRepairNative.lean": "eff3674b60215d8da7df8dd5663586f80f99151fbc980296ba242a1cb7ab0303"
+  },
+  "unchanged_previous_inputs": [
+    {
+      "record": "docs/experiments/oracle-selected-coupling-repair.json",
+      "source_count": 6,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-interaction-encoding-comparison.json",
+      "source_count": 4,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-interaction-replay-scope.json",
+      "source_count": 10,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-proof-edits-benchmark.json",
+      "source_count": 6,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-proof-edits-benchmark-replication.json",
+      "source_count": 6,
+      "mismatches": []
+    }
+  ],
+  "computational_examples": {
+    "triangles": 3,
+    "accepts_additional_edge_budget": 3,
+    "rejects_additional_edge_budget": 2,
+    "method": "decide_cbv"
+  },
+  "physical_scope": {
+    "caller_instructions": 251,
+    "existing_execution_horizon": 2091,
+    "initial_private_tape": "Actual false end marker; initial layout preparation excluded",
+    "observable": "Encoded final table cells, verification bit, and full typed trace",
+    "elapsed_time_in_observable": false,
+    "joint_physical_configurations_constructed": false
+  },
+  "baseline_dependencies": {
+    "Foundation/Crypto/Semantics/Probability/SelectedCouplingCertificate.lean": {
+      "local_dependency_count": 6,
+      "diagram_related_imports": []
+    },
+    "Foundation/Examples/SelectedCouplingRepairCertificate.lean": {
+      "local_dependency_count": 8,
+      "diagram_related_imports": []
+    },
+    "Foundation/Examples/RandomFunctionMACRepairGame.lean": {
+      "local_dependency_count": 311,
+      "diagram_related_imports": [
+        "Foundation/Crypto/Logic/Polygraph/Experiment.lean",
+        "Foundation/Crypto/Logic/Polygraph/ExperimentSyntax.lean",
+        "Foundation/Crypto/Logic/Polygraph/OracleLocalEdits.lean",
+        "Foundation/Crypto/Logic/Polygraph/OracleProofEdits.lean",
+        "Foundation/Crypto/Logic/Polygraph/RandomOracle.lean",
+        "Foundation/Crypto/Logic/Polygraph/StateCube.lean",
+        "Foundation/Logic/Polygraph/Rewriting.lean",
+        "Foundation/Logic/Polygraph/ScheduleCertificate.lean",
+        "Foundation/Logic/Polygraph/StateCube.lean"
+      ]
+    },
+    "Foundation/Examples/RandomFunctionMACRepairNative.lean": {
+      "local_dependency_count": 342,
+      "diagram_related_imports": [
+        "Foundation/Crypto/Logic/Polygraph/Experiment.lean",
+        "Foundation/Crypto/Logic/Polygraph/ExperimentSyntax.lean",
+        "Foundation/Crypto/Logic/Polygraph/OracleLocalEdits.lean",
+        "Foundation/Crypto/Logic/Polygraph/OracleProofEdits.lean",
+        "Foundation/Crypto/Logic/Polygraph/RandomOracle.lean",
+        "Foundation/Crypto/Logic/Polygraph/StateCube.lean",
+        "Foundation/Logic/Polygraph/Rewriting.lean",
+        "Foundation/Logic/Polygraph/ScheduleCertificate.lean",
+        "Foundation/Logic/Polygraph/StateCube.lean"
+      ]
+    }
+  },
+  "new_literature_search_performed": false,
+  "novelty_status": "Unconfirmed. Explicit repair certificates and full-output maps do not by themselves establish a higher-dimensional advantage.",
+  "ai_assistance": "Formalization, implementation, validation, and documentation used AI assistance."
+}

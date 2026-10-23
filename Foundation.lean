@@ -1327,3 +1327,571 @@ import Foundation.Crypto.Semantics.Oracle.RawTapeEquality
 import Foundation.Crypto.Semantics.Oracle.RestoreRawQuery
 import Foundation.Crypto.Semantics.Oracle.CodePrefixExecution
 import Foundation.Crypto.Semantics.Oracle.SelectiveHaltReturn
+
+import Foundation.Logic.Polygraph.Cell
+import Foundation.Logic.Polygraph.Category
+import Foundation.Logic.Polygraph.Rewriting
+import Foundation.Logic.Polygraph.Structural
+import Foundation.Logic.Polygraph.Normalization
+import Foundation.Logic.Polygraph.Higher
+import Foundation.Logic.Polygraph.HigherPresentation
+import Foundation.Logic.Polygraph.Coherence
+import Foundation.Logic.Polygraph.DiagramNormalization
+import Foundation.Logic.Polygraph.Translation
+import Foundation.Crypto.Logic.Polygraph.ExperimentSyntax
+import Foundation.Crypto.Logic.Polygraph.ExperimentInterpretation
+import Foundation.Crypto.Meta.Polygraph.Normalization
+import Foundation.Crypto.Meta.Polygraph.FiniteHybrid
+import Foundation.Crypto.Meta.Polygraph.UniformHybrid
+import Foundation.Constructions.Symmetric.PRGPolygraphPaths
+import Foundation.Constructions.Symmetric.EncryptThenMAC.Polygraph
+import Foundation.Examples.PolygraphCoherence
+import Foundation.Examples.PolygraphExperiments
+
+import Foundation.Logic.Polygraph.FiniteCoherence
+import Foundation.Logic.Polygraph.CriticalBranchings
+import Foundation.Logic.Polygraph.FiniteConfluence
+import Foundation.Logic.Polygraph.FiniteCompletion
+import Foundation.Crypto.Meta.Polygraph.FiniteCoherence
+import Foundation.Examples.FinitePolygraphCoherence
+
+import Foundation.Logic.Polygraph.CartesianContext
+import Foundation.Logic.Polygraph.CartesianCoherence
+import Foundation.Logic.Polygraph.CartesianLaws
+import Foundation.Crypto.Meta.Polygraph.CartesianCoherence
+import Foundation.Examples.CartesianPolygraphCoherence
+
+import Foundation.Logic.Polygraph.RelationalInterpretation
+import Foundation.Crypto.Logic.General.ResourceImprovement
+import Foundation.Examples.PolygraphResourceImprovement
+
+import Foundation.Crypto.Semantics.Machine.MaskingFused
+import Foundation.Constructions.Symmetric.PRGOptimized
+import Foundation.Constructions.Symmetric.PRGOptimizedPolygraph
+import Foundation.Crypto.Meta.General.CertifiedPipeline
+import Foundation.Examples.PRGOptimized
+import Foundation.Examples.CertifiedPipeline
+
+import Foundation.Crypto.Semantics.Machine.MaskingAdministrative
+import Foundation.Constructions.Symmetric.PRGOptimizedPipeline
+
+import Foundation.Logic.Polygraph.StateCube
+import Foundation.Crypto.Logic.Polygraph.StateCube
+import Foundation.Examples.StateCube
+
+import Foundation.Crypto.Logic.Polygraph.RandomOracle
+import Foundation.Constructions.Hash.PolygraphLookup
+import Foundation.Examples.PolygraphRandomOracle
+
+import Foundation.Constructions.Hash.PolygraphOracle
+import Foundation.Examples.PolygraphOracle
+
+import Foundation.Constructions.Hash.NativeOracleExecution
+import Foundation.Examples.NativeOracleExecution
+import Foundation.Examples.NativeOraclePolicy
+
+import Foundation.Crypto.Logic.Polygraph.RootedTransport
+import Foundation.Examples.RootedTransport
+import Foundation.Logic.Polygraph.ScheduleCertificate
+import Foundation.Constructions.Symmetric.RandomFunctionMACSchedules
+import Foundation.Examples.ScheduleCertificate
+import Foundation.Crypto.Logic.Polygraph.MaskedTransport
+import Foundation.Crypto.Logic.Polygraph.GameCoherence
+import Foundation.Crypto.Logic.Polygraph.GameCoherenceCoupling
+import Foundation.Crypto.Logic.Polygraph.GameCoherenceProduct
+import Foundation.Crypto.Logic.Polygraph.GameCoherenceRules
+import Foundation.Crypto.Logic.Polygraph.GameCoherenceCertificate
+import Foundation.Crypto.Logic.Polygraph.GameCoherenceDiagram
+import Foundation.Crypto.Logic.Polygraph.GameCoherenceScope
+import Foundation.Examples.GameCoherence
+import Foundation.Examples.GameCoherenceMAC
+import Foundation.Crypto.Logic.Polygraph.AffineTransportCertificate
+import Foundation.Examples.AffineTransportCertificate
+import Foundation.Crypto.Logic.Polygraph.OracleProofEdits
+import Foundation.Crypto.Logic.Polygraph.OracleLocalEdits
+import Foundation.Crypto.Logic.Polygraph.OracleLocalCells
+import Foundation.Constructions.Symmetric.RandomFunctionMACProofSyntax
+import Foundation.Constructions.Symmetric.RandomFunctionMACProofEdits
+import Foundation.Examples.OracleProofEdits
+import Foundation.Examples.OracleProofEditsBaseline
+import Foundation.Crypto.Semantics.Oracle.NativeDeterministic
+import Foundation.Crypto.Semantics.Oracle.NativeFixedResponse
+import Foundation.Crypto.Semantics.Oracle.NativeCopyBlock
+import Foundation.Constructions.Symmetric.RandomFunctionMACNativeCaller
+import Foundation.Constructions.Symmetric.RandomFunctionMACNativeExecution
+import Foundation.Examples.RandomFunctionMACNativeCaller
+import Foundation.Crypto.Semantics.Oracle.NativeDeterministicHalt
+import Foundation.Crypto.Semantics.Oracle.NativeCompareBlock
+import Foundation.Crypto.Semantics.Oracle.NativeTrace
+import Foundation.Constructions.Symmetric.RandomFunctionMACNativeStages
+import Foundation.Constructions.Symmetric.RandomFunctionMACNativeComparison
+import Foundation.Constructions.Symmetric.RandomFunctionMACNativeCorrectness
+import Foundation.Constructions.Symmetric.RandomFunctionMACNativeRequests
+import Foundation.Crypto.Semantics.Oracle.PosteriorCoupling
+import Foundation.Crypto.Logic.Polygraph.OraclePosteriorCells
+import Foundation.Examples.RandomFunctionMACPosterior
+import Foundation.Examples.OraclePosteriorBaseline
+import Foundation.Examples.OraclePosteriorCells
+import Foundation.Crypto.Semantics.Oracle.Refresh
+import Foundation.Crypto.Logic.Polygraph.OracleRefreshCells
+import Foundation.Crypto.Logic.Polygraph.OracleRefreshGames
+import Foundation.Crypto.Meta.Polygraph.OracleRefreshCertificate
+import Foundation.Examples.OracleRefreshCells
+import Foundation.Examples.OracleRefreshBaseline
+import Foundation.Crypto.Semantics.Oracle.RefreshInteraction
+import Foundation.Crypto.Semantics.Oracle.InteractionRules
+import Foundation.Crypto.Logic.Polygraph.OracleInteractionCells
+import Foundation.Crypto.Meta.Polygraph.OracleInteractionCertificate
+import Foundation.Examples.OracleInteractionBaseline
+import Foundation.Examples.OracleInteractionMAC
+import Foundation.Crypto.Semantics.Oracle.NativeCompactRequest
+import Foundation.Constructions.Symmetric.RandomFunctionMACNativeInterface
+import Foundation.Constructions.Hash.NativeCompactMACQuery
+import Foundation.Constructions.Hash.NativeCompactMACPacket
+import Foundation.Constructions.Hash.NativeCompactMACService
+import Foundation.Examples.OracleInteractionReplayBaseline
+import Foundation.Examples.OracleInteractionReplayComparison
+import Foundation.Constructions.Hash.NativeCompactMACRound
+import Foundation.Constructions.Hash.NativeCompactMACExecution
+import Foundation.Constructions.Hash.NativeCompactMACExecutionCorrectness
+import Foundation.Examples.RandomFunctionMACNativeBackend
+import Foundation.Constructions.Hash.NativeCompactMACQueryLaw
+import Foundation.Constructions.Hash.NativeCompactMACObservation
+import Foundation.Constructions.Hash.NativeCompactMACTypedOracle
+import Foundation.Constructions.Hash.NativeCompactMACGame
+import Foundation.Examples.RandomFunctionMACNativeBackendSecurity
+import Foundation.Crypto.Semantics.Oracle.InteractionEncoding
+import Foundation.Examples.OracleInteractionEncodingBaseline
+import Foundation.Examples.OracleInteractionEncodingComparison
+import Foundation.Examples.OracleInteractionAdaptiveEncoding
+
+import Foundation.Crypto.Semantics.Probability.SelectedCouplingGraph
+
+import Foundation.Crypto.Semantics.Probability.SelectedCouplingRepair
+
+import Foundation.Crypto.Semantics.Probability.SelectedCouplingTags
+
+import Foundation.Crypto.Semantics.Probability.SelectedCouplingContext
+
+import Foundation.Examples.SelectedCouplingRepair
+
+import Foundation.Examples.RandomFunctionMACCouplingRepair
+
+import Foundation.Crypto.Semantics.Probability.SelectedCouplingCertificate
+
+import Foundation.Examples.SelectedCouplingRepairCertificate
+
+import Foundation.Examples.RandomFunctionMACRepairGame
+
+import Foundation.Examples.RandomFunctionMACRepairNative
+
+import Foundation.Crypto.Semantics.Oracle.RandomOracleRepresentation
+
+import Foundation.Examples.RandomFunctionMACRepresentationGame
+
+import Foundation.Examples.RandomFunctionMACRepresentationRepair
+
+import Foundation.Crypto.Semantics.Probability.SelectedCouplingSearch
+
+import Foundation.Examples.SelectedCouplingSearch
+
+import Foundation.Examples.RandomFunctionMACRepairSearch
+
+import Foundation.Crypto.Semantics.Probability.SelectedCouplingOrdinaryProgram
+
+import Foundation.Examples.CausalCouplingRepair
+
+import Foundation.Examples.RandomFunctionMACCausalRepair
+
+import Foundation.Crypto.Semantics.Oracle.InformationSchedule
+
+import Foundation.Crypto.Logic.Polygraph.InformationScheduleCells
+
+import Foundation.Crypto.Meta.Polygraph.InformationScheduleCertificate
+
+import Foundation.Examples.InformationScheduleBaseline
+
+import Foundation.Examples.RandomFunctionMACInformationSchedule
+
+import Foundation.Examples.InformationScheduleLocalRepair
+
+import Foundation.Examples.InformationScheduleLocalRepairComparison
+
+import Foundation.Crypto.Semantics.Oracle.QueryFootprint
+
+import Foundation.Crypto.Semantics.Oracle.RepresentationLocality
+
+import Foundation.Crypto.Semantics.Oracle.QueryPrefix
+
+import Foundation.Examples.RandomFunctionMACQueryFootprint
+
+import Foundation.Crypto.Semantics.Oracle.RepresentationSwitch
+
+import Foundation.Examples.RandomFunctionMACRepresentationSwitch
+
+import Foundation.Logic.AdjacentReplay
+
+import Foundation.Examples.InformationScheduleCellCompilation
+
+import Foundation.Examples.RandomFunctionMACCellCompilation
+
+import Foundation.Logic.FiniteCodecGenerator
+
+import Foundation.Crypto.Semantics.Oracle.GeneratedRepresentationEdit
+
+import Foundation.Examples.RandomFunctionMACGeneratedEdit
+
+import Foundation.Logic.FiniteCodecRestriction
+
+import Foundation.Crypto.Semantics.Oracle.RepresentationScope
+
+import Foundation.Crypto.Semantics.Oracle.ScopedRepresentationEdit
+
+import Foundation.Examples.RandomFunctionMACScopedEdit
+
+import Foundation.Logic.FiniteCodecRepair
+
+import Foundation.Crypto.Semantics.Oracle.IncrementalRepresentationEdit
+
+import Foundation.Examples.RandomFunctionMACIncrementalEdit
+
+import Foundation.Logic.FiniteCodecDifference
+
+import Foundation.Crypto.Logic.Polygraph.RepresentationPatches
+
+import Foundation.Crypto.Semantics.Oracle.AutomaticRepresentationEdit
+
+import Foundation.Examples.RandomFunctionMACAutomaticEdit
+
+import Foundation.Crypto.Semantics.Probability.Copyability
+
+import Foundation.Logic.Polygraph.StructuralTransport
+
+import Foundation.Examples.RandomFunctionMACStructuralTransport
+
+import Foundation.Crypto.Semantics.Oracle.SharedReference
+
+import Foundation.Crypto.Semantics.Oracle.SharedReferenceCache
+
+import Foundation.Crypto.Semantics.Oracle.SharedReferenceSwitch
+
+import Foundation.Examples.RandomFunctionMACSharedReferences
+
+import Foundation.Logic.Polygraph.FiniteWiring
+
+import Foundation.Logic.Polygraph.StructuralWiringCompilation
+
+import Foundation.Logic.Polygraph.StructuralWiringBoundary
+
+import Foundation.Crypto.Semantics.Oracle.FiniteWiringSwitch
+
+import Foundation.Examples.RandomFunctionMACFiniteWiring
+
+import Foundation.Logic.Polygraph.FiniteWiringCoherence
+
+import Foundation.Logic.Polygraph.FiniteWiringCoherenceBoundary
+
+import Foundation.Examples.RandomFunctionMACWiringCoherence
+import Foundation.Crypto.Semantics.Oracle.ChangeFrontier
+import Foundation.Examples.RandomFunctionMACChangeFrontier
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramSlice
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramExchange
+import Foundation.Examples.RandomFunctionMACStatefulDiagram
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramAnalysisTransport
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramHigher
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramProofSupport
+import Foundation.Examples.StatefulDiagramAnalysisTransport
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramHigherBoundary
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramSelfExchange
+
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramPathLaws
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramHeadExtraction
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramExchangeDecision
+import Foundation.Examples.StatefulDiagramNormalizationBoundary
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramCanonical
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramInverseCells
+import Foundation.Examples.StatefulDiagramCanonical
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramHorizontal
+import Foundation.Examples.StatefulDiagramHorizontal
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramHeadPull
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramPullCells
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramPullOverlap
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramCoherent
+import Foundation.Examples.StatefulDiagramCoherent
+import Foundation.Crypto.Logic.Polygraph.GameProofRequirements
+import Foundation.Crypto.Logic.Polygraph.GameProofInterpretation
+import Foundation.Crypto.Logic.Polygraph.GameProofHigher
+import Foundation.Examples.GameProofHigherRequirements
+import Foundation.Examples.GameProofMACRequirements
+import Foundation.Examples.GameProofBudgetBoundary
+
+import Foundation.Crypto.Logic.Polygraph.GameProofNormalization
+import Foundation.Examples.GameProofMACNormalization
+import Foundation.Examples.GameProofNormalizationBoundary
+import Foundation.Crypto.Logic.Polygraph.ComputationalComparison
+import Foundation.Crypto.Logic.Polygraph.GameProofComputational
+import Foundation.Examples.GameProofPRGComputational
+import Foundation.Examples.GameProofComputationalLossBoundary
+import Foundation.Logic.SharedInference
+import Foundation.Logic.SharedInferenceEvaluation
+import Foundation.Examples.GameProofSharedMAC
+import Foundation.Logic.SharedInferenceCompilation
+import Foundation.Crypto.Logic.Polygraph.GameProofEncoding
+import Foundation.Crypto.Logic.Polygraph.GameProofPresentation
+import Foundation.Crypto.Logic.Polygraph.GameProofShared
+import Foundation.Examples.GameProofGeneratedSharedMAC
+
+import Foundation.Crypto.Logic.Polygraph.GameProofFiniteOrdinary
+
+import Foundation.Logic.SharedInferenceDerivation
+
+import Foundation.Crypto.Logic.Polygraph.GameProofOrdinaryErasure
+
+import Foundation.Examples.GameProofOrdinaryMAC
+
+import Foundation.Crypto.Logic.Polygraph.MixedCircuit
+
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitBranching
+
+import Foundation.Examples.MixedCircuitMAC
+
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitRootResolution
+
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitNormalization
+
+import Foundation.Examples.MixedCircuitMACRoots
+
+import Foundation.Examples.MixedCircuitMACNormalization
+
+import Foundation.Examples.MixedCircuitMACGuardedNormalization
+
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitHigher
+
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitHigherNormalization
+
+import Foundation.Examples.MixedCircuitMACHigher
+
+import Foundation.Logic.Polygraph.StructuralWireRewrite
+import Foundation.Examples.MixedCircuitStructuralRules
+import Foundation.Examples.MixedCircuitStructuralFork
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitPresentedHigher
+import Foundation.Examples.MixedCircuitStructuralCompletion
+
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitContextualHigher
+import Foundation.Examples.MixedCircuitStructuralDiagrams
+import Foundation.Examples.MixedCircuitStructuralContext
+
+import Foundation.Examples.MixedCircuitStructuralOverlap
+import Foundation.Examples.MixedCircuitStructuralBranching
+import Foundation.Logic.Polygraph.HigherRotation
+import Foundation.Examples.MixedCircuitSuffixOverlap
+import Foundation.Examples.MixedCircuitFusionObstruction
+
+import Foundation.Examples.MixedCircuitFusionCompletion
+import Foundation.Examples.MixedCircuitFusionHigher
+import Foundation.Examples.MixedCircuitFusionProjection
+import Foundation.Examples.MixedCircuitFusionRepair
+import Foundation.Examples.MixedCircuitFusionExamples
+
+import Foundation.Logic.Polygraph.StructuralTypedRouting
+import Foundation.Logic.Polygraph.StructuralCartesianPresentation
+import Foundation.Logic.Polygraph.StructuralCartesianNormalization
+import Foundation.Logic.Polygraph.StructuralCartesianRewriting
+import Foundation.Crypto.Logic.Polygraph.MixedCartesianWiring
+import Foundation.Examples.TypedCartesianWiring
+
+import Foundation.Logic.Polygraph.StructuralCartesianTemplates
+import Foundation.Logic.Polygraph.StructuralCartesianNaturality
+import Foundation.Logic.Polygraph.StructuralCartesianArgumentCoverage
+import Foundation.Logic.Polygraph.StructuralCartesianLocalHigher
+import Foundation.Crypto.Logic.Polygraph.MixedCartesianLocalHigher
+import Foundation.Examples.CartesianLocalHigher
+
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitPathRepair
+
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitComputational
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitComputationalHigher
+import Foundation.Examples.ComputationalOrientationBoundary
+
+import Foundation.Crypto.Logic.General.QuantitativeReduction
+import Foundation.Crypto.Logic.General.QuantitativeObservation
+import Foundation.Crypto.Logic.Polygraph.GameProofQuantitative
+import Foundation.Examples.GameProofMACNativeQuantitative
+import Foundation.Examples.MixedCircuitMACNativeReduction
+
+import Foundation.Constructions.Symmetric.RandomFunctionMACNativeOptimized
+import Foundation.Constructions.Symmetric.RandomFunctionMACNativeOptimizedExecution
+import Foundation.Constructions.Symmetric.RandomFunctionMACNativeOptimizedRefinement
+import Foundation.Crypto.Logic.General.QuantitativeObservationTransport
+import Foundation.Crypto.Logic.Polygraph.GameProofTransport
+import Foundation.Examples.RandomFunctionMACNativeOptimization
+import Foundation.Examples.RandomFunctionMACNativeOptimizationTransport
+
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramHistoryBoundary
+
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitStateful
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitClocked
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitClockedFusion
+import Foundation.Examples.MixedCircuitSharedState
+import Foundation.Examples.MixedCircuitNativeContinuation
+import Foundation.Examples.MixedCircuitNativeMACGame
+
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitStatefulHigher
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitStatefulWiringUnion
+import Foundation.Examples.MixedCircuitStatefulStructural
+import Foundation.Examples.MixedCircuitStatefulWiringHigher
+
+import Foundation.Examples.MixedCircuitUnifiedOverlap
+import Foundation.Examples.MixedCircuitUnifiedContextOverlap
+import Foundation.Examples.MixedCircuitUnifiedFusionResolution
+
+import Foundation.Logic.Polygraph.StructuralCartesianOldExpansion
+import Foundation.Logic.Polygraph.StructuralCartesianOldExpansionCounts
+import Foundation.Examples.MixedCircuitOldWireDefinitions
+import Foundation.Examples.MixedCircuitOldWireElimination
+
+import Foundation.Logic.Polygraph.FourNaturality
+import Foundation.Examples.MixedCircuitWireFrameNaturality
+import Foundation.Examples.MixedCircuitRootWireDefinitions
+import Foundation.Examples.MixedCircuitRootWireElimination
+
+import Foundation.Examples.MixedCircuitUnifiedAssociationBasis
+import Foundation.Examples.MixedCircuitUnifiedAssociationDiagrams
+import Foundation.Examples.MixedCircuitUnifiedAssociationResolution
+import Foundation.Examples.MixedCircuitUnifiedAssociationContracts
+
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitStatefulSimulation
+import Foundation.Examples.MixedCircuitMACNativeContinuation
+import Foundation.Examples.MixedCircuitMACNativeRepair
+import Foundation.Examples.MixedCircuitMACNativeContinuationGame
+import Foundation.Examples.MixedCircuitMACNativeRepairExample
+
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitRepresentation
+import Foundation.Examples.MixedCircuitMACAnalysisCompilation
+import Foundation.Crypto.Semantics.Oracle.NativeVerdictPacket
+import Foundation.Crypto.Semantics.Oracle.NativeVerdictPacketExecution
+import Foundation.Examples.MixedCircuitMACAnalysisNative
+
+import Foundation.Crypto.Semantics.Oracle.NativeHaltReturnChecked
+import Foundation.Crypto.Semantics.Oracle.NativeVerdictRestore
+import Foundation.Examples.MixedCircuitMACLinkedPrefix
+import Foundation.Examples.MixedCircuitMACLinkedExecution
+import Foundation.Examples.MixedCircuitMACLinkedGame
+
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitWireNormalization
+
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitTrackExchange
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitTrackExchangeSupport
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitTrackExchangeContracts
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitWirePassNaturality
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitWirePassContracts
+import Foundation.Examples.MixedCircuitMACWirePass
+
+import Foundation.Logic.Polygraph.FourPathNaturality
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitPathExchange
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitPathNaturalitySupport
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitWirePathCompatibility
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitWirePathContracts
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitPresentedPathNaturality
+import Foundation.Examples.MixedCircuitErasedWirePath
+import Foundation.Examples.MixedCircuitFusionPathResidual
+import Foundation.Examples.MixedCircuitWireFusionResidual
+
+import Foundation.Examples.MixedCircuitWireFusionTrackNaturality
+import Foundation.Examples.MixedCircuitSequentialFusionWirePass
+
+import Foundation.Logic.Polygraph.StructuralCartesianTrackNaturality
+import Foundation.Logic.Polygraph.StructuralCartesianCoherenceInvariant
+import Foundation.Logic.Polygraph.StructuralCartesianUnitCritical
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitCartesianUnitCritical
+
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitPresentedExchange
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitPresentedWireCompatibility
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitPresentedWireContracts
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitHigherBasisSum
+import Foundation.Examples.MixedCircuitPresentedWirePass
+import Foundation.Examples.MixedCircuitTensorNormalizationObstruction
+
+import Foundation.Logic.Polygraph.StructuralCartesianCategoryCritical
+import Foundation.Logic.Polygraph.StructuralCartesianCategoryPeaks
+import Foundation.Logic.Polygraph.StructuralCartesianOneHole
+import Foundation.Logic.Polygraph.StructuralCartesianCompositionTransport
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitCartesianCategoryCritical
+import Foundation.Examples.MixedCircuitCategoryWirePass
+
+import Foundation.Logic.Polygraph.StructuralCartesianLegacyComposition
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitHigherBasisSumCounts
+import Foundation.Examples.MixedCircuitLegacyWireBasis
+import Foundation.Examples.MixedCircuitLegacyCategoryCoherence
+import Foundation.Examples.MixedCircuitLegacyWireRepair
+
+
+
+import Foundation.Logic.Polygraph.StructuralCartesianProductTracks
+import Foundation.Logic.Polygraph.StructuralCartesianObservationCoherence
+import Foundation.Examples.MixedCircuitTensorObservation
+
+import Foundation.Logic.Polygraph.StructuralCartesianProductCritical
+import Foundation.Logic.Polygraph.StructuralCartesianProductCriticalInvariant
+import Foundation.Logic.Polygraph.StructuralCartesianProductProjectionNaturality
+import Foundation.Logic.Polygraph.StructuralCartesianPresentedObservation
+import Foundation.Logic.Polygraph.StructuralCartesianProductTriangleCoherence
+import Foundation.Logic.Polygraph.StructuralCartesianProductPeaks
+import Foundation.Logic.Polygraph.StructuralCartesianProductCriticalCounts
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitCartesianProductCritical
+import Foundation.Examples.MixedCircuitProductCriticalWirePass
+
+import Foundation.Logic.Polygraph.StructuralCartesianRootAnnotation
+import Foundation.Logic.Polygraph.StructuralCartesianRootAnnotationCritical
+import Foundation.Logic.Polygraph.StructuralCartesianDistributionCritical
+import Foundation.Logic.Polygraph.StructuralCartesianDistributionUnitCoherence
+import Foundation.Logic.Polygraph.StructuralCartesianDistributionAnnotation
+import Foundation.Logic.Polygraph.StructuralCartesianDistributionPeaks
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitCartesianDistributionCritical
+import Foundation.Examples.MixedCircuitDistributionCriticalWirePass
+
+import Foundation.Logic.Polygraph.StructuralCartesianTensorProjectionPeak
+
+import Foundation.Logic.Polygraph.StructuralCartesianExpansionUnitPeak
+import Foundation.Logic.Polygraph.StructuralCartesianExpansionCritical
+import Foundation.Logic.Polygraph.StructuralCartesianExpansionAnnotation
+import Foundation.Logic.Polygraph.StructuralCartesianRootAnnotationLinear
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitCartesianExpansionCritical
+import Foundation.Examples.MixedCircuitExpansionCriticalWirePass
+import Foundation.Examples.MixedCircuitExpansionAnnotationProfile
+
+import Foundation.Logic.Polygraph.StructuralCartesianExpansionLoopCoherence
+import Foundation.Examples.MixedCircuitExpansionLoop
+
+import Foundation.Logic.Polygraph.StructuralCartesianProjectedTrackNaturality
+import Foundation.Logic.Polygraph.StructuralCartesianIdentityProjectionCoherence
+import Foundation.Examples.MixedCircuitIdentityProjection
+
+import Foundation.Logic.Polygraph.FourAssociation
+import Foundation.Logic.Polygraph.StructuralCartesianAssociatorPaths
+import Foundation.Logic.Polygraph.StructuralCartesianSelectionPasting
+import Foundation.Logic.Polygraph.StructuralCartesianLiftSelectionCoherence
+import Foundation.Examples.MixedCircuitLiftSelection
+
+import Foundation.Logic.Polygraph.FourAssociationContext
+import Foundation.Logic.Polygraph.StructuralCartesianUnitSelectionPasting
+import Foundation.Logic.Polygraph.StructuralCartesianSelectionUnitCoherence
+import Foundation.Logic.Polygraph.StructuralCartesianSubstitutionUnitCoherence
+import Foundation.Examples.MixedCircuitSubstitutionUnit
+
+import Foundation.Logic.Polygraph.StructuralCartesianDistributionCompositionCoherence
+import Foundation.Logic.Polygraph.StructuralCartesianDistributionSubstitutionPasting
+import Foundation.Logic.Polygraph.StructuralCartesianProjectedSubstitutionCoherence
+import Foundation.Logic.Polygraph.StructuralCartesianRightUnitPasting
+import Foundation.Logic.Polygraph.StructuralCartesianSubstitutionRightUnitCoherence
+import Foundation.Examples.MixedCircuitSubstitutionRightUnit
+
+import Foundation.Logic.Polygraph.StructuralCartesianSelectionSubstitutionCoherence
+import Foundation.Logic.Polygraph.StructuralCartesianSubstitutionAssociativityCoherence
+import Foundation.Examples.MixedCircuitSubstitutionAssociativity
+
+import Foundation.Crypto.Semantics.Probability.SharedEventBudget
+import Foundation.Crypto.Logic.Polygraph.GameProofJointEventBudget
+import Foundation.Examples.RandomFunctionMACSharedEventBudget
+import Foundation.Examples.SharedEventBudgetIndependence
+import Foundation.Examples.RandomFunctionMACEncodedEventBudget

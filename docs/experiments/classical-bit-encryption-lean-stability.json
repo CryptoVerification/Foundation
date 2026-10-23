@@ -1,0 +1,56 @@
+{
+  "target_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitRepairStability",
+  "targeted_lake_build_passed": true,
+  "lean_toolchain": "leanprover/lean4:v4.33.0",
+  "axioms_per_theorem": {
+    "parts_distance": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "normalized_distance_mul": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "repair_distance_mul": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "contrast_distance_le_joint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "perfect_jointTV": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "repairedCipher_stable": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "sorry_or_additional_axioms_in_listed_theorems": false,
+  "finite_key_type_is_arbitrary": true,
+  "metric": "maximum over the two messages of joint key/ciphertext total variation",
+  "margin_premise": "each cipher has privacy_TV + 2*key_averaged_correctness_error <= 1-margin",
+  "quantitative_conclusion": "repaired_joint_TV <= 2*original_internal_TV/margin",
+  "signed_to_actual_joint_distribution_distance_identity_checked": true,
+  "attacker_without_key_advantage_identified_with_internal_metric": false,
+  "topological_nonextension_checked": false,
+  "finite_boundary_obstruction_checked": false,
+  "Foundation_bounded_machine_realization_checked": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/classical-bit-encryption-lean-stability.py": "c658f06aa9d6b8f6ee06e2f75ab050911d5ab522fdfc1693c18c2b3988900251",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepairStability.lean": "d83db5cc70fbda328ccd400f5232f7aa6b3ea9058da0f3b5b02da2d673e7f50b",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepair.lean": "459aa24b50357f54d78ce8faf35ebbf96164a3971bc6b6aebd19524f69921a07",
+    "/Users/hiro/workspace/Foundation/lakefile.toml": "b537fcdfd0e540cfd6f310d771aff1eb8fc24ab107a421b02cfa42cf131a9411",
+    "/Users/hiro/workspace/Foundation/lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
+    "/Users/hiro/workspace/Foundation/lake-manifest.json": "ef3799fa73ec244f1db2063a084e5c03ab1196e16604e883952f870179bff929"
+  }
+}

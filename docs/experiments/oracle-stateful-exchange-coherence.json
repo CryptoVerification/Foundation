@@ -1,0 +1,259 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Semantics/Oracle/StatefulDiagramHeadPull.lean": "7f29a9f36a71f492a7ed55c785dfde68d216555c1f70ea71a6ee6578fadf50d0",
+    "Foundation/Crypto/Semantics/Oracle/StatefulDiagramPullCells.lean": "8b9d8ffd82c5b08e1748f0df000ff8ff9255bf313297551d3a5bc8b7a081baa6",
+    "Foundation/Crypto/Semantics/Oracle/StatefulDiagramPullOverlap.lean": "faaecd5ab8fa0b60be14c82ceee4c7120a66bced8813c37a7ef6c51abcacf1f3",
+    "Foundation/Crypto/Semantics/Oracle/StatefulDiagramCoherent.lean": "4678d8f67d1619b9f0a3c94d49cb0d62c294b652c9c6e2415af69aa0275c25aa",
+    "Foundation/Examples/StatefulDiagramCoherent.lean": "6fe198875966dd9354895315726486601c97eea69dd651bb957cd1f5f8a18109"
+  },
+  "audited_public_declarations": [
+    "CryptoOracle.StatefulDiagram.eraseSwap",
+    "CryptoOracle.StatefulDiagram.Exchange.eraseData",
+    "CryptoOracle.StatefulDiagram.pullHead",
+    "CryptoOracle.StatefulDiagram.pullHead_front",
+    "CryptoOracle.StatefulDiagram.Exchange.eraseData_trans",
+    "CryptoOracle.StatefulDiagram.Exchange.eraseData_symm",
+    "CryptoOracle.StatefulDiagram.pullHead_sound",
+    "CryptoOracle.StatefulDiagram.frontSwap",
+    "CryptoOracle.StatefulDiagram.frontInvolution",
+    "CryptoOracle.StatefulDiagram.frontSelf",
+    "CryptoOracle.StatefulDiagram.frontBraid",
+    "CryptoOracle.StatefulDiagram.frontSwap_tail",
+    "CryptoOracle.StatefulDiagram.PullSquare",
+    "CryptoOracle.StatefulDiagram.frontPullSquare",
+    "CryptoOracle.StatefulDiagram.primitivePullSquare",
+    "CryptoOracle.StatefulDiagram.pullNaturality",
+    "CryptoOracle.StatefulDiagram.emptyReference",
+    "CryptoOracle.StatefulDiagram.emptyContraction",
+    "CryptoOracle.StatefulDiagram.HorizontalCoherence.cancelSuffix",
+    "CryptoOracle.StatefulDiagram.exchangeCoherent",
+    "CryptoOracle.StatefulDiagram.exchange_coherence_complete",
+    "CryptoOracle.StatefulDiagram.canonicalTargetRoute",
+    "CryptoOracle.StatefulDiagram.canonicalFactor",
+    "Foundation.Examples.StatefulDiagramCoherent.automaticBraid",
+    "Foundation.Examples.StatefulDiagramCoherent.automaticSeparated",
+    "Foundation.Examples.StatefulDiagramCoherent.automaticComposite",
+    "Foundation.Examples.StatefulDiagramCoherent.automaticSelf",
+    "Foundation.Examples.StatefulDiagramCoherent.emptyPath",
+    "Foundation.Examples.StatefulDiagramCoherent.automaticEmpty",
+    "Foundation.Examples.StatefulDiagramCoherent.old_obstruction_connected",
+    "Foundation.Examples.StatefulDiagramCoherent.automaticCanonicalFactor"
+  ],
+  "public_theorems": [
+    "CryptoOracle.StatefulDiagram.pullHead_front",
+    "CryptoOracle.StatefulDiagram.Exchange.eraseData_trans",
+    "CryptoOracle.StatefulDiagram.Exchange.eraseData_symm",
+    "CryptoOracle.StatefulDiagram.pullHead_sound",
+    "CryptoOracle.StatefulDiagram.exchange_coherence_complete",
+    "Foundation.Examples.StatefulDiagramCoherent.old_obstruction_connected"
+  ],
+  "claims": {
+    "residual_paths": "eraseSwap and Exchange.eraseData compute paths after removing the first occurrence of a selected operation ID on both endpoints. Formal inverse and composition are respected by construction.",
+    "head_pull": "pullHead constructs a checked path to wanted :: word.erase wanted under AccessibleHead. It retains every other occurrence in its original order and preserves the full store law for all typed kernels.",
+    "local_cells": "frontInvolution, frontSelf, frontBraid and frontSwap_tail derive the local comparison cells using existing involution, self contraction, braid and horizontal interchange only.",
+    "overlap_coverage": "frontPullSquare handles both, one, or neither swapped ID equal to wanted, including extraction from an arbitrarily long common suffix. primitivePullSquare extends the construction under arbitrary common prefixes.",
+    "naturality": "pullNaturality constructs the square path ; pull(target) ~ pull(source) ; prepend(wanted, eraseData(path)) for every raw checked path, including inverse, composition and reflexivity.",
+    "global_coherence": "exchangeCoherent constructs HorizontalCoherence signature p q for every two parallel raw Exchange paths p and q. It recurses on source word length by deleting its first label; empty paths contract by structural laws. No additional higher root is introduced in this step.",
+    "canonical_factor": "canonicalFactor compares path ; canonicalCertificate(target) with the canonical source certificate transported to the common canonical endpoint. This is derived by exchangeCoherent, not postulated as a normalizer-relative root.",
+    "execution": "Runtime evaluation constructs the actual higher data for braid, separated edits, composite inverses, repeated read-only self-loop, empty word and canonical factorization."
+  },
+  "exact_theorem_scope": {
+    "quantifiers": "For arbitrary Slot and Op with decidable equality, signature : Op -> Interface Slot, finite words one two and p q : Exchange signature one two, construct HorizontalCoherence signature p q.",
+    "assumptions": "The paths are built from the actual checked read/write exchange syntax. The selected-ID word endpoints identify repeated labels as before. No finite full operation alphabet, total operation order, path enumeration, semantic equality oracle or supplied global coherence premise is required.",
+    "relation": "The explicit HorizontalCoherence relation introduced in the preceding step, including earlier groupoid structural laws, self contraction and the separated primitive square. This is not completeness of any older smaller relation."
+  },
+  "runtime_checks": [
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "expected": "(0, 1, 1, 0, 0, 0)",
+      "meaning": [
+        "new separated-square uses in automatically compared braid paths",
+        "new separated-square uses for separated edits with middle reader",
+        "new separated-square uses for composite/inverse edits",
+        "new separated-square uses for the former self-loop obstruction",
+        "new separated-square uses for an empty-word contraction",
+        "new separated-square uses in derived canonical factorization"
+      ],
+      "passed": true
+    }
+  ],
+  "scope": [
+    "Global coherence is proved for the checked-exchange fragment in HorizontalCoherence. Copy/discard, general structural circuits, arbitrary cryptographic-box transformations and approximate games are not thereby completed.",
+    "No new higher inductive type or generator was added in the five source modules. The global construction uses the already explicit basis and its structural/context closures.",
+    "Involution, braid, self and separated exchange roots have bounded active swap boundaries, but structural laws may take arbitrary paths and contexts/operation labels are parameters. No claim of finitely many concrete generators, a uniform bound for every structural-law boundary or full finite derivation type is made.",
+    "The runtime tuple counts only the previously defined new separated-square form, excluding all old roots, structural laws, input proofs, contexts, sharing, bytes and checking time. It is not a size or performance advantage.",
+    "Private erased random draws and CPU timing are not observations unless encoded in the typed state. No native runtime guarantee or dynamic scheduling/conditioning semantics is added.",
+    "Existing actual MAC/caller/cache/trace execution sources remain unchanged. The new runtime examples are diagnostics of the generic proof constructor, not new MAC query reorderings.",
+    "Novelty of head-deletion proof construction, formalization priority, conditional-assumption repair and fair comparative proof cost remain unconfirmed."
+  ],
+  "literature_this_step": {
+    "primary": {
+      "title": "Convex Rank Tests and Semigraphoids",
+      "authors": [
+        "Jason Morton",
+        "Lior Pachter",
+        "Anne Shiu",
+        "Bernd Sturmfels",
+        "Oliver Wienand"
+      ],
+      "year": 2009,
+      "doi": "10.1137/080715822",
+      "url": "https://www.stat.uchicago.edu/~lekheng/meetings/mathofranking/ref/morton-shiu.pdf",
+      "pdf_sha256": "0362f5275afcaa6a5ebdbcb2f7f385f6d8cb50273bea8b861d35f546232a1342",
+      "pdf_bytes": 293353,
+      "read_scope": "Selected published text in section 3: relations (BS), (BH), (BN), directional (BN prime), Theorem 13 attributed to Tits, and the following proof of Lemma 12. No full-paper, figure-proof or artifact reproduction claim.",
+      "comparison": "Square/braid/backtrack path transformations have prior mathematical results. The theorem numbered 10 in a preprint is numbered 13 in the published PDF. No formal reduction of the current repeated-ID read/write guarded syntax to that published theorem is supplied; neither publication novelty nor an exact subsumption claim is inferred."
+    },
+    "discovery_only": {
+      "url": "https://arxiv.org/html/2511.11785v2",
+      "title": "Graphical view on linear extensions of finite posets",
+      "read_scope": "Abstract, selected introduction and section 5.5 discussion/reference used to locate the older result.",
+      "metadata_note": "The viewed HTML showed a v2/version header dated 24 November 2025 and a manuscript body date 24 August 2026. This inconsistency was not resolved or used for priority claims."
+    }
+  },
+  "novelty": "Unconfirmed. A constructive global coherence theorem for this implemented exchange fragment is now verified; the full polygraphic cryptographic framework and the central submission claim remain unfinished.",
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4353,
+    "build_log": "/tmp/foundation-stateful-coherent-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-stateful-coherent-audit.log",
+    "audit_declarations": 1881,
+    "new_public_declarations": 31,
+    "new_public_theorems": 6,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {
+      "Foundation/Crypto/Semantics/Oracle/StatefulDiagramHeadPull.lean": [],
+      "Foundation/Crypto/Semantics/Oracle/StatefulDiagramPullCells.lean": [],
+      "Foundation/Crypto/Semantics/Oracle/StatefulDiagramPullOverlap.lean": [],
+      "Foundation/Crypto/Semantics/Oracle/StatefulDiagramCoherent.lean": [],
+      "Foundation/Examples/StatefulDiagramCoherent.lean": []
+    },
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "inputs": 2,
+        "mismatches": []
+      }
+    }
+  }
+}

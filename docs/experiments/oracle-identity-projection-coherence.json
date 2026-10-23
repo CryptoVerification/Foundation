@@ -1,0 +1,415 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Logic/Polygraph/StructuralCartesianProjectedTrackNaturality.lean": "9f84406eef5f2cd532ff3bf9763ef7c52f1c4b50d528ea52a1b15716047a835b",
+    "Foundation/Logic/Polygraph/StructuralCartesianIdentityProjectionCoherence.lean": "65559144c39c2ccb8aa3cda7a73f6d7d98746e572cd29ae71de5c7e3d70d3c81",
+    "Foundation/Examples/MixedCircuitIdentityProjection.lean": "5ee3de0142eafbb75bdd8a090f9a9467b1792ef23e0f35d47b121fbb9a97eaad"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.firstComparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.firstComparison_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.sampledComparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.sampledPrefix",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.sampledSource",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.sampledTarget",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.sampled_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.sampled_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.secondComparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.secondComparison_support",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.assemble",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.assembledFst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.assembledSnd",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.identityNormalFst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.identityNormalSnd",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.identityPairAssembly",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.inverseEtaFst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.inverseEtaSnd",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.leftCanonical",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.leftIdentityProjection",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.normalizeIdentity",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.normalizeIdentityFst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.normalizeIdentitySnd",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.productLift",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.rightCanonical",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.rightIdentityProjection",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProjectedTrackNaturality.forkFirst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProjectedTrackNaturality.forkLast",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProjectedTrackNaturality.forkPaths",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProjectedTrackNaturality.fstBoth",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProjectedTrackNaturality.fstFirst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProjectedTrackNaturality.fstLast",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProjectedTrackNaturality.sndBoth",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProjectedTrackNaturality.sndFirst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProjectedTrackNaturality.sndLast"
+  ],
+  "public_theorems": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.firstComparison_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.sampled_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.sampled_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.secondComparison_support",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.normalizeIdentity"
+  ],
+  "claims": [
+    "The four beta projection argument diagrams are extended to arbitrary finite pure wire proof paths, including formal inverses. The erased branch cases are derived recursively without a whole-track generator.",
+    "When both fork components change along actual paths, projecting with fst and then beta agrees with beta followed by the first path; snd selects the second path. All of these comparisons use only the previous old pure local argument/groupoid library.",
+    "In the retained pure Fin 31 extension, assembling two supplied projected paths by inverse eta and fork has actual higher projection laws: projecting the assembled path and beta gives back the corresponding supplied path.",
+    "The actual existing identityNormal(pair a b) path is compared with that eta assembly, removing only a zero-step bookkeeping prefix. Both product shapes a and b are arbitrary.",
+    "Consequently, postcomposing the actual product identity normalization with fst/snd and then the beta of its canonical components is compared with leftId of that projection followed by the actual existing projectLeft/projectRight(identityNormal child) path.",
+    "The existing public normalizeCell(identity a) endpoint transport is definitionally equal to identityNormal a, proved by rfl. Both product projection squares are exported for this PUBLIC normalizer, not a replacement normalization algorithm.",
+    "The existing MAC presentation embeds both actual public normalizer projection squares with empty pure support. No new basic higher diagram family, basis or first-level rule is introduced.",
+    "The concrete sampled context executes one MAC.before stage and copies its full output before applying the identity-normalization/projection comparison. Its exact condition support is singleton stage. Repaired joint equality in the updated checked model retains the correlated past, state and input."
+  ],
+  "finite_scope": {
+    "unchanged_pure_schematic_tag_count": 31,
+    "new_basic_generator_families": 0,
+    "path_naturality_inputs": "Actual arbitrary finite paths of the eighteen pure Cartesian rules, including inverses; not conditional crypto rewrite paths",
+    "normalizer_inputs": "Identity at pair(a,b), with arbitrary product shapes a and b; the supplied projectLeft and projectRight paths retain recursive identityNormal child computations",
+    "public_normalizer": "The existing frozen normalizeCell, with an explicit identity transport equality, not a new normalization function",
+    "mixed_context": "MAC.before stage, full-output copy, identity of the pair, and fst; no before/after crypto rewrite"
+  },
+  "limits": [
+    "These are actual product identity/projection normalization squares. They do not yet compare the full existing componentThenCanonical and direct tensor normalization paths.",
+    "The selector/lift routing compatibility, substitution unit/associativity comparisons, and normalization idempotence as higher proofs remain to be supplied.",
+    "No complete finite higher basis or arbitrary branching classifier for the whole eighteen-root/mixed catalogue is established.",
+    "Erased-branch naturality concerns pure proof paths. Conditional requirements of the sampled crypto prefix are retained and rechecked, not discarded.",
+    "No total certificate size, checker runtime advantage, code-changing reduction, loss/time/resource bound or full physical oracle/keygen execution is proved. Unregistered NativeConfiguredMAC integration remains excluded.",
+    "Mathematical novelty remains unconfirmed. Generic beta/eta coherence or product reconstruction is not claimed as a new abstract principle. No new external primary-source reading or independent review occurred."
+  ],
+  "next_obligations": [
+    "Construct actual commuting squares between liftLeft/liftRight and selectNormal for typed slots, using the distribution/projection diagrams and categorical coherence.",
+    "Use those squares and the public identity projection comparisons to prove substitution unit laws and higher normalization idempotence for reified routes.",
+    "Discharge the unchanged actual canonical tensor square and its mixed root contract; continue the full finite eighteen-root/mixed coverage.",
+    "Keep the original full goal active: code-changing reductions/losses/resources, continuing oracle/keygen execution, fair shared-proof total costs and primary-source theorem-level novelty assessment."
+  ],
+  "verification": {
+    "target_command": "nix develop path:. -c lake build Foundation.Examples.MixedCircuitIdentityProjection",
+    "target_jobs": 2878,
+    "target_log": "/tmp/foundation-identity-projection-mac-target.log",
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4548,
+    "build_log": "/tmp/foundation-identity-projection-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-identity-projection-audit.log",
+    "audit_declarations": 5000,
+    "new_modules": 3,
+    "new_selected_declarations": 35,
+    "new_authored_theorems": 5,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "prior_source_hash_checks": {
+      "oracle-product-critical-coherence.json": {
+        "source_count": 9,
+        "mismatches": []
+      },
+      "oracle-stateful-unified-wiring-fusion.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-information-schedule-comparison.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-mixed-path-repair-novelty-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mac-native-code-changing-transport.json": {
+        "source_count": 7,
+        "mismatches": []
+      },
+      "oracle-expansion-loop-coherence.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-mixed-fusion-conservative-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-full-outcome-native-repair.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-directed-computational-extraction.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-single-state-native-execution.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-compact-mac-security.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "source_count": 10,
+        "mismatches": []
+      },
+      "oracle-output-observation-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mac-analysis-native-compilation.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-cartesian-local-higher-discard-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-context.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-unified-association-overlap-resolution.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-mixed-wire-pass-naturality.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-presented-wire-compatibility.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-path-valued-residuals.json": {
+        "source_count": 9,
+        "mismatches": []
+      },
+      "oracle-categorical-critical-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-chronological-history-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-compact-mac-execution.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-legacy-wire-interoperability.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-wire-pass-research.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-root-only-wire-context-lifting.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-unified-fusion-overlap-resolution.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-overlap-classification.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-expansion-critical-coherence.json": {
+        "source_count": 7,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-bounded-old-wire-elimination.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-distribution-critical-coherence.json": {
+        "source_count": 8,
+        "mismatches": []
+      },
+      "oracle-tensor-projection-peak.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-sequential-fusion-wire-pass.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-mac-linked-analysis-execution.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mac-native-quantitative-contracts.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-cartesian-coherence-obstruction.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-typed-cartesian-wiring-completeness.json": {
+        "source_count": 6,
+        "mismatches": []
+      }
+    },
+    "imported_warnings": "Existing imported warnings remain."
+  },
+  "material_passport": {
+    "type": "Pathwise projection naturality, eta assembly projection laws, actual public product identity normalizer squares and checked MAC placement",
+    "status": "Verified within explicit scope; full research goal remains active",
+    "provenance": "AI-assisted research, implementation and reporting",
+    "human_read_scope": "unknown",
+    "independent_review": "not performed"
+  }
+}

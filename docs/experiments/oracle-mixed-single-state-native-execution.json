@@ -1,0 +1,408 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Logic/Polygraph/MixedCircuitStateful.lean": "258713e79147605faa75f2528567bb259c438c6c6728ff1dc9e0aa009cd12a7e",
+    "Foundation/Crypto/Logic/Polygraph/MixedCircuitClocked.lean": "1c016c7d7c266758a55c88b69b0c26880c41bb9ed3e7a14eebb2473d2047fc07",
+    "Foundation/Crypto/Logic/Polygraph/MixedCircuitClockedFusion.lean": "3e1d88f91a3c6786b48241ab9f14ee0eeb49232c2f20a93ec8e29ca2c26b0a15",
+    "Foundation/Examples/MixedCircuitSharedState.lean": "810b0307699a84da0aed1aa304c4cd3d2896d7f222b38a1861c55329cf5f15dc",
+    "Foundation/Examples/MixedCircuitNativeContinuation.lean": "3be1264e60ffc148857b756918fc9c0422be1f8cef97dac9f3e79eba492e82cc",
+    "Foundation/Examples/MixedCircuitNativeMACGame.lean": "69249d7d600f8a9dcc3b3281f0bdef1fb02253913c233e59e7ae2b1bcd7cd981"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.Game.forgery_bound",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.Game.full_law",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.Game.run",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.Game.run_eq",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.continuing_frame",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.nativeModel",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.optimized_halts_queries",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.optimized_observation",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.refinement",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.split",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.split_full_frame",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.split_ticks",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.Runtime",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.copyOnce",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.copyOnceValid",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.copy_once_run",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.copying_effect_not_value",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.discardResult",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.discardValid",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.discard_preserves_effects",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.executeTwice",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.executeTwiceValid",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.execute_twice_run",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.model",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.putThenRead",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.putThenRead_needs",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.putValid",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.readThenPut",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.readThenPut_needs",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.readValid",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.restart_not_shared",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.restarted",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.restarted_read_false",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.restarted_run",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.reversed_run",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.shared_read_true",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.shared_run",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.signature",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.unrestricted_exchange_false",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.CheckedModel",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.CheckedModel.base",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.CheckedModel.localSound",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.CheckedModel.mk",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.Fusion.checked",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.Fusion.relator",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.Fusion.sound_in_context",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.Fusion.sound_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.Values",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.evaluate_exact",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.exact_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.model",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.needs_empty",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.output",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.same_ticks",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.signature",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.state_marginal",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.ticks",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.valid",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Model",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Model.box",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Model.mk",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.evaluate",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.evaluate_lift",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.lift",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.liftChecked",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.repaired",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.sound",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.sound_joint"
+  ],
+  "public_theorems": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.Game.forgery_bound",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.Game.full_law",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.Game.run_eq",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.continuing_frame",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.optimized_halts_queries",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.optimized_observation",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.refinement",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.split_full_frame",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.split_ticks",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.copyOnceValid",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.copy_once_run",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.copying_effect_not_value",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.discardValid",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.discard_preserves_effects",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.executeTwiceValid",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.execute_twice_run",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.putThenRead_needs",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.putValid",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.readThenPut_needs",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.readValid",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.restart_not_shared",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.restarted_read_false",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.restarted_run",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.reversed_run",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.shared_read_true",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.shared_run",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.unrestricted_exchange_false",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.Fusion.sound_in_context",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.Fusion.sound_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.evaluate_exact",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.exact_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.needs_empty",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.same_ticks",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.state_marginal",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.valid",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.evaluate_lift",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.repaired",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.sound",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.sound_joint"
+  ],
+  "claims": [
+    "The original mixed Circuit syntax has an explicit single-state evaluator. Tensor executes left and then right with the same evolving state; wires copy/discard port values only.",
+    "The old state-independent models and checked roots lift with unchanged port laws.",
+    "A root equality universal in state and input lifts through all existing seq/tensor Step placements, preserving arbitrary correlated past and original state/input; condition repair uses the updated checked model.",
+    "A shared-bit/log example distinguishes continuous execution from restarting both children, rejects unrestricted exchange, distinguishes copying a produced value from executing the effect twice, and retains state/log effects when discarding output.",
+    "For one common stochastic transition function, every mixed schedule is exactly the corresponding uninterrupted execution, paired with deterministic port output.",
+    "A single schematic adjacent-chunk fusion rule has a concrete checked model and preserves full state in every mixed placement.",
+    "Specialization to actual native caller frames retains oracle state, all machine tapes/control and complete bit request/response transcript across chunk boundaries.",
+    "Any optimized native mixed schedule of total horizon 286 inherits stopping and four additional oracle calls for arbitrary typed oracle state and prior trace.",
+    "Any old schedule of horizon 343 and optimized schedule of horizon 286 satisfy the existing complete-frame PC relocation correspondence.",
+    "A concrete tensor/copy/discard schedule splits 286 into 100 and 186 transitions and has the exact complete native-frame law of the uninterrupted caller.",
+    "Sampling the original key distribution connects any such schedule to every preparation-order full MAC law and the inherited fixed-attack forgery upper bound 1/256."
+  ],
+  "limits": [
+    "The stateful tensor is explicitly left-first; arbitrary effectful interchange is not an axiom.",
+    "The same transition function/program/oracle runs through every clocked box. This is not arbitrary program switching or a general native compiler.",
+    "Clocked-box ports contain empty values. General typed port values belong to the separate generic Stateful.Model.",
+    "Clocked boxes are execution durations, not the crypto proof-transformation boxes of the existing MACNormalization signature.",
+    "This implements scheduling semantics and one local fusion schema, not a complete finite higher critical basis for the full mixed crypto/fusion/wiring presentation.",
+    "Local stateful root validity is an explicit proof obligation. Updating a model/its kernels or native contract is not discharged by dependency-set repair alone.",
+    "Old-to-new code refinement is a separate final-frame correspondence, not equality of their clock processes or an already integrated stateful rewriting root.",
+    "The 286 quantity is a transition horizon/bound; absorbing halted-state steps and proof traversal are not new actual useful-work costs.",
+    "Native oracle internals and initial key sampling are external. The compact native oracle backend remains to be connected.",
+    "The cryptographic upper bound is inherited for the existing fixed attack with 8 messages and 256 tags. No asymptotic or arbitrary-adversary result.",
+    "No proof-size, total checking-time, or higher-dimensional necessity advantage over ordinary shared proof has been demonstrated; these proofs use ordinary structural induction and local composition."
+  ],
+  "concrete_contract": {
+    "same_program_all_chunks": true,
+    "tensor_order": "left then right on returned shared state",
+    "example_chunks": [
+      100,
+      186
+    ],
+    "optimized_total_horizon": 286,
+    "old_total_horizon": 343,
+    "extra_oracle_calls": 4,
+    "native_frame_components_retained": [
+      "opaque oracle state",
+      "control and all tapes",
+      "full reverse bit transcript"
+    ],
+    "key_domain_messages": 8,
+    "tag_cardinality": 256,
+    "finite_success_upper_bound": "1/256"
+  },
+  "novelty": {
+    "status": "unconfirmed",
+    "interpretation": "Necessary concrete shared-state/native foundation, not claimed as new state semantics, higher coherence, security bound or proof compression. Full mixed finite local basis, code-changing reduction interpretation, observational contracts, complete runtime, fair total costs and primary-theorem priority remain open."
+  },
+  "primary_sources_this_step": [
+    {
+      "title": "String Diagrams for Premonoidal Categories",
+      "authors": [
+        "Mario Román",
+        "Paweł Sobociński"
+      ],
+      "url": "https://lmcs.episciences.org/15593/pdf",
+      "doi": "10.46298/LMCS-21(2:9)2025",
+      "sha256": "8d34da8f010f438e5ff0d0791a3dc338204c55d08ee591a4a18287d193902711",
+      "read_scope": "Additional selected reading of §4: Definition 4.1, prose of the state laws, and Proposition 4.3 and its textual proof (PDF pages 13–15). Not all diagram derivations or a full-paper read/artifact reproduction.",
+      "comparison": "Pure value copy/discard and effectful global-state operations are already explicitly separated in the primary source. Our logged read/write runtime also records reads; equalities from an unlogged state theory cannot be silently reused. Each stateful root here requires a separate full-state equality proof. No priority for this general distinction is claimed."
+    }
+  ],
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4442,
+    "build_log": "/tmp/foundation-stateful-mixed-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-stateful-mixed-audit.log",
+    "audit_declarations": 3493,
+    "new_modules": 6,
+    "new_selected_declarations": 68,
+    "new_authored_theorems": 39,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "source_count": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-context.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-overlap-classification.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-fusion-conservative-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-typed-cartesian-wiring-completeness.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-cartesian-local-higher-discard-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-path-repair-novelty-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-mixed-directed-computational-extraction.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mac-native-quantitative-contracts.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mac-native-code-changing-transport.json": {
+        "source_count": 7,
+        "mismatches": []
+      },
+      "oracle-stateful-chronological-history-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      }
+    },
+    "imported_warnings": "Existing imported warnings remain outside these added sources; no whole-project warning-free claim."
+  }
+}

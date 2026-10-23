@@ -1,0 +1,27 @@
+{
+  "exact_rational_checks": {
+    "rational_clutch_representatives_checked": 135,
+    "ground_projector_and_chart_transition_checks": 135,
+    "positive_probability_unitary_branch_checks": 945,
+    "pole_independence_checks": 54,
+    "constant_clutch_four_key_comparators": 3,
+    "clutch_formula": "(2a, z i conjugate(z)) / (1+a^2)",
+    "physical_complex_dimension": 4,
+    "logical_complex_dimension": 2
+  },
+  "mathematical_classification": "A continuous perfect four-key qubit encryption family exists exactly when the oriented traceless-Hermitian endomorphism bundle reduces to the ordered-axis sign group D2. On a simply connected CW base this is equivalent to triviality of that real rank-three bundle.",
+  "torsion_example_mathematical_claim": "The suspended-Hopf clutch yields a nontrivial rank-two bundle on S5 with c1=c2=0, no perfect continuous four-key code-preserving encryption, and a seven-key construction.",
+  "arbitrarily_high_obstruction_claim": "For every fixed Postnikov truncation degree, some sphere-parametrized family has the same truncated SU2 bundle-classifying data as a trivial family but different feasibility of perfect continuous four-key encryption.",
+  "robust_four_key_bound": "Every nontrivial SU2 clutch over S^(r+1), r>=2, forces some privacy + (5/2) maximum positive-key recovery error >=1/4 in a continuous four-key code-preserving family.",
+  "topological_classification_or_torsion_computer_verified": false,
+  "five_or_six_key_nonexistence_for_torsion_example_claimed": false,
+  "higher_parameter_models_experimentally_realized": false,
+  "infinity_categorical_formalism_proved_indispensable": false,
+  "Lean_checked": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/quantum-encryption-torsion-bundle.py": "99c8a4c8564e943d0268e2c5720ecc270e4ba9f3456ef008cfa1ff218ab3a6f8",
+    "/Users/hiro/workspace/Foundation/docs/experiments/quantum-encryption-yang-bundle.py": "38b1781f304a0df0421a10518cff440d72b1b1b769620fe799935699e238de20",
+    "/Users/hiro/workspace/Foundation/docs/experiments/quantum-encryption-robust-retraction.py": "c282d983d992519433ac15556c0bc7ce2b309dadeb40f335dd96a5244b50de12"
+  }
+}

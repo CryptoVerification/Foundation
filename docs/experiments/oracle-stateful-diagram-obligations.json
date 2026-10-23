@@ -1,0 +1,283 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Semantics/Oracle/StatefulDiagramSlice.lean": "b7655c1790919cf565ba223557b7663d77bd1e66baca06f5be4080090320af1c",
+    "Foundation/Crypto/Semantics/Oracle/StatefulDiagramExchange.lean": "0cd6e248a7f94e7ca879277b4e58ed63513c28782b4b0500d517aa8a86759c11",
+    "Foundation/Examples/RandomFunctionMACStatefulDiagram.lean": "290821b60564985a00f3d4858cbeea0b1a3805d94d934b2b4151ea529b3a5608"
+  },
+  "audited_public_declarations": [
+    "CryptoOracle.StatefulDiagram.Store",
+    "CryptoOracle.StatefulDiagram.view",
+    "CryptoOracle.StatefulDiagram.write",
+    "CryptoOracle.StatefulDiagram.Kernels",
+    "CryptoOracle.StatefulDiagram.step",
+    "CryptoOracle.StatefulDiagram.execute",
+    "CryptoOracle.StatefulDiagram.neededBefore",
+    "CryptoOracle.StatefulDiagram.dependencies",
+    "CryptoOracle.StatefulDiagram.required",
+    "CryptoOracle.StatefulDiagram.step_view",
+    "CryptoOracle.StatefulDiagram.view_write",
+    "CryptoOracle.StatefulDiagram.execute_view",
+    "CryptoOracle.StatefulDiagram.obligations",
+    "CryptoOracle.StatefulDiagram.obligations_subset_changed",
+    "CryptoOracle.StatefulDiagram.checkReuse",
+    "CryptoOracle.StatefulDiagram.repair_sound",
+    "CryptoOracle.StatefulDiagram.checkReuse_sound",
+    "CryptoOracle.StatefulDiagram.repair_mixture_sound",
+    "CryptoOracle.StatefulDiagram.Independent",
+    "CryptoOracle.StatefulDiagram.checkExchange",
+    "CryptoOracle.StatefulDiagram.view_write_disjoint",
+    "CryptoOracle.StatefulDiagram.write_commute",
+    "CryptoOracle.StatefulDiagram.exchange_sound",
+    "CryptoOracle.StatefulDiagram.checkExchange_sound",
+    "CryptoOracle.StatefulDiagram.execute_append",
+    "CryptoOracle.StatefulDiagram.exchange_in_context",
+    "CryptoOracle.StatefulDiagram.attemptExchange",
+    "CryptoOracle.StatefulDiagram.Exchange.sound",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.signature",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.diagram",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.initial",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.observe",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.kernels",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.actual_caller",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.full_required",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.verification_only_obligation",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.freshPermutation",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.freshPermutation_eq",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.editedKernels",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.unchanged_operations",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.generated_local_laws",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.repaired_actual_game",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.shared_queries_rejected",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.forkSignature",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.independentCertificate",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.independent_full_state"
+  ],
+  "public_theorems": [
+    "CryptoOracle.StatefulDiagram.step_view",
+    "CryptoOracle.StatefulDiagram.view_write",
+    "CryptoOracle.StatefulDiagram.execute_view",
+    "CryptoOracle.StatefulDiagram.obligations_subset_changed",
+    "CryptoOracle.StatefulDiagram.repair_sound",
+    "CryptoOracle.StatefulDiagram.checkReuse_sound",
+    "CryptoOracle.StatefulDiagram.repair_mixture_sound",
+    "CryptoOracle.StatefulDiagram.view_write_disjoint",
+    "CryptoOracle.StatefulDiagram.write_commute",
+    "CryptoOracle.StatefulDiagram.exchange_sound",
+    "CryptoOracle.StatefulDiagram.checkExchange_sound",
+    "CryptoOracle.StatefulDiagram.execute_append",
+    "CryptoOracle.StatefulDiagram.exchange_in_context",
+    "CryptoOracle.StatefulDiagram.Exchange.sound",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.actual_caller",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.full_required",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.verification_only_obligation",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.freshPermutation_eq",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.unchanged_operations",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.generated_local_laws",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.repaired_actual_game",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.shared_queries_rejected",
+    "Foundation.Symmetric.RandomFunctionMACStatefulDiagram.independent_full_state"
+  ],
+  "claims": {
+    "enforced_effects": "An action receives only its finite read-scope values and returns only its finite write-scope values. The interpreter frames all other locations. Signatures are supplied and respected by construction, not inferred from arbitrary host functions.",
+    "extraction": "Backward dependencies and required operation IDs are computed from a fixed finite operation list and observation scope. Obligations are required IDs intersect changed IDs.",
+    "repair": "Equality of old/new local kernels for the extracted IDs, plus equality outside changed, gives equality of the observed complete execution. No assumption of independence between initial slots; repair_mixture_sound covers an arbitrary common initial PMF.",
+    "reuse_checker": "checkReuse computes whether the fresh obligation set is empty; acceptance justifies reuse given the unchanged-operation proofs. It is not a decision procedure for arbitrary probabilistic kernel equality.",
+    "exchange": "A Boolean read/write/write noninterference check generates a proof-relevant adjacent Exchange certificate, sound in arbitrary sequential contexts for the entire final store. The side condition is sufficient, not semantically necessary.",
+    "actual_mac": "Typed register-diagram interpreter refines the original target Program for ANY shared oracle and initial cache, retaining full result/cache/ordered transcript. Coin plus all four original queries remain; the second request still depends on the first response.",
+    "probabilistic_edit": "Only the verification box is replaced by relabeling a fresh uniform response via any Fin256 equivalence before caching and returning it; cache hits are unchanged. The one generated local-law obligation certifies equality to the original full MAC game.",
+    "rejection": "The guard rejects exchange of the first two actual query boxes: shared cache and trace writes interfere. A separate two-box diagnostic reading one immutable coin and writing separate registers is accepted."
+  },
+  "runtime_checks": [
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "expected": [
+        5,
+        1,
+        false
+      ],
+      "units": [
+        "number of distinct required operation IDs for full actual MAC outcome",
+        "number of fresh local-law IDs when verification is changed",
+        "no-fresh-law reuse acceptance"
+      ],
+      "passed": true
+    },
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "expected": [
+        false,
+        true
+      ],
+      "units": [
+        "acceptance of actual shared query exchange",
+        "acceptance of separate-register diagnostic exchange"
+      ],
+      "passed": true
+    }
+  ],
+  "scope": {
+    "state": "Slot -> Value with finite read/write scopes, enforced through subtype-indexed function types. No claim of heterogeneous inference-box coherence.",
+    "program": "Fixed finite schedule; actions can use prior values, arbitrary discrete sampling and explicit shared state. The MAC example includes its actual adaptive request data. No dynamic scheduling, observe/postselection or potentially nonterminating control-flow language.",
+    "certificate": "Fresh local equality proofs are supplied and checked by Lean. Equalities for arbitrary opaque kernels are not automatically solved. Exchange paths use only the checked swap schema and refl/symm/trans.",
+    "higher_dimensions": "No theorem of higher coherence for the new stateful Exchange language, no bounded primitive higher basis for the full cryptographic proof language.",
+    "native": "No new native execution/CPU certificate."
+  },
+  "costs": {
+    "what_is_counted": "Distinct operation IDs generating fresh local equality obligations. Repeated occurrence of one ID shares the same universally quantified local kernel law.",
+    "not_claimed": [
+      "proof tree or proof DAG size advantage",
+      "small local proof terms or automatically solved obligations",
+      "runtime/generation/checking cost bounds",
+      "semantic minimality of extracted dependencies",
+      "exclusive higher-dimensional advantage",
+      "new cryptographic security bound"
+    ]
+  },
+  "literature": [
+    {
+      "title": "A Theory of Slicing for Probabilistic Control Flow Graphs",
+      "authors": [
+        "Torben Amtoft",
+        "Anindya Banerjee"
+      ],
+      "year": 2016,
+      "url": "https://software.imdea.org/~ab/Publications/fossacs16.pdf",
+      "read_scope": "Abstract, introduction, selected motivation and definitions from sections 2-4. Not full proof reading or artifact reproduction.",
+      "comparison": "Probabilistic slicing and dependency-based correctness have prior theory. Our total fixed-schedule language omits observe/conditioning and nontermination; no claim to solve those general problems."
+    },
+    {
+      "title": "Error Localization, Certificates, and Hints for Probabilistic Program Verification via Slicing",
+      "authors": [
+        "Philipp Schröer",
+        "Darion Haase",
+        "Joost-Pieter Katoen"
+      ],
+      "publication_date": "2026-04-10",
+      "url": "https://link.springer.com/chapter/10.1007/978-3-032-22723-2_8",
+      "read_scope": "Publisher abstract and metadata only. Full theorem-level comparison remains pending.",
+      "comparison": "Slicing for proof simplification and preserving successful verification is already a relevant comparison; the general slogan is not a novelty claim."
+    }
+  ],
+  "novelty": "Unconfirmed. This is an enforced stateful effect/obligation interface, actual MAC refinement and checked local exchange baseline. No first/exclusive or cost-separation claim.",
+  "verification": {
+    "build_jobs": 4333,
+    "audit_declarations": 1595,
+    "new_public_declarations": 46,
+    "new_public_theorems": 23,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      }
+    },
+    "dependency_closures": {
+      "Foundation.Crypto.Semantics.Oracle.StatefulDiagramSlice": [
+        "Foundation.Crypto.Semantics.Oracle.StatefulDiagramSlice",
+        "Foundation.Crypto.Semantics.Probability.Comp",
+        "Foundation.Crypto.Semantics.Probability.Facts"
+      ],
+      "Foundation.Crypto.Semantics.Oracle.StatefulDiagramExchange": [
+        "Foundation.Crypto.Semantics.Oracle.StatefulDiagramExchange",
+        "Foundation.Crypto.Semantics.Oracle.StatefulDiagramSlice",
+        "Foundation.Crypto.Semantics.Probability.Comp",
+        "Foundation.Crypto.Semantics.Probability.Facts"
+      ]
+    }
+  }
+}

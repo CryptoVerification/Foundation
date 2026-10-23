@@ -1,0 +1,110 @@
+{
+  "complete_transcript_laws_checked": 6432,
+  "binary_first_challenge_permutation_tables_exhausted": 512,
+  "ternary_first_challenge_permutation_tables_sampled": 24,
+  "executable_witness_free_sampler_checks": 68,
+  "no_pilot_queries_or_class_mass_inputs": true,
+  "exact_resource_comparisons": [
+    {
+      "A_challenges": 2,
+      "B_challenges": 2,
+      "full_restart": {
+        "a": "4",
+        "b": "4",
+        "qa": "4",
+        "qb": "2",
+        "root": "3",
+        "local": "0",
+        "snapshot": "0"
+      },
+      "balanced_reuse": {
+        "a": "3",
+        "b": "4",
+        "qa": "4",
+        "qb": "2",
+        "root": "2",
+        "local": "1",
+        "snapshot": "3"
+      }
+    },
+    {
+      "A_challenges": 2,
+      "B_challenges": 3,
+      "full_restart": {
+        "a": "6",
+        "b": "6",
+        "qa": "6",
+        "qb": "3",
+        "root": "5",
+        "local": "0",
+        "snapshot": "0"
+      },
+      "balanced_reuse": {
+        "a": "4",
+        "b": "6",
+        "qa": "6",
+        "qb": "3",
+        "root": "3",
+        "local": "2",
+        "snapshot": "4"
+      }
+    },
+    {
+      "A_challenges": 3,
+      "B_challenges": 2,
+      "full_restart": {
+        "a": "6",
+        "b": "6",
+        "qa": "6",
+        "qb": "2",
+        "root": "5",
+        "local": "0",
+        "snapshot": "0"
+      },
+      "balanced_reuse": {
+        "a": "5",
+        "b": "6",
+        "qa": "6",
+        "qb": "2",
+        "root": "4",
+        "local": "1",
+        "snapshot": "5"
+      }
+    },
+    {
+      "A_challenges": 3,
+      "B_challenges": 3,
+      "full_restart": {
+        "a": "9",
+        "b": "9",
+        "qa": "9",
+        "qb": "3",
+        "root": "8",
+        "local": "0",
+        "snapshot": "0"
+      },
+      "balanced_reuse": {
+        "a": "7",
+        "b": "9",
+        "qa": "9",
+        "qb": "3",
+        "root": "6",
+        "local": "2",
+        "snapshot": "7"
+      }
+    }
+  ],
+  "weighted_snapshot_and_restore_cost_cases_per_setting": 3,
+  "group_for_tests": "order 3 subgroup modulo 7; no hardness experiment",
+  "scope": "private commitment-dependent permutations of a uniform public tag; fixed crossing schedule; no aborts; abstract reset",
+  "universal_simulator_optimality_proved": false,
+  "wall_clock_advantage_established": false,
+  "full_machine_semantics_Lean_checked": false,
+  "newness_established": false,
+  "infinity_category_necessity_proved": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/balanced-rewinding-resources.py": "bcf9bd557073e59c85b67e12315e8bfcb16014cff534ff131fb0b5dac8e04b82",
+    "Foundation/Examples/BalancedRewindingResources.lean": "0c923ce9bb5535a861f02d1163b97c71769dce2f9ea919bf3b0f1c861d81a19b",
+    "Foundation/Examples/LocalRewindingCompiler.lean": "d200f24fec202222277ac0cfd7f331f3b416756ce31b5ccdc96d25891a175361"
+  }
+}

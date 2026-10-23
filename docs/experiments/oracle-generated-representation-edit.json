@@ -1,0 +1,234 @@
+{
+  "kind": "finite_forward_encoding_declaration_to_inverse_and_operational_game_correspondence",
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Logic/FiniteCodecGenerator.lean": "cf886a55a3ecc5db4f9d343211de52cd9e1df78187ce9eb47a77bd6f486ea73f",
+    "Foundation/Crypto/Semantics/Oracle/GeneratedRepresentationEdit.lean": "c533a4a1fb03e6d20d1924ebd9e20e8409cbdbc25ae33410b6be22be6c31173c",
+    "Foundation/Examples/RandomFunctionMACGeneratedEdit.lean": "eeae4e6fa720ab34137e8e573357abccf1155e9eb6e999034ff7e54863dd257b"
+  },
+  "public_theorems": [
+    "Foundation.Logic.FiniteCodecGenerator.validates_iff",
+    "Foundation.Logic.FiniteCodecGenerator.inverse_of_injective",
+    "Foundation.Logic.FiniteCodecGenerator.validates_bijective",
+    "Foundation.Logic.FiniteCodecGenerator.compile_complete",
+    "Foundation.Logic.FiniteCodecGenerator.compile_spec",
+    "Foundation.Logic.FiniteCodecGenerator.decoder_exists_iff",
+    "Foundation.Logic.FiniteCodecGenerator.collision_rejected",
+    "Foundation.Logic.FiniteCodecGenerator.family_complete",
+    "Foundation.Logic.FiniteCodecGenerator.family_spec",
+    "Foundation.Logic.FiniteCodecGenerator.family_inverse_spec",
+    "CryptoOracle.RandomOracle.Representation.GeneratedEdit.randomized_decoder_iff",
+    "CryptoOracle.RandomOracle.Representation.GeneratedEdit.raw_run_congr",
+    "CryptoOracle.RandomOracle.Representation.GeneratedEdit.compiled_oracle",
+    "CryptoOracle.RandomOracle.Representation.GeneratedEdit.compiled_recode",
+    "CryptoOracle.RandomOracle.Representation.GeneratedEdit.generated_matches_edit",
+    "CryptoOracle.RandomOracle.Representation.GeneratedEdit.generate_complete",
+    "CryptoOracle.RandomOracle.Representation.GeneratedEdit.generate_sound",
+    "CryptoOracle.RandomOracle.Representation.GeneratedEdit.generated_final",
+    "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.declaration_bijective",
+    "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.compiler_accepts",
+    "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.compiled",
+    "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.generated_game",
+    "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.matches_declared_edit",
+    "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.declared_encoding",
+    "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.decoded_joint",
+    "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.decoded_game",
+    "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.selection_uniform",
+    "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.collision_rejected",
+    "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.no_randomized_collision_decoder",
+    "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.unused_declaration_rejected",
+    "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.unused_raw_game_equal"
+  ],
+  "claims": {
+    "pointwise_roundtrip_iff_bijection": "Foundation.Logic.FiniteCodecGenerator.validates_bijective",
+    "compiler_complete_for_fixed_finite_codec_class": "Foundation.Logic.FiniteCodecGenerator.compile_complete",
+    "generated_forward_and_inverse": "Foundation.Logic.FiniteCodecGenerator.compile_spec",
+    "deterministic_perfect_decoder_exists_iff": "Foundation.Logic.FiniteCodecGenerator.decoder_exists_iff",
+    "whole_family_acceptance_iff": "Foundation.Logic.FiniteCodecGenerator.family_complete",
+    "randomized_perfect_decoder_exists_iff": "CryptoOracle.RandomOracle.Representation.GeneratedEdit.randomized_decoder_iff",
+    "generated_game_is_actual_declared_edit": "CryptoOracle.RandomOracle.Representation.GeneratedEdit.generated_matches_edit",
+    "generated_encoding_and_preserved_joint": "CryptoOracle.RandomOracle.Representation.GeneratedEdit.generate_sound",
+    "generated_full_original_game": "CryptoOracle.RandomOracle.Representation.GeneratedEdit.generated_final",
+    "raw_program_locality": "CryptoOracle.RandomOracle.Representation.GeneratedEdit.raw_run_congr",
+    "actual_mac_declared_game": "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.matches_declared_edit",
+    "actual_mac_decoded_joint": "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.decoded_joint",
+    "actual_mac_decoded_full_game": "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.decoded_game",
+    "actual_uniform_choice": "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.selection_uniform",
+    "rejected_collision": "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.collision_rejected",
+    "unused_declaration_rejected": "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.unused_declaration_rejected",
+    "same_raw_game_despite_global_rejection": "Foundation.Symmetric.RandomFunctionMACGeneratedEdit.unused_raw_game_equal"
+  },
+  "interface": {
+    "forward_declaration": "Index -> Fin(n+1) -> Fin(n+1), finite Index.",
+    "no_supplied_inverse": true,
+    "no_supplied_whole_game_equality": true,
+    "fixed_packing": "Fin(n+1) equivalence with actual stored type supplied as standard interface, not as inverse of custom encoding.",
+    "inverse_algorithm": "Find first preimage in List.finRange(n+1), default to zero if absent.",
+    "validation_algorithm": "Roundtrip of every public value; family version checks all indexes.",
+    "raw_semantics": "Fresh uniform public response then store declared encoding; cache hit uses first-preimage search; actual prefix cache is recoded with forward declaration.",
+    "retained_joint": "Same actual prefix, chosen label, and complete final Outcome; decode recovers original joint.",
+    "actual_mac": "Same target; select from public first-response bit zero; tag index shifts by 0 or 1 modulo 256; then pack with existing 8-bit interface; inverse generated by compiler."
+  },
+  "completeness_scope": {
+    "exact": "Every fixed family entry must be bijective on ALL public values.",
+    "randomized_decoder_scope": "Only stored code as input; must return original value with probability 1 for every public value. No extra history, cache entries or auxiliary memory.",
+    "verified_counterexample": "Global checker rejects a collision at unused message 6; actual full target with each STATIC label from empty state has same raw final distribution as corresponding valid declaration.",
+    "not_program_semantic_completeness": true,
+    "not_inferred_unknown_forward_relation": true,
+    "not_generated_polygraph_syntax": true
+  },
+  "runtime_checks": [
+    {
+      "source": "Foundation/Examples/RandomFunctionMACGeneratedEdit.lean",
+      "mechanism": "#guard_msgs in #eval",
+      "check": "compile family of 2 labels x 8 inputs x 256 tags, and collision family",
+      "expected": [
+        true,
+        false
+      ],
+      "passed": true
+    },
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "check": "generated true-label forward(255), inverse(0)",
+      "expected": [
+        0,
+        255
+      ],
+      "passed": true
+    },
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "check": "global rejection for collision only at unused input 6",
+      "expected": false,
+      "passed": true
+    }
+  ],
+  "comparison": {
+    "ordinary_shared_lemmas_suffice": true,
+    "exclusive_higher_dimensional_advantage_shown": false,
+    "proof_size_or_timing_benchmark": false,
+    "arbitrary_game_edit_frontend": false,
+    "source_proof_for_unwrapping": "Concrete example proves acceptance to define Option.get; compile itself takes only forward declaration and is executed independently by guards."
+  },
+  "limits": [
+    "No effect-restricted generation: all indexes checked, including unused messages and labels.",
+    "No inverse synthesis beyond finite equally-sized alphabets with fixed packing.",
+    "No synthesis of unknown forward coupling, arbitrary state relation or polygraphic diagram.",
+    "No quantitative best-decoder error bound.",
+    "No machine implementation or execution-time bound for finite lookup, cache recoding or generated switch.",
+    "No new cryptographic success-probability bound or proof-size advantage."
+  ],
+  "literature": [
+    {
+      "title": "Constraint-Based Synthesis of Coupling Proofs",
+      "authors": [
+        "Aws Albarghouthi",
+        "Justin Hsu"
+      ],
+      "year": 2018,
+      "url": "https://arxiv.org/html/1804.04052",
+      "scope_this_turn": "Rechecked injective f-coupling definition, section 4 injectivity constraints and Appendix D grammar. Earlier broader reading scopes remain in prior records; no new artifact rebuild.",
+      "comparison": "Prior work synthesizes unknown coupling functions. This frontend takes a fixed forward encoding and generates its finite inverse and operational correspondence; does not establish a new generic synthesis principle."
+    }
+  ],
+  "novelty": "Unconfirmed. An implemented limited generation pipeline, with a verified boundary on completeness.",
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4302,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 1315,
+    "new_public_theorems": 31,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "axiom_allowlist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "neutral_dependencies": {
+      "Foundation.Logic.FiniteCodecGenerator": [
+        "Foundation.Logic.FiniteCodecGenerator"
+      ],
+      "Foundation.Crypto.Semantics.Oracle.GeneratedRepresentationEdit": [
+        "Foundation.Crypto.Semantics.Oracle.Composition",
+        "Foundation.Crypto.Semantics.Oracle.GeneratedRepresentationEdit",
+        "Foundation.Crypto.Semantics.Oracle.Program",
+        "Foundation.Crypto.Semantics.Oracle.QueryFootprint",
+        "Foundation.Crypto.Semantics.Oracle.QueryMap",
+        "Foundation.Crypto.Semantics.Oracle.QueryPrefix",
+        "Foundation.Crypto.Semantics.Oracle.RandomOracle",
+        "Foundation.Crypto.Semantics.Oracle.RandomOracleRepresentation",
+        "Foundation.Crypto.Semantics.Oracle.RepresentationLocality",
+        "Foundation.Crypto.Semantics.Oracle.RepresentationSwitch",
+        "Foundation.Crypto.Semantics.Oracle.StateMap",
+        "Foundation.Crypto.Semantics.Probability.Comp",
+        "Foundation.Crypto.Semantics.Probability.Facts",
+        "Foundation.Logic.FiniteCodecGenerator"
+      ]
+    },
+    "prior_source_hash_checks": {
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      }
+    }
+  }
+}

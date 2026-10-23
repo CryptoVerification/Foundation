@@ -1,0 +1,253 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Semantics/Oracle/StatefulDiagramCanonical.lean": "3772655fa0d549356d20f73aa2f221e8387e2c87846ee7ac2dc205737a84df42",
+    "Foundation/Crypto/Semantics/Oracle/StatefulDiagramInverseCells.lean": "8aa593106a0eb69fcc62a3408681aa5dbc20402c5c45d122db0c99b29315520c",
+    "Foundation/Examples/StatefulDiagramCanonical.lean": "158b1127367582d96e8e1f02b698ebc747a2868eff97bb1677190cdf1dcb2bec"
+  },
+  "audited_public_declarations": [
+    "CryptoOracle.StatefulDiagram.availableHeads",
+    "CryptoOracle.StatefulDiagram.mem_availableHeads",
+    "CryptoOracle.StatefulDiagram.availableHeads_nonempty",
+    "CryptoOracle.StatefulDiagram.Exchange.availableHeads_eq",
+    "CryptoOracle.StatefulDiagram.leastHead",
+    "CryptoOracle.StatefulDiagram.canonicalAux",
+    "CryptoOracle.StatefulDiagram.canonicalAux_reachable",
+    "CryptoOracle.StatefulDiagram.canonicalAux_invariant",
+    "CryptoOracle.StatefulDiagram.canonicalWord",
+    "CryptoOracle.StatefulDiagram.canonicalWord_reachable",
+    "CryptoOracle.StatefulDiagram.Exchange.canonicalWord_eq",
+    "CryptoOracle.StatefulDiagram.canonicalWord_complete",
+    "CryptoOracle.StatefulDiagram.canonicalWord_idempotent",
+    "CryptoOracle.StatefulDiagram.canonicalWord_sound",
+    "CryptoOracle.StatefulDiagram.Exchange.prepend",
+    "CryptoOracle.StatefulDiagram.Exchange.prepend_count",
+    "CryptoOracle.StatefulDiagram.canonicalAuxCertificate",
+    "CryptoOracle.StatefulDiagram.canonicalCertificate",
+    "CryptoOracle.StatefulDiagram.canonicalWord_dependencies",
+    "CryptoOracle.StatefulDiagram.canonicalWord_required",
+    "CryptoOracle.StatefulDiagram.canonicalWord_obligations",
+    "CryptoOracle.StatefulDiagram.canonicalWord_checkReuse",
+    "CryptoOracle.StatefulDiagram.canonicalWord_repair_across",
+    "CryptoOracle.StatefulDiagram.identifyInverse",
+    "CryptoOracle.StatefulDiagram.reverseSwapCell",
+    "CryptoOracle.StatefulDiagram.reverseSwapCell_context",
+    "CryptoOracle.StatefulDiagram.oppositeBacktrack",
+    "Foundation.Examples.StatefulDiagramCanonical.peak_canonical",
+    "Foundation.Examples.StatefulDiagramCanonical.both_terminals_canonical",
+    "Foundation.Examples.StatefulDiagramCanonical.dependent_order_distinguished",
+    "Foundation.Examples.StatefulDiagramCanonical.multiplicity_preserved",
+    "Foundation.Examples.StatefulDiagramCanonical.peakCertificate",
+    "Foundation.Examples.StatefulDiagramCanonical.terminalCertificate",
+    "Foundation.Examples.StatefulDiagramCanonical.peakCertificate_count",
+    "Foundation.Examples.StatefulDiagramCanonical.terminalCertificate_count",
+    "Foundation.Examples.StatefulDiagramCanonical.readOnly",
+    "Foundation.Examples.StatefulDiagramCanonical.readOnly_repetition",
+    "Foundation.Examples.StatefulDiagramCanonical.readOnly_certificate_count"
+  ],
+  "public_theorems": [
+    "CryptoOracle.StatefulDiagram.mem_availableHeads",
+    "CryptoOracle.StatefulDiagram.availableHeads_nonempty",
+    "CryptoOracle.StatefulDiagram.Exchange.availableHeads_eq",
+    "CryptoOracle.StatefulDiagram.canonicalAux_reachable",
+    "CryptoOracle.StatefulDiagram.canonicalAux_invariant",
+    "CryptoOracle.StatefulDiagram.canonicalWord_reachable",
+    "CryptoOracle.StatefulDiagram.Exchange.canonicalWord_eq",
+    "CryptoOracle.StatefulDiagram.canonicalWord_complete",
+    "CryptoOracle.StatefulDiagram.canonicalWord_idempotent",
+    "CryptoOracle.StatefulDiagram.canonicalWord_sound",
+    "CryptoOracle.StatefulDiagram.Exchange.prepend_count",
+    "CryptoOracle.StatefulDiagram.canonicalWord_dependencies",
+    "CryptoOracle.StatefulDiagram.canonicalWord_required",
+    "CryptoOracle.StatefulDiagram.canonicalWord_obligations",
+    "CryptoOracle.StatefulDiagram.canonicalWord_checkReuse",
+    "CryptoOracle.StatefulDiagram.canonicalWord_repair_across",
+    "Foundation.Examples.StatefulDiagramCanonical.peak_canonical",
+    "Foundation.Examples.StatefulDiagramCanonical.both_terminals_canonical",
+    "Foundation.Examples.StatefulDiagramCanonical.dependent_order_distinguished",
+    "Foundation.Examples.StatefulDiagramCanonical.multiplicity_preserved",
+    "Foundation.Examples.StatefulDiagramCanonical.peakCertificate_count",
+    "Foundation.Examples.StatefulDiagramCanonical.terminalCertificate_count",
+    "Foundation.Examples.StatefulDiagramCanonical.readOnly_repetition",
+    "Foundation.Examples.StatefulDiagramCanonical.readOnly_certificate_count"
+  ],
+  "claims": {
+    "available_heads": "The finite set of input labels exposable at the head is preserved by every checked Exchange path. No finiteness assumption on the full operation type is required; a LinearOrder is used to select the least available label.",
+    "canonical_word": "canonicalAux repeatedly extracts the least available head with input-length fuel. Enough-fuel invariance is proved by equal available-head sets and cancellation of the chosen head. canonicalWord outputs the same word on any two exchange-related inputs.",
+    "completeness": "canonicalWord equality iff Nonempty (Exchange signature one two), for all finite words including repeated operation IDs. Reachability and idempotence are also proved.",
+    "certificate": "canonicalAuxCertificate and canonicalCertificate directly generate the path along the least-head recursion, without calling a second target-directed alignment procedure. Exchange.prepend adds one unchanged prefix operation without append-unit casts; its expanded swap count equals that of the input path.",
+    "semantics": "The original and canonical words have identical full-store PMF laws for all typed local kernels and all initial stores.",
+    "repair": "Backwards input dependencies, required operation IDs, fresh obligation IDs, and checkReuse are unchanged by canonicalization. The same fresh local laws and unchanged-operation laws connect old execution on the input word to updated execution on the canonical word.",
+    "inverse_cells": "Reverse-direction primitive exchange is explicitly compared with formal path inversion using the existing bounded involution and structural groupoid laws. Common contexts and opposite backtracks are handled by derived data, without adding higher roots."
+  },
+  "runtime_checks": [
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "expected": "([1, 2, 0], [1, 2, 0], [1, 1, 2, 0], 1, 2, 0)",
+      "meaning": [
+        "canonical word of [2,1,0]",
+        "canonical word of the other former descending terminal [2,0,1]",
+        "canonical word retains two occurrences of label 1",
+        "primitive swaps in canonical certificate for [2,1,0]",
+        "primitive swaps in canonical certificate for [2,0,1]",
+        "primitive swaps for three read-only repetitions"
+      ],
+      "passed": true
+    }
+  ],
+  "additional_kernel_checked_examples": [
+    "Former descending terminals have equal canonical words.",
+    "Dependent orders [2,0] and [0,2] have distinct canonical words.",
+    "Input [1,2,1,0] normalizes to [1,1,2,0] without removing an occurrence.",
+    "Read-only repetitions remain present; the generated certificate uses zero swaps.",
+    "The concrete one-, two- and zero-swap equalities are checked by definitional equality with rfl."
+  ],
+  "scope": [
+    "Canonical equality characterizes the generated checked-exchange equivalence, not all semantic equivalence of probabilistic programs or cryptographic transformations.",
+    "A canonical representative and a path to it do not establish higher coherence between arbitrary parallel raw proof terms. No arbitrary-parallel-path or whole-normalization-boundary higher generator has been introduced.",
+    "The selected representative is computed by least available head. A separate lexicographic-minimality theorem is not established here.",
+    "No proof-size or runtime asymptotic bound, minimal certificate size, native CPU guarantee or exclusive higher-dimensional advantage is proved by the diagnostic swap counts.",
+    "The unchanged interface assumption remains. Dynamic scheduling, loops, conditioning, approximate game changes, copy/discard and full cryptographic-box higher completeness remain outside this step.",
+    "Existing actual MAC/caller/cache/trace executions are unchanged, and earlier source hashes retain equality."
+  ],
+  "diagnostic_during_development": {
+    "observation": "Direct decide_cbv proofs of three concrete certificate swap counts exceeded 200000 and 2000000 elaboration heartbeats. Final proofs use definitional equality (rfl), and generated prefix paths use direct recursion without append-unit casts. The final example module builds under the default heartbeat limit.",
+    "status": "Resolved for the final concrete examples; no general checking-time guarantee follows.",
+    "measurement_scope": "Development diagnostic, not a controlled performance benchmark; intermediate source variants were not preserved as benchmark artifacts."
+  },
+  "literature_this_step": "No additional primary-paper reading or external artifact reproduction. Prior trace-monoid definition/cancellation comparison remains the baseline; endpoint canonicalization alone is not claimed novel.",
+  "novelty": "Unconfirmed. Global bounded higher coherence, proof-edit assumption tracking and fair comparative repair-cost results remain required for the central submission claim.",
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4346,
+    "build_log": "/tmp/foundation-stateful-canonical-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-stateful-canonical-audit.log",
+    "audit_declarations": 1791,
+    "new_public_declarations": 38,
+    "new_public_theorems": 24,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {
+      "Foundation/Crypto/Semantics/Oracle/StatefulDiagramCanonical.lean": [],
+      "Foundation/Crypto/Semantics/Oracle/StatefulDiagramInverseCells.lean": [],
+      "Foundation/Examples/StatefulDiagramCanonical.lean": []
+    },
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "inputs": 4,
+        "mismatches": []
+      }
+    }
+  }
+}

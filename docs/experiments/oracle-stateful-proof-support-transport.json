@@ -1,0 +1,356 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Semantics/Oracle/StatefulDiagramAnalysisTransport.lean": "29f6ddb30ec30e2c7ce8e463af625abe2a1bf9272fd79d5d0247e9216b8be466",
+    "Foundation/Crypto/Semantics/Oracle/StatefulDiagramHigher.lean": "d1b0b6f7dbfd52776589875e9d707c94e993aa1879d8fddf5bd9aabd532943e5",
+    "Foundation/Crypto/Semantics/Oracle/StatefulDiagramProofSupport.lean": "234085b4ddc622bd3f3cd63a687aad42a6e55441c2fb568b08f0032df615df64",
+    "Foundation/Examples/StatefulDiagramAnalysisTransport.lean": "c39943fa2503ccb354e29131a4712baf07c5ce2079e49bcad6a016eaeefe20ce"
+  },
+  "audited_public_declarations": [
+    "CryptoOracle.StatefulDiagram.relevant_after_independent",
+    "CryptoOracle.StatefulDiagram.neededBefore_commute",
+    "CryptoOracle.StatefulDiagram.dependencies_append",
+    "CryptoOracle.StatefulDiagram.required_append",
+    "CryptoOracle.StatefulDiagram.required_exchange",
+    "CryptoOracle.StatefulDiagram.Exchange.dependencies_eq",
+    "CryptoOracle.StatefulDiagram.Exchange.required_eq",
+    "CryptoOracle.StatefulDiagram.Exchange.obligations_eq",
+    "CryptoOracle.StatefulDiagram.Exchange.transportRepair",
+    "CryptoOracle.StatefulDiagram.Exchange.repair_reordered",
+    "CryptoOracle.StatefulDiagram.Exchange.repair_across",
+    "CryptoOracle.StatefulDiagram.Exchange.whisker",
+    "CryptoOracle.StatefulDiagram.Exchange.swapCount",
+    "CryptoOracle.StatefulDiagram.braidLeft",
+    "CryptoOracle.StatefulDiagram.braidRight",
+    "CryptoOracle.StatefulDiagram.swapTwice",
+    "CryptoOracle.StatefulDiagram.farLeft",
+    "CryptoOracle.StatefulDiagram.farRight",
+    "CryptoOracle.StatefulDiagram.braidLeft_count",
+    "CryptoOracle.StatefulDiagram.braidRight_count",
+    "CryptoOracle.StatefulDiagram.swapTwice_count",
+    "CryptoOracle.StatefulDiagram.farLeft_count",
+    "CryptoOracle.StatefulDiagram.farRight_count",
+    "CryptoOracle.StatefulDiagram.equivalenceSupport",
+    "CryptoOracle.StatefulDiagram.equivalence_transport",
+    "CryptoOracle.StatefulDiagram.ReusePlan.support",
+    "CryptoOracle.StatefulDiagram.ReusePlan.Valid",
+    "CryptoOracle.StatefulDiagram.ReuseCertificate.checked",
+    "CryptoOracle.StatefulDiagram.ReuseCertificate.imported",
+    "CryptoOracle.StatefulDiagram.ReuseCertificate.symm",
+    "CryptoOracle.StatefulDiagram.ReuseCertificate.trans",
+    "CryptoOracle.StatefulDiagram.ReuseCertificate.support",
+    "CryptoOracle.StatefulDiagram.ReusePlan.sound",
+    "CryptoOracle.StatefulDiagram.ReuseCertificate.sound",
+    "CryptoOracle.StatefulDiagram.ReusePlan.fresh",
+    "CryptoOracle.StatefulDiagram.ReusePlan.check",
+    "CryptoOracle.StatefulDiagram.ReuseCertificate.fresh",
+    "CryptoOracle.StatefulDiagram.ReuseCertificate.check",
+    "CryptoOracle.StatefulDiagram.ReuseCertificate.repair_sound",
+    "CryptoOracle.StatefulDiagram.ReuseCertificate.check_sound",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.signature",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.left",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.right",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.braid",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.distantLeft",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.distantRight",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.distant",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.doubleSwap",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.cancellation",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.generated_inputs",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.generated_required",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.generated_obligations",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.reordered_obligations",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.both_operational_orders",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.repair_after_reorder",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.uniformCertificate",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.uniform_support_empty",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.uniform_check_any_change",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.uniform_reuse_after_any_update",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.signature",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.world",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.same_full_execution",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.first_required",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.second_required",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.different_required",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.different_obligations",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.semantic_equality_insufficient",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.editedWorld",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.original_order_observation",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.reversed_order_observation",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.edit_breaks_semantic_reorder",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.old_equivalence_not_edit_stable",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.exchange_rejected",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.importedCertificate",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.imported_support",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.proof_recheck_needed",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.proof_checker_rejects",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.source_only_check_accepts",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.edited_unchanged",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.source_marginal_preserved"
+  ],
+  "public_theorems": [
+    "CryptoOracle.StatefulDiagram.relevant_after_independent",
+    "CryptoOracle.StatefulDiagram.neededBefore_commute",
+    "CryptoOracle.StatefulDiagram.dependencies_append",
+    "CryptoOracle.StatefulDiagram.required_append",
+    "CryptoOracle.StatefulDiagram.required_exchange",
+    "CryptoOracle.StatefulDiagram.Exchange.dependencies_eq",
+    "CryptoOracle.StatefulDiagram.Exchange.required_eq",
+    "CryptoOracle.StatefulDiagram.Exchange.obligations_eq",
+    "CryptoOracle.StatefulDiagram.Exchange.transportRepair",
+    "CryptoOracle.StatefulDiagram.Exchange.repair_reordered",
+    "CryptoOracle.StatefulDiagram.Exchange.repair_across",
+    "CryptoOracle.StatefulDiagram.braidLeft_count",
+    "CryptoOracle.StatefulDiagram.braidRight_count",
+    "CryptoOracle.StatefulDiagram.swapTwice_count",
+    "CryptoOracle.StatefulDiagram.farLeft_count",
+    "CryptoOracle.StatefulDiagram.farRight_count",
+    "CryptoOracle.StatefulDiagram.equivalence_transport",
+    "CryptoOracle.StatefulDiagram.ReusePlan.sound",
+    "CryptoOracle.StatefulDiagram.ReuseCertificate.sound",
+    "CryptoOracle.StatefulDiagram.ReuseCertificate.repair_sound",
+    "CryptoOracle.StatefulDiagram.ReuseCertificate.check_sound",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.generated_inputs",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.generated_required",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.generated_obligations",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.reordered_obligations",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.both_operational_orders",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.repair_after_reorder",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.uniform_support_empty",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.uniform_check_any_change",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.uniform_reuse_after_any_update",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.same_full_execution",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.first_required",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.second_required",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.different_required",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.different_obligations",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.semantic_equality_insufficient",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.original_order_observation",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.reversed_order_observation",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.edit_breaks_semantic_reorder",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.old_equivalence_not_edit_stable",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.exchange_rejected",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.imported_support",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.proof_recheck_needed",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.proof_checker_rejects",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.source_only_check_accepts",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.edited_unchanged",
+    "Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.source_marginal_preserved"
+  ],
+  "claims": {
+    "checked_analysis_invariance": "Computed input dependencies, required operation IDs and fresh operation obligations are invariant along EVERY checked Exchange path, including its existing prefix/suffix contexts.",
+    "repair_transport": "Existing local kernel equality proofs transport across the checked order; the repair/reorder square compares the actual projected execution laws from one common initial store.",
+    "bounded_higher_forms": "Three explicit schematic higher generator forms: swap involution, three-box braid, disjoint two-pair exchange. Their core words have 2, 3 and 4 operation occurrences; primitive-swap counts on their boundary paths are 2/0, 3/3 and 2/2. No arbitrary-parallel-path or global-normalization generator.",
+    "higher_scope": "The newly DEFINED higher relation has reflexivity, reversal, transitivity, path-composition and surrounding-context closures. Global coherence/completeness, path groupoid law completion, repeated-ID/self-exchange analysis and heterogeneous/copy/discard completion remain unproved.",
+    "negative_boundary": "Two constant-overwrite boxes give equal full old execution laws in opposite orders but different required/fresh sets. Updating only operation false makes their observed final Boolean false versus true. Mere old semantic equivalence is not stable under kernel edits.",
+    "source_checker_still_sound": "The original-order projected marginal is preserved by that edit and its dataflow-only reuse check correctly accepts; this does not license reusing the old reordering proof.",
+    "proof_support": "An imported old equivalence receives a conservative support equal to the UNION of the two endpoint required sets. Matching new kernels on this set suffices to transport the old equivalence. Checked Exchange certificates are uniform in all kernels and therefore need no kernel-equality support, while static interfaces and guards remain required.",
+    "certificate_composition": "ReusePlan stores pure executable metadata; ReuseCertificate adds an explicitly checked old validity proof. Supports combine by union through composition and are preserved by reversal. Fresh support is its intersection with changed operation IDs.",
+    "executable_checker": "The metadata-only plan checker runs without evaluating noncomputable PMF semantics. Acceptance plus unchanged-operation proofs implies updated equivalence. Rejection requests new sufficient conditions, not a general impossibility result."
+  },
+  "runtime_checks": [
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "expected": [
+        3,
+        3,
+        2,
+        2,
+        2,
+        1
+      ],
+      "meaning": [
+        "braid left swaps",
+        "braid right swaps",
+        "disjoint left swaps",
+        "disjoint right swaps",
+        "diagnostic required operation IDs",
+        "fresh local operation IDs after reorder"
+      ],
+      "passed": true
+    },
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "expected": [
+        false,
+        1,
+        1,
+        0,
+        1
+      ],
+      "meaning": [
+        "checked-exchange acceptance for overlapping overwrites",
+        "source required IDs",
+        "target required IDs",
+        "source fresh IDs",
+        "target fresh IDs"
+      ],
+      "passed": true
+    },
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "expected": [
+        true,
+        false,
+        1
+      ],
+      "meaning": [
+        "source-marginal reuse check",
+        "imported-equivalence proof-reuse check",
+        "fresh proof-support IDs"
+      ],
+      "passed": true
+    }
+  ],
+  "scope": [
+    "Same enforced read/write interfaces across kernel updates.",
+    "Fixed finite operation schedules, with arbitrary data-dependent actions and discrete PMFs as before.",
+    "Exact observed-law equalities, not general approximate cryptographic reductions.",
+    "Imported equivalences are supplied Lean proofs; they are NOT primitive polygraph equations or automatically solved semantic equalities.",
+    "Computed supports are sufficient and conservative, not minimal dependency sets.",
+    "New examples are diagnostic; no new nontrivial query reordering of the actual MAC caller is claimed. The previous full MAC refinement and cache/trace exchange rejection remain unchanged.",
+    "Higher forms are explicit proof data, but global higher coherence is not proved.",
+    "No new native runtime, proof DAG-size, kernel-byte or proof-checking-time bound."
+  ],
+  "research_consequence": "Do not compare proof-repair obligations solely as invariants of the game distribution. Track the support of the proof transformation and require stability under the edited semantics.",
+  "novelty": "Unconfirmed. Positive transport and a negative stability boundary are verified; neither exclusive higher-dimensional cost advantage nor publication priority is established.",
+  "literature_this_step": "No additional primary-literature reading or artifact reproduction this step; prior comparison record remains applicable.",
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4337,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 1675,
+    "new_public_declarations": 80,
+    "new_public_theorems": 47,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "inputs": 3,
+        "mismatches": []
+      }
+    },
+    "dependency_closures": {
+      "Foundation.Crypto.Semantics.Oracle.StatefulDiagramAnalysisTransport": [
+        "Foundation.Crypto.Semantics.Oracle.StatefulDiagramAnalysisTransport",
+        "Foundation.Crypto.Semantics.Oracle.StatefulDiagramExchange",
+        "Foundation.Crypto.Semantics.Oracle.StatefulDiagramSlice",
+        "Foundation.Crypto.Semantics.Probability.Comp",
+        "Foundation.Crypto.Semantics.Probability.Facts"
+      ],
+      "Foundation.Crypto.Semantics.Oracle.StatefulDiagramHigher": [
+        "Foundation.Crypto.Semantics.Oracle.StatefulDiagramAnalysisTransport",
+        "Foundation.Crypto.Semantics.Oracle.StatefulDiagramExchange",
+        "Foundation.Crypto.Semantics.Oracle.StatefulDiagramHigher",
+        "Foundation.Crypto.Semantics.Oracle.StatefulDiagramSlice",
+        "Foundation.Crypto.Semantics.Probability.Comp",
+        "Foundation.Crypto.Semantics.Probability.Facts"
+      ],
+      "Foundation.Crypto.Semantics.Oracle.StatefulDiagramProofSupport": [
+        "Foundation.Crypto.Semantics.Oracle.StatefulDiagramAnalysisTransport",
+        "Foundation.Crypto.Semantics.Oracle.StatefulDiagramExchange",
+        "Foundation.Crypto.Semantics.Oracle.StatefulDiagramProofSupport",
+        "Foundation.Crypto.Semantics.Oracle.StatefulDiagramSlice",
+        "Foundation.Crypto.Semantics.Probability.Comp",
+        "Foundation.Crypto.Semantics.Probability.Facts"
+      ]
+    }
+  }
+}

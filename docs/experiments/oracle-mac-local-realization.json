@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Examples/RandomFunctionMACLocalRealization.lean": "3c9272386998e043a28ffa5692a7c6cb0f40c09835edf7747429c43cfbca640f"
+  },
+  "audited_public_declarations": [
+    "Foundation.Examples.RandomFunctionMACLocalRealization.execute_correct",
+    "Foundation.Examples.RandomFunctionMACLocalRealization.Storage.put_consistent",
+    "Foundation.Examples.RandomFunctionMACLocalRealization.game_correct",
+    "Foundation.Examples.RandomFunctionMACLocalRealization.family_correct",
+    "Foundation.Examples.RandomFunctionMACLocalRealization.joint_retains_world",
+    "Foundation.Examples.RandomFunctionMACLocalRealization.joint_vertex",
+    "Foundation.Examples.RandomFunctionMACLocalRealization.joint_generated",
+    "Foundation.Examples.RandomFunctionMACLocalRealization.eight_configurations",
+    "Foundation.Examples.RandomFunctionMACLocalRealization.reject_without_optimization_calls",
+    "Foundation.Examples.RandomFunctionMACLocalRealization.reject_with_optimization_calls",
+    "Foundation.Examples.RandomFunctionMACLocalRealization.fresh_with_optimization_calls"
+  ],
+  "verification": {
+    "target_build": {
+      "command": "nix develop path:. -c lake build Foundation.Examples.RandomFunctionMACLocalRealization",
+      "exit_code": 0,
+      "jobs": 2598
+    },
+    "axiom_audit": {
+      "command": "nix develop path:. -c lake env lean /tmp/foundation-mac-local-realization-audit.lean",
+      "exit_code": 0,
+      "selected_theorems": 11,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "root_import_registered": false,
+    "aggregate_audit_registered": false,
+    "full_library_build_rerun": false,
+    "existing_records_with_sources": 82,
+    "existing_hash_entries_verified": 351
+  },
+  "established": [
+    "Arbitrary adaptive programs: public transcript, result, coin cursor, and final local invariant follow from one-query laws.",
+    "True early rejection in the replay interpreter preserves candidate, public signing transcript, verdict, and coin cursor.",
+    "Association-list and indexed partial-map stores are instantiated from entry-local laws.",
+    "A world-retaining common public-observation joint is constructed for arbitrary model families with heterogeneous private states.",
+    "The selected 4-message, 256-tag attack has equal public replay observations for 8 store/memo/early configurations.",
+    "Concrete replay backend-call log lengths are checked; no native machine cost claim is made."
+  ],
+  "remaining_inputs": [
+    "The library chooses a common retained function and coin-tape semantics.",
+    "A law for that world is supplied; no uniform law on an infinite coin-tape type is constructed.",
+    "A new model needs a local invariant, an initial-state proof, and one-query preservation/response proofs."
+  ],
+  "not_established": [
+    "The world law or global correspondence is extracted from arbitrary unrelated probabilistic couplings.",
+    "The new replay marginals equal independent lazy-sampling Program.run marginals.",
+    "Higher cells are used or necessary: all new theorems use ordinary structural induction and shared invariants.",
+    "Proof-size, checking-time, user-effort, or cryptographic-security-loss advantage over an ordinary shared-lemma baseline.",
+    "A novel general local-to-global or coupling theorem."
+  ]
+}

@@ -1,0 +1,439 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Examples/MixedCircuitUnifiedOverlap.lean": "4c74f202e3b6fc1023c8712c462d6348d67ed82926f666e2bf628f60ca62039d",
+    "Foundation/Examples/MixedCircuitUnifiedContextOverlap.lean": "c1d2cc182ded0ddf7f05c23b4d967e4088ab0990460e13575a566962f65c329c",
+    "Foundation/Examples/MixedCircuitUnifiedFusionResolution.lean": "b29437e46864c20af4e9e6bacf2e9593006bcfd9b86c2b680300e274baff48f5"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase.first",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase.last",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase.leftAssoc",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase.leftCrypto",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase.leftCryptoSuffix",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase.leftFusion",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase.leftWireSuffix",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase.middle",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase.same",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.CryptoCase",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.CryptoCase.same",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.CryptoSuffixCase",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.CryptoSuffixCase.same",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.CryptoSuffixCase.tail",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.Resolution",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.Resolution.afterFirst",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.Resolution.afterSecond",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.Resolution.comparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.Resolution.mk",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.Resolution.repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.Resolution.target",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.RootView",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.RootView.assoc",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.RootView.cartesian",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.RootView.crypto",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.RootView.cryptoSuffix",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.RootView.oldWire",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.RootView.seqFusion",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.RootView.tensorFusion",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.RootView.wireSuffix",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.SRule",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.SeqFusionCase",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.SeqFusionCase.cartesianLeft",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.SeqFusionCase.cartesianRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.SeqFusionCase.oldLeft",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.SeqFusionCase.oldRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.SeqFusionCase.same",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.ShortForward",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.ShortForward.bounded",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.ShortForward.path",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.ShortForward.refl",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.ShortForward.step",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.ShortForward.steps",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.ShortForward.track",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.TensorFusionCase",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.TensorFusionCase.cartesianLeft",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.TensorFusionCase.cartesianRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.TensorFusionCase.oldLeft",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.TensorFusionCase.oldRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.TensorFusionCase.same",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireCase",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireCase.cartesian",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireCase.old",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireSuffixCase",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireSuffixCase.cartesianFirst",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireSuffixCase.cartesianMiddle",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireSuffixCase.oldFirst",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireSuffixCase.oldMiddle",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireSuffixCase.rightFusion",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireSuffixCase.rightSuffix",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireSuffixCase.same",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireSuffixCase.tail",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.associate",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.classifyAssoc",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.classifyCrypto",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.classifyCryptoSuffix",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.classifySeqFusion",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.classifyTensorFusion",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.classifyWire",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.classifyWireSuffix",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.crypto",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.cryptoSuffix",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.noBoxStep",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldEdit",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldPrimitive",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldSeqLeft",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldSeqLeft_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldSeqRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldSeqRight_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldStep",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldTensorLeft",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldTensorLeft_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldTensorRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldTensorRight_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeq",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeqCase",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeqCase_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeqCase_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeq_context_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeq_context_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeq_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensor",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensorCase",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensorCase_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensorCase_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensor_context_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensor_context_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensor_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.rootView",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.suffixPrimitive",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.suffixStep"
+  ],
+  "public_theorems": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.Resolution.repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.ShortForward.bounded",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.noBoxStep",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldSeqLeft_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldSeqRight_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldTensorLeft_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldTensorRight_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeqCase_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeqCase_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeq_context_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeq_context_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeq_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensorCase_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensorCase_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensor_context_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensor_context_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensor_support"
+  ],
+  "claims": [
+    "An exhaustive eight-form dependent view of every actual primitive in the registered unified MAC/structural/cartesian catalogue.",
+    "Dependent classifiers of every actual competitor at seven specified source shapes; atomic MAC boxes admit no step. Original typed wires, tails and changes remain data in the returned views.",
+    "Sequential and tensor fusion roots each have exactly the five declared competitor forms: same fusion, old left/right edit, or cartesian left/right edit.",
+    "Both fusion-root resolvers accept every actual competitor from the exact whole-source fusion diagram and produce a common target and a higher comparison from existing local squares.",
+    "Each residual has type ShortForward: identity or one actual forward Step. A forward Path can be extracted, so no inverse execution/rewrite is hidden in the residual.",
+    "Generated comparisons have empty root support and at most two higher constructors. When both changes lift through the same placement, support is exactly the surrounding Placement.needs and the bound remains two.",
+    "Stateful correlated-joint endpoint repair is available in an updated checked model, preserving arbitrary correlated past, original shared state and input.",
+    "The concrete added-left-unit-inverse example yields residual counts 1 and 1, comparison count 2 and zero guards."
+  ],
+  "classified_root_forms": [
+    "crypto",
+    "association",
+    "old wire edit",
+    "sequential wire fusion",
+    "tensor wire fusion",
+    "crypto suffix",
+    "wire suffix",
+    "cartesian wire edit"
+  ],
+  "competitor_rows": {
+    "pure_wire": {
+      "forms": 2,
+      "scope": "Old versus cartesian edit dispatch only; internal pure-wire overlaps remain."
+    },
+    "seq_fusion": {
+      "forms": 5,
+      "scope": "Every competitor at the whole-source fusion root is resolved."
+    },
+    "tensor_fusion": {
+      "forms": 5,
+      "scope": "Every competitor at the whole-source fusion root is resolved."
+    },
+    "association": {
+      "forms": 9,
+      "scope": "Classified, not fully resolved."
+    },
+    "crypto": {
+      "forms": 1,
+      "scope": "Self-only competitor classification."
+    },
+    "crypto_suffix": {
+      "forms": 2,
+      "scope": "Self and arbitrary tail change classified; no exhaustive resolver added."
+    },
+    "wire_suffix": {
+      "forms": 8,
+      "scope": "All declared source competitors classified; no exhaustive resolver added."
+    }
+  },
+  "local_contract": {
+    "forward_residual_steps_each_upper_bound": 1,
+    "higher_constructors_upper_bound": 2,
+    "root_guards": 0,
+    "common_placement_guards": "exactly Placement.needs",
+    "diagnostic": [
+      1,
+      1,
+      2,
+      0
+    ]
+  },
+  "limits": [
+    "Coverage is for the currently registered unified MAC rule catalogue; adding arbitrary crypto/native labels needs new classification proofs.",
+    "The case numbers count parameterized typed forms, not concrete instances, internal pure-wire critical pairs or global finite-basis size.",
+    "Fusion completeness applies with fusion at the root of the whole source. Context lifting handles both edits inside one shared hole, not arbitrary competitors overlapping the outer placement.",
+    "Old/new pure-wire proof comparison, wire-internal root/fixed-structure overlaps, association, crypto-tail and wire-tail resolution remain incomplete.",
+    "The unified rewrite system remains nonterminating under unrestricted expansion; no global convergence or higher-basis completeness follows.",
+    "Higher constructor counts exclude wiring/context/boundary payload, libraries, dependencies and generation/checking cost. No ordinary shared-proof advantage established.",
+    "Stateful repair is endpoint kernel equality within the updated checked model. It does not establish across-revision equality or compare extracted compilers, runtime or quantitative losses.",
+    "Full mixed code-changing reduction/native/cryptographic error integration and internal oracle runtime remain outstanding."
+  ],
+  "novelty": {
+    "status": "unconfirmed",
+    "interpretation": "A concrete exhaustive typed classification and two root-specific local resolution algorithms, built from the already explicit finite local forms. No new general naturality/critical-pair principle, complete finite basis or compression theorem is claimed. Full original research scope remains active."
+  },
+  "literature_this_step": "No new external primary-source review; this step verifies actual catalogue coverage and local resolution algorithms.",
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4449,
+    "build_log": "/tmp/foundation-unified-fusion-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-unified-fusion-audit.log",
+    "audit_declarations": 3663,
+    "new_modules": 3,
+    "new_selected_declarations": 102,
+    "new_authored_theorems": 17,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "source_count": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-context.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-overlap-classification.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-fusion-conservative-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-typed-cartesian-wiring-completeness.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-cartesian-local-higher-discard-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-path-repair-novelty-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-mixed-directed-computational-extraction.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mac-native-quantitative-contracts.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mac-native-code-changing-transport.json": {
+        "source_count": 7,
+        "mismatches": []
+      },
+      "oracle-stateful-chronological-history-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-mixed-single-state-native-execution.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-stateful-unified-wiring-fusion.json": {
+        "source_count": 4,
+        "mismatches": []
+      }
+    },
+    "imported_warnings": "Preexisting imported warnings remain outside these new sources; no whole-project warning-free claim."
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "numerical_polar_repair": {
+    "sampled_schemes": 640,
+    "below_quarter_distance": 461,
+    "outside_guaranteed_neighborhood": 179,
+    "sign_and_key_permutation_covariance_checks": 1344,
+    "common_basis_covariance_checks": 461,
+    "eigen_residual_tolerance": 1e-10,
+    "independent_privacy_comparison_tolerance": 1e-08,
+    "minimum_observed_squared_repair_bound_slack": 0.0010052019392207678
+  },
+  "biased_four_key_repair": {
+    "sampled_schemes": 384,
+    "below_quarter_distance": 237,
+    "outside_guaranteed_neighborhood": 147,
+    "biased_four_key_laws_supported": true,
+    "key_probability_and_squared_repair_bounds_checked": true
+  },
+  "exact_rational_checks": {
+    "rank_deficient_critical_gram_exact": true,
+    "rank_deficient_critical_half_diamond_distance": "1/4",
+    "eight_key_exact_mixtures_checked": 459,
+    "entropy_upper_bound_bits": 3,
+    "endpoint_independence_checked_as_weighted_branches": true
+  },
+  "scope": "normalized qubit unitary branches, four possibly biased keys for robust repair; up to eight weighted keys for the exact-private cone",
+  "privacy_metric": "one half of diamond-norm distance to the completely depolarizing channel, including arbitrary reference systems",
+  "mathematical_claim": "For epsilon < 1/4 a continuous sign-independent polar retraction to exact schemes exists; uniform keys have branch distance at most 2 sqrt(epsilon), biased keys at most sqrt(8 epsilon / (1+4 epsilon)).",
+  "quarter_threshold_for_global_nullhomotopy_proved_sharp": false,
+  "topological_theorems_computer_verified": false,
+  "Lean_checked": false,
+  "newness_established": false,
+  "cryptographic_reduction_impossibility_proved": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/quantum-encryption-robust-retraction.py": "c282d983d992519433ac15556c0bc7ce2b309dadeb40f335dd96a5244b50de12"
+  }
+}

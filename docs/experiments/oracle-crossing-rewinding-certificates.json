@@ -1,0 +1,119 @@
+{
+  "build_commands": [
+    "nix develop path:. -c lake build Foundation.Examples.CrossingRewindingCost",
+    "nix develop path:. -c lake build Foundation.Examples.RewindingExitLaw"
+  ],
+  "build_success": true,
+  "build_jobs_per_target": 3006,
+  "new_module_warnings": 0,
+  "declarations_audited": 22,
+  "axiom_dependencies": {
+    "Foundation.Examples.CrossingRewindingCost.potential_nonnegative": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.CrossingRewindingCost.potential_empty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.CrossingRewindingCost.potential_done": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.CrossingRewindingCost.exact_local_drift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.CrossingRewindingCost.affine_certificate_upper": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.CrossingRewindingCost.affine_ten_attained": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.CrossingRewindingCost.stopped_cost_identity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.CrossingRewindingCost.terminal_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.CrossingRewindingCost.finite_success_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.CrossingRewindingCost.three_step_completion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.CrossingRewindingCost.cubic_reduction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.RewindingExitLaw.balanced_total": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.RewindingExitLaw.balanced_joint_law": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.RewindingExitLaw.unchanged_proposal_requires_constant_mass": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.RewindingExitLaw.biased_tag_probability": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.RewindingExitLaw.reweighted_tag_probability": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.RewindingExitLaw.biased_policy_cost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.RewindingExitLaw.reweighted_policy_cost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.CrossingRewindingCost.empty_ne_done": [],
+    "Foundation.Examples.CrossingRewindingCost.a_ne_done": [],
+    "Foundation.Examples.CrossingRewindingCost.b_ne_done": [],
+    "Foundation.Examples.CrossingRewindingCost.ab_ne_done": []
+  },
+  "registered_in_root_module": false,
+  "scope": "Five-state arithmetic, affine certificate ceiling, quadratic drift, finite-horizon cost, finite exit-law normalization.",
+  "general_polynomial_compiler_Lean_checked": false,
+  "Schnorr_full_output_law_Lean_checked": false,
+  "arbitrary_simulator_optimality_proved": false,
+  "newness_established": false,
+  "infinity_category_necessity_proved": false,
+  "source_sha256": {
+    "Foundation/Examples/CrossingRewindingCost.lean": "b60b0e1835d6e112244070b6c2e196095ae45af61504a9bd221604b42de2b203",
+    "Foundation/Examples/RewindingExitLaw.lean": "8c28fd1ba30bfcd691a438144ab535fbe4baaa02b1817a69677b6430ecc37d9b",
+    "docs/experiments/crossing-rewinding-certificates.py": "74b9c2e9f2b611aa0d35d7720aa5cd5b99b32c465b67d5ca425c0ebc5f7e68e9",
+    "docs/experiments/crossing-rewinding-certificates.json": "9f1ef25c5b1e4dbcf6601422271ae31d1db2a34394b61757914c5eca684976ac"
+  }
+}

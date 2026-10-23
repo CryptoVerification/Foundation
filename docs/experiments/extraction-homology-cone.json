@@ -1,0 +1,75 @@
+{
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/extraction-homology-cone.py": "3ca59a994b7a2f22fd32739f70dbd1b73997f7d76d8c778c0214ebb33122aec7",
+    "/Users/hiro/workspace/Foundation/docs/experiments/extraction-access-homology.py": "3f79aacb1a5021bdf52153b4a6e95d56927c70a886d2d13a435b5cfea08590da",
+    "/Users/hiro/workspace/Foundation/docs/experiments/extraction-homology-filtration.py": "ea26e519884e7863623d4a4463afc507c3c898efbc35dbbd6080367b7eeb33ef"
+  },
+  "lean_checked": false,
+  "challenge_count": 9,
+  "one_rejecting_challenge_acceptance": "8/9",
+  "warning": "Uniform-on-nine Bayes values are not minimax; core-only adversary establishes minimax.",
+  "B": {
+    "kappa": "5/9",
+    "useful_extension_depth": 5,
+    "face_counts_including_empty": [
+      1,
+      9,
+      36,
+      76,
+      78,
+      30,
+      0,
+      0,
+      0,
+      0
+    ],
+    "reduced_betti_F2_by_degree": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "uniform_nine_label_Bayes_value_not_minimax": "31/9",
+    "uniform_core_adversary_lower": "7/2",
+    "rotated_core_policy_worst_case_upper": "7/2",
+    "exact_minimax_queries": "7/2",
+    "new_challenge_is_irrelevant_to_extraction": true
+  },
+  "C": {
+    "kappa": "5/9",
+    "useful_extension_depth": 5,
+    "face_counts_including_empty": [
+      1,
+      9,
+      36,
+      76,
+      82,
+      34,
+      0,
+      0,
+      0,
+      0
+    ],
+    "reduced_betti_F2_by_degree": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "uniform_nine_label_Bayes_value_not_minimax": "10/3",
+    "uniform_core_adversary_lower": "27/8",
+    "rotated_core_policy_worst_case_upper": "27/8",
+    "exact_minimax_queries": "27/8",
+    "new_challenge_is_irrelevant_to_extraction": true
+  }
+}

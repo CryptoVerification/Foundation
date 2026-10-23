@@ -1,0 +1,139 @@
+{
+  "kind": "registry_dependency_local_recheck_comparison",
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Examples/InformationScheduleLocalRepair.lean": "57a8102f27554d42e320e8bae18520fbd6345a946f108b1c631ba7ac358de351",
+    "Foundation/Examples/InformationScheduleLocalRepairComparison.lean": "4f7857024db9e0c9208360ba10eb68982d1c2b0784157cc6ec45e66dfbbec5ca"
+  },
+  "public_theorems": [
+    "CryptoOracle.InformationSchedule.LocalRepair.exchangeChecks_holds",
+    "CryptoOracle.InformationSchedule.LocalRepair.sourceChecks_holds",
+    "CryptoOracle.InformationSchedule.LocalRepair.swapPlan_evaluate",
+    "CryptoOracle.InformationSchedule.LocalRepair.replayPlan_evaluate",
+    "CryptoOracle.InformationSchedule.LocalRepair.compile_validates",
+    "CryptoOracle.InformationSchedule.LocalRepair.Check.unchanged",
+    "CryptoOracle.InformationSchedule.LocalRepair.recheck_iff",
+    "CryptoOracle.InformationSchedule.LocalRepair.compiled_validates_iff",
+    "CryptoOracle.InformationSchedule.LocalRepair.repaired_validates_iff",
+    "CryptoOracle.InformationSchedule.LocalRepair.repaired_kernel",
+    "CryptoOracle.InformationSchedule.LocalRepair.recheck_count_le",
+    "CryptoOracle.InformationSchedule.LocalRepairComparison.diagram_repair_iff",
+    "CryptoOracle.InformationSchedule.LocalRepairComparison.agrees_except",
+    "CryptoOracle.InformationSchedule.LocalRepairComparison.compiled",
+    "CryptoOracle.InformationSchedule.LocalRepairComparison.old_checks",
+    "CryptoOracle.InformationSchedule.LocalRepairComparison.old_accepted",
+    "CryptoOracle.InformationSchedule.LocalRepairComparison.affected_checks",
+    "CryptoOracle.InformationSchedule.LocalRepairComparison.rechecked",
+    "CryptoOracle.InformationSchedule.LocalRepairComparison.repaired",
+    "CryptoOracle.InformationSchedule.LocalRepairComparison.exact_counts",
+    "CryptoOracle.InformationSchedule.LocalRepairComparison.rejects_changed_dependency",
+    "Foundation.Symmetric.RandomFunctionMACLocalRepair.repaired_joint",
+    "Foundation.Symmetric.RandomFunctionMACLocalRepair.ordinary_repaired_joint",
+    "Foundation.Symmetric.RandomFunctionMACLocalRepair.repaired_continuation",
+    "Foundation.Symmetric.RandomFunctionMACLocalRepair.continued_game"
+  ],
+  "claims": {
+    "ordinary_extraction_exact": "CryptoOracle.InformationSchedule.LocalRepair.compile_validates",
+    "ordinary_local_criterion": "CryptoOracle.InformationSchedule.LocalRepair.repaired_validates_iff",
+    "diagram_same_local_criterion": "CryptoOracle.InformationSchedule.LocalRepairComparison.diagram_repair_iff",
+    "counts": "CryptoOracle.InformationSchedule.LocalRepairComparison.exact_counts",
+    "actual_mac_joint": "Foundation.Symmetric.RandomFunctionMACLocalRepair.repaired_joint",
+    "ordinary_same_mac_joint": "Foundation.Symmetric.RandomFunctionMACLocalRepair.ordinary_repaired_joint"
+  },
+  "comparison": {
+    "old_acceptance_required": true,
+    "outside_changed_keys_signatures_must_agree": true,
+    "word_target_script_fixed": true,
+    "total_obligations": "n + 2",
+    "affected_obligations": 2,
+    "n_means": "Repeated proof-only commitments, not number of MAC queries",
+    "cost_metric": "Count of generated obligations evaluated against new registry",
+    "ordinary_and_diagram": "Exactly same affected-check necessary and sufficient condition",
+    "not_measured": [
+      "Kernel proof bytes",
+      "Wall-clock time",
+      "Manual proof edits",
+      "Native instruction count"
+    ]
+  },
+  "limits": [
+    "Compilation and filtering still traverse the full list; no indexed constant-time bound.",
+    "Equivalence is within the NEW registry and policy; changing policy need not preserve old distribution.",
+    "Changed signatures may invalidate a script; rejection example verified.",
+    "No automatically extracted dependence graph from arbitrary crypto games.",
+    "No advantage over ordinary shared lemmas shown."
+  ],
+  "literature": [
+    {
+      "title": "Fine-grained Caching of Verification Results",
+      "authors": [
+        "K. Rustan M. Leino",
+        "Valentin Wüstholz"
+      ],
+      "year": 2015,
+      "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/krml245.pdf",
+      "read_scope": "Abstract, introduction, sections 1–2, opening of section 3 and section 3.0, selected related-work paragraphs via extracted PDF text. Not full paper or artifact rebuild.",
+      "use": "Prior art for dependency-sensitive reuse of verification results; no claim that generic locality is new."
+    }
+  ],
+  "novelty": "unconfirmed; no exclusive higher-dimensional locality in this fragment",
+  "verification": {
+    "full_build_jobs": 4290,
+    "audit_declarations": 1196,
+    "new_audit_declarations": 25,
+    "missing": [],
+    "nonstandard_axioms": [],
+    "own_new_warnings": [],
+    "baseline_dependencies": [
+      "Foundation.Crypto.Semantics.Oracle.InformationSchedule",
+      "Foundation.Crypto.Semantics.Probability.Comp",
+      "Foundation.Crypto.Semantics.Probability.Facts",
+      "Foundation.Examples.InformationScheduleBaseline",
+      "Foundation.Examples.InformationScheduleLocalRepair"
+    ],
+    "prior_source_hash_checks": {
+      "oracle-causal-coupling-repair.json": {
+        "count": 2,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "count": 1,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "count": 3,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "count": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "count": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "count": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "count": 4,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "count": 10,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "count": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "count": 6,
+        "mismatches": []
+      }
+    },
+    "build_command": "nix develop path:. -c lake build",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean"
+  }
+}

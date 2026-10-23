@@ -1,0 +1,279 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Semantics/Oracle/StatefulDiagramPathLaws.lean": "ed14d9640a57c4b499843a128d82e9bb1d9c96c1ed5d8f325bf85962f7c24db9",
+    "Foundation/Crypto/Semantics/Oracle/StatefulDiagramHeadExtraction.lean": "56e1bbf9ba423e54feaee3ec8b2823edadfa6c6dca6baca4fb5da6596a673f67",
+    "Foundation/Crypto/Semantics/Oracle/StatefulDiagramExchangeDecision.lean": "40e81087ba4dc7091fa81c36937040909a63fd26a12758b6f1ea44f518896aaa",
+    "Foundation/Examples/StatefulDiagramNormalizationBoundary.lean": "c22de019256e23e0d69d65812edf2a0e1062c9cfacc45faa47bd21e3a58b9dce"
+  },
+  "audited_public_declarations": [
+    "CryptoOracle.StatefulDiagram.ExchangeCoherence",
+    "CryptoOracle.StatefulDiagram.undoSuffix",
+    "CryptoOracle.StatefulDiagram.cancelSuffix",
+    "CryptoOracle.StatefulDiagram.undoPrefix",
+    "CryptoOracle.StatefulDiagram.cancelPrefix",
+    "CryptoOracle.StatefulDiagram.common_suffix_iff",
+    "CryptoOracle.StatefulDiagram.common_prefix_iff",
+    "CryptoOracle.StatefulDiagram.HeadExtraction",
+    "CryptoOracle.StatefulDiagram.exposeHead",
+    "CryptoOracle.StatefulDiagram.AccessibleHead",
+    "CryptoOracle.StatefulDiagram.exposeHead_success_iff",
+    "CryptoOracle.StatefulDiagram.checkExchange_reverse",
+    "CryptoOracle.StatefulDiagram.Exchange.accessibleHead_iff",
+    "CryptoOracle.StatefulDiagram.exposeHead_complete",
+    "CryptoOracle.StatefulDiagram.Exchange.length_eq",
+    "CryptoOracle.StatefulDiagram.HeadExtraction.length",
+    "CryptoOracle.StatefulDiagram.HeadExtraction.sound",
+    "CryptoOracle.StatefulDiagram.Exchange.erase",
+    "CryptoOracle.StatefulDiagram.Exchange.cancel_head",
+    "CryptoOracle.StatefulDiagram.alignExchange",
+    "CryptoOracle.StatefulDiagram.alignExchange_complete",
+    "CryptoOracle.StatefulDiagram.alignExchange_sound",
+    "CryptoOracle.StatefulDiagram.descendingSwaps",
+    "CryptoOracle.StatefulDiagram.DescendingPath",
+    "CryptoOracle.StatefulDiagram.descendingSwaps_checked",
+    "CryptoOracle.StatefulDiagram.DescendingPath.checked",
+    "CryptoOracle.StatefulDiagram.DescendingPath.from_terminal",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.signature",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.rank",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.peak_successors",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.left_terminal",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.right_terminal",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.different_terminals",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.peak_not_joinable",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.descending_not_locally_confluent",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.peakLeft",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.peakRight",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.terminal_execution_equal",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.extraction_succeeds",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.blocked_extraction",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.terminalAlignment",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.terminalAlignment_count",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.impossible_order_rejected",
+    "CryptoOracle.StatefulDiagram.ExchangeCoherence.local",
+    "CryptoOracle.StatefulDiagram.ExchangeCoherence.refl",
+    "CryptoOracle.StatefulDiagram.ExchangeCoherence.symm",
+    "CryptoOracle.StatefulDiagram.ExchangeCoherence.trans",
+    "CryptoOracle.StatefulDiagram.ExchangeCoherence.comp",
+    "CryptoOracle.StatefulDiagram.ExchangeCoherence.inverse",
+    "CryptoOracle.StatefulDiagram.ExchangeCoherence.whisker",
+    "CryptoOracle.StatefulDiagram.ExchangeCoherence.assoc",
+    "CryptoOracle.StatefulDiagram.ExchangeCoherence.leftUnit",
+    "CryptoOracle.StatefulDiagram.ExchangeCoherence.rightUnit",
+    "CryptoOracle.StatefulDiagram.ExchangeCoherence.leftInv",
+    "CryptoOracle.StatefulDiagram.ExchangeCoherence.rightInv",
+    "CryptoOracle.StatefulDiagram.ExchangeCoherence.inverseRefl",
+    "CryptoOracle.StatefulDiagram.ExchangeCoherence.inverseInverse",
+    "CryptoOracle.StatefulDiagram.ExchangeCoherence.inverseComp",
+    "CryptoOracle.StatefulDiagram.HeadExtraction.mk",
+    "CryptoOracle.StatefulDiagram.HeadExtraction.rest",
+    "CryptoOracle.StatefulDiagram.HeadExtraction.path",
+    "CryptoOracle.StatefulDiagram.DescendingPath.refl",
+    "CryptoOracle.StatefulDiagram.DescendingPath.step"
+  ],
+  "public_theorems": [
+    "CryptoOracle.StatefulDiagram.common_suffix_iff",
+    "CryptoOracle.StatefulDiagram.common_prefix_iff",
+    "CryptoOracle.StatefulDiagram.exposeHead_success_iff",
+    "CryptoOracle.StatefulDiagram.checkExchange_reverse",
+    "CryptoOracle.StatefulDiagram.Exchange.accessibleHead_iff",
+    "CryptoOracle.StatefulDiagram.exposeHead_complete",
+    "CryptoOracle.StatefulDiagram.Exchange.length_eq",
+    "CryptoOracle.StatefulDiagram.HeadExtraction.length",
+    "CryptoOracle.StatefulDiagram.HeadExtraction.sound",
+    "CryptoOracle.StatefulDiagram.Exchange.erase",
+    "CryptoOracle.StatefulDiagram.Exchange.cancel_head",
+    "CryptoOracle.StatefulDiagram.alignExchange_complete",
+    "CryptoOracle.StatefulDiagram.alignExchange_sound",
+    "CryptoOracle.StatefulDiagram.descendingSwaps_checked",
+    "CryptoOracle.StatefulDiagram.DescendingPath.checked",
+    "CryptoOracle.StatefulDiagram.DescendingPath.from_terminal",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.peak_successors",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.left_terminal",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.right_terminal",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.different_terminals",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.peak_not_joinable",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.descending_not_locally_confluent",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.terminal_execution_equal",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.extraction_succeeds",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.blocked_extraction",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.terminalAlignment_count",
+    "Foundation.Examples.StatefulDiagramNormalizationBoundary.impossible_order_rejected"
+  ],
+  "claims": {
+    "path_laws": "ExchangeCoherence embeds existing bounded higher cells plus self contraction and adds structural groupoid laws. Explicit prefix/suffix cancellation cells are constructed; existence of a higher comparison is equivalent before/after appending a common path.",
+    "extraction": "exposeHead scans until the first equal label, checking independence before crossing each preceding operation. It returns a residual word and an explicit Exchange path. Success iff some Exchange path exposes the chosen label.",
+    "cancellation": "Erasing the first occurrence of any label preserves Exchange reachability. A common head can therefore be cancelled at the level of endpoint reachability.",
+    "decision": "alignExchange recursively exposes successive target heads. Success iff Nonempty (Exchange signature one two), for all finite words, including repeated IDs, inverses and compositions. A successful result is an explicit path, without enumerating exchange paths.",
+    "semantics": "Generated paths preserve the entire store distribution, uniformly in all typed local PMF kernels and every initial store.",
+    "negative": "For read/write signature 0 reads {2} and writes {0}, 1 reads empty and writes {1}, 2 reads empty and writes {2}, descending swaps from [2,1,0] yield [1,2,0] and [2,0,1]. Both have no descending successors, are unequal, and have no common descending descendant. Thus this orientation is not locally confluent.",
+    "recovery": "The complete generator connects those two descending terminals using two checked swaps, and rejects [2,1,0] to [0,1,2]."
+  },
+  "runtime_checks": [
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "expected": "([[1, 2, 0], [2, 0, 1]], [], [], true, false)",
+      "meaning": "Successors of the peak; successors of each terminal; exposing 1 succeeds from [2,0,1]; exposing 0 fails from [2,1,0].",
+      "passed": true
+    },
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "expected": "(true, false, 2)",
+      "meaning": "Terminal alignment accepted; dependency-violating order rejected; generated terminal alignment uses two primitive swaps.",
+      "passed": true
+    }
+  ],
+  "scope": [
+    "Completeness concerns the generated checked-exchange syntax, not all semantically equal probabilistic programs or arbitrary cryptographic transformations.",
+    "Target-directed alignment is not a proof of canonical normalization or global higher coherence. An explicit comparison between arbitrary parallel paths is still required.",
+    "The structural groupoid laws are explicit new higher constructors. They are not claimed derived from the former three root forms or to form a complete finite presentation.",
+    "The descending-swap counterexample refutes this chosen orientation only; it does not refute other normalization strategies or finite higher presentations.",
+    "No new copy/discard, approximate game, dynamic scheduling, native CPU-time, proof-DAG size, byte-size or checking-time bound is established.",
+    "No actual MAC execution or interface changed. Earlier full caller/cache/trace results retain their inputs.",
+    "The two-swap count is a primitive-rule count for this diagnostic example, not an exclusive higher-dimensional advantage."
+  ],
+  "literature_this_step": {
+    "primary_url": "https://link.springer.com/article/10.1007/s00224-024-10173-z",
+    "title": "The Power Word Problem in Graph Products",
+    "authors": [
+      "Markus Lohrey",
+      "Florian Stober",
+      "Armin Weiß"
+    ],
+    "publication_date": "2024-05-07",
+    "read_scope": "Selected publisher HTML: 2.4 definition of trace monoids, minimal letters and dependence graph representation; 2.4.1 Lemma 1 statement and following cancellation consequence. No full-paper, diagram-proof or artifact reproduction claim.",
+    "comparison": "Endpoint commutation reachability and cancellation already belong to trace theory; do not claim novelty from the exchange decision procedure alone. The implementation also retains raw proof terms and accepted self-loops, which are separate from endpoint equivalence. A formal reduction/comparison of higher proof relations is not supplied."
+  },
+  "novelty": "Unconfirmed. Complete path generation is verified infrastructure; publication novelty, full higher coherence and comparative proof-repair costs remain open.",
+  "ai_assistance": true,
+  "verification": {
+    "audit_declarations": 1753,
+    "new_public_declarations": 63,
+    "new_public_theorems": 27,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "inputs": 2,
+        "mismatches": []
+      }
+    },
+    "own_new_warnings": [],
+    "new_source_forbidden_tokens": {
+      "Foundation/Crypto/Semantics/Oracle/StatefulDiagramPathLaws.lean": [],
+      "Foundation/Crypto/Semantics/Oracle/StatefulDiagramHeadExtraction.lean": [],
+      "Foundation/Crypto/Semantics/Oracle/StatefulDiagramExchangeDecision.lean": [],
+      "Foundation/Examples/StatefulDiagramNormalizationBoundary.lean": []
+    },
+    "build_jobs": 4343,
+    "audit_errors": [],
+    "build_command": "nix develop path:. -c lake build",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "build_log": "/tmp/foundation-stateful-normalization-build.log",
+    "audit_log": "/tmp/foundation-stateful-normalization-audit.log"
+  }
+}

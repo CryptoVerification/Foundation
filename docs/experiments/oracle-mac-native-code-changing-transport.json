@@ -1,0 +1,506 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Constructions/Symmetric/RandomFunctionMACNativeOptimized.lean": "c737cb857cfbe2c4698921c1f292dadfc61e7054c4524578b71089d1984f7e45",
+    "Foundation/Constructions/Symmetric/RandomFunctionMACNativeOptimizedExecution.lean": "e18cfc9e2eea6a2fec873bad232113ac64267b38e5ebee02ce67a2793eeee73c",
+    "Foundation/Constructions/Symmetric/RandomFunctionMACNativeOptimizedRefinement.lean": "7aaaa6f18dfdf9e8610864bbfa0e779feff5595d6fd86d9acb7c2790e9cffe14",
+    "Foundation/Crypto/Logic/General/QuantitativeObservationTransport.lean": "ac2d2601aca7d93781c281735ef8d95c490063e7bf0fdd299f55797fe92a13a9",
+    "Foundation/Crypto/Logic/Polygraph/GameProofTransport.lean": "30285d96667bf83ef3de7cc321722f130f51980509da25ab81883a80c2ce3f03",
+    "Foundation/Examples/RandomFunctionMACNativeOptimization.lean": "8aae82dcce7918d16d8801d9dba15f4782371b11d97910ec40775f26760a256d",
+    "Foundation/Examples/RandomFunctionMACNativeOptimizationTransport.lean": "6f5800ab954b2500b767df0ae28e35648dd89e0ef67792517da3ebd129744ed2"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.General.QuantitativeReduction.observation_square",
+    "CryptoLogic.General.QuantitativeReduction.transport",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.Label",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.Label.after",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.Label.before",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.Label.bridge",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.after",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.after_needs",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.atomCount",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.before",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.before_needs",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.bridge",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.bridge_needs",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.cellCount",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.diagram",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.diagram_count_bound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.diagram_generator_count",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.diagram_needs",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.generatorCount",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.layout",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.planCount",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.relators",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Contract",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Diagnostics.constantWorld",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Diagnostics.constant_packet",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Diagnostics.optimized_not_285",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Diagnostics.original_not_342",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Diagnostics.replies",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Diagnostics.start",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.base",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.comparison",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.eliminate",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.eliminate_square",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.leftReduction",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.leftRoute",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.left_code",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.left_needs",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.left_resources",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.model",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.ordinary_compilation",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.ordinary_measure",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.ordinary_tree",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.repaired",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.rightReduction",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.rightRoute",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.right_code",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.right_execution",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.right_full_law",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.right_needs",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.right_resources",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.routes_same_process",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.schedule",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.schedule_square",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.changed_code",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.common",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.emitted_code",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.full_law",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.improves",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.native_contract",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.observed",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.optimized",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.original",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.reduction",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.reduction_code",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.reduction_resources",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.resourceOrder",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.semantic",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.source",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.strictly_smaller_bound",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.EncodedPair",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.accept_location",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.after_coin_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.awaiting_format",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.call_addresses",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.code",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.code_changed",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.code_length",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.compare_locations",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.compare_result_shift",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparisonResult",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparisonStart",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_decision",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_enter_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_full_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_halts",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_result_shift",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.copyAddress",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.copy_locations",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.executionLaw",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.executionLaw_refinement",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.execution_encoded",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.execution_properties",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.extend_encoded",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.first_given_coin_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.first_setup_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.first_setup_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.first_transfer",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.haltsWithin",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.initial_step",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.lastCall",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.last_query_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.last_setup_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.last_setup_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.last_transfer",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.observation_law",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.observe_relocate",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.prefix_encoded",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.reject_location",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.relocate",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.saveAddress",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.save_enter_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.save_rewind_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.save_tag_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.savedAddress",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.savedSecond",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.secondCall",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.second_query_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.second_setup_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.second_setup_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.second_transfer",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.select_candidate_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.select_candidate_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.select_second_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.select_second_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.shiftPC",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.thirdCall",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.third_query_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.third_setup_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.third_setup_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.third_transfer",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.whole_frame_refinement",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.whole_halts_queries",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.whole_run"
+  ],
+  "public_theorems": [
+    "CryptoLogic.General.QuantitativeReduction.observation_square",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.after_needs",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.before_needs",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.bridge_needs",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.diagram_count_bound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.diagram_generator_count",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.diagram_needs",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Diagnostics.constant_packet",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Diagnostics.optimized_not_285",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Diagnostics.original_not_342",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.comparison",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.eliminate_square",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.left_code",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.left_needs",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.left_resources",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.ordinary_compilation",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.ordinary_measure",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.ordinary_tree",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.repaired",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.right_code",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.right_execution",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.right_full_law",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.right_needs",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.right_resources",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.routes_same_process",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.schedule_square",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.changed_code",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.emitted_code",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.full_law",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.improves",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.native_contract",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.reduction_code",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.reduction_resources",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimization.strictly_smaller_bound",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.accept_location",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.after_coin_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.awaiting_format",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.call_addresses",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.code_changed",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.code_length",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.compare_locations",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.compare_result_shift",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_decision",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_enter_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_full_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_halts",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_result_shift",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.copy_locations",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.executionLaw_refinement",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.execution_encoded",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.execution_properties",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.extend_encoded",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.first_given_coin_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.first_setup_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.first_setup_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.first_transfer",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.haltsWithin",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.initial_step",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.last_query_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.last_setup_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.last_setup_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.last_transfer",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.observation_law",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.observe_relocate",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.prefix_encoded",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.reject_location",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.save_enter_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.save_rewind_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.save_tag_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.second_query_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.second_setup_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.second_setup_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.second_transfer",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.select_candidate_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.select_candidate_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.select_second_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.select_second_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.third_query_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.third_setup_checked",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.third_setup_run",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.third_transfer",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.whole_frame_refinement",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.whole_halts_queries",
+    "Foundation.Symmetric.RandomFunctionMACNativeOptimized.whole_run"
+  ],
+  "claims": [
+    "Actual native conditional dead-store elimination, preserving four dependent oracle calls for every typed stateful probabilistic oracle.",
+    "A complete final-frame refinement changes only final native program counter by +1, retaining all tapes, oracle state and bit transcript.",
+    "Uniform stopping bound 343 to 286 transitions; checked constant-response witnesses refute old bound 342 and new bound 285.",
+    "Two schematic local observation/compilation squares generate comparison for every plan of the existing serial MAC presentation.",
+    "Generated diagram support is exactly original plan support; constructor bound is 12 times plan constructors, with one root generator per atom.",
+    "Both proof-order routes emit identical optimized code and resource packet; hence their continuing timed executions agree at every horizon.",
+    "The same ordinary rule library gives the identical complete ordinary tree and identical Option result of shared compilation. A concrete typed-claim check accepts both certificates, each with 56 nodes."
+  ],
+  "concrete_contract": {
+    "old_instructions": 251,
+    "new_instructions": 252,
+    "old_uniform_bound_transitions": 343,
+    "new_uniform_bound_transitions": 286,
+    "oracle_calls": 4,
+    "constant_zero_reply_branch_times": {
+      "old": [
+        285,
+        343
+      ],
+      "new": [
+        286,
+        286
+      ]
+    },
+    "serial_stage_3_example": {
+      "root_generators": 4,
+      "cell_constructors": 56,
+      "guard_count": 1,
+      "fresh_guards_for_change_1": 0,
+      "geometric_certificate_accepted": true,
+      "ordinary_certificate_accepted": true,
+      "geometric_nodes": 56,
+      "ordinary_nodes": 56
+    }
+  },
+  "limits": [
+    "Time includes caller and packet transfer, excludes oracle internals and initial key generation.",
+    "The false branch increases from 285 to 286: no pointwise speed dominance or global optimality theorem.",
+    "Code grows by one instruction; no code-size saving.",
+    "Native implementation is certified for the existing fixed attack/source code, not a general optimizing compiler.",
+    "The original and optimized clock processes differ; same-process theorem compares two routes producing the same optimized code.",
+    "Quantitative error epsilon + 1/256 remains finite and fixed; no unconditional asymptotic-security promotion.",
+    "The current transport concerns serial plans, not a full tensor/copy/discard mixed critical basis.",
+    "Constructor counts exclude boundary payload, code, libraries, dependency search and model checking.",
+    "Option compilation equality alone is not completeness; successful checked certificates are established for the concrete diagnostic.",
+    "No intrinsic higher-dimensional compression is demonstrated: ordinary export is exactly equal under the common encoding.",
+    "Compact native backend/internal oracle timing, scalable attacks and total-cost comparison remain open."
+  ],
+  "novelty": {
+    "status": "unconfirmed",
+    "interpretation": "Code-changing execution transport is now concrete, but generic naturality/composition and this shared certificate do not establish publication novelty. Full shared-state mixed composition and theorem-level prior-work comparison remain required."
+  },
+  "literature_this_step": "No new external primary-source review; verified implementation and ordinary-comparison evidence only.",
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4435,
+    "build_log": "/tmp/foundation-native-transport-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-native-transport-audit.log",
+    "audit_declarations": 3405,
+    "new_modules": 7,
+    "new_selected_declarations": 135,
+    "new_authored_theorems": 86,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "source_count": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-context.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-overlap-classification.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-fusion-conservative-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-typed-cartesian-wiring-completeness.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-cartesian-local-higher-discard-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-path-repair-novelty-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-mixed-directed-computational-extraction.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mac-native-quantitative-contracts.json": {
+        "source_count": 5,
+        "mismatches": []
+      }
+    },
+    "imported_warnings": "Preexisting imported warnings remain outside these new sources."
+  }
+}

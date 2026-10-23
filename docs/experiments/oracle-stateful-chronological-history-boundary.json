@@ -1,0 +1,308 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Semantics/Oracle/StatefulDiagramHistoryBoundary.lean": "a547c67bbb46d7b66f4b59e724d06db94064d4be335a0e8e9b08f1fdff786224"
+  },
+  "audited_public_declarations": [
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.Example.full_observation_boundary",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.Example.independent",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.Example.signature",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.distinguishing_history",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.exchange_not_history_equal",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.historyEquiv",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.history_eq_of_recorded_eq",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.history_marginal",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.independent_exchange_boundary",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.invariant_observation",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.joint",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.joint_exchange_transport",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.recorded",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.recorded_exchange_transport",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.recover_original",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.store_marginal",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.swapAt",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.swapAt_context",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.swapAt_involutive",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.transported_observation"
+  ],
+  "public_theorems": [
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.Example.full_observation_boundary",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.Example.independent",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.distinguishing_history",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.exchange_not_history_equal",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.history_eq_of_recorded_eq",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.history_marginal",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.independent_exchange_boundary",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.invariant_observation",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.joint_exchange_transport",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.recorded_exchange_transport",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.recover_original",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.store_marginal",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.swapAt_context",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.swapAt_involutive",
+    "CryptoOracle.StatefulDiagram.HistoryBoundary.transported_observation"
+  ],
+  "claims": [
+    "A fixed chronological operation-label log marginal determines the executed word.",
+    "Different neighboring operations can have equal final-state laws under checked read/write independence while logged laws differ in any fixed context.",
+    "A Boolean chronological observer perfectly distinguishes any two different fixed operation words.",
+    "An explicit involutive adjacent-label swap is a bijection transporting both full stores and operation-label histories between independent schedules.",
+    "The inverse recovers the original recorded distribution; arbitrary correlated past/context is retained.",
+    "Every target observation transports to a source observation; retaining the same observation requires an explicit invariance hypothesis."
+  ],
+  "limits": [
+    "Operation-label log only: no new implementation of full request/response transcript or native execution.",
+    "Fixed operation words, not arbitrary adaptive schedulers.",
+    "No claim that chronological histories or public clock observations are unchanged by actual execution reordering.",
+    "No replacement of full-history security observations by an unannounced quotient.",
+    "Read/write independence and probabilistic state kernels reuse existing ordinary exchange theorem.",
+    "No full mixed tensor/copy/discard execution semantics or finite complete higher basis yet.",
+    "No certificate-size or runtime advantage over ordinary shared proofs."
+  ],
+  "novelty": {
+    "status": "unconfirmed",
+    "interpretation": "An observation boundary and sufficient reversible correspondence, not claimed novel. Runtime-wire graphical state semantics is already covered by prior work; a contribution must survive comparison on cryptographic error, native contracts, local higher generation and repair."
+  },
+  "primary_sources_this_step": [
+    {
+      "title": "String Diagrams for Premonoidal Categories",
+      "authors": [
+        "Mario Román",
+        "Paweł Sobociński"
+      ],
+      "url": "https://lmcs.episciences.org/15593/pdf",
+      "doi": "10.46298/LMCS-21(2:9)2025",
+      "local_pdf": "/tmp/foundation-romansobocinski-2025-premonoidal.pdf",
+      "sha256": "8d34da8f010f438e5ff0d0791a3dc338204c55d08ee591a4a18287d193902711",
+      "read_scope": "Selected sections: §2.1 state/writer examples, Remark 2.8 (PDF page 5), Theorem 3.14 statement and proof (PDF page 13), Theorem 5.5 statement and proof (PDF page 16). Not a full-paper read or artifact reproduction.",
+      "comparison": "Existing runtime-wire free effectful/premonoidal constructions prevent claiming single shared-state wiring or failure of unrestricted interchange as new. The inspected theorem statements concern free categorical constructions; this does not itself settle priority of the proposed cryptographic/native/repair package. The paper runtime is an abstract ordering resource, not a measured machine clock."
+    }
+  ],
+  "search_this_step": {
+    "queries": [
+      "Power Robinson premonoidal categories 1997 state side effects tensor interchange pdf",
+      "probabilistic state string diagrams premonoidal categories centrality effects"
+    ],
+    "other_lead": "String Diagrammatic Trace Theory, arXiv:2306.16341v1: abstract and introduction inspected only; no theorem-level comparison claimed.",
+    "exhaustive": false
+  },
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4436,
+    "build_log": "/tmp/foundation-history-boundary-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-history-boundary-audit.log",
+    "audit_declarations": 3425,
+    "new_modules": 1,
+    "new_selected_declarations": 20,
+    "new_authored_theorems": 15,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "source_count": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-context.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-overlap-classification.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-fusion-conservative-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-typed-cartesian-wiring-completeness.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-cartesian-local-higher-discard-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-path-repair-novelty-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-mixed-directed-computational-extraction.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mac-native-quantitative-contracts.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mac-native-code-changing-transport.json": {
+        "source_count": 7,
+        "mismatches": []
+      }
+    },
+    "imported_warnings": "Preexisting imported warnings remain outside these sources."
+  }
+}

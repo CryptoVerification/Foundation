@@ -1,0 +1,241 @@
+{
+  "kind": "deterministic_structural_transport_and_discrete_copyability_boundary",
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Semantics/Probability/Copyability.lean": "cdd62b080dea1b98cad6a684e9031517f2fdf189b9f89061d956f613fa951d22",
+    "Foundation/Logic/Polygraph/StructuralTransport.lean": "f43f1adcad20d4f8ae8ee77c027ab0de3bad2d05f751af1a073cc9685a873f62",
+    "Foundation/Examples/RandomFunctionMACStructuralTransport.lean": "462f8ec1ee0fdc73642605aed92affd6c18aa9d02bb04561298f059b1ea86b6a"
+  },
+  "public_theorems": [
+    "Foundation.Probability.Copyability.support_shared",
+    "Foundation.Probability.Copyability.support_independent",
+    "Foundation.Probability.Copyability.shared_pure",
+    "Foundation.Probability.Copyability.support_subsingleton",
+    "Foundation.Probability.Copyability.copyable_iff_pure",
+    "Foundation.Probability.Copyability.kernel_copyable_iff_deterministic",
+    "Foundation.Probability.Copyability.shared_map",
+    "Foundation.Probability.Copyability.independent_map",
+    "Foundation.Probability.Copyability.discard",
+    "Foundation.Probability.Copyability.shared_agreement",
+    "Foundation.Probability.Copyability.fair_independent_agreement",
+    "Foundation.Probability.Copyability.fair_not_copyable",
+    "Foundation.Logic.Polygraph.StructuralTransport.Wire.naturality",
+    "Foundation.Logic.Polygraph.StructuralTransport.Wire.transport",
+    "Foundation.Logic.Polygraph.StructuralTransport.Wire.transport_joint",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cell.sound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cell.distribution",
+    "Foundation.Symmetric.RandomFunctionMACStructuralTransport.view_evaluation",
+    "Foundation.Symmetric.RandomFunctionMACStructuralTransport.decoded_source",
+    "Foundation.Symmetric.RandomFunctionMACStructuralTransport.decoded_view",
+    "Foundation.Symmetric.RandomFunctionMACStructuralTransport.final_game",
+    "Foundation.Symmetric.RandomFunctionMACStructuralTransport.original_selection",
+    "Foundation.Symmetric.RandomFunctionMACStructuralTransport.actual_selection",
+    "Foundation.Symmetric.RandomFunctionMACStructuralTransport.shared_selection_agreement",
+    "Foundation.Symmetric.RandomFunctionMACStructuralTransport.independent_selection_agreement",
+    "Foundation.Symmetric.RandomFunctionMACStructuralTransport.copy_is_not_rerun"
+  ],
+  "claims": {
+    "copying_equals_independent_reruns_iff_point_mass": "Foundation.Probability.Copyability.copyable_iff_pure",
+    "kernel_copyability_iff_pointwise_deterministic": "Foundation.Probability.Copyability.kernel_copyable_iff_deterministic",
+    "all_typed_structural_circuits_commute_with_deterministic_maps": "Foundation.Logic.Polygraph.StructuralTransport.Wire.naturality",
+    "distribution_transport_for_arbitrarily_correlated_inputs": "Foundation.Logic.Polygraph.StructuralTransport.Wire.transport",
+    "earlier_context_retained_jointly": "Foundation.Logic.Polygraph.StructuralTransport.Wire.transport_joint",
+    "nine_root_schemata_sound": "Foundation.Logic.Polygraph.StructuralTransport.Cell.sound",
+    "mac_full_record_view_decoded": "Foundation.Symmetric.RandomFunctionMACStructuralTransport.decoded_view",
+    "mac_original_full_game_projection": "Foundation.Symmetric.RandomFunctionMACStructuralTransport.final_game",
+    "mac_shared_label_agreement_probability_one": "Foundation.Symmetric.RandomFunctionMACStructuralTransport.shared_selection_agreement",
+    "mac_independent_label_agreement_probability_half": "Foundation.Symmetric.RandomFunctionMACStructuralTransport.independent_selection_agreement",
+    "mac_copy_not_independent_rerun": "Foundation.Symmetric.RandomFunctionMACStructuralTransport.copy_is_not_rerun"
+  },
+  "interface": {
+    "objects": "Atomic types, unit, binary product; old and new atomic representation families.",
+    "wire_constructors": [
+      "identity",
+      "seq",
+      "tensor",
+      "copy",
+      "discard",
+      "swap",
+      "assoc",
+      "unassoc",
+      "leftUnit",
+      "leftUnitInv",
+      "rightUnit",
+      "rightUnitInv"
+    ],
+    "cell_root_schemata": [
+      "seqAssoc",
+      "seqLeftUnit",
+      "seqRightUnit",
+      "tensorIdentity",
+      "interchange",
+      "copyAssoc",
+      "copySwap",
+      "copyDiscardLeft",
+      "copyDiscardRight"
+    ],
+    "cell_closures": [
+      "refl",
+      "symm",
+      "trans",
+      "seq",
+      "tensor"
+    ],
+    "no_reconstruction_or_arbitrary_equality_rule": true,
+    "transport_maps": "Arbitrary deterministic Lean functions on atomic values, not arbitrary probabilistic kernels; need not be bijective for forward naturality.",
+    "law_scope": "Arbitrary PMF, including correlated product input. Tensor here evaluates deterministic components on the same sampled input, not independent sampling.",
+    "copyability_theorem_scope": "Discrete PMFs on arbitrary Type; no Fintype assumption. Kernel version uses standard classical choice to select a deterministic function.",
+    "mac_view": "After a single completed MAC run, copy full retained record; duplicate/discard inside one component; tensor with identity; swap. An explicit cell reduces the result to two equal records.",
+    "discard_scope": "Projection of output values in normalized terminating PMF semantics. Does not erase live cache, earlier context, execution cost or possible nontermination.",
+    "full_game_recovery": "The MAC view keeps complete records. An arbitrary circuit may discard every record, in which case transport only preserves the corresponding marginal, not recoverability of the full game."
+  },
+  "runtime_checks": [
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "expected": "((true, true), 7)",
+      "meaning": "Execute the same structural circuit on a Boolean atomic family and the copy/discard circuit on a natural-number family. No runtime simulation of the MAC law is claimed.",
+      "passed": true
+    }
+  ],
+  "exact_probability_checks": {
+    "shared_actual_public_labels_agree": "1",
+    "independent_actual_public_labels_agree": "1/2",
+    "meaning": "Semantic difference of copying and independent rerunning, not a proof-size gap or new cryptographic security bound."
+  },
+  "literature": [
+    {
+      "title": "A synthetic approach to Markov kernels, conditional independence and theorems on sufficient statistics",
+      "authors": [
+        "Tobias Fritz"
+      ],
+      "year": 2020,
+      "url": "https://arxiv.org/html/1908.07021",
+      "read_scope": "Definition 2.1 and surrounding discussion including Example 2.5 opening/footnote 10; section 10 opening, Definition 10.1, Remarks 10.2 and Examples 10.3-10.5 with textual explanation. Not a full-paper reading or artifact reproduction.",
+      "comparison": "Copy preservation characterizes deterministic morphisms in the cited framework; do not claim this criterion as a new mathematical principle."
+    },
+    {
+      "title": "Free gs-Monoidal Categories and Free Markov Categories",
+      "authors": [
+        "Tobias Fritz",
+        "Wendong Liang"
+      ],
+      "year": 2023,
+      "url": "https://link.springer.com/article/10.1007/s10485-023-09717-0",
+      "read_scope": "Abstract and introduction including 1.1-1.5; Theorem 4.1 statement and portions of proof including piece definitions/Lemma 4.6 and 4.4-4.6; section 5 definitions, statements and textual proofs; section 6 definitions, normal-form argument, Lemmas 6.4-6.5, Theorem 6.6 statement/textual proof and Corollary 6.7. Embedded diagram images were not inspected; section 4.2 and the full construction/proofs were not fully read; no artifact rebuild.",
+      "comparison": "Existing construction already includes copying, discard and monoidal composition, with decomposition and normalization results. Current local transport and nine sound equations neither supersede that theory nor prove a coherent finite presentation."
+    }
+  ],
+  "novelty": "Unconfirmed. Structural transport and copyability constraints follow established mathematical principles; current contribution is verified connection to the existing MAC representation edit.",
+  "remaining": [
+    "completeness and higher coherence of a primitive finite structural basis without global reconstruction",
+    "integration of these structural operations inside a live oracle execution with its shared cache",
+    "automatic synthesis/repair for control-flow and query-schedule edits",
+    "fair proof-size and proof-repair comparisons with ordinary shared lemmas",
+    "native execution and time bounds for the edits"
+  ],
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4316,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 1429,
+    "new_public_theorems": 26,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "axiom_allowlist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "dependency_closures": {
+      "Foundation.Crypto.Semantics.Probability.Copyability": [
+        "Foundation.Crypto.Semantics.Probability.Comp",
+        "Foundation.Crypto.Semantics.Probability.Copyability",
+        "Foundation.Crypto.Semantics.Probability.Facts"
+      ],
+      "Foundation.Logic.Polygraph.StructuralTransport": [
+        "Foundation.Crypto.Semantics.Probability.Comp",
+        "Foundation.Crypto.Semantics.Probability.Facts",
+        "Foundation.Logic.Polygraph.StructuralTransport"
+      ]
+    },
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      }
+    }
+  }
+}

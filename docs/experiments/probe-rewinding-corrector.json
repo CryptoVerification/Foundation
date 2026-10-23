@@ -1,0 +1,35 @@
+{
+  "complete_Schnorr_transcript_laws_checked": 192,
+  "oracle_only_witness_free_sampler_checks": 64,
+  "private_functions_depend_on_group_commitments": true,
+  "second_private_function_also_depends_on_first_response": true,
+  "sampler_requires_class_masses_or_global_coupling": false,
+  "cost_comparison": [
+    {
+      "first_challenge_values": 2,
+      "pilot_expected_challenge_calls": "4",
+      "main_expected_challenge_calls": "6",
+      "total_expected_challenge_calls": "10",
+      "full_restart_expected_challenge_calls": "6"
+    },
+    {
+      "first_challenge_values": 3,
+      "pilot_expected_challenge_calls": "6",
+      "main_expected_challenge_calls": "8",
+      "total_expected_challenge_calls": "14",
+      "full_restart_expected_challenge_calls": "8"
+    }
+  ],
+  "faster_than_full_restart": false,
+  "scope": "two sessions, fixed crossing schedule, fixed private challenge functions, no verifier aborts",
+  "secret_group_for_tests": "order 3 subgroup modulo 7; not a hardness experiment",
+  "operational_sampler_Lean_checked": false,
+  "arbitrary_schedule_or_abort_support_proved": false,
+  "newness_established": false,
+  "infinity_category_necessity_proved": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/probe-rewinding-corrector.py": "6c9ba3b1aa45e28da92ad6f3bf3f0a35585c05b21278dbd64524659b2af4c11d",
+    "Foundation/Examples/ProbeRewindingCorrection.lean": "ee2977be619afed390fce1939d073197a16c6979d54dcbfd1aa4443494c6d31a",
+    "Foundation/Examples/LocalRewindingCompiler.lean": "d200f24fec202222277ac0cfd7f331f3b416756ce31b5ccdc96d25891a175361"
+  }
+}

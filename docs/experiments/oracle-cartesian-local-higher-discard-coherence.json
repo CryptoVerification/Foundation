@@ -1,0 +1,466 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Logic/Polygraph/StructuralCartesianTemplates.lean": "b2d2b484b8a2d4c2f6b4fdc02122f181f3edfff3b060bf6a6108d43cbecb99b7",
+    "Foundation/Logic/Polygraph/StructuralCartesianNaturality.lean": "317bd836548cfbeb8a443adb38d6f0ef4be030441ad24c9b461095cbb3c847f4",
+    "Foundation/Logic/Polygraph/StructuralCartesianArgumentCoverage.lean": "a7f8f95563dc491b32bcc2c12b8f3130738aa041240111cf86f4463de9391204",
+    "Foundation/Logic/Polygraph/StructuralCartesianLocalHigher.lean": "e096ac557328506eee479b958ffaa2be49152fe960470110506d4d8bc3823ac5",
+    "Foundation/Crypto/Logic/Polygraph/MixedCartesianLocalHigher.lean": "142173e36ab8d98c45bb7562ef90c790d833ef975801a45cc79ce919e179981a",
+    "Foundation/Examples/CartesianLocalHigher.lean": "b2377b94388af3dcd7aff20ecbabedccb1f041610d51153d73ff2e4e0d3420be"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.Cell",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.Generator",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.Generator.structural",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.baseBasis",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.basis",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.discardedInContext_constructorBound",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.embedPure",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.embedPure_constructorCount",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.embedPure_support",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.inContext",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.inContext_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.inContext_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.discardedEta",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.discardedEta_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.discardedEta_fresh",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.discardedEta_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.framedEta",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.framedEta_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.observedFrame",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.observedFrame_support",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Argument",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Argument.input",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Argument.mk",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Argument.output",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Argument.same",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Argument.value",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Argument.variation",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.a",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.b",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.copyStep",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.duplicateCell",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.duplicate_counts",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.eraseCell",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.erase_counts",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.erasedEtaComparison",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.etaCell",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.eta_counts",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Generator",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Generator.argument",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Generator.boundaries_bounded",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Generator.code",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Generator.placed",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Generator.seqExchange",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Generator.tensorExchange",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.cancelRight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.constructorCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.discardStep",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.discardTrack",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.discardTrack_constructorBound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.discardTrack_generatorCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.discardedParallel",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.discardedParallel_constructorBound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.discardedParallel_generatorCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.generatorCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.whisker",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.whisker_constructorCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement.apply",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement.seqLeft",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement.seqRight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement.step",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement.tensorLeft",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement.tensorRight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement.track",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement.track_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.apply",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.change",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.change_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.fixed",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.hole",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.holes",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.pair",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.seq",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.tensor",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.assocFirst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.assocLast",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.assocMiddle",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.betaFstFirst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.betaFstLast",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.betaSndFirst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.betaSndLast",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.code",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.discard",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.eta",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.forkFirst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.forkLast",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.forkMiddle",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.left",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.leftId",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.left_holes_le_two",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.right",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.rightId",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.right_holes_le_two",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.rootAt",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.tensorFirst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.tensorLast",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.afterRule",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.afterRule_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argumentAt",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argumentAt_tag",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argumentCell",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argumentCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argumentTag",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argument_coverage",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.beforeRule",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.beforeRule_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.stepCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.stepCount_map",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.trackConstructorCount"
+  ],
+  "public_theorems": [
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.discardedInContext_constructorBound",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.embedPure_constructorCount",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.embedPure_support",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.inContext_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.inContext_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.discardedEta_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.discardedEta_fresh",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.discardedEta_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.framedEta_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.observedFrame_support",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.duplicate_counts",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.erase_counts",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.eta_counts",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Generator.boundaries_bounded",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.discardTrack_constructorBound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.discardTrack_generatorCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.discardedParallel_constructorBound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.discardedParallel_generatorCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.whisker_constructorCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement.track_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.change_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.left_holes_le_two",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.right_holes_le_two",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.afterRule_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argumentAt_tag",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argument_coverage",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.beforeRule_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.stepCount_map"
+  ],
+  "claims": [
+    "Typed substitution templates count and replace every occurrence of a chosen pure Wire argument by one actual contextual Step. The replacement proof track has exactly as many rewrite edges as template holes.",
+    "Sixteen explicit Variation forms cover the wire-argument positions of the eighteen first-level cartesian equations, including two-to-one eta contraction, one-to-zero erased arguments, and one-to-two fork-composition duplication. Primitive fixed-gate and shape-unification overlaps are not included in this coverage claim.",
+    "argumentAt reconstructs the original root by heterogeneous equality for every declared argument index. argumentAt_tag independently checks that its Variation tag equals the expected position tag; argument_coverage retains this tag check in the witness.",
+    "The higher presentation explicitly supplies sixteen argument-naturality diagram families and two sequence/tensor separated-exchange families, with four pure context placements. Each generator boundary contains at most three actual rewrite Steps, including under arbitrary repeated pure placements.",
+    "Pure Homotopy.whisker maps existing generators and proof-groupoid laws to contexts and preserves Four-constructor count. No fixed whole-normalizer or arbitrary parallel-path comparison is a higher generator.",
+    "discardTrack derives a comparison for any inner proof track followed by the discardAfter equation, by recursion on that track and only the one-step discard argument diagram plus proof-groupoid laws.",
+    "discardedParallel constructs a higher comparison of ANY two parallel inner proof tracks AFTER postcomposition with a discard wire. This does not establish comparison of the original tracks before that context.",
+    "The constructed discardedParallel witness uses exactly stepCount(first)+stepCount(second) local higher generators. Its Four-constructor count is at most 23+12*(trackConstructorCount(first)+trackConstructorCount(second)). No other proof paths are enumerated by the construction.",
+    "The counting metrics exclude Step/Wire/context/boundary payloads and shared libraries; input trackConstructorCount includes refl, step, comp and inverse nodes, while stepCount counts only actual rewrite edges.",
+    "Pure local higher generators and cells embed into the standalone mixed cartesian-wiring catalogue. Embedded cells have empty guard support; a mixed placement adds exactly its fixed-context needs. Updated joint-kernel repair retains arbitrary correlated prior data and original input.",
+    "The discard-context constructor bound transfers to mixed placements. Actual full-state MAC contexts are instantiated, including a frame retaining the MAC result on the left while only the pure right branch is discarded. Its support is exactly {stage}."
+  ],
+  "argument_family_tags": {
+    "assocFirst": 0,
+    "assocMiddle": 1,
+    "assocLast": 2,
+    "leftId": 3,
+    "rightId": 4,
+    "betaFstFirst": 5,
+    "betaFstLast": 6,
+    "betaSndFirst": 7,
+    "betaSndLast": 8,
+    "eta": 9,
+    "discard": 10,
+    "forkFirst": 11,
+    "forkMiddle": 12,
+    "forkLast": 13,
+    "tensorFirst": 14,
+    "tensorLast": 15
+  },
+  "additional_family_tags": {
+    "seqExchange": 16,
+    "tensorExchange": 17
+  },
+  "compiled_guarded_diagnostics": [
+    {
+      "value": [
+        [
+          3,
+          2
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        1
+      ],
+      "meaning": "Eta, erased beta argument and duplicated composition argument: actual boundary rewrite counts; the eta basic cell has one Four constructor."
+    },
+    {
+      "value": [
+        9,
+        6,
+        11,
+        12,
+        13
+      ],
+      "meaning": "Executable argument selection for eta, beta erasure and the three forkAfter positions."
+    },
+    {
+      "value": [
+        2,
+        2,
+        17
+      ],
+      "meaning": "Two-sort tensor exchange boundary counts and underlying family tag."
+    },
+    {
+      "value": [
+        5,
+        true
+      ],
+      "meaning": "Generic discard-context comparison of the eta example: five local generators; its Four-constructor bound holds."
+    },
+    {
+      "value": [
+        1,
+        1,
+        0
+      ],
+      "meaning": "A MAC-prefixed eta cell followed by discard: guard count, Four-constructor count and fresh guard count for changed ID 1 at stage zero."
+    },
+    {
+      "value": 1,
+      "meaning": "Observed MAC frame retains the full MAC result on the left while discarding only the pure right branch: one guard at stage zero."
+    }
+  ],
+  "limits": [
+    "Wire-argument coverage is not exhaustive critical-overlap classification. Root/root and fixed structural-gate overlaps, alternative update schedules and a complete finite higher basis for all pure tracks remain to be connected or proved.",
+    "The chosen higher presentation is explicit and local. Theorems are relative to these supplied diagram families. No global cartesian higher coherence, unrestricted directed termination or complete cryptographic/mixed union is established.",
+    "The previous eighteen first-level equations and the eighteen new higher families are distinct sets. Families allow typed substitution and context; the number of all ground instances is not finite.",
+    "discardedParallel compares tracks in a post-discard context only. Formal cancellation removes a rewrite-proof suffix, not a wire operation or a stochastic continuation. It does not recover pre-discard observations or prove coherence of the original inner tracks.",
+    "Application to an original game requires that the relevant pure branch is already discarded, with required observations retained elsewhere. Adding discard to forget the target observations is not a proof of the original full-state game guarantee.",
+    "The linear counts are counts of local generators and Four syntax constructors for this constructed witness, not total certificate bytes, minimal proofs, checking time, native runtime or an equal-information ordinary-proof lower bound. A supplied local cell may yield a smaller comparison than the generic discard construction.",
+    "Only deterministic pure Wire arguments may be duplicated or erased. These rules do not justify copying probabilistic boxes or removing their physical costs. The generic joint repair theorem uses one mixed placement; repeated placement supports are separately tracked.",
+    "The mixed catalogue here is the pure structural one from the preceding step, not a completed merge of all MAC/fusion rules. Existing MAC kernels, state/trace and indexed security conditions are unchanged; no new security bound or continuing native-machine contract is proved.",
+    "No new independent ordinary baseline, total-cost experiment or primary-source priority review is provided."
+  ],
+  "novelty": {
+    "status": "unconfirmed",
+    "finding": "Bounded local higher diagrams now handle nonlinear wire arguments, and a constructive discard-context coherence theorem with linear Four-constructor bounds is derived without a whole-normalization generator. This is a concrete restricted theorem within the research foundation, not a claim of novelty for naturality, terminality or groupoid contraction principles.",
+    "next_evidence": "Classify and fill remaining fixed-gate/root critical overlaps, establish the complete pure and mixed higher basis, retain full observation/resource/native contracts, compare ordinary methods with identical information and sharing, and review primary results for the proposed observation-relative proof-construction method."
+  },
+  "literature_this_step": "No new external primary-source theorem review. This step constructs local diagrams and derives restricted higher coherence from them.",
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4419,
+    "build_log": "/tmp/foundation-cartesian-higher-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-cartesian-higher-audit.log",
+    "audit_declarations": 3147,
+    "new_modules": 6,
+    "new_selected_declarations": 112,
+    "new_authored_theorems": 28,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-completion.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-context.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-overlap-classification.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-fusion-conservative-completion.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-typed-cartesian-wiring-completeness.json": {
+        "inputs": 6,
+        "mismatches": []
+      }
+    },
+    "imported_warnings": "Whole-project build replays warnings from preexisting sources outside these six modules; no warning-free whole-project claim is made.",
+    "final_source_and_prior_hashes_rechecked": true,
+    "new_document_links_exist": true,
+    "git_diff_check": "passed"
+  }
+}

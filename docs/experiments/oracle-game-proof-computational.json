@@ -1,0 +1,342 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Logic/Polygraph/ComputationalComparison.lean": "e090276bd500733e6c827b2e1d40ee925b9571c51e671f8fd0ffe36bbe73f189",
+    "Foundation/Crypto/Logic/Polygraph/GameProofComputational.lean": "78d58b096080eecaea0fd20afe6a4261f688982f2a1182b574b4502576d5a23f",
+    "Foundation/Examples/GameProofPRGComputational.lean": "5846f6ee49f0982bb37639cf0a1925df7c3279eed2790de41fb36a5f943deba9",
+    "Foundation/Examples/GameProofComputationalLossBoundary.lean": "cef062b233a714c9ba02b5d0ebec5bf4172ee131908a0d54f065bf26ce401af4"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.General.CertifiedComparison",
+    "CryptoLogic.General.CertifiedComparison.assoc",
+    "CryptoLogic.General.CertifiedComparison.comp",
+    "CryptoLogic.General.CertifiedComparison.families",
+    "CryptoLogic.General.CertifiedComparison.leftUnit",
+    "CryptoLogic.General.CertifiedComparison.loss",
+    "CryptoLogic.General.CertifiedComparison.mk",
+    "CryptoLogic.General.CertifiedComparison.packets",
+    "CryptoLogic.General.CertifiedComparison.programs",
+    "CryptoLogic.General.CertifiedComparison.refl",
+    "CryptoLogic.General.CertifiedComparison.resources",
+    "CryptoLogic.General.CertifiedComparison.rightUnit",
+    "CryptoLogic.General.CertifiedComparison.symm",
+    "CryptoLogic.General.CertifiedComparison.trans",
+    "CryptoLogic.General.CertifiedReduction.runPacket",
+    "CryptoLogic.General.SecurityObject.Packet",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.HigherModel",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.HigherModel.base",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.HigherModel.comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.HigherModel.mk",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.Model",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.Model.atom",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.Model.machine",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.Model.mk",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.Model.object",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.bounded",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.evaluate",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.evaluateCell",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.repaired_comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.secure",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.different_loss",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.firstOrder",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.identityWithLoss",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.layout",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.left",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.model",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.no_comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.no_higher_model",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.observedZero",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.prefixError",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.prefixError_negligible",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.relators",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.right",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.same_charge_bag",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.same_packet",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.same_program",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.secondOrder",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.twice",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.twice_negligible",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.Atom",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.Atom.direct",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.Atom.replace",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.Atom.uniform",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.Vertex",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.Vertex.half",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.Vertex.masked",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.Vertex.prg",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.baseModel",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.branch_bound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.branch_secure",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.condition",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.conditions",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.diamonds",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.direct",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.directGiven",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.emitted_code",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.encryption_bound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.encryption_secure",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.family_eq",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.generated",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.halts",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.layout",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.loss_eq",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.model",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.object",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.relators",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.repaired_comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.resources",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.strategy",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.time_polynomial",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.uniformGiven"
+  ],
+  "public_theorems": [
+    "CryptoLogic.General.CertifiedComparison.refl",
+    "CryptoLogic.General.CertifiedComparison.symm",
+    "CryptoLogic.General.CertifiedComparison.trans",
+    "CryptoLogic.General.CertifiedComparison.comp",
+    "CryptoLogic.General.CertifiedComparison.assoc",
+    "CryptoLogic.General.CertifiedComparison.leftUnit",
+    "CryptoLogic.General.CertifiedComparison.rightUnit",
+    "CryptoLogic.General.CertifiedComparison.resources",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.evaluateCell",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.secure",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.bounded",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.repaired_comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.conditions",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.family_eq",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.loss_eq",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.emitted_code",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.resources",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.halts",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.time_polynomial",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.branch_bound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.branch_secure",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.encryption_bound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.encryption_secure",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.repaired_comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.twice_negligible",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.prefixError_negligible",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.same_program",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.same_packet",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.different_loss",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.no_comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.same_charge_bag",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.no_higher_model"
+  ],
+  "claims": [
+    "CertifiedComparison preserves instance families, packaged adversary/witness outputs, actual emitted programs, resource certificates, and pointwise advantage-loss functions.",
+    "The existing condition-bearing directed Plan/Cell syntax has a checked computational interpretation. Atomic rules carry genuine CertifiedReductions; local higher rules must prove CertifiedComparison.",
+    "Structural laws and pasting preserve computational comparison; whole-diagram condition repair reconstructs comparison in the checked updated model.",
+    "A restricted PRG-encryption branch presentation supplies all local diamonds. The previous terminalCoherence generator compares every terminal plan with the direct compiler route.",
+    "For any terminal proof in each PRG branch, emitted masking code and the original all-challenge stopping guarantee are preserved; time is 2*n + 10*L(n) + 9 + t(n), polynomial under the original time/width hypotheses.",
+    "Combining any two terminal branch proofs with the existing triangle theorem reconstructs the encryption 2*epsilon bound and asymptotic security under the explicit original PRG resource-class assumption.",
+    "A counterexample uses identical certified programs/packets and a balanced charge multiset, but two negligible-preserving loss functions compose differently. No computational HigherModel can interpret that charge-balanced rule with the exhibited base model."
+  ],
+  "runtime_checks": {
+    "PRG_generated_diagram": [
+      1,
+      1
+    ],
+    "fields": [
+      "declared whole-diagram condition count",
+      "fresh condition count when that condition ID changes"
+    ],
+    "method": "guarded compiled metadata evaluation"
+  },
+  "scope": [
+    "This is a computational interpretation, not a coupling or equality theorem for real/ideal challenge distributions. Statistical state kernels are neither inferred nor discarded.",
+    "Computational loss functions are checked explicitly; a commutative multiset of additive error IDs does not determine their composition.",
+    "The PRG terminal graph has three vertices, exact uniform-pad rewrite, computational replacement, and a direct route built from the same certified reduction with the identity compiler node removed. This is not an independent stronger reduction or machine optimization.",
+    "The named example condition is the exact uniform-pad observation equality. The actual PRG boundedness/security hypothesis remains an explicit terminal premise, not an automatically extracted changed condition.",
+    "The PRG backend stores its time profile in the security object, with Unit resource payload. The halts and time_polynomial theorems expose the real budget; Unit is not reported as a numerical resource profile.",
+    "Current execution transfer is for the existing masking backend. The separate complete native query/loading backend is not newly connected by this example.",
+    "The loss obstruction is an intentionally loose certificate on a zero observation, with finite-prefix additive error. It disproves automatic preservation of assigned loss functions, not equality of actual success probabilities or possibility of a tighter bound.",
+    "Full mixed coherence with cyclic exchanges/copy/discard, an elementary finite basis, proof-sharing cost comparison, and publication novelty remain open."
+  ],
+  "literature_this_step": [
+    {
+      "topic": "SSProve comparison follow-up",
+      "author_page": "https://haselwarter.org/",
+      "read_scope": "Official author publication listing, selected SSProve entries only. No additional paper theorem read or artifact execution this turn.",
+      "retrieval_attempts": [
+        {
+          "url": "https://eprint.iacr.org/2021/397.pdf",
+          "result": "403 Forbidden"
+        },
+        {
+          "url": "https://hal.science/hal-04273257v1/file/2021-397.pdf",
+          "result": "inaccessible via web tool"
+        },
+        {
+          "url": "https://haselwarter.org/assets/pdfs/Paper-A-SSProve_2021.pdf",
+          "result": "one-page award certificate, not paper text"
+        },
+        {
+          "url": "https://iacr.steepath.eu/2021/397-SSProveAFoundationalFrameworkforModularCryptographicProofsinCoq.pdf",
+          "result": "401 Unauthorized"
+        }
+      ],
+      "conclusion": "No feature-absence, theorem-level novelty, or priority conclusion derived from failed access."
+    }
+  ],
+  "novelty": {
+    "status": "unconfirmed",
+    "not_claimed": [
+      "new PRG security inequality",
+      "novel general compiler-comparison principle",
+      "exclusive higher-dimensional proof-size advantage"
+    ],
+    "next_evidence": "Compare complete generated proof/certificate costs against ordinary shared-lemma and shared-DAG methods; obtain primary theorem/artifact evidence for incremental cryptographic proof repair."
+  },
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4366,
+    "build_log": "/tmp/foundation-computational-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-computational-audit.log",
+    "audit_declarations": 2155,
+    "new_selected_declarations": 82,
+    "new_authored_theorems": 33,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "inputs": 3,
+        "mismatches": []
+      }
+    }
+  }
+}

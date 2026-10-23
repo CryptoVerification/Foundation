@@ -1,0 +1,30 @@
+{
+  "exact_rational_checks": {
+    "clutch_and_general_quaternion_endpoint_pairs": 162,
+    "exact_SO5_homotopy_and_five_key_frame_samples": 810,
+    "samples_with_positive_fifth_key": 375,
+    "start": "left multiplication by q squared, with one extra real coordinate",
+    "end": "diag(1, Ad_q, 1)",
+    "weighted_cipher_average_Bloch_matrix": "zero",
+    "weighted_cipher_Choi_matrix": "I4/4"
+  },
+  "mathematical_sufficient_condition": "If T(E) direct-sum two trivial real lines is trivial, E has a continuous perfectly private, exactly recoverable five-key encryption.",
+  "doubling_formula": "[diag(1, Ad_g, 1)] = 2 [extended_left(g)] in pi_r(SO5).",
+  "order_two_clutch_consequence": "For every r>=2 and nonzero clutch g of order two, the minimum classical key alphabet is exactly five.",
+  "S5_suspended_Hopf_minimum_key_count": 5,
+  "entropy_upper_bound_bits": "log2(5)",
+  "global_five_key_controller_implemented": false,
+  "explicit_doubling_homotopy_implemented": true,
+  "nullhomotopy_of_squared_clutch_implemented": false,
+  "topological_existence_theorem_computer_verified": false,
+  "condition_claimed_necessary_for_all_five_key_implementations": false,
+  "infinity_categorical_formalism_proved_indispensable": false,
+  "Lean_checked": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/quantum-encryption-five-key-stabilization.py": "1b4b3c1c0a71ac61e8e6b44fb1a7212a372d6a9e9ea764d294f5044978fc3106",
+    "/Users/hiro/workspace/Foundation/docs/experiments/quantum-encryption-torsion-bundle.py": "99c8a4c8564e943d0268e2c5720ecc270e4ba9f3456ef008cfa1ff218ab3a6f8",
+    "/Users/hiro/workspace/Foundation/docs/experiments/quantum-encryption-yang-bundle.py": "38b1781f304a0df0421a10518cff440d72b1b1b769620fe799935699e238de20",
+    "/Users/hiro/workspace/Foundation/docs/experiments/quantum-encryption-robust-retraction.py": "c282d983d992519433ac15556c0bc7ce2b309dadeb40f335dd96a5244b50de12"
+  }
+}

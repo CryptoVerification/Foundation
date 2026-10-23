@@ -1,0 +1,172 @@
+{
+  "kind": "all_generated_information_cells_compile_to_ordinary_scripts_with_exact_exchange_counts",
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Logic/AdjacentReplay.lean": "1fc08a15acb099e60e7072d0840434aa1379a3f64b93ecdf321d45c44f7f54bd",
+    "Foundation/Examples/InformationScheduleCellCompilation.lean": "cfeb8c54f247597cd0955ccfc086f0eb8132bc770ce4e5c30bffc705d798f305",
+    "Foundation/Examples/RandomFunctionMACCellCompilation.lean": "afb99a66e3ae519e140177ee98f71252d7d069cb7cd2263f58b6865eb7057b15"
+  },
+  "public_theorems": [
+    "Foundation.Logic.AdjacentReplay.replay_append",
+    "Foundation.Logic.AdjacentReplay.replay_cons",
+    "Foundation.Logic.AdjacentReplay.swapAt_inverse",
+    "Foundation.Logic.AdjacentReplay.replay_reverse",
+    "CryptoOracle.InformationSchedule.CellCompilation.independent_symmetric",
+    "CryptoOracle.InformationSchedule.CellCompilation.swap_agrees",
+    "CryptoOracle.InformationSchedule.CellCompilation.replay_agrees",
+    "CryptoOracle.InformationSchedule.CellCompilation.script_length",
+    "CryptoOracle.InformationSchedule.CellCompilation.compile_sound",
+    "CryptoOracle.InformationSchedule.CellCompilation.replay_has_cell",
+    "CryptoOracle.InformationSchedule.CellCompilation.exchange_costs_iff",
+    "CryptoOracle.InformationSchedule.CellCompilation.optimal_exchange_cost_iff",
+    "CryptoOracle.InformationSchedule.CellCompilation.generated_iff_replay",
+    "CryptoOracle.InformationSchedule.CellCompilation.compiled_validates",
+    "CryptoOracle.InformationSchedule.CellCompilation.ordinary_joint",
+    "Foundation.Symmetric.RandomFunctionMACCellCompilation.ordinary_any_cell",
+    "Foundation.Symmetric.RandomFunctionMACCellCompilation.ordinary_any_continuation",
+    "Foundation.Symmetric.RandomFunctionMACCellCompilation.source_ne_target",
+    "Foundation.Symmetric.RandomFunctionMACCellCompilation.optimal_one",
+    "Foundation.Symmetric.RandomFunctionMACCellCompilation.ordinary_optimal_one",
+    "Foundation.Symmetric.RandomFunctionMACCellCompilation.loop_exchanges",
+    "Foundation.Symmetric.RandomFunctionMACCellCompilation.expanded_compilation_size",
+    "Foundation.Symmetric.RandomFunctionMACCellCompilation.compact_ordinary_alternative"
+  ],
+  "claims": {
+    "all_cells_ordinary_success": "CryptoOracle.InformationSchedule.CellCompilation.compile_sound",
+    "exact_compiled_length": "CryptoOracle.InformationSchedule.CellCompilation.script_length",
+    "successful_replay_cell_same_count": "CryptoOracle.InformationSchedule.CellCompilation.replay_has_cell",
+    "all_feasible_counts_equal": "CryptoOracle.InformationSchedule.CellCompilation.exchange_costs_iff",
+    "optimal_counts_equal": "CryptoOracle.InformationSchedule.CellCompilation.optimal_exchange_cost_iff",
+    "all_generated_endpoints_equal": "CryptoOracle.InformationSchedule.CellCompilation.generated_iff_replay",
+    "availability_premise_preserved": "CryptoOracle.InformationSchedule.CellCompilation.compiled_validates",
+    "ordinary_original_context_joint": "CryptoOracle.InformationSchedule.CellCompilation.ordinary_joint",
+    "same_actual_mac_prefix_joint": "Foundation.Symmetric.RandomFunctionMACCellCompilation.ordinary_any_cell",
+    "same_actual_mac_continuation": "Foundation.Symmetric.RandomFunctionMACCellCompilation.ordinary_any_continuation",
+    "redundant_input_exponential_expansion": "Foundation.Symmetric.RandomFunctionMACCellCompilation.expanded_compilation_size",
+    "same_endpoints_have_one_exchange_alternative": "Foundation.Symmetric.RandomFunctionMACCellCompilation.compact_ordinary_alternative"
+  },
+  "scope": {
+    "language": "InformationSchedule.Cell: refl, independent adjacent exchange, common action prefix, symm, trans; fixed declared information dependencies.",
+    "quantification": "All signatures, source words, target words, generated cells and ordinary swap scripts in this language.",
+    "cost": "Expanded TREE occurrences of exchange constructor; refl zero, prefix and symm unchanged, trans sums.",
+    "ordinary_metric": "Number of Nat positions in a flat ordinary replay script.",
+    "count_result": "For every k, a k-exchange cell exists iff a successful ordinary script of length k exists; minima also equivalent.",
+    "validity": "Compiled acceptance additionally assumes source scan succeeds; raw cell compilation alone does not supply source availability.",
+    "mac": "Same actual first-response prefix with retained outcome/cache/trace, plus proof-only information schedule state.",
+    "redundancy_diagnostic": "Recursive doubling of exchange-and-return loops followed by one exchange compiles to length 2^(depth+1)+1, while SAME endpoints admit one exchange in BOTH systems.",
+    "sharing": "No comparison of proof DAG nodes or kernel proof bytes; recursive source can share previous definitions in either method."
+  },
+  "decision": {
+    "exclude_from_central_novelty_claim": "Exclusive higher-dimensional reduction of MINIMUM elementary-exchange count in this language.",
+    "still_unproven": [
+      "Proof-term byte separation",
+      "Kernel checking-time advantage",
+      "Proof search advantage",
+      "Human repair effort advantage",
+      "Complete finite basis for all structural transformations",
+      "Automatic inference of state correspondences from arbitrary game changes"
+    ],
+    "not_a_global_impossibility_theorem": "Does not cover all polygraphs, higher cells between proofs, copy/discard/horizontal full structure, or arbitrary selected probabilistic correspondences.",
+    "next_research_focus": "Certified generation/repair of correspondences and local obligations from real game edits, compared with ordinary methods having identical lemma sharing, dependency analysis and reuse.",
+    "publication_novelty": "Unconfirmed."
+  },
+  "literature": [
+    {
+      "title": "Dynamic Partial-Order Reduction for Model Checking Software",
+      "authors": [
+        "Cormac Flanagan",
+        "Patrice Godefroid"
+      ],
+      "year": 2005,
+      "doi": "10.1145/1040305.1040315",
+      "url": "https://patricegodefroid.github.io/public_psfiles/popl2005.pdf",
+      "read_scope": "Abstract, introduction, section 2 definitions, section 3 adjacent-swap trace equivalence, algorithm Fig.3 and Theorem 1 statement. Not full later main text, appendix proof or experimental reproduction.",
+      "use": "Prior independent adjacent swap and partial-order execution-class reasoning. No claim that this paper states the exact new repository count theorem.",
+      "access": "University repository access blocked by JS check; author-hosted PDF accessed successfully."
+    }
+  ],
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4299,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 1284,
+    "new_public_theorems": 23,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "axiom_allowlist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ordinary_dependencies": {
+      "Foundation.Logic.AdjacentReplay": [
+        "Foundation.Logic.AdjacentReplay"
+      ],
+      "Foundation.Examples.InformationScheduleBaseline": [
+        "Foundation.Crypto.Semantics.Oracle.InformationSchedule",
+        "Foundation.Crypto.Semantics.Probability.Comp",
+        "Foundation.Crypto.Semantics.Probability.Facts",
+        "Foundation.Examples.InformationScheduleBaseline"
+      ]
+    },
+    "prior_source_hash_checks": {
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      }
+    }
+  }
+}

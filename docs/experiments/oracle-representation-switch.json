@@ -1,0 +1,177 @@
+{
+  "kind": "operational_representation_switch_from_retained_actual_prefix",
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Semantics/Oracle/RepresentationSwitch.lean": "f9c6016d584d1fdabffed50ee52b043efcd3920865545216e6d4b32661d692eb",
+    "Foundation/Examples/RandomFunctionMACRepresentationSwitch.lean": "fafd8a3ba35290da6d76e8bc604ec7a9eedace2d8f2eb883c1a4fdcfe4fe708f"
+  },
+  "public_theorems": [
+    "CryptoOracle.RandomOracle.Representation.Switch.recode_roundtrip",
+    "CryptoOracle.RandomOracle.Representation.Switch.recode_encoded",
+    "CryptoOracle.RandomOracle.Representation.Switch.recode_comp",
+    "CryptoOracle.RandomOracle.Representation.Switch.step_recode",
+    "CryptoOracle.RandomOracle.Representation.Switch.run_recode",
+    "CryptoOracle.RandomOracle.Representation.Switch.decode_encode",
+    "CryptoOracle.RandomOracle.Representation.Switch.operational_joint",
+    "CryptoOracle.RandomOracle.Representation.Switch.decoded_joint",
+    "CryptoOracle.RandomOracle.Representation.Switch.prefix_selection",
+    "CryptoOracle.RandomOracle.Representation.Switch.reference_final",
+    "CryptoOracle.RandomOracle.Representation.Switch.decoded_final",
+    "CryptoOracle.RandomOracle.Representation.Switch.decoded_continuation",
+    "Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.old_oracle",
+    "Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.decoded_joint",
+    "Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.decoded_game",
+    "Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.original_game",
+    "Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.prefix_and_selection",
+    "Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.selection_law",
+    "Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.decoded_continuation",
+    "Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.recoded_cache_hit",
+    "Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.stale_cache_hit"
+  ],
+  "claims": {
+    "arbitrary_cache_reversible_recoding": "CryptoOracle.RandomOracle.Representation.Switch.recode_roundtrip",
+    "recoding_composition": "CryptoOracle.RandomOracle.Representation.Switch.recode_comp",
+    "adaptive_operational_continuation_transport": "CryptoOracle.RandomOracle.Representation.Switch.run_recode",
+    "changed_oracle_joint_not_posthoc_definition": "CryptoOracle.RandomOracle.Representation.Switch.operational_joint",
+    "same_original_prefix_selection_final_joint": "CryptoOracle.RandomOracle.Representation.Switch.decoded_joint",
+    "actual_prefix_and_selection_preserved": "CryptoOracle.RandomOracle.Representation.Switch.prefix_selection",
+    "original_full_game_after_decode": "CryptoOracle.RandomOracle.Representation.Switch.decoded_final",
+    "arbitrary_decoded_joint_continuation": "CryptoOracle.RandomOracle.Representation.Switch.decoded_continuation",
+    "actual_mac_selected_bit_uniform": "Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.selection_law",
+    "actual_mac_original_game": "Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.decoded_game",
+    "all_cached_tags_survive_recoding": "Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.recoded_cache_hit",
+    "wrong_recoding_diagnostic": "Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.stale_cache_hit"
+  },
+  "model": {
+    "types": "OldStored and NewStored can differ; public Response finite and nonempty; input need not be finite.",
+    "selection": "Pure function of actual old prefix output; no fresh private randomized policy at selection.",
+    "joint_retains": [
+      "Actual prefix Outcome including captured remaining Program, old cache and ordered prefix trace",
+      "Actual selected label",
+      "Full final Outcome with concatenated trace and new stored cache"
+    ],
+    "mac": "Same 8-message/256-tag target; switch after first actual response; old Fin 256 cache becomes Bits 8; bit zero of first public response selects whether to complement all stored bits.",
+    "mac_selection_information": "Only actual public first-response trace is read; no future response input.",
+    "mac_selection_entropy": "Uniform Bool, proved using real first-response uniformity.",
+    "cache_hit": "For every input, tag and mask, correctly recoded one-entry cache returns original tag.",
+    "stale_cache_diagnostic": "Fixed true mask, old value zero encoded with false mask: reading with true mask returns 255. This is not the actual choose policy at first tag zero.",
+    "selection_retention_not_necessary_claim": "In this concrete public-selection example, the mask can be recomputed from retained public trace. No impossibility claim on dropping only label.",
+    "reference": "Old oracle prefix and old continuation in one execution; final projection is old full game."
+  },
+  "comparison": {
+    "generic_core": "Ordinary probability and state-map shared lemmas; no diagram imports in transitive dependency graph.",
+    "exclusive_higher_dimensional_advantage": false,
+    "automatic_inference_of_codecs_or_relations": false,
+    "proof_edit_or_timing_benchmark": false
+  },
+  "limits": [
+    "Single selected cut; no general multi-time changing-type compiler.",
+    "No policy sampling fresh randomness at cut; ordinary program coins remain supported.",
+    "Original prefix retained, but no extra original eager random function attached by this theorem.",
+    "No physical machine recoding implementation, memory or runtime bound; existing 2091-step bound does not apply to switch overhead.",
+    "No novel cryptographic success bound, finite all-structure coherence basis, or proof-size separation."
+  ],
+  "literature": [
+    {
+      "title": "EasyCrypt official Proving Security tutorial",
+      "url": "https://easycrypt.gitlab.io/easycrypt-web/docs/tutorials/encryption-from-prf/proof/",
+      "read_scope": "Selected ideal-case equivalence proof and rnd bijection discussion, including transformation p + m{2}; no artifact execution.",
+      "use": "Known runtime input can select bijection; not a novelty claim for state-dependent bijections."
+    },
+    {
+      "title": "A Direct Lazy Sampling Proof Technique in Probabilistic Relational Hoare Logic",
+      "authors": [
+        "Roberto Metere",
+        "Changyu Dong"
+      ],
+      "url": "https://arxiv.org/pdf/2311.16844",
+      "read_scope": "Selected introduction; end of section IV syntax/denotational semantics; section V rules including Fig.11; section V-A soundness discussion and lemma/theorem statements. Not full paper, Appendix G proofs or artifact rebuild.",
+      "use": "Prior direct lazy/lazy sampling comparison using provenance/secrecy metadata. Problem differs from operational representation-type switch, but this alone establishes no novelty.",
+      "html_access": "HTML v1 returned 404; original PDF accessed."
+    }
+  ],
+  "novelty": "Unconfirmed; ordinary state correspondence realizes this construction.",
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4296,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 1261,
+    "new_public_theorems": 21,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "axiom_allowlist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "neutral_dependencies": [
+      "Foundation.Crypto.Semantics.Oracle.Composition",
+      "Foundation.Crypto.Semantics.Oracle.Program",
+      "Foundation.Crypto.Semantics.Oracle.QueryFootprint",
+      "Foundation.Crypto.Semantics.Oracle.QueryMap",
+      "Foundation.Crypto.Semantics.Oracle.QueryPrefix",
+      "Foundation.Crypto.Semantics.Oracle.RandomOracle",
+      "Foundation.Crypto.Semantics.Oracle.RandomOracleRepresentation",
+      "Foundation.Crypto.Semantics.Oracle.RepresentationLocality",
+      "Foundation.Crypto.Semantics.Oracle.RepresentationSwitch",
+      "Foundation.Crypto.Semantics.Oracle.StateMap",
+      "Foundation.Crypto.Semantics.Probability.Comp",
+      "Foundation.Crypto.Semantics.Probability.Facts"
+    ],
+    "prior_source_hash_checks": {
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      }
+    }
+  }
+}

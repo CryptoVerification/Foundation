@@ -1,0 +1,389 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Logic/General/QuantitativeReduction.lean": "440a437b950e200ec38b63c319c89cfc777fb9c41850c4aa57ca7ecde30b926c",
+    "Foundation/Crypto/Logic/General/QuantitativeObservation.lean": "a69143f53432ac38fc90dd7a5075db5e22f0dccaf6fa74cebbbbfca4181d0ca7",
+    "Foundation/Crypto/Logic/Polygraph/GameProofQuantitative.lean": "5006309c531e417aefb8720bf7a68920ece0f9224492d784be6037b9657e7352",
+    "Foundation/Examples/GameProofMACNativeQuantitative.lean": "b833ca250273d8e30977da04b78e204f30eec1322dd634221771540818c80989",
+    "Foundation/Examples/MixedCircuitMACNativeReduction.lean": "2e8224e292a7d3892dc4c7df99044e13bf8cc5e4f2f3e147fef2892340384df9"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.General.QuantitativeComparison",
+    "CryptoLogic.General.QuantitativeComparison.assoc",
+    "CryptoLogic.General.QuantitativeComparison.comp",
+    "CryptoLogic.General.QuantitativeComparison.families",
+    "CryptoLogic.General.QuantitativeComparison.leftUnit",
+    "CryptoLogic.General.QuantitativeComparison.loss",
+    "CryptoLogic.General.QuantitativeComparison.mk",
+    "CryptoLogic.General.QuantitativeComparison.packets",
+    "CryptoLogic.General.QuantitativeComparison.programs",
+    "CryptoLogic.General.QuantitativeComparison.refl",
+    "CryptoLogic.General.QuantitativeComparison.resources",
+    "CryptoLogic.General.QuantitativeComparison.rightUnit",
+    "CryptoLogic.General.QuantitativeComparison.symm",
+    "CryptoLogic.General.QuantitativeComparison.trans",
+    "CryptoLogic.General.QuantitativeReduction",
+    "CryptoLogic.General.QuantitativeReduction.bounded",
+    "CryptoLogic.General.QuantitativeReduction.code_eq",
+    "CryptoLogic.General.QuantitativeReduction.comp",
+    "CryptoLogic.General.QuantitativeReduction.compiler",
+    "CryptoLogic.General.QuantitativeReduction.id",
+    "CryptoLogic.General.QuantitativeReduction.mapWitness",
+    "CryptoLogic.General.QuantitativeReduction.mk",
+    "CryptoLogic.General.QuantitativeReduction.observe",
+    "CryptoLogic.General.QuantitativeReduction.observe_code",
+    "CryptoLogic.General.QuantitativeReduction.observe_comp",
+    "CryptoLogic.General.QuantitativeReduction.observe_resources",
+    "CryptoLogic.General.QuantitativeReduction.ofCertified",
+    "CryptoLogic.General.QuantitativeReduction.promote",
+    "CryptoLogic.General.QuantitativeReduction.promote_ofCertified",
+    "CryptoLogic.General.QuantitativeReduction.reduction",
+    "CryptoLogic.General.QuantitativeReduction.runPacket",
+    "CryptoLogic.General.QuantitativeReduction.toTransform",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.ExecutionContract",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.FullOutcome",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.NativeRealizes",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.State",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.arbitrary_bound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.arbitrary_comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.base",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.caller_contract",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.eliminate",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.emitted_code",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.extracted_execution",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.extracted_full_observation",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.extracted_process",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.initial",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.loss",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.model",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.native_full_law",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.object",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.observation",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.rawGoal",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.rawObject",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.resources",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.run",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.sanitized_observation",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.schedule",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.stage_probability_realized",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.statisticalLoss",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.statisticalLoss_not_negligible",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.HigherModel",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.HigherModel.base",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.HigherModel.comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.HigherModel.mk",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.Model",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.Model.atom",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.Model.machine",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.Model.mk",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.Model.object",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.bounded",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.evaluate",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.evaluateCell",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.repaired_comparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.Serial",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.Serial.box",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.Serial.extract",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.Serial.identity",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.Serial.needs",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.Serial.plan",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.Serial.seq",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.afterSerial",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.beforeSerial",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.root_comparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.root_repaired",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.serial_code"
+  ],
+  "public_theorems": [
+    "CryptoLogic.General.QuantitativeComparison.assoc",
+    "CryptoLogic.General.QuantitativeComparison.comp",
+    "CryptoLogic.General.QuantitativeComparison.leftUnit",
+    "CryptoLogic.General.QuantitativeComparison.refl",
+    "CryptoLogic.General.QuantitativeComparison.resources",
+    "CryptoLogic.General.QuantitativeComparison.rightUnit",
+    "CryptoLogic.General.QuantitativeComparison.symm",
+    "CryptoLogic.General.QuantitativeComparison.trans",
+    "CryptoLogic.General.QuantitativeReduction.bounded",
+    "CryptoLogic.General.QuantitativeReduction.observe_code",
+    "CryptoLogic.General.QuantitativeReduction.observe_comp",
+    "CryptoLogic.General.QuantitativeReduction.observe_resources",
+    "CryptoLogic.General.QuantitativeReduction.promote_ofCertified",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.arbitrary_bound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.arbitrary_comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.caller_contract",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.emitted_code",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.extracted_execution",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.extracted_full_observation",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.extracted_process",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.loss",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.native_full_law",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.resources",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.sanitized_observation",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.stage_probability_realized",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.statisticalLoss_not_negligible",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.bounded",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.evaluateCell",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.repaired_comparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.Serial.needs",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.root_comparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.root_repaired",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.serial_code"
+  ],
+  "claims": [
+    "QuantitativeReduction retains the actual reduction, typed finite compiler and its code/execution/resource/realization witnesses without assuming that its loss preserves negligible functions. Explicit promotion requires that additional property; ofCertified followed by promotion recovers the original CertifiedReduction.",
+    "QuantitativeComparison compares instance families, dependent adversary/code/resource/execution packets, emitted code and actual loss functions. Its composition/groupoid-of-comparisons operations never reverse computational reduction arrows.",
+    "QuantitativeReduction.observe changes an observation of one unchanged execution under a separately supplied advantage inequality. observe_comp compares staged and direct observation changes only under an explicit equality of their composed loss functions.",
+    "GameProofQuantitative interprets the existing directed condition-bearing Plan/Cell presentation in quantitative reductions, with finite bound transport and repair of comparisons including internal conditions; it supplies no unconditional asymptotic security theorem.",
+    "For the same fixed adaptive 8-message/256-tag MAC attack, caller_contract is instantiated from the original universal native caller correctness theorems. It records the same 251-instruction code, a 343-transition horizon, stopping for every key and exactly four actual calls including the repeated query.",
+    "native_full_law connects that same continuing native caller to every preparation-order fullLaw, retaining the original success bit, oracle state and all typed query/response pairs. stage_probability_realized ties the observed security advantage to that actual native probability.",
+    "Concrete schedule and elimination reductions preserve emitted code and resource data. The original local preparation/elimination diagram is checked on the complete quantitative packets and loss functions; generated comparisons extend it to arbitrary terminal proof plans in the original serial presentation.",
+    "For every such terminal plan, emitted_code/resources/extracted_execution/extracted_full_observation/loss/arbitrary_bound retain the original code, 343-transition caller contract, four calls, full state and trace and the exact epsilon+1/256 advantage transformer. The existing finite security bound is reused, not improved.",
+    "extracted_process identifies the entire timed caller transition law at every horizon, oracle and frame because the emitted code is identical. Sanitization is separately proved as an analysis readout; the original unsanitized native observation is retained independently.",
+    "statisticalLoss_not_negligible formally refutes negligible-function preservation for the particular fixed additive 1/256 loss; it does not refute all alternative bounds or all possible reductions.",
+    "Serial is indexed by actual MixedCircuit MAC circuits. Its plan translation preserves required-condition sets exactly, interprets the real boxes and sequence, compares the actual before/after root and repairs it under the actual root support. serial_code proves code preservation by ordinary structural induction without a higher-cell input."
+  ],
+  "limits": [
+    "The concrete adversary is the original fixed adaptive MAC attack with all local coin/response cases, represented by a Unit adversary goal. This is not a theorem for arbitrary attackers, security-dependent tag lengths, or a new cryptographic security bound.",
+    "The 343 transitions count caller computation and packet transfer. Typed oracle evaluation and initial key-function generation remain external capabilities. The existing 2091-transition native compact backend and its complete physical-state refinement are not yet instantiated in these quantitative objects.",
+    "Sanitization changes the declared analysis observation, not the physical program output or its cost. Raw state, trace and original success bit remain available through the independent raw native law.",
+    "This concrete semantics maps game-transformation boxes/circuit sequences to reductions and box rewrites to comparisons. It is not a full instantiation of the previous MixedCircuit.Computational.Model that maps rewrite paths themselves to reductions.",
+    "The Serial fragment contains atomic identity wiring, actual MAC boxes and sequence. It does not interpret tensor/copy/discard or prove the remaining pure/mixed critical-overlap coverage, finite complete higher basis, all cryptographic/fusion contracts, or unrestricted convergence.",
+    "The observation comparison principle and finite quantitative/asymptotic distinction are not asserted novel. Fair ordinary/shared-proof byte/time comparison and theorem-level priority reduction remain undone.",
+    "The concrete serial proof edits compile to the identity. serial_code already gives ordinary-induction evidence for code preservation. In accordance with the earlier case-selection criterion this case is retained as an execution-contract validation example, not adopted as the publication centerpiece demonstrating a higher-dimensional advantage. A code-changing reduction/case and fair proof-construction comparison are still needed."
+  ],
+  "concrete_contract": {
+    "caller_instructions": 251,
+    "caller_transition_horizon": 343,
+    "actual_calls": 4,
+    "message_count": 8,
+    "tag_count": 256,
+    "loss": "epsilon + 1/256",
+    "resource_data": "Nat horizon, required to equal 343",
+    "oracle_model": "Original typed coordinate oracle via original packet adapter; its internal evaluation is an external capability.",
+    "initial_state": "Fully prepared finite-coordinate state (univ, key), with key drawn uniformly in the experiment ensemble; no machine cost for initial key generation is inferred.",
+    "retained_observations": [
+      "original verification bit",
+      "entire oracle state including the key function",
+      "entire typed request/response trace",
+      "entire timed caller process through emitted-code equality"
+    ],
+    "publication_case_status": "execution-contract validation; not a distinguishing-advantage centerpiece"
+  },
+  "novelty": {
+    "status": "unconfirmed",
+    "finding": "Concrete MAC serial proof boxes and their local comparison now carry the real caller execution/finite-loss contracts. The identity code behavior is also proved by ordinary induction and therefore does not establish a need for higher cells or an advantage over shared ordinary proofs.",
+    "next_evidence": "Connect shared-state tensor/copy/discard and all mixed critical overlaps to actual execution contracts, integrate the complete compact native backend refinement, select a code-changing reduction case and compare proof/update costs against ordinary shared proofs with identical information, then complete primary-theorem reductions."
+  },
+  "literature_this_step": "No new external primary-source review. This step constructs and verifies concrete native quantitative MAC contracts and records the identity-extraction case-selection consequence.",
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4428,
+    "build_log": "/tmp/foundation-mac-native-quantitative-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-mac-native-quantitative-audit.log",
+    "audit_declarations": 3270,
+    "new_modules": 5,
+    "new_selected_declarations": 85,
+    "new_authored_theorems": 33,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "source_count": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-context.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-overlap-classification.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-fusion-conservative-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-typed-cartesian-wiring-completeness.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-cartesian-local-higher-discard-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-path-repair-novelty-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-mixed-directed-computational-extraction.json": {
+        "source_count": 3,
+        "mismatches": []
+      }
+    },
+    "imported_warnings": "The full build replays preexisting imported warnings outside these new sources; no warning-free whole-project claim."
+  }
+}

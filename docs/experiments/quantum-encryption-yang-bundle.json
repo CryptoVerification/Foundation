@@ -1,0 +1,31 @@
+{
+  "exact_rational_checks": {
+    "rational_parameter_points": 135,
+    "chart_overlap_points": 81,
+    "positive_probability_unitary_branch_checks": 783,
+    "logical_Hermitian_basis_privacy_checks": 540,
+    "physical_complex_dimension": 4,
+    "logical_complex_dimension": 2,
+    "ground_projector_real_trace": 4,
+    "chart_transition": "q=y/|y| acts by left quaternion multiplication",
+    "zero_probability_gates_identified": true
+  },
+  "mathematical_claim": "The rank-two quaternionic Hopf ground-space bundle on S4 has no continuous perfectly private and exactly recoverable implementation with at most five classical keys, but has a seven-key implementation.",
+  "robust_mathematical_claim": "Every continuous five-key code-preserving implementation has a parameter with privacy + (5/2) maximum positive-key recovery error >=1/4, without an externally prescribed boundary cipher.",
+  "Hamiltonian_energy_levels": [
+    -1,
+    1
+  ],
+  "spectral_gap": 2,
+  "seven_key_entropy_upper_bound_bits": "11/4",
+  "topological_nonsection_claim_computer_verified": false,
+  "cryptographic_protocol_in_the_cited_experiment": false,
+  "digital_gate_synthesis_implemented": false,
+  "infinity_categorical_formalism_necessary": false,
+  "Lean_checked": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/quantum-encryption-yang-bundle.py": "38b1781f304a0df0421a10518cff440d72b1b1b769620fe799935699e238de20",
+    "/Users/hiro/workspace/Foundation/docs/experiments/quantum-encryption-robust-retraction.py": "c282d983d992519433ac15556c0bc7ce2b309dadeb40f335dd96a5244b50de12"
+  }
+}

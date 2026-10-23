@@ -1,0 +1,104 @@
+{
+  "target_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitBrouwerObstruction",
+  "targeted_lake_build_passed": true,
+  "lean_toolchain": "leanprover/lean4:v4.33.0",
+  "prior_work": {
+    "repository": "https://github.com/math-xmum/Brouwer",
+    "commit": "f9dc162170e8711f78059a87edcd38ffc44a1bfb",
+    "license": "MIT",
+    "only_import_paths_and_headers_changed": true,
+    "brouwer_standard_simplex_statement_checked": true
+  },
+  "axioms_per_theorem": {
+    "Brouwer": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.positive_negative_of_zero_sum": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.negative_coordinate": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.sharpAffine_ne_zero_at_boundary": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.sharp_normalized_extension_forces_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.sharpTetrahedron_entry": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.sharpAffine_eq_weighted_labels": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.sharpAffine_bias": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.sharpAffine_center_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.sharp_parameterized_perfect_edge": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.sharp_parameterized_approximate_edge": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "sorry_or_additional_axioms_in_listed_theorems": false,
+  "concrete_domain": "standard real three-simplex on four vertices",
+  "boundary": "normalized four-key affine labels, coordinate 1/6 - (2/3)*x_i",
+  "concrete_extension_has_zero_without_nonnullity_premise": true,
+  "affine_boundary_matches_original_cipher_labels": true,
+  "explicit_admissible_affine_map_and_center_zero_checked": true,
+  "perfect_edge_joint_TV_lower_bound": "2/3",
+  "approximate_edge_internal_TV_lower_bound": "margin/3",
+  "continuous_mesh_parameterization_and_boundary_agreement_remain_premises": true,
+  "concrete_refined_mesh_parameterization_constructed": false,
+  "nullhomotopy_to_extension_bridge_or_Nullhomotopic_negation_checked": false,
+  "Foundation_bounded_machine_realization_checked": false,
+  "infinity_categories_shown_necessary": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/classical-bit-encryption-lean-brouwer.py": "e44043e5a676077f04cae7390d63e6b3415e8d91e8edc6ef08e702e5e8af5d9d",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitBrouwerObstruction.lean": "76fa9974c703a9d49c0aeb7abdeca3b1c3eb9b6b5bdde3caf0c3195121509e31",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitTetrahedralBoundary.lean": "b15d168127860a85496dd6c00adbea68deaa148dc1aab647a34bd9d90ab3bbfa",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitNormalizedBoundary.lean": "f20e61ad98612e5aa5dab5610ba7e15ec684f982cc724c5fb642ce9671e5625b",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitSimplicialInterpolation.lean": "d1124720e2e06c81ea1c478a00259c866e3eb01ed29ffd9a4697dc6aae8de323",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitBoundaryCertificate.lean": "965e273b18c96a70e8d4f80e540bf80c70e42626edcbf12fc76cf1bdf9dd5c43",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitConvexCertificate.lean": "61a9d1ba588d70e16fb4c75cf187baf6616de2e9eae0e8310acfecd804946950",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitSimplexCertificate.lean": "e5ebeb7ca2c9ed2b37e47e4a654b8d010cd405bc9312f3b6989084e34b3a741c",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepairStability.lean": "d83db5cc70fbda328ccd400f5232f7aa6b3ea9058da0f3b5b02da2d673e7f50b",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepair.lean": "459aa24b50357f54d78ce8faf35ebbf96164a3971bc6b6aebd19524f69921a07",
+    "/Users/hiro/workspace/Foundation/lakefile.toml": "b537fcdfd0e540cfd6f310d771aff1eb8fc24ab107a421b02cfa42cf131a9411",
+    "/Users/hiro/workspace/Foundation/lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
+    "/Users/hiro/workspace/Foundation/lake-manifest.json": "ef3799fa73ec244f1db2063a084e5c03ab1196e16604e883952f870179bff929",
+    "/Users/hiro/workspace/Foundation/Foundation/ThirdParty/Brouwer/LICENSE": "956bddafa77f8b8ad428bb35cf59424b0ddd0933ebab506037b97a20fab1a5d0",
+    "/Users/hiro/workspace/Foundation/Foundation/ThirdParty/Brouwer/ORIGIN.json": "f35b9c346e4ef495b4eeddaffbc432cad271fa713cf6df500297c64ebfc07f68",
+    "/Users/hiro/workspace/Foundation/Foundation/ThirdParty/Brouwer/Scarf.lean": "443f9acc760b665494cde8ad5a849de5b1b243ef864ef79dc86690fb08bff886",
+    "/Users/hiro/workspace/Foundation/Foundation/ThirdParty/Brouwer/PathComponents.lean": "a9c5ec6e5a4c69834980f981d3b3bc6a761073a8a658ec33668b70d0b8aab454",
+    "/Users/hiro/workspace/Foundation/Foundation/ThirdParty/Brouwer/ScarfPath.lean": "feee73478505fec4d4af15edd1c035424cf238a9433bd44c8385432a534ca17b",
+    "/Users/hiro/workspace/Foundation/Foundation/ThirdParty/Brouwer/Brouwer.lean": "aac1f4b8fee3664bbb14452068cd0390d47cdf32b8781650aa8daccb572524c4"
+  }
+}

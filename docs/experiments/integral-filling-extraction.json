@@ -1,0 +1,67 @@
+{
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/integral-filling-extraction.py": "3354b1b9eec071a6299ef22b19727213043cf7fd8ae3c4300b5aea0e1908be75",
+    "Foundation/Examples/IntegralFillingExtraction.lean": "fef7e3e595979fcfa769f57e48479c562438666c62de437587f7a1ccc4533a03"
+  },
+  "signed_chains_checked": 19500,
+  "traces_with_rejections_and_repetitions_checked": 80979,
+  "cryptographic_hardness_tested": false,
+  "cryptographic_success_not_identified_with_collection": true,
+  "instances": [
+    {
+      "labels": 3,
+      "cell_weights": [
+        1,
+        2,
+        3
+      ],
+      "exact_unit_target_integral_filling_mass": 3,
+      "exact_weighted_target_filling_mass": 6,
+      "double_target_integral_mass": 6,
+      "double_target_mod_two": "zero"
+    },
+    {
+      "labels": 4,
+      "cell_weights": [
+        1,
+        2,
+        3,
+        1
+      ],
+      "exact_unit_target_integral_filling_mass": 4,
+      "exact_weighted_target_filling_mass": 7,
+      "double_target_integral_mass": 8,
+      "double_target_mod_two": "zero"
+    },
+    {
+      "labels": 5,
+      "cell_weights": [
+        1,
+        2,
+        3,
+        1,
+        2
+      ],
+      "exact_unit_target_integral_filling_mass": 5,
+      "exact_weighted_target_filling_mass": 9,
+      "double_target_integral_mass": 10,
+      "double_target_mod_two": "zero"
+    },
+    {
+      "labels": 6,
+      "cell_weights": [
+        1,
+        2,
+        3,
+        1,
+        2,
+        3
+      ],
+      "exact_unit_target_integral_filling_mass": 6,
+      "exact_weighted_target_filling_mass": 12,
+      "double_target_integral_mass": 12,
+      "double_target_mod_two": "zero"
+    }
+  ],
+  "limitation": "Linear fan example; no strict integral-versus-real gap or infinity-category necessity."
+}

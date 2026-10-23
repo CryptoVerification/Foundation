@@ -1,0 +1,421 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Logic/Polygraph/StructuralCartesianTrackNaturality.lean": "b7024b34fbd2e5d5c4801698bb374e3e03a80a00318c0566fb489c91eee34f3d",
+    "Foundation/Logic/Polygraph/StructuralCartesianCoherenceInvariant.lean": "bfbe674c42418e543425c24c773a929eb6af700181424b00d13b754fb2b14b51",
+    "Foundation/Logic/Polygraph/StructuralCartesianUnitCritical.lean": "dba4bd8177b23363b925268ee4e8bd6bcf5a4aa150d7a04eb6cc5b136e415a5d",
+    "Foundation/Crypto/Logic/Polygraph/MixedCircuitCartesianUnitCritical.lean": "a2717fdfa7d44199f945f694e8e29e8fefd0ada0faa2587462137e5d7a5db935"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.Generator",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.Generator.existing",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.Generator.pure",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.baseBasis",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.basis",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.embedOld",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.embedOld_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.embedPure",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.embedPure_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.pure_context_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.pure_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.unitCell",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.unitCell_support",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.Weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.argument_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.eval_add",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.eval_neg",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.eval_zero",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.generator_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.homotopy_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.ones",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.placeWeight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.placed_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.push",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.push_sound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.rootWeight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.seqLeft_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.seqRight_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.stepWeight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.tensorLeft_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.tensorRight_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.trackWeight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.unit_overlap_not_comparable",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.weightGroup",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.invertSquare_generatorCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.track",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.track_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.Cell",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.Generator",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.Generator.boundaries_bounded",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.Generator.code",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.Generator.existing",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.Generator.placed",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.Generator.unit",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.embed",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.strict_extension",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.unitCell",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argumentTrack",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argumentTrack_generatorCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.tensorFirstTrack",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.tensorFirstTrack_generatorCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.tensorLastTrack",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.tensorLastTrack_generatorCount"
+  ],
+  "public_theorems": [
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.embedOld_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.embedPure_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.pure_context_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.pure_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.unitCell_support",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.argument_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.eval_add",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.eval_neg",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.eval_zero",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.generator_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.homotopy_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.placed_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.push_sound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.seqLeft_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.seqRight_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.tensorLeft_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.tensorRight_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.unit_overlap_not_comparable",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.invertSquare_generatorCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.track_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.Generator.boundaries_bounded",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.strict_extension",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argumentTrack_generatorCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.tensorFirstTrack_generatorCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.tensorLastTrack_generatorCount"
+  ],
+  "claims": [
+    "Actual template substitution for proof tracks handles zero/one/two occurrences of an argument. The target step count equals template hole count times source step count.",
+    "The existing sixteen argument squares extend to arbitrary eighteen-law tracks, including inverse proofs. The generated higher proof uses exactly one old local generator per source rewrite leaf. Boundary/path/shape/payload sizes are excluded from that count.",
+    "An integer-valued output annotation is preserved by every old pure Higher.Generator and every old Four derivation, including all pure placements and separated exchanges.",
+    "At an atomic identity, the left-unit and right-unit one-step reductions have annotation 1 and 0. Consequently no old pure higher comparison exists between these parallel paths.",
+    "One explicit local unit-overlap family extends the pure presentation. It retains every old comparison and supplies the missing unit comparison. The extended root-family tag is Fin 19 and generator boundaries have at most three first-level rewrites.",
+    "A generic mixed higher presentation retains the supplied old mixed basis and embeds the extended pure presentation. Old comparison support is unchanged; added pure cells have empty support; a circuit placement contributes exactly its own requirements.",
+    "Rechecking the placement conditions yields correlated joint-law equality for the pure comparison endpoints inside one updated checked shared-state model."
+  ],
+  "limits": [
+    "The obstruction is for the old pure Cartesian.Higher basis only. It is not a non-derivability theorem for the richer mixed basis, where other original higher generators may supply comparisons.",
+    "The annotation is an algebraic invariant distinguishing proof paths. It is not runtime, encoded certificate size, guard support, semantic inequivalence of the underlying wires or a cryptographic advantage.",
+    "Fin 19 classifies schematic families with arbitrary typed parameters and contextual closure. It does not assert a literally finite set of all instantiated cells or a complete homotopy basis.",
+    "Only the displayed unit critical family is added. Associativity/unit and all remaining Cartesian/mixed root criticals have not been classified or resolved.",
+    "Tensor-expansion argument naturality is available for whole tracks, but the canonical tensor fusion/wire-pass square remains open.",
+    "The generic path-valued contextual contract has not yet been extended to the richer supplied presented basis.",
+    "No fair advantage over ordinary proofs with identical sharing/lemmas is established. No new computational reduction, execution/time/key-generation theorem or MAC bound is derived.",
+    "Novelty remains unconfirmed; independent review has not occurred."
+  ],
+  "primary_source_check": {
+    "title": "Coherence in monoidal track categories",
+    "authors": [
+      "Yves Guiraud",
+      "Philippe Malbos"
+    ],
+    "url": "https://webusers.imj-prg.fr/~yves.guiraud/articles/cohe.pdf",
+    "arxiv": "https://arxiv.org/abs/1004.1055",
+    "verified_scope": "Parsed text of Introduction, Theorem 1.2.3, the five-critical-branching paragraph in Proposition 2.3.3, and Corollary 2.3.4. This is not a full-paper reading claim.",
+    "source_facts": "Theorem 1.2.3 assumes convergence and obtains a homotopy basis from generating confluences. The monoidal example in 2.3.3 studies five critical branchings.",
+    "our_interpretation": "Critical-branching coherence is an existing method. The new countermodel identifies a concrete incompleteness of this implementation; it is not presented as a new general coherence principle. The source theorem is not applied without proving its assumptions for the actual language.",
+    "visual_scope": "Web screenshot requests for page 14 of both public PDF copies failed with timeouts. No visual verification of the displayed critical diagrams is claimed."
+  },
+  "next_obligations": [
+    "Classify actual root-root critical overlaps beyond wire-argument naturality. Resolve the remaining categorical and Cartesian families without arbitrary whole-path roots.",
+    "Construct the tensor-internal comparison between component normalization followed by canonical tensor normalization and the actual whole-wire normalizer.",
+    "Extend the path-valued contextual contract to the richer supplied higher basis and instantiate sequential fusion and the remaining actual roots.",
+    "Preserve the original full research scope: finite complete mixed basis, computational reductions/losses/resources, continuing execution through oracle internals/keygen, fair total-cost comparison and theorem-level novelty."
+  ],
+  "verification": {
+    "target_command": "nix develop path:. -c lake build Foundation.Crypto.Logic.Polygraph.MixedCircuitCartesianUnitCritical",
+    "target_jobs": 2626,
+    "target_log": "/tmp/foundation-cartesian-critical-target.log",
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4498,
+    "build_log": "/tmp/foundation-cartesian-critical-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-cartesian-critical-audit.log",
+    "audit_declarations": 4254,
+    "new_modules": 4,
+    "new_selected_declarations": 53,
+    "new_authored_theorems": 25,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "prior_source_hash_checks": {
+      "oracle-stateful-unified-wiring-fusion.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-information-schedule-comparison.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-mixed-path-repair-novelty-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mac-native-code-changing-transport.json": {
+        "source_count": 7,
+        "mismatches": []
+      },
+      "oracle-mixed-fusion-conservative-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-full-outcome-native-repair.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-directed-computational-extraction.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-single-state-native-execution.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-compact-mac-security.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "source_count": 10,
+        "mismatches": []
+      },
+      "oracle-mac-analysis-native-compilation.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-cartesian-local-higher-discard-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-context.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-unified-association-overlap-resolution.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-mixed-wire-pass-naturality.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-path-valued-residuals.json": {
+        "source_count": 9,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-chronological-history-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-compact-mac-execution.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-wire-pass-research.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-root-only-wire-context-lifting.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-unified-fusion-overlap-resolution.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-overlap-classification.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-bounded-old-wire-elimination.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-sequential-fusion-wire-pass.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-mac-linked-analysis-execution.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mac-native-quantitative-contracts.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-typed-cartesian-wiring-completeness.json": {
+        "source_count": 6,
+        "mismatches": []
+      }
+    },
+    "imported_warnings": "Existing imported warnings remain; unregistered NativeConfiguredMAC work is not covered by this full-library build."
+  },
+  "material_passport": {
+    "type": "Lean formalization, algebraic obstruction and local higher extension",
+    "status": "Verified within stated scope; original research goal remains active",
+    "provenance": "AI-assisted research, implementation and reporting",
+    "human_read_scope": "unknown",
+    "independent_review": "not performed"
+  }
+}

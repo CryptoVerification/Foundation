@@ -1,0 +1,575 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Logic/Polygraph/StructuralCartesianProductCritical.lean": "7a79ea137084bc97278fb57aac1c1ede9e00dff67e48e184730da6a850f7ae2e",
+    "Foundation/Logic/Polygraph/StructuralCartesianProductCriticalInvariant.lean": "e01466421f98241013c960cb23de26dafdecbcca1fb6a1f16f84d1faaa9dbbd3",
+    "Foundation/Logic/Polygraph/StructuralCartesianProductProjectionNaturality.lean": "e587dcc2ad3b4817910e6cbf694af7efb747600f327db7c414860ec88cf98163",
+    "Foundation/Logic/Polygraph/StructuralCartesianPresentedObservation.lean": "e67f809c66f64f4438c87c1b4f4c5949844059870b109277d4e539894ad982fe",
+    "Foundation/Logic/Polygraph/StructuralCartesianProductTriangleCoherence.lean": "78da16f90ff2b9a12b1caae1b67222d37acfe227c3676224df1dbe81a03e60d5",
+    "Foundation/Logic/Polygraph/StructuralCartesianProductPeaks.lean": "4b763aa03693c45cfc4f810a73eb7194a90ba43b9088b66d99895b33d1e57dea",
+    "Foundation/Logic/Polygraph/StructuralCartesianProductCriticalCounts.lean": "3cf81f5590e3b25728d3e730807d7f4fa24086d727546e3b5a8995b7803639dd",
+    "Foundation/Crypto/Logic/Polygraph/MixedCircuitCartesianProductCritical.lean": "c55e7794f0b16ae93dae2e4beb9c3be2cd5dc2183fddabb6ebf4d8ee30267b02",
+    "Foundation/Examples/MixedCircuitProductCriticalWirePass.lean": "7a456193d6b4f5271cef79616b0601d437f918222ff48a9bf43401d5e5b2d3ee"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.Cell",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.ProductBasis",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.actual_atomic_categorical_obstruction",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.actual_atomic_first_weight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.actual_atomic_second_weight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.actual_tensor_categorical_obstruction",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.atomicComparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.atomicComparison_context_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.atomicComparison_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.atomicComparison_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.comparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.contract",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.framedComparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.framed_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.lift",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.lift_constructorCount",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.lift_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.presentation",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.productLift",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.productLift_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.pureLift",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.pureLift_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.resolvedPeak",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.resolvedPeak_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.sampleExpanded",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.samplePair",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.sampledComparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.sampledSource",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.sampledTarget",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.sampled_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.sampled_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.tensorComparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.tensorComparison_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.Generator",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.Generator.existing",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.Generator.pure",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.baseBasis",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.basis",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.embedOld",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.embedOld_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.embedPure",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.embedPure_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.pure_context_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.pure_repaired_joint",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.AtomicCertificate",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.Cell",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.Extension",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.Extension.Generator",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.Extension.embed",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.Extension.mk",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.Extension.whisker",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.categorical",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.certificateLeaves",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.certificateLeaves_eq",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.comparable_iff_atomic",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.etaNatural",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.fromOldCertificate",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.observe",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.product",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.reconstruct",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.reflect",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.tensorCells",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Cell",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator.boundaries_bounded",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator.code",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator.existing",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator.fst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator.new_boundaries_single",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator.placed",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator.productCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator.snd",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.argument_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.atomicIdentity",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.atomicPairIdentity",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.categoryGenerator_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.fork_not_comparable",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.fst_not_comparable",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.generator_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.homotopy_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.placeWeight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.placed_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.push_sound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.rootWeight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.seqLeft_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.seqRight_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.snd_not_comparable",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.stepWeight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.strict_extension",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.tensorLeft_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.tensorRight_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.trackWeight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.unitGenerator_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Peak",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Peak.first",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Peak.forkFirst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Peak.forkLast",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Peak.fst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Peak.second",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Peak.snd",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Peak.steps",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Peak.swap",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.cell",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.family",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.firstTail",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.first_bound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.first_forward",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.mk",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.secondTail",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.second_bound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.second_forward",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.target",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.betaEtaFst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.betaEtaSnd",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.cancelProofSuffix",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.cancelProofSuffix_productCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.embed",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.embed_productCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.etaFst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.etaNatural_productCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.etaSnd",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkBeta",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkCell",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkCell_productCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkEta",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkFirst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkFstSquare",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkFstSquare_productCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkLast",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkLastFirst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkOtherOrder",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkSndSquare",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkSndSquare_productCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.fstCell",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.liftOld",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.productCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.reflection_productCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.resolve",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.resolve_bounded",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.resolve_forward",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.sndCell",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.whisker",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.whisker_productCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductProjectionNaturality.forkLeft",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductProjectionNaturality.forkRight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductProjectionNaturality.fstLeft",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductProjectionNaturality.fstRight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductProjectionNaturality.sndLeft",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductProjectionNaturality.sndRight"
+  ],
+  "public_theorems": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.actual_atomic_categorical_obstruction",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.actual_atomic_first_weight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.actual_atomic_second_weight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.actual_tensor_categorical_obstruction",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.atomicComparison_context_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.atomicComparison_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.atomicComparison_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.framed_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.lift_constructorCount",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.lift_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.productLift_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.pureLift_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.resolvedPeak_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.sampled_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.sampled_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.tensorComparison_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.embedOld_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.embedPure_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.pure_context_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.pure_repaired_joint",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.certificateLeaves_eq",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.comparable_iff_atomic",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator.boundaries_bounded",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator.new_boundaries_single",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.argument_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.categoryGenerator_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.fork_not_comparable",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.fst_not_comparable",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.generator_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.homotopy_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.placed_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.push_sound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.seqLeft_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.seqRight_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.snd_not_comparable",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.strict_extension",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.tensorLeft_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.tensorRight_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.unitGenerator_weight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.cancelProofSuffix_productCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.embed_productCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.etaNatural_productCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkCell_productCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkFstSquare_productCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkSndSquare_productCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.reflection_productCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.resolve_bounded",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.resolve_forward",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.whisker_productCount"
+  ],
+  "claims": [
+    "An eta output annotation is preserved by the old argument/exchange diagrams, unit criticals and all categorical criticals. It shows that the two eta/projection comparisons and the fork/eta triangle are not derivable in that previous pure categorical presentation.",
+    "Exactly TWO new one-step-boundary schematic generator families compare eta-then-projection with outer beta, for fst and snd. The pure presentation retains all previous categorical cells and has Fin 25 tags, with all generator boundaries bounded by three and the new tagged boundaries exactly one rewrite each.",
+    "Four beta projection argument diagrams, including the two erased argument sites, are derived from existing argument naturality and single-hole bookkeeping removal.",
+    "The fork/eta triangle is DERIVED by comparing its two output projections, cancelling common proof suffixes and reconstructing the original comparison. Its former prototype generator was removed; only the two new projection generator constructors remain.",
+    "The derived fork triangle uses exactly two new projection critical generators. Reflection adds the counts of its two input comparisons; old embeddings and contextual placements preserve the specified counts.",
+    "The opposite beta order is derived from the existing separated exchange and the derived fork triangle, with no extra critical generator.",
+    "A typed Peak interface covers four displayed beta/eta overlap sites and arbitrary reversal of the two branches. resolve supplies actual Cartesian.Step boundaries, a common target, forward tails and whole-branch bounds of at most two rewrites.",
+    "Output observation reconstruction is parameterized by an explicitly supplied higher extension retaining old local diagrams and placements; the categorical and new product-critical presentations are instantiated. Atomic proof witnesses may now use the added projection diagrams.",
+    "The mixed product extension retains the old categorical library and embeds new pure witnesses with empty support. The actual MAC sum additionally retains the latest legacy-root-definition library and constructor counts under its embedding.",
+    "The existing three-family MAC/erasure/sequential-fusion contract retargets unchanged; its full-output copy/discard frame retains exactly stage and stage+1 guards.",
+    "A separate actual derived fork comparison follows one shared MAC.before computation and then discards one full-output copy through fst. Its exact support is the singleton stage, and repaired correlated joint-law equality follows in the updated checked model.",
+    "The previous actual canonical tensor example remains noncomparable in the PREVIOUS PURE CATEGORICAL presentation: its first-left atomic projections have eta weights -4 and -2, proved by kernel reduction. This strengthens the earlier old-pure-only obstruction."
+  ],
+  "finite_scope": {
+    "new_basic_families": [
+      "eta followed by fst versus betaFst",
+      "eta followed by snd versus betaSnd"
+    ],
+    "pure_schematic_tag_count": 25,
+    "critical_comparison_families": [
+      "fst/eta",
+      "snd/eta",
+      "fork/eta (derived, not a generator)"
+    ],
+    "resolver_input": "Only the four displayed typed product-overlap sites and their branch reversals. Not arbitrary pairs of coinitial Cartesian.Step.",
+    "generic_observation_inputs": "An actual higher generator family, an embedding of old higher witnesses, contextual placement, and atomic higher proof witnesses.",
+    "actual_mixed_contract_source_catalogue": "The prior three normalization source families only; unchanged."
+  },
+  "limits": [
+    "Fin 25 counts schematic forms with arbitrary typed parameters and contextual placement, not a literally finite concrete generator set or a complete Cartesian/mixed higher basis.",
+    "The two added forms suffice to derive the displayed third comparison. Minimality of two, independence after adding one, or sufficiency for every product critical branching is not proved.",
+    "The strengthened nonderivability result concerns the previous pure categorical basis, not the richer mixed presentation or the new product-critical pure basis.",
+    "The actual MAC-output canonical tensor square remains unsolved in the new basis. The retargeted tensor reconstruction still requires actual atomic proof witnesses; no arbitrary normalization or whole-path comparison generator was inserted.",
+    "Atomic hypotheses are syntactic higher comparisons, not equality of individual output marginals. No inference of joint equality from matching marginals is made.",
+    "The new-generator count of two excludes old generators, groupoid constructors, context and wire payloads, certificate bytes and checker time. No compression or fair total-cost advantage is inferred.",
+    "Sampled support is singleton stage because the fixed prefix is MAC.before stage; it is not the before/after MAC crypto rewrite whose support is stage and stage+1.",
+    "Repaired semantics is within one updated checked model. No new code-changing reduction, advantage/loss/time bound, or full physical execution through oracle internals/keygen is supplied.",
+    "Unregistered NativeConfiguredMAC integration remains outside the successful full-library build.",
+    "Mathematical novelty remains unconfirmed. This stage gives concrete obstruction and derivation data in the selected presentation; no new abstract Cartesian coherence principle is claimed. No new external primary-source reading or independent review occurred."
+  ],
+  "next_obligations": [
+    "Analyze the remaining atomic normalization comparisons, especially distribution/forkAfter with projection and association, and expansion interactions; construct only explicitly justified bounded local diagrams.",
+    "Discharge the actual canonical tensor normalization square and install its root compatibility contract, then cover the remaining actual eighteen-rule and mixed root catalogue.",
+    "Keep the full research objective active: full finite schematic coverage, computational reductions/losses/resources, continuing oracle/keygen execution, fair shared-proof total costs and primary-source theorem-level novelty assessment."
+  ],
+  "verification": {
+    "target_command": "nix develop path:. -c lake build Foundation.Logic.Polygraph.StructuralCartesianProductCriticalCounts Foundation.Examples.MixedCircuitProductCriticalWirePass",
+    "target_jobs": 2862,
+    "target_log": "/tmp/foundation-product-critical-final-target.log",
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4527,
+    "build_log": "/tmp/foundation-product-critical-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-product-critical-audit.log",
+    "audit_declarations": 4700,
+    "new_modules": 9,
+    "new_selected_declarations": 150,
+    "new_authored_theorems": 49,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "prior_source_hash_checks": {
+      "oracle-stateful-unified-wiring-fusion.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-information-schedule-comparison.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-mixed-path-repair-novelty-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mac-native-code-changing-transport.json": {
+        "source_count": 7,
+        "mismatches": []
+      },
+      "oracle-mixed-fusion-conservative-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-full-outcome-native-repair.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-directed-computational-extraction.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-single-state-native-execution.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-compact-mac-security.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "source_count": 10,
+        "mismatches": []
+      },
+      "oracle-output-observation-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mac-analysis-native-compilation.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-cartesian-local-higher-discard-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-context.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-unified-association-overlap-resolution.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-mixed-wire-pass-naturality.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-presented-wire-compatibility.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-path-valued-residuals.json": {
+        "source_count": 9,
+        "mismatches": []
+      },
+      "oracle-categorical-critical-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-chronological-history-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-compact-mac-execution.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-legacy-wire-interoperability.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-wire-pass-research.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-root-only-wire-context-lifting.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-unified-fusion-overlap-resolution.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-overlap-classification.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-bounded-old-wire-elimination.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-sequential-fusion-wire-pass.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-mac-linked-analysis-execution.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mac-native-quantitative-contracts.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-cartesian-coherence-obstruction.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-typed-cartesian-wiring-completeness.json": {
+        "source_count": 6,
+        "mismatches": []
+      }
+    },
+    "imported_warnings": "Existing imported warnings remain."
+  },
+  "material_passport": {
+    "type": "Lean product critical obstruction, two-form extension, derived fork triangle, rich observation reconstruction and checked MAC integration",
+    "status": "Verified within explicit scope; full research goal remains active",
+    "provenance": "AI-assisted research, implementation and reporting",
+    "human_read_scope": "unknown",
+    "independent_review": "not performed"
+  }
+}

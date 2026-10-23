@@ -1,6 +1,366 @@
+import Foundation.Crypto.Semantics.Probability.SharedEventBudget
+import Foundation.Crypto.Logic.Polygraph.GameProofJointEventBudget
+import Foundation.Examples.RandomFunctionMACSharedEventBudget
+import Foundation.Examples.SharedEventBudgetIndependence
+import Foundation.Examples.RandomFunctionMACEncodedEventBudget
+import Foundation.Logic.Polygraph.StructuralCartesianSelectionSubstitutionCoherence
+import Foundation.Logic.Polygraph.StructuralCartesianSubstitutionAssociativityCoherence
+import Foundation.Examples.MixedCircuitSubstitutionAssociativity
+import Foundation.Logic.Polygraph.StructuralCartesianDistributionCompositionCoherence
+import Foundation.Logic.Polygraph.StructuralCartesianDistributionSubstitutionPasting
+import Foundation.Logic.Polygraph.StructuralCartesianProjectedSubstitutionCoherence
+import Foundation.Logic.Polygraph.StructuralCartesianRightUnitPasting
+import Foundation.Logic.Polygraph.StructuralCartesianSubstitutionRightUnitCoherence
+import Foundation.Examples.MixedCircuitSubstitutionRightUnit
+import Foundation.Logic.Polygraph.FourAssociationContext
+import Foundation.Logic.Polygraph.StructuralCartesianUnitSelectionPasting
+import Foundation.Logic.Polygraph.StructuralCartesianSelectionUnitCoherence
+import Foundation.Logic.Polygraph.StructuralCartesianSubstitutionUnitCoherence
+import Foundation.Examples.MixedCircuitSubstitutionUnit
+import Foundation.Logic.Polygraph.FourAssociation
+import Foundation.Logic.Polygraph.StructuralCartesianAssociatorPaths
+import Foundation.Logic.Polygraph.StructuralCartesianSelectionPasting
+import Foundation.Logic.Polygraph.StructuralCartesianLiftSelectionCoherence
+import Foundation.Examples.MixedCircuitLiftSelection
+import Foundation.Logic.Polygraph.StructuralCartesianProjectedTrackNaturality
+import Foundation.Logic.Polygraph.StructuralCartesianIdentityProjectionCoherence
+import Foundation.Examples.MixedCircuitIdentityProjection
+import Foundation.Logic.Polygraph.StructuralCartesianExpansionLoopCoherence
+import Foundation.Examples.MixedCircuitExpansionLoop
+import Foundation.Logic.Polygraph.StructuralCartesianExpansionUnitPeak
+import Foundation.Logic.Polygraph.StructuralCartesianExpansionCritical
+import Foundation.Logic.Polygraph.StructuralCartesianExpansionAnnotation
+import Foundation.Logic.Polygraph.StructuralCartesianRootAnnotationLinear
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitCartesianExpansionCritical
+import Foundation.Examples.MixedCircuitExpansionCriticalWirePass
+import Foundation.Examples.MixedCircuitExpansionAnnotationProfile
+import Foundation.Logic.Polygraph.StructuralCartesianTensorProjectionPeak
+import Foundation.Logic.Polygraph.StructuralCartesianRootAnnotation
+import Foundation.Logic.Polygraph.StructuralCartesianRootAnnotationCritical
+import Foundation.Logic.Polygraph.StructuralCartesianDistributionCritical
+import Foundation.Logic.Polygraph.StructuralCartesianDistributionUnitCoherence
+import Foundation.Logic.Polygraph.StructuralCartesianDistributionAnnotation
+import Foundation.Logic.Polygraph.StructuralCartesianDistributionPeaks
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitCartesianDistributionCritical
+import Foundation.Examples.MixedCircuitDistributionCriticalWirePass
+import Foundation.Logic.Polygraph.StructuralCartesianProductCritical
+import Foundation.Logic.Polygraph.StructuralCartesianProductCriticalInvariant
+import Foundation.Logic.Polygraph.StructuralCartesianProductProjectionNaturality
+import Foundation.Logic.Polygraph.StructuralCartesianPresentedObservation
+import Foundation.Logic.Polygraph.StructuralCartesianProductTriangleCoherence
+import Foundation.Logic.Polygraph.StructuralCartesianProductPeaks
+import Foundation.Logic.Polygraph.StructuralCartesianProductCriticalCounts
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitCartesianProductCritical
+import Foundation.Examples.MixedCircuitProductCriticalWirePass
+import Foundation.Logic.Polygraph.StructuralCartesianProductTracks
+import Foundation.Logic.Polygraph.StructuralCartesianObservationCoherence
+import Foundation.Examples.MixedCircuitTensorObservation
+
+import Foundation.Logic.Polygraph.StructuralCartesianLegacyComposition
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitHigherBasisSumCounts
+import Foundation.Examples.MixedCircuitLegacyWireBasis
+import Foundation.Examples.MixedCircuitLegacyCategoryCoherence
+import Foundation.Examples.MixedCircuitLegacyWireRepair
+import Foundation.Logic.Polygraph.StructuralCartesianCategoryCritical
+import Foundation.Logic.Polygraph.StructuralCartesianCategoryPeaks
+import Foundation.Logic.Polygraph.StructuralCartesianOneHole
+import Foundation.Logic.Polygraph.StructuralCartesianCompositionTransport
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitCartesianCategoryCritical
+import Foundation.Examples.MixedCircuitCategoryWirePass
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitPresentedExchange
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitPresentedWireCompatibility
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitPresentedWireContracts
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitHigherBasisSum
+import Foundation.Examples.MixedCircuitPresentedWirePass
+import Foundation.Examples.MixedCircuitTensorNormalizationObstruction
+import Foundation.Logic.Polygraph.StructuralCartesianTrackNaturality
+import Foundation.Logic.Polygraph.StructuralCartesianCoherenceInvariant
+import Foundation.Logic.Polygraph.StructuralCartesianUnitCritical
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitCartesianUnitCritical
+import Foundation.Examples.MixedCircuitWireFusionTrackNaturality
+import Foundation.Examples.MixedCircuitSequentialFusionWirePass
+import Foundation.Logic.Polygraph.FourPathNaturality
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitPathExchange
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitPathNaturalitySupport
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitWirePathCompatibility
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitWirePathContracts
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitPresentedPathNaturality
+import Foundation.Examples.MixedCircuitErasedWirePath
+import Foundation.Examples.MixedCircuitFusionPathResidual
+import Foundation.Examples.MixedCircuitWireFusionResidual
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitTrackExchange
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitTrackExchangeSupport
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitTrackExchangeContracts
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitWirePassNaturality
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitWirePassContracts
+import Foundation.Examples.MixedCircuitMACWirePass
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitWireNormalization
+import Foundation.Crypto.Semantics.Oracle.NativeHaltReturnChecked
+import Foundation.Crypto.Semantics.Oracle.NativeVerdictRestore
+import Foundation.Examples.MixedCircuitMACLinkedPrefix
+import Foundation.Examples.MixedCircuitMACLinkedExecution
+import Foundation.Examples.MixedCircuitMACLinkedGame
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitRepresentation
+import Foundation.Examples.MixedCircuitMACAnalysisCompilation
+import Foundation.Crypto.Semantics.Oracle.NativeVerdictPacket
+import Foundation.Crypto.Semantics.Oracle.NativeVerdictPacketExecution
+import Foundation.Examples.MixedCircuitMACAnalysisNative
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitStatefulSimulation
+import Foundation.Examples.MixedCircuitMACNativeContinuation
+import Foundation.Examples.MixedCircuitMACNativeRepair
+import Foundation.Examples.MixedCircuitMACNativeContinuationGame
+import Foundation.Examples.MixedCircuitMACNativeRepairExample
+import Foundation.Examples.MixedCircuitUnifiedAssociationBasis
+import Foundation.Examples.MixedCircuitUnifiedAssociationDiagrams
+import Foundation.Examples.MixedCircuitUnifiedAssociationResolution
+import Foundation.Examples.MixedCircuitUnifiedAssociationContracts
+import Foundation.Logic.Polygraph.FourNaturality
+import Foundation.Examples.MixedCircuitWireFrameNaturality
+import Foundation.Examples.MixedCircuitRootWireDefinitions
+import Foundation.Examples.MixedCircuitRootWireElimination
+import Foundation.Logic.Polygraph.StructuralCartesianOldExpansion
+import Foundation.Logic.Polygraph.StructuralCartesianOldExpansionCounts
+import Foundation.Examples.MixedCircuitOldWireDefinitions
+import Foundation.Examples.MixedCircuitOldWireElimination
+import Foundation.Examples.MixedCircuitUnifiedOverlap
+import Foundation.Examples.MixedCircuitUnifiedContextOverlap
+import Foundation.Examples.MixedCircuitUnifiedFusionResolution
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitStatefulHigher
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitStatefulWiringUnion
+import Foundation.Examples.MixedCircuitStatefulStructural
+import Foundation.Examples.MixedCircuitStatefulWiringHigher
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitStateful
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitClocked
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitClockedFusion
+import Foundation.Examples.MixedCircuitSharedState
+import Foundation.Examples.MixedCircuitNativeContinuation
+import Foundation.Examples.MixedCircuitNativeMACGame
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramHistoryBoundary
+import Foundation.Constructions.Symmetric.RandomFunctionMACNativeOptimized
+import Foundation.Constructions.Symmetric.RandomFunctionMACNativeOptimizedExecution
+import Foundation.Constructions.Symmetric.RandomFunctionMACNativeOptimizedRefinement
+import Foundation.Crypto.Logic.General.QuantitativeObservationTransport
+import Foundation.Crypto.Logic.Polygraph.GameProofTransport
+import Foundation.Examples.RandomFunctionMACNativeOptimization
+import Foundation.Examples.RandomFunctionMACNativeOptimizationTransport
+import Foundation.Crypto.Logic.General.QuantitativeReduction
+import Foundation.Crypto.Logic.General.QuantitativeObservation
+import Foundation.Crypto.Logic.Polygraph.GameProofQuantitative
+import Foundation.Examples.GameProofMACNativeQuantitative
+import Foundation.Examples.MixedCircuitMACNativeReduction
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitComputational
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitComputationalHigher
+import Foundation.Examples.ComputationalOrientationBoundary
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitPathRepair
+import Foundation.Logic.Polygraph.StructuralCartesianTemplates
+import Foundation.Logic.Polygraph.StructuralCartesianNaturality
+import Foundation.Logic.Polygraph.StructuralCartesianArgumentCoverage
+import Foundation.Logic.Polygraph.StructuralCartesianLocalHigher
+import Foundation.Crypto.Logic.Polygraph.MixedCartesianLocalHigher
+import Foundation.Examples.CartesianLocalHigher
+import Foundation.Logic.Polygraph.StructuralTypedRouting
+import Foundation.Logic.Polygraph.StructuralCartesianPresentation
+import Foundation.Logic.Polygraph.StructuralCartesianNormalization
+import Foundation.Logic.Polygraph.StructuralCartesianRewriting
+import Foundation.Crypto.Logic.Polygraph.MixedCartesianWiring
+import Foundation.Examples.TypedCartesianWiring
+import Foundation.Examples.MixedCircuitFusionCompletion
+import Foundation.Examples.MixedCircuitFusionHigher
+import Foundation.Examples.MixedCircuitFusionProjection
+import Foundation.Examples.MixedCircuitFusionRepair
+import Foundation.Examples.MixedCircuitFusionExamples
+import Foundation.Examples.MixedCircuitStructuralOverlap
+import Foundation.Examples.MixedCircuitStructuralBranching
+import Foundation.Logic.Polygraph.HigherRotation
+import Foundation.Examples.MixedCircuitSuffixOverlap
+import Foundation.Examples.MixedCircuitFusionObstruction
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitContextualHigher
+import Foundation.Examples.MixedCircuitStructuralDiagrams
+import Foundation.Examples.MixedCircuitStructuralContext
+import Foundation.Logic.Polygraph.StructuralWireRewrite
+import Foundation.Examples.MixedCircuitStructuralRules
+import Foundation.Examples.MixedCircuitStructuralFork
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitPresentedHigher
+import Foundation.Examples.MixedCircuitStructuralCompletion
+import Foundation.Examples.MixedCircuitMACHigher
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitHigherNormalization
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitHigher
+import Foundation.Examples.MixedCircuitMACGuardedNormalization
+import Foundation.Examples.MixedCircuitMACNormalization
+import Foundation.Examples.MixedCircuitMACRoots
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitNormalization
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitRootResolution
+import Foundation.Examples.MixedCircuitMAC
+import Foundation.Crypto.Logic.Polygraph.MixedCircuitBranching
+import Foundation.Crypto.Logic.Polygraph.MixedCircuit
+import Foundation.Examples.GameProofOrdinaryMAC
+import Foundation.Crypto.Logic.Polygraph.GameProofOrdinaryErasure
+import Foundation.Logic.SharedInferenceDerivation
+import Foundation.Crypto.Logic.Polygraph.GameProofFiniteOrdinary
+import Foundation.Logic.SharedInferenceCompilation
+import Foundation.Crypto.Logic.Polygraph.GameProofEncoding
+import Foundation.Crypto.Logic.Polygraph.GameProofPresentation
+import Foundation.Crypto.Logic.Polygraph.GameProofShared
+import Foundation.Examples.GameProofGeneratedSharedMAC
+import Foundation.Logic.SharedInference
+import Foundation.Logic.SharedInferenceEvaluation
+import Foundation.Examples.GameProofSharedMAC
+import Foundation.Crypto.Logic.Polygraph.ComputationalComparison
+import Foundation.Crypto.Logic.Polygraph.GameProofComputational
+import Foundation.Examples.GameProofPRGComputational
+import Foundation.Examples.GameProofComputationalLossBoundary
+import Foundation.Crypto.Logic.Polygraph.GameProofNormalization
+import Foundation.Examples.GameProofMACNormalization
+import Foundation.Examples.GameProofNormalizationBoundary
+import Foundation.Crypto.Logic.Polygraph.GameProofRequirements
+import Foundation.Crypto.Logic.Polygraph.GameProofInterpretation
+import Foundation.Crypto.Logic.Polygraph.GameProofHigher
+import Foundation.Examples.GameProofHigherRequirements
+import Foundation.Examples.GameProofMACRequirements
+import Foundation.Examples.GameProofBudgetBoundary
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramHeadPull
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramPullCells
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramPullOverlap
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramCoherent
+import Foundation.Examples.StatefulDiagramCoherent
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramHorizontal
+import Foundation.Examples.StatefulDiagramHorizontal
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramCanonical
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramInverseCells
+import Foundation.Examples.StatefulDiagramCanonical
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramPathLaws
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramHeadExtraction
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramExchangeDecision
+import Foundation.Examples.StatefulDiagramNormalizationBoundary
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramHigherBoundary
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramSelfExchange
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramAnalysisTransport
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramHigher
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramProofSupport
+import Foundation.Examples.StatefulDiagramAnalysisTransport
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramSlice
+import Foundation.Crypto.Semantics.Oracle.StatefulDiagramExchange
+import Foundation.Examples.RandomFunctionMACStatefulDiagram
+import Foundation.Crypto.Semantics.Oracle.ChangeFrontier
+import Foundation.Examples.RandomFunctionMACChangeFrontier
+import Foundation.Logic.Polygraph.FiniteWiringCoherence
+import Foundation.Logic.Polygraph.FiniteWiringCoherenceBoundary
+import Foundation.Examples.RandomFunctionMACWiringCoherence
+import Foundation.Logic.Polygraph.FiniteWiring
+import Foundation.Logic.Polygraph.StructuralWiringCompilation
+import Foundation.Logic.Polygraph.StructuralWiringBoundary
+import Foundation.Crypto.Semantics.Oracle.FiniteWiringSwitch
+import Foundation.Examples.RandomFunctionMACFiniteWiring
+import Foundation.Crypto.Semantics.Oracle.SharedReference
+import Foundation.Crypto.Semantics.Oracle.SharedReferenceCache
+import Foundation.Crypto.Semantics.Oracle.SharedReferenceSwitch
+import Foundation.Examples.RandomFunctionMACSharedReferences
+import Foundation.Crypto.Semantics.Probability.Copyability
+import Foundation.Logic.Polygraph.StructuralTransport
+import Foundation.Examples.RandomFunctionMACStructuralTransport
+import Foundation.Logic.FiniteCodecDifference
+import Foundation.Crypto.Logic.Polygraph.RepresentationPatches
+import Foundation.Crypto.Semantics.Oracle.AutomaticRepresentationEdit
+import Foundation.Examples.RandomFunctionMACAutomaticEdit
+import Foundation.Logic.FiniteCodecRepair
+import Foundation.Crypto.Semantics.Oracle.IncrementalRepresentationEdit
+import Foundation.Examples.RandomFunctionMACIncrementalEdit
+import Foundation.Logic.FiniteCodecRestriction
+import Foundation.Crypto.Semantics.Oracle.RepresentationScope
+import Foundation.Crypto.Semantics.Oracle.ScopedRepresentationEdit
+import Foundation.Examples.RandomFunctionMACScopedEdit
+import Foundation.Examples.RandomFunctionMACGeneratedEdit
+import Foundation.Crypto.Semantics.Oracle.GeneratedRepresentationEdit
+import Foundation.Logic.FiniteCodecGenerator
+import Foundation.Examples.RandomFunctionMACCellCompilation
+import Foundation.Examples.InformationScheduleCellCompilation
+import Foundation.Logic.AdjacentReplay
+import Foundation.Examples.RandomFunctionMACRepresentationSwitch
+import Foundation.Crypto.Semantics.Oracle.RepresentationSwitch
+import Foundation.Examples.RandomFunctionMACQueryFootprint
+import Foundation.Crypto.Semantics.Oracle.QueryPrefix
+import Foundation.Crypto.Semantics.Oracle.RepresentationLocality
+import Foundation.Crypto.Semantics.Oracle.QueryFootprint
+import Foundation.Examples.InformationScheduleLocalRepairComparison
+import Foundation.Examples.InformationScheduleLocalRepair
+import Foundation.Examples.RandomFunctionMACInformationSchedule
+import Foundation.Examples.InformationScheduleBaseline
+import Foundation.Crypto.Meta.Polygraph.InformationScheduleCertificate
+import Foundation.Crypto.Logic.Polygraph.InformationScheduleCells
+import Foundation.Crypto.Semantics.Oracle.InformationSchedule
+import Foundation.Examples.RandomFunctionMACCausalRepair
+import Foundation.Examples.CausalCouplingRepair
+import Foundation.Crypto.Semantics.Probability.SelectedCouplingOrdinaryProgram
+import Foundation.Examples.RandomFunctionMACRepairSearch
+import Foundation.Examples.SelectedCouplingSearch
+import Foundation.Crypto.Semantics.Probability.SelectedCouplingSearch
+import Foundation.Examples.RandomFunctionMACRepresentationRepair
+import Foundation.Examples.RandomFunctionMACRepresentationGame
+import Foundation.Crypto.Semantics.Oracle.RandomOracleRepresentation
+import Foundation.Examples.RandomFunctionMACRepairNative
+import Foundation.Examples.RandomFunctionMACRepairGame
+import Foundation.Examples.SelectedCouplingRepairCertificate
+import Foundation.Crypto.Semantics.Probability.SelectedCouplingCertificate
+import Foundation.Examples.RandomFunctionMACCouplingRepair
+import Foundation.Examples.SelectedCouplingRepair
+import Foundation.Crypto.Semantics.Probability.SelectedCouplingContext
+import Foundation.Crypto.Semantics.Probability.SelectedCouplingTags
+import Foundation.Crypto.Semantics.Probability.SelectedCouplingRepair
+import Foundation.Crypto.Semantics.Probability.SelectedCouplingGraph
 import Foundation.Examples.PolygraphLogic
 import Foundation.Examples.PRGPolygraph
 import Foundation.Examples.PRGPolygraphCompatibility
+import Foundation.Examples.PolygraphCoherence
+import Foundation.Examples.PolygraphExperiments
+import Foundation.Examples.FinitePolygraphCoherence
+import Foundation.Examples.CartesianPolygraphCoherence
+import Foundation.Examples.PolygraphResourceImprovement
+import Foundation.Examples.PRGOptimized
+import Foundation.Examples.CertifiedPipeline
+import Foundation.Examples.StateCube
+import Foundation.Examples.PolygraphRandomOracle
+import Foundation.Examples.PolygraphOracle
+import Foundation.Examples.NativeOracleExecution
+import Foundation.Examples.NativeOraclePolicy
+import Foundation.Examples.RootedTransport
+import Foundation.Examples.ScheduleCertificate
+import Foundation.Examples.AffineTransportCertificate
+import Foundation.Examples.GameCoherenceMAC
+import Foundation.Crypto.Logic.Polygraph.GameCoherenceScope
+import Foundation.Examples.OracleProofEdits
+import Foundation.Examples.OracleProofEditsBaseline
+import Foundation.Examples.RandomFunctionMACNativeCaller
+import Foundation.Constructions.Symmetric.RandomFunctionMACNativeRequests
+import Foundation.Examples.RandomFunctionMACPosterior
+import Foundation.Examples.OraclePosteriorBaseline
+import Foundation.Examples.OraclePosteriorCells
+import Foundation.Examples.OracleRefreshCells
+import Foundation.Examples.OracleRefreshBaseline
+import Foundation.Examples.OracleInteractionMAC
+
+import Foundation.Crypto.Semantics.Oracle.NativeCompactRequest
+import Foundation.Constructions.Symmetric.RandomFunctionMACNativeInterface
+import Foundation.Constructions.Hash.NativeCompactMACQuery
+import Foundation.Constructions.Hash.NativeCompactMACPacket
+import Foundation.Constructions.Hash.NativeCompactMACService
+import Foundation.Examples.OracleInteractionReplayBaseline
+import Foundation.Examples.OracleInteractionReplayComparison
+
+import Foundation.Constructions.Hash.NativeCompactMACRound
+import Foundation.Constructions.Hash.NativeCompactMACExecution
+import Foundation.Constructions.Hash.NativeCompactMACExecutionCorrectness
+import Foundation.Examples.RandomFunctionMACNativeBackend
+
+import Foundation.Constructions.Hash.NativeCompactMACQueryLaw
+import Foundation.Constructions.Hash.NativeCompactMACObservation
+import Foundation.Constructions.Hash.NativeCompactMACTypedOracle
+import Foundation.Constructions.Hash.NativeCompactMACGame
+import Foundation.Examples.RandomFunctionMACNativeBackendSecurity
+
+import Foundation.Crypto.Semantics.Oracle.InteractionEncoding
+import Foundation.Examples.OracleInteractionEncodingBaseline
+import Foundation.Examples.OracleInteractionEncodingComparison
+import Foundation.Examples.OracleInteractionAdaptiveEncoding
 
 /-! Kernel axiom-dependency audit of reconstruction, interpretation, leaf
 accounting, quantitative security, and the actual execution certificates. -/
@@ -19,3 +379,9351 @@ accounting, quantitative security, and the actual execution certificates. -/
 #print axioms Foundation.Symmetric.Generator.Polygraph.secure
 #print axioms Foundation.Symmetric.Generator.Polygraph.run
 #print axioms Foundation.Symmetric.Generator.Polygraph.targetWitnesses_eq
+
+#print axioms Foundation.Logic.Polygraph.Cell.forestEquiv
+#print axioms Foundation.Logic.Polygraph.Cell.eq_iff_all_models
+#print axioms Foundation.Logic.Polygraph.Cell.tensor_seq
+#print axioms Foundation.Logic.Polygraph.Composition.Expr.terminating
+#print axioms Foundation.Logic.Polygraph.Composition.Expr.confluent
+#print axioms Foundation.Logic.Polygraph.Composition.Expr.normal_irreducible
+#print axioms Foundation.Logic.Polygraph.Composition.Expr.normalizePath
+#print axioms Foundation.Logic.Polygraph.NormalSquare.coherent
+#print axioms Foundation.Logic.Polygraph.Normalizer.coherent
+#print axioms Foundation.Logic.Polygraph.Examples.Coherence.pentagon
+#print axioms Foundation.Logic.Polygraph.Examples.Coherence.unitCoherence
+#print axioms Foundation.Logic.Polygraph.Presentation3.Cell3.eval_eq
+#print axioms Foundation.Logic.Polygraph.Translation.eval_preserving
+#print axioms Foundation.Logic.Polygraph.Translation.substitutePath
+#print axioms Foundation.Logic.Polygraph.Four.Path.eq_iff
+#print axioms CryptoLogic.Polygraph.Derivation.normalize_witnesses
+#print axioms CryptoLogic.Polygraph.Experiment.ExactPath.sound
+#print axioms CryptoLogic.Polygraph.Experiment.Hop.sound
+#print axioms CryptoLogic.Polygraph.Experiment.ComputationalPath.secure
+#print axioms CryptoLogic.Polygraph.Experiment.ComputationalPath.code_eq
+#print axioms CryptoLogic.Polygraph.Experiment.ComputationalPath.executes
+#print axioms CryptoLogic.Polygraph.Experiment.ComputationalPath.realizes
+#print axioms CryptoLogic.Polygraph.Experiment.Statistical.sound
+#print axioms CryptoLogic.Polygraph.Experiment.Statistical.comp_tree
+#print axioms CryptoLogic.Polygraph.FiniteHybrid.bounded
+#print axioms CryptoLogic.Polygraph.FiniteHybrid.loss
+#print axioms CryptoLogic.Polygraph.FiniteHybrid.witnesses_legacy
+#print axioms CryptoLogic.Polygraph.UniformHybrid.executed_negligible
+#print axioms CryptoLogic.Polygraph.UniformHybrid.executed_resources
+#print axioms Foundation.Symmetric.EncryptThenMAC.Polygraph.bounded
+#print axioms Foundation.Symmetric.EncryptThenMAC.Polygraph.proof_codes
+#print axioms Foundation.Symmetric.EncryptThenMAC.Polygraph.witnesses_preserved
+#print axioms Foundation.Symmetric.Generator.Polygraph.normalized_witnesses
+
+#print axioms Foundation.Logic.Polygraph.Composition.Finite.localJoin
+#print axioms Foundation.Logic.Polygraph.Composition.Finite.terminalCoherence
+#print axioms Foundation.Logic.Polygraph.Composition.Finite.stepNormalization
+#print axioms Foundation.Logic.Polygraph.Composition.Finite.coherent
+#print axioms Foundation.Logic.Polygraph.Examples.FiniteCoherence.pentagonGenerator
+#print axioms Foundation.Logic.Polygraph.Examples.FiniteCoherence.pentagon
+#print axioms Foundation.Logic.Polygraph.Examples.FiniteCoherence.reversedLoop
+#print axioms CryptoLogic.Polygraph.FiniteCoherence.witnesses_path
+#print axioms Foundation.Logic.Polygraph.Examples.FiniteCoherence.PRG.codes
+#print axioms Foundation.Logic.Polygraph.Examples.FiniteCoherence.PRG.loss
+#print axioms Foundation.Logic.Polygraph.Examples.FiniteCoherence.PRG.witnesses
+#print axioms Foundation.Logic.Polygraph.Examples.FiniteCoherence.EncryptThenMAC.codes
+#print axioms Foundation.Logic.Polygraph.Examples.FiniteCoherence.EncryptThenMAC.loss
+#print axioms Foundation.Logic.Polygraph.Examples.FiniteCoherence.EncryptThenMAC.witnesses
+
+#print axioms Foundation.Logic.Polygraph.Diagram.toForest_tupleAt_congr
+#print axioms Foundation.Logic.Polygraph.Cartesian.Generator.code
+#print axioms Foundation.Logic.Polygraph.Cartesian.stepSquare
+#print axioms Foundation.Logic.Polygraph.Cartesian.contract
+#print axioms Foundation.Logic.Polygraph.Cartesian.coherent
+#print axioms Foundation.Logic.Polygraph.Cartesian.interchange
+#print axioms Foundation.Logic.Polygraph.Cartesian.duplicateNatural
+#print axioms Foundation.Logic.Polygraph.Cartesian.discardNatural
+#print axioms Foundation.Logic.Polygraph.Cartesian.wiringComp
+#print axioms Foundation.Logic.Polygraph.Cartesian.tupleProjection
+#print axioms Foundation.Logic.Polygraph.Cartesian.tupleEta
+#print axioms CryptoLogic.Polygraph.CartesianCoherence.compare
+#print axioms CryptoLogic.Polygraph.CartesianCoherence.witnesses_path
+#print axioms Foundation.Logic.Polygraph.Examples.CartesianCoherence.tensorExchange
+#print axioms Foundation.Logic.Polygraph.Examples.CartesianCoherence.copyDelete
+#print axioms Foundation.Logic.Polygraph.Examples.CartesianCoherence.outputComparison
+#print axioms Foundation.Logic.Polygraph.Examples.CartesianCoherence.emptyLoop
+#print axioms Foundation.Logic.Polygraph.Examples.CartesianCoherence.distinctRules
+#print axioms Foundation.Logic.Polygraph.Examples.CartesianCoherence.PRG.comparison
+#print axioms Foundation.Logic.Polygraph.Examples.CartesianCoherence.PRG.codes
+#print axioms Foundation.Logic.Polygraph.Examples.CartesianCoherence.PRG.loss
+#print axioms Foundation.Logic.Polygraph.Examples.CartesianCoherence.PRG.witnesses
+#print axioms Foundation.Logic.Polygraph.Examples.CartesianCoherence.EncryptThenMAC.comparison
+#print axioms Foundation.Logic.Polygraph.Examples.CartesianCoherence.EncryptThenMAC.interpretations
+#print axioms Foundation.Logic.Polygraph.Examples.CartesianCoherence.EncryptThenMAC.codes
+#print axioms Foundation.Logic.Polygraph.Examples.CartesianCoherence.EncryptThenMAC.loss
+#print axioms Foundation.Logic.Polygraph.Examples.CartesianCoherence.EncryptThenMAC.witnesses
+
+#print axioms Foundation.Logic.Polygraph.InterpretationRelation.diagram
+#print axioms Foundation.Logic.Polygraph.InterpretationRelation.structural
+#print axioms Foundation.Logic.Polygraph.InterpretationRelation.expanded
+#print axioms CryptoLogic.General.ResourceImprovement.Implementation.executes
+#print axioms CryptoLogic.General.ResourceImprovement.Implementation.realizes
+#print axioms CryptoLogic.General.ResourceImprovement.Implementation.postcompose
+#print axioms CryptoLogic.General.ResourceImprovement.Implementation.comp_improves
+#print axioms CryptoLogic.General.ResourceImprovement.Implementation.comp_monotone
+#print axioms CryptoLogic.General.ResourceImprovement.Implementation.resources_eq_of_both
+#print axioms CryptoLogic.General.ResourceImprovement.Implementation.constrainImprovement
+#print axioms CryptoLogic.General.ResourceImprovement.optimized_bounded
+#print axioms CryptoLogic.General.ResourceImprovement.constrained_bounded
+#print axioms CryptoLogic.General.ResourceImprovement.Examples.fast_trace
+#print axioms CryptoLogic.General.ResourceImprovement.Examples.slow_trace
+#print axioms CryptoLogic.General.ResourceImprovement.Examples.slow_never_one
+#print axioms CryptoLogic.General.ResourceImprovement.Examples.improves
+#print axioms CryptoLogic.General.ResourceImprovement.Examples.not_reverse
+#print axioms CryptoLogic.General.ResourceImprovement.Examples.postcompose_fails
+#print axioms CryptoLogic.General.ResourceImprovement.Examples.suffix_not_monotone
+#print axioms CryptoLogic.General.ResourceImprovement.Examples.code_changed
+#print axioms CryptoLogic.General.ResourceImprovement.Examples.tight_bound
+#print axioms CryptoLogic.General.ResourceImprovement.Examples.Diagrams.all_diagrams
+#print axioms CryptoLogic.General.ResourceImprovement.Examples.Diagrams.routeComparison
+#print axioms CryptoLogic.General.ResourceImprovement.Examples.Diagrams.reordered_optimization
+
+#print axioms Machine.Masking.Fused.loading_eval
+#print axioms Machine.Masking.Fused.masked_prepare
+#print axioms Machine.Masking.Fused.running_eval
+#print axioms Machine.Masking.Fused.masked_eval
+#print axioms Machine.Masking.Fused.simulateStep_mem_support
+#print axioms Foundation.Symmetric.Generator.Optimized.eval_saved
+#print axioms Foundation.Symmetric.Generator.Optimized.time_saving
+#print axioms Foundation.Symmetric.Generator.Optimized.time_polynomial
+#print axioms Foundation.Symmetric.Generator.Optimized.implementation
+#print axioms Foundation.Symmetric.Generator.Optimized.improves
+#print axioms Foundation.Symmetric.Generator.Optimized.resources_strict
+#print axioms Foundation.Symmetric.Generator.Optimized.code_changed
+#print axioms Foundation.Symmetric.Generator.Optimized.binary
+#print axioms Foundation.Symmetric.Generator.Optimized.bounded
+#print axioms Foundation.Symmetric.Generator.Optimized.Polygraph.run
+#print axioms Foundation.Symmetric.Generator.Optimized.Polygraph.loss
+#print axioms Foundation.Symmetric.Generator.Optimized.Polygraph.bounded
+#print axioms Foundation.Symmetric.Generator.Optimized.Polygraph.resource_profiles
+#print axioms Foundation.Symmetric.Generator.Optimized.Polygraph.output_constraints
+#print axioms Foundation.Symmetric.Generator.Optimized.Polygraph.comparison
+#print axioms Foundation.Symmetric.Generator.Optimized.Polygraph.witnesses_path
+#print axioms CryptoLogic.General.CertifiedPipeline.code
+#print axioms CryptoLogic.General.CertifiedPipeline.executes
+#print axioms CryptoLogic.General.CertifiedPipeline.realizes
+#print axioms CryptoLogic.General.CertifiedPipeline.accumulated
+#print axioms CryptoLogic.General.CertifiedPipeline.polynomial_envelope
+#print axioms CryptoLogic.General.CertifiedPipeline.doubling
+#print axioms CryptoLogic.General.CertifiedPipeline.Examples.suffixHalt
+#print axioms CryptoLogic.General.CertifiedPipeline.Examples.emitted
+#print axioms CryptoLogic.General.CertifiedPipeline.Examples.arbitrary_depth_polynomial
+#print axioms CryptoLogic.General.CertifiedPipeline.Examples.emitted_not_constant
+#print axioms CryptoLogic.General.CertifiedPipeline.Examples.eliminate
+
+#print axioms Machine.Masking.eval_appendHalt
+#print axioms Machine.Masking.Fused.eval_appendHalt
+#print axioms Foundation.Symmetric.Generator.Optimized.Pipeline.eval_pass
+#print axioms Foundation.Symmetric.Generator.Optimized.Pipeline.eval_compiler
+#print axioms Foundation.Symmetric.Generator.Optimized.Pipeline.administrative
+#print axioms Foundation.Symmetric.Generator.Optimized.Pipeline.compiler_eq
+#print axioms Foundation.Symmetric.Generator.Optimized.Pipeline.resources
+#print axioms Foundation.Symmetric.Generator.Optimized.Pipeline.uniform_extraction
+
+#print axioms Foundation.Logic.Polygraph.StateCube.ofFamily
+#print axioms Foundation.Logic.Polygraph.StateCube.ofCommuting
+#print axioms Foundation.Logic.Polygraph.StateCube.commute
+#print axioms Foundation.Logic.Polygraph.StateCube.run_perm
+#print axioms Foundation.Logic.Polygraph.StateCube.vertex_run
+#print axioms Foundation.Logic.Polygraph.StateCube.comparison_sound
+#print axioms Foundation.Logic.Polygraph.StateCube.comparison_complete
+#print axioms Foundation.Logic.Polygraph.StateCube.comparison_of_same_changes
+#print axioms Foundation.Logic.Polygraph.StateCube.query_order
+#print axioms Foundation.Logic.Polygraph.StateCube.query_insert
+#print axioms Foundation.Logic.Polygraph.StateCube.run_same_changes
+#print axioms Foundation.Logic.Polygraph.StateCube.assignment_unique
+#print axioms Foundation.Logic.Polygraph.StateCube.runCount_eq
+#print axioms Foundation.Logic.Polygraph.StateCube.query_transformations
+#print axioms Foundation.Logic.Polygraph.StateCube.runCost_state
+#print axioms Foundation.Logic.Polygraph.StateCube.query_cost_le
+#print axioms CryptoLogic.Polygraph.StateCube.Measured.ofFamily
+#print axioms CryptoLogic.Polygraph.StateCube.Measured.fromRoot
+#print axioms CryptoLogic.Polygraph.StateCube.Measured.query_law
+#print axioms CryptoLogic.Polygraph.StateCube.Measured.joint_marginal
+#print axioms CryptoLogic.Polygraph.StateCube.Measured.joint_edges
+#print axioms CryptoLogic.Polygraph.StateCube.Measured.joint_vertices
+#print axioms CryptoLogic.Polygraph.StateCube.Measured.joint_edge_law
+#print axioms CryptoLogic.Polygraph.StateCube.Measured.joint_unique
+#print axioms CryptoLogic.Polygraph.StateCube.Measured.common_bad_bound
+#print axioms CryptoLogic.Polygraph.StateCube.Measured.common_bad_between
+#print axioms CryptoLogic.Polygraph.StateCube.Measured.commonBadHop
+#print axioms Foundation.Logic.Polygraph.Examples.StateCube.flip_commutes
+#print axioms Foundation.Logic.Polygraph.Examples.StateCube.compared
+#print axioms Foundation.Logic.Polygraph.Examples.StateCube.Growing.allocate_square
+#print axioms Foundation.Logic.Polygraph.Examples.StateCube.Growing.order_independent
+#print axioms Foundation.Logic.Polygraph.Examples.StateCube.Growing.global_marginal
+#print axioms Foundation.Logic.Polygraph.Examples.StateCube.bad_probability
+#print axioms Foundation.Logic.Polygraph.Examples.StateCube.shared_bad_bound
+#print axioms Foundation.Logic.Polygraph.Examples.StateCube.endpoint_gap
+#print axioms Foundation.Logic.Polygraph.Examples.StateCube.Obstruction.equal_left
+#print axioms Foundation.Logic.Polygraph.Examples.StateCube.Obstruction.equal_right
+#print axioms Foundation.Logic.Polygraph.Examples.StateCube.Obstruction.opposite_left
+#print axioms Foundation.Logic.Polygraph.Examples.StateCube.Obstruction.opposite_right
+#print axioms Foundation.Logic.Polygraph.Examples.StateCube.Obstruction.no_joint
+
+#print axioms CryptoOracle.RandomOracle.Cube.query_eq
+#print axioms CryptoOracle.RandomOracle.Cube.snapshot_view
+#print axioms CryptoOracle.RandomOracle.Cube.prefetch_run
+#print axioms CryptoOracle.RandomOracle.Cube.coordinate_final
+#print axioms CryptoOracle.RandomOracle.Cube.coordinate_distinct_bound
+#print axioms CryptoOracle.RandomOracle.Cube.eager_run_snapshot
+#print axioms CryptoOracle.RandomOracle.Cube.execution_marginal
+#print axioms CryptoOracle.RandomOracle.Cube.execution_public
+#print axioms CryptoOracle.RandomOracle.Cube.execution_edges
+#print axioms CryptoOracle.RandomOracle.Cube.coupled_lazy
+#print axioms CryptoOracle.RandomOracle.Cube.coupled_cube
+#print axioms CryptoOracle.RandomOracle.Cube.coupled_cache
+#print axioms CryptoOracle.RandomOracle.Cube.lazy_run_snapshot
+#print axioms CryptoOracle.RandomOracle.Cube.prefetch_public
+#print axioms CryptoOracle.RandomOracle.Cube.public_correct
+#print axioms CryptoOracle.RandomOracle.Cube.prefetchPath
+#print axioms Foundation.Hash.Native.SimulatorLookup.Polygraph.coupled_lookup
+#print axioms Foundation.Hash.Native.SimulatorLookup.Polygraph.coupled_lookup_first
+#print axioms Foundation.Hash.Native.SimulatorLookup.Polygraph.coupled_lookup_budget
+#print axioms CryptoOracle.RandomOracle.PolygraphExamples.probe_queries
+#print axioms CryptoOracle.RandomOracle.PolygraphExamples.all_prefetches_same_public
+#print axioms CryptoOracle.RandomOracle.PolygraphExamples.exact_prefetch
+#print axioms CryptoOracle.RandomOracle.PolygraphExamples.lazy_marginal
+
+#print axioms Foundation.Hash.Native.PolygraphOracle.steps_budget
+#print axioms Foundation.Hash.Native.PolygraphOracle.packet_law
+#print axioms Foundation.Hash.Native.PolygraphOracle.round_complete
+#print axioms Foundation.Hash.Native.PolygraphOracle.physicalRound_eq
+#print axioms Foundation.Hash.Native.PolygraphOracle.physicalRound_law
+#print axioms Foundation.Hash.Native.PolygraphOracle.physicalRound_retained
+#print axioms Foundation.Hash.Native.PolygraphOracle.physicalRound_costed
+#print axioms Foundation.Hash.Native.PolygraphOracle.erase_cost
+#print axioms Foundation.Hash.Native.PolygraphOracle.state_from_trace
+#print axioms Foundation.Hash.Native.PolygraphOracle.reconstruct_cost
+#print axioms Foundation.Hash.Native.PolygraphOracle.coupledCost_execution
+#print axioms Foundation.Hash.Native.PolygraphOracle.coupledCost_cube
+#print axioms Foundation.Hash.Native.PolygraphOracle.coupledCost_cache
+#print axioms Foundation.Hash.Native.PolygraphOracle.cumulative_bound
+#print axioms Foundation.Hash.Native.PolygraphOracle.empty_bound
+#print axioms Foundation.Hash.Native.PolygraphOracle.coupledCost_bound
+#print axioms Foundation.Hash.Native.PolygraphOracle.totalBudget_polynomial
+#print axioms Foundation.Hash.Native.PolygraphOracle.Examples.repeated_queries
+#print axioms Foundation.Hash.Native.PolygraphOracle.Examples.repeated_erasure
+#print axioms Foundation.Hash.Native.PolygraphOracle.Examples.empty_steps
+#print axioms Foundation.Hash.Native.PolygraphOracle.Examples.hit_steps
+#print axioms Foundation.Hash.Native.PolygraphOracle.Examples.repeated_law
+#print axioms Foundation.Hash.Native.PolygraphOracle.Examples.repeated_exact
+#print axioms Foundation.Hash.Native.PolygraphOracle.Examples.repeated_cost
+
+#print axioms Foundation.Hash.Native.NativeOracleExecution.response_layout
+#print axioms Foundation.Hash.Native.NativeOracleExecution.round_layout
+#print axioms Foundation.Hash.Native.NativeOracleExecution.round_costed
+#print axioms Foundation.Hash.Native.NativeOracleExecution.round_operational
+#print axioms Foundation.Hash.Native.NativeOracleExecution.stage_reachable
+#print axioms Foundation.Hash.Native.NativeOracleExecution.checkedStage_reachable
+#print axioms Foundation.Hash.Native.NativeOracleExecution.execution_budget
+#print axioms Foundation.Hash.Native.NativeOracleExecution.execution_succ
+#print axioms Foundation.Hash.Native.NativeOracleExecution.execution_reachable
+#print axioms Foundation.Hash.Native.NativeOracleExecution.execution_law
+#print axioms Foundation.Hash.Native.NativeOracleExecution.execution_cost_bound
+#print axioms Foundation.Hash.Native.NativeOracleExecution.halted_absorbing
+#print axioms Foundation.Hash.Native.NativeOracleExecution.execution_final
+#print axioms Foundation.Hash.Native.NativeOracleExecution.selection_budget
+#print axioms Foundation.Hash.Native.NativeOracleExecution.wholeBudget_polynomial
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Choice.map_law
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Choice.support
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.timedChoice_law
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.exportNext_law
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.loadNext_law
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.packetChoice_law
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.next_law
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.paths_support
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.checked_paths
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.checked_before
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.first_halt_exact
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.one_before_unfinished
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.whole_run
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.whole_run_correct
+
+#print axioms Foundation.Hash.Native.NativeOracleExecution.service_lazy
+#print axioms Foundation.Hash.Native.NativeOracleExecution.service_lazy_costed
+
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.paths_visited
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.eval_visited
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.reachable_visited
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.sourceChoice_law
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.sourceFrames_support
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.checked_sources
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.source_facts
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.table_bound
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.request_format
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.caller_complete
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.selection
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.round_closed
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.round_progress
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.policy
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.initialSession
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.start
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.checked_progress
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.halt_persists
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.trace_progress
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.three_rounds_stop
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.certified_execution
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.certified_correct
+#print axioms Foundation.Hash.Native.NativeOracleExecution.Examples.Certified.certified_result
+
+#print axioms CryptoLogic.Polygraph.RootedTransport.Path.run_nil
+#print axioms CryptoLogic.Polygraph.RootedTransport.Path.run_snoc
+#print axioms CryptoLogic.Polygraph.RootedTransport.Model.reconstruct
+#print axioms CryptoLogic.Polygraph.RootedTransport.Model.bad_forces_failure
+#print axioms CryptoLogic.Polygraph.RootedTransport.Model.route_law
+#print axioms CryptoLogic.Polygraph.RootedTransport.Model.joint_marginal
+#print axioms CryptoLogic.Polygraph.RootedTransport.Model.joint_failure
+#print axioms CryptoLogic.Polygraph.RootedTransport.Model.failure_lower_bound
+#print axioms CryptoLogic.Polygraph.RootedTransport.Model.failure_optimal
+#print axioms CryptoLogic.Polygraph.RootedTransport.Model.compatible_joint_iff
+#print axioms CryptoLogic.Polygraph.RootedTransport.Model.joint_unique
+#print axioms CryptoLogic.Polygraph.RootedTransport.Model.route_independent
+#print axioms CryptoLogic.Polygraph.RootedTransport.Examples.preserve
+#print axioms CryptoLogic.Polygraph.RootedTransport.Examples.projection_not_injective
+#print axioms CryptoLogic.Polygraph.RootedTransport.Examples.compatible_iff
+#print axioms CryptoLogic.Polygraph.RootedTransport.Examples.bad_probability
+#print axioms CryptoLogic.Polygraph.RootedTransport.Examples.optimal_failure
+#print axioms CryptoLogic.Polygraph.RootedTransport.Examples.unavoidable_failure
+#print axioms CryptoLogic.Polygraph.RootedTransport.Examples.every_vertex_correct
+
+#print axioms Foundation.Logic.Polygraph.ScheduleCertificate.order_length
+#print axioms Foundation.Logic.Polygraph.ScheduleCertificate.order_perm
+#print axioms Foundation.Logic.Polygraph.ScheduleCertificate.order_injective
+#print axioms Foundation.Logic.Polygraph.ScheduleCertificate.schedule_count
+#print axioms Foundation.Logic.Polygraph.ScheduleCertificate.LocalCertificate.all_orders
+#print axioms Foundation.Logic.Polygraph.ScheduleCertificate.LocalCertificate.comparison
+#print axioms Foundation.Logic.Polygraph.ScheduleCertificate.local_slot_count
+#print axioms Foundation.Logic.Polygraph.ScheduleCertificate.shared_size
+#print axioms Foundation.Logic.Polygraph.ScheduleCertificate.SharedCertificate.sound
+#print axioms Foundation.Logic.Polygraph.ScheduleCertificate.ExplicitCertificate.rows_lower_bound
+#print axioms Foundation.Logic.Polygraph.ScheduleCertificate.ExplicitCertificate.size_eq
+#print axioms Foundation.Logic.Polygraph.ScheduleCertificate.ExplicitCertificate.size_lower_bound
+#print axioms Foundation.Logic.Polygraph.ScheduleCertificate.enumerate_size
+#print axioms Foundation.Logic.Polygraph.ScheduleCertificate.succ_lt_factorial
+#print axioms Foundation.Logic.Polygraph.ScheduleCertificate.smaller_than_enumeration
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.checkedAttack_queries
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.checkedAttack_run
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.checked_lazy
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.game_lazy
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.secure
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.keyed_secure
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.certificate_cube
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.scheduled_state
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.scheduled_game
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.all_schedules_secure
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.exposure_steps
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.keyed_all_schedules
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.security_certificate_separation
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.Examples.attack_queries
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.Examples.reduction_queries
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.Examples.forgery_bound
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.Examples.explicit_rows
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.Examples.explicit_nodes
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.Examples.shared_slots
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.Examples.strict_separation
+#print axioms Foundation.Symmetric.RandomFunctionMACSchedules.Examples.keyed_forgery_bound
+
+#print axioms CryptoLogic.Polygraph.MaskedTransport.uniform_event_count
+#print axioms CryptoLogic.Polygraph.MaskedTransport.uniform_first
+#print axioms CryptoLogic.Polygraph.MaskedTransport.preserve
+#print axioms CryptoLogic.Polygraph.MaskedTransport.compatible_iff
+#print axioms CryptoLogic.Polygraph.MaskedTransport.bad_iff
+#print axioms CryptoLogic.Polygraph.MaskedTransport.obstruction_probability
+#print axioms CryptoLogic.Polygraph.MaskedTransport.unavoidable_obstruction
+#print axioms CryptoLogic.Polygraph.MaskedTransport.compatible_joint_iff
+#print axioms CryptoLogic.Polygraph.MaskedTransport.same_vertex_laws
+#print axioms CryptoLogic.Polygraph.MaskedTransport.no_marginal_only_checker
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Formula.valid_correct
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Formula.diagram_valid_iff
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Formula.obstruction_count
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Formula.checker_transfer
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Affine.eval_normal_form
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Affine.eval_zero
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Affine.eval_basis
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Affine.probes_length
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Affine.basis_complete
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Affine.counterexample_sound
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Affine.counterexample_none_iff
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Affine.diagnosis_correct
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Affine.obstruction_certificate
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Affine.evaluateCount_eq
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Affine.probeVisits_eq
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Affine.searchCount_result
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Affine.searchCount_le
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Affine.checker_visits_le
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Examples.cancelled_check
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Examples.cancelled_joint
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Examples.missing_counterexample
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Examples.missing_obstruction
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Examples.cancelled_visits
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Examples.missing_visits
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Examples.nonlinear_fools_basis
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Examples.nonlinear_not_valid
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Examples.nonlinear_count
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Examples.nonlinear_obstruction_probability
+#print axioms CryptoLogic.Polygraph.AffineTransportCertificate.Examples.nonlinear_unavoidable
+
+/- Directed stochastic game transformations and retained execution data. -/
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Step.joint_left
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Step.joint_right
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Step.hop
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Step.ofMap
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Step.exact
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Path.preserve
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Path.sound
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Path.joint_left
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Path.joint_right
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Cell4.sound
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Cell4.joint_eq
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Cell4.retained_law
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Cell4.deterministic_output
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Step.mismatch_bound
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Path.triple_left
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Path.triple_right
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Path.triple_endpoints
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Path.mismatch_bound
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.product_left
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.product_right
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.product_swap
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Step.swap
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Step.left_preserve
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Step.left_joint_project
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Step.left
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Path.left_kernel
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Path.left_loss
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Path.right_kernel
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Path.right_loss
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Path.parallel_kernel
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Path.parallel_loss
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Cell4.exchange
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Cell4.left
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Cell4.right
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Cell4.parallel
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.sample
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.eraseSample
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.sampleErase
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.copy
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.eraseCopy
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.copyErase
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.exactRoutes
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.constantMap
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Certified.interchange
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Certified.witness_law
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Certified.alternate_witness_law
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Certified.edited_witness_law
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Certified.loss_preserved
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Certified.execution_preserved
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Certified.transformed_advantage_bound
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.DiagramBridge.derivation_eval
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.DiagramBridge.evaluate_diagram
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.DiagramBridge.structural
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.DiagramBridge.edit_comparison
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.DiagramBridge.edited_kernel
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.DiagramBridge.edited_loss
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.DiagramBridge.edited_joint
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.DiagramBridge.edited_bound
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.DiagramBridge.edited_mismatch_bound
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.replacement_loss
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.replacement_gap
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.positiveExchange
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.positive_exchange_loss
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.sampleThenErase
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.copyThenErase
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.sampleExchangeRoutes
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.no_identity_flip_comparison
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.mixedEdits
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.mixed_kernel
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.certifiedExchange
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.certified_loss
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.MAC.full_law_eq
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.MAC.full_security
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.MAC.schedule_kernel
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.MAC.schedule_loss
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.MAC.scheduleTriangle
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.MAC.eliminateForgery
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.MAC.statisticalExchange
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Examples.MAC.elimination_disagreement
+
+/- Scope checks distinguish interface soundness from a novelty claim. -/
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Scope.cell_iff_comparison
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Scope.cell_iff_kernel_loss
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Scope.edits_iff_comparison
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Scope.registerExchange
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Scope.certified_exchange_specializes
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Scope.losing_probability
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Scope.eliminate
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Scope.elimination_iff_bound
+
+/- Restricted oracle edits, reconstructed MAC bounds, and negative controls. -/
+#print axioms CryptoOracle.ProofEdits.Command.finish_result
+#print axioms CryptoOracle.ProofEdits.Command.recall_queries
+#print axioms CryptoOracle.ProofEdits.Command.remember_queries
+#print axioms CryptoOracle.ProofEdits.CacheLaws.repeatStable
+#print axioms CryptoOracle.ProofEdits.lazy_cache_laws
+#print axioms CryptoOracle.ProofEdits.eager_cache_laws
+#print axioms CryptoOracle.ProofEdits.Command.recall_sound
+#print axioms CryptoOracle.ProofEdits.Edit.sound
+#print axioms CryptoOracle.ProofEdits.Command.rememberEdit
+#print axioms CryptoOracle.ProofEdits.Edit.posterior_square
+#print axioms CryptoOracle.ProofEdits.Edit.sampling_square
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.routes
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.cachedRoutes
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.before_full
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.Covered.fresh
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.Covered.query
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.verify_bound
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.before_bound
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.after_bound
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.cached_bound
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.distinguisher_eq
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.distinguisher_queries
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.ideal_bound
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.keyed_bound
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.cachedDistinguisher_queries
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.cached_family_eq
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.cached_ideal_bound
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.cached_keyed_bound
+#print axioms CryptoOracle.ProofEdits.Examples.ordinary_compile_eq
+#print axioms CryptoOracle.ProofEdits.Examples.adaptive_posterior_square
+#print axioms CryptoOracle.ProofEdits.Examples.cached_adaptive_posterior_square
+#print axioms CryptoOracle.ProofEdits.Examples.cached_adaptive_bound
+#print axioms CryptoOracle.ProofEdits.Examples.cached_adaptive_reduction_queries
+#print axioms CryptoOracle.ProofEdits.Examples.cannot_move_test_across_same_record
+#print axioms CryptoOracle.ProofEdits.Examples.uncovered_not_bounded
+#print axioms CryptoOracle.ProofEdits.Examples.recall_needs_cache
+#print axioms CryptoOracle.ProofEdits.Examples.recall_compile_ne
+
+/- Elementary cache-fact edits, restricted overlap cells and ordinary baseline. -/
+#print axioms CryptoOracle.ProofEdits.knows_nil
+#print axioms CryptoOracle.ProofEdits.Knows.query
+#print axioms CryptoOracle.ProofEdits.LocalEdit.sound
+#print axioms CryptoOracle.ProofEdits.Command.recallLocalEdit
+#print axioms CryptoOracle.ProofEdits.Command.rememberLocalEdit
+#print axioms CryptoOracle.ProofEdits.Edit.expand
+#print axioms CryptoOracle.ProofEdits.LocalEdit.posterior_square
+#print axioms CryptoOracle.ProofEdits.LocalEdit.sampling_square
+#print axioms CryptoOracle.ProofEdits.LocalEdit.recordCachedLeft
+#print axioms CryptoOracle.ProofEdits.LocalEdit.recordCachedRight
+#print axioms CryptoOracle.ProofEdits.LocalEdit.freshCachedLeft
+#print axioms CryptoOracle.ProofEdits.LocalEdit.freshCachedRight
+#print axioms CryptoOracle.ProofEdits.LocalGames.transition
+#print axioms CryptoOracle.ProofEdits.LocalGames.path
+#print axioms CryptoOracle.ProofEdits.LocalGames.path_kernel
+#print axioms CryptoOracle.ProofEdits.LocalGames.path_loss
+#print axioms CryptoOracle.ProofEdits.LocalGames.comparison
+#print axioms CryptoOracle.ProofEdits.LocalGames.cell
+#print axioms CryptoOracle.ProofEdits.LocalGames.cell_joint
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.localRoutes
+#print axioms Foundation.Symmetric.RandomFunctionMACProofEdits.localCachedRoutes
+#print axioms CryptoOracle.ProofEdits.Examples.elementary_adaptive_posterior_square
+#print axioms CryptoOracle.ProofEdits.Examples.separatedElementary
+#print axioms CryptoOracle.ProofEdits.Examples.conflicting_facts_unreachable
+#print axioms CryptoOracle.ProofEdits.Examples.cannot_force_unknown_response
+#print axioms CryptoOracle.ProofEdits.Examples.force_known_response
+#print axioms CryptoOracle.ProofEdits.Examples.record_cache_cell
+#print axioms CryptoOracle.ProofEdits.Examples.record_cache_joint
+#print axioms CryptoOracle.ProofEdits.Baseline.compile_before_after
+#print axioms CryptoOracle.ProofEdits.Baseline.remember_sound
+#print axioms CryptoOracle.ProofEdits.Baseline.cached_eq
+#print axioms CryptoOracle.ProofEdits.Baseline.cached_posterior
+
+/- Same MAC's native code, exact initial exchange and symbolic response copy. -/
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.message_roundtrip
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.tag_roundtrip
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.message_width
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.tag_width
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.packet_response_width
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.adapt_packet
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.packet_run
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.packet_result
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.final_fresh
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.target_eq_checked
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.packet_queries
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.packet_ideal_bound
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.code_length
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.call_addresses
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.forward_code
+#print axioms CryptoOracle.Interactive.NativeDeterministic.run_add
+#print axioms CryptoOracle.Interactive.NativeDeterministic.next_sound
+#print axioms CryptoOracle.Interactive.NativeDeterministic.run_sound
+#print axioms CryptoOracle.Interactive.QueryTransfer.fixed_response_call
+#print axioms CryptoOracle.Interactive.NativeCopyBlock.checked
+#print axioms CryptoOracle.Interactive.NativeCopyBlock.timed
+#print axioms CryptoOracle.Interactive.NativeCopyBlock.many_checked
+#print axioms CryptoOracle.Interactive.NativeCopyBlock.many_timed
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.first_setup_checked
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.first_setup_native
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.initial_step
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.first_setup
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.first_call_position
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.first_transfer
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.first_query_run
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.copy_locations
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.saved_bit_run
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.saved_tag_bits_run
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Examples.sixteen_paths_checked
+
+/- Universal whole-caller execution, actual stopping, request formats and security. -/
+#print axioms CryptoOracle.Interactive.NativeDeterministic.finish_spec
+#print axioms CryptoOracle.Interactive.NativeDeterministic.finish_after_run
+#print axioms CryptoOracle.Interactive.NativeDeterministic.finish_timed
+#print axioms CryptoOracle.Interactive.NativeCompareBlock.halt_checked
+#print axioms CryptoOracle.Interactive.NativeCompareBlock.match_checked
+#print axioms CryptoOracle.Interactive.NativeCompareBlock.mismatch_checked
+#print axioms CryptoOracle.Interactive.NativeCompareBlock.checked
+#print axioms CryptoOracle.Interactive.NativeCompareBlock.decision
+#print axioms CryptoOracle.Interactive.Reification.step_trace
+#print axioms CryptoOracle.Interactive.Reification.eval_trace
+#print axioms CryptoOracle.Interactive.Reification.extend_prefix
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.second_setup_checked
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.third_setup_checked
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.last_setup_checked
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.save_enter_checked
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.save_rewind_checked
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.save_tag_checked
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.save_tag_run
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.second_setup_run
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.third_setup_run
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.last_setup_run
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.second_transfer
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.third_transfer
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.last_transfer
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.second_query_run
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.third_query_run
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.last_query_run
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.select_candidate_checked
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.select_candidate_run
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.comparison_width
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.comparison_candidates
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.comparison_actuals
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.compare_locations
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.accept_location
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.reject_location
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.comparison_enter_checked
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.comparison_checked
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.comparison_full_checked
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.comparison_halts
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.comparison_decision
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.comparison_run
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.first_given_coin_run
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.save_second_run
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.after_coin_run
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.whole_run
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.execution_properties
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.whole_halts_queries
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.haltsWithin
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.observation_law
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.verdict_law
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.family_game_eq
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.ideal_security
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.keyed_security
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.extend_encoded
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.execution_encoded
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.prefix_encoded
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Native.awaiting_format
+
+/- Chosen eager/lazy joint witnesses, reconstruction obstruction and ordinary baseline. -/
+#print axioms CryptoOracle.RandomOracle.Posterior.shared_left
+#print axioms CryptoOracle.RandomOracle.Posterior.shared_right
+#print axioms CryptoOracle.RandomOracle.Posterior.reconstructed_left
+#print axioms CryptoOracle.RandomOracle.Posterior.reconstructed_right
+#print axioms CryptoOracle.RandomOracle.Posterior.reserve_fresh
+#print axioms CryptoOracle.RandomOracle.Posterior.reserve_known
+#print axioms CryptoOracle.RandomOracle.Posterior.event_bind_constant
+#print axioms CryptoOracle.RandomOracle.Posterior.reconstructed_agreement
+#print axioms CryptoOracle.RandomOracle.Posterior.shared_agreement
+#print axioms CryptoOracle.RandomOracle.Posterior.reconstructed_ne_shared
+#print axioms CryptoOracle.RandomOracle.Posterior.reconstructWith_agreement
+#print axioms CryptoOracle.RandomOracle.Posterior.reconstructWith_ne_shared
+#print axioms CryptoOracle.RandomOracle.Posterior.retained_eager
+#print axioms CryptoOracle.RandomOracle.Posterior.eager_full
+#print axioms CryptoOracle.RandomOracle.Posterior.completion_right
+#print axioms CryptoOracle.RandomOracle.Posterior.completion_left
+#print axioms CryptoOracle.RandomOracle.Posterior.completion_related
+#print axioms CryptoOracle.ProofEdits.PosteriorCells.completion_eq
+#print axioms CryptoOracle.ProofEdits.PosteriorCells.eager_before
+#print axioms CryptoOracle.ProofEdits.PosteriorCells.lazy_before
+#print axioms CryptoOracle.ProofEdits.PosteriorCells.eager_after
+#print axioms CryptoOracle.ProofEdits.PosteriorCells.lazy_after
+#print axioms CryptoOracle.ProofEdits.PosteriorCells.compatible
+#print axioms CryptoOracle.ProofEdits.PosteriorCells.same_endpoints
+#print axioms Foundation.Symmetric.RandomFunctionMACPosterior.avoids_trace
+#print axioms Foundation.Symmetric.RandomFunctionMACPosterior.attack_avoids
+#print axioms Foundation.Symmetric.RandomFunctionMACPosterior.signing_fresh
+#print axioms Foundation.Symmetric.RandomFunctionMACPosterior.left_marginal
+#print axioms Foundation.Symmetric.RandomFunctionMACPosterior.right_marginal
+#print axioms Foundation.Symmetric.RandomFunctionMACPosterior.restored_verification_agreement
+#print axioms Foundation.Symmetric.RandomFunctionMACPosterior.kept_verification_agreement
+#print axioms Foundation.Symmetric.RandomFunctionMACPosterior.distinct_couplings
+#print axioms Foundation.Symmetric.RandomFunctionMACPosterior.actual_eager_marginal
+#print axioms Foundation.Symmetric.RandomFunctionMACPosterior.any_restoration_agreement
+#print axioms Foundation.Symmetric.RandomFunctionMACPosterior.any_restoration_not_shared
+#print axioms CryptoOracle.ProofEdits.Baseline.cached_completion_eq
+#print axioms CryptoOracle.ProofEdits.Baseline.cached_function_state
+#print axioms Foundation.Symmetric.RandomFunctionMACPosteriorCells.before_eager
+#print axioms Foundation.Symmetric.RandomFunctionMACPosteriorCells.before_lazy
+#print axioms Foundation.Symmetric.RandomFunctionMACPosteriorCells.after_eager
+#print axioms Foundation.Symmetric.RandomFunctionMACPosteriorCells.after_lazy
+#print axioms Foundation.Symmetric.RandomFunctionMACPosteriorCells.same_function
+
+/- Restricted nonidentity refresh diagrams, resource improvements and diagram replay. -/
+#print axioms CryptoOracle.ProofEdits.Refresh.run_append
+#print axioms CryptoOracle.ProofEdits.Refresh.step_exchange
+#print axioms CryptoOracle.ProofEdits.Refresh.step_duplicate
+#print axioms CryptoOracle.ProofEdits.Refresh.reserve_preserve
+#print axioms CryptoOracle.ProofEdits.Refresh.step_preserve
+#print axioms CryptoOracle.ProofEdits.Refresh.run_preserve
+#print axioms CryptoOracle.ProofEdits.Refresh.run_history
+#print axioms CryptoOracle.ProofEdits.Refresh.run_untouched
+#print axioms CryptoOracle.ProofEdits.Refresh.joint_left
+#print axioms CryptoOracle.ProofEdits.Refresh.joint_right
+#print axioms CryptoOracle.ProofEdits.Refresh.joint_last_agreement
+#print axioms CryptoOracle.ProofEdits.Refresh.joint_untouched_agreement
+#print axioms CryptoOracle.ProofEdits.Refresh.Cell.sound
+#print axioms CryptoOracle.ProofEdits.Refresh.Cell.perm
+#print axioms CryptoOracle.ProofEdits.Refresh.Cell.nonempty_of_perm
+#print axioms CryptoOracle.ProofEdits.Refresh.cell_iff_perm
+#print axioms CryptoOracle.ProofEdits.Refresh.Cell.draws
+#print axioms CryptoOracle.ProofEdits.Refresh.Improvement.sound
+#print axioms CryptoOracle.ProofEdits.Refresh.Improvement.draws
+#print axioms CryptoOracle.ProofEdits.Refresh.Cell.joint_eq
+#print axioms CryptoOracle.ProofEdits.Refresh.Cell.continuation
+#print axioms CryptoOracle.ProofEdits.Refresh.Games.interpret_kernel
+#print axioms CryptoOracle.ProofEdits.Refresh.Games.interpret_loss
+#print axioms CryptoOracle.ProofEdits.Refresh.Games.interpret_joint
+#print axioms CryptoOracle.ProofEdits.Refresh.Certificate.accepts_sound
+#print axioms CryptoOracle.ProofEdits.Refresh.Certificate.rejects_nonpermutation
+#print axioms CryptoOracle.ProofEdits.Refresh.Certificate.swapAt_nodes
+#print axioms CryptoOracle.ProofEdits.Refresh.Certificate.replay_nodes
+#print axioms Foundation.Symmetric.RandomFunctionMACRefresh.attack_avoids_six
+#print axioms Foundation.Symmetric.RandomFunctionMACRefresh.six_fresh
+#print axioms Foundation.Symmetric.RandomFunctionMACRefresh.swap_kernel
+#print axioms Foundation.Symmetric.RandomFunctionMACRefresh.swap_joint
+#print axioms Foundation.Symmetric.RandomFunctionMACRefresh.swap_verification
+#print axioms Foundation.Symmetric.RandomFunctionMACRefresh.coalesce_kernel
+#print axioms Foundation.Symmetric.RandomFunctionMACRefresh.coalesce_draws
+#print axioms Foundation.Symmetric.RandomFunctionMACRefresh.replaced_six_agreement
+#print axioms Foundation.Symmetric.RandomFunctionMACRefresh.kept_six_agreement
+#print axioms Foundation.Symmetric.RandomFunctionMACRefresh.distinct_selected_kernels
+#print axioms Foundation.Symmetric.RandomFunctionMACRefresh.no_cell_between_replacement_and_retention
+#print axioms Foundation.Symmetric.RandomFunctionMACRefresh.same_original_marginal
+#print axioms Foundation.Symmetric.RandomFunctionMACRefresh.same_transformed_marginal
+#print axioms Foundation.Symmetric.RandomFunctionMACRefresh.certificate_accepts
+#print axioms Foundation.Symmetric.RandomFunctionMACRefresh.certificate_verification
+#print axioms Foundation.Symmetric.RandomFunctionMACRefresh.rejects_any_certificate
+#print axioms Foundation.Symmetric.RandomFunctionMACRefresh.word_fresh
+#print axioms Foundation.Symmetric.RandomFunctionMACRefresh.verification_probability
+#print axioms CryptoOracle.ProofEdits.Refresh.Baseline.run_perm
+#print axioms CryptoOracle.ProofEdits.Refresh.Baseline.continuation
+#print axioms CryptoOracle.ProofEdits.Refresh.Baseline.joint_eq
+
+/- Shared cache/history/refresh diagrams, freshness scan and actual adaptive MAC. -/
+#print axioms CryptoOracle.ProofEdits.Interaction.known_cache
+#print axioms CryptoOracle.ProofEdits.Interaction.record_known
+#print axioms CryptoOracle.ProofEdits.Interaction.record_coherent
+#print axioms CryptoOracle.ProofEdits.Interaction.ask_known
+#print axioms CryptoOracle.ProofEdits.Interaction.ask_coherent
+#print axioms CryptoOracle.ProofEdits.Interaction.update_known
+#print axioms CryptoOracle.ProofEdits.Interaction.update_coherent
+#print axioms CryptoOracle.ProofEdits.Interaction.ask_record
+#print axioms CryptoOracle.ProofEdits.Interaction.update_record
+#print axioms CryptoOracle.ProofEdits.Interaction.ask_update
+#print axioms CryptoOracle.ProofEdits.Interaction.ask_lookup_other
+#print axioms CryptoOracle.ProofEdits.Interaction.ask_signed
+#print axioms CryptoOracle.ProofEdits.Interaction.run_append
+#print axioms CryptoOracle.ProofEdits.Interaction.ask_eager
+#print axioms CryptoOracle.ProofEdits.Interaction.run_valid
+#print axioms CryptoOracle.ProofEdits.Interaction.scan_exchange
+#print axioms CryptoOracle.ProofEdits.Interaction.resample_exchange
+#print axioms CryptoOracle.ProofEdits.Interaction.step_exchange
+#print axioms CryptoOracle.ProofEdits.Interaction.Cell.sound
+#print axioms CryptoOracle.ProofEdits.Interaction.Cell.scan
+#print axioms CryptoOracle.ProofEdits.Interaction.Cell.perm
+#print axioms CryptoOracle.ProofEdits.Interaction.Cell.counts
+#print axioms CryptoOracle.ProofEdits.Interaction.Cell.continuation
+#print axioms CryptoOracle.ProofEdits.Interaction.Cell.joint
+#print axioms CryptoOracle.ProofEdits.Interaction.Certificate.validates_sound
+#print axioms CryptoOracle.ProofEdits.Interaction.Certificate.rejects_invalid_source
+#print axioms CryptoOracle.ProofEdits.Interaction.Certificate.rejects_exposed_refresh
+#print axioms CryptoOracle.ProofEdits.Interaction.Certificate.validates_kernel
+#print axioms CryptoOracle.ProofEdits.Interaction.Certificate.validates_invariant
+#print axioms CryptoOracle.ProofEdits.Interaction.Baseline.exchange_context
+#print axioms CryptoOracle.ProofEdits.Interaction.Baseline.mixed_block
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.attack_decomposition
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.first_ne_seven
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.second_ne_seven
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.prefix_avoids
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.prefix_invariant
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.prefix_unsigned
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.validates_fresh
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.full_game_eq
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.ordinary_full_game_eq
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.retained_context
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.block_signing_eq
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.refreshed_signing_eq
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.after_is_refreshed
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.erase_refresh
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.valid_final_state
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.fresh_finish
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.after_probability
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.after_security
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.before_security
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.before_original_eq
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.original_game_security
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.mixed_counts
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.after_coherent
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.after_unsigned
+#print axioms Foundation.Symmetric.RandomFunctionMACInteraction.refuses_same_coordinate
+
+#print axioms CryptoOracle.Interactive.NativeCompactRequest.pad_actions
+#print axioms CryptoOracle.Interactive.NativeCompactRequest.actions_length
+#print axioms CryptoOracle.Interactive.NativeCompactRequest.pad_length
+#print axioms CryptoOracle.Interactive.NativeCompactRequest.adapter_length
+#print axioms CryptoOracle.Interactive.NativeCompactRequest.fetch
+#print axioms CryptoOracle.Interactive.NativeCompactRequest.fetch_start
+#print axioms CryptoOracle.Interactive.NativeCompactRequest.fetch_jump
+#print axioms CryptoOracle.Interactive.NativeCompactRequest.checked
+#print axioms CryptoOracle.Interactive.NativeCompactRequest.prefix_run
+#print axioms CryptoOracle.Interactive.NativeCompactRequest.run
+#print axioms CryptoOracle.Interactive.NativeCompactRequest.load_run
+#print axioms CryptoOracle.Interactive.NativeCompactRequest.private_tape
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Backend.padded_length
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Backend.bits_list
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Backend.request_eq
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Backend.request_width
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Backend.decode_request
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Backend.key_injective
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Backend.tagBits_list
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Backend.decode_tagBits
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Backend.tagBits_decode
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.Backend.uniform_decoded
+#print axioms Foundation.Hash.Native.CompactMACQuery.executing_run
+#print axioms Foundation.Hash.Native.CompactMACQuery.prepare_run
+#print axioms Foundation.Hash.Native.CompactMACQuery.original_body_shape
+#print axioms Foundation.Hash.Native.CompactMACQuery.extended_body
+#print axioms Foundation.Hash.Native.CompactMACQuery.steps_overhead
+#print axioms Foundation.Hash.Native.CompactMACQuery.native_run
+#print axioms Foundation.Hash.Native.CompactMACQuery.native_halts
+#print axioms Foundation.Hash.Native.CompactMACQuery.steps_budget
+#print axioms Foundation.Hash.Native.CompactMACQuery.native_retained
+#print axioms Foundation.Hash.Native.CompactMACPacket.native_absorbing
+#print axioms Foundation.Hash.Native.CompactMACPacket.boundary_embed
+#print axioms Foundation.Hash.Native.CompactMACPacket.embed_step
+#print axioms Foundation.Hash.Native.CompactMACPacket.export_run
+#print axioms Foundation.Hash.Native.CompactMACPacket.exported_ready
+#print axioms Foundation.Hash.Native.CompactMACPacket.core_terminal
+#print axioms Foundation.Hash.Native.CompactMACPacket.lifted_exportable
+#print axioms Foundation.Hash.Native.CompactMACPacket.whole_budget
+#print axioms Foundation.Hash.Native.CompactMACPacket.whole_operational
+#print axioms Foundation.Hash.Native.CompactMACPacket.whole_semantics
+#print axioms Foundation.Hash.Native.CompactMACPacket.whole_ready
+#print axioms Foundation.Hash.Native.CompactMACPacket.whole_retained
+#print axioms Foundation.Hash.Native.CompactMACPacket.ready_absorbing
+#print axioms Foundation.Hash.Native.CompactMACPacket.whole_run
+#print axioms Foundation.Hash.Native.CompactMACPacket.whole_steps_budget
+#print axioms Foundation.Hash.Native.CompactMACPacket.whole_costed
+#print axioms Foundation.Hash.Native.CompactMACService.packet_semantics
+#print axioms Foundation.Hash.Native.CompactMACService.packet_reference
+#print axioms Foundation.Hash.Native.CompactMACService.packet_width
+#print axioms Foundation.Hash.Native.CompactMACService.service_budget
+#print axioms Foundation.Hash.Native.CompactMACService.service_steps_budget
+#print axioms Foundation.Hash.Native.CompactMACService.service_semantics
+#print axioms Foundation.Hash.Native.CompactMACService.service_reference
+#print axioms Foundation.Hash.Native.CompactMACService.service_lazy
+#print axioms Foundation.Hash.Native.CompactMACService.service_retained
+#print axioms Foundation.Hash.Native.CompactMACService.service_operational
+#print axioms Foundation.Hash.Native.CompactMACService.service_law
+#print axioms Foundation.Hash.Native.CompactMACService.awaiting_law
+#print axioms Foundation.Hash.Native.CompactMACService.service_costed
+#print axioms CryptoOracle.ProofEdits.Interaction.ReplayBaseline.swapAt_sound
+#print axioms CryptoOracle.ProofEdits.Interaction.ReplayBaseline.swapAt_scan
+#print axioms CryptoOracle.ProofEdits.Interaction.ReplayBaseline.replay_sound
+#print axioms CryptoOracle.ProofEdits.Interaction.ReplayBaseline.replay_scan
+#print axioms CryptoOracle.ProofEdits.Interaction.ReplayBaseline.validates_kernel
+#print axioms CryptoOracle.ProofEdits.Interaction.ReplayBaseline.validates_invariant
+#print axioms CryptoOracle.ProofEdits.Interaction.ReplayBaseline.validates_continuation
+#print axioms CryptoOracle.ProofEdits.Interaction.ReplayBaseline.validates_joint
+#print axioms CryptoOracle.ProofEdits.Interaction.ReplayComparison.swapAt_erasure
+#print axioms CryptoOracle.ProofEdits.Interaction.ReplayComparison.replay_erasure
+#print axioms CryptoOracle.ProofEdits.Interaction.ReplayComparison.validates_eq
+#print axioms Foundation.Hash.Native.CompactMACRound.capture_semantics
+#print axioms Foundation.Hash.Native.CompactMACRound.raw_semantics
+#print axioms Foundation.Hash.Native.CompactMACRound.raw_budget
+#print axioms Foundation.Hash.Native.CompactMACRound.raw_operational
+#print axioms Foundation.Hash.Native.CompactMACRound.raw_returned
+#print axioms Foundation.Hash.Native.CompactMACRound.encode_decode
+#print axioms Foundation.Hash.Native.CompactMACRound.answer_exit
+#print axioms Foundation.Hash.Native.CompactMACRound.query_budget
+#print axioms Foundation.Hash.Native.CompactMACRound.query_bound
+#print axioms Foundation.Hash.Native.CompactMACRound.query_operational
+#print axioms Foundation.Hash.Native.CompactMACRound.query_growth
+#print axioms Foundation.Hash.Native.CompactMACRound.native_run
+#print axioms Foundation.Hash.Native.CompactMACRound.prefixed_semantics
+#print axioms Foundation.Hash.Native.CompactMACRound.prefixed_growth
+#print axioms Foundation.Hash.Native.CompactMACRound.prefixed_bound
+#print axioms Foundation.Hash.Native.CompactMACRound.prefixed_operational
+#print axioms Foundation.Hash.Native.CompactMACExecution.follow_semantics
+#print axioms Foundation.Hash.Native.CompactMACExecution.finish_bound
+#print axioms Foundation.Hash.Native.CompactMACExecution.repeated_checked
+#print axioms Foundation.Hash.Native.CompactMACExecution.verify_checked
+#print axioms Foundation.Hash.Native.CompactMACExecution.firstQuery_bound
+#print axioms Foundation.Hash.Native.CompactMACExecution.firstQuery_growth
+#print axioms Foundation.Hash.Native.CompactMACExecution.secondQuery_bound
+#print axioms Foundation.Hash.Native.CompactMACExecution.secondQuery_growth
+#print axioms Foundation.Hash.Native.CompactMACExecution.repeatedQuery_bound
+#print axioms Foundation.Hash.Native.CompactMACExecution.repeatedQuery_growth
+#print axioms Foundation.Hash.Native.CompactMACExecution.verifyQuery_bound
+#print axioms Foundation.Hash.Native.CompactMACExecution.verifyQuery_growth
+#print axioms Foundation.Hash.Native.CompactMACExecution.last_bound
+#print axioms Foundation.Hash.Native.CompactMACExecution.repeat_bound
+#print axioms Foundation.Hash.Native.CompactMACExecution.second_bound
+#print axioms Foundation.Hash.Native.CompactMACExecution.first_bound
+#print axioms Foundation.Hash.Native.CompactMACExecution.whole_budget
+#print axioms Foundation.Hash.Native.CompactMACExecution.post_prepend
+#print axioms Foundation.Hash.Native.CompactMACExecution.finish_post
+#print axioms Foundation.Hash.Native.CompactMACExecution.last_post
+#print axioms Foundation.Hash.Native.CompactMACExecution.repeat_post
+#print axioms Foundation.Hash.Native.CompactMACExecution.second_post
+#print axioms Foundation.Hash.Native.CompactMACExecution.first_post
+#print axioms Foundation.Hash.Native.CompactMACExecution.whole_post
+#print axioms Foundation.Hash.Native.CompactMACExecution.whole_shape
+#print axioms Foundation.Hash.Native.CompactMACExecution.last_operational
+#print axioms Foundation.Hash.Native.CompactMACExecution.repeat_operational
+#print axioms Foundation.Hash.Native.CompactMACExecution.second_operational
+#print axioms Foundation.Hash.Native.CompactMACExecution.first_operational
+#print axioms Foundation.Hash.Native.CompactMACExecution.whole_operational
+#print axioms Foundation.Hash.Native.CompactMACExecution.stopped_absorbing
+#print axioms Foundation.Hash.Native.CompactMACExecution.whole_run
+#print axioms Foundation.Hash.Native.CompactMACExecution.whole_costed
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.NativeBackend.empty_run
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.NativeBackend.empty_halts
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.NativeBackend.empty_actual_cost
+#print axioms Foundation.Hash.Native.CompactMACRound.headBits_loaded
+#print axioms Foundation.Hash.Native.CompactMACRound.frameTag_resumed
+#print axioms Foundation.Hash.Native.CompactMACRound.update_as_if
+#print axioms Foundation.Hash.Native.CompactMACRound.raw_tag_law
+#print axioms Foundation.Hash.Native.CompactMACRound.answer_projection
+#print axioms Foundation.Hash.Native.CompactMACRound.query_law
+#print axioms Foundation.Hash.Native.CompactMACExecution.bind_projection
+#print axioms Foundation.Hash.Native.CompactMACExecution.firstQuery_law
+#print axioms Foundation.Hash.Native.CompactMACExecution.secondQuery_law
+#print axioms Foundation.Hash.Native.CompactMACExecution.repeatedQuery_law
+#print axioms Foundation.Hash.Native.CompactMACExecution.verifyQuery_law
+#print axioms Foundation.Hash.Native.CompactMACExecution.finish_projection
+#print axioms Foundation.Hash.Native.CompactMACExecution.last_projection
+#print axioms Foundation.Hash.Native.CompactMACExecution.repeat_projection
+#print axioms Foundation.Hash.Native.CompactMACExecution.second_projection
+#print axioms Foundation.Hash.Native.CompactMACExecution.first_projection
+#print axioms Foundation.Hash.Native.CompactMACExecution.whole_projection
+#print axioms Foundation.Hash.Native.CompactMACExecution.runtimeObservation_embed
+#print axioms Foundation.Hash.Native.CompactMACExecution.runtime_law
+#print axioms Foundation.Hash.Native.CompactMACExecution.lookup_encodeTable
+#print axioms Foundation.Hash.Native.CompactMACExecution.decodedOracle_step
+#print axioms Foundation.Hash.Native.CompactMACExecution.decodedOracle_run
+#print axioms Foundation.Hash.Native.CompactMACExecution.reference_executionLaw
+#print axioms Foundation.Hash.Native.CompactMACExecution.reference_game
+#print axioms Foundation.Hash.Native.CompactMACExecution.reference_typed_game
+#print axioms Foundation.Hash.Native.CompactMACExecution.runtime_game_law
+#print axioms Foundation.Hash.Native.CompactMACExecution.runtime_verdict_law
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.NativeBackend.idealGame_eq_lazy
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.NativeBackend.idealGame_eq_family
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.NativeBackend.idealGame_eq_distinguisher
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.NativeBackend.ideal_security
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.NativeBackend.keyed_against_physical
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.NativeBackend.keyed_security
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeCaller.NativeBackend.ideal_game_observation
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.cache_lookup
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.state_inverse
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.inverse_state
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.ask_state
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.record_state
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.update_state
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.known_state
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.coherent_state
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.step_state
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.run_state
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.run_inverse
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.transport
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.recode_run
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.public_history
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.recode_identity
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.recode_compose
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Baseline.validated_run
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Baseline.validated_invariant
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Baseline.validated_continuation
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Baseline.validated_joint
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Baseline.repair
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Baseline.repair_joint
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Comparison.diagram_run
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Comparison.diagram_repair
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Comparison.validated_diagram_repair
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Comparison.ordinary_repair_from_diagram_validation
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Comparison.validated_diagram_repair_joint
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Comparison.ordinary_joint_from_diagram_validation
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Comparison.ByteExample.encoding_changes_secret
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Comparison.ByteExample.coordinate_difference
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Comparison.ByteExample.public_response
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Comparison.ByteExample.rejects_undecoded_history
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Comparison.ByteExample.ordinary_accepts
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Comparison.ByteExample.diagram_accepts
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Comparison.ByteExample.ordinary_repair
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Comparison.ByteExample.diagram_repair
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Adaptive.encode_plain
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Adaptive.not_injective
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Adaptive.no_fixed_decoder
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Adaptive.selected_matches
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Adaptive.encoded_law
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Adaptive.encoded_secret_law
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Adaptive.encoded_secret_not_uniform
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Adaptive.decode_retain
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Adaptive.retained_injective
+#print axioms CryptoOracle.ProofEdits.Interaction.Encoding.Adaptive.retained_joint
+
+#print axioms Foundation.Probability.SelectedCouplingGraph.edge_first
+#print axioms Foundation.Probability.SelectedCouplingGraph.edge_second
+#print axioms Foundation.Probability.SelectedCouplingGraph.edge_supported
+#print axioms Foundation.Probability.SelectedCouplingGraph.Graph.joint_vertex
+#print axioms Foundation.Probability.SelectedCouplingGraph.Graph.joint_edge
+#print axioms Foundation.Probability.SelectedCouplingGraph.Graph.realizes_compatible
+#print axioms Foundation.Probability.SelectedCouplingGraph.Graph.compatible_boundary
+#print axioms Foundation.Probability.SelectedCouplingGraph.Graph.selected_joint_iff
+#print axioms Foundation.Probability.SelectedCouplingGraph.Graph.shifted_shift
+#print axioms Foundation.Probability.SelectedCouplingGraph.Graph.boundary_shift
+#print axioms Foundation.Probability.SelectedCouplingGraph.Graph.changed_iff_cut
+#print axioms Foundation.Probability.SelectedCouplingGraph.Graph.shifted_changed_iff
+#print axioms Foundation.Probability.SelectedCouplingGraph.Graph.boundary_cost
+#print axioms Foundation.Probability.SelectedCouplingGraph.Graph.shifted_cost
+#print axioms Foundation.Probability.SelectedCouplingGraph.Graph.feasible_cost_iff
+#print axioms Foundation.Probability.SelectedCouplingGraph.Graph.selected_joint_repair_cost_iff
+#print axioms Foundation.Probability.SelectedCouplingGraph.Graph.minimum_repair_iff
+#print axioms Foundation.Probability.SelectedCouplingGraph.tag_first
+#print axioms Foundation.Probability.SelectedCouplingGraph.tag_second
+#print axioms Foundation.Probability.SelectedCouplingGraph.tag_joint_vertex
+#print axioms Foundation.Probability.SelectedCouplingGraph.tag_joint_edge
+#print axioms Foundation.Probability.SelectedCouplingGraph.tag_selected_joint_iff
+#print axioms Foundation.Probability.SelectedCouplingGraph.tag_repair_cost_iff
+#print axioms Foundation.Probability.SelectedCouplingGraph.context_joint_history
+#print axioms Foundation.Probability.SelectedCouplingGraph.context_joint_vertex
+#print axioms Foundation.Probability.SelectedCouplingGraph.context_joint_edge
+#print axioms Foundation.Probability.SelectedCouplingGraph.context_selected_joint_iff
+#print axioms Foundation.Probability.SelectedCouplingGraph.context_repair_cost_iff
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.initial_boundary
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.repaired_boundary
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.coherent_iff_faces
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.cost_formula
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.repair_lower_bound
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.repair_cost
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.minimum_selected_joint_repair
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.editedOnly_no_joint
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.editedOnly_marginals
+#print axioms Foundation.Symmetric.RandomFunctionMACCouplingRepair.actual_answer_law
+#print axioms Foundation.Symmetric.RandomFunctionMACCouplingRepair.actual_joint_original
+#print axioms Foundation.Symmetric.RandomFunctionMACCouplingRepair.actual_joint_eager
+#print axioms Foundation.Symmetric.RandomFunctionMACCouplingRepair.actual_joint_projection
+#print axioms Foundation.Symmetric.RandomFunctionMACCouplingRepair.actual_joint_realizes
+#print axioms Foundation.Symmetric.RandomFunctionMACCouplingRepair.adaptive_joint_iff
+#print axioms Foundation.Symmetric.RandomFunctionMACCouplingRepair.fan_faces_iff_joint
+#print axioms Foundation.Symmetric.RandomFunctionMACCouplingRepair.fan_minimum_repair
+#print axioms Foundation.Symmetric.RandomFunctionMACCouplingRepair.fan_unrepaired_no_joint
+
+#print axioms Foundation.Probability.SelectedCouplingGraph.Certificate.validates_iff
+#print axioms Foundation.Probability.SelectedCouplingGraph.Certificate.sound
+#print axioms Foundation.Probability.SelectedCouplingGraph.Certificate.unchanged
+#print axioms Foundation.Probability.SelectedCouplingGraph.Certificate.complete
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.Checked.shifted_original
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.Checked.generated_labels
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.Checked.cut_cost
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.Checked.accepts
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.Checked.rejects_unchanged
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.Checked.minimum
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.Checked.concrete_accepts
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.Checked.concrete_rejects_budget
+#print axioms Foundation.Symmetric.RandomFunctionMACRepairGame.target_decomposition
+#print axioms Foundation.Symmetric.RandomFunctionMACRepairGame.reference_game_law
+#print axioms Foundation.Symmetric.RandomFunctionMACRepairGame.games_original
+#print axioms Foundation.Symmetric.RandomFunctionMACRepairGame.vertex_game_law
+#print axioms Foundation.Symmetric.RandomFunctionMACRepairGame.edge_game_law
+#print axioms Foundation.Symmetric.RandomFunctionMACRepairGame.vertex_continuation
+#print axioms Foundation.Symmetric.RandomFunctionMACRepairGame.checked_repair
+#print axioms Foundation.Symmetric.RandomFunctionMACRepairGame.fan_generated
+#print axioms Foundation.Symmetric.RandomFunctionMACRepairNative.vertex_physical_observation
+#print axioms Foundation.Symmetric.RandomFunctionMACRepairNative.vertex_security
+
+#print axioms CryptoOracle.RandomOracle.Representation.lookup
+#print axioms CryptoOracle.RandomOracle.Representation.table_inverse
+#print axioms CryptoOracle.RandomOracle.Representation.table_length
+#print axioms CryptoOracle.RandomOracle.Representation.step
+#print axioms CryptoOracle.RandomOracle.Representation.run
+#print axioms CryptoOracle.RandomOracle.Representation.decoded_run
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationGame.decode_encode
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationGame.suffix_law
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationGame.stored_answer_encode_finish
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationGame.untwisted
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationGame.joint_vertex
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationGame.decoded_vertex
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationGame.joint_stored_answers
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationGame.derived_edge_law
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationGame.distinct_storage
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationGame.public_answer_encode_finish
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationGame.stored_game_relation
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationGame.stored_games_distinct
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationRepair.derived_changes
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationRepair.checked_changes
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationRepair.operational_vertices
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationRepair.operational_edges
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationRepair.decoded_vertices
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationRepair.fan_generated_cost
+
+#print axioms Foundation.Probability.SelectedCouplingGraph.Search.cuts_length
+#print axioms Foundation.Probability.SelectedCouplingGraph.Search.cuts_cover
+#print axioms Foundation.Probability.SelectedCouplingGraph.Search.cuts_complete
+#print axioms Foundation.Probability.SelectedCouplingGraph.Search.solve_spec
+#print axioms Foundation.Probability.SelectedCouplingGraph.Search.solve_accepted
+#print axioms Foundation.Probability.SelectedCouplingGraph.Search.solve_optimal
+#print axioms Foundation.Probability.SelectedCouplingGraph.Search.solve_budget_complete
+#print axioms Foundation.Probability.SelectedCouplingGraph.Search.solve_none_iff
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.SearchExample.covers
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.SearchExample.enumeration_size
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.SearchExample.selected_cost
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.SearchExample.always_finds
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.SearchExample.computed_three
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.SearchExample.computed_weighted
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.SearchExample.fixed_cut_weighted_cost
+#print axioms Foundation.Probability.SelectedCouplingGraph.Fan.SearchExample.computed_impossible_loop
+#print axioms Foundation.Symmetric.RandomFunctionMACRepairSearch.optimal_at_history
+#print axioms Foundation.Symmetric.RandomFunctionMACRepairSearch.operational_vertices
+#print axioms Foundation.Symmetric.RandomFunctionMACRepairSearch.decoded_vertices
+#print axioms Foundation.Symmetric.RandomFunctionMACRepairSearch.operational_edges
+
+#print axioms Foundation.Probability.SelectedCouplingGraph.OrdinaryProgram.sampler_no_queries
+#print axioms Foundation.Probability.SelectedCouplingGraph.OrdinaryProgram.law_eq
+#print axioms Foundation.Probability.SelectedCouplingGraph.OrdinaryProgram.realizes
+#print axioms Foundation.Probability.SelectedCouplingGraph.OrdinaryProgram.expressivity_iff
+#print axioms Foundation.Probability.SelectedCouplingGraph.OrdinaryProgram.repair_cost_iff
+#print axioms Foundation.Probability.SelectedCouplingGraph.OrdinaryProgram.searched_repair
+
+#print axioms Foundation.Probability.SelectedCouplingGraph.CausalRepair.cut_separates
+#print axioms Foundation.Probability.SelectedCouplingGraph.CausalRepair.cut_price
+#print axioms Foundation.Probability.SelectedCouplingGraph.CausalRepair.normalized_price
+#print axioms Foundation.Probability.SelectedCouplingGraph.CausalRepair.after_observation_cost
+#print axioms Foundation.Probability.SelectedCouplingGraph.CausalRepair.price_lower
+#print axioms Foundation.Probability.SelectedCouplingGraph.CausalRepair.pointwise_optimal
+#print axioms Foundation.Probability.SelectedCouplingGraph.CausalRepair.before_observation_worst
+#print axioms Foundation.Probability.SelectedCouplingGraph.CausalRepair.fixed_price_law
+#print axioms Foundation.Probability.SelectedCouplingGraph.CausalRepair.independent_price_law
+#print axioms Foundation.Probability.SelectedCouplingGraph.CausalRepair.before_price_law
+#print axioms Foundation.Probability.SelectedCouplingGraph.CausalRepair.after_price_law
+#print axioms Foundation.Probability.SelectedCouplingGraph.CausalRepair.expensive_probability
+#print axioms Foundation.Probability.SelectedCouplingGraph.CausalRepair.causal_gap
+#print axioms Foundation.Probability.SelectedCouplingGraph.CausalRepair.pointwise_not_precommitted
+#print axioms Foundation.Symmetric.RandomFunctionMACCausalRepair.actual_prefix
+#print axioms Foundation.Symmetric.RandomFunctionMACCausalRepair.challenge_uniform
+#print axioms Foundation.Symmetric.RandomFunctionMACCausalRepair.prefix_preserved
+#print axioms Foundation.Symmetric.RandomFunctionMACCausalRepair.response_cost_law
+#print axioms Foundation.Symmetric.RandomFunctionMACCausalRepair.before_cost_law
+#print axioms Foundation.Symmetric.RandomFunctionMACCausalRepair.after_cost_law
+#print axioms Foundation.Symmetric.RandomFunctionMACCausalRepair.timing_gap
+#print axioms Foundation.Symmetric.RandomFunctionMACCausalRepair.full_run_prefix
+#print axioms Foundation.Symmetric.RandomFunctionMACCausalRepair.full_run_game
+#print axioms Foundation.Symmetric.RandomFunctionMACCausalRepair.full_run_cost_law
+#print axioms Foundation.Symmetric.RandomFunctionMACCausalRepair.full_run_expensive_probability
+
+#print axioms CryptoOracle.InformationSchedule.view_available
+#print axioms CryptoOracle.InformationSchedule.view_noninterference
+#print axioms CryptoOracle.InformationSchedule.view_reveal
+#print axioms CryptoOracle.InformationSchedule.subset_reveal
+#print axioms CryptoOracle.InformationSchedule.scan_exchange
+#print axioms CryptoOracle.InformationSchedule.reveal_commit
+#print axioms CryptoOracle.InformationSchedule.commit_commit
+#print axioms CryptoOracle.InformationSchedule.step_exchange
+#print axioms CryptoOracle.InformationSchedule.run_seen
+#print axioms CryptoOracle.InformationSchedule.Cell.sound
+#print axioms CryptoOracle.InformationSchedule.Cell.scan
+#print axioms CryptoOracle.InformationSchedule.Cell.continuation
+#print axioms CryptoOracle.InformationSchedule.Cell.joint
+#print axioms CryptoOracle.InformationSchedule.Certificate.validates_sound
+#print axioms CryptoOracle.InformationSchedule.Certificate.validates_kernel
+#print axioms CryptoOracle.InformationSchedule.Certificate.validates_final_seen
+#print axioms CryptoOracle.InformationSchedule.Certificate.rejects_unavailable
+#print axioms CryptoOracle.InformationSchedule.Certificate.rejects_invalid_target
+#print axioms CryptoOracle.InformationSchedule.Baseline.swap_sound
+#print axioms CryptoOracle.InformationSchedule.Baseline.replay_sound
+#print axioms CryptoOracle.InformationSchedule.Baseline.validated_kernel
+#print axioms CryptoOracle.InformationSchedule.Example.swap_erases
+#print axioms CryptoOracle.InformationSchedule.Example.replay_erases
+#print axioms CryptoOracle.InformationSchedule.Example.validates_eq
+#print axioms CryptoOracle.InformationSchedule.Example.accepts_independent
+#print axioms CryptoOracle.InformationSchedule.Example.rejects_premature
+#print axioms CryptoOracle.InformationSchedule.Example.rejects_dependency_crossing
+#print axioms CryptoOracle.InformationSchedule.Example.no_dependency_cell
+#print axioms CryptoOracle.InformationSchedule.Example.rejects_every_crossing_script
+#print axioms CryptoOracle.InformationSchedule.Example.accepts_unrelated
+#print axioms CryptoOracle.InformationSchedule.Example.ordinary_independent
+#print axioms CryptoOracle.InformationSchedule.Example.late_cost
+#print axioms CryptoOracle.InformationSchedule.Example.premature_cost
+#print axioms CryptoOracle.InformationSchedule.Example.overdeclared_exchange
+#print axioms Foundation.Symmetric.RandomFunctionMACInformationSchedule.first_profile_law
+#print axioms Foundation.Symmetric.RandomFunctionMACInformationSchedule.prefix_preserved
+#print axioms Foundation.Symmetric.RandomFunctionMACInformationSchedule.checked_joint
+#print axioms Foundation.Symmetric.RandomFunctionMACInformationSchedule.ordinary_checked_joint
+#print axioms Foundation.Symmetric.RandomFunctionMACInformationSchedule.cost_eq
+#print axioms Foundation.Symmetric.RandomFunctionMACInformationSchedule.late_cost
+#print axioms Foundation.Symmetric.RandomFunctionMACInformationSchedule.premature_cost
+#print axioms Foundation.Symmetric.RandomFunctionMACInformationSchedule.checked_continuation
+#print axioms Foundation.Symmetric.RandomFunctionMACInformationSchedule.continued_game
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepair.exchangeChecks_holds
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepair.sourceChecks_holds
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepair.swapPlan_evaluate
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepair.replayPlan_evaluate
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepair.compile_validates
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepair.Check.unchanged
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepair.recheck_iff
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepair.compiled_validates_iff
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepair.repaired_validates_iff
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepair.repaired_kernel
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepair.recheck_count_le
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepairComparison.diagram_repair_iff
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepairComparison.agrees_except
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepairComparison.compiled
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepairComparison.old_checks
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepairComparison.old_accepted
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepairComparison.affected_checks
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepairComparison.rechecked
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepairComparison.repaired
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepairComparison.exact_counts
+
+#print axioms CryptoOracle.InformationSchedule.LocalRepairComparison.rejects_changed_dependency
+
+#print axioms Foundation.Symmetric.RandomFunctionMACLocalRepair.repaired_joint
+
+#print axioms Foundation.Symmetric.RandomFunctionMACLocalRepair.ordinary_repaired_joint
+
+#print axioms Foundation.Symmetric.RandomFunctionMACLocalRepair.repaired_continuation
+
+#print axioms Foundation.Symmetric.RandomFunctionMACLocalRepair.continued_game
+
+#print axioms CryptoOracle.Program.continuation_subset
+
+#print axioms CryptoOracle.Program.footprintAt_subset
+
+#print axioms CryptoOracle.Program.BoundedQueries.footprint_positions
+
+#print axioms CryptoOracle.Program.footprint_trace
+
+#print axioms CryptoOracle.Program.run_congr_on_footprint
+
+#print axioms CryptoOracle.Program.affectedPositions_mem
+
+#print axioms CryptoOracle.Program.BoundedQueries.unaffected_iff
+
+#print axioms CryptoOracle.RandomOracle.Representation.oracle_congr_at
+
+#print axioms CryptoOracle.RandomOracle.Representation.run_congr_on_footprint
+
+#print axioms CryptoOracle.RandomOracle.Representation.run_unaffected_patch
+
+#print axioms CryptoOracle.RandomOracle.Representation.run_unaffected_positions
+
+#print axioms CryptoOracle.RandomOracle.Representation.table_eq_of_agree
+
+#print axioms CryptoOracle.RandomOracle.Representation.encoded_run_unaffected_patch
+
+#print axioms CryptoOracle.RandomOracle.Representation.plain_entries_in_set
+
+#print axioms CryptoOracle.Program.pauseAfter_resume
+
+#print axioms CryptoOracle.Program.pauseAfter_continuation
+
+#print axioms CryptoOracle.Program.pauseAfter_bounded
+
+#print axioms CryptoOracle.Program.pauseAfter_footprintAt
+
+#print axioms CryptoOracle.Program.pauseAfter_unaffected
+
+#print axioms CryptoOracle.Program.pauseAfter_representation_patch
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.first_position
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.second_position
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.repeated_position
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.verification_position
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.no_fifth_position
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.signing_positions
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.signing_footprint
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.target_bounded
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.target_footprint
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.verification_only
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.unused_patch
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.codec_agrees
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.signing_patch_unaffected
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.represented_signing_law
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.retained_signing_patch
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.unused_codec_changed
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.unused_encoding_patch
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.full_game_law
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.full_storage_relation
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.full_games_distinct
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.decoded_full_game
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.first_three_unaffected
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.extracted_prefix_patch
+
+#print axioms Foundation.Symmetric.RandomFunctionMACQueryFootprint.resume_extracted_prefix
+
+#print axioms CryptoOracle.RandomOracle.Representation.Switch.recode_roundtrip
+
+#print axioms CryptoOracle.RandomOracle.Representation.Switch.recode_encoded
+
+#print axioms CryptoOracle.RandomOracle.Representation.Switch.recode_comp
+
+#print axioms CryptoOracle.RandomOracle.Representation.Switch.step_recode
+
+#print axioms CryptoOracle.RandomOracle.Representation.Switch.run_recode
+
+#print axioms CryptoOracle.RandomOracle.Representation.Switch.decode_encode
+
+#print axioms CryptoOracle.RandomOracle.Representation.Switch.operational_joint
+
+#print axioms CryptoOracle.RandomOracle.Representation.Switch.decoded_joint
+
+#print axioms CryptoOracle.RandomOracle.Representation.Switch.prefix_selection
+
+#print axioms CryptoOracle.RandomOracle.Representation.Switch.reference_final
+
+#print axioms CryptoOracle.RandomOracle.Representation.Switch.decoded_final
+
+#print axioms CryptoOracle.RandomOracle.Representation.Switch.decoded_continuation
+
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.old_oracle
+
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.decoded_joint
+
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.decoded_game
+
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.original_game
+
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.prefix_and_selection
+
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.selection_law
+
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.decoded_continuation
+
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.recoded_cache_hit
+
+#print axioms Foundation.Symmetric.RandomFunctionMACRepresentationSwitch.stale_cache_hit
+
+#print axioms Foundation.Logic.AdjacentReplay.replay_append
+
+#print axioms Foundation.Logic.AdjacentReplay.replay_cons
+
+#print axioms Foundation.Logic.AdjacentReplay.swapAt_inverse
+
+#print axioms Foundation.Logic.AdjacentReplay.replay_reverse
+
+#print axioms CryptoOracle.InformationSchedule.CellCompilation.independent_symmetric
+
+#print axioms CryptoOracle.InformationSchedule.CellCompilation.swap_agrees
+
+#print axioms CryptoOracle.InformationSchedule.CellCompilation.replay_agrees
+
+#print axioms CryptoOracle.InformationSchedule.CellCompilation.script_length
+
+#print axioms CryptoOracle.InformationSchedule.CellCompilation.compile_sound
+
+#print axioms CryptoOracle.InformationSchedule.CellCompilation.replay_has_cell
+
+#print axioms CryptoOracle.InformationSchedule.CellCompilation.exchange_costs_iff
+
+#print axioms CryptoOracle.InformationSchedule.CellCompilation.optimal_exchange_cost_iff
+
+#print axioms CryptoOracle.InformationSchedule.CellCompilation.generated_iff_replay
+
+#print axioms CryptoOracle.InformationSchedule.CellCompilation.compiled_validates
+
+#print axioms CryptoOracle.InformationSchedule.CellCompilation.ordinary_joint
+
+#print axioms Foundation.Symmetric.RandomFunctionMACCellCompilation.ordinary_any_cell
+
+#print axioms Foundation.Symmetric.RandomFunctionMACCellCompilation.ordinary_any_continuation
+
+#print axioms Foundation.Symmetric.RandomFunctionMACCellCompilation.source_ne_target
+
+#print axioms Foundation.Symmetric.RandomFunctionMACCellCompilation.optimal_one
+
+#print axioms Foundation.Symmetric.RandomFunctionMACCellCompilation.ordinary_optimal_one
+
+#print axioms Foundation.Symmetric.RandomFunctionMACCellCompilation.loop_exchanges
+
+#print axioms Foundation.Symmetric.RandomFunctionMACCellCompilation.expanded_compilation_size
+
+#print axioms Foundation.Symmetric.RandomFunctionMACCellCompilation.compact_ordinary_alternative
+
+#print axioms Foundation.Logic.FiniteCodecGenerator.validates_iff
+
+#print axioms Foundation.Logic.FiniteCodecGenerator.inverse_of_injective
+
+#print axioms Foundation.Logic.FiniteCodecGenerator.validates_bijective
+
+#print axioms Foundation.Logic.FiniteCodecGenerator.compile_complete
+
+#print axioms Foundation.Logic.FiniteCodecGenerator.compile_spec
+
+#print axioms Foundation.Logic.FiniteCodecGenerator.decoder_exists_iff
+
+#print axioms Foundation.Logic.FiniteCodecGenerator.collision_rejected
+
+#print axioms Foundation.Logic.FiniteCodecGenerator.family_complete
+
+#print axioms Foundation.Logic.FiniteCodecGenerator.family_spec
+
+#print axioms Foundation.Logic.FiniteCodecGenerator.family_inverse_spec
+
+#print axioms CryptoOracle.RandomOracle.Representation.GeneratedEdit.randomized_decoder_iff
+
+#print axioms CryptoOracle.RandomOracle.Representation.GeneratedEdit.raw_run_congr
+
+#print axioms CryptoOracle.RandomOracle.Representation.GeneratedEdit.compiled_oracle
+
+#print axioms CryptoOracle.RandomOracle.Representation.GeneratedEdit.compiled_recode
+
+#print axioms CryptoOracle.RandomOracle.Representation.GeneratedEdit.generated_matches_edit
+
+#print axioms CryptoOracle.RandomOracle.Representation.GeneratedEdit.generate_complete
+
+#print axioms CryptoOracle.RandomOracle.Representation.GeneratedEdit.generate_sound
+
+#print axioms CryptoOracle.RandomOracle.Representation.GeneratedEdit.generated_final
+
+#print axioms Foundation.Symmetric.RandomFunctionMACGeneratedEdit.declaration_bijective
+
+#print axioms Foundation.Symmetric.RandomFunctionMACGeneratedEdit.compiler_accepts
+
+#print axioms Foundation.Symmetric.RandomFunctionMACGeneratedEdit.compiled
+
+#print axioms Foundation.Symmetric.RandomFunctionMACGeneratedEdit.generated_game
+
+#print axioms Foundation.Symmetric.RandomFunctionMACGeneratedEdit.matches_declared_edit
+
+#print axioms Foundation.Symmetric.RandomFunctionMACGeneratedEdit.declared_encoding
+
+#print axioms Foundation.Symmetric.RandomFunctionMACGeneratedEdit.decoded_joint
+
+#print axioms Foundation.Symmetric.RandomFunctionMACGeneratedEdit.decoded_game
+
+#print axioms Foundation.Symmetric.RandomFunctionMACGeneratedEdit.selection_uniform
+
+#print axioms Foundation.Symmetric.RandomFunctionMACGeneratedEdit.collision_rejected
+
+#print axioms Foundation.Symmetric.RandomFunctionMACGeneratedEdit.no_randomized_collision_decoder
+
+#print axioms Foundation.Symmetric.RandomFunctionMACGeneratedEdit.unused_declaration_rejected
+
+#print axioms Foundation.Symmetric.RandomFunctionMACGeneratedEdit.unused_raw_game_equal
+
+#print axioms Foundation.Logic.FiniteCodecRestriction.complete
+
+#print axioms Foundation.Logic.FiniteCodecRestriction.forward_spec
+
+#print axioms Foundation.Logic.FiniteCodecRestriction.inverse_spec
+
+#print axioms Foundation.Logic.FiniteCodecRestriction.outside_spec
+
+#print axioms Foundation.Logic.FiniteCodecRestriction.compile_congr
+
+#print axioms Foundation.Logic.FiniteCodecRestriction.repair_complete
+
+#print axioms CryptoOracle.RandomOracle.Representation.Scope.step_keys
+
+#print axioms CryptoOracle.RandomOracle.Representation.Scope.run_keys
+
+#print axioms CryptoOracle.RandomOracle.Representation.Scope.pause_footprint
+
+#print axioms CryptoOracle.RandomOracle.Representation.Scope.remaining_footprint
+
+#print axioms CryptoOracle.RandomOracle.Representation.Scope.initial_keys
+
+#print axioms CryptoOracle.RandomOracle.Representation.Scope.prefix_scope
+
+#print axioms CryptoOracle.RandomOracle.Representation.ScopedEdit.used_pair
+
+#print axioms CryptoOracle.RandomOracle.Representation.ScopedEdit.oracle_on
+
+#print axioms CryptoOracle.RandomOracle.Representation.ScopedEdit.run_on
+
+#print axioms CryptoOracle.RandomOracle.Representation.ScopedEdit.recode_on
+
+#print axioms CryptoOracle.RandomOracle.Representation.ScopedEdit.joint_matches_declaration
+
+#print axioms CryptoOracle.RandomOracle.Representation.ScopedEdit.generate_congr
+
+#print axioms CryptoOracle.RandomOracle.Representation.ScopedEdit.raw_joint_congr
+
+#print axioms CryptoOracle.RandomOracle.Representation.ScopedEdit.generate_complete
+
+#print axioms CryptoOracle.RandomOracle.Representation.ScopedEdit.generate_sound
+
+#print axioms CryptoOracle.RandomOracle.Representation.ScopedEdit.generated_final
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.exact_scope
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.exact_preloaded_scope
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.ten_declarations
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.declaration_counts
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.scoped_accepts
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.compiled
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.generated_game
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.matches_declared_edit
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.decoded_joint
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.decoded_game
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.outside_completed
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.preloaded_rejected
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.actual_collision_rejected
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.unselected_label_equal
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.unused_edit_reuses_artifact
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.two_changed_rows
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.local_repair_accepts
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.local_repair_generated
+
+#print axioms Foundation.Symmetric.RandomFunctionMACScopedEdit.local_repair_sound
+
+#print axioms Foundation.Logic.FiniteCodecRepair.compile_eq_full
+
+#print axioms Foundation.Logic.FiniteCodecRepair.complete
+
+#print axioms Foundation.Logic.FiniteCodecRepair.acceptance
+
+#print axioms CryptoOracle.RandomOracle.Representation.IncrementalEdit.generate_eq_full
+
+#print axioms CryptoOracle.RandomOracle.Representation.IncrementalEdit.generate_sound
+
+#print axioms Foundation.Symmetric.RandomFunctionMACIncrementalEdit.unchanged
+
+#print axioms Foundation.Symmetric.RandomFunctionMACIncrementalEdit.compiled_eq_full
+
+#print axioms Foundation.Symmetric.RandomFunctionMACIncrementalEdit.compiled_eq_previous
+
+#print axioms Foundation.Symmetric.RandomFunctionMACIncrementalEdit.accepted_scope
+
+#print axioms Foundation.Symmetric.RandomFunctionMACIncrementalEdit.unchanged_scope
+
+#print axioms Foundation.Symmetric.RandomFunctionMACIncrementalEdit.generated
+
+#print axioms Foundation.Symmetric.RandomFunctionMACIncrementalEdit.joint_sound
+
+#print axioms Foundation.Symmetric.RandomFunctionMACIncrementalEdit.bad_unchanged
+
+#print axioms Foundation.Symmetric.RandomFunctionMACIncrementalEdit.rejects_collision
+
+#print axioms Foundation.Logic.FiniteCodecDifference.mem_changed
+
+#print axioms Foundation.Logic.FiniteCodecDifference.changed_subset
+
+#print axioms Foundation.Logic.FiniteCodecDifference.unchanged
+
+#print axioms Foundation.Logic.FiniteCodecDifference.minimal
+
+#print axioms Foundation.Logic.FiniteCodecDifference.compile_eq_full
+
+#print axioms Foundation.Logic.FiniteCodecDifference.complete
+
+#print axioms CryptoOracle.RandomOracle.Representation.Patches.generate_length
+
+#print axioms CryptoOracle.RandomOracle.Representation.Patches.run_generated
+
+#print axioms CryptoOracle.RandomOracle.Representation.Patches.generated_length
+
+#print axioms CryptoOracle.RandomOracle.Representation.Patches.generated_endpoint
+
+#print axioms CryptoOracle.RandomOracle.Representation.Patches.generated_compile_eq
+
+#print axioms CryptoOracle.RandomOracle.Representation.Patches.generated_member
+
+#print axioms CryptoOracle.RandomOracle.Representation.Patches.run_bijective
+
+#print axioms CryptoOracle.RandomOracle.Representation.Patches.generated_prefix_accepted
+
+#print axioms CryptoOracle.RandomOracle.Representation.Patches.Edit.exchange
+
+#print axioms CryptoOracle.RandomOracle.Representation.Patches.Cell.sound
+
+#print axioms CryptoOracle.RandomOracle.Representation.Patches.order_cell_exists
+
+#print axioms CryptoOracle.RandomOracle.Representation.Patches.order_sound
+
+#print axioms CryptoOracle.RandomOracle.Representation.AutomaticEdit.generate_eq_full
+
+#print axioms CryptoOracle.RandomOracle.Representation.AutomaticEdit.generate_sound
+
+#print axioms Foundation.Symmetric.RandomFunctionMACAutomaticEdit.row_changed
+
+#print axioms Foundation.Symmetric.RandomFunctionMACAutomaticEdit.exact_changes
+
+#print axioms Foundation.Symmetric.RandomFunctionMACAutomaticEdit.changed_count
+
+#print axioms Foundation.Symmetric.RandomFunctionMACAutomaticEdit.compiled_eq_previous
+
+#print axioms Foundation.Symmetric.RandomFunctionMACAutomaticEdit.generated_game
+
+#print axioms Foundation.Symmetric.RandomFunctionMACAutomaticEdit.joint_sound
+
+#print axioms Foundation.Symmetric.RandomFunctionMACAutomaticEdit.rows_cover
+
+#print axioms Foundation.Symmetric.RandomFunctionMACAutomaticEdit.rows_nodup
+
+#print axioms Foundation.Symmetric.RandomFunctionMACAutomaticEdit.path_eq
+
+#print axioms Foundation.Symmetric.RandomFunctionMACAutomaticEdit.path_length
+
+#print axioms Foundation.Symmetric.RandomFunctionMACAutomaticEdit.path_compiled
+
+#print axioms Foundation.Symmetric.RandomFunctionMACAutomaticEdit.path_game
+
+#print axioms Foundation.Symmetric.RandomFunctionMACAutomaticEdit.reversed_path_game
+
+#print axioms Foundation.Probability.Copyability.support_shared
+
+#print axioms Foundation.Probability.Copyability.support_independent
+
+#print axioms Foundation.Probability.Copyability.shared_pure
+
+#print axioms Foundation.Probability.Copyability.support_subsingleton
+
+#print axioms Foundation.Probability.Copyability.copyable_iff_pure
+
+#print axioms Foundation.Probability.Copyability.kernel_copyable_iff_deterministic
+
+#print axioms Foundation.Probability.Copyability.shared_map
+
+#print axioms Foundation.Probability.Copyability.independent_map
+
+#print axioms Foundation.Probability.Copyability.discard
+
+#print axioms Foundation.Probability.Copyability.shared_agreement
+
+#print axioms Foundation.Probability.Copyability.fair_independent_agreement
+
+#print axioms Foundation.Probability.Copyability.fair_not_copyable
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Wire.naturality
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Wire.transport
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Wire.transport_joint
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cell.sound
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cell.distribution
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStructuralTransport.view_evaluation
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStructuralTransport.decoded_source
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStructuralTransport.decoded_view
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStructuralTransport.final_game
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStructuralTransport.original_selection
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStructuralTransport.actual_selection
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStructuralTransport.shared_selection_agreement
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStructuralTransport.independent_selection_agreement
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStructuralTransport.copy_is_not_rerun
+
+#print axioms CryptoOracle.SharedReference.erase_borrow
+
+#print axioms CryptoOracle.SharedReference.borrowed_bound
+
+#print axioms CryptoOracle.SharedReference.run_erase
+
+#print axioms CryptoOracle.SharedReference.run_eq
+
+#print axioms CryptoOracle.SharedReference.readPair_bound
+
+#print axioms CryptoOracle.SharedReference.readPair_run
+
+#print axioms CryptoOracle.SharedReference.readPair_results
+
+#print axioms CryptoOracle.SharedReference.resetReads_results
+
+#print axioms CryptoOracle.SharedReference.shared_not_reset
+
+#print axioms CryptoOracle.RandomOracle.Representation.SharedSwitch.operational_joint
+
+#print axioms CryptoOracle.RandomOracle.Representation.SharedSwitch.forget_view
+
+#print axioms CryptoOracle.RandomOracle.Representation.SharedSwitch.decoded_joint
+
+#print axioms CryptoOracle.RandomOracle.Representation.SharedSwitch.final_game
+
+#print axioms CryptoOracle.RandomOracle.Representation.SharedSwitch.cell_joint
+
+#print axioms Foundation.Symmetric.RandomFunctionMACSharedReferences.diagram_game
+
+#print axioms Foundation.Symmetric.RandomFunctionMACSharedReferences.same_actual_game
+
+#print axioms Foundation.Symmetric.RandomFunctionMACSharedReferences.same_declared_game
+
+#print axioms Foundation.Symmetric.RandomFunctionMACSharedReferences.decoded_joint
+
+#print axioms Foundation.Symmetric.RandomFunctionMACSharedReferences.final_game
+
+#print axioms Foundation.Symmetric.RandomFunctionMACSharedReferences.physical_query_bound
+
+#print axioms Foundation.Symmetric.RandomFunctionMACSharedReferences.alias_cache_hit
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Cell.routing_eq
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.complete
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.synthesize_complete
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Circuit.eval_routing
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Cell.sound
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.all_models_iff
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Finite.unflatten_flatten
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Finite.flatten_unflatten
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Finite.compile_correct
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Finite.compiled_cell_sound
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Finite.complete
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Finite.probabilistic_complete
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Boundary.old_cell_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Boundary.old_inverse_missing
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Boundary.inverse_evaluations_equal
+
+#print axioms CryptoOracle.RandomOracle.Representation.SharedSwitch.compiled_cell_joint
+
+#print axioms Foundation.Symmetric.RandomFunctionMACFiniteWiring.accepts_view
+
+#print axioms Foundation.Symmetric.RandomFunctionMACFiniteWiring.generated_live_game
+
+#print axioms Foundation.Symmetric.RandomFunctionMACFiniteWiring.accepts_inverse
+
+#print axioms Foundation.Symmetric.RandomFunctionMACFiniteWiring.previous_basis_missing
+
+#print axioms Foundation.Symmetric.RandomFunctionMACFiniteWiring.rejects_different_routing
+
+#print axioms Foundation.Symmetric.RandomFunctionMACFiniteWiring.singleton_reference_model_same
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.identityNormal
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.seqNormal
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.tensorNormal
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.normalize
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.connect
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.synthesize
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Boundary.inverse_cell
+
+#print axioms Foundation.Symmetric.RandomFunctionMACFiniteWiring.certificate
+
+#print axioms Foundation.Symmetric.RandomFunctionMACFiniteWiring.inverseCertificate
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.seqRouting
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.tensorRouting_eq
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.tupleRouting_eq
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.Boundary.tower_steps
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.Boundary.boundary_steps
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.Boundary.boundaries_unbounded
+
+#print axioms Foundation.Symmetric.RandomFunctionMACWiringCoherence.different_costs
+
+#print axioms Foundation.Symmetric.RandomFunctionMACWiringCoherence.steps_not_invariant
+
+#print axioms Foundation.Symmetric.RandomFunctionMACWiringCoherence.live_left_then_right
+
+#print axioms Foundation.Symmetric.RandomFunctionMACWiringCoherence.live_right_then_left
+
+#print axioms Foundation.Symmetric.RandomFunctionMACWiringCoherence.decoded_full_game
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.normalAt
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.Root.cell
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.tensorRouting
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.tupleRouting
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.Root.code
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.Generator.code
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.Law.code
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.Four.assoc
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.Four.leftUnit
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.Four.rightUnit
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.Four.leftInv
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.Four.rightInv
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.seqContract
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.tensorContract
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.tupleContract
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.contract
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.factor
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.coherent
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.normalLoop
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.seqIdentity
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.tensorIdentity
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.tupleIdentity
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.tensorInterchange
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.Four.generatorCount
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.Four.lawCount
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.Boundary.tower
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.Boundary.boundaryLeft
+
+#print axioms Foundation.Logic.Polygraph.FiniteWiring.Higher.Boundary.rootSquare
+
+#print axioms Foundation.Symmetric.RandomFunctionMACWiringCoherence.cancelledLoop
+
+#print axioms Foundation.Symmetric.RandomFunctionMACWiringCoherence.withLoop
+
+#print axioms Foundation.Symmetric.RandomFunctionMACWiringCoherence.comparison
+
+#print axioms Foundation.Symmetric.RandomFunctionMACWiringCoherence.leftThenRight
+
+#print axioms Foundation.Symmetric.RandomFunctionMACWiringCoherence.rightThenLeft
+
+#print axioms Foundation.Symmetric.RandomFunctionMACWiringCoherence.independentOrders
+
+#print axioms Foundation.Symmetric.RandomFunctionMACWiringCoherence.combinedBefore
+
+#print axioms Foundation.Symmetric.RandomFunctionMACWiringCoherence.combinedAfter
+
+#print axioms Foundation.Symmetric.RandomFunctionMACWiringCoherence.inputs
+
+#print axioms Foundation.Symmetric.RandomFunctionMACWiringCoherence.combinedRoute
+
+#print axioms Foundation.Symmetric.RandomFunctionMACWiringCoherence.beforeGame
+
+#print axioms Foundation.Symmetric.RandomFunctionMACWiringCoherence.afterGame
+
+#print axioms CryptoOracle.Program.pauseBefore
+
+#print axioms CryptoOracle.Program.pauseBefore_resume
+
+#print axioms CryptoOracle.Program.pauseBefore_same
+
+#print axioms CryptoOracle.Program.resumePast
+
+#print axioms CryptoOracle.Program.pauseBefore_continuation
+
+#print axioms CryptoOracle.Program.repair_at_frontier
+
+#print axioms CryptoOracle.Program.repair_observation_at_frontier
+
+#print axioms CryptoOracle.Program.pauseBefore_preserves
+
+#print axioms CryptoOracle.Program.pauseBefore_boundary
+
+#print axioms CryptoOracle.Program.frontier_mixture_le
+
+#print axioms CryptoOracle.Program.atChanged
+
+#print axioms CryptoOracle.Program.change_frontier_bound
+
+#print axioms Foundation.Symmetric.RandomFunctionMACChangeFrontier.automatic_cut
+
+#print axioms Foundation.Symmetric.RandomFunctionMACChangeFrontier.shared_prefix
+
+#print axioms Foundation.Symmetric.RandomFunctionMACChangeFrontier.always_reaches_change
+
+#print axioms Foundation.Symmetric.RandomFunctionMACChangeFrontier.local_decoded_repair
+
+#print axioms Foundation.Symmetric.RandomFunctionMACChangeFrontier.assembled_decoded_repair
+
+#print axioms CryptoOracle.StatefulDiagram.Store
+
+#print axioms CryptoOracle.StatefulDiagram.view
+
+#print axioms CryptoOracle.StatefulDiagram.write
+
+#print axioms CryptoOracle.StatefulDiagram.Kernels
+
+#print axioms CryptoOracle.StatefulDiagram.step
+
+#print axioms CryptoOracle.StatefulDiagram.execute
+
+#print axioms CryptoOracle.StatefulDiagram.neededBefore
+
+#print axioms CryptoOracle.StatefulDiagram.dependencies
+
+#print axioms CryptoOracle.StatefulDiagram.required
+
+#print axioms CryptoOracle.StatefulDiagram.step_view
+
+#print axioms CryptoOracle.StatefulDiagram.view_write
+
+#print axioms CryptoOracle.StatefulDiagram.execute_view
+
+#print axioms CryptoOracle.StatefulDiagram.obligations
+
+#print axioms CryptoOracle.StatefulDiagram.obligations_subset_changed
+
+#print axioms CryptoOracle.StatefulDiagram.checkReuse
+
+#print axioms CryptoOracle.StatefulDiagram.repair_sound
+
+#print axioms CryptoOracle.StatefulDiagram.checkReuse_sound
+
+#print axioms CryptoOracle.StatefulDiagram.repair_mixture_sound
+
+#print axioms CryptoOracle.StatefulDiagram.Independent
+
+#print axioms CryptoOracle.StatefulDiagram.checkExchange
+
+#print axioms CryptoOracle.StatefulDiagram.view_write_disjoint
+
+#print axioms CryptoOracle.StatefulDiagram.write_commute
+
+#print axioms CryptoOracle.StatefulDiagram.exchange_sound
+
+#print axioms CryptoOracle.StatefulDiagram.checkExchange_sound
+
+#print axioms CryptoOracle.StatefulDiagram.execute_append
+
+#print axioms CryptoOracle.StatefulDiagram.exchange_in_context
+
+#print axioms CryptoOracle.StatefulDiagram.attemptExchange
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.sound
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStatefulDiagram.signature
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStatefulDiagram.diagram
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStatefulDiagram.initial
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStatefulDiagram.observe
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStatefulDiagram.kernels
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStatefulDiagram.actual_caller
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStatefulDiagram.full_required
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStatefulDiagram.verification_only_obligation
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStatefulDiagram.freshPermutation
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStatefulDiagram.freshPermutation_eq
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStatefulDiagram.editedKernels
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStatefulDiagram.unchanged_operations
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStatefulDiagram.generated_local_laws
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStatefulDiagram.repaired_actual_game
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStatefulDiagram.shared_queries_rejected
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStatefulDiagram.forkSignature
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStatefulDiagram.independentCertificate
+
+#print axioms Foundation.Symmetric.RandomFunctionMACStatefulDiagram.independent_full_state
+
+#print axioms CryptoOracle.StatefulDiagram.relevant_after_independent
+
+#print axioms CryptoOracle.StatefulDiagram.neededBefore_commute
+
+#print axioms CryptoOracle.StatefulDiagram.dependencies_append
+
+#print axioms CryptoOracle.StatefulDiagram.required_append
+
+#print axioms CryptoOracle.StatefulDiagram.required_exchange
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.dependencies_eq
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.required_eq
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.obligations_eq
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.transportRepair
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.repair_reordered
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.repair_across
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.whisker
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.swapCount
+
+#print axioms CryptoOracle.StatefulDiagram.braidLeft
+
+#print axioms CryptoOracle.StatefulDiagram.braidRight
+
+#print axioms CryptoOracle.StatefulDiagram.swapTwice
+
+#print axioms CryptoOracle.StatefulDiagram.farLeft
+
+#print axioms CryptoOracle.StatefulDiagram.farRight
+
+#print axioms CryptoOracle.StatefulDiagram.braidLeft_count
+
+#print axioms CryptoOracle.StatefulDiagram.braidRight_count
+
+#print axioms CryptoOracle.StatefulDiagram.swapTwice_count
+
+#print axioms CryptoOracle.StatefulDiagram.farLeft_count
+
+#print axioms CryptoOracle.StatefulDiagram.farRight_count
+
+#print axioms CryptoOracle.StatefulDiagram.equivalenceSupport
+
+#print axioms CryptoOracle.StatefulDiagram.equivalence_transport
+
+#print axioms CryptoOracle.StatefulDiagram.ReusePlan.support
+
+#print axioms CryptoOracle.StatefulDiagram.ReusePlan.Valid
+
+#print axioms CryptoOracle.StatefulDiagram.ReuseCertificate.checked
+
+#print axioms CryptoOracle.StatefulDiagram.ReuseCertificate.imported
+
+#print axioms CryptoOracle.StatefulDiagram.ReuseCertificate.symm
+
+#print axioms CryptoOracle.StatefulDiagram.ReuseCertificate.trans
+
+#print axioms CryptoOracle.StatefulDiagram.ReuseCertificate.support
+
+#print axioms CryptoOracle.StatefulDiagram.ReusePlan.sound
+
+#print axioms CryptoOracle.StatefulDiagram.ReuseCertificate.sound
+
+#print axioms CryptoOracle.StatefulDiagram.ReusePlan.fresh
+
+#print axioms CryptoOracle.StatefulDiagram.ReusePlan.check
+
+#print axioms CryptoOracle.StatefulDiagram.ReuseCertificate.fresh
+
+#print axioms CryptoOracle.StatefulDiagram.ReuseCertificate.check
+
+#print axioms CryptoOracle.StatefulDiagram.ReuseCertificate.repair_sound
+
+#print axioms CryptoOracle.StatefulDiagram.ReuseCertificate.check_sound
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.signature
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.left
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.right
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.braid
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.distantLeft
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.distantRight
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.distant
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.doubleSwap
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.cancellation
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.generated_inputs
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.generated_required
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.generated_obligations
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.reordered_obligations
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.both_operational_orders
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.repair_after_reorder
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.uniformCertificate
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.uniform_support_empty
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.uniform_check_any_change
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.Checked.uniform_reuse_after_any_update
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.signature
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.world
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.same_full_execution
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.first_required
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.second_required
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.different_required
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.different_obligations
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.semantic_equality_insufficient
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.editedWorld
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.original_order_observation
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.reversed_order_observation
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.edit_breaks_semantic_reorder
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.old_equivalence_not_edit_stable
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.exchange_rejected
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.importedCertificate
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.imported_support
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.proof_recheck_needed
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.proof_checker_rejects
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.source_only_check_accepts
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.edited_unchanged
+
+#print axioms Foundation.Examples.StatefulDiagramAnalysisTransport.SemanticBoundary.source_marginal_preserved
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.swapCount_whisker
+
+#print axioms CryptoOracle.StatefulDiagram.ExchangeHigher.swapParity
+
+#print axioms CryptoOracle.StatefulDiagram.HigherBoundary.readOnly
+
+#print axioms CryptoOracle.StatefulDiagram.HigherBoundary.selfSwap
+
+#print axioms CryptoOracle.StatefulDiagram.HigherBoundary.identityPath
+
+#print axioms CryptoOracle.StatefulDiagram.HigherBoundary.self_count
+
+#print axioms CryptoOracle.StatefulDiagram.HigherBoundary.identity_count
+
+#print axioms CryptoOracle.StatefulDiagram.HigherBoundary.no_self_contraction
+
+#print axioms CryptoOracle.StatefulDiagram.HigherBoundary.three_forms_incomplete
+
+#print axioms CryptoOracle.StatefulDiagram.self_exchange_no_writes
+
+#print axioms CryptoOracle.StatefulDiagram.step_no_writes
+
+#print axioms CryptoOracle.StatefulDiagram.self_exchange_no_effect
+
+#print axioms CryptoOracle.StatefulDiagram.HigherBoundary.selfContraction
+
+#print axioms CryptoOracle.StatefulDiagram.HigherBoundary.extension_closes_counterexample
+
+#print axioms CryptoOracle.StatefulDiagram.HigherBoundary.added_root_not_old_derived
+
+#print axioms CryptoOracle.StatefulDiagram.ExchangeCoherence
+
+#print axioms CryptoOracle.StatefulDiagram.undoSuffix
+
+#print axioms CryptoOracle.StatefulDiagram.cancelSuffix
+
+#print axioms CryptoOracle.StatefulDiagram.undoPrefix
+
+#print axioms CryptoOracle.StatefulDiagram.cancelPrefix
+
+#print axioms CryptoOracle.StatefulDiagram.common_suffix_iff
+
+#print axioms CryptoOracle.StatefulDiagram.common_prefix_iff
+
+#print axioms CryptoOracle.StatefulDiagram.HeadExtraction
+
+#print axioms CryptoOracle.StatefulDiagram.exposeHead
+
+#print axioms CryptoOracle.StatefulDiagram.AccessibleHead
+
+#print axioms CryptoOracle.StatefulDiagram.exposeHead_success_iff
+
+#print axioms CryptoOracle.StatefulDiagram.checkExchange_reverse
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.accessibleHead_iff
+
+#print axioms CryptoOracle.StatefulDiagram.exposeHead_complete
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.length_eq
+
+#print axioms CryptoOracle.StatefulDiagram.HeadExtraction.length
+
+#print axioms CryptoOracle.StatefulDiagram.HeadExtraction.sound
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.erase
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.cancel_head
+
+#print axioms CryptoOracle.StatefulDiagram.alignExchange
+
+#print axioms CryptoOracle.StatefulDiagram.alignExchange_complete
+
+#print axioms CryptoOracle.StatefulDiagram.alignExchange_sound
+
+#print axioms CryptoOracle.StatefulDiagram.descendingSwaps
+
+#print axioms CryptoOracle.StatefulDiagram.DescendingPath
+
+#print axioms CryptoOracle.StatefulDiagram.descendingSwaps_checked
+
+#print axioms CryptoOracle.StatefulDiagram.DescendingPath.checked
+
+#print axioms CryptoOracle.StatefulDiagram.DescendingPath.from_terminal
+
+#print axioms Foundation.Examples.StatefulDiagramNormalizationBoundary.signature
+
+#print axioms Foundation.Examples.StatefulDiagramNormalizationBoundary.rank
+
+#print axioms Foundation.Examples.StatefulDiagramNormalizationBoundary.peak_successors
+
+#print axioms Foundation.Examples.StatefulDiagramNormalizationBoundary.left_terminal
+
+#print axioms Foundation.Examples.StatefulDiagramNormalizationBoundary.right_terminal
+
+#print axioms Foundation.Examples.StatefulDiagramNormalizationBoundary.different_terminals
+
+#print axioms Foundation.Examples.StatefulDiagramNormalizationBoundary.peak_not_joinable
+
+#print axioms Foundation.Examples.StatefulDiagramNormalizationBoundary.descending_not_locally_confluent
+
+#print axioms Foundation.Examples.StatefulDiagramNormalizationBoundary.peakLeft
+
+#print axioms Foundation.Examples.StatefulDiagramNormalizationBoundary.peakRight
+
+#print axioms Foundation.Examples.StatefulDiagramNormalizationBoundary.terminal_execution_equal
+
+#print axioms Foundation.Examples.StatefulDiagramNormalizationBoundary.extraction_succeeds
+
+#print axioms Foundation.Examples.StatefulDiagramNormalizationBoundary.blocked_extraction
+
+#print axioms Foundation.Examples.StatefulDiagramNormalizationBoundary.terminalAlignment
+
+#print axioms Foundation.Examples.StatefulDiagramNormalizationBoundary.terminalAlignment_count
+
+#print axioms Foundation.Examples.StatefulDiagramNormalizationBoundary.impossible_order_rejected
+
+#print axioms CryptoOracle.StatefulDiagram.ExchangeCoherence.local
+
+#print axioms CryptoOracle.StatefulDiagram.ExchangeCoherence.refl
+
+#print axioms CryptoOracle.StatefulDiagram.ExchangeCoherence.symm
+
+#print axioms CryptoOracle.StatefulDiagram.ExchangeCoherence.trans
+
+#print axioms CryptoOracle.StatefulDiagram.ExchangeCoherence.comp
+
+#print axioms CryptoOracle.StatefulDiagram.ExchangeCoherence.inverse
+
+#print axioms CryptoOracle.StatefulDiagram.ExchangeCoherence.whisker
+
+#print axioms CryptoOracle.StatefulDiagram.ExchangeCoherence.assoc
+
+#print axioms CryptoOracle.StatefulDiagram.ExchangeCoherence.leftUnit
+
+#print axioms CryptoOracle.StatefulDiagram.ExchangeCoherence.rightUnit
+
+#print axioms CryptoOracle.StatefulDiagram.ExchangeCoherence.leftInv
+
+#print axioms CryptoOracle.StatefulDiagram.ExchangeCoherence.rightInv
+
+#print axioms CryptoOracle.StatefulDiagram.ExchangeCoherence.inverseRefl
+
+#print axioms CryptoOracle.StatefulDiagram.ExchangeCoherence.inverseInverse
+
+#print axioms CryptoOracle.StatefulDiagram.ExchangeCoherence.inverseComp
+
+#print axioms CryptoOracle.StatefulDiagram.HeadExtraction.mk
+
+#print axioms CryptoOracle.StatefulDiagram.HeadExtraction.rest
+
+#print axioms CryptoOracle.StatefulDiagram.HeadExtraction.path
+
+#print axioms CryptoOracle.StatefulDiagram.DescendingPath.refl
+
+#print axioms CryptoOracle.StatefulDiagram.DescendingPath.step
+
+#print axioms CryptoOracle.StatefulDiagram.availableHeads
+
+#print axioms CryptoOracle.StatefulDiagram.mem_availableHeads
+
+#print axioms CryptoOracle.StatefulDiagram.availableHeads_nonempty
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.availableHeads_eq
+
+#print axioms CryptoOracle.StatefulDiagram.leastHead
+
+#print axioms CryptoOracle.StatefulDiagram.canonicalAux
+
+#print axioms CryptoOracle.StatefulDiagram.canonicalAux_reachable
+
+#print axioms CryptoOracle.StatefulDiagram.canonicalAux_invariant
+
+#print axioms CryptoOracle.StatefulDiagram.canonicalWord
+
+#print axioms CryptoOracle.StatefulDiagram.canonicalWord_reachable
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.canonicalWord_eq
+
+#print axioms CryptoOracle.StatefulDiagram.canonicalWord_complete
+
+#print axioms CryptoOracle.StatefulDiagram.canonicalWord_idempotent
+
+#print axioms CryptoOracle.StatefulDiagram.canonicalWord_sound
+
+#print axioms CryptoOracle.StatefulDiagram.canonicalAuxCertificate
+
+#print axioms CryptoOracle.StatefulDiagram.canonicalCertificate
+
+#print axioms CryptoOracle.StatefulDiagram.canonicalWord_dependencies
+
+#print axioms CryptoOracle.StatefulDiagram.canonicalWord_required
+
+#print axioms CryptoOracle.StatefulDiagram.canonicalWord_obligations
+
+#print axioms CryptoOracle.StatefulDiagram.canonicalWord_checkReuse
+
+#print axioms CryptoOracle.StatefulDiagram.canonicalWord_repair_across
+
+#print axioms CryptoOracle.StatefulDiagram.identifyInverse
+
+#print axioms CryptoOracle.StatefulDiagram.reverseSwapCell
+
+#print axioms CryptoOracle.StatefulDiagram.reverseSwapCell_context
+
+#print axioms CryptoOracle.StatefulDiagram.oppositeBacktrack
+
+#print axioms Foundation.Examples.StatefulDiagramCanonical.peak_canonical
+
+#print axioms Foundation.Examples.StatefulDiagramCanonical.both_terminals_canonical
+
+#print axioms Foundation.Examples.StatefulDiagramCanonical.dependent_order_distinguished
+
+#print axioms Foundation.Examples.StatefulDiagramCanonical.multiplicity_preserved
+
+#print axioms Foundation.Examples.StatefulDiagramCanonical.peakCertificate
+
+#print axioms Foundation.Examples.StatefulDiagramCanonical.terminalCertificate
+
+#print axioms Foundation.Examples.StatefulDiagramCanonical.peakCertificate_count
+
+#print axioms Foundation.Examples.StatefulDiagramCanonical.terminalCertificate_count
+
+#print axioms Foundation.Examples.StatefulDiagramCanonical.readOnly
+
+#print axioms Foundation.Examples.StatefulDiagramCanonical.readOnly_repetition
+
+#print axioms Foundation.Examples.StatefulDiagramCanonical.readOnly_certificate_count
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.prepend
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.prepend_count
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.prefix
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.suffix
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.suffix_trans
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.suffix_symm
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.suffix_refl
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.prefix_trans
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.prefix_symm
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.prefix_refl
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.prefix_count
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.suffix_count
+
+#print axioms CryptoOracle.StatefulDiagram.horizontalLeft
+
+#print axioms CryptoOracle.StatefulDiagram.horizontalRight
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.assoc
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.undoSuffix
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.undoForwardPrefix
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.undoInversePrefix
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.cancelPrefix
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.invertSquare
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.stackSquares
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.composeSquares
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.invertLeft
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.invertSecond
+
+#print axioms CryptoOracle.StatefulDiagram.interchangeWithSwap
+
+#print axioms CryptoOracle.StatefulDiagram.horizontalInterchange
+
+#print axioms CryptoOracle.StatefulDiagram.separated_boundary_counts
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.squareCount
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.stackSquares_count
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.composeSquares_count
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.invertLeft_count
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.invertSecond_count
+
+#print axioms CryptoOracle.StatefulDiagram.interchangeWithSwap_count
+
+#print axioms CryptoOracle.StatefulDiagram.horizontalInterchange_count
+
+#print axioms CryptoOracle.StatefulDiagram.adjacentInterchangeOld
+
+#print axioms CryptoOracle.StatefulDiagram.adjacentInterchangeOld_count
+
+#print axioms CryptoOracle.StatefulDiagram.horizontal_execution_sound
+
+#print axioms CryptoOracle.StatefulDiagram.horizontal_obligations
+
+#print axioms Foundation.Examples.StatefulDiagramHorizontal.signature
+
+#print axioms Foundation.Examples.StatefulDiagramHorizontal.leftSwap
+
+#print axioms Foundation.Examples.StatefulDiagramHorizontal.rightSwap
+
+#print axioms Foundation.Examples.StatefulDiagramHorizontal.leftFirst
+
+#print axioms Foundation.Examples.StatefulDiagramHorizontal.rightFirst
+
+#print axioms Foundation.Examples.StatefulDiagramHorizontal.separatedCell
+
+#print axioms Foundation.Examples.StatefulDiagramHorizontal.leftWithBacktrack
+
+#print axioms Foundation.Examples.StatefulDiagramHorizontal.rightWithInverses
+
+#print axioms Foundation.Examples.StatefulDiagramHorizontal.compositeCell
+
+#print axioms Foundation.Examples.StatefulDiagramHorizontal.root_count
+
+#print axioms Foundation.Examples.StatefulDiagramHorizontal.composite_count
+
+#print axioms Foundation.Examples.StatefulDiagramHorizontal.blocker_not_crossed
+
+#print axioms Foundation.Examples.StatefulDiagramHorizontal.actual_shared_store_law
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.base
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.refl
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.symm
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.trans
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.comp
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.inverse
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.prefix
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.suffix
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.separated
+
+#print axioms CryptoOracle.StatefulDiagram.eraseSwap
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.eraseData
+
+#print axioms CryptoOracle.StatefulDiagram.pullHead
+
+#print axioms CryptoOracle.StatefulDiagram.pullHead_front
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.eraseData_trans
+
+#print axioms CryptoOracle.StatefulDiagram.Exchange.eraseData_symm
+
+#print axioms CryptoOracle.StatefulDiagram.pullHead_sound
+
+#print axioms CryptoOracle.StatefulDiagram.frontSwap
+
+#print axioms CryptoOracle.StatefulDiagram.frontInvolution
+
+#print axioms CryptoOracle.StatefulDiagram.frontSelf
+
+#print axioms CryptoOracle.StatefulDiagram.frontBraid
+
+#print axioms CryptoOracle.StatefulDiagram.frontSwap_tail
+
+#print axioms CryptoOracle.StatefulDiagram.PullSquare
+
+#print axioms CryptoOracle.StatefulDiagram.frontPullSquare
+
+#print axioms CryptoOracle.StatefulDiagram.primitivePullSquare
+
+#print axioms CryptoOracle.StatefulDiagram.pullNaturality
+
+#print axioms CryptoOracle.StatefulDiagram.emptyReference
+
+#print axioms CryptoOracle.StatefulDiagram.emptyContraction
+
+#print axioms CryptoOracle.StatefulDiagram.HorizontalCoherence.cancelSuffix
+
+#print axioms CryptoOracle.StatefulDiagram.exchangeCoherent
+
+#print axioms CryptoOracle.StatefulDiagram.exchange_coherence_complete
+
+#print axioms CryptoOracle.StatefulDiagram.canonicalTargetRoute
+
+#print axioms CryptoOracle.StatefulDiagram.canonicalFactor
+
+#print axioms Foundation.Examples.StatefulDiagramCoherent.automaticBraid
+
+#print axioms Foundation.Examples.StatefulDiagramCoherent.automaticSeparated
+
+#print axioms Foundation.Examples.StatefulDiagramCoherent.automaticComposite
+
+#print axioms Foundation.Examples.StatefulDiagramCoherent.automaticSelf
+
+#print axioms Foundation.Examples.StatefulDiagramCoherent.emptyPath
+
+#print axioms Foundation.Examples.StatefulDiagramCoherent.automaticEmpty
+
+#print axioms Foundation.Examples.StatefulDiagramCoherent.old_obstruction_connected
+
+#print axioms Foundation.Examples.StatefulDiagramCoherent.automaticCanonicalFactor
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Layout
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.needs
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.charges
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Holds
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Holds.restrict
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.fresh
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.checkReuse
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.repair
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.reuse
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.totalCharge
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.totalCharge_add
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Model
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.evaluate
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.evaluate_loss
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.evaluate_sound
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Relator
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.needs
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.endpoint_needs
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.charge_eq
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.totalCharge_eq
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.fresh
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.checkReuse
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.HigherModel
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.evaluateCell
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.evaluateCell_sound
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.repaired_comparison
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.repaired_bound
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.reused_comparison
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.layout
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.identityPlan
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.mapPlan
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.relators
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.roundTrip
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.alternative
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.condition
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.endpoints_need_nothing
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.interior_condition
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.old_conditions
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.missing_new_condition
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.endpoint_check_accepts
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.diagram_check_rejects
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.alternative_check_accepts
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.baseModel
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.model
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.Interior.new_local_rule_impossible
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.Vertex
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.Atom
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.layout
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.scheduledPlan
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.directPlan
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.relators
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.diagram
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.generated_needs
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.generated_fresh
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.price
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.condition
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.eliminateGiven
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.game
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.baseModel
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.model
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.cached_conditions
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.unchanged_condition
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.rechecked_condition
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.repairedConditions
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.scheduledRealization
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.directRealization
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.repairedDiagram
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.repaired_loss
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.repaired_probability_bound
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.repaired_joint
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.layout
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.doubled
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.empty
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.double_charge
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.no_charge_preserving_contraction
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.chargedFlip
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.loop
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.loop_kernel
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.loop_loss
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.no_loss_preserving_contraction
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.model
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.BudgetBoundary.doubled_realization
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Layout.mk
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Layout.source
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Layout.target
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Layout.needs
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Layout.charges
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.identity
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.atom
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.seq
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Model.mk
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Model.game
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Model.atom
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Model.atom_loss
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Relator.mk
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Relator.source
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Relator.target
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Relator.left
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Relator.right
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Relator.needs
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Relator.balanced
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.rule
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.refl
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.symm
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.trans
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.seq
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.assoc
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.leftUnit
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Cell.rightUnit
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.HigherModel.mk
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.HigherModel.base
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.HigherModel.comparison
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.Vertex.start
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.Vertex.middle
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.Vertex.finish
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.Atom.schedule
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.Atom.last
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACRepair.Atom.first
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.Atom
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.Atom.eliminate
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.Atom.schedule
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.Vertex
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.Vertex.finish
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.Vertex.stage
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.arbitraryDiagram
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.arbitrary_bound
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.arbitrary_kernel
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.arbitrary_state
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.arbitrary_trace
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.baseModel
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.condition
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.conditions
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.diamonds
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.direct
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.eliminateRetaining
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.game
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.generated
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.generated_bound
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.generated_joint
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.layout
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.model
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.price
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.realized
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.relators
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.repairedConditions
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.repairedDiagram
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.retainedGame
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.sanitize
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.sanitize_state
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.sanitize_trace
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.strategy
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.terminal_charges
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.NormalizationBoundary.completed
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.NormalizationBoundary.discard
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.NormalizationBoundary.suffix_cancellation_fails
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.NormalizationBoundary.terminal
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.LocalDiamond
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.LocalDiamond.cell
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.LocalDiamond.join
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.LocalDiamond.left
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.LocalDiamond.mk
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.LocalDiamond.right
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Next
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Next.done
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Next.step
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.rank_le
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy.decreases
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy.mk
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy.next
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy.normal
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy.normal_sink
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy.normal_step
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy.rank
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy.terminal
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transition
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transition.atom
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transition.label
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transition.mk
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transition.plan
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transition.rank_lt
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transition.source_eq
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transition.target_eq
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.completedCoherence
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.foldNormalization
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.normalizePlan
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.normalizeTerminal
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.normalizeTransition
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.terminalCoherence
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.terminal_coherence_complete
+
+#print axioms CryptoLogic.General.CertifiedComparison
+
+#print axioms CryptoLogic.General.CertifiedComparison.assoc
+
+#print axioms CryptoLogic.General.CertifiedComparison.comp
+
+#print axioms CryptoLogic.General.CertifiedComparison.families
+
+#print axioms CryptoLogic.General.CertifiedComparison.leftUnit
+
+#print axioms CryptoLogic.General.CertifiedComparison.loss
+
+#print axioms CryptoLogic.General.CertifiedComparison.mk
+
+#print axioms CryptoLogic.General.CertifiedComparison.packets
+
+#print axioms CryptoLogic.General.CertifiedComparison.programs
+
+#print axioms CryptoLogic.General.CertifiedComparison.refl
+
+#print axioms CryptoLogic.General.CertifiedComparison.resources
+
+#print axioms CryptoLogic.General.CertifiedComparison.rightUnit
+
+#print axioms CryptoLogic.General.CertifiedComparison.symm
+
+#print axioms CryptoLogic.General.CertifiedComparison.trans
+
+#print axioms CryptoLogic.General.CertifiedReduction.runPacket
+
+#print axioms CryptoLogic.General.SecurityObject.Packet
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.HigherModel
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.HigherModel.base
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.HigherModel.comparison
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.HigherModel.mk
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.Model
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.Model.atom
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.Model.machine
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.Model.mk
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.Model.object
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.bounded
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.evaluate
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.evaluateCell
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.repaired_comparison
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Computational.secure
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.different_loss
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.firstOrder
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.identityWithLoss
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.layout
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.left
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.model
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.no_comparison
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.no_higher_model
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.observedZero
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.prefixError
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.prefixError_negligible
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.relators
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.right
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.same_charge_bag
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.same_packet
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.same_program
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.secondOrder
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.twice
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.ComputationalLossBoundary.twice_negligible
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.Atom
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.Atom.direct
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.Atom.replace
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.Atom.uniform
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.Vertex
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.Vertex.half
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.Vertex.masked
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.Vertex.prg
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.baseModel
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.branch_bound
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.branch_secure
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.comparison
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.condition
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.conditions
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.diamonds
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.direct
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.directGiven
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.emitted_code
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.encryption_bound
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.encryption_secure
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.family_eq
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.generated
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.halts
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.layout
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.loss_eq
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.model
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.object
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.relators
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.repaired_comparison
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.resources
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.strategy
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.time_polynomial
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.PRGComputational.uniformGiven
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.Rule
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.Rule.refl
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.Rule.root
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.Rule.symm
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.Rule.trans
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.accepted
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.certificate
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.claims
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.claims_last
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.claims_succ
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.encodedBytes
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.erasure
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.expandedNodes
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.expanded_closed
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.expanded_count
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.geometric
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.higher_certificate
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.lookup_steps
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.node_count
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.nodes
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.ordinary
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.ordinary_certificate
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.realization
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.reference_count
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.reflexive
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.reflexive_accepted
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.reflexive_size
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.render
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.route
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.run_nodes
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.run_sizes
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.sizeCache
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.sizeCache_last
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.sizeCache_length
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.SharedMAC.theory
+
+#print axioms Foundation.Logic.SharedInference.Certificate
+
+#print axioms Foundation.Logic.SharedInference.Certificate.encode
+
+#print axioms Foundation.Logic.SharedInference.Certificate.eval
+
+#print axioms Foundation.Logic.SharedInference.Certificate.eval_map
+
+#print axioms Foundation.Logic.SharedInference.Certificate.expandedSize
+
+#print axioms Foundation.Logic.SharedInference.Certificate.expandedSize_correct
+
+#print axioms Foundation.Logic.SharedInference.Certificate.lookupSteps
+
+#print axioms Foundation.Logic.SharedInference.Certificate.mk
+
+#print axioms Foundation.Logic.SharedInference.Certificate.nodeCount
+
+#print axioms Foundation.Logic.SharedInference.Certificate.nodes
+
+#print axioms Foundation.Logic.SharedInference.Certificate.output
+
+#print axioms Foundation.Logic.SharedInference.Certificate.payloadCost
+
+#print axioms Foundation.Logic.SharedInference.Certificate.referenceCount
+
+#print axioms Foundation.Logic.SharedInference.Node
+
+#print axioms Foundation.Logic.SharedInference.Node.mk
+
+#print axioms Foundation.Logic.SharedInference.Node.parents
+
+#print axioms Foundation.Logic.SharedInference.Node.rule
+
+#print axioms Foundation.Logic.SharedInference.Tree
+
+#print axioms Foundation.Logic.SharedInference.Tree.node
+
+#print axioms Foundation.Logic.SharedInference.Tree.nodeCount
+
+#print axioms Foundation.Logic.SharedInference.Valid
+
+#print axioms Foundation.Logic.SharedInference.check
+
+#print axioms Foundation.Logic.SharedInference.gather
+
+#print axioms Foundation.Logic.SharedInference.gather_map
+
+#print axioms Foundation.Logic.SharedInference.node_sound
+
+#print axioms Foundation.Logic.SharedInference.parentsValid
+
+#print axioms Foundation.Logic.SharedInference.parentsValid_sound
+
+#print axioms Foundation.Logic.SharedInference.run
+
+#print axioms Foundation.Logic.SharedInference.runValues
+
+#print axioms Foundation.Logic.SharedInference.runValues_append
+
+#print axioms Foundation.Logic.SharedInference.runValues_map
+
+#print axioms Foundation.Logic.SharedInference.run_append
+
+#print axioms Foundation.Logic.SharedInference.run_sound
+
+#print axioms Foundation.Logic.SharedInference.sound
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Claim
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Claim.left
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Claim.mk
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Claim.right
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Claim.source
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Claim.support
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Claim.target
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Rule
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Rule.assoc
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Rule.leftUnit
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Rule.refl
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Rule.rightUnit
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Rule.root
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Rule.seq
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Rule.symm
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Rule.trans
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified.accepted
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified.computational
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified.data
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified.diagram
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified.mk
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified.probabilistic
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified.repaired
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.checked
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.compile
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.compileMode
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.geometric
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.instDecidableEqClaim
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.instDecidableEqRule
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.ordinary
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.render
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.theory
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.toTree
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.Output
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.comparison
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.compile
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.compileMode
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.ordinary_comparison
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.rejectsMissingInterior
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.repaired
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.stats
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.PackedPlan
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.decode_shape
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.shape
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.shape_injective
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.PlanShape
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.PlanShape.atom
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.PlanShape.decode
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.PlanShape.identity
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.PlanShape.seq
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.instDecidableEqPlan
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.instDecidableEqPlanShape
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.instReprPlanShape
+
+#print axioms Foundation.Logic.SharedInference.compile
+
+#print axioms Foundation.Logic.SharedInference.compileChecked
+
+#print axioms Foundation.Logic.SharedInference.compileChecked_accepts
+
+#print axioms Foundation.Logic.SharedInference.compileChecked_sound
+
+#print axioms Foundation.Logic.SharedInference.compileFuel
+
+#print axioms Foundation.Logic.SharedInference.compileUnshared
+
+#print axioms Foundation.Logic.SharedInference.intern
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.FiniteOrdinary.join
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.FiniteOrdinary.Meaning
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.FiniteOrdinary.interpretation
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.FiniteOrdinary.repaired
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.FiniteOrdinary.checked
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.FiniteOrdinary.compileAt
+
+#print axioms Foundation.Logic.SharedInference.closedTree
+
+#print axioms Foundation.Logic.SharedInference.treeModel
+
+#print axioms Foundation.Logic.SharedInference.closedTree_eval
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.treeErasure
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.ordinary_geometric_tree
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.toDerivation
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.toDerivation_tree
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.toDerivation_compilation
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.normal
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.normal_eq
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.rootSupport
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.support
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.support_range
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.claim
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.theory
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.derivation
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.tree
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.proof
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.specializedGeometric
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.exact_tree_agreement
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.exact_compilation_agreement
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.compile
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.compileSpecializedGeometric
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.compileGeneralGeometric
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.checked_compilation_agreement
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.repaired
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.tree_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Branching
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Branching.overlap
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Branching.separate
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Bundle
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CheckedModel
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CheckedModel.base
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CheckedModel.localSound
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CheckedModel.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Circuit
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Circuit.box
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Circuit.charges
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Circuit.needs
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Circuit.seq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Circuit.tensor
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Circuit.wire
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Diamond
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Diamond.Meaning
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Diamond.afterFirst
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Diamond.afterSecond
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Diamond.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Diamond.target
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Direction
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Direction.seqLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Direction.seqRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Direction.tensorLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Direction.tensorRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Outcome
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.after
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.base
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.base_eliminate
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.base_schedule
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.before
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.copiedRewrite
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.copied_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.copied_kernel
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.copied_retains_state_trace
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.copied_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.copy
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.drop
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.droppedRewrite
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.dropped_charge
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.dropped_kernel
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.dropped_repair
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.dropped_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.eliminate_realizes
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.family
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.finish
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.model
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.relators
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.rewrite
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.schedule_realizes
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.separatedChanges
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.signature
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.source
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.wrong_game_connection
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Model
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Model.box
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Model.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Port
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Primitive
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Primitive.rule
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Primitive.support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Relator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Relator.balanced
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Relator.extra
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Relator.inputs
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Relator.left
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Relator.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Relator.outputs
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Relator.right
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Relator.support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Separated
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Separated.diamond
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Separated.incomparable
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Separated.no_new_conditions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Separated.seqLR
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Separated.seqLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Separated.seqRL
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Separated.seqRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Separated.tensorLR
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Separated.tensorLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Separated.tensorRL
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Separated.tensorRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Signature
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Signature.PortAtom
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Signature.charges
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Signature.inputs
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Signature.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Signature.needs
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Signature.outputs
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.boundaries
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.branching
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.charge_eq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.classify
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.commute
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.commute_complete
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.commute_no_new_conditions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.commute_repaired
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.commute_sound
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.position
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.repaired
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.root
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.separated_iff
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.seqLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.seqRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.sound
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.sound_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.tensorLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.tensorRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Wiring
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.append
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.evaluate
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.instDecidableEqDirection
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.instReprDirection
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.RootShape
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.RootShape.box
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.RootShape.other
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.RootShape.seq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.beforeShape
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.before_shape
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.boxCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.box_shape
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.chain
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.chainPath
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.chain_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.chain_footprint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.chain_normal
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.chain_normal_length
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.detect
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.footprint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.localJoin
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.needs_footprint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.next
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.next_complete
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.no_box_step
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.no_wire_step
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.normalForm
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.normal_length
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.normalizationStrategy
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.normalized_repaired
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.normalized_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.packed
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.path_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.path_footprint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.resolve
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.rootAt
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.rootAt_complete
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.rootShape
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.root_unique
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.roots_rigid
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.step_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.step_footprint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.terminating
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.GuardedJoin
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.GuardedJoin.left
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.GuardedJoin.leftCovered
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.GuardedJoin.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.GuardedJoin.output
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.GuardedJoin.repaired
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.GuardedJoin.right
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.GuardedJoin.rightCovered
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.LocalJoin
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.LocalJoin.afterFirst
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.LocalJoin.afterSecond
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.LocalJoin.covered
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.LocalJoin.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.LocalJoin.target
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Normalized
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Normalized.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Normalized.output
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Normalized.path
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Normalized.stopped
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Path
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Path.boundaries
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Path.charge_eq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Path.comp_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Path.rank_le
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Path.single_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Path.sound
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Path.sound_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Path.support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Path.terminal
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Resolution
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Resolution.join
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Resolution.join_length
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Resolution.same
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Resolution.separate
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Resolution.seqLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Resolution.seqRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Resolution.tensorLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Resolution.tensorRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.RootRigid
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Selection
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Selection.done
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Selection.more
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.localJoin
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.resolve
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Strategy
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Strategy.decreases
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Strategy.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Strategy.rank
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Strategy.select
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.joinBounded
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.joinPaths
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.normal_reachable
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.normalize
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.normalizeWithin
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.terminal_unique
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.framedLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.framedRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.generatedDiagram
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.generatedFramed
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.generated_uses_extra_guard
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.localDiagram
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.localFramed
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.local_avoids_frame_successor
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.local_framed_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.local_framed_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.local_repaired
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.local_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.orderLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.orderRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.original_routes_avoid_extra_guard
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Exchange
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Exchange.boundaries
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Exchange.separated
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Exchange.support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Exchange.whisker
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Exchange.whisker_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Homotopy
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Homotopy.boundaries
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Homotopy.cancelRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Homotopy.cancelRight_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Homotopy.constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Homotopy.continueRoute
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Homotopy.exchangeCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Homotopy.pathComp
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Homotopy.repaired
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Homotopy.support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Homotopy.whisker
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Homotopy.whisker_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Homotopy.whisker_exchangeCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Homotopy.whisker_fresh
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Homotopy.whisker_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Placement
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Placement.apply
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Placement.apply_needs
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Placement.map_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Placement.needs
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Placement.separate
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Placement.seqLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Placement.seqRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Placement.step
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Placement.step_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Placement.tensorLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Placement.tensorRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Placement.track
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Placement.track_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Resolution.square
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.RewriteTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.RewriteTrack.boundaries
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.RewriteTrack.ofPath_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.RewriteTrack.sound
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.RewriteTrack.support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Step.localSquare
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.completeToTerminal
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.directedCoherence
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.directedCoherence_suffix_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.route
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.terminalCoherence
+
+-- Structural rewrites, conservative completion, and higher repair.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.CompletionCell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Definition
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Definition.suffix
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Profile
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Profile.eliminate
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Profile.schedule
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Profile.seq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Profile.tensor
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Profile.wire
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Rule
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Rule.assoc
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Rule.crypto
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Rule.fuseSeq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Rule.fuseTensor
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Rule.suffix
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Rule.wire
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.WireEdit
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.assocFirst
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.associated_no_candidates
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.candidates
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.completedJoin
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.completedResidual
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.completionBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.copy_naive_unjoinable
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.criticalCell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.criticalCell_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.criticalCell_fresh
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.criticalCell_repaired
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.criticalCell_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.cryptoFirst
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.definition_expands
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.direct_no_candidates
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.discard_naive_unjoinable
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.expandPrimitive
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.expandPrimitive_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.expandStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.expandStep_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.expandTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.expandTrack_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.extendModel
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.forkAssociated
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.forkDirect
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.forkSource
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.fork_distinct
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.model
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.naive_unjoinable
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.not_root_rigid
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.primitive_candidate
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.profile
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.rootCandidate
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.rules
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.step_candidate
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.stopped_of_no_candidates
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.tailAssoc
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.tailCrypto
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.tailSuffix
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.HigherBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.HigherBasis.Generator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.HigherBasis.covered
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.HigherBasis.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.HigherBasis.requirements
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.boundaries
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.repaired
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.support
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.assocUnassoc
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.code
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.copyAssoc
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.copyDiscardLeft
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.copyDiscardRight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.copySwap
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.interchange
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.leftUnit
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.rightUnit
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.seqAssoc
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.sound
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.tensorIdentity
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Root.unassocAssoc
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Step
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Step.root
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Step.seqLeft
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Step.seqRight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Step.sound
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Step.source_composite
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Step.tensorLeft
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.Step.tensorRight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Rewrite.composite
+
+-- Contextual higher reuse and explicit structural naturality diagrams.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.ContextualGenerator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.ContextualGenerator.boundaries
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.ContextualGenerator.placed
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.ContextualGenerator.root
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.ContextualGenerator.support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.LocalDiagram
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.LocalDiagram.assocLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.LocalDiagram.assocMiddle
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.LocalDiagram.assocRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.LocalDiagram.cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.LocalDiagram.cell_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.LocalDiagram.code
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.LocalDiagram.definition
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.LocalDiagram.exchange
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.LocalDiagram.pentagon
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.LocalDiagram.seqWireLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.LocalDiagram.seqWireRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.LocalDiagram.suffixTail
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.LocalDiagram.tensorWireLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.LocalDiagram.tensorWireRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.MixedCell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.assocLeft_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.assocMiddle_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.assocRight_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.associate
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.associate_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.contextualCritical
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.contextualCritical_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.contextualCritical_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.contextualCritical_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.copiedFramedCritical
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.copiedFramedCritical_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.copiedFramedCritical_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.definition_requirements
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.discardedFramedCritical
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.discardedFramedCritical_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.discardedFramedCritical_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.framedCritical
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.framedCritical_fresh
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.framedCritical_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.localBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.mixedBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.pentagon_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.reuseCompletion
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.reuseCompletion_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.reuseCompletion_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.seqFusion
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.seqWireLeft_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.seqWireRight_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.suffixTail_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.tensorFusion
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.tensorWireLeft_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.tensorWireRight_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.two
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.wireChange
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.embed
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.embed_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.embed_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.whisker
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.whisker_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.whisker_fresh
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.whisker_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.contextualBasis
+
+-- Exhaustive mixed root views, derived suffix overlap, and fusion obstruction.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.AssocCase
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.AssocCase.first
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.AssocCase.last
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.AssocCase.leftAssoc
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.AssocCase.leftCrypto
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.AssocCase.leftFusion
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.AssocCase.leftSuffix
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.AssocCase.middle
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.AssocCase.same
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.BranchView
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.BranchView.depth
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.BranchView.depth_le_first
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.BranchView.depth_le_second
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.BranchView.rootCode
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.BranchView.rootLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.BranchView.rootRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.BranchView.separated
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.BranchView.seqLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.BranchView.seqRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.BranchView.tensorLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.BranchView.tensorRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.CryptoCase
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.CryptoCase.same
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.RootBranch
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.RootBranch.competitor
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.RootBranch.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.RootBranch.view
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.RootView
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.RootView.Competitor
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.RootView.Competitor.code
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.RootView.assoc
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.RootView.classify
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.RootView.crypto
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.RootView.fuseSeq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.RootView.fuseTensor
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.RootView.suffix
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.RootView.wire
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.SeqFusionCase
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.SeqFusionCase.left
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.SeqFusionCase.right
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.SeqFusionCase.same
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.SuffixCase
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.SuffixCase.same
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.SuffixCase.tail
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.TensorFusionCase
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.TensorFusionCase.left
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.TensorFusionCase.right
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.TensorFusionCase.same
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.WireCase
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.WireCase.wire
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.associateFirst
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.classification_total
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.classifyAssoc
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.classifyBranch
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.classifyCrypto
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.classifySeqFusion
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.classifySuffix
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.classifyTensorFusion
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.classifyWire
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.completedConfluent
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.completed_not_confluent
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.fusionAssocPath
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.fusionAssociated
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.fusionAssociated_stopped
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.fusionDirect
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.fusionDirect_stopped
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.fusionPath
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.fusionSource
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.fusion_endpoints_distinct
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.fusion_kernel_equal
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.fusion_unjoinable
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.noMixedBoxStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.rootBranch
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.rootBranchCode
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.rootView
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.suffixAssocCell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.suffixAssocCell_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.suffixAssocCell_fresh
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.suffixAssocCell_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.suffixAssoc_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.suffixFirst
+
+#print axioms Foundation.Logic.Polygraph.Four.divideRight
+
+#print axioms Foundation.Logic.Polygraph.Four.rotate
+
+#print axioms Foundation.Logic.Polygraph.Four.stripLeft
+
+-- Conservative wire-fusion completion and exact-footprint relative coherence.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.Cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.ExactCell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.ExactCell.cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.ExactCell.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.ExactCell.support_eq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.Generator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.Generator.definition
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.Generator.existing
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.OldExactCell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.OldExactCell.cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.OldExactCell.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.OldExactCell.support_eq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.Rule
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.Rule.existing
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.Rule.suffix
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.baseBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.basis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.comparison_iff
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.copiedCritical
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.copiedCritical_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.copiedElimination
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.copiedElimination_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.criticalCell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.criticalCell_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.criticalCell_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.discardedCritical
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.discardedCritical_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.eliminatePrimitive
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.eliminateStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.eliminateTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.eliminateTrack_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.embedCell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.embedCell_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.embedCell_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.embedPath
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.embedPath_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.embedPrimitive
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.embedPrimitive_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.embedStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.embedStep_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.embedTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.embedTrack_placement
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.embedTrack_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.expandPrimitive
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.expandPrimitive_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.expandStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.expandStep_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.expandTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.expandTrack_placement
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.expandTrack_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.expand_embedStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.expand_embedTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.extendModel
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.liftCoherence
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.liftCoherence_fresh
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.liftCoherence_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.liftCoherence_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.macModel
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.oldMACComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.oldMACComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.projectCell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.projectCell_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.projectGenerator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.projectRoot
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.repairedFusionJoin
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.repairedFusionPath
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.repairedFusionPath_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.reusedExpandedComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.reusedExpandedComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.roundTripElimination
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.roundTripElimination_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.rules
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.suffixStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.suffixStep_support
+
+-- Complete typed first-level cartesian wiring presentation and mixed repair.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Rule
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Rule.wire
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.certificate
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.checkedModel
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.contextual_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.liftStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.liftTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.liftTrack_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.normalization
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.normalization_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.normalized_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.relators
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.TypedCartesian.copiedNormalization
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.TypedCartesian.copiedNormalization_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.TypedCartesian.discardedNormalization
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.TypedCartesian.discardedNormalization_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.TypedCartesian.mac_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.TypedCartesian.model
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.TypedCartesian.unitCancellation
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.fork
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.refl
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.root
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.seq
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.sound
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.symm
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.tensor
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.toTrack
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.trans
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.a
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.b
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.doubleSwap
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.duplicateDiscard
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.inverseCertificate
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.sampleFamily
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.swapCertificate
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.swap_rejected
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.unitCancellation
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.before
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.certificate
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.identity
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.layout
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.leftProjection
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.mk
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.pair
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.rightProjection
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.seq
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.terminal
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.ProofTrack
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.assoc
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.assocExpand
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.betaFst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.betaSnd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.code
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.copyExpand
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.discardAfter
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.eta
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.forkAfter
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.leftId
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.leftUnitExpand
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.leftUnitInvExpand
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.rightId
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.rightUnitExpand
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.rightUnitInvExpand
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.sound
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.swapExpand
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.tensorExpand
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.unassocExpand
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.unitIdentity
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Step
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Step.root
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Step.seqLeft
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Step.seqRight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Step.sound
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Step.tensorLeft
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Step.tensorRight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.canonical_idempotent
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.certify
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.certify_complete
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.complete
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.connect
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.copyChain
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.copyChainStep
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.equivalent
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.equivalent_correct
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.fork
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.fromOldRoot
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.fst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.identityNormal
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.layoutDecEq
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.leftUnitInvCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.leftUnit_inverse
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.liftLeft
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.liftRight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.normalize
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.normalizeCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.normalize_layout
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.oldRoot_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.oldStep_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.oldTrack_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.old_leftUnit_inverse_missing
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.projectLeft
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.projectRight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.reify
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.reifyRef
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.reifyRef_correct
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.reify_correct
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.reify_normal
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.selectNormal
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.seqLeftTrack
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.seqNormal
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.seqRightTrack
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.snd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.substitute
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.tensorLeftTrack
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.tensorRightTrack
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.unrestricted_not_terminating
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.Layout
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.Slot
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.Slot.here
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.Slot.left
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.Slot.right
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.map_identity
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.map_map
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.map_universal
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.normal
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.normal_complete
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.normal_correct
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.read
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.read_map
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.read_universal
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.universal
+
+-- Bounded cartesian argument diagrams and derived discard-context coherence.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.Cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.Generator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.Generator.structural
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.baseBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.basis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.discardedInContext_constructorBound
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.embedPure
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.embedPure_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.embedPure_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.inContext
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.inContext_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Higher.inContext_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.discardedEta
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.discardedEta_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.discardedEta_fresh
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.discardedEta_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.framedEta
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.framedEta_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.observedFrame
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.CartesianHigher.observedFrame_support
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Argument
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Argument.input
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Argument.mk
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Argument.output
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Argument.same
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Argument.value
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Argument.variation
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.a
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.b
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.copyStep
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.duplicateCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.duplicate_counts
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.eraseCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.erase_counts
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.erasedEtaComparison
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.etaCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Examples.eta_counts
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Generator
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Generator.argument
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Generator.boundaries_bounded
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Generator.code
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Generator.placed
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Generator.seqExchange
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Generator.tensorExchange
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.cancelRight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.constructorCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.discardStep
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.discardTrack
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.discardTrack_constructorBound
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.discardTrack_generatorCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.discardedParallel
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.discardedParallel_constructorBound
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.discardedParallel_generatorCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.generatorCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.whisker
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.whisker_constructorCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement.apply
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement.seqLeft
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement.seqRight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement.step
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement.tensorLeft
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement.tensorRight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement.track
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Placement.track_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.apply
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.change
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.change_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.fixed
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.hole
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.holes
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.pair
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.seq
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.tensor
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.assocFirst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.assocLast
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.assocMiddle
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.betaFstFirst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.betaFstLast
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.betaSndFirst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.betaSndLast
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.code
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.discard
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.eta
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.forkFirst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.forkLast
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.forkMiddle
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.left
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.leftId
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.left_holes_le_two
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.right
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.rightId
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.right_holes_le_two
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.rootAt
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.tensorFirst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Variation.tensorLast
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.afterRule
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.afterRule_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argumentAt
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argumentAt_tag
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argumentCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argumentCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argumentTag
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argument_coverage
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.beforeRule
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.beforeRule_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.stepCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.stepCount_map
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.trackConstructorCount
+
+-- Path-only repair: endpoint equality does not require a higher comparison.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.RewriteTrack.repaired
+#print axioms CryptoLogic.Polygraph.MixedCircuit.RewriteTrack.repaired_joint
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.left_recheck_subset
+
+-- Directed mixed extraction, computational comparison and orientation boundary.
+#print axioms CryptoLogic.General.Backends.OrientationBoundary.forward_exists_no_reverse
+
+#print axioms CryptoLogic.General.Backends.OrientationBoundary.masking_closed
+
+#print axioms CryptoLogic.General.Backends.OrientationBoundary.no_reverse_compiler
+
+#print axioms CryptoLogic.General.Backends.OrientationBoundary.no_reverse_reduction
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.Basis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.Basis.Generator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.Basis.covered
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.Basis.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.Basis.support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.Cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.Cell.boundaries
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.Cell.comp
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.Cell.generator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.Cell.refl
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.Cell.support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.Cell.symm
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.Cell.trans
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.HigherModel
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.HigherModel.base
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.HigherModel.comparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.HigherModel.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.Model
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.Model.machine
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.Model.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.Model.object
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.Model.step
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.bounded
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.compare
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.executes
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.extract
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.extract_comp
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.extract_single
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.realizes
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.repaired
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Computational.repaired_comparison
+
+-- Quantitative native MAC box contracts and the actual mixed serial root.
+#print axioms CryptoLogic.General.QuantitativeComparison
+
+#print axioms CryptoLogic.General.QuantitativeComparison.assoc
+
+#print axioms CryptoLogic.General.QuantitativeComparison.comp
+
+#print axioms CryptoLogic.General.QuantitativeComparison.families
+
+#print axioms CryptoLogic.General.QuantitativeComparison.leftUnit
+
+#print axioms CryptoLogic.General.QuantitativeComparison.loss
+
+#print axioms CryptoLogic.General.QuantitativeComparison.mk
+
+#print axioms CryptoLogic.General.QuantitativeComparison.packets
+
+#print axioms CryptoLogic.General.QuantitativeComparison.programs
+
+#print axioms CryptoLogic.General.QuantitativeComparison.refl
+
+#print axioms CryptoLogic.General.QuantitativeComparison.resources
+
+#print axioms CryptoLogic.General.QuantitativeComparison.rightUnit
+
+#print axioms CryptoLogic.General.QuantitativeComparison.symm
+
+#print axioms CryptoLogic.General.QuantitativeComparison.trans
+
+#print axioms CryptoLogic.General.QuantitativeReduction
+
+#print axioms CryptoLogic.General.QuantitativeReduction.bounded
+
+#print axioms CryptoLogic.General.QuantitativeReduction.code_eq
+
+#print axioms CryptoLogic.General.QuantitativeReduction.comp
+
+#print axioms CryptoLogic.General.QuantitativeReduction.compiler
+
+#print axioms CryptoLogic.General.QuantitativeReduction.id
+
+#print axioms CryptoLogic.General.QuantitativeReduction.mapWitness
+
+#print axioms CryptoLogic.General.QuantitativeReduction.mk
+
+#print axioms CryptoLogic.General.QuantitativeReduction.observe
+
+#print axioms CryptoLogic.General.QuantitativeReduction.observe_code
+
+#print axioms CryptoLogic.General.QuantitativeReduction.observe_comp
+
+#print axioms CryptoLogic.General.QuantitativeReduction.observe_resources
+
+#print axioms CryptoLogic.General.QuantitativeReduction.ofCertified
+
+#print axioms CryptoLogic.General.QuantitativeReduction.promote
+
+#print axioms CryptoLogic.General.QuantitativeReduction.promote_ofCertified
+
+#print axioms CryptoLogic.General.QuantitativeReduction.reduction
+
+#print axioms CryptoLogic.General.QuantitativeReduction.runPacket
+
+#print axioms CryptoLogic.General.QuantitativeReduction.toTransform
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.ExecutionContract
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.FullOutcome
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.NativeRealizes
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.State
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.arbitrary_bound
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.arbitrary_comparison
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.base
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.caller_contract
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.eliminate
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.emitted_code
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.extracted_execution
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.extracted_full_observation
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.extracted_process
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.initial
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.loss
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.model
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.native_full_law
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.object
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.observation
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.rawGoal
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.rawObject
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.resources
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.run
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.sanitized_observation
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.schedule
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.stage_probability_realized
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.statisticalLoss
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNativeQuantitative.statisticalLoss_not_negligible
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.HigherModel
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.HigherModel.base
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.HigherModel.comparison
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.HigherModel.mk
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.Model
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.Model.atom
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.Model.machine
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.Model.mk
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.Model.object
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.bounded
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.evaluate
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.evaluateCell
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Quantitative.repaired_comparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.Serial
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.Serial.box
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.Serial.extract
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.Serial.identity
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.Serial.needs
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.Serial.plan
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.Serial.seq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.afterSerial
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.beforeSerial
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.root_comparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.root_repaired
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeReduction.serial_code
+
+-- Code-changing native optimization and generated observation transport.
+#print axioms CryptoLogic.General.QuantitativeReduction.observation_square
+
+#print axioms CryptoLogic.General.QuantitativeReduction.transport
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.Label
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.Label.after
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.Label.before
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.Label.bridge
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.after
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.after_needs
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.atomCount
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.before
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.before_needs
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.bridge
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.bridge_needs
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.cellCount
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.diagram
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.diagram_count_bound
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.diagram_generator_count
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.diagram_needs
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.generatorCount
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.layout
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.planCount
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transport.relators
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Contract
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Diagnostics.constantWorld
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Diagnostics.constant_packet
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Diagnostics.optimized_not_285
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Diagnostics.original_not_342
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Diagnostics.replies
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Diagnostics.start
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.base
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.comparison
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.eliminate
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.eliminate_square
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.leftReduction
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.leftRoute
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.left_code
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.left_needs
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.left_resources
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.model
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.ordinary_compilation
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.ordinary_measure
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.ordinary_tree
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.repaired
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.rightReduction
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.rightRoute
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.right_code
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.right_execution
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.right_full_law
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.right_needs
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.right_resources
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.routes_same_process
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.schedule
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.Transported.schedule_square
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.changed_code
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.common
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.emitted_code
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.full_law
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.improves
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.native_contract
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.observed
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.optimized
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.original
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.reduction
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.reduction_code
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.reduction_resources
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.resourceOrder
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.semantic
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.source
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimization.strictly_smaller_bound
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.EncodedPair
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.accept_location
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.after_coin_run
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.awaiting_format
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.call_addresses
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.code
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.code_changed
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.code_length
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.compare_locations
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.compare_result_shift
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparisonResult
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparisonStart
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_checked
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_decision
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_enter_checked
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_full_checked
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_halts
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_result_shift
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.comparison_run
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.copyAddress
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.copy_locations
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.executionLaw
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.executionLaw_refinement
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.execution_encoded
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.execution_properties
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.extend_encoded
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.first_given_coin_run
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.first_setup_checked
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.first_setup_run
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.first_transfer
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.haltsWithin
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.initial_step
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.lastCall
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.last_query_run
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.last_setup_checked
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.last_setup_run
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.last_transfer
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.observation_law
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.observe_relocate
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.prefix_encoded
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.reject_location
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.relocate
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.saveAddress
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.save_enter_checked
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.save_rewind_checked
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.save_tag_checked
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.savedAddress
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.savedSecond
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.secondCall
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.second_query_run
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.second_setup_checked
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.second_setup_run
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.second_transfer
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.select_candidate_checked
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.select_candidate_run
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.select_second_checked
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.select_second_run
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.shiftPC
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.thirdCall
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.third_query_run
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.third_setup_checked
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.third_setup_run
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.third_transfer
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.whole_frame_refinement
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.whole_halts_queries
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.whole_run
+
+-- Chronological history boundary and reversible observation transport.
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.Example.full_observation_boundary
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.Example.independent
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.Example.signature
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.distinguishing_history
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.exchange_not_history_equal
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.historyEquiv
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.history_eq_of_recorded_eq
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.history_marginal
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.independent_exchange_boundary
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.invariant_observation
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.joint
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.joint_exchange_transport
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.recorded
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.recorded_exchange_transport
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.recover_original
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.store_marginal
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.swapAt
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.swapAt_context
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.swapAt_involutive
+
+#print axioms CryptoOracle.StatefulDiagram.HistoryBoundary.transported_observation
+
+-- One shared-state mixed evaluator and actual native execution segments.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.Game.forgery_bound
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.Game.full_law
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.Game.run
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.Game.run_eq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.continuing_frame
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.nativeModel
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.optimized_halts_queries
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.optimized_observation
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.refinement
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.split
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.split_full_frame
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.NativeContinuation.split_ticks
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.Runtime
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.copyOnce
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.copyOnceValid
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.copy_once_run
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.copying_effect_not_value
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.discardResult
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.discardValid
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.discard_preserves_effects
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.executeTwice
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.executeTwiceValid
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.execute_twice_run
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.model
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.putThenRead
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.putThenRead_needs
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.putValid
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.readThenPut
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.readThenPut_needs
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.readValid
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.restart_not_shared
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.restarted
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.restarted_read_false
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.restarted_run
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.reversed_run
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.shared_read_true
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.shared_run
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.signature
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.SharedState.unrestricted_exchange_false
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.CheckedModel
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.CheckedModel.base
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.CheckedModel.localSound
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.CheckedModel.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.Fusion.checked
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.Fusion.relator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.Fusion.sound_in_context
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.Fusion.sound_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.Values
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.evaluate_exact
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.exact_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.model
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.needs_empty
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.output
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.same_ticks
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.signature
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.state_marginal
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.ticks
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Clocked.valid
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Model
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Model.box
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Model.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.evaluate
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.evaluate_lift
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.lift
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.liftChecked
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.repaired
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.sound
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.sound_joint
+
+-- Stateful completed crypto rules and unified cartesian local higher squares.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulStructural.allRules
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulStructural.base_unchanged
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulStructural.completed
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulStructural.critical_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulStructural.fused
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulStructural.original
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulStructural.uncompleted
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Generator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Generator.existing
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Generator.localSquare
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.LocalDiagram
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.LocalDiagram.cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.LocalDiagram.seqLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.LocalDiagram.seqRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.LocalDiagram.tensorLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.LocalDiagram.tensorRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.UnionRules
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.addedWireSquare
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.added_step_not_old
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.baseBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.basis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.checked
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.edit
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.embedOld
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.embedOld_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.embedOld_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.local_cell_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.local_context_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.local_context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.local_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.local_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.original
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.seqFusion
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.tensorFusion
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.two
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.Generator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.Generator.existing
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.Generator.pure
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.Generator.separated
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.Label
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.baseBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.basis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.checked
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedCell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedCell_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedCell_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedPure
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedPure_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedPure_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedStep_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedTrack_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.normalization_context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.normalization_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.normalize
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.normalize_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.rules
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.unrestricted_not_terminating
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.wireStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.wireTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.wireTrack_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.cell_repaired
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.cell_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.track_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.track_sound
+
+-- Unified typed overlap classification and exhaustive pure-wire fusion resolution.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase.first
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase.last
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase.leftAssoc
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase.leftCrypto
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase.leftCryptoSuffix
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase.leftFusion
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase.leftWireSuffix
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase.middle
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.AssocCase.same
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.CryptoCase
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.CryptoCase.same
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.CryptoSuffixCase
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.CryptoSuffixCase.same
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.CryptoSuffixCase.tail
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.Resolution
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.Resolution.afterFirst
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.Resolution.afterSecond
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.Resolution.comparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.Resolution.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.Resolution.repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.Resolution.target
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.RootView
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.RootView.assoc
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.RootView.cartesian
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.RootView.crypto
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.RootView.cryptoSuffix
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.RootView.oldWire
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.RootView.seqFusion
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.RootView.tensorFusion
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.RootView.wireSuffix
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.SRule
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.SeqFusionCase
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.SeqFusionCase.cartesianLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.SeqFusionCase.cartesianRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.SeqFusionCase.oldLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.SeqFusionCase.oldRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.SeqFusionCase.same
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.ShortForward
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.ShortForward.bounded
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.ShortForward.path
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.ShortForward.refl
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.ShortForward.step
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.ShortForward.steps
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.ShortForward.track
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.TensorFusionCase
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.TensorFusionCase.cartesianLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.TensorFusionCase.cartesianRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.TensorFusionCase.oldLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.TensorFusionCase.oldRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.TensorFusionCase.same
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireCase
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireCase.cartesian
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireCase.old
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireSuffixCase
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireSuffixCase.cartesianFirst
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireSuffixCase.cartesianMiddle
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireSuffixCase.oldFirst
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireSuffixCase.oldMiddle
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireSuffixCase.rightFusion
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireSuffixCase.rightSuffix
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireSuffixCase.same
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.WireSuffixCase.tail
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.associate
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.classifyAssoc
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.classifyCrypto
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.classifyCryptoSuffix
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.classifySeqFusion
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.classifyTensorFusion
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.classifyWire
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.classifyWireSuffix
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.crypto
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.cryptoSuffix
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.noBoxStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldEdit
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldPrimitive
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldSeqLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldSeqLeft_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldSeqRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldSeqRight_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldTensorLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldTensorLeft_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldTensorRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.oldTensorRight_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeqCase
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeqCase_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeqCase_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeq_context_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeq_context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveSeq_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensor
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensorCase
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensorCase_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensorCase_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensor_context_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensor_context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.resolveTensor_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.rootView
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.suffixPrimitive
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Overlap.suffixStep
+
+-- Explicit bounded old-wire macros and guarded mixed proof elimination.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.Cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.ExactCell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.ExactCell.cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.ExactCell.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.ExactCell.support_eq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.Generator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.Generator.definition
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.Generator.existing
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.PriorBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.baseBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.basis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.eliminatePrimitive
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.eliminateStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.eliminateTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.elimination_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.embedPrior
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.embedPrior_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.embedPrior_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.expandComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.expandComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.expandPrimitive
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.expandPrimitive_clean
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.expandPrimitive_steps
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.expandPrimitive_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.expandStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.expandStep_clean
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.expandStep_steps
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.expandStep_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.expandTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.expandTrack_clean
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.expandTrack_steps
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.expandTrack_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.legacyPrimitive
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.legacyStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.legacyTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.legacy_placement
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.legacy_wireTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.macroTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.macro_steps
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.macro_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.oldEdit_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldDefinitions.proofSteps
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.assocUnassoc
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.constructorProfile
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.constructorProfile_exact
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.constructors
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.constructors_bounded
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.copyAssoc
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.copyDiscardLeft
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.copyDiscardRight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.copyFst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.copySnd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.copySwap
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.etaId
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.expandRoot
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.expandStep
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.expandStep_roots
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.expandStep_steps
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.expandTrack
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.expandTrack_steps
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.ext
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.forkAssoc
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.forkThenFst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.forkThenSnd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.forkUnassoc
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.interchange
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.interchangeFst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.interchangeSnd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.post
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.pre
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.rootProfile
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.rootProfile_exact
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.roots
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.roots_bounded
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.steps
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.steps_map
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.tensorFst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.tensorIdentity
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.tensorSnd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.toTrack_steps
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.BoundedOld.unassocAssoc
+
+-- Root-only wire definitions and derived internal-context lifting.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.Cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.ExactCell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.ExactCell.cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.ExactCell.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.ExactCell.support_eq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.Generator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.Generator.definition
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.Generator.existing
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.PriorBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.baseBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.basis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.castRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.castRight_definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.castRight_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.definitions_whisker
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminatePrimitive
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminatePrimitive_definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminateStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminateStep_definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminateTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminateTrack_definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminateWireStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminateWireStep_definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.eliminateWireStep_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.elimination_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.embedPrior
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.embedPrior_definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.embedPrior_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.expandComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.expandComparison_definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.expandComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.generatorDefinitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.liftComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.liftComparison_definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.liftComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.macro_seqLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.macro_seqRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.macro_tensorLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.RootDefinitions.macro_tensorRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.apply
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.cartNaturality
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.cartNaturality_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.cartStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.cartStepNaturality
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.cartStepNaturality_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.cartTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.compiled_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.fusion
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.fusion_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.oldNaturality
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.oldNaturality_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.oldStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.place
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.place_needs
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.seqLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.seqRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.tensorLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFrame.Frame.tensorRight
+
+#print axioms Foundation.Logic.Polygraph.FourNaturality.cancelPrefix
+
+#print axioms Foundation.Logic.Polygraph.FourNaturality.invertSquare
+
+#print axioms Foundation.Logic.Polygraph.FourNaturality.map_map
+
+#print axioms Foundation.Logic.Polygraph.FourNaturality.natural
+
+#print axioms Foundation.Logic.Polygraph.FourNaturality.undoInversePrefix
+
+#print axioms Foundation.Logic.Polygraph.FourNaturality.undoLeft
+
+#print axioms Foundation.Logic.Polygraph.FourNaturality.undoRight
+
+-- Root association: nine exhaustive competitors, guards and bounded residuals.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.Cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.Generator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.Generator.existing
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.Generator.first
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.Generator.last
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.Generator.middle
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.PriorBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.Resolution
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.Resolution.afterFirst
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.Resolution.afterSecond
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.Resolution.comparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.Resolution.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.Resolution.target
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.TwoForward
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.TwoForward.bounded
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.TwoForward.one
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.TwoForward.path
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.TwoForward.refl
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.TwoForward.steps
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.TwoForward.track
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.TwoForward.two
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.associate_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.baseBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.basis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.cryptoCritical
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.cryptoCritical_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.cryptoCritical_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.cryptoSuffixAssoc
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.cryptoSuffixAssoc_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.cryptoSuffixAssoc_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.cryptoSuffix_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.crypto_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.eliminate_needs
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.embedRoot
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.embedRoot_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.firstNaturality
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.firstNaturality_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.fromFusion
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.fromFusion_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.fromFusion_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.fromStructural
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.fromStructural_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.fromStructural_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.fusionCritical
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.fusionCritical_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.fusionCritical_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.fusionDefinition
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.fusionDefinition_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.fusionDefinition_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.lastNaturality
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.lastNaturality_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.middleNaturality
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.middleNaturality_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.pentagon
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.pentagon_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.pentagon_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.resolve
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.resolveCase
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.resolveCase_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.resolveCase_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.resolve_context_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.resolve_context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.resolve_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.resolve_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.schedule_needs
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.seqFusion_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.structuralSeqFusion_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.suffixStep_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.wireSuffixAssoc
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.wireSuffixAssoc_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Association.wireSuffixAssoc_support
+
+-- Stateful simulation and nonempty mixed MAC analysis after real code-changing execution.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.Implementation
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.Implementation.code
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.Implementation.horizon
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.Implementation.optimized
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.Implementation.original
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.charges_retained
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.comparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.comparison_count
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.comparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.fixed
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.localComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.native_repair
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.originalDiagram
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.updatedDiagram
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.updated_security
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.wrap
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.analysis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.analysis_kernel
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.analysis_needs
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.analysis_retains_state_trace
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.analysis_run
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.analysis_terminal_queries
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.frames
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.frames_refinement
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.optimized_compiler_code
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.original_compiler_code
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.prefix_awaiting_format
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.prefix_transcript_encoded
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.repaired_refinement
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.repaired_refinement_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.run
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.runGame
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.runGame_full_law
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.runGame_native
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.runGame_refinement
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.runGame_security
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.run_refinement
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.run_refinement_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.run_state_marginal
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.run_terminal_queries
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Simulation
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Simulation.box
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Simulation.evaluate
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Simulation.joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.Simulation.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.lift_simulation
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.lift_state_marginal
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.stateMap
+
+-- One-seed mixed MAC analysis to actual native verdict packets, with explicit block costs.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.Bits
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.Packet
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.budget
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.checkedBits
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.compile_correct
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.doubledPort
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.doubled_width
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.duplication_cost
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.duplications
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.evaluate_bits
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.example_program_eq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.flags
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.flags_length
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.flatten
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.flatten_length
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.mask
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.model
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.native_correct
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.native_run
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.output
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.program
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.program_length
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.repaired_program_eq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.repaired_same_process
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.representation
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.restore
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.restore_false
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.restored_verdicts
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.verdict
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.verdicts
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.AnalysisCompilation.width
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Representation
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Representation.box
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Representation.evaluate
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Representation.mk
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.Located
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.checked
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.code
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.code_length
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.emit
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.emitFinish
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.emit_checked
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.emit_get
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.emit_length
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.finish
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.halt_get
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.located_append
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.one_jump
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.one_located
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.original_cell_retained
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.read
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.read_written
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.result
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.result_length
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.start
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.timed
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.written
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.written_cells
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.written_view
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.zero_jump
+
+#print axioms CryptoOracle.Interactive.NativeVerdictPacket.zero_located
+
+-- Single linked native MAC execution with physical verdict analysis and original-head restoration.
+#print axioms CryptoOracle.Interactive.NativeDeterministic.finish_return
+
+#print axioms CryptoOracle.Interactive.NativeDeterministic.run_return
+
+#print axioms CryptoOracle.Interactive.NativeVerdictRestore.code
+
+#print axioms CryptoOracle.Interactive.NativeVerdictRestore.code_length
+
+#print axioms CryptoOracle.Interactive.NativeVerdictRestore.finish
+
+#print axioms CryptoOracle.Interactive.NativeVerdictRestore.read
+
+#print axioms CryptoOracle.Interactive.NativeVerdictRestore.read_restored
+
+#print axioms CryptoOracle.Interactive.NativeVerdictRestore.restored
+
+#print axioms CryptoOracle.Interactive.NativeVerdictRestore.restored_layout
+
+#print axioms CryptoOracle.Interactive.NativeVerdictRestore.rewind
+
+#print axioms CryptoOracle.Interactive.NativeVerdictRestore.rewind_checked
+
+#print axioms CryptoOracle.Interactive.NativeVerdictRestore.rewind_timed
+
+#print axioms CryptoOracle.Interactive.NativeVerdictRestore.timed
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.after_coin_prefix
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.awaiting_format
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.budget
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.comparison_run
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.compiled
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.compiled_budget
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.compiled_joint
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.compiled_length
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.example_compiled_eq
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.finalize
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.full_law
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.gameRun
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.haltsWithin
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.joint_run
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.linkedCode
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.linkedCode_length
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.linked_prefix
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.observation_law
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.observe_finalize
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.packetView
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.packet_finalize
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.prefixLaw
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.prefix_active
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.prefix_encoded
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.prefix_run
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.repaired_compiled_eq
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.security
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.terminal_finalize
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.trace_finalize
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.whole_halts_queries
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.whole_run
+
+#print axioms Foundation.Symmetric.RandomFunctionMACNativeOptimized.AnalysisLinked.whole_run_original
+
+-- Controlled whole-circuit pure-wire preprocessing and rejection of an all-step rank strategy.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.boxes
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.no_all_steps_strategy
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.output
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.output_boxes
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.output_charges
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.output_idempotent
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.output_needs
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.sound
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.wire_step_output
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.wire_step_output_in_context
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.witness
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.witness_support
+
+-- Generated normalization squares in mixed contexts and exact interior guard support.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.WirePassNaturality.contextual
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.WirePassNaturality.contract
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.WirePassNaturality.copyDiscardChange
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.WirePassNaturality.copyDiscardSquare
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.WirePassNaturality.copy_discard_square_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.WirePassNaturality.exactWholeTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.WirePassNaturality.normalized_residual_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.WirePassNaturality.repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.WirePassNaturality.root_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.WirePassNaturality.wholeTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.RootCompatibility
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.RootCompatibility.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.RootCompatibility.residual
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.RootCompatibility.square
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.RootCompatibility.support_eq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.embeddedMap_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.exactTrackSquare
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.normalizedTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.normalizedTrack_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.residual
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.residual_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.square
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.square_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.trackSquare
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.cancelPrefix_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.invertSquare_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.natural_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.natural_union
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.separated
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.separated_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.separated_union
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.seqLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.seqLeft_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.seqRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.seqRight_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.seqSplit_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.split_union
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.tensorLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.tensorLeft_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.tensorRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.tensorRight_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.tensorSplit_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.undoInversePrefix_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.undoLeft_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.TrackExchange.undoRight_support
+
+-- Path-valued residuals: erased wire roots, full-track exchange, and actual fusion expansion.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.combinedContract
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.combinedRules
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.contract
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.copyDiscardPath
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.copyDiscardSquare
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.copyDiscardWire
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.copy_discard_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.discard_witness
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.framedChange
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.framedSquare
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.framed_residual_is_empty
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.framed_residual_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.framed_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.identity_witness
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.mixedPath
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.mixedSquare
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.mixed_residual
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.mixed_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.residual_is_empty
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.sourceRules
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ErasedWirePath.unitStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionResidual.canonical
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionResidual.seqResidual
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionResidual.seqResidual_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionResidual.seqWire
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionResidual.tensorResidual
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionResidual.tensorResidual_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionResidual.tensorWire
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.PathResidual.comparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.PathResidual.edgeCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.PathResidual.embedding
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.PathResidual.embedding_eq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.PathResidual.embedding_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.PathResidual.image
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.PathResidual.image_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.PathResidual.projection
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.PathResidual.projection_eq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.PathResidual.projection_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.PathResidual.rawSquare
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.PathResidual.rawSquare_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.PathResidual.stepSquare
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.PathResidual.stepSquare_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.Structural.Fusion.PathResidual.suffix_image_edges
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PathExchange.seq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PathExchange.seq_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PathExchange.tensor
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PathExchange.tensor_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PathNaturality.natural_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedPathNaturality.cancelPrefix_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedPathNaturality.invertSquare_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedPathNaturality.natural_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedPathNaturality.undoInversePrefix_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedPathNaturality.undoLeft_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedPathNaturality.undoRight_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.Contract
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.Contract.embed
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.Contract.embed_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.Contract.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.Contract.residual
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.Contract.residual_covered
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.Contract.square
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.Contract.square_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.embedStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.embedStep_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.embeddedTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.embeddedTrack_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.exactTrackSquare
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.residualStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.residualStep_covered
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.residualTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.residualTrack_covered
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.square
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.square_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PathResidual.trackSquare
+
+#print axioms Foundation.Logic.Polygraph.FourPathNaturality.natural
+
+#print axioms Foundation.Logic.Polygraph.FourPathNaturality.replace
+
+#print axioms Foundation.Logic.Polygraph.FourPathNaturality.replace_single
+
+-- Full wire-track fusion exchange and canonical sequential fusion/wire-pass comparison.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.SequentialFusionWirePass.context_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.SequentialFusionWirePass.context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.SequentialFusionWirePass.pasted
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.SequentialFusionWirePass.pasted_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.SequentialFusionWirePass.seq_normalization
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.SequentialFusionWirePass.seq_normalization_track
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.SequentialFusionWirePass.square
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.normalizeSeq
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.normalizeTensor
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.seqInner
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.seqLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.seqLeft_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.seqOuter
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.seqOuter_normalize
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.seqPair
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.seqPair_context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.seqPair_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.seqRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.seqRight_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.tensorInner
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.tensorLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.tensorLeft_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.tensorOuter
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.tensorOuter_normalize
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.tensorPair
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.tensorPair_context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.tensorPair_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.tensorRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.WireFusionTrackNaturality.tensorRight_support
+
+-- Cartesian track naturality, a coherence countermodel, and an explicit unit critical extension.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.Generator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.Generator.existing
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.Generator.pure
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.baseBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.basis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.embedOld
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.embedOld_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.embedPure
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.embedPure_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.pure_context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.pure_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.unitCell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianUnitCritical.unitCell_support
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.Weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.argument_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.eval_add
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.eval_neg
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.eval_zero
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.generator_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.homotopy_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.ones
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.placeWeight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.placed_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.push
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.push_sound
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.rootWeight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.seqLeft_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.seqRight_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.stepWeight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.tensorLeft_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.tensorRight_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.trackWeight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.unit_overlap_not_comparable
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CoherenceInvariant.weightGroup
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Homotopy.invertSquare_generatorCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.track
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.Template.track_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.Cell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.Generator
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.Generator.boundaries_bounded
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.Generator.code
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.Generator.existing
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.Generator.placed
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.Generator.unit
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.embed
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.strict_extension
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.UnitCritical.unitCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argumentTrack
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.argumentTrack_generatorCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.tensorFirstTrack
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.tensorFirstTrack_generatorCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.tensorLastTrack
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.tensorLastTrack_generatorCount
+
+-- Path-valued wire compatibility in supplied higher presentations and the actual mixed MAC/fusion/erasure instance.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.Cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.Root
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.Root.crypto
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.Root.erase
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.Root.fusion
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.UnionRules
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.UnitBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.comparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.contract
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.cryptoStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.exchanges
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.framedComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.framedPath
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.framed_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.fullCopyDiscard
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.fusionLift
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.fusionLift_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.mixedPath
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.mixed_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.presentation
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.rootEmbed
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.rootResidual
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.rootSquare
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.rootSquare_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.sourceRules
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.unitComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.unitComparison_context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.PresentedWirePass.unitComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.TensorNormalizationObstruction.componentPath
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.TensorNormalizationObstruction.componentThenCanonical
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.TensorNormalizationObstruction.component_path_realizes
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.TensorNormalizationObstruction.component_weight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.TensorNormalizationObstruction.direct
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.TensorNormalizationObstruction.direct_weight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.TensorNormalizationObstruction.firstWire
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.TensorNormalizationObstruction.not_comparable
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.TensorNormalizationObstruction.secondWire
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.HigherBasis.sum
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.injectLeft
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.injectLeft_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.injectRight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.injectRight_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedExchange.Data
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedExchange.Data.lift
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedExchange.Data.lift_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedExchange.Data.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedExchange.Data.single
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedExchange.Data.single_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.Contract
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.Contract.embed
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.Contract.embed_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.Contract.exchange
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.Contract.mk
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.Contract.residual
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.Contract.residual_covered
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.Contract.square
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.Contract.square_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.embedStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.embedStep_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.embeddedTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.embeddedTrack_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.exactTrackSquare
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.residualStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.residualStep_covered
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.residualTrack
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.residualTrack_covered
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.square
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.square_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.WirePass.PresentedResidual.trackSquare
+
+-- Categorical critical peaks, finite source-coherence transport and the mixed MAC integration.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.CategoryWirePass.CategoryBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.CategoryWirePass.Cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.CategoryWirePass.categoryLift
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.CategoryWirePass.categoryLift_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.CategoryWirePass.comparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.CategoryWirePass.compositionComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.CategoryWirePass.compositionComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.CategoryWirePass.composition_context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.CategoryWirePass.contract
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.CategoryWirePass.framedComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.CategoryWirePass.framed_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.CategoryWirePass.lift
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.CategoryWirePass.lift_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.CategoryWirePass.presentation
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.CategoryWirePass.repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.CategoryWirePass.resolvedPeak
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.CategoryWirePass.resolvedPeak_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianCategoryCritical.Generator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianCategoryCritical.Generator.existing
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianCategoryCritical.Generator.pure
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianCategoryCritical.baseBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianCategoryCritical.basis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianCategoryCritical.compositionComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianCategoryCritical.compositionComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianCategoryCritical.embedOld
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianCategoryCritical.embedOld_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianCategoryCritical.embedPure
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianCategoryCritical.embedPure_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianCategoryCritical.pure_context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianCategoryCritical.pure_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianCategoryCritical.resolvedPeak
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianCategoryCritical.resolvedPeak_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianCategoryCritical.unitCell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianCategoryCritical.unitCell_support
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Cell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.CompositionTransport.cell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.CompositionTransport.coherent
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.CompositionTransport.edge
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.CompositionTransport.evaluate
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.CompositionTransport.generator
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.CompositionTransport.law
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.CompositionTransport.track
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.CompositionTransport.track_left
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.CompositionTransport.track_right
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Context
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Context.apply
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Context.argument
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Context.changeCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Context.hole
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Context.holes
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Context.seqLeft
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Context.seqRight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Context.step
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Context.template
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Context.tensorLeft
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Context.tensorRight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Forward
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Generator
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Generator.boundaries_bounded
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Generator.code
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Generator.existing
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Generator.leftUnit
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Generator.middleUnit
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Generator.pentagon
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Generator.placed
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Generator.rightUnit
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Peak
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Peak.assocNested
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Peak.first
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Peak.leftNested
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Peak.rightNested
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Peak.roots
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Peak.second
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Resolution
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Resolution.cell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Resolution.family
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Resolution.firstTail
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Resolution.first_bound
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Resolution.first_forward
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Resolution.mk
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Resolution.secondTail
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Resolution.second_bound
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Resolution.second_forward
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.Resolution.target
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.RootRule
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.RootRule.assoc
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.RootRule.leftUnit
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.RootRule.rightUnit
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.RootRule.step
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.RootRule.view
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.RootRule.view_complete
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.argumentFrom
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.assocFirstNatural
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.assocLastNatural
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.assocMiddleNatural
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.associate
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.embed
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.leftNatural
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.leftUnit
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.leftUnitCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.middleUnitCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.oldLift
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.pentagonCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.resolve
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.resolve_bounded
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.resolve_forward
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.rightNatural
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.rightUnit
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.rightUnitCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.three
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.two
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.unitCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.whisker
+
+-- Root-only legacy elimination and cross-encoding categorical coherence in the current MAC presentation.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.bridge
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.bridgeStep
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.bridgeStep_definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.bridgeStep_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.bridge_definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.bridge_matches_legacy_occurrences
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.bridge_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.current
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.currentComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.currentComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.current_clean
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.legacy
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.legacyCoherence
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.legacyCoherence_definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.legacyCoherence_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.legacy_occurrences
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.mixedCoherence
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.mixedCoherence_definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.mixedCoherence_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.pureLift
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.pureLift_definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyCategoryCoherence.pureLift_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.Cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.RootBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.UnionRules
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.currentLift
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.currentLift_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.currentLift_definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.currentLift_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.definitions_whisker
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.eliminate
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.eliminate_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.eliminate_definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.expanded_clean
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.expanded_steps
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.generatorDefinitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.legacyLift
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.legacyLift_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.legacyLift_definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.legacyLift_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.presentation
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireRepair.comparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireRepair.contract
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireRepair.elimination_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireRepair.endpointPass
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireRepair.endpoint_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireRepair.framedComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireRepair.framed_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireRepair.mixedComposition_context_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.injectLeft_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.PresentedCell.injectRight_constructorCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.CompositionTransport.Legacy.edge
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.CompositionTransport.Legacy.expansion
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.CompositionTransport.Legacy.expansion_roots
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.CompositionTransport.Legacy.expansion_steps
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.CompositionTransport.Legacy.track
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.CategoryCritical.CompositionTransport.Legacy.trackExpansion
+
+-- Additional legacy boundary expansion declarations.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.comparison_iff_expanded
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.expandComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.expandComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.expandStep_fixed
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.expandTrack_fixed
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.expansion_idempotent
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.recoverComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LegacyWireBasis.recoverComparison_support
+
+-- Derived output observation comparisons and tensor normalization obligations.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.TensorObservation.atomic_obstruction
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.TensorObservation.comparison_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.TensorObservation.componentThenCanonical
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.TensorObservation.direct
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.TensorObservation.mixedComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.TensorObservation.mixedComparison_context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.TensorObservation.mixedComparison_definitions
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.TensorObservation.mixedComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.TensorObservation.obstructedFirst
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.TensorObservation.obstructedFirst_weight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.TensorObservation.obstructedSecond
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.TensorObservation.obstructedSecond_weight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.TensorObservation.original_tensor_still_requires_atomic_diagrams
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.TensorObservation.tensorComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.TensorObservation.tensor_comparable_iff_atomic
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.TensorObservation.terminalTensor
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ObservationCoherence.AtomicCertificate
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ObservationCoherence.NoAtoms
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ObservationCoherence.atomCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ObservationCoherence.certificateLeaves
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ObservationCoherence.certificateLeaves_eq
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ObservationCoherence.comparable_iff_atomic
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ObservationCoherence.noAtomsCoherent
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ObservationCoherence.observe
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ObservationCoherence.reconstruct
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ObservationCoherence.terminal
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ObservationCoherence.terminalCertificate
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ObservationCoherence.terminalContract
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ObservationCoherence.terminalParallel
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductTracks.Cell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductTracks.comparable_iff_projections
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductTracks.diagonal
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductTracks.diagonalSplit
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductTracks.etaEdge
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductTracks.etaSplit
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductTracks.exchange
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductTracks.exchangeStep
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductTracks.exchangeStep_generatorCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductTracks.exchange_generatorCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductTracks.firstProjection
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductTracks.reflect
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductTracks.secondProjection
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductTracks.tensor
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductTracks.tensorCells
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductTracks.tensorComp
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductTracks.tensorInverse
+
+-- Two product projection critical forms, derived fork triangle, rich observation reconstruction and MAC integration.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.Cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.ProductBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.actual_atomic_categorical_obstruction
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.actual_atomic_first_weight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.actual_atomic_second_weight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.actual_tensor_categorical_obstruction
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.atomicComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.atomicComparison_context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.atomicComparison_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.atomicComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.comparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.contract
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.framedComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.framed_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.lift
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.lift_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.lift_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.presentation
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.productLift
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.productLift_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.pureLift
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.pureLift_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.resolvedPeak
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.resolvedPeak_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.sampleExpanded
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.samplePair
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.sampledComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.sampledSource
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.sampledTarget
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.sampled_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.sampled_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.tensorComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ProductCriticalWirePass.tensorComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.Generator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.Generator.existing
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.Generator.pure
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.baseBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.basis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.embedOld
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.embedOld_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.embedPure
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.embedPure_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.pure_context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianProductCritical.pure_repaired_joint
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.AtomicCertificate
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.Cell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.Extension
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.Extension.Generator
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.Extension.embed
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.Extension.mk
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.Extension.whisker
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.categorical
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.certificateLeaves
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.certificateLeaves_eq
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.comparable_iff_atomic
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.etaNatural
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.fromOldCertificate
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.observe
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.product
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.reconstruct
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.reflect
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.PresentedObservation.tensorCells
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Cell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator.boundaries_bounded
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator.code
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator.existing
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator.fst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator.new_boundaries_single
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator.placed
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator.productCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Generator.snd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.argument_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.atomicIdentity
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.atomicPairIdentity
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.categoryGenerator_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.fork_not_comparable
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.fst_not_comparable
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.generator_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.homotopy_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.placeWeight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.placed_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.push_sound
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.rootWeight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.seqLeft_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.seqRight_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.snd_not_comparable
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.stepWeight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.strict_extension
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.tensorLeft_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.tensorRight_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.trackWeight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Invariant.unitGenerator_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Peak
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Peak.first
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Peak.forkFirst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Peak.forkLast
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Peak.fst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Peak.second
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Peak.snd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Peak.steps
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Peak.swap
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.cell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.family
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.firstTail
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.first_bound
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.first_forward
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.mk
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.secondTail
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.second_bound
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.second_forward
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.Resolution.target
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.betaEtaFst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.betaEtaSnd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.cancelProofSuffix
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.cancelProofSuffix_productCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.embed
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.embed_productCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.etaFst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.etaNatural_productCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.etaSnd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkBeta
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkCell_productCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkEta
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkFirst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkFstSquare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkFstSquare_productCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkLast
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkLastFirst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkOtherOrder
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkSndSquare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.forkSndSquare_productCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.fstCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.liftOld
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.productCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.reflection_productCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.resolve
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.resolve_bounded
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.resolve_forward
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.sndCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.whisker
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductCritical.whisker_productCount
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductProjectionNaturality.forkLeft
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductProjectionNaturality.forkRight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductProjectionNaturality.fstLeft
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductProjectionNaturality.fstRight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductProjectionNaturality.sndLeft
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProductProjectionNaturality.sndRight
+
+-- Distribution projection critical forms, root annotations, derived identity triangle and MAC integration.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.Cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.DistributionBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.actual_atomic_distribution_obstruction
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.actual_atomic_first_weight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.actual_atomic_second_weight
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.actual_tensor_distribution_obstruction
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.atomicComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.atomicComparison_context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.atomicComparison_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.atomicComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.comparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.contract
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.framedComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.framed_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.lift
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.lift_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.lift_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.presentation
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.productLift
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.productLift_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.pureLift
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.pureLift_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.resolvedPeak
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.resolvedPeak_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.sampleExpanded
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.samplePair
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.sampledComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.sampledSource
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.sampledTarget
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.sampled_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.sampled_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.tensorCoeff
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.tensorCoeff_admissible
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.tensorComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.DistributionCriticalWirePass.tensorComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianDistributionCritical.Generator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianDistributionCritical.Generator.existing
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianDistributionCritical.Generator.pure
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianDistributionCritical.baseBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianDistributionCritical.basis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianDistributionCritical.embedOld
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianDistributionCritical.embedOld_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianDistributionCritical.embedPure
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianDistributionCritical.embedPure_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianDistributionCritical.pure_context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianDistributionCritical.pure_repaired_joint
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Annotation.Admissible
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Annotation.Admissible.distribution
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Annotation.Admissible.mk
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Annotation.Preserves
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Annotation.admissible_iff_preserves
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Annotation.admissible_of_preserves
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Annotation.atomicIdentity
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Annotation.forkCoeff
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Annotation.forkCoeff_admissible
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Annotation.fst_not_comparable
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Annotation.generator_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Annotation.homotopy_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Annotation.identity_not_comparable
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Annotation.snd_not_comparable
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Annotation.strict_extension
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Cell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Generator
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Generator.boundaries_bounded
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Generator.code
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Generator.existing
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Generator.fst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Generator.new_boundaries_two
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Generator.placed
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Generator.snd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Peak
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Peak.first
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Peak.fst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Peak.second
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Peak.snd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Peak.steps
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Peak.swap
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Resolution
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Resolution.cell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Resolution.family
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Resolution.firstTail
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Resolution.first_bound
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Resolution.first_forward
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Resolution.mk
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Resolution.secondTail
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Resolution.second_bound
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Resolution.second_forward
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.Resolution.target
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.cancelProofSuffix
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.categoryLift
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.embed
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.extension
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.forkChanges
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.forkFstNatural
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.forkSndNatural
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.fstAssociated
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.fstCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.fstDistributed
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.identityCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.identityDirect
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.identityDistributed
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.identityFstSquare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.identitySndSquare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.oldLift
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.resolve
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.resolve_bounded
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.resolve_forward
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.sndAssociated
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.sndCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.sndDistributed
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.DistributionCritical.whisker
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.Admissible
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.Admissible.assoc
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.Admissible.fst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.Admissible.mk
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.Admissible.snd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.Admissible.units
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.Preserves
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.admissible_iff_preserves
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.admissible_of_preserves
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.argument_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.categoryGenerator_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.constant
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.constant_zero
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.generator_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.homotopy_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.placeWeight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.placed_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.productGenerator_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.push_constant
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.push_sound
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.rootWeight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.seqLeft_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.seqRight_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.stepWeight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.tensorLeft_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.tensorRight_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.trackWeight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.unitGenerator_weight
+
+-- Explicit tensor expansion projection overlaps and exact scalar discrepancy; no new higher generator.
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.TensorProjectionPeak.expandFst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.TensorProjectionPeak.expandSnd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.TensorProjectionPeak.fstDirect
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.TensorProjectionPeak.fstExpanded
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.TensorProjectionPeak.fstTail
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.TensorProjectionPeak.fst_annotation_iff
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.TensorProjectionPeak.fst_lengths
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.TensorProjectionPeak.fst_missing
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.TensorProjectionPeak.sndDirect
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.TensorProjectionPeak.sndExpanded
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.TensorProjectionPeak.sndTail
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.TensorProjectionPeak.snd_annotation_iff
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.TensorProjectionPeak.snd_lengths
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.TensorProjectionPeak.snd_missing
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.TensorProjectionPeak.tensorCoeff
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.TensorProjectionPeak.tensorCoeff_admissible
+
+-- Four bounded local expansion comparisons, exact annotations and checked mixed support.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionAnnotationProfile.admissible_scalar_equality
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionAnnotationProfile.basis_profile
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionAnnotationProfile.discrepancy
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionAnnotationProfile.scalarProfile
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.Cell
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.ExpansionBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.atomicComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.atomicComparison_context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.atomicComparison_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.atomicComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.comparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.contract
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.expansionLift
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.expansionLift_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.framedComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.framed_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.lift
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.lift_constructorCount
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.lift_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.presentation
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.pureLift
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.pureLift_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.sampledComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.sampledSource
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.sampledTarget
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.sampled_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.sampled_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.tensorComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionCriticalWirePass.tensorComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianExpansionCritical.Generator
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianExpansionCritical.Generator.existing
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianExpansionCritical.Generator.pure
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianExpansionCritical.baseBasis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianExpansionCritical.basis
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianExpansionCritical.embedOld
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianExpansionCritical.embedOld_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianExpansionCritical.embedPure
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianExpansionCritical.embedPure_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianExpansionCritical.pure_context_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.CartesianExpansionCritical.pure_repaired_joint
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Annotation.Admissible
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Annotation.Admissible.leftUnit
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Annotation.Admissible.mk
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Annotation.Admissible.rightUnit
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Annotation.Admissible.tensor
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Annotation.Admissible.toDistribution
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Annotation.Preserves
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Annotation.admissible_iff_preserves
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Annotation.admissible_of_preserves
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Annotation.constant_add
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Annotation.generator_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Annotation.homotopy_weight
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Annotation.rightUnitCoeff
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Annotation.rightUnitCoeff_admissible
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Annotation.rightUnit_missing_before
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Annotation.strict_extension
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Cell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Generator
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Generator.boundaries_bounded
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Generator.code
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Generator.existing
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Generator.fst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Generator.leftUnit
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Generator.placed
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Generator.rightUnit
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.Generator.snd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.embed
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.extension
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.fstCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.leftUnitCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.oldLift
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.rightUnitCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.sndCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.whisker
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionUnitPeak.leftCopied
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionUnitPeak.leftExpanded
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionUnitPeak.left_lengths
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionUnitPeak.left_scalar_iff
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionUnitPeak.rightCopied
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionUnitPeak.rightExpanded
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionUnitPeak.right_lengths
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionUnitPeak.right_scalar_iff
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.Linear.annotationHom
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.Linear.profile
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.Linear.step_add
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.Linear.step_zero
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.Linear.track_add
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.RootAnnotation.Linear.track_zero
+
+-- Derived expansion restoration loop and checked MAC output discard placement.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionLoop.comparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionLoop.comparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionLoop.loopComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionLoop.loopComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionLoop.sampledComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionLoop.sampledSource
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionLoop.sampledTarget
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionLoop.sampled_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.ExpansionLoop.sampled_support
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LoopCoherence.expand
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LoopCoherence.expandedPair
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LoopCoherence.expansionCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LoopCoherence.forkCells
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LoopCoherence.forkComp
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LoopCoherence.forkTracks
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LoopCoherence.inverseEtaNatural
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LoopCoherence.loop
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LoopCoherence.loopCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LoopCoherence.loop_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LoopCoherence.loop_missing_before
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LoopCoherence.restore
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LoopCoherence.restore_count
+
+-- Pathwise beta naturality, eta assembly projection laws, actual identity normalization squares and MAC placement.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.firstComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.firstComparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.sampledComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.sampledPrefix
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.sampledSource
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.sampledTarget
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.sampled_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.sampled_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.secondComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.IdentityProjection.secondComparison_support
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.assemble
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.assembledFst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.assembledSnd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.identityNormalFst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.identityNormalSnd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.identityPairAssembly
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.inverseEtaFst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.inverseEtaSnd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.leftCanonical
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.leftIdentityProjection
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.normalizeIdentity
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.normalizeIdentityFst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.normalizeIdentitySnd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.productLift
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.rightCanonical
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectionCoherence.rightIdentityProjection
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProjectedTrackNaturality.forkFirst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProjectedTrackNaturality.forkLast
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProjectedTrackNaturality.forkPaths
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProjectedTrackNaturality.fstBoth
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProjectedTrackNaturality.fstFirst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProjectedTrackNaturality.fstLast
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProjectedTrackNaturality.sndBoth
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProjectedTrackNaturality.sndFirst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ProjectedTrackNaturality.sndLast
+
+-- Kernel-checked pasting and actual liftLeft/liftRight selection compatibility for every typed slot.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.Side
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.comparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.comparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampleLayout
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampleShape
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampleSlot
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampledComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampledPrefix
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampledSource
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampledTarget
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampled_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampled_support
+
+#print axioms Foundation.Logic.Polygraph.FourAssociation.assocCell
+
+#print axioms Foundation.Logic.Polygraph.FourAssociation.compCell
+
+#print axioms Foundation.Logic.Polygraph.FourAssociation.leftCell
+
+#print axioms Foundation.Logic.Polygraph.FourAssociation.reflCell
+
+#print axioms Foundation.Logic.Polygraph.FourAssociation.rightCell
+
+#print axioms Foundation.Logic.Polygraph.FourAssociation.symmCell
+
+#print axioms Foundation.Logic.Polygraph.FourAssociation.transCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.AssociatorPaths.alpha
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.AssociatorPaths.categorical
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.AssociatorPaths.firstPath
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.AssociatorPaths.middleStep
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.AssociatorPaths.pentagonCorner
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.AssociatorPaths.postfixInverse
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.Side
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.Side.left
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.Side.right
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.compare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.correction
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.correction_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.domain
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.embedSlot
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.first
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.lift
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.liftFstSquare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.liftPair
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.liftPairCell
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.liftSndSquare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.mapLayout
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.projection
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.readReify
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.reifyEmbeddedRef
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.second
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.targetCast
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.targetCast_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionPasting.distributedLift
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionPasting.fstSquare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionPasting.sndSquare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionPasting.suffix
+
+-- Actual selector and substitution left units, transported identities and checked MAC nonlinear terminal-output example.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionUnit.comparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionUnit.comparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionUnit.sampleInput
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionUnit.sampleLayout
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionUnit.sampleOutput
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionUnit.sampledComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionUnit.sampledPrefix
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionUnit.sampledSource
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionUnit.sampledTarget
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionUnit.sampled_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionUnit.sampled_support
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionUnit.compare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionUnit.correction
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionUnit.correction_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionUnit.first
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionUnit.fstFace
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionUnit.leftCorrections
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionUnit.publicCompare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionUnit.publicFirst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionUnit.rightCorrections
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionUnit.second
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionUnit.sndFace
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionUnit.cancelSuffix
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionUnit.compare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionUnit.correction
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionUnit.correction_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionUnit.exchangeStep
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionUnit.first
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionUnit.fork_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionUnit.pairFst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionUnit.pairSnd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionUnit.publicCompare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionUnit.publicFirst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionUnit.second
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionUnit.unitLayout
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionUnit.unitLayout_eq
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.UnitSelectionPasting.branch
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.UnitSelectionPasting.castIdentity
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.UnitSelectionPasting.leftCorner
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.UnitSelectionPasting.middlePath
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.UnitSelectionPasting.prefixCastComp
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.UnitSelectionPasting.unitCorner
+
+-- Derived distribution composition and naturality, actual projected substitution and right unit, and checked MAC example.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionRightUnit.comparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionRightUnit.comparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionRightUnit.sampledComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionRightUnit.sampledSource
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionRightUnit.sampledTarget
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionRightUnit.sampled_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionRightUnit.sampled_support
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.DistributionComposition.argumentFirst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.DistributionComposition.argumentSecond
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.DistributionComposition.arguments
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.DistributionComposition.association
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.DistributionComposition.associationCorner
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.DistributionComposition.combined
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.DistributionComposition.distribute
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.DistributionComposition.fstArguments
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.DistributionComposition.fstAssociation
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.DistributionComposition.fstPrefix
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.DistributionComposition.prefixFirst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.DistributionComposition.prefixPath
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.DistributionComposition.prefixSecond
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.DistributionComposition.sequential
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.DistributionComposition.sndArguments
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.DistributionComposition.sndAssociation
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.DistributionComposition.sndPrefix
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.DistributionSubstitutionPasting.pair
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectedSubstitution.beta
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectedSubstitution.compare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectedSubstitution.correction
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectedSubstitution.correction_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectedSubstitution.first
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectedSubstitution.parent
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectedSubstitution.readEmbedded
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectedSubstitution.result
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectedSubstitution.result_eq
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.ProjectedSubstitution.second
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.RightUnitPasting.branch
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.RightUnitPasting.corner
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.RightUnitPasting.exchange
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.RightUnitPasting.lastPath
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.RightUnitPasting.lastPostfixInverse
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionRightUnit.compare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionRightUnit.correction
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionRightUnit.correction_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionRightUnit.first
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionRightUnit.pairFst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionRightUnit.pairSnd
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionRightUnit.publicCompare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionRightUnit.publicFirst
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionRightUnit.second
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionRightUnit.unitLayout
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionRightUnit.unitLayout_eq
+
+-- Actual selection/substitution and substitution associativity, with retained MAC nonlinear terminal-output example.
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionAssociativity.comparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionAssociativity.comparison_support
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionAssociativity.middleLayout
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionAssociativity.sampledComparison
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionAssociativity.sampledSource
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionAssociativity.sampledTarget
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionAssociativity.sampled_repaired_joint
+
+#print axioms CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.SubstitutionAssociativity.sampled_support
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionSubstitution.compare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionSubstitution.correction
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionSubstitution.correction_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionSubstitution.first
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionSubstitution.fstSquare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionSubstitution.readSubstitute
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionSubstitution.rightNatural
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionSubstitution.second
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionSubstitution.sndSquare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionAssociativity.associated
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionAssociativity.atomic
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionAssociativity.compare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionAssociativity.contracted
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionAssociativity.correction
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionAssociativity.correction_count
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionAssociativity.first
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionAssociativity.forwardCompare
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionAssociativity.second
+
+#print axioms Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SubstitutionAssociativity.substitute_assoc
+
+-- Joint event-support budgets, strict per-occurrence accounting comparison, encoded MAC joint observation and independent-sample counterexample.
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Realization
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Realization.bad
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Realization.mk
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Realization.plan
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Realization.root
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Realization.value
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Request
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Request.mk
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Request.path
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Request.source
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.Request.target
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.failure
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.failure_covered
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.family_bound
+
+#print axioms CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.JointEventBudget.support
+
+#print axioms Foundation.Examples.RandomFunctionMACEncodedEventBudget.Out
+
+#print axioms Foundation.Examples.RandomFunctionMACEncodedEventBudget.adaptive_selection_bound
+
+#print axioms Foundation.Examples.RandomFunctionMACEncodedEventBudget.decode
+
+#print axioms Foundation.Examples.RandomFunctionMACEncodedEventBudget.decode_encode
+
+#print axioms Foundation.Examples.RandomFunctionMACEncodedEventBudget.encode
+
+#print axioms Foundation.Examples.RandomFunctionMACEncodedEventBudget.encode_injective
+
+#print axioms Foundation.Examples.RandomFunctionMACEncodedEventBudget.encodedModel
+
+#print axioms Foundation.Examples.RandomFunctionMACEncodedEventBudget.failure_iff
+
+#print axioms Foundation.Examples.RandomFunctionMACEncodedEventBudget.guessAttack
+
+#print axioms Foundation.Examples.RandomFunctionMACEncodedEventBudget.guess_success_exact
+
+#print axioms Foundation.Examples.RandomFunctionMACEncodedEventBudget.joint_gap_exact
+
+#print axioms Foundation.Examples.RandomFunctionMACEncodedEventBudget.joint_observation_gap
+
+#print axioms Foundation.Examples.RandomFunctionMACEncodedEventBudget.leftBundle
+
+#print axioms Foundation.Examples.RandomFunctionMACEncodedEventBudget.occurrence_bound
+
+#print axioms Foundation.Examples.RandomFunctionMACEncodedEventBudget.rightBundle
+
+#print axioms Foundation.Examples.RandomFunctionMACEncodedEventBudget.simultaneous_bound
+
+#print axioms Foundation.Examples.RandomFunctionMACEncodedEventBudget.simultaneous_exact
+
+#print axioms Foundation.Examples.RandomFunctionMACSharedEventBudget.Transcript
+
+#print axioms Foundation.Examples.RandomFunctionMACSharedEventBudget.byte_bound
+
+#print axioms Foundation.Examples.RandomFunctionMACSharedEventBudget.different_iff
+
+#print axioms Foundation.Examples.RandomFunctionMACSharedEventBudget.displayed_256_views
+
+#print axioms Foundation.Examples.RandomFunctionMACSharedEventBudget.erase
+
+#print axioms Foundation.Examples.RandomFunctionMACSharedEventBudget.erase_eq
+
+#print axioms Foundation.Examples.RandomFunctionMACSharedEventBudget.failure_iff
+
+#print axioms Foundation.Examples.RandomFunctionMACSharedEventBudget.law
+
+#print axioms Foundation.Examples.RandomFunctionMACSharedEventBudget.layout
+
+#print axioms Foundation.Examples.RandomFunctionMACSharedEventBudget.model
+
+#print axioms Foundation.Examples.RandomFunctionMACSharedEventBudget.occurrence_bound
+
+#print axioms Foundation.Examples.RandomFunctionMACSharedEventBudget.requests
+
+#print axioms Foundation.Examples.RandomFunctionMACSharedEventBudget.simultaneous_bound
+
+#print axioms Foundation.Examples.RandomFunctionMACSharedEventBudget.strict_budget_improvement
+
+#print axioms Foundation.Examples.RandomFunctionMACSharedEventBudget.support_singleton
+
+#print axioms Foundation.Examples.SharedEventBudgetIndependence.cannot_merge_independent
+
+#print axioms Foundation.Examples.SharedEventBudgetIndependence.independent
+
+#print axioms Foundation.Examples.SharedEventBudgetIndependence.independent_failure
+
+#print axioms Foundation.Examples.SharedEventBudgetIndependence.shared_failure
+
+#print axioms Foundation.Probability.SharedEventBudget.budget
+
+#print axioms Foundation.Probability.SharedEventBudget.byte_strict
+
+#print axioms Foundation.Probability.SharedEventBudget.covers
+
+#print axioms Foundation.Probability.SharedEventBudget.occurs
+
+#print axioms Foundation.Probability.SharedEventBudget.repeated_budget
+
+#print axioms Foundation.Probability.SharedEventBudget.union_bound

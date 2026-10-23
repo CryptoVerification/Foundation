@@ -1,0 +1,887 @@
+{
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/extraction-homology-filtration.py": "ea26e519884e7863623d4a4463afc507c3c898efbc35dbbd6080367b7eeb33ef"
+  },
+  "lean_checked": false,
+  "cryptographic_hardness_tested": false,
+  "infinity_category_necessity_proved": false,
+  "programmed_commitment_distribution_checks": 35,
+  "instances": [
+    {
+      "response_count": 3,
+      "cycle_degree": 1,
+      "cycle_birth_budget": 2,
+      "cycle_death_budget": 3,
+      "filtration": [
+        {
+          "budget": 1,
+          "reduced_betti_F2_by_degree": [
+            2
+          ],
+          "boundary_ranks_including_augmentation": [
+            1
+          ]
+        },
+        {
+          "budget": 2,
+          "reduced_betti_F2_by_degree": [
+            0,
+            1
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            2
+          ]
+        },
+        {
+          "budget": 3,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            2,
+            1
+          ]
+        }
+      ],
+      "DL_reduction_loss": 3,
+      "expected_query_lower": "3*(1-delta-3*epsilon_DL)"
+    },
+    {
+      "response_count": 4,
+      "cycle_degree": 2,
+      "cycle_birth_budget": 3,
+      "cycle_death_budget": 4,
+      "filtration": [
+        {
+          "budget": 1,
+          "reduced_betti_F2_by_degree": [
+            3
+          ],
+          "boundary_ranks_including_augmentation": [
+            1
+          ]
+        },
+        {
+          "budget": 2,
+          "reduced_betti_F2_by_degree": [
+            0,
+            3
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            3
+          ]
+        },
+        {
+          "budget": 3,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            1
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            3,
+            3
+          ]
+        },
+        {
+          "budget": 4,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            3,
+            3,
+            1
+          ]
+        }
+      ],
+      "DL_reduction_loss": 4,
+      "expected_query_lower": "4*(1-delta-4*epsilon_DL)"
+    },
+    {
+      "response_count": 5,
+      "cycle_degree": 3,
+      "cycle_birth_budget": 4,
+      "cycle_death_budget": 5,
+      "filtration": [
+        {
+          "budget": 1,
+          "reduced_betti_F2_by_degree": [
+            4
+          ],
+          "boundary_ranks_including_augmentation": [
+            1
+          ]
+        },
+        {
+          "budget": 2,
+          "reduced_betti_F2_by_degree": [
+            0,
+            6
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            4
+          ]
+        },
+        {
+          "budget": 3,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            4
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            4,
+            6
+          ]
+        },
+        {
+          "budget": 4,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            4,
+            6,
+            4
+          ]
+        },
+        {
+          "budget": 5,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            4,
+            6,
+            4,
+            1
+          ]
+        }
+      ],
+      "DL_reduction_loss": 5,
+      "expected_query_lower": "5*(1-delta-5*epsilon_DL)"
+    },
+    {
+      "response_count": 6,
+      "cycle_degree": 4,
+      "cycle_birth_budget": 5,
+      "cycle_death_budget": 6,
+      "filtration": [
+        {
+          "budget": 1,
+          "reduced_betti_F2_by_degree": [
+            5
+          ],
+          "boundary_ranks_including_augmentation": [
+            1
+          ]
+        },
+        {
+          "budget": 2,
+          "reduced_betti_F2_by_degree": [
+            0,
+            10
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            5
+          ]
+        },
+        {
+          "budget": 3,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            10
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            5,
+            10
+          ]
+        },
+        {
+          "budget": 4,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            5
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            5,
+            10,
+            10
+          ]
+        },
+        {
+          "budget": 5,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            5,
+            10,
+            10,
+            5
+          ]
+        },
+        {
+          "budget": 6,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            5,
+            10,
+            10,
+            5,
+            1
+          ]
+        }
+      ],
+      "DL_reduction_loss": 6,
+      "expected_query_lower": "6*(1-delta-6*epsilon_DL)"
+    },
+    {
+      "response_count": 7,
+      "cycle_degree": 5,
+      "cycle_birth_budget": 6,
+      "cycle_death_budget": 7,
+      "filtration": [
+        {
+          "budget": 1,
+          "reduced_betti_F2_by_degree": [
+            6
+          ],
+          "boundary_ranks_including_augmentation": [
+            1
+          ]
+        },
+        {
+          "budget": 2,
+          "reduced_betti_F2_by_degree": [
+            0,
+            15
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            6
+          ]
+        },
+        {
+          "budget": 3,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            20
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            6,
+            15
+          ]
+        },
+        {
+          "budget": 4,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            15
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            6,
+            15,
+            20
+          ]
+        },
+        {
+          "budget": 5,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            6
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            6,
+            15,
+            20,
+            15
+          ]
+        },
+        {
+          "budget": 6,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            6,
+            15,
+            20,
+            15,
+            6
+          ]
+        },
+        {
+          "budget": 7,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            6,
+            15,
+            20,
+            15,
+            6,
+            1
+          ]
+        }
+      ],
+      "DL_reduction_loss": 7,
+      "expected_query_lower": "7*(1-delta-7*epsilon_DL)"
+    },
+    {
+      "response_count": 8,
+      "cycle_degree": 6,
+      "cycle_birth_budget": 7,
+      "cycle_death_budget": 8,
+      "filtration": [
+        {
+          "budget": 1,
+          "reduced_betti_F2_by_degree": [
+            7
+          ],
+          "boundary_ranks_including_augmentation": [
+            1
+          ]
+        },
+        {
+          "budget": 2,
+          "reduced_betti_F2_by_degree": [
+            0,
+            21
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            7
+          ]
+        },
+        {
+          "budget": 3,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            35
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            7,
+            21
+          ]
+        },
+        {
+          "budget": 4,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            35
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            7,
+            21,
+            35
+          ]
+        },
+        {
+          "budget": 5,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            21
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            7,
+            21,
+            35,
+            35
+          ]
+        },
+        {
+          "budget": 6,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            7
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            7,
+            21,
+            35,
+            35,
+            21
+          ]
+        },
+        {
+          "budget": 7,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            7,
+            21,
+            35,
+            35,
+            21,
+            7
+          ]
+        },
+        {
+          "budget": 8,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            7,
+            21,
+            35,
+            35,
+            21,
+            7,
+            1
+          ]
+        }
+      ],
+      "DL_reduction_loss": 8,
+      "expected_query_lower": "8*(1-delta-8*epsilon_DL)"
+    },
+    {
+      "response_count": 9,
+      "cycle_degree": 7,
+      "cycle_birth_budget": 8,
+      "cycle_death_budget": 9,
+      "filtration": [
+        {
+          "budget": 1,
+          "reduced_betti_F2_by_degree": [
+            8
+          ],
+          "boundary_ranks_including_augmentation": [
+            1
+          ]
+        },
+        {
+          "budget": 2,
+          "reduced_betti_F2_by_degree": [
+            0,
+            28
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            8
+          ]
+        },
+        {
+          "budget": 3,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            56
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            8,
+            28
+          ]
+        },
+        {
+          "budget": 4,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            70
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            8,
+            28,
+            56
+          ]
+        },
+        {
+          "budget": 5,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            56
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            8,
+            28,
+            56,
+            70
+          ]
+        },
+        {
+          "budget": 6,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            28
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            8,
+            28,
+            56,
+            70,
+            56
+          ]
+        },
+        {
+          "budget": 7,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            8
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            8,
+            28,
+            56,
+            70,
+            56,
+            28
+          ]
+        },
+        {
+          "budget": 8,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            8,
+            28,
+            56,
+            70,
+            56,
+            28,
+            8
+          ]
+        },
+        {
+          "budget": 9,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            8,
+            28,
+            56,
+            70,
+            56,
+            28,
+            8,
+            1
+          ]
+        }
+      ],
+      "DL_reduction_loss": 9,
+      "expected_query_lower": "9*(1-delta-9*epsilon_DL)"
+    },
+    {
+      "response_count": 10,
+      "cycle_degree": 8,
+      "cycle_birth_budget": 9,
+      "cycle_death_budget": 10,
+      "filtration": [
+        {
+          "budget": 1,
+          "reduced_betti_F2_by_degree": [
+            9
+          ],
+          "boundary_ranks_including_augmentation": [
+            1
+          ]
+        },
+        {
+          "budget": 2,
+          "reduced_betti_F2_by_degree": [
+            0,
+            36
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            9
+          ]
+        },
+        {
+          "budget": 3,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            84
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            9,
+            36
+          ]
+        },
+        {
+          "budget": 4,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            126
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            9,
+            36,
+            84
+          ]
+        },
+        {
+          "budget": 5,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            126
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            9,
+            36,
+            84,
+            126
+          ]
+        },
+        {
+          "budget": 6,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            84
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            9,
+            36,
+            84,
+            126,
+            126
+          ]
+        },
+        {
+          "budget": 7,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            36
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            9,
+            36,
+            84,
+            126,
+            126,
+            84
+          ]
+        },
+        {
+          "budget": 8,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            9
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            9,
+            36,
+            84,
+            126,
+            126,
+            84,
+            36
+          ]
+        },
+        {
+          "budget": 9,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            9,
+            36,
+            84,
+            126,
+            126,
+            84,
+            36,
+            9
+          ]
+        },
+        {
+          "budget": 10,
+          "reduced_betti_F2_by_degree": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "boundary_ranks_including_augmentation": [
+            1,
+            9,
+            36,
+            84,
+            126,
+            126,
+            84,
+            36,
+            9,
+            1
+          ]
+        }
+      ],
+      "DL_reduction_loss": 10,
+      "expected_query_lower": "10*(1-delta-10*epsilon_DL)"
+    }
+  ]
+}

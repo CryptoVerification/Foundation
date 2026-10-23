@@ -1,0 +1,206 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Logic/Polygraph/FiniteWiringCoherence.lean": "abc7325f1ee551c312ee661e8f13a70ef2a341a85d26bf2ffcba18675b6dcea9",
+    "Foundation/Logic/Polygraph/FiniteWiringCoherenceBoundary.lean": "be358286c6f9ce9f479366e1135c80fe62408a65c940317fee64511d9f8780c5",
+    "Foundation/Examples/RandomFunctionMACWiringCoherence.lean": "70c30d92e9ffce7e4b3829d8be9a43d1c884a51ecacaa99910fd7343b4b85047"
+  },
+  "public_theorems": [
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.seqRouting",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.tensorRouting_eq",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.tupleRouting_eq",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.Boundary.tower_steps",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.Boundary.boundary_steps",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.Boundary.boundaries_unbounded",
+    "Foundation.Symmetric.RandomFunctionMACWiringCoherence.different_costs",
+    "Foundation.Symmetric.RandomFunctionMACWiringCoherence.steps_not_invariant",
+    "Foundation.Symmetric.RandomFunctionMACWiringCoherence.live_left_then_right",
+    "Foundation.Symmetric.RandomFunctionMACWiringCoherence.live_right_then_left",
+    "Foundation.Symmetric.RandomFunctionMACWiringCoherence.decoded_full_game"
+  ],
+  "audited_witness_definitions": [
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.normalAt",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.Root.cell",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.tensorRouting",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.tupleRouting",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.Root.code",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.Generator.code",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.Law.code",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.Four.assoc",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.Four.leftUnit",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.Four.rightUnit",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.Four.leftInv",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.Four.rightInv",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.seqContract",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.tensorContract",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.tupleContract",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.contract",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.factor",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.coherent",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.normalLoop",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.seqIdentity",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.tensorIdentity",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.tupleIdentity",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.tensorInterchange",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.Four.generatorCount",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.Four.lawCount",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.Boundary.tower",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.Boundary.boundaryLeft",
+    "Foundation.Logic.Polygraph.FiniteWiring.Higher.Boundary.rootSquare",
+    "Foundation.Symmetric.RandomFunctionMACWiringCoherence.cancelledLoop",
+    "Foundation.Symmetric.RandomFunctionMACWiringCoherence.withLoop",
+    "Foundation.Symmetric.RandomFunctionMACWiringCoherence.comparison",
+    "Foundation.Symmetric.RandomFunctionMACWiringCoherence.leftThenRight",
+    "Foundation.Symmetric.RandomFunctionMACWiringCoherence.rightThenLeft",
+    "Foundation.Symmetric.RandomFunctionMACWiringCoherence.independentOrders",
+    "Foundation.Symmetric.RandomFunctionMACWiringCoherence.combinedBefore",
+    "Foundation.Symmetric.RandomFunctionMACWiringCoherence.combinedAfter",
+    "Foundation.Symmetric.RandomFunctionMACWiringCoherence.inputs",
+    "Foundation.Symmetric.RandomFunctionMACWiringCoherence.combinedRoute",
+    "Foundation.Symmetric.RandomFunctionMACWiringCoherence.beforeGame",
+    "Foundation.Symmetric.RandomFunctionMACWiringCoherence.afterGame"
+  ],
+  "claims": {
+    "coherence": "Constructive Four witness between every pair of parallel pure-wiring Cell paths in the newly defined normalization-relative higher completion.",
+    "generators": "Eight root-normalization squares and three constructor-normalization forms; eight structural law forms. No arbitrary parallel-path generator.",
+    "boundary": "One root-square schema has expanded left boundary 4*depth+3, unbounded even for one input and one output. This does not exclude another bounded presentation.",
+    "live_game": "Both orders of independent pure-wiring edits lift to the same continuing MAC game with one shared cache and original remaining caller.",
+    "cost": "Equivalent Cell paths can have 43 and 45 expanded root occurrences; this metric is not invariant under Four."
+  },
+  "runtime_guard": [
+    43,
+    45,
+    204,
+    279,
+    63,
+    63,
+    0,
+    6
+  ],
+  "runtime_guard_units": [
+    "original Cell roots",
+    "loop-added Cell roots",
+    "comparison normalization-schema instances",
+    "comparison structural-law instances",
+    "left-first Cell roots",
+    "right-first Cell roots",
+    "interchange normalization-schema instances",
+    "interchange structural-law instances"
+  ],
+  "scope": [
+    "One-sort pure wiring only.",
+    "Higher boundaries contain fixed recursive normalizations and are not uniformly bounded elementary diagrams.",
+    "Not finite derivation type or a finite concrete critical-branching basis.",
+    "Counts are expanded tree/macro occurrences, not DAG bytes, kernel time or minimum proof size.",
+    "No arbitrary stochastic-controller interchange or heterogeneous cryptographic-box completeness."
+  ],
+  "literature": {
+    "title": "Higher-dimensional normalisation strategies for acyclicity",
+    "authors": [
+      "Yves Guiraud",
+      "Philippe Malbos"
+    ],
+    "url": "https://webusers.imj-prg.fr/~yves.guiraud/articles/ktheory.pdf",
+    "read_scope": "Selected introduction, definitions 2.2.1-2.2.3 and 3.2.1-3.2.3, selected 3.3 discussion, Theorem 3.3.6 statement and textual proof, Corollary 3.3.7. Not full paper or full diagram inspection.",
+    "comparison": "Normalization implies coherence/acyclicity is an existing general principle; current implementation does not establish novelty."
+  },
+  "novelty": "Unconfirmed.",
+  "verification": {
+    "build_jobs": 4328,
+    "audit_declarations": 1532,
+    "new_public_theorems": 11,
+    "additional_witness_definitions": 40,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "inputs": 5,
+        "mismatches": []
+      }
+    }
+  }
+}

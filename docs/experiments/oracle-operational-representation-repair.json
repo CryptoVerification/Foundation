@@ -1,0 +1,118 @@
+{
+  "kind": "operational_representation_games_and_derived_correspondence_repair",
+  "date": "2026-10-17",
+  "claims": {
+    "arbitrary_adaptive_program_representation": "CryptoOracle.RandomOracle.Representation.run",
+    "whole_decoded_output": "CryptoOracle.RandomOracle.Representation.decoded_run",
+    "actual_vertex_game": "Foundation.Symmetric.RandomFunctionMACRepresentationGame.joint_vertex",
+    "decoded_original_game": "Foundation.Symmetric.RandomFunctionMACRepresentationGame.decoded_vertex",
+    "edges_derived_from_cache_values": "Foundation.Symmetric.RandomFunctionMACRepresentationGame.derived_edge_law",
+    "stored_game_distributions_differ": "Foundation.Symmetric.RandomFunctionMACRepresentationGame.stored_games_distinct",
+    "changed_edges_exactly_cut_boundary": "Foundation.Symmetric.RandomFunctionMACRepresentationRepair.derived_changes",
+    "checked_changes_and_budget": "Foundation.Symmetric.RandomFunctionMACRepresentationRepair.checked_changes",
+    "fan_generator_cost": "Foundation.Symmetric.RandomFunctionMACRepresentationRepair.fan_generated_cost",
+    "example": {
+      "messages": 8,
+      "public_tag_values": 256,
+      "stored_tag_width": 8,
+      "masked_coordinate": 7,
+      "representation_selection": "After three actual signing queries; depends on the retained signing history, not the future unqueried tag.",
+      "distinction": "Final cache and public response correlation differs; both decode to the same full original game."
+    },
+    "comparison": "Ordinary shared-lemma reasoning uses the same step/run state correspondence and cut-cost theorems. No path enumeration imposed. No exclusive higher-dimensional advantage established.",
+    "not_claimed": [
+      "Novelty established",
+      "General automatic graph extraction from arbitrary program edits",
+      "Proof-size or verification-time separation",
+      "New native encoded-cache machine or inherited 2091-step implementation bound",
+      "Arbitrary optimal-repair search",
+      "Finite completeness of all structural transformations"
+    ]
+  },
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4276,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 1077,
+    "new_audit_declarations": [
+      "CryptoOracle.RandomOracle.Representation.lookup",
+      "CryptoOracle.RandomOracle.Representation.table_inverse",
+      "CryptoOracle.RandomOracle.Representation.table_length",
+      "CryptoOracle.RandomOracle.Representation.step",
+      "CryptoOracle.RandomOracle.Representation.run",
+      "CryptoOracle.RandomOracle.Representation.decoded_run",
+      "Foundation.Symmetric.RandomFunctionMACRepresentationGame.decode_encode",
+      "Foundation.Symmetric.RandomFunctionMACRepresentationGame.suffix_law",
+      "Foundation.Symmetric.RandomFunctionMACRepresentationGame.stored_answer_encode_finish",
+      "Foundation.Symmetric.RandomFunctionMACRepresentationGame.untwisted",
+      "Foundation.Symmetric.RandomFunctionMACRepresentationGame.joint_vertex",
+      "Foundation.Symmetric.RandomFunctionMACRepresentationGame.decoded_vertex",
+      "Foundation.Symmetric.RandomFunctionMACRepresentationGame.joint_stored_answers",
+      "Foundation.Symmetric.RandomFunctionMACRepresentationGame.derived_edge_law",
+      "Foundation.Symmetric.RandomFunctionMACRepresentationGame.distinct_storage",
+      "Foundation.Symmetric.RandomFunctionMACRepresentationGame.public_answer_encode_finish",
+      "Foundation.Symmetric.RandomFunctionMACRepresentationGame.stored_game_relation",
+      "Foundation.Symmetric.RandomFunctionMACRepresentationGame.stored_games_distinct",
+      "Foundation.Symmetric.RandomFunctionMACRepresentationRepair.derived_changes",
+      "Foundation.Symmetric.RandomFunctionMACRepresentationRepair.checked_changes",
+      "Foundation.Symmetric.RandomFunctionMACRepresentationRepair.operational_vertices",
+      "Foundation.Symmetric.RandomFunctionMACRepresentationRepair.operational_edges",
+      "Foundation.Symmetric.RandomFunctionMACRepresentationRepair.decoded_vertices",
+      "Foundation.Symmetric.RandomFunctionMACRepresentationRepair.fan_generated_cost"
+    ],
+    "missing_audit_outputs": [],
+    "axiom_dependencies": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "temporary_build_log": "/tmp/foundation-representation-build.log",
+    "temporary_audit_log": "/tmp/foundation-representation-audit.log"
+  },
+  "source_sha256": {
+    "Foundation/Crypto/Semantics/Oracle/RandomOracleRepresentation.lean": "e48f1b06a6dc62499f99900f7f6c5ee7102e27b3a7a4353f20809d01dc69cba0",
+    "Foundation/Examples/RandomFunctionMACRepresentationGame.lean": "deaea7040396302cfdcee0235314c16c6afc4765eb04fba8e8f2ba67ca8a1d7b",
+    "Foundation/Examples/RandomFunctionMACRepresentationRepair.lean": "59aba299e4ca375f511eb5b590c9e76904cf3308726d84c4552d69fdf59da294"
+  },
+  "unchanged_previous_inputs": [
+    {
+      "record": "docs/experiments/oracle-checked-coupling-repair-game.json",
+      "source_count": 4,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-selected-coupling-repair.json",
+      "source_count": 6,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-interaction-encoding-comparison.json",
+      "source_count": 4,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-interaction-replay-scope.json",
+      "source_count": 10,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-proof-edits-benchmark.json",
+      "source_count": 6,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-proof-edits-benchmark-replication.json",
+      "source_count": 6,
+      "mismatches": []
+    }
+  ],
+  "neutral_representation_baseline": {
+    "module": "Foundation.Crypto.Semantics.Oracle.RandomOracleRepresentation",
+    "local_dependency_count": 6,
+    "diagram_related_imports": [],
+    "proof_method": "One-step cache lookup/update correspondence shared by run_state_map for all adaptive programs."
+  },
+  "new_literature_search_performed": false,
+  "novelty_status": "Unconfirmed. Operationally different stored-state games do not by themselves establish a new proof method.",
+  "ai_assistance": "Formalization, implementation, comparison, verification, and documentation used AI assistance."
+}

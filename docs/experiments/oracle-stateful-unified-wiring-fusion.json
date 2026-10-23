@@ -1,0 +1,374 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Logic/Polygraph/MixedCircuitStatefulHigher.lean": "1f94c46741f5bbff3dbddc36f5adbf04197bc02628f8cb1a3778c94dbb5c1c00",
+    "Foundation/Crypto/Logic/Polygraph/MixedCircuitStatefulWiringUnion.lean": "c51bd9e1d02c3faff78ac528a50dc80bac78851e161422ffd754166bde946c03",
+    "Foundation/Examples/MixedCircuitStatefulStructural.lean": "cdeee4ab5dc7d5b86522196037cc9088b69172961eae30a48785a47a7ed629d3",
+    "Foundation/Examples/MixedCircuitStatefulWiringHigher.lean": "462fa2d843503c906c7c7134067ad931d1ba03930aa76842da2230b7a6fb2c36"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulStructural.allRules",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulStructural.base_unchanged",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulStructural.completed",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulStructural.critical_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulStructural.fused",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulStructural.original",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulStructural.uncompleted",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Cell",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Generator",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Generator.existing",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.Generator.localSquare",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.LocalDiagram",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.LocalDiagram.cell",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.LocalDiagram.seqLeft",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.LocalDiagram.seqRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.LocalDiagram.tensorLeft",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.LocalDiagram.tensorRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.OldBasis",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.UnionRules",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.addedWireSquare",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.added_step_not_old",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.baseBasis",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.basis",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.checked",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.edit",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.embedOld",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.embedOld_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.embedOld_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.local_cell_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.local_context_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.local_context_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.local_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.local_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.original",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.seqFusion",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.tensorFusion",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.two",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.Generator",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.Generator.existing",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.Generator.pure",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.Generator.separated",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.Label",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.baseBasis",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.basis",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.checked",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedCell",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedCell_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedCell_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedPure",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedPure_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedPure_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedStep",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedStep_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedTrack",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedTrack_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.normalization_context_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.normalization_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.normalize",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.normalize_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.rules",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.unrestricted_not_terminating",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.wireStep",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.wireTrack",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.wireTrack_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.cell_repaired",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.cell_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.track_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.track_sound"
+  ],
+  "public_theorems": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulStructural.base_unchanged",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulStructural.critical_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.added_step_not_old",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.embedOld_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.embedOld_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.local_cell_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.local_context_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.local_context_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.local_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.StatefulWiring.local_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedCell_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedCell_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedPure_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedPure_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedStep_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.embedTrack_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.normalization_context_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.normalization_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.normalize_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.unrestricted_not_terminating",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.WiringUnion.wireTrack_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.cell_repaired",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.cell_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.track_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.track_sound"
+  ],
+  "claims": [
+    "Existing rewrite tracks and supplied higher cells interpret as endpoint equalities for the single shared-state evaluator; arbitrary correlated past and initial state/input are retained.",
+    "Starting from a universally stateful checked original MAC root, the old structural catalogue and both suffix completions are checked in the same base model using explicit expansion into old proof tracks.",
+    "A single Sum-labelled catalogue combines existing checked roots with all 18 cartesian pure-wire laws.",
+    "Wire normalization generates an actual 18-law track in the unified catalogue, with empty root support and exact surrounding-context support.",
+    "Existing local higher generators, pure local generators, and separated two-step cross exchanges form an explicit partial unified basis. Old higher proofs retain exact support and constructor counts; pure higher proofs retain zero support and exact counts.",
+    "Four added local higher schemata exchange one actual cartesian wire step with left/right sequential/tensor wire fusion. Both boundaries contain two mixed steps; each higher root has one constructor and no guards.",
+    "Arbitrary mixed placements retain one higher constructor and exactly the surrounding guard set, with stateful correlated-joint repair in the updated checked model.",
+    "A concrete left-unit-inverse expansion instantiates a new fusion square; that pure change has no proof even with inverses using the old eleven pure-wire roots.",
+    "The unified forward rewriting relation is not well founded: an actual infinite mixed copy-expansion chain is exhibited.",
+    "A concrete original MAC checked interpretation of the unified rule catalogue retains the additional shared state as analysis context."
+  ],
+  "limits": [
+    "The original MAC root must be proved universally in the whole shared state; structural extension does not infer root validity from distributions without state.",
+    "Endpoint kernel equality is already obtained from one track. These higher repair theorems do not establish a higher-dimensional necessity or proof-size advantage.",
+    "The unified basis is partial: fixed-structure, nested/root-root and other cross critical overlaps are not exhaustively classified or filled.",
+    "Completeness of the 18-law pure-wire equality presentation is not completeness of the higher basis or of mixed game equality.",
+    "The four schemas have arbitrary typed wiring/context payload; one higher constructor or two boundary steps does not bound total bytes or checking time.",
+    "The pure old-eleven-root obstruction is not a new global nonderivability theorem for every old mixed catalogue.",
+    "The recursive pure-wire normalizer does not imply termination of unrestricted rewriting; no terminating-rewriting coherence theorem is applied unconditionally.",
+    "The concrete original MAC interpretation is analysis-only on the extra state; proof edits do not rerun a native caller.",
+    "This stateful crypto/structural catalogue is distinct from the prior same-program native-chunk signature. Full mixed code extraction, quantitative error and runtime integration remain open.",
+    "Native internal oracle costs, scalable cryptographic examples, fair total-cost comparison and primary-theorem novelty confirmation remain unfinished."
+  ],
+  "local_extension": {
+    "schematic_fusion_wire_squares": 4,
+    "boundary_steps_each": 2,
+    "higher_constructors_root_and_whiskering": 1,
+    "root_guards": 0,
+    "context_guards": "exactly Placement.needs",
+    "concrete_added_wire_square_diagnostic": [
+      1,
+      0
+    ],
+    "unrestricted_forward_termination": false
+  },
+  "novelty": {
+    "status": "unconfirmed",
+    "interpretation": "A checked integration of previously separate structures and four actual added-wire/fusion local forms, not claimed as a new naturality/completion principle, a complete finite basis, or a compression theorem. The complete original research scope remains active."
+  },
+  "literature_this_step": "No new external primary-source review. Prior state/effectful-diagram results remain applicable background; this step verifies explicit stateful catalogue integration and the nontermination boundary.",
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4446,
+    "build_log": "/tmp/foundation-stateful-unified-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-stateful-unified-audit.log",
+    "audit_declarations": 3561,
+    "new_modules": 4,
+    "new_selected_declarations": 68,
+    "new_authored_theorems": 25,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "source_count": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-context.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-overlap-classification.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-fusion-conservative-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-typed-cartesian-wiring-completeness.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-cartesian-local-higher-discard-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-path-repair-novelty-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-mixed-directed-computational-extraction.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mac-native-quantitative-contracts.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mac-native-code-changing-transport.json": {
+        "source_count": 7,
+        "mismatches": []
+      },
+      "oracle-stateful-chronological-history-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-mixed-single-state-native-execution.json": {
+        "source_count": 6,
+        "mismatches": []
+      }
+    },
+    "imported_warnings": "Preexisting imported warnings remain outside these new sources; no whole-project warning-free claim."
+  }
+}

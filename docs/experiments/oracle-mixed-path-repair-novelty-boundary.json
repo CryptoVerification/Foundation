@@ -1,0 +1,273 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Logic/Polygraph/MixedCircuitPathRepair.lean": "42440f6dc3c1c0d0a60b8abc994962f167323664ec28d69379ce7632dadb24d9"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.MixedCircuit.RewriteTrack.repaired",
+    "CryptoLogic.Polygraph.MixedCircuit.RewriteTrack.repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.PresentedCell.left_recheck_subset"
+  ],
+  "public_theorems": [
+    "CryptoLogic.Polygraph.MixedCircuit.RewriteTrack.repaired",
+    "CryptoLogic.Polygraph.MixedCircuit.RewriteTrack.repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.PresentedCell.left_recheck_subset"
+  ],
+  "claims": [
+    "One reversible rewrite track suffices for endpoint kernel repair under explicit updated CheckedModel validity, cached named conditions, transfer outside the change set and rechecks of the track support intersection. No higher basis or comparison cell is a premise.",
+    "The same one-track repair preserves arbitrary correlated past data and original input in the joint distribution. Equality is within the updated model, not across model revisions.",
+    "For an existing PresentedCell, the left boundary track recheck set is a subset of the cell recheck set. This is not minimality or guaranteed strict reduction.",
+    "A theorem-level comparison records the convergence premise of the monoid coherence theorem, the stable-invariant and adversarial separation premises of SSProve, and fixed unrolling plus tree-interpolation premises of summary repair correctness.",
+    "The research specification strengthens the candidate conclusion to path-derived reductions and observation/error/resource contracts, with explicit generation, matching, dependency-index, model-check and output-encoding costs. This strengthened candidate is not implemented or proved."
+  ],
+  "limits": [
+    "Endpoint equality repair alone cannot demonstrate a need for higher comparison data in this implementation. This is not an impossibility theorem for higher proof methods.",
+    "The new theorems assume an updated CheckedModel. They do not certify model updates, infer a complete change set, prove native runtime or establish any new security bound.",
+    "Higher support remains needed to replay or validate the full comparison itself; only the weaker endpoint-kernel conclusion can use one boundary track.",
+    "Finite mixed higher completeness, extraction from all mixed proof tracks, computational/native continuing execution contracts, fair total-cost comparison and novelty remain unproved.",
+    "The literature pass is targeted, not a systematic or exhaustive priority search. No claim of missing features in an entire framework follows from the selected sections."
+  ],
+  "literature": {
+    "sources": [
+      {
+        "title": "A Homotopical Completion Procedure with Applications to Coherence of Monoids",
+        "url": "https://drops.dagstuhl.de/storage/00lipics/lipics-vol021-rta2013/LIPIcs.RTA.2013.223/LIPIcs.RTA.2013.223.pdf",
+        "locator": "Section 2.3, Theorem 8; opening of Section 3.1",
+        "retrieved_sha256": "d0039e25c835c6712cf462dc92169d55e6a8a634661d41d572fb8104143eff8a",
+        "scope": "Selected theorem statement and explanatory text; no full-paper or artifact-reproduction claim."
+      },
+      {
+        "title": "SSProve: A Foundational Framework for Modular Cryptographic Proofs in Coq",
+        "url": "https://pure.au.dk/ws/files/418606654/3594735.pdf",
+        "doi": "10.1145/3594735",
+        "locator": "Theorem 2.4 (printed page 15:8), Section 3.4, Section 4.2 including Theorem 4.1 and the proof sketch",
+        "retrieved_sha256": "e8cd1bc8323f3f3a302262933b9db95907c553185ad47edd97c8c6702af8d33b",
+        "scope": "Selected sections read from text extraction of the university-hosted published PDF; not full text/all figures/artifact rebuild. The IACR PDF URL failed in this step."
+      },
+      {
+        "title": "SMT-based verification of program changes through summary repair",
+        "url": "https://link.springer.com/article/10.1007/s10703-023-00423-0",
+        "doi": "10.1007/s10703-023-00423-0",
+        "locator": "Section 5.1, Theorem 1 and proof; Section 5 introductory fixed-unwinding scope",
+        "scope": "Publisher full-text HTML, selected theorem and proof; no external code execution."
+      }
+    ],
+    "search_queries": [
+      "\"incremental\" \"cryptographic proofs\" proof repair",
+      "\"incremental verification\" \"summary\" \"2023\" repair 00423",
+      "\"SSProve\" \"theorem\" modular cryptographic proofs",
+      "\"homotopical completion\" \"Theorem 8\"",
+      "\"SSProve\" \"3594735\" pdf Haselwarter",
+      "cryptographic proof maintenance incremental verification proof repair relational program logic"
+    ],
+    "inclusion": "Primary theorem text directly relevant to coherence, compositional cryptographic soundness, or change repair; current local source bodies checked for comparison.",
+    "exclusion": "Nonprimary search hits, summaries without theorem text, and failed retrievals do not support substantive comparisons."
+  },
+  "novelty": {
+    "status": "unconfirmed",
+    "finding": "The broad endpoint repair claim has a strictly lower-dimensional sufficient proof already in the current implementation. A stronger candidate must expose what proof comparisons guarantee about extracted reductions and execution contracts, beyond endpoint equality."
+  },
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4420,
+    "build_log": "/tmp/foundation-path-repair-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-path-repair-audit.log",
+    "audit_declarations": 3150,
+    "new_modules": 1,
+    "new_selected_declarations": 3,
+    "new_authored_theorems": 3,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": [],
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "source_count": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-context.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-overlap-classification.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-fusion-conservative-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-typed-cartesian-wiring-completeness.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-cartesian-local-higher-discard-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      }
+    },
+    "imported_warnings": "Existing imported warnings are replayed by the full build; no warning-free whole-project claim."
+  }
+}

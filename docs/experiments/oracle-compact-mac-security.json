@@ -1,0 +1,64 @@
+{
+  "kind": "full_physical_mac_probability_and_security_refinement",
+  "predecessor": "docs/experiments/oracle-compact-mac-execution.json",
+  "claims": {
+    "query_joint_law": "Foundation.Hash.Native.CompactMACRound.query_law",
+    "whole_native_observation": "Foundation.Hash.Native.CompactMACExecution.runtime_law",
+    "typed_game_refinement": "Foundation.Hash.Native.CompactMACExecution.runtime_game_law",
+    "typed_oracle_generalization": "Foundation.Hash.Native.CompactMACExecution.decodedOracle_run",
+    "physical_ideal_security": "Foundation.Symmetric.RandomFunctionMACNativeCaller.NativeBackend.ideal_security",
+    "explicit_distinguisher_reference": "Foundation.Symmetric.RandomFunctionMACNativeCaller.NativeBackend.idealGame_eq_distinguisher",
+    "keyed_comparison": "Foundation.Symmetric.RandomFunctionMACNativeCaller.NativeBackend.keyed_against_physical",
+    "keyed_security": "Foundation.Symmetric.RandomFunctionMACNativeCaller.NativeBackend.keyed_security",
+    "physical_ideal_bound": "1 / 256",
+    "keyed_bound_under_explicit_prf_premise": "epsilon + 1 / 256",
+    "physical_ideal_horizon_in_transition_steps": 2091,
+    "joint_game_observations": [
+      "actual final private-table bits",
+      "verification result",
+      "complete ordered typed request/response transcript"
+    ],
+    "precondition": "Initial native private tape represents the empty table with its false end marker. Preparing that initial layout is outside the bound.",
+    "scope_limitations": [
+      "Physical native implementation and total-time bound concern the ideal lazy random-function backend for this fixed adaptive MAC caller.",
+      "The keyed comparison uses the existing native caller with external keyed-function evaluation; there is no native keyed evaluator or its internal cost proof.",
+      "Original typed-game projection erases elapsed time. Actual physical outcome/time correlation and reachability remain in the separate execution contract.",
+      "No superiority over ordinary shared-lemma proofs or novelty is established.",
+      "Finite completeness for all structural transformations and diagram-to-native proof edits remain open."
+    ]
+  },
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4259,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 939,
+    "missing_audit_outputs": [],
+    "axiom_dependencies": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "temporary_build_log": "/tmp/foundation-compact-probability-build.log",
+    "temporary_audit_log": "/tmp/foundation-compact-probability-audit.log"
+  },
+  "protected_benchmarks": [
+    {
+      "record": "docs/experiments/oracle-proof-edits-benchmark-replication.json",
+      "sources": 6,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-proof-edits-benchmark.json",
+      "sources": 6,
+      "mismatches": []
+    }
+  ],
+  "source_sha256": {
+    "Foundation/Constructions/Hash/NativeCompactMACQueryLaw.lean": "9b9672b67c8c800b5df163ab6b83a5bfd57966006b47c41d2cc026c51b3ebc19",
+    "Foundation/Constructions/Hash/NativeCompactMACObservation.lean": "98ab98eea6a5e313b60147c63e0cc3bda7252d38c29cbc8a9d3247d065ed74df",
+    "Foundation/Constructions/Hash/NativeCompactMACTypedOracle.lean": "957e021412f3d3a24b753c486297b8a2f2317ff7a976042e813e0e7980f481ee",
+    "Foundation/Constructions/Hash/NativeCompactMACGame.lean": "2ebdb6a324f1c8291fbb493187eea252e1afb4dff930406c8d7cbc77a8a6589b",
+    "Foundation/Examples/RandomFunctionMACNativeBackendSecurity.lean": "82cb09de7825cc2552387d7d36dd2581b2e7638804c783b92edc1806e2e0d527"
+  },
+  "ai_assistance": "Formulation, implementation, verification, interpretation, and documentation used AI assistance."
+}

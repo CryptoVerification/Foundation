@@ -1,0 +1,35 @@
+{
+  "noisy_recovery_experiments": {
+    "protocol_settings": 256,
+    "inside_sufficient_error_region": 72,
+    "outside_sufficient_error_region": 184,
+    "encoder_decoder_Kraus_checks": 2048,
+    "nonunital_symmetrization_checks": 1024,
+    "largest_certified_eta_inside_region": 0.249722777811696,
+    "largest_tested_translation_norm": 0.06621314626273793,
+    "correctness_budget": "delta_k = h_k + b_k - h_k b_k, certified by convex mixture with identity",
+    "secrecy_budget": "TV(key law,uniform) + sum_k p_k h_k, certified by convex mixture with exact private scheme",
+    "diamond_norm_SDP_performed": false,
+    "Bell_input_distances_are_only_lower_bounds": true,
+    "numerical_tolerance": 1e-08
+  },
+  "seven_key_cone": {
+    "exact_rational_mixtures": 459,
+    "maximum_key_labels": 7,
+    "entropy_upper_bound_bits": "11/4",
+    "extra_entropy_upper_bound_bits": "3/4",
+    "zero_probability_key_branches_identified": true,
+    "key_count_or_entropy_optimality_proved": false
+  },
+  "exact_boundary_retraction_numerical_settings": 27,
+  "mathematical_result": "For qubit-to-qubit encryption/recovery with per-key recovery error delta, a continuous unitary rounding has branch half-diamond distance <= (5/2)delta; epsilon+(5/2)delta<1/4 yields a retraction to normalized perfect schemes.",
+  "topological_theorems_computer_verified": false,
+  "Lean_checked": false,
+  "optimal_constants_proved": false,
+  "newness_established": false,
+  "cryptographic_reduction_impossibility_proved": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/quantum-encryption-noisy-recovery.py": "35de58be2a9f7e1f5f48b36536aa2ac61239ac0751649310028128fdc833d3cd",
+    "/Users/hiro/workspace/Foundation/docs/experiments/quantum-encryption-robust-retraction.py": "c282d983d992519433ac15556c0bc7ce2b309dadeb40f335dd96a5244b50de12"
+  }
+}

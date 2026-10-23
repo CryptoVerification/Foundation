@@ -1,0 +1,75 @@
+{
+  "target_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitConvexCertificate",
+  "targeted_lake_build_passed": true,
+  "lean_toolchain": "leanprover/lean4:v4.33.0",
+  "axioms_per_theorem": {
+    "restore_firstThree": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "zero_convex_hull_three_small": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "zero_convex_hull_small": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "small_unit_barycenter_pair": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "zero_convex_hull_jump": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "perfect_convex_hull_jump": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "approximate_convex_hull_jump": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "perfect_cell_edge_jump": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "approximate_cell_edge_jump": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "sorry_or_additional_axioms_in_listed_theorems": false,
+  "four_coordinate_zero_sum_space_reduced_to_three_dimensions": true,
+  "selected_original_points_at_most": 4,
+  "user_supplied_four_points_and_barycentric_coefficients_required": false,
+  "local_cell_zero_in_convex_hull_remains_a_premise": true,
+  "adjacency_inferred_from_single_cell_pairwise_edge_condition": true,
+  "whole_table_hull_substituted_for_single_cell_hull": false,
+  "perfect_joint_TV_edge_lower_bound": "2/3",
+  "approximate_internal_TV_edge_lower_bound": "margin/3",
+  "noncomputable_existence_uses_mathlib_Caratheodory": true,
+  "boundary_nonextension_or_boundary_to_zero_cell_checked": false,
+  "Foundation_bounded_machine_realization_checked": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/classical-bit-encryption-lean-convex.py": "3e73078165ef5b09d3de6e7f55abe092ee8c4be3b18cb54790c571f5f19c677d",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitConvexCertificate.lean": "61a9d1ba588d70e16fb4c75cf187baf6616de2e9eae0e8310acfecd804946950",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitSimplexCertificate.lean": "e5ebeb7ca2c9ed2b37e47e4a654b8d010cd405bc9312f3b6989084e34b3a741c",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepairStability.lean": "d83db5cc70fbda328ccd400f5232f7aa6b3ea9058da0f3b5b02da2d673e7f50b",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepair.lean": "459aa24b50357f54d78ce8faf35ebbf96164a3971bc6b6aebd19524f69921a07",
+    "/Users/hiro/workspace/Foundation/lakefile.toml": "b537fcdfd0e540cfd6f310d771aff1eb8fc24ab107a421b02cfa42cf131a9411",
+    "/Users/hiro/workspace/Foundation/lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
+    "/Users/hiro/workspace/Foundation/lake-manifest.json": "ef3799fa73ec244f1db2063a084e5c03ab1196e16604e883952f870179bff929"
+  }
+}

@@ -1,0 +1,1514 @@
+{
+  "scope": "restricted fair-guess, context-sensitive resource model",
+  "local_transition_drift_checks": 1215,
+  "signed_count_tables_checked": 1776,
+  "two_branch_probability_pairs_checked": 1089,
+  "finite_budget_instances": 95,
+  "dynamic_program_states": 7285,
+  "exact_until_success_instances": [
+    {
+      "depth": 1,
+      "expected_fresh_queries_until_root_completion": 2,
+      "levels_in_one_successful_output_transcript": 1,
+      "expected_query_and_completion_counts": [
+        [
+          2,
+          1
+        ]
+      ]
+    },
+    {
+      "depth": 2,
+      "expected_fresh_queries_until_root_completion": 6,
+      "levels_in_one_successful_output_transcript": 2,
+      "expected_query_and_completion_counts": [
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          2
+        ]
+      ]
+    },
+    {
+      "depth": 3,
+      "expected_fresh_queries_until_root_completion": 14,
+      "levels_in_one_successful_output_transcript": 3,
+      "expected_query_and_completion_counts": [
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          8,
+          4
+        ]
+      ]
+    },
+    {
+      "depth": 4,
+      "expected_fresh_queries_until_root_completion": 30,
+      "levels_in_one_successful_output_transcript": 4,
+      "expected_query_and_completion_counts": [
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          16,
+          8
+        ]
+      ]
+    },
+    {
+      "depth": 5,
+      "expected_fresh_queries_until_root_completion": 62,
+      "levels_in_one_successful_output_transcript": 5,
+      "expected_query_and_completion_counts": [
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          32,
+          16
+        ]
+      ]
+    },
+    {
+      "depth": 6,
+      "expected_fresh_queries_until_root_completion": 126,
+      "levels_in_one_successful_output_transcript": 6,
+      "expected_query_and_completion_counts": [
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          32,
+          16
+        ],
+        [
+          64,
+          32
+        ]
+      ]
+    },
+    {
+      "depth": 7,
+      "expected_fresh_queries_until_root_completion": 254,
+      "levels_in_one_successful_output_transcript": 7,
+      "expected_query_and_completion_counts": [
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          32,
+          16
+        ],
+        [
+          64,
+          32
+        ],
+        [
+          128,
+          64
+        ]
+      ]
+    },
+    {
+      "depth": 8,
+      "expected_fresh_queries_until_root_completion": 510,
+      "levels_in_one_successful_output_transcript": 8,
+      "expected_query_and_completion_counts": [
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          32,
+          16
+        ],
+        [
+          64,
+          32
+        ],
+        [
+          128,
+          64
+        ],
+        [
+          256,
+          128
+        ]
+      ]
+    },
+    {
+      "depth": 9,
+      "expected_fresh_queries_until_root_completion": 1022,
+      "levels_in_one_successful_output_transcript": 9,
+      "expected_query_and_completion_counts": [
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          32,
+          16
+        ],
+        [
+          64,
+          32
+        ],
+        [
+          128,
+          64
+        ],
+        [
+          256,
+          128
+        ],
+        [
+          512,
+          256
+        ]
+      ]
+    },
+    {
+      "depth": 10,
+      "expected_fresh_queries_until_root_completion": 2046,
+      "levels_in_one_successful_output_transcript": 10,
+      "expected_query_and_completion_counts": [
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          32,
+          16
+        ],
+        [
+          64,
+          32
+        ],
+        [
+          128,
+          64
+        ],
+        [
+          256,
+          128
+        ],
+        [
+          512,
+          256
+        ],
+        [
+          1024,
+          512
+        ]
+      ]
+    },
+    {
+      "depth": 11,
+      "expected_fresh_queries_until_root_completion": 4094,
+      "levels_in_one_successful_output_transcript": 11,
+      "expected_query_and_completion_counts": [
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          32,
+          16
+        ],
+        [
+          64,
+          32
+        ],
+        [
+          128,
+          64
+        ],
+        [
+          256,
+          128
+        ],
+        [
+          512,
+          256
+        ],
+        [
+          1024,
+          512
+        ],
+        [
+          2048,
+          1024
+        ]
+      ]
+    },
+    {
+      "depth": 12,
+      "expected_fresh_queries_until_root_completion": 8190,
+      "levels_in_one_successful_output_transcript": 12,
+      "expected_query_and_completion_counts": [
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          32,
+          16
+        ],
+        [
+          64,
+          32
+        ],
+        [
+          128,
+          64
+        ],
+        [
+          256,
+          128
+        ],
+        [
+          512,
+          256
+        ],
+        [
+          1024,
+          512
+        ],
+        [
+          2048,
+          1024
+        ],
+        [
+          4096,
+          2048
+        ]
+      ]
+    },
+    {
+      "depth": 13,
+      "expected_fresh_queries_until_root_completion": 16382,
+      "levels_in_one_successful_output_transcript": 13,
+      "expected_query_and_completion_counts": [
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          32,
+          16
+        ],
+        [
+          64,
+          32
+        ],
+        [
+          128,
+          64
+        ],
+        [
+          256,
+          128
+        ],
+        [
+          512,
+          256
+        ],
+        [
+          1024,
+          512
+        ],
+        [
+          2048,
+          1024
+        ],
+        [
+          4096,
+          2048
+        ],
+        [
+          8192,
+          4096
+        ]
+      ]
+    },
+    {
+      "depth": 14,
+      "expected_fresh_queries_until_root_completion": 32766,
+      "levels_in_one_successful_output_transcript": 14,
+      "expected_query_and_completion_counts": [
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          32,
+          16
+        ],
+        [
+          64,
+          32
+        ],
+        [
+          128,
+          64
+        ],
+        [
+          256,
+          128
+        ],
+        [
+          512,
+          256
+        ],
+        [
+          1024,
+          512
+        ],
+        [
+          2048,
+          1024
+        ],
+        [
+          4096,
+          2048
+        ],
+        [
+          8192,
+          4096
+        ],
+        [
+          16384,
+          8192
+        ]
+      ]
+    },
+    {
+      "depth": 15,
+      "expected_fresh_queries_until_root_completion": 65534,
+      "levels_in_one_successful_output_transcript": 15,
+      "expected_query_and_completion_counts": [
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          32,
+          16
+        ],
+        [
+          64,
+          32
+        ],
+        [
+          128,
+          64
+        ],
+        [
+          256,
+          128
+        ],
+        [
+          512,
+          256
+        ],
+        [
+          1024,
+          512
+        ],
+        [
+          2048,
+          1024
+        ],
+        [
+          4096,
+          2048
+        ],
+        [
+          8192,
+          4096
+        ],
+        [
+          16384,
+          8192
+        ],
+        [
+          32768,
+          16384
+        ]
+      ]
+    },
+    {
+      "depth": 16,
+      "expected_fresh_queries_until_root_completion": 131070,
+      "levels_in_one_successful_output_transcript": 16,
+      "expected_query_and_completion_counts": [
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          32,
+          16
+        ],
+        [
+          64,
+          32
+        ],
+        [
+          128,
+          64
+        ],
+        [
+          256,
+          128
+        ],
+        [
+          512,
+          256
+        ],
+        [
+          1024,
+          512
+        ],
+        [
+          2048,
+          1024
+        ],
+        [
+          4096,
+          2048
+        ],
+        [
+          8192,
+          4096
+        ],
+        [
+          16384,
+          8192
+        ],
+        [
+          32768,
+          16384
+        ],
+        [
+          65536,
+          32768
+        ]
+      ]
+    }
+  ],
+  "finite_budget_results": [
+    {
+      "depth": 1,
+      "max_fresh_queries": 0,
+      "maximum_root_success_probability": "0",
+      "expected_queries_of_selected_optimal_policy": "0"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 1,
+      "maximum_root_success_probability": "1/2",
+      "expected_queries_of_selected_optimal_policy": "1"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 2,
+      "maximum_root_success_probability": "3/4",
+      "expected_queries_of_selected_optimal_policy": "3/2"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 3,
+      "maximum_root_success_probability": "7/8",
+      "expected_queries_of_selected_optimal_policy": "7/4"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 4,
+      "maximum_root_success_probability": "15/16",
+      "expected_queries_of_selected_optimal_policy": "15/8"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 5,
+      "maximum_root_success_probability": "31/32",
+      "expected_queries_of_selected_optimal_policy": "31/16"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 6,
+      "maximum_root_success_probability": "63/64",
+      "expected_queries_of_selected_optimal_policy": "63/32"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 7,
+      "maximum_root_success_probability": "127/128",
+      "expected_queries_of_selected_optimal_policy": "127/64"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 8,
+      "maximum_root_success_probability": "255/256",
+      "expected_queries_of_selected_optimal_policy": "255/128"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 9,
+      "maximum_root_success_probability": "511/512",
+      "expected_queries_of_selected_optimal_policy": "511/256"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 10,
+      "maximum_root_success_probability": "1023/1024",
+      "expected_queries_of_selected_optimal_policy": "1023/512"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 11,
+      "maximum_root_success_probability": "2047/2048",
+      "expected_queries_of_selected_optimal_policy": "2047/1024"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 12,
+      "maximum_root_success_probability": "4095/4096",
+      "expected_queries_of_selected_optimal_policy": "4095/2048"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 13,
+      "maximum_root_success_probability": "8191/8192",
+      "expected_queries_of_selected_optimal_policy": "8191/4096"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 14,
+      "maximum_root_success_probability": "16383/16384",
+      "expected_queries_of_selected_optimal_policy": "16383/8192"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 15,
+      "maximum_root_success_probability": "32767/32768",
+      "expected_queries_of_selected_optimal_policy": "32767/16384"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 16,
+      "maximum_root_success_probability": "65535/65536",
+      "expected_queries_of_selected_optimal_policy": "65535/32768"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 17,
+      "maximum_root_success_probability": "131071/131072",
+      "expected_queries_of_selected_optimal_policy": "131071/65536"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 18,
+      "maximum_root_success_probability": "262143/262144",
+      "expected_queries_of_selected_optimal_policy": "262143/131072"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 0,
+      "maximum_root_success_probability": "0",
+      "expected_queries_of_selected_optimal_policy": "0"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 1,
+      "maximum_root_success_probability": "0",
+      "expected_queries_of_selected_optimal_policy": "0"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 2,
+      "maximum_root_success_probability": "1/4",
+      "expected_queries_of_selected_optimal_policy": "3/2"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 3,
+      "maximum_root_success_probability": "3/8",
+      "expected_queries_of_selected_optimal_policy": "9/4"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 4,
+      "maximum_root_success_probability": "1/2",
+      "expected_queries_of_selected_optimal_policy": "3"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 5,
+      "maximum_root_success_probability": "19/32",
+      "expected_queries_of_selected_optimal_policy": "57/16"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 6,
+      "maximum_root_success_probability": "43/64",
+      "expected_queries_of_selected_optimal_policy": "129/32"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 7,
+      "maximum_root_success_probability": "47/64",
+      "expected_queries_of_selected_optimal_policy": "141/32"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 8,
+      "maximum_root_success_probability": "201/256",
+      "expected_queries_of_selected_optimal_policy": "603/128"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 9,
+      "maximum_root_success_probability": "423/512",
+      "expected_queries_of_selected_optimal_policy": "1269/256"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 10,
+      "maximum_root_success_probability": "55/64",
+      "expected_queries_of_selected_optimal_policy": "165/32"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 11,
+      "maximum_root_success_probability": "1815/2048",
+      "expected_queries_of_selected_optimal_policy": "5445/1024"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 12,
+      "maximum_root_success_probability": "3719/4096",
+      "expected_queries_of_selected_optimal_policy": "11157/2048"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 13,
+      "maximum_root_success_probability": "3791/4096",
+      "expected_queries_of_selected_optimal_policy": "11373/2048"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 14,
+      "maximum_root_success_probability": "15397/16384",
+      "expected_queries_of_selected_optimal_policy": "46191/8192"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 15,
+      "maximum_root_success_probability": "31171/32768",
+      "expected_queries_of_selected_optimal_policy": "93513/16384"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 16,
+      "maximum_root_success_probability": "7869/8192",
+      "expected_queries_of_selected_optimal_policy": "23607/4096"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 17,
+      "maximum_root_success_probability": "126891/131072",
+      "expected_queries_of_selected_optimal_policy": "380673/65536"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 18,
+      "maximum_root_success_probability": "255379/262144",
+      "expected_queries_of_selected_optimal_policy": "766137/131072"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 0,
+      "maximum_root_success_probability": "0",
+      "expected_queries_of_selected_optimal_policy": "0"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 1,
+      "maximum_root_success_probability": "0",
+      "expected_queries_of_selected_optimal_policy": "0"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 2,
+      "maximum_root_success_probability": "0",
+      "expected_queries_of_selected_optimal_policy": "0"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 3,
+      "maximum_root_success_probability": "1/8",
+      "expected_queries_of_selected_optimal_policy": "7/4"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 4,
+      "maximum_root_success_probability": "3/16",
+      "expected_queries_of_selected_optimal_policy": "21/8"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 5,
+      "maximum_root_success_probability": "1/4",
+      "expected_queries_of_selected_optimal_policy": "7/2"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 6,
+      "maximum_root_success_probability": "5/16",
+      "expected_queries_of_selected_optimal_policy": "35/8"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 7,
+      "maximum_root_success_probability": "47/128",
+      "expected_queries_of_selected_optimal_policy": "329/64"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 8,
+      "maximum_root_success_probability": "107/256",
+      "expected_queries_of_selected_optimal_policy": "749/128"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 9,
+      "maximum_root_success_probability": "119/256",
+      "expected_queries_of_selected_optimal_policy": "833/128"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 10,
+      "maximum_root_success_probability": "65/128",
+      "expected_queries_of_selected_optimal_policy": "455/64"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 11,
+      "maximum_root_success_probability": "1121/2048",
+      "expected_queries_of_selected_optimal_policy": "7847/1024"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 12,
+      "maximum_root_success_probability": "2391/4096",
+      "expected_queries_of_selected_optimal_policy": "16737/2048"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 13,
+      "maximum_root_success_probability": "79/128",
+      "expected_queries_of_selected_optimal_policy": "553/64"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 14,
+      "maximum_root_success_probability": "1327/2048",
+      "expected_queries_of_selected_optimal_policy": "9289/1024"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 15,
+      "maximum_root_success_probability": "22159/32768",
+      "expected_queries_of_selected_optimal_policy": "155113/16384"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 16,
+      "maximum_root_success_probability": "46023/65536",
+      "expected_queries_of_selected_optimal_policy": "322161/32768"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 17,
+      "maximum_root_success_probability": "47591/65536",
+      "expected_queries_of_selected_optimal_policy": "333137/32768"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 18,
+      "maximum_root_success_probability": "49033/65536",
+      "expected_queries_of_selected_optimal_policy": "343231/32768"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 0,
+      "maximum_root_success_probability": "0",
+      "expected_queries_of_selected_optimal_policy": "0"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 1,
+      "maximum_root_success_probability": "0",
+      "expected_queries_of_selected_optimal_policy": "0"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 2,
+      "maximum_root_success_probability": "0",
+      "expected_queries_of_selected_optimal_policy": "0"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 3,
+      "maximum_root_success_probability": "0",
+      "expected_queries_of_selected_optimal_policy": "0"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 4,
+      "maximum_root_success_probability": "1/16",
+      "expected_queries_of_selected_optimal_policy": "15/8"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 5,
+      "maximum_root_success_probability": "3/32",
+      "expected_queries_of_selected_optimal_policy": "45/16"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 6,
+      "maximum_root_success_probability": "1/8",
+      "expected_queries_of_selected_optimal_policy": "15/4"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 7,
+      "maximum_root_success_probability": "5/32",
+      "expected_queries_of_selected_optimal_policy": "75/16"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 8,
+      "maximum_root_success_probability": "3/16",
+      "expected_queries_of_selected_optimal_policy": "45/8"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 9,
+      "maximum_root_success_probability": "111/512",
+      "expected_queries_of_selected_optimal_policy": "1665/256"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 10,
+      "maximum_root_success_probability": "251/1024",
+      "expected_queries_of_selected_optimal_policy": "3765/512"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 11,
+      "maximum_root_success_probability": "279/1024",
+      "expected_queries_of_selected_optimal_policy": "4185/512"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 12,
+      "maximum_root_success_probability": "153/512",
+      "expected_queries_of_selected_optimal_policy": "2295/256"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 13,
+      "maximum_root_success_probability": "83/256",
+      "expected_queries_of_selected_optimal_policy": "1245/128"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 14,
+      "maximum_root_success_probability": "5713/16384",
+      "expected_queries_of_selected_optimal_policy": "85695/8192"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 15,
+      "maximum_root_success_probability": "12199/32768",
+      "expected_queries_of_selected_optimal_policy": "182985/16384"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 16,
+      "maximum_root_success_probability": "809/2048",
+      "expected_queries_of_selected_optimal_policy": "12135/1024"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 17,
+      "maximum_root_success_probability": "6831/16384",
+      "expected_queries_of_selected_optimal_policy": "102465/8192"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 18,
+      "maximum_root_success_probability": "7177/16384",
+      "expected_queries_of_selected_optimal_policy": "107655/8192"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 0,
+      "maximum_root_success_probability": "0",
+      "expected_queries_of_selected_optimal_policy": "0"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 1,
+      "maximum_root_success_probability": "0",
+      "expected_queries_of_selected_optimal_policy": "0"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 2,
+      "maximum_root_success_probability": "0",
+      "expected_queries_of_selected_optimal_policy": "0"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 3,
+      "maximum_root_success_probability": "0",
+      "expected_queries_of_selected_optimal_policy": "0"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 4,
+      "maximum_root_success_probability": "0",
+      "expected_queries_of_selected_optimal_policy": "0"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 5,
+      "maximum_root_success_probability": "1/32",
+      "expected_queries_of_selected_optimal_policy": "31/16"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 6,
+      "maximum_root_success_probability": "3/64",
+      "expected_queries_of_selected_optimal_policy": "93/32"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 7,
+      "maximum_root_success_probability": "1/16",
+      "expected_queries_of_selected_optimal_policy": "31/8"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 8,
+      "maximum_root_success_probability": "5/64",
+      "expected_queries_of_selected_optimal_policy": "155/32"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 9,
+      "maximum_root_success_probability": "3/32",
+      "expected_queries_of_selected_optimal_policy": "93/16"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 10,
+      "maximum_root_success_probability": "7/64",
+      "expected_queries_of_selected_optimal_policy": "217/32"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 11,
+      "maximum_root_success_probability": "255/2048",
+      "expected_queries_of_selected_optimal_policy": "7905/1024"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 12,
+      "maximum_root_success_probability": "571/4096",
+      "expected_queries_of_selected_optimal_policy": "17701/2048"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 13,
+      "maximum_root_success_probability": "631/4096",
+      "expected_queries_of_selected_optimal_policy": "19561/2048"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 14,
+      "maximum_root_success_probability": "345/2048",
+      "expected_queries_of_selected_optimal_policy": "10695/1024"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 15,
+      "maximum_root_success_probability": "187/1024",
+      "expected_queries_of_selected_optimal_policy": "5797/512"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 16,
+      "maximum_root_success_probability": "805/4096",
+      "expected_queries_of_selected_optimal_policy": "24955/2048"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 17,
+      "maximum_root_success_probability": "27553/131072",
+      "expected_queries_of_selected_optimal_policy": "854143/65536"
+    },
+    {
+      "depth": 5,
+      "max_fresh_queries": 18,
+      "maximum_root_success_probability": "58631/262144",
+      "expected_queries_of_selected_optimal_policy": "1817561/131072"
+    }
+  ],
+  "tagged_Schnorr_coin_streams_checked": 8188,
+  "tagged_Schnorr_strategy_results": [
+    {
+      "depth": 1,
+      "max_fresh_queries": 0,
+      "success_probability": "0",
+      "expected_fresh_queries": "0"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 1,
+      "success_probability": "1/2",
+      "expected_fresh_queries": "1"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 2,
+      "success_probability": "3/4",
+      "expected_fresh_queries": "3/2"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 3,
+      "success_probability": "7/8",
+      "expected_fresh_queries": "7/4"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 4,
+      "success_probability": "15/16",
+      "expected_fresh_queries": "15/8"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 5,
+      "success_probability": "31/32",
+      "expected_fresh_queries": "31/16"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 6,
+      "success_probability": "63/64",
+      "expected_fresh_queries": "63/32"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 7,
+      "success_probability": "127/128",
+      "expected_fresh_queries": "127/64"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 8,
+      "success_probability": "255/256",
+      "expected_fresh_queries": "255/128"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 9,
+      "success_probability": "511/512",
+      "expected_fresh_queries": "511/256"
+    },
+    {
+      "depth": 1,
+      "max_fresh_queries": 10,
+      "success_probability": "1023/1024",
+      "expected_fresh_queries": "1023/512"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 0,
+      "success_probability": "0",
+      "expected_fresh_queries": "0"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 1,
+      "success_probability": "0",
+      "expected_fresh_queries": "1"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 2,
+      "success_probability": "1/4",
+      "expected_fresh_queries": "2"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 3,
+      "success_probability": "3/8",
+      "expected_fresh_queries": "11/4"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 4,
+      "success_probability": "1/2",
+      "expected_fresh_queries": "27/8"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 5,
+      "success_probability": "19/32",
+      "expected_fresh_queries": "31/8"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 6,
+      "success_probability": "43/64",
+      "expected_fresh_queries": "137/32"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 7,
+      "success_probability": "47/64",
+      "expected_fresh_queries": "295/64"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 8,
+      "success_probability": "201/256",
+      "expected_fresh_queries": "39/8"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 9,
+      "success_probability": "423/512",
+      "expected_fresh_queries": "1303/256"
+    },
+    {
+      "depth": 2,
+      "max_fresh_queries": 10,
+      "success_probability": "55/64",
+      "expected_fresh_queries": "2695/512"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 0,
+      "success_probability": "0",
+      "expected_fresh_queries": "0"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 1,
+      "success_probability": "0",
+      "expected_fresh_queries": "1"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 2,
+      "success_probability": "0",
+      "expected_fresh_queries": "2"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 3,
+      "success_probability": "1/8",
+      "expected_fresh_queries": "3"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 4,
+      "success_probability": "3/16",
+      "expected_fresh_queries": "31/8"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 5,
+      "success_probability": "1/4",
+      "expected_fresh_queries": "75/16"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 6,
+      "success_probability": "5/16",
+      "expected_fresh_queries": "87/16"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 7,
+      "success_probability": "47/128",
+      "expected_fresh_queries": "49/8"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 8,
+      "success_probability": "107/256",
+      "expected_fresh_queries": "865/128"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 9,
+      "success_probability": "119/256",
+      "expected_fresh_queries": "1879/256"
+    },
+    {
+      "depth": 3,
+      "max_fresh_queries": 10,
+      "success_probability": "65/128",
+      "expected_fresh_queries": "63/8"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 0,
+      "success_probability": "0",
+      "expected_fresh_queries": "0"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 1,
+      "success_probability": "0",
+      "expected_fresh_queries": "1"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 2,
+      "success_probability": "0",
+      "expected_fresh_queries": "2"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 3,
+      "success_probability": "0",
+      "expected_fresh_queries": "3"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 4,
+      "success_probability": "1/16",
+      "expected_fresh_queries": "4"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 5,
+      "success_probability": "3/32",
+      "expected_fresh_queries": "79/16"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 6,
+      "success_probability": "1/8",
+      "expected_fresh_queries": "187/32"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 7,
+      "success_probability": "5/32",
+      "expected_fresh_queries": "215/32"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 8,
+      "success_probability": "3/16",
+      "expected_fresh_queries": "121/16"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 9,
+      "success_probability": "111/512",
+      "expected_fresh_queries": "67/8"
+    },
+    {
+      "depth": 4,
+      "max_fresh_queries": 10,
+      "success_probability": "251/1024",
+      "expected_fresh_queries": "4689/512"
+    }
+  ],
+  "wrong_persistent_child_ticket_depth_two_expected_queries": "4",
+  "general_crypto_simulator_embedding_proved": false,
+  "DL_reduction_formalized": false,
+  "newness_established": false,
+  "infinity_category_necessity_proved": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/nested-rewinding-cost.py": "61017a6ed2b5395e54acbd6182bc174aa47ec25c4ad4ced8e6855098eb659e6b",
+    "Foundation/Examples/NestedRewindingCost.lean": "dbdf280caa7a963f324540df7487c86fa13fe26657884a8efb116b8ea325ad29"
+  }
+}

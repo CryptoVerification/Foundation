@@ -1,0 +1,294 @@
+{
+  "kind": "constructive_complete_finite_schematic_basis_for_one_sort_pure_product_wiring",
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Logic/Polygraph/FiniteWiring.lean": "86d9f9f8e98ea63fe9e834847874ea67fc69975d3cfff14c7a803ae311f59209",
+    "Foundation/Logic/Polygraph/StructuralWiringCompilation.lean": "6162cca4e3ed2ab20ee23cae32fc658a8f27ae4de2faa4a54cac785ef3cb771b",
+    "Foundation/Logic/Polygraph/StructuralWiringBoundary.lean": "328d2868f42e1687a199a05ad90106b1744051e1c6df990219fe75db4bc6dbf7",
+    "Foundation/Crypto/Semantics/Oracle/FiniteWiringSwitch.lean": "ba246842f385b1b6c21b45a3549ae30925b334e0a105bfbf78d337c1b5681777",
+    "Foundation/Examples/RandomFunctionMACFiniteWiring.lean": "526d63018bd78e9e180903123f0486256eab2ad71d07f84a34ee73b8b844cd90"
+  },
+  "public_theorems": [
+    "Foundation.Logic.Polygraph.FiniteWiring.Cell.routing_eq",
+    "Foundation.Logic.Polygraph.FiniteWiring.complete",
+    "Foundation.Logic.Polygraph.FiniteWiring.synthesize_complete",
+    "Foundation.Logic.Polygraph.FiniteWiring.Circuit.eval_routing",
+    "Foundation.Logic.Polygraph.FiniteWiring.Cell.sound",
+    "Foundation.Logic.Polygraph.FiniteWiring.all_models_iff",
+    "Foundation.Logic.Polygraph.StructuralTransport.Finite.unflatten_flatten",
+    "Foundation.Logic.Polygraph.StructuralTransport.Finite.flatten_unflatten",
+    "Foundation.Logic.Polygraph.StructuralTransport.Finite.compile_correct",
+    "Foundation.Logic.Polygraph.StructuralTransport.Finite.compiled_cell_sound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Finite.complete",
+    "Foundation.Logic.Polygraph.StructuralTransport.Finite.probabilistic_complete",
+    "Foundation.Logic.Polygraph.StructuralTransport.Boundary.old_cell_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Boundary.old_inverse_missing",
+    "Foundation.Logic.Polygraph.StructuralTransport.Boundary.inverse_evaluations_equal",
+    "CryptoOracle.RandomOracle.Representation.SharedSwitch.compiled_cell_joint",
+    "Foundation.Symmetric.RandomFunctionMACFiniteWiring.accepts_view",
+    "Foundation.Symmetric.RandomFunctionMACFiniteWiring.generated_live_game",
+    "Foundation.Symmetric.RandomFunctionMACFiniteWiring.accepts_inverse",
+    "Foundation.Symmetric.RandomFunctionMACFiniteWiring.previous_basis_missing",
+    "Foundation.Symmetric.RandomFunctionMACFiniteWiring.rejects_different_routing",
+    "Foundation.Symmetric.RandomFunctionMACFiniteWiring.singleton_reference_model_same"
+  ],
+  "audited_witness_definitions": [
+    "Foundation.Logic.Polygraph.FiniteWiring.identityNormal",
+    "Foundation.Logic.Polygraph.FiniteWiring.seqNormal",
+    "Foundation.Logic.Polygraph.FiniteWiring.tensorNormal",
+    "Foundation.Logic.Polygraph.FiniteWiring.normalize",
+    "Foundation.Logic.Polygraph.FiniteWiring.connect",
+    "Foundation.Logic.Polygraph.FiniteWiring.synthesize",
+    "Foundation.Logic.Polygraph.StructuralTransport.Boundary.inverse_cell",
+    "Foundation.Symmetric.RandomFunctionMACFiniteWiring.certificate",
+    "Foundation.Symmetric.RandomFunctionMACFiniteWiring.inverseCertificate"
+  ],
+  "root_schemata": [
+    "seqAssoc",
+    "seqLeftUnit",
+    "seqRightUnit",
+    "beta",
+    "eta",
+    "singleton",
+    "seqTuple",
+    "tensorExpand"
+  ],
+  "context_closures": [
+    "refl",
+    "symm",
+    "trans",
+    "seq",
+    "tuple",
+    "tensor"
+  ],
+  "claims": {
+    "finite_basis_routing_completeness": "Foundation.Logic.Polygraph.FiniteWiring.complete",
+    "proof_producing_normalization": "Foundation.Logic.Polygraph.FiniteWiring.normalize",
+    "total_deciding_certificate_generator": "Foundation.Logic.Polygraph.FiniteWiring.synthesize",
+    "generator_complete_for_wiring_paths": "Foundation.Logic.Polygraph.FiniteWiring.synthesize_complete",
+    "all_atomic_interpretations_iff_path_exists": "Foundation.Logic.Polygraph.FiniteWiring.all_models_iff",
+    "compositional_shape_compiler_correct": "Foundation.Logic.Polygraph.StructuralTransport.Finite.compile_correct",
+    "complete_for_all_one_sort_source_interpretations": "Foundation.Logic.Polygraph.StructuralTransport.Finite.complete",
+    "complete_for_all_correlated_input_laws_and_atomic_interpretations": "Foundation.Logic.Polygraph.StructuralTransport.Finite.probabilistic_complete",
+    "old_nine_rule_basis_incomplete": "Foundation.Logic.Polygraph.StructuralTransport.Boundary.old_inverse_missing",
+    "new_compiled_basis_certifies_missing_inverse": "Foundation.Logic.Polygraph.StructuralTransport.Boundary.inverse_cell",
+    "compiled_certificate_preserves_actual_shared_cache_resume": "CryptoOracle.RandomOracle.Representation.SharedSwitch.compiled_cell_joint",
+    "automatic_mac_live_alias_diagram": "Foundation.Symmetric.RandomFunctionMACFiniteWiring.generated_live_game"
+  },
+  "scope": {
+    "circuits": "One-sort strict finite-product terms: identity, scalar projection, finite tuple, sequential composition, and explicit tensor.",
+    "routing": "For n inputs and m outputs, a function Fin m -> Fin n. Repeated indices are copies, omitted indices are discarded.",
+    "normal_form": "Tuple of scalar projections selected by routing. The recursive normalizer constructs a Cell using only the eight local schemata and context closure.",
+    "not_a_reconstruction_generator": true,
+    "endpoint_equality": "connect accepts equality of normal routing functions only to cast endpoints; the actual path is built by normalize. synthesize computes the finite routing equality itself.",
+    "finite_means": "Eight schematic root forms with arbitrary finite arities and term parameters, not a finite set of concrete cells. Tuples and projections are primitive syntax; this is not a gate-only binary-copy/delete/symmetry presentation.",
+    "shape_compilation": "All twelve previous structural Wire constructors on Shape Unit, interpreted in a single arbitrary atomic type. Nested products flatten to arrays; seq and tensor nodes are retained compositionally.",
+    "all_models": "Completeness quantifies over every atomic type and every input value or input PMF, not equality in a selected singleton-reference model.",
+    "no_stochastic_operation_boxes": true,
+    "no_heterogeneous_inference_rule_boxes": true,
+    "no_higher_coherence_claim": true
+  },
+  "verified_old_boundary": {
+    "invariant": "The previous nine-root source Cell language preserves the number of unassoc gates.",
+    "counterexample": "assoc followed by unassoc evaluates to identity but has no old Cell to identity (unassoc counts 1 and 0).",
+    "consequence": "Previous status unproved completeness is strengthened to a verified incompleteness result for that specific source language. Source modules and earlier claims of soundness remain unchanged."
+  },
+  "runtime_checks": [
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "expected": [
+        true,
+        true,
+        false,
+        43,
+        20
+      ],
+      "meaning": [
+        "accept MAC alias view versus simple copy",
+        "accept associator inverse cancellation",
+        "reject swap versus identity on two independent input positions",
+        "expanded root occurrences of generated MAC witness",
+        "expanded root occurrences of generated inverse witness"
+      ],
+      "passed": true,
+      "witnesses_materialized": "Cell.steps traverses the generated witness, not only its isSome tag."
+    }
+  ],
+  "size_metric": {
+    "unit": "Root-equation occurrences in expanded Cell tree, with tuple branches expanded and context/refl nodes not counted.",
+    "not_claimed": [
+      "minimum proof size",
+      "shared proof DAG size",
+      "kernel bytes or checking time",
+      "comparison between old and new different presentations",
+      "asymptotic bound or a higher-dimensional advantage"
+    ]
+  },
+  "conservative_rejection": {
+    "theorem": "Foundation.Symmetric.RandomFunctionMACFiniteWiring.singleton_reference_model_same",
+    "meaning": "Swap and identity are equal on the singleton Ref.root interpretation, but not across all atomic interpretations. The wiring checker correctly rejects their different routing and is not complete for arbitrary game equivalence."
+  },
+  "literature": [
+    {
+      "title": "Free gs-Monoidal Categories and Free Markov Categories",
+      "authors": [
+        "Tobias Fritz",
+        "Wendong Liang"
+      ],
+      "year": 2023,
+      "url": "https://link.springer.com/article/10.1007/s10485-023-09717-0",
+      "scope_this_turn": "Rechecked Example 4.2 relating pure single-sort wiring to FinSet^op, with surrounding selected universal-property and decomposition discussion. No full-paper reading, image inspection or artifact rebuild claimed.",
+      "comparison": "Routing descriptions of pure wiring are established mathematics. A verified concrete finite-product normalizer and live-oracle connection do not by themselves establish publication novelty."
+    }
+  ],
+  "novelty": "Unconfirmed. Pure-wiring completeness and a finite certificate generator are now verified within the stated presentation; exclusive proof-size/repair advantage is not established.",
+  "remaining": [
+    "higher coherence between parallel primitive-equation paths",
+    "finite primitive coherence for the full heterogeneous inference/cryptographic-box language",
+    "arbitrary probabilistic/stateful controller rewrites beyond reference wiring",
+    "native realization and CPU bounds for representation changes",
+    "fair proof-construction/repair comparison and literature-based novelty determination"
+  ],
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4325,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 1481,
+    "new_public_theorems": 22,
+    "additional_witness_definitions": 9,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "axiom_allowlist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "dependency_closures": {
+      "Foundation.Logic.Polygraph.FiniteWiring": [
+        "Foundation.Logic.Polygraph.FiniteWiring"
+      ],
+      "Foundation.Logic.Polygraph.StructuralWiringCompilation": [
+        "Foundation.Crypto.Semantics.Probability.Comp",
+        "Foundation.Crypto.Semantics.Probability.Facts",
+        "Foundation.Logic.Polygraph.FiniteWiring",
+        "Foundation.Logic.Polygraph.StructuralTransport",
+        "Foundation.Logic.Polygraph.StructuralWiringCompilation"
+      ],
+      "Foundation.Logic.Polygraph.StructuralWiringBoundary": [
+        "Foundation.Crypto.Semantics.Probability.Comp",
+        "Foundation.Crypto.Semantics.Probability.Facts",
+        "Foundation.Logic.Polygraph.FiniteWiring",
+        "Foundation.Logic.Polygraph.StructuralTransport",
+        "Foundation.Logic.Polygraph.StructuralWiringBoundary",
+        "Foundation.Logic.Polygraph.StructuralWiringCompilation"
+      ],
+      "Foundation.Crypto.Semantics.Oracle.FiniteWiringSwitch": [
+        "Foundation.Crypto.Semantics.Oracle.Composition",
+        "Foundation.Crypto.Semantics.Oracle.FiniteWiringSwitch",
+        "Foundation.Crypto.Semantics.Oracle.Program",
+        "Foundation.Crypto.Semantics.Oracle.QueryFootprint",
+        "Foundation.Crypto.Semantics.Oracle.QueryMap",
+        "Foundation.Crypto.Semantics.Oracle.QueryPrefix",
+        "Foundation.Crypto.Semantics.Oracle.RandomOracle",
+        "Foundation.Crypto.Semantics.Oracle.RandomOracleRepresentation",
+        "Foundation.Crypto.Semantics.Oracle.RepresentationLocality",
+        "Foundation.Crypto.Semantics.Oracle.RepresentationSwitch",
+        "Foundation.Crypto.Semantics.Oracle.SharedReference",
+        "Foundation.Crypto.Semantics.Oracle.SharedReferenceSwitch",
+        "Foundation.Crypto.Semantics.Oracle.StateMap",
+        "Foundation.Crypto.Semantics.Probability.Comp",
+        "Foundation.Crypto.Semantics.Probability.Facts",
+        "Foundation.Logic.Polygraph.FiniteWiring",
+        "Foundation.Logic.Polygraph.StructuralTransport",
+        "Foundation.Logic.Polygraph.StructuralWiringCompilation"
+      ]
+    },
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "exact_rational_checks": {
+    "rational_direction_radius_cases": 459,
+    "center_independent_of_direction": true,
+    "boundary_matches_four_key_specification": true,
+    "discontinuous_four_key_comparator_joint_key_Choi_jump": "3/4"
+  },
+  "numerical_checks": {
+    "Lipschitz_parameter_pairs_checked": 2048,
+    "joint_key_distance_computed_from_weighted_unitary_Bell_formula": true,
+    "Lipschitz_upper_bound": "3 sqrt(5) / 4 for joint key/ciphertext half-diamond distance",
+    "center_approach_settings": 104,
+    "boundary_homotopy_budget_checks": 2424,
+    "largest_tested_homotopy_budget": 0.249999999,
+    "boundary_approximation_tolerance": "1/20 half-diamond per key",
+    "uniform_continuity_of_conditional_zero_weight_gates_claimed": false
+  },
+  "mathematical_lower_bound": "Every continuous four-key qubit implementation on D4, with uniform boundary keys and boundary encryption error <=1/20 relative to the quaternion Pauli family, has a control point with privacy + (5/2) max per-key recovery error >=1/4.",
+  "lower_bound_is_standard_cryptographic_reduction_impossibility": false,
+  "topological_lower_bound_computer_verified": false,
+  "digital_circuit_synthesis_implemented": false,
+  "Lean_checked": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/quantum-encryption-parameter-ball.py": "99eade398f6833e43aade2024b3854aeeb24855a62c868223c2a15c7e3d876f5",
+    "/Users/hiro/workspace/Foundation/docs/experiments/quantum-encryption-robust-retraction.py": "c282d983d992519433ac15556c0bc7ce2b309dadeb40f335dd96a5244b50de12"
+  }
+}

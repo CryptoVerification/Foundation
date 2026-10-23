@@ -1,0 +1,90 @@
+{
+  "build_command": "nix develop path:. -c lake build Foundation.Examples.IntegralFillingExtraction",
+  "build_success": true,
+  "build_jobs": 3006,
+  "new_module_warnings": 0,
+  "lean_checked": true,
+  "theorems_audited": 15,
+  "axiom_dependencies": {
+    "Foundation.Examples.IntegralFillingExtraction.calibration_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.IntegralFillingExtraction.filling_lower_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.IntegralFillingExtraction.boundary_squared_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.IntegralFillingExtraction.fan_filling_unique": [
+      "Quot.sound"
+    ],
+    "Foundation.Examples.IntegralFillingExtraction.constant_fills": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.IntegralFillingExtraction.fan_filling_mass": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.IntegralFillingExtraction.trace_mass": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.IntegralFillingExtraction.trace_mass_le_queries": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.IntegralFillingExtraction.cached_read_idempotent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.IntegralFillingExtraction.trace_fills_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.IntegralFillingExtraction.complete_trace_query_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.IntegralFillingExtraction.enumeration_attains": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.IntegralFillingExtraction.complete_events_query_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.IntegralFillingExtraction.expected_queries_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.IntegralFillingExtraction.expected_events_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "cryptographic_DL_reduction_lean_checked": false,
+  "infinity_category_necessity_proved": false,
+  "registered_in_root_module": false,
+  "source_sha256": {
+    "Foundation/Examples/IntegralFillingExtraction.lean": "fef7e3e595979fcfa769f57e48479c562438666c62de437587f7a1ccc4533a03",
+    "docs/experiments/integral-filling-extraction.py": "3354b1b9eec071a6299ef22b19727213043cf7fd8ae3c4300b5aea0e1908be75",
+    "docs/experiments/integral-filling-extraction.json": "ab060ce21997af9f0739ceb87ebfd0607d4bdacae33f0492637f248f16d6fbb5"
+  }
+}

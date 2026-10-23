@@ -1,0 +1,85 @@
+{
+  "target_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitSimplicialInterpolation",
+  "targeted_lake_build_passed": true,
+  "lean_toolchain": "leanprover/lean4:v4.33.0",
+  "axioms_per_theorem": {
+    "interpolate_vertex": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "interpolate_bias": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "interpolate_cell": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "interpolate_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "faceEdge_iff_pair": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "cone_realization_contractible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "interpolated_perfect_edge": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "interpolated_approximate_edge": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "cone_perfect_edge": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "cone_approximate_edge": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "sorry_or_additional_axioms_in_listed_theorems": false,
+  "finite_vertices_with_abstract_faces": true,
+  "canonical_realization_uses_nonnegative_normalized_coordinates": true,
+  "continuous_interpolation_built_from_vertex_labels": true,
+  "vertex_label_reproduction_checked": true,
+  "zero_sum_preservation_checked": true,
+  "single_cell_convex_cover_derived": true,
+  "edge_relation_agrees_with_two_vertex_faces": true,
+  "cone_contractibility_derived_from_finite_face_condition": true,
+  "opaque_global_interpolator_or_cell_cover_required": false,
+  "boundary_nonnullity_and_boundary_agreement_still_premises": true,
+  "concrete_boundary_nonnullity_checked": false,
+  "geometric_mesh_to_canonical_realization_homeomorphism_checked": false,
+  "Foundation_bounded_machine_realization_checked": false,
+  "infinity_categories_shown_necessary": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/classical-bit-encryption-lean-interpolation.py": "2d5eef74588b1dfa2307ecd880bf29d5d8ecb373847a433a0f1b1cb03a6c09a8",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitSimplicialInterpolation.lean": "d1124720e2e06c81ea1c478a00259c866e3eb01ed29ffd9a4697dc6aae8de323",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitBoundaryCertificate.lean": "965e273b18c96a70e8d4f80e540bf80c70e42626edcbf12fc76cf1bdf9dd5c43",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitConvexCertificate.lean": "61a9d1ba588d70e16fb4c75cf187baf6616de2e9eae0e8310acfecd804946950",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitSimplexCertificate.lean": "e5ebeb7ca2c9ed2b37e47e4a654b8d010cd405bc9312f3b6989084e34b3a741c",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepairStability.lean": "d83db5cc70fbda328ccd400f5232f7aa6b3ea9058da0f3b5b02da2d673e7f50b",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepair.lean": "459aa24b50357f54d78ce8faf35ebbf96164a3971bc6b6aebd19524f69921a07",
+    "/Users/hiro/workspace/Foundation/lakefile.toml": "b537fcdfd0e540cfd6f310d771aff1eb8fc24ab107a421b02cfa42cf131a9411",
+    "/Users/hiro/workspace/Foundation/lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
+    "/Users/hiro/workspace/Foundation/lake-manifest.json": "ef3799fa73ec244f1db2063a084e5c03ab1196e16604e883952f870179bff929"
+  }
+}

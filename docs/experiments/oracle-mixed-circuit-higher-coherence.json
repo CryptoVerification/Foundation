@@ -1,0 +1,366 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Logic/Polygraph/MixedCircuitHigher.lean": "b53fca155cb4fbb0de379cbd87527e502bc6490ead928ebce2581fefc3c67a75",
+    "Foundation/Crypto/Logic/Polygraph/MixedCircuitHigherNormalization.lean": "6e9a4f0fd9717f63521759c7edee2c778766147c527f71e826c13f2b6736ba32",
+    "Foundation/Examples/MixedCircuitMACHigher.lean": "4ec195223a7c1317ab13e682046a51081fc19b71cef219d3d523ce5399952d35"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.framedLeft",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.framedRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.generatedDiagram",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.generatedFramed",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.generated_uses_extra_guard",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.localDiagram",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.localFramed",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.local_avoids_frame_successor",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.local_framed_constructorCount",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.local_framed_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.local_repaired",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.local_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.orderLeft",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.orderRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.original_routes_avoid_extra_guard",
+    "CryptoLogic.Polygraph.MixedCircuit.Exchange",
+    "CryptoLogic.Polygraph.MixedCircuit.Exchange.boundaries",
+    "CryptoLogic.Polygraph.MixedCircuit.Exchange.separated",
+    "CryptoLogic.Polygraph.MixedCircuit.Exchange.support",
+    "CryptoLogic.Polygraph.MixedCircuit.Exchange.whisker",
+    "CryptoLogic.Polygraph.MixedCircuit.Exchange.whisker_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.boundaries",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.cancelRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.cancelRight_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.constructorCount",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.continueRoute",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.exchangeCount",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.pathComp",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.repaired",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.support",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.whisker",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.whisker_constructorCount",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.whisker_exchangeCount",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.whisker_fresh",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.whisker_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Placement",
+    "CryptoLogic.Polygraph.MixedCircuit.Placement.apply",
+    "CryptoLogic.Polygraph.MixedCircuit.Placement.apply_needs",
+    "CryptoLogic.Polygraph.MixedCircuit.Placement.map_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Placement.needs",
+    "CryptoLogic.Polygraph.MixedCircuit.Placement.separate",
+    "CryptoLogic.Polygraph.MixedCircuit.Placement.seqLeft",
+    "CryptoLogic.Polygraph.MixedCircuit.Placement.seqRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Placement.step",
+    "CryptoLogic.Polygraph.MixedCircuit.Placement.step_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Placement.tensorLeft",
+    "CryptoLogic.Polygraph.MixedCircuit.Placement.tensorRight",
+    "CryptoLogic.Polygraph.MixedCircuit.Placement.track",
+    "CryptoLogic.Polygraph.MixedCircuit.Placement.track_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Resolution.square",
+    "CryptoLogic.Polygraph.MixedCircuit.RewriteTrack",
+    "CryptoLogic.Polygraph.MixedCircuit.RewriteTrack.boundaries",
+    "CryptoLogic.Polygraph.MixedCircuit.RewriteTrack.ofPath_support",
+    "CryptoLogic.Polygraph.MixedCircuit.RewriteTrack.sound",
+    "CryptoLogic.Polygraph.MixedCircuit.RewriteTrack.support",
+    "CryptoLogic.Polygraph.MixedCircuit.Step.localSquare",
+    "CryptoLogic.Polygraph.MixedCircuit.completeToTerminal",
+    "CryptoLogic.Polygraph.MixedCircuit.directedCoherence",
+    "CryptoLogic.Polygraph.MixedCircuit.directedCoherence_suffix_support",
+    "CryptoLogic.Polygraph.MixedCircuit.route",
+    "CryptoLogic.Polygraph.MixedCircuit.terminalCoherence"
+  ],
+  "public_theorems": [
+    "CryptoLogic.Polygraph.MixedCircuit.RewriteTrack.boundaries",
+    "CryptoLogic.Polygraph.MixedCircuit.RewriteTrack.ofPath_support",
+    "CryptoLogic.Polygraph.MixedCircuit.RewriteTrack.sound",
+    "CryptoLogic.Polygraph.MixedCircuit.Exchange.boundaries",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.boundaries",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.repaired",
+    "CryptoLogic.Polygraph.MixedCircuit.Placement.apply_needs",
+    "CryptoLogic.Polygraph.MixedCircuit.Placement.step_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Placement.track_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Placement.map_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Exchange.whisker_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.whisker_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.whisker_exchangeCount",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.whisker_constructorCount",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.whisker_fresh",
+    "CryptoLogic.Polygraph.MixedCircuit.Homotopy.cancelRight_support",
+    "CryptoLogic.Polygraph.MixedCircuit.directedCoherence_suffix_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.local_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.local_framed_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.local_framed_constructorCount",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.local_avoids_frame_successor",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.generated_uses_extra_guard",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.original_routes_avoid_extra_guard",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.local_repaired"
+  ],
+  "claims": [
+    "Mixed rewrite proofs have proof-relevant higher comparison cells using the existing free proof-groupoid laws and separated two-step exchange generators. No arbitrary parallel-path or normalization square is a primitive.",
+    "Separated exchange witnesses use the four ordered split forms and four context placements already constructed. Homotopy context lifting is derived by mapping generators and groupoid constructors.",
+    "Under the explicit RootRigid catalogue contract and an actual decreasing strategy, terminalCoherence constructs higher cells between any two directed rewrite paths to a common irreducible endpoint.",
+    "directedCoherence compares arbitrary directed parallel rewrite proofs, by extending to normalization and cancelling the common suffix in the PROOF groupoid. This is not cancellation or inversion of a stochastic execution.",
+    "Finite support of the produced higher cell retains intermediate tracks and all groupoid-law parameters. Both boundary-track supports are included, and repair reconstructs their guard supplies and checked updated-kernel comparison.",
+    "Context lifting has exact support union with the fixed context needs. Its fresh set distributes as the union of the two intersections; exchange count and Four-constructor count are preserved by context lifting.",
+    "The chosen global coherence construction retains the support of its normalization suffix even after formal cancellation. This is a dependency of that constructed witness, not a semantic necessity theorem.",
+    "In the actual MAC-kernel example, a local two-step exchange lifted through an untouched third component uses declared support {n,n+1,n+2} and one Four constructor for every n. The changed ID n+3 has empty fresh set for that local witness.",
+    "For the concrete n=0 instance, the global generator includes ID 3 while both original routes omit it; these are Lean theorems, not only compiled diagnostics."
+  ],
+  "experiment": {
+    "method": "Guarded compiled evaluations in Foundation/Examples/MixedCircuitMACHigher.lean; no wall-clock performance benchmark.",
+    "command": "nix develop path:. -c lake build Foundation.Examples.MixedCircuitMACHigher",
+    "rows": [
+      [
+        0,
+        1,
+        3,
+        0,
+        1,
+        4,
+        1
+      ],
+      [
+        1,
+        1,
+        3,
+        0,
+        1,
+        4,
+        1
+      ],
+      [
+        2,
+        1,
+        3,
+        0,
+        1,
+        4,
+        1
+      ]
+    ],
+    "fields": [
+      "stage n",
+      "local exchange-generator count",
+      "local declared support cardinality",
+      "local fresh count for changed={n+3}",
+      "canonical exchange-generator count",
+      "canonical declared support cardinality",
+      "canonical fresh count for changed={n+3}"
+    ],
+    "constructor_rows": [
+      [
+        0,
+        1,
+        255
+      ],
+      [
+        1,
+        1,
+        255
+      ],
+      [
+        2,
+        1,
+        255
+      ]
+    ],
+    "constructor_fields": [
+      "stage n",
+      "local expanded Four-constructor count",
+      "canonical expanded Four-constructor count"
+    ],
+    "count_scope": "Four constructors are counted as an expanded tree; boundary tracks/circuits/wirings, Separated placement-witness data, condition-set and all other payload bytes, common library code/proof sizes and shared-DAG optimizations are excluded. Not a proof-byte or kernel-checking-time metric.",
+    "comparison_scope": "Both witnesses compare exactly the same framed directed routes. The local constructor is supplied with the existing local exchange diagram AND its context decomposition; the general generator consumes the raw two routes and does not search for that decomposition. This is not an equal-information search-cost comparison or an ordinary-versus-higher-dimensional separation.",
+    "guard_scope": "The extra canonical guard is an indexed use of the existing MAC security-condition schema. That schema already proves all preparation orders secure, so a fresh declared label does not imply a new cryptographic assumption or measured re-verification cost."
+  },
+  "scope": [
+    "Coherence here concerns DIRECTED parallel rewrite proof paths. A theorem for arbitrary reversible Track inputs is not newly proved, although formal inverse appears inside the constructed higher witness.",
+    "Pure wiring is fixed as circuit values/contexts. The full mixed structural-and-cryptographic critical basis including rewrites of association, copy, discard, and their overlaps remains open.",
+    "RootRigid is restrictive and may fail after adding structural or other cryptographic rules. The generic result does not establish coherence for an arbitrary mixed catalogue.",
+    "The generator family is a local exchange schema with finite placement forms, not a finite list of all ground typed cells, a byte-size bound, or a completed critical-overlap presentation of all game transformations.",
+    "Higher support is conservative; no minimum guard set, optimal proof, or repair-time lower bound is shown. Directed-coherence suffix normalization may introduce extra guard dependencies.",
+    "The returned Homotopy is syntactic higher proof data. The repaired semantic conclusion supplies both boundary-track guards and equality of complete input-indexed circuit kernels in the checked updated model; it does not establish a new coupling between distinct computational-security experiments.",
+    "Symbolic multiset charge balance is inherited from the rewrite catalogue. A general mixed-diagram security-bound contract, actual computational reduction code/resources/loss-transformer interpretation, and continuing native execution are not newly connected here.",
+    "The MAC example reuses actual original kernels, full state/trace and existing bound/condition schema. It does not change the attack or query order, prove a new cryptographic bound, or duplicate a mutable live oracle into independent oracles.",
+    "No whole-certificate serialization/checker, shared-DAG compilation for these higher cells, semantic proof/kernel checking cost comparison, or independent ordinary baseline is supplied for this new layer."
+  ],
+  "novelty": {
+    "status": "unconfirmed",
+    "finding": "A previously missing actual higher-cell construction for directed mixed rewrite proofs is now implemented. Exact contextual guard transport gives an explicit example avoiding a dependency introduced by this global normalizer, but the principle of local contextual composition is not claimed as new or exclusive to higher-dimensional proofs.",
+    "next_evidence": "Integrate actual structural wiring rewrites and classify their overlaps with the cryptographic rules; connect computational/native semantics; compare methods with the same local diagrams/context information and permitted sharing, including ordinary proofs and total payload/checking costs."
+  },
+  "literature_this_step": "No new external primary-source review. Earlier selected-source scope is retained; no priority or complete novelty exclusion is claimed.",
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4389,
+    "build_log": "/tmp/foundation-mixed-higher-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-mixed-higher-audit.log",
+    "audit_declarations": 2590,
+    "new_selected_declarations": 62,
+    "new_authored_theorems": 24,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "inputs": 5,
+        "mismatches": []
+      }
+    }
+  }
+}

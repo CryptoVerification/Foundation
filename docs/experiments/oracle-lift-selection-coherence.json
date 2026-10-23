@@ -1,0 +1,441 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Logic/Polygraph/FourAssociation.lean": "87e9a93a5c08923513ec225900eb7acbd04c902815c3137fdb55ace0616c2ed0",
+    "Foundation/Logic/Polygraph/StructuralCartesianAssociatorPaths.lean": "619e125aa379ba878f2d992d4bec8fbddf431eadd011d7544ebf689e4ff28f38",
+    "Foundation/Logic/Polygraph/StructuralCartesianSelectionPasting.lean": "dea73b37c5d245cff073994344d71cac6a73fcc150e0932b51bbdac54deed7e6",
+    "Foundation/Logic/Polygraph/StructuralCartesianLiftSelectionCoherence.lean": "77c885466cd2733c6d24020d2d42290e2f83aa894ae784a699de297472408046",
+    "Foundation/Examples/MixedCircuitLiftSelection.lean": "a2afec1c8b87c689137a59297c101f219116279e7b25f870948d09b2fed5673a"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.Side",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.comparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.comparison_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampleLayout",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampleShape",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampleSlot",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampledComparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampledPrefix",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampledSource",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampledTarget",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampled_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampled_support",
+    "Foundation.Logic.Polygraph.FourAssociation.assocCell",
+    "Foundation.Logic.Polygraph.FourAssociation.compCell",
+    "Foundation.Logic.Polygraph.FourAssociation.leftCell",
+    "Foundation.Logic.Polygraph.FourAssociation.reflCell",
+    "Foundation.Logic.Polygraph.FourAssociation.rightCell",
+    "Foundation.Logic.Polygraph.FourAssociation.symmCell",
+    "Foundation.Logic.Polygraph.FourAssociation.transCell",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.AssociatorPaths.alpha",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.AssociatorPaths.categorical",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.AssociatorPaths.firstPath",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.AssociatorPaths.middleStep",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.AssociatorPaths.pentagonCorner",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.AssociatorPaths.postfixInverse",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.Side",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.Side.left",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.Side.right",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.compare",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.correction",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.correction_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.domain",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.embedSlot",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.first",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.lift",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.liftFstSquare",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.liftPair",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.liftPairCell",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.liftSndSquare",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.mapLayout",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.projection",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.readReify",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.reifyEmbeddedRef",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.second",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.targetCast",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.targetCast_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionPasting.distributedLift",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionPasting.fstSquare",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionPasting.sndSquare",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.SelectionPasting.suffix"
+  ],
+  "public_theorems": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.comparison_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampled_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.LiftSelection.sampled_support",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.correction_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.liftPair",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.readReify",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.reifyEmbeddedRef",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Higher.ExpansionCritical.LiftSelection.targetCast_count"
+  ],
+  "claims": [
+    "A proof-pasting helper normalizes only proof-path association and units, and can paste one explicitly supplied Four cell into a consecutive segment. It emits ordinary Four constructor terms checked by the Lean kernel; it adds no generator or semantic equality oracle.",
+    "Pathwise associator naturality in the first argument, its inverse corner, a middle-step square and a pentagon corner are derived in the retained pure Fin 31 presentation.",
+    "The existing two distribution/projection diagrams, old pathwise beta naturality, categorical naturality and the pentagon derive a selector-suffix pasting rule from an actual projection square and an actual child square. No unconditional arbitrary whole-path generator is introduced.",
+    "A two-case Side wrapper selects EXACTLY the frozen liftLeft or liftRight. mapLayout extends input references by Slot.left or Slot.right with the corresponding input ordering.",
+    "For every arbitrary typed layout and every actual typed output Slot, the actual existing liftLeft/liftRight followed by the existing selectNormal on the extended layout is compared to association, prefixing the original selectNormal, and a zero-step endpoint correction. The comparison is recursively constructed on Slot.",
+    "The endpoint correction comes only from the proved read_map equation and the definition of reifyRef on an embedded Slot. Its stepCount is exactly zero, proved using a general endpoint-transport count lemma.",
+    "The arbitrary-layout theorem assumes neither injectivity nor surjectivity of routing. Repeated and unused input slots are allowed. It requires no supplied atomic higher witnesses and no new basic diagram family; the pure tag catalogue remains Fin 31.",
+    "The existing MAC presentation embeds the arbitrary left/right comparison with empty support. The concrete example copies one MAC.before output, uses a repeated three-output layout, and selects the nested middle output.",
+    "The sampled example retains exactly singleton stage support. Repaired joint-law equality in the updated checked model retains the correlated past, state and input; no independence of the copied sample is assumed."
+  ],
+  "finite_scope": {
+    "unchanged_pure_schematic_tag_count": 31,
+    "new_basic_generator_families": 0,
+    "inputs": "Arbitrary Atom type, input/output/extra shapes, a typed Layout and a typed output Slot; both input-extension sides",
+    "first_path": "Actual frozen liftLeft/liftRight track, postcomposed by the selector, then actual frozen selectNormal of the extended layout",
+    "second_path": "An actual association step, prefixing the actual original selectNormal path, then an equality-transported identity from read_map",
+    "correction_rewrite_leaves": 0,
+    "pasting_helper": "Only association and units are automatic; inverse fragments are opaque and an actual Four witness is required for rewriting. The first matching consecutive segment is selected; this is not a complete proof search."
+  },
+  "limits": [
+    "This proves lift/selection compatibility for all typed output positions. It does not yet establish substitution unit/associativity laws, higher idempotence of the full normalizer, or the unchanged actual canonical tensor square.",
+    "The full eighteen-root and mixed rule catalogue still lacks a complete finite higher basis and arbitrary branching classifier.",
+    "The zero count concerns only endpoint transport. Proof payload, layouts, contexts, higher constructors and checker time are not included. No fair total-cost compression advantage is proved.",
+    "The helper program is not asserted to be a complete or performance-bounded solver. Each emitted proof used in the exported results is checked as an ordinary Lean proof term.",
+    "The pure selector theorem does not discard conditional crypto requirements. The concrete MAC prefix retains and rechecks its stage condition.",
+    "No new code-changing reduction, loss/time/resource bound or full continuing physical execution through oracle internals/keygen is supplied. Unregistered NativeConfiguredMAC integration remains excluded.",
+    "Mathematical novelty remains unconfirmed. Categorical pasting and generic beta/eta coherence are not claimed as new abstract principles. No new external primary-source reading or independent review occurred."
+  ],
+  "next_obligations": [
+    "Combine the actual identity projection squares with lift/selection compatibility to construct selection/substitution unit laws, including precise endpoint transports.",
+    "Construct higher normalization idempotence and compare the unchanged actual canonical tensor normalization paths; then install the mixed tensor root contract.",
+    "Keep the full original goal active: finite structural/mixed coverage, code-changing reductions/losses/resources, continuing oracle/keygen execution, fair shared-proof total costs and primary-source theorem-level novelty assessment."
+  ],
+  "verification": {
+    "target_command": "nix develop path:. -c lake build Foundation.Examples.MixedCircuitLiftSelection",
+    "target_jobs": 2881,
+    "target_log": "/tmp/foundation-lift-selection-mac-target.log",
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4553,
+    "build_log": "/tmp/foundation-lift-selection-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-lift-selection-audit.log",
+    "audit_declarations": 5050,
+    "new_modules": 5,
+    "new_selected_declarations": 50,
+    "new_authored_theorems": 8,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "prior_source_hash_checks": {
+      "oracle-product-critical-coherence.json": {
+        "source_count": 9,
+        "mismatches": []
+      },
+      "oracle-stateful-unified-wiring-fusion.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-information-schedule-comparison.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-mixed-path-repair-novelty-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mac-native-code-changing-transport.json": {
+        "source_count": 7,
+        "mismatches": []
+      },
+      "oracle-expansion-loop-coherence.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-mixed-fusion-conservative-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-full-outcome-native-repair.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-directed-computational-extraction.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-single-state-native-execution.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-compact-mac-security.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "source_count": 10,
+        "mismatches": []
+      },
+      "oracle-output-observation-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mac-analysis-native-compilation.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-cartesian-local-higher-discard-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-context.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-unified-association-overlap-resolution.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-mixed-wire-pass-naturality.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-presented-wire-compatibility.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-path-valued-residuals.json": {
+        "source_count": 9,
+        "mismatches": []
+      },
+      "oracle-categorical-critical-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-chronological-history-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-compact-mac-execution.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-legacy-wire-interoperability.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-wire-pass-research.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-root-only-wire-context-lifting.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-unified-fusion-overlap-resolution.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-overlap-classification.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-expansion-critical-coherence.json": {
+        "source_count": 7,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-bounded-old-wire-elimination.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-identity-projection-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-distribution-critical-coherence.json": {
+        "source_count": 8,
+        "mismatches": []
+      },
+      "oracle-tensor-projection-peak.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-sequential-fusion-wire-pass.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-mac-linked-analysis-execution.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mac-native-quantitative-contracts.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-cartesian-coherence-obstruction.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-typed-cartesian-wiring-completeness.json": {
+        "source_count": 6,
+        "mismatches": []
+      }
+    },
+    "imported_warnings": "Existing imported warnings remain."
+  },
+  "material_passport": {
+    "type": "Kernel-checked pasting, categorical selector faces, actual arbitrary-slot lift/selection compatibility and checked MAC copy/select example",
+    "status": "Verified within explicit scope; full research goal remains active",
+    "provenance": "AI-assisted research, implementation and reporting",
+    "human_read_scope": "unknown",
+    "independent_review": "not performed"
+  }
+}

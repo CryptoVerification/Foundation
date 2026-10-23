@@ -1,0 +1,75 @@
+{
+  "scope": "fixed FIFO reset policy, prefix-scoped private challenges, explicit freshness",
+  "exhaustive_scope_vectors_by_session_count": {
+    "1": 1,
+    "2": 2,
+    "3": 6,
+    "4": 24,
+    "5": 120,
+    "6": 720
+  },
+  "scope_vectors_checked": 873,
+  "models_requiring_quadratic_terms_for_exactness": 677,
+  "max_invariant_family_size": 13,
+  "three_session_example": {
+    "cuts": [
+      2,
+      1,
+      2
+    ],
+    "invariant_states": [
+      0,
+      1,
+      2,
+      3,
+      7
+    ],
+    "exact_expected_fresh_challenge_checks": "12",
+    "affine_exact": false,
+    "quadratic_coefficients": {
+      "1": "2",
+      "2": "2",
+      "4": "6",
+      "3": "2"
+    },
+    "remaining_costs": {
+      "0": "12",
+      "1": "10",
+      "2": "10",
+      "3": "6",
+      "7": "0"
+    }
+  },
+  "tagged_Schnorr_coin_streams_checked": 4599,
+  "tagged_Schnorr_cache_quotient_transitions_checked": 23014,
+  "distribution_counterexample_and_repair": {
+    "greedy_tag_law": {
+      "(0, 0)": "3/10",
+      "(0, 1)": "3/10",
+      "(1, 0)": "1/5",
+      "(1, 1)": "1/5"
+    },
+    "greedy_expected_challenge_checks": "27/5",
+    "greedy_total_variation_from_honest_joint_tag_law": "1/10",
+    "full_restart_expected_challenge_checks": "6",
+    "reweighted_proposal_tag_zero_probability": "2/5",
+    "reweighted_tag_law": {
+      "(0, 0)": "1/4",
+      "(0, 1)": "1/4",
+      "(1, 0)": "1/4",
+      "(1, 1)": "1/4"
+    },
+    "reweighted_expected_challenge_checks": "11/2",
+    "Schnorr_preparation_identities_checked": 242,
+    "optimal_over_all_simulators": false,
+    "generic_black_box_ZK_simulation_theorem": false
+  },
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/crossing-rewinding-certificates.py": "74b9c2e9f2b611aa0d35d7720aa5cd5b99b32c465b67d5ca425c0ebc5f7e68e9",
+    "Foundation/Examples/CrossingRewindingCost.lean": "b60b0e1835d6e112244070b6c2e196095ae45af61504a9bd221604b42de2b203"
+  },
+  "general_compiler_Lean_checked": false,
+  "arbitrary_crypto_simulator_optimality_proved": false,
+  "newness_established": false,
+  "infinity_category_necessity_proved": false
+}

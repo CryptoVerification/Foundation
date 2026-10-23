@@ -1,0 +1,291 @@
+{
+  "kind": "automatic_exact_declaration_difference_and_generated_row_replacement_diagrams",
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Logic/FiniteCodecDifference.lean": "92c591131893cd2ef08127e833e17fb10624173070b3d3d8bb7e0908fc95a832",
+    "Foundation/Crypto/Logic/Polygraph/RepresentationPatches.lean": "9b6aaab8a2bef796380ffcc5b49e683338dea559343f76ddb5fdad072975ec0d",
+    "Foundation/Crypto/Semantics/Oracle/AutomaticRepresentationEdit.lean": "927bb6e0d606159757e93e028b4bf6f3771dd365c32f679e3cf411f874390026",
+    "Foundation/Examples/RandomFunctionMACAutomaticEdit.lean": "206a03cb476bcf3b0b45815469fb93294f7b21eb227102b5f0cfc1b10e89ea08",
+    "docs/experiments/bench_automatic_codec_edit.lean": "f08ef77c47473e2c4b1bbae18a3ebe461b38c7ee363e8c410579999630011d52",
+    "docs/experiments/oracle-automatic-codec-timing.csv": "d84e69e8854dc58c5267abe0f97d657d183fe214a32d2b881135f2577dac02eb"
+  },
+  "public_theorems": [
+    "Foundation.Logic.FiniteCodecDifference.mem_changed",
+    "Foundation.Logic.FiniteCodecDifference.changed_subset",
+    "Foundation.Logic.FiniteCodecDifference.unchanged",
+    "Foundation.Logic.FiniteCodecDifference.minimal",
+    "Foundation.Logic.FiniteCodecDifference.compile_eq_full",
+    "Foundation.Logic.FiniteCodecDifference.complete",
+    "CryptoOracle.RandomOracle.Representation.Patches.generate_length",
+    "CryptoOracle.RandomOracle.Representation.Patches.run_generated",
+    "CryptoOracle.RandomOracle.Representation.Patches.generated_length",
+    "CryptoOracle.RandomOracle.Representation.Patches.generated_endpoint",
+    "CryptoOracle.RandomOracle.Representation.Patches.generated_compile_eq",
+    "CryptoOracle.RandomOracle.Representation.Patches.generated_member",
+    "CryptoOracle.RandomOracle.Representation.Patches.run_bijective",
+    "CryptoOracle.RandomOracle.Representation.Patches.generated_prefix_accepted",
+    "CryptoOracle.RandomOracle.Representation.Patches.Edit.exchange",
+    "CryptoOracle.RandomOracle.Representation.Patches.Cell.sound",
+    "CryptoOracle.RandomOracle.Representation.Patches.order_cell_exists",
+    "CryptoOracle.RandomOracle.Representation.Patches.order_sound",
+    "CryptoOracle.RandomOracle.Representation.AutomaticEdit.generate_eq_full",
+    "CryptoOracle.RandomOracle.Representation.AutomaticEdit.generate_sound",
+    "Foundation.Symmetric.RandomFunctionMACAutomaticEdit.row_changed",
+    "Foundation.Symmetric.RandomFunctionMACAutomaticEdit.exact_changes",
+    "Foundation.Symmetric.RandomFunctionMACAutomaticEdit.changed_count",
+    "Foundation.Symmetric.RandomFunctionMACAutomaticEdit.compiled_eq_previous",
+    "Foundation.Symmetric.RandomFunctionMACAutomaticEdit.generated_game",
+    "Foundation.Symmetric.RandomFunctionMACAutomaticEdit.joint_sound",
+    "Foundation.Symmetric.RandomFunctionMACAutomaticEdit.rows_cover",
+    "Foundation.Symmetric.RandomFunctionMACAutomaticEdit.rows_nodup",
+    "Foundation.Symmetric.RandomFunctionMACAutomaticEdit.path_eq",
+    "Foundation.Symmetric.RandomFunctionMACAutomaticEdit.path_length",
+    "Foundation.Symmetric.RandomFunctionMACAutomaticEdit.path_compiled",
+    "Foundation.Symmetric.RandomFunctionMACAutomaticEdit.path_game",
+    "Foundation.Symmetric.RandomFunctionMACAutomaticEdit.reversed_path_game"
+  ],
+  "claims": {
+    "exact_scope_restricted_difference": "Foundation.Logic.FiniteCodecDifference.mem_changed",
+    "minimal_for_row_equality_preservation": "Foundation.Logic.FiniteCodecDifference.minimal",
+    "generated_unchanged_proof": "Foundation.Logic.FiniteCodecDifference.unchanged",
+    "automatic_compiler_equals_full": "Foundation.Logic.FiniteCodecDifference.compile_eq_full",
+    "automatic_game_generator_equals_full": "CryptoOracle.RandomOracle.Representation.AutomaticEdit.generate_eq_full",
+    "raw_operational_game_and_original_joint": "CryptoOracle.RandomOracle.Representation.AutomaticEdit.generate_sound",
+    "generated_replacement_endpoint": "CryptoOracle.RandomOracle.Representation.Patches.generated_endpoint",
+    "generated_replacement_compile_equality": "CryptoOracle.RandomOracle.Representation.Patches.generated_compile_eq",
+    "all_intermediate_generated_prefixes_accepted": "CryptoOracle.RandomOracle.Representation.Patches.generated_prefix_accepted",
+    "elementary_exchange_sound": "CryptoOracle.RandomOracle.Representation.Patches.Cell.sound",
+    "diagram_exists_for_any_permutation": "CryptoOracle.RandomOracle.Representation.Patches.order_cell_exists",
+    "mac_exact_two_changed_rows": "Foundation.Symmetric.RandomFunctionMACAutomaticEdit.exact_changes",
+    "mac_two_replacements": "Foundation.Symmetric.RandomFunctionMACAutomaticEdit.path_eq",
+    "mac_same_game_from_generated_path": "Foundation.Symmetric.RandomFunctionMACAutomaticEdit.path_game",
+    "mac_same_game_from_reversed_path": "Foundation.Symmetric.RandomFunctionMACAutomaticEdit.reversed_path_game"
+  },
+  "interface": {
+    "automatic_compiler_inputs": "Finite checked scope, old and new forward declarations, old acceptance certificate. No changed set, unchanged-row proof or custom inverse supplied.",
+    "difference_computation": "Compare the two forward functions on every public response of each in-scope row; filter the finite scope by inequality.",
+    "minimality_scope": "Minimal among sets whose complement preserves exact row equality. Not minimal for probabilistic game equivalence, reachable responses, actual labels or proof size.",
+    "path_generator": "Uses an explicit ordered enumeration of the checked scope, filters changed rows, and creates one replacement per remaining occurrence. Duplicates are allowed generically; MAC rows are proved duplicate-free and cover the exact scope.",
+    "path_endpoint": "New declaration inside the enumerated scope, old declaration outside. Compiled equivalences still use identity outside the checked scope.",
+    "diagrams": "refl, distinct-row exchange, cons, symm, trans. Concrete exchangeCell is executable; order_cell_exists is a Nonempty theorem from a permutation proposition, not an extracted arbitrary sorting algorithm.",
+    "what_is_changed": "Declarations of representation edits at the same actual execution cut. Row replacements are proof-construction operations, not successive native cache writes or new oracle queries.",
+    "intermediate_validity": "If old and final declarations are accepted on the enumerated scope, every generated replacement-prefix declaration is accepted too."
+  },
+  "runtime_checks": [
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "expected": [
+        2,
+        true,
+        2,
+        false,
+        0,
+        true
+      ],
+      "meaning": [
+        "computed changed row count",
+        "automatic valid edit accepted",
+        "generated replacement count",
+        "automatic colliding edit rejected",
+        "equal declaration change count",
+        "equal declaration accepted"
+      ],
+      "passed": true
+    }
+  ],
+  "timing": {
+    "command": "nix develop path:. -c lake env lean --run docs/experiments/bench_automatic_codec_edit.lean",
+    "raw_data": "docs/experiments/oracle-automatic-codec-timing.csv",
+    "summary": {
+      "full": {
+        "samples": 7,
+        "runs_per_sample": 16,
+        "batch_seconds_median": 1.397218958,
+        "batch_seconds_min": 1.382770333,
+        "batch_seconds_max": 1.408992834,
+        "per_run_milliseconds_median": 87.32618487500001
+      },
+      "incremental": {
+        "samples": 7,
+        "runs_per_sample": 16,
+        "batch_seconds_median": 0.253689709,
+        "batch_seconds_min": 0.250557291,
+        "batch_seconds_max": 0.256988666,
+        "per_run_milliseconds_median": 15.8556068125
+      },
+      "automatic": {
+        "samples": 7,
+        "runs_per_sample": 16,
+        "batch_seconds_median": 0.274025209,
+        "batch_seconds_min": 0.27335475,
+        "batch_seconds_max": 0.275924917,
+        "per_run_milliseconds_median": 17.1265755625
+      },
+      "automatic_with_path": {
+        "samples": 7,
+        "runs_per_sample": 16,
+        "batch_seconds_median": 0.295193833,
+        "batch_seconds_min": 0.293696417,
+        "batch_seconds_max": 0.304959542,
+        "per_run_milliseconds_median": 18.449614562500003
+      },
+      "full_over_automatic_ratio_of_medians": 5.098870148111081,
+      "full_over_automatic_with_path_ratio_of_medians": 4.733225432931047,
+      "platform": "macOS-26.3.1-arm64-arm-64bit-Mach-O",
+      "machine": "arm64"
+    },
+    "methods": {
+      "full": "Full scoped acceptance checking, 10 rows x 256 public responses.",
+      "incremental": "Manual changed set and reusable unchanged-row proof, checking 2 edited rows.",
+      "automatic": "Exact difference extraction plus incremental acceptance, only old certificate supplied.",
+      "automatic_with_path": "Same automatic acceptance plus generating a concrete row-replacement word and consuming its length. Difference work is repeated by the separate path generator; no cache shared between them."
+    },
+    "design": "One process, one warmup per method, 7 blocks x 16 calls per method, rotating order, identical salts per method in each block, noinline entry functions, all 112 calls per method accepted.",
+    "timed_output": "Acceptance for first 3 methods; acceptance AND verification that generated word length is 2 for the fourth. Extra word output is not matched by the full baseline, so this is an overhead breakdown, not a higher-dimensional efficacy comparison.",
+    "excluded": [
+      "initial certification",
+      "scope extraction and scope-coverage proof",
+      "constructing a generic permutation diagram",
+      "Lean kernel checking",
+      "applying generated codec functions",
+      "executing the replacement word on a declaration",
+      "game execution",
+      "native recoding"
+    ],
+    "interpretation": "Single-environment observations; automatic difference and path generation retain an observed improvement versus full revalidation. The ordinary automatic method is already faster than the path-producing variant. No unique polygraphic effect is isolated.",
+    "limits": [
+      "single machine/process, no independent replication",
+      "fixed 8-input/256-response MAC example",
+      "no asymptotic or kernel-time bound",
+      "not a human proof repair effort comparison",
+      "not full native machine execution",
+      "general footprint extraction can enumerate branches"
+    ]
+  },
+  "novelty": "Unconfirmed; no new literature reading or novelty determination in this turn.",
+  "remaining": [
+    "generate diagrams for edits to control flow, information flow and actual query schedules",
+    "compare proof-construction effort with equally automated ordinary methods",
+    "finite complete all-structure basis including copying, discard and horizontal composition",
+    "native execution and time bounds for the representation edit"
+  ],
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4313,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 1403,
+    "new_public_theorems": 33,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "axiom_allowlist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "neutral_dependencies": {
+      "Foundation.Logic.FiniteCodecDifference": [
+        "Foundation.Logic.FiniteCodecDifference",
+        "Foundation.Logic.FiniteCodecGenerator",
+        "Foundation.Logic.FiniteCodecRepair",
+        "Foundation.Logic.FiniteCodecRestriction"
+      ],
+      "Foundation.Crypto.Semantics.Oracle.AutomaticRepresentationEdit": [
+        "Foundation.Crypto.Semantics.Oracle.AutomaticRepresentationEdit",
+        "Foundation.Crypto.Semantics.Oracle.Composition",
+        "Foundation.Crypto.Semantics.Oracle.GeneratedRepresentationEdit",
+        "Foundation.Crypto.Semantics.Oracle.Program",
+        "Foundation.Crypto.Semantics.Oracle.QueryFootprint",
+        "Foundation.Crypto.Semantics.Oracle.QueryMap",
+        "Foundation.Crypto.Semantics.Oracle.QueryPrefix",
+        "Foundation.Crypto.Semantics.Oracle.RandomOracle",
+        "Foundation.Crypto.Semantics.Oracle.RandomOracleRepresentation",
+        "Foundation.Crypto.Semantics.Oracle.RepresentationLocality",
+        "Foundation.Crypto.Semantics.Oracle.RepresentationScope",
+        "Foundation.Crypto.Semantics.Oracle.RepresentationSwitch",
+        "Foundation.Crypto.Semantics.Oracle.ScopedRepresentationEdit",
+        "Foundation.Crypto.Semantics.Oracle.StateMap",
+        "Foundation.Crypto.Semantics.Probability.Comp",
+        "Foundation.Crypto.Semantics.Probability.Facts",
+        "Foundation.Logic.FiniteCodecDifference",
+        "Foundation.Logic.FiniteCodecGenerator",
+        "Foundation.Logic.FiniteCodecRepair",
+        "Foundation.Logic.FiniteCodecRestriction"
+      ]
+    },
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      }
+    }
+  }
+}

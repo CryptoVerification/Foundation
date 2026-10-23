@@ -1,0 +1,136 @@
+{
+  "build_commands": [
+    "nix develop path:. -c lake build Foundation.Examples.LocalRewindingCompiler",
+    "nix develop path:. -c lake build Foundation.Examples.ProbeRewindingCorrection"
+  ],
+  "build_success": true,
+  "build_jobs_per_target": [
+    3006,
+    3007
+  ],
+  "new_module_warnings": 0,
+  "declarations_audited": 21,
+  "axiom_dependencies": {
+    "Foundation.Examples.LocalRewindingCompiler.class_mass_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.LocalRewindingCompiler.actual_class_positive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.LocalRewindingCompiler.denominator_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.LocalRewindingCompiler.guess_proposal_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.LocalRewindingCompiler.generated_row_exit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.LocalRewindingCompiler.context_proposal_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.LocalRewindingCompiler.generated_joint_balance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.LocalRewindingCompiler.generated_output_law": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.LocalRewindingCompiler.generated_work_cancellation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.LocalRewindingCompiler.productive_work_count": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.LocalRewindingCompiler.generated_row_work": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.LocalRewindingCompiler.generated_total_work": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.LocalRewindingCompiler.unequal_class_output_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.LocalRewindingCompiler.unequal_class_corrected_guess": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.ProbeRewindingCorrection.probe_acceptance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.ProbeRewindingCorrection.probe_probability_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.ProbeRewindingCorrection.probe_cancels_restart": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.ProbeRewindingCorrection.output_after_normalization": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.ProbeRewindingCorrection.sum_retry_denominators": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.ProbeRewindingCorrection.total_challenge_cost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.ProbeRewindingCorrection.pilot_challenge_cost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "registered_in_root_module": false,
+  "scope": "Finite proposal normalization, pointwise balance and cost arithmetic; operational and full-transcript arguments are separate.",
+  "full_machine_semantics_Lean_checked": false,
+  "support_pruning_query_lower_bound_Lean_checked": false,
+  "arbitrary_crypto_compiler_proved": false,
+  "efficiency_advantage_over_full_restart_proved": false,
+  "newness_established": false,
+  "infinity_category_necessity_proved": false,
+  "source_sha256": {
+    "Foundation/Examples/LocalRewindingCompiler.lean": "d200f24fec202222277ac0cfd7f331f3b416756ce31b5ccdc96d25891a175361",
+    "Foundation/Examples/ProbeRewindingCorrection.lean": "ee2977be619afed390fce1939d073197a16c6979d54dcbfd1aa4443494c6d31a",
+    "docs/experiments/local-rewinding-compiler.py": "9afc8debb4c03642fc2c0de6ed6ab035cb539a057715dc74f9fef7f6cd66f5ba",
+    "docs/experiments/local-rewinding-compiler.json": "ff29001cfeb754cd777ea2aab36b0078f974db7dfada2454d2c2471758ae2ca0",
+    "docs/experiments/probe-rewinding-corrector.py": "6c9ba3b1aa45e28da92ad6f3bf3f0a35585c05b21278dbd64524659b2af4c11d",
+    "docs/experiments/probe-rewinding-corrector.json": "32994e438767f19966bf2ff023ae004ed87ff10b0b230d65ba3eb7a50b9c67c3"
+  }
+}

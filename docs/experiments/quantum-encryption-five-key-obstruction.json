@@ -1,0 +1,37 @@
+{
+  "exact_rational_checks": {
+    "rational_SO5_frames": 32,
+    "frames_with_positive_fifth_key": 29,
+    "frames_with_zero_fifth_key": 3,
+    "column_sign_completion_and_Cartan_checks": 1024,
+    "key_transposition_completion_and_Cartan_checks": 320,
+    "Cartan_form_on_so3_generators": -6,
+    "boundary_pullback_on_unit_quaternion_tangents": -48,
+    "finite_sign_action_has_fixed_points": true
+  },
+  "numerical_checks": {
+    "near_frame_whitening_cases": 400,
+    "exact_frame_fixed_point_cases": 400,
+    "sign_equivariance_cases": 400,
+    "key_counts_tested": [
+      4,
+      5,
+      6,
+      7,
+      11
+    ],
+    "largest_row_orthogonality_residual": 1.0436096431476471e-14
+  },
+  "mathematical_claim": "The padded quaternion Pauli boundary S3 -> E5 has nonzero pullback of a real degree-three cohomology class; hence it cannot extend to B4 in E5.",
+  "minimum_key_count_for_this_exact_boundary_task": "6 or 7; six keys unresolved",
+  "robust_claim": "With boundary probabilities (1/4,1/4,1/4,1/4,0) and per-positive-key boundary encryption error <=1/20, some control has privacy + (5/2) max positive-key recovery error >=1/4.",
+  "topological_claim_computer_verified": false,
+  "Lean_checked": false,
+  "infinity_categorical_formalism_proved_necessary": false,
+  "natural_protocol_application_identified": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/quantum-encryption-five-key-obstruction.py": "903205ef2fa5f5f0063cdd2832a70a16e1d968a08f50d77a51a95e086418b9e4",
+    "/Users/hiro/workspace/Foundation/docs/experiments/quantum-encryption-robust-retraction.py": "c282d983d992519433ac15556c0bc7ce2b309dadeb40f335dd96a5244b50de12"
+  }
+}

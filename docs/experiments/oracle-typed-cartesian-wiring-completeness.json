@@ -1,0 +1,463 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Logic/Polygraph/StructuralTypedRouting.lean": "2873db9b9ff5991fda3742adc38f03c48cfdb4e7edaac2e1ba303808a7e824be",
+    "Foundation/Logic/Polygraph/StructuralCartesianPresentation.lean": "feef5d405009416ec385ebd69fa5988c58a41498f60104275fcf56ed90651d62",
+    "Foundation/Logic/Polygraph/StructuralCartesianNormalization.lean": "82f72ab7994d893cd830a2d89f00c5d2c864421f5d1db9a6292f4ba9a553b413",
+    "Foundation/Logic/Polygraph/StructuralCartesianRewriting.lean": "da9370d39569ce792e03829d097fd83d7be834fe572f6e0a1fab6434abd0346f",
+    "Foundation/Crypto/Logic/Polygraph/MixedCartesianWiring.lean": "e08cacc4cd3e5706817ded8065637c60ccd59c73e00ce26abc9a082afd351c54",
+    "Foundation/Examples/TypedCartesianWiring.lean": "0fd869c4529c08b6beec88b2bd0c5c06ae8f6c59a7dcb90b51ff78935a75c605"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Rule",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.Rule.wire",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.certificate",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.checkedModel",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.contextual_support",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.liftStep",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.liftTrack",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.liftTrack_support",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.normalization",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.normalization_support",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.normalized_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.relators",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.TypedCartesian.copiedNormalization",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.TypedCartesian.copiedNormalization_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.TypedCartesian.discardedNormalization",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.TypedCartesian.discardedNormalization_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.TypedCartesian.mac_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.TypedCartesian.model",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.TypedCartesian.unitCancellation",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.fork",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.refl",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.root",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.seq",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.sound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.symm",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.tensor",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.toTrack",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.trans",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.a",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.b",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.doubleSwap",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.duplicateDiscard",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.inverseCertificate",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.sampleFamily",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.swapCertificate",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.swap_rejected",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.unitCancellation",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.before",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.certificate",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.identity",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.layout",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.leftProjection",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.mk",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.pair",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.rightProjection",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.seq",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Normalized.terminal",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.ProofTrack",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.assoc",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.assocExpand",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.betaFst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.betaSnd",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.code",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.copyExpand",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.discardAfter",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.eta",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.forkAfter",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.leftId",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.leftUnitExpand",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.leftUnitInvExpand",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.rightId",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.rightUnitExpand",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.rightUnitInvExpand",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.sound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.swapExpand",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.tensorExpand",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.unassocExpand",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.unitIdentity",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Step",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Step.root",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Step.seqLeft",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Step.seqRight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Step.sound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Step.tensorLeft",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Step.tensorRight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.canonical_idempotent",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.certify",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.certify_complete",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.complete",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.connect",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.copyChain",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.copyChainStep",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.equivalent",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.equivalent_correct",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.fork",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.fromOldRoot",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.fst",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.identityNormal",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.layoutDecEq",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.leftUnitInvCount",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.leftUnit_inverse",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.liftLeft",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.liftRight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.normalize",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.normalizeCell",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.normalize_layout",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.oldRoot_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.oldStep_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.oldTrack_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.old_leftUnit_inverse_missing",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.projectLeft",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.projectRight",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.reify",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.reifyRef",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.reifyRef_correct",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.reify_correct",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.reify_normal",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.selectNormal",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.seqLeftTrack",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.seqNormal",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.seqRightTrack",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.snd",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.substitute",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.tensorLeftTrack",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.tensorRightTrack",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.unrestricted_not_terminating",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.Layout",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.Slot",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.Slot.here",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.Slot.left",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.Slot.right",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.map_identity",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.map_map",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.map_universal",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.normal",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.normal_complete",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.normal_correct",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.read",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.read_map",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.read_universal",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.universal"
+  ],
+  "public_theorems": [
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.contextual_support",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.liftTrack_support",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.normalization_support",
+    "CryptoLogic.Polygraph.MixedCircuit.CartesianWiring.normalized_repaired_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.TypedCartesian.copiedNormalization_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.TypedCartesian.discardedNormalization_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.TypedCartesian.mac_repaired_joint",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Cell.sound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Examples.swap_rejected",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Root.sound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.Step.sound",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.canonical_idempotent",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.certify_complete",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.complete",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.equivalent_correct",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.normalize_layout",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.oldRoot_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.oldStep_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.oldTrack_count",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.old_leftUnit_inverse_missing",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.reifyRef_correct",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.reify_correct",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.reify_normal",
+    "Foundation.Logic.Polygraph.StructuralTransport.Cartesian.unrestricted_not_terminating",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.map_identity",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.map_map",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.map_universal",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.normal_complete",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.normal_correct",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.read_map",
+    "Foundation.Logic.Polygraph.StructuralTransport.TypedRouting.read_universal"
+  ],
+  "claims": [
+    "Typed Slot references and universal symbolic inputs work for arbitrary atomic sorts and product/unit shapes. A wire normal layout is a finite output-shaped tuple of input references retaining all atom types.",
+    "normal_complete characterizes equality of these layouts by equality of wire evaluation for EVERY value family and input. This adds no semantic-equality rewrite generator. The equational normalization proof does not require decidable equality of atomic sorts.",
+    "The existing Wire syntax has an explicit eighteen-form cartesian root-equation presentation, with composition/tensor congruence, symmetry and transitivity. Projections and pairing are fixed Wire macros, not new opaque boxes or whole-normalization roots.",
+    "normalize recursively constructs a Cell from every wire to a reified layout using only those roots. normalize_layout identifies the computed layout with symbolic evaluation; reify_normal and canonical_idempotent prove canonical layout reconstruction and idempotence.",
+    "complete proves FIRST-LEVEL equational completeness on the original typed Wire syntax: a Cartesian.Cell exists exactly when evaluations agree for every atomic value family and input. connect constructs a witness from equal layouts.",
+    "With decidable equality of atom names, equivalent decides universal pure-wire equality and certify returns a derived Cell exactly when one exists. Cell.toTrack compiles derived cells into actual eighteen-root contextual rewrite proof tracks.",
+    "The old eleven-root reversible language preserves leftUnitInvCount, so left-unit inverse cancellation cannot be derived there for any shape. The new presentation derives it; fromOldRoot also constructs new derivations for each old root.",
+    "Unrestricted forward application of the eighteen roots is NOT terminating: copy expansion creates an infinite contextual copy chain, formally refuting well-foundedness. This does not contradict termination of the structural recursive normalization algorithm or idempotence of its representative.",
+    "A generic pure-wiring rewrite catalogue embeds these proof tracks into mixed circuits with arbitrary opaque probabilistic boxes. Structural normalization support is empty; a single mixed placement adds exactly its fixed-context needs.",
+    "normalized_repaired_joint compares the updated kernels while retaining correlated prior data and input, using only cached/transferred/rechecked context conditions. The concrete MAC instantiation and mac_repaired_joint retain the existing full state/trace and indexed conditions.",
+    "Actual MAC tensor contexts followed by output copy or discard have support exactly {stage} for every stage. The pure normalization contributes no additional condition IDs."
+  ],
+  "root_equation_tags": {
+    "assoc": 0,
+    "leftId": 1,
+    "rightId": 2,
+    "betaFst": 3,
+    "betaSnd": 4,
+    "eta": 5,
+    "discardAfter": 6,
+    "forkAfter": 7,
+    "tensorExpand": 8,
+    "copyExpand": 9,
+    "swapExpand": 10,
+    "assocExpand": 11,
+    "unassocExpand": 12,
+    "leftUnitExpand": 13,
+    "rightUnitExpand": 14,
+    "leftUnitInvExpand": 15,
+    "rightUnitInvExpand": 16,
+    "unitIdentity": 17
+  },
+  "compiled_guarded_diagnostics": [
+    {
+      "value": [
+        true,
+        true,
+        true,
+        false,
+        true,
+        true
+      ],
+      "meaning": "Two-sort double swap, left unit cancellation, copy/discard cancellation, rejection of swap versus identity on equal sorts, and successful certificates for the first two cases."
+    },
+    {
+      "value": [
+        true,
+        37
+      ],
+      "meaning": "Double swap evaluates on an actual Bool/Nat heterogeneous input bundle."
+    },
+    {
+      "value": [
+        true,
+        true,
+        true
+      ],
+      "meaning": "Associator inverse cancellation, right unit inverse cancellation, and identity versus discard on unit are accepted."
+    },
+    {
+      "value": [
+        1,
+        1
+      ],
+      "meaning": "Stage-zero actual MAC tensor context followed by copy/discard: normalization support cardinalities."
+    }
+  ],
+  "limits": [
+    "Completeness is first-level pure cartesian equational completeness, not higher coherence between proof paths, a finite mixed homotopy basis, or an exhaustive critical-diagram classifier.",
+    "The eighteen forms are parameterized local equation patterns. They are not a finite list of all ground typed cells. No arbitrary semantic-equality or whole-normalization root is used.",
+    "Canonical layout/reified-representative normalization is not irreducibility under all directed roots. Unrestricted directed termination is explicitly false, so a convergent-rewriting coherence theorem cannot be applied to these orientations without additional work.",
+    "The generic mixed catalogue contains only the new pure structural rules. It is usable inside fixed probabilistic contexts, but has not been merged with all previous MAC/fusion rules or supplied with a complete higher basis for that union.",
+    "The generic joint repair theorem takes one Placement layer. Repeated placements construct nested certificates; the concrete MAC copy/discard examples verify a nested case. No new all-context higher coherence theorem is inferred.",
+    "Universal equality across all value families/inputs is stronger than equality for one concrete type, a constrained reachable-state invariant or a particular correlated input law. This is not a decision procedure for arbitrary cryptographic program equivalence.",
+    "The cartesian laws apply to deterministic routing on already obtained values. They neither commute duplication through arbitrary probabilistic boxes nor clone mutable oracle executions. Internal pure computations may be duplicated or erased in equational proofs; actual runtime/resource equality is not established.",
+    "Empty structural guard support and indexed guard counts are not measured verification cost or a proof of minimal security assumptions. Joint repair is within the updated model, not equality of old and updated model distributions.",
+    "No total certificate size/checking-time bound, equal-information ordinary-proof separation, new security bound, computational reduction implementation or continuing native-machine contract is supplied."
+  ],
+  "novelty": {
+    "status": "unconfirmed",
+    "finding": "A previously missing complete first-level presentation on the original many-sorted Wire syntax now has a constructive normalizer, decidable routing equality and mixed probabilistic-context repair. These cartesian presentation and normalization principles are not asserted as new; the full higher/mixed and publication novelty requirements remain open.",
+    "next_evidence": "Construct a finite higher basis for the pure presentation, account for the nonterminating chosen orientations, integrate it with the mixed cryptographic/fusion catalogue and fill all mixed cases; retain computational/native contracts, fair ordinary comparison and primary-source novelty review."
+  },
+  "literature_this_step": "No new external primary-source theorem review. This step constructs and verifies the missing typed pure-wiring presentation on the existing source syntax.",
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4413,
+    "build_log": "/tmp/foundation-typed-cartesian-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-typed-cartesian-audit.log",
+    "audit_declarations": 3035,
+    "new_modules": 6,
+    "new_selected_declarations": 134,
+    "new_authored_theorems": 31,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-completion.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-context.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-overlap-classification.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-fusion-conservative-completion.json": {
+        "inputs": 5,
+        "mismatches": []
+      }
+    },
+    "imported_warnings": "Whole-project build replays warnings from preexisting sources outside these six modules; no warning-free whole-project claim is made.",
+    "final_source_and_prior_hashes_rechecked": true,
+    "new_document_links_exist": true,
+    "git_diff_check": "passed"
+  }
+}

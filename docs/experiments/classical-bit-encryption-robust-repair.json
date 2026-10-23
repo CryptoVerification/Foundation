@@ -1,0 +1,26 @@
+{
+  "exact_rational_checks": {
+    "perfect_ciphers_fixed_by_repair": 448,
+    "noisy_ciphers_repaired": 448,
+    "pairs_checking_repair_distance_bound": 896,
+    "noisy_four_key_fill_settings": 99,
+    "exact_boundary_fill_settings": 3,
+    "sharp_threshold_equality_settings": 33,
+    "rare_bad_key_probability": "1/1024",
+    "rare_bad_key_average_error": "1/2048",
+    "rare_bad_key_maximum_conditional_error": "1/2"
+  },
+  "repair_condition": "privacy_TV + 2*maximum_per_message_key_averaged_recovery_error < 1",
+  "repair_distance_bound": "repaired_joint_TV <= 2*original_joint_TV/margin",
+  "finite_four_key_edge_lower_bound": "margin/3, with exact nonnull boundary",
+  "continuous_four_key_fill_at_recovery_error_one_half": true,
+  "topological_nonextension_computer_verified": false,
+  "ordinary_key_averaged_recovery_error_supported_algebraically": true,
+  "Foundation_machine_realization_certified": false,
+  "Lean_checked": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/classical-bit-encryption-robust-repair.py": "7fbbc4d87bd3db7f16e687131a638a9edf51ec669e40c764ffa93d1a2c868664",
+    "/Users/hiro/workspace/Foundation/docs/experiments/classical-bit-encryption-control.py": "667cdff66e5eb6ab6b56e49cc5c0d0f6e6d56197c14b08af9e123635b5e8de86"
+  }
+}

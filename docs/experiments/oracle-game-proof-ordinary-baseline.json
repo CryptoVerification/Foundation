@@ -1,0 +1,679 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Logic/Polygraph/GameProofFiniteOrdinary.lean": "a9ffb4f805853a4878866ba9be7a19d5eee6ac869df8940bd88d9133eda42e9b",
+    "Foundation/Logic/SharedInferenceDerivation.lean": "8c9ce14dbdbc9964f2ae410726907d19f468df24ed1d8acb48706eeaf6fbeca5",
+    "Foundation/Crypto/Logic/Polygraph/GameProofOrdinaryErasure.lean": "e668c7600925349c9187b6512b74f5c2f6e9b3dee8722d92da6e4f0d93c15845",
+    "Foundation/Examples/GameProofOrdinaryMAC.lean": "15c0ced759951da7677c7939d62b42a215a89c74ebc2d8ed828bdfe632356acb",
+    "docs/experiments/bench_ordinary_game_proofs.lean": "bc533febd9e172742138d18682e9f7259133815eb9e542f7aa9a4cda3093612b"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.FiniteOrdinary.join",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.FiniteOrdinary.Meaning",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.FiniteOrdinary.interpretation",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.FiniteOrdinary.repaired",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.FiniteOrdinary.checked",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.FiniteOrdinary.compileAt",
+    "Foundation.Logic.SharedInference.closedTree",
+    "Foundation.Logic.SharedInference.treeModel",
+    "Foundation.Logic.SharedInference.closedTree_eval",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.treeErasure",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.ordinary_geometric_tree",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.toDerivation",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.toDerivation_tree",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.toDerivation_compilation",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.normal",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.normal_eq",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.rootSupport",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.support",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.support_range",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.claim",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.theory",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.derivation",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.tree",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.proof",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.specializedGeometric",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.exact_tree_agreement",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.exact_compilation_agreement",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.compile",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.compileSpecializedGeometric",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.compileGeneralGeometric",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.checked_compilation_agreement",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.repaired",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.tree_count"
+  ],
+  "public_theorems": [
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.FiniteOrdinary.join",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.FiniteOrdinary.repaired",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.FiniteOrdinary.checked",
+    "Foundation.Logic.SharedInference.closedTree_eval",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.ordinary_geometric_tree",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.toDerivation_tree",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.toDerivation_compilation",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.normal_eq",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.support_range",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.proof",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.exact_tree_agreement",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.exact_compilation_agreement",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.checked_compilation_agreement",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.repaired",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.OrdinaryMAC.tree_count"
+  ],
+  "claims": [
+    "An ordinary inference model interprets each claim using only its declared finite condition support. It does not reconstruct the syntactic Cell or call a coherence generator.",
+    "Ordinary closed derivations and geometric Cells admit rule-tree preserving translations in both directions within the same local-rule library. Applying the same deterministic shared compiler to each translated input yields equal output.",
+    "An independent ordinary MAC-chain derivation has exactly 5*stage+2 tree nodes and condition support Finset.range(stage+1), for all stages.",
+    "The geometric interpretation of the independent derivation exports exactly the same rule tree and checked compilation output. This specialization is a control, not an independent third proof-search algorithm.",
+    "Finite-support ordinary repair uses cached conditions outside the change set and new proofs on its intersection, without geometric reconstruction."
+  ],
+  "experiment": {
+    "driver": "docs/experiments/bench_ordinary_game_proofs.lean",
+    "command": "nix develop path:. -c lake env lean --run docs/experiments/bench_ordinary_game_proofs.lean",
+    "csv": "docs/experiments/oracle-ordinary-game-proof-timing.csv",
+    "csv_sha256": "b43ee3bb6a842772b2b6099c27a36a51f7b70c74d325bab1aafc93100be93ae5",
+    "row_count": 45,
+    "samples_per_case": 3,
+    "stages": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "method_order": "Rotate general/ordinary/specialized order across samples. All use the same goal, finite-support rule library, shared producer and typed/support checker.",
+    "machine": {
+      "system": "Darwin",
+      "release": "25.3.0",
+      "architecture": "arm64"
+    },
+    "summary": [
+      {
+        "stage": 0,
+        "method": "general_diagram",
+        "source_tree_nodes": 48,
+        "source_payload_bytes": 43918,
+        "certificate_rows": 24,
+        "references": 29,
+        "encoded_bytes": 25709,
+        "goal_display_bytes": 852,
+        "conditions": 1,
+        "fresh_conditions": 0,
+        "generation_accounting_ns": {
+          "min": 738167,
+          "median": 763916,
+          "max": 1285667
+        },
+        "interning_validation_ns": {
+          "min": 336292,
+          "median": 339917,
+          "max": 852333
+        },
+        "encoding_ns": {
+          "min": 371083,
+          "median": 389541,
+          "max": 508834
+        }
+      },
+      {
+        "stage": 0,
+        "method": "ordinary",
+        "source_tree_nodes": 2,
+        "source_payload_bytes": 843,
+        "certificate_rows": 2,
+        "references": 1,
+        "encoded_bytes": 859,
+        "goal_display_bytes": 852,
+        "conditions": 1,
+        "fresh_conditions": 0,
+        "generation_accounting_ns": {
+          "min": 15292,
+          "median": 15625,
+          "max": 145041
+        },
+        "interning_validation_ns": {
+          "min": 9000,
+          "median": 9917,
+          "max": 13500
+        },
+        "encoding_ns": {
+          "min": 13333,
+          "median": 13667,
+          "max": 15209
+        }
+      },
+      {
+        "stage": 0,
+        "method": "specialized_diagram",
+        "source_tree_nodes": 2,
+        "source_payload_bytes": 843,
+        "certificate_rows": 2,
+        "references": 1,
+        "encoded_bytes": 859,
+        "goal_display_bytes": 852,
+        "conditions": 1,
+        "fresh_conditions": 0,
+        "generation_accounting_ns": {
+          "min": 16625,
+          "median": 19000,
+          "max": 130625
+        },
+        "interning_validation_ns": {
+          "min": 8542,
+          "median": 9666,
+          "max": 10667
+        },
+        "encoding_ns": {
+          "min": 13500,
+          "median": 13834,
+          "max": 14042
+        }
+      },
+      {
+        "stage": 1,
+        "method": "general_diagram",
+        "source_tree_nodes": 89,
+        "source_payload_bytes": 95979,
+        "certificate_rows": 55,
+        "references": 69,
+        "encoded_bytes": 74531,
+        "goal_display_bytes": 1131,
+        "conditions": 2,
+        "fresh_conditions": 1,
+        "generation_accounting_ns": {
+          "min": 1653583,
+          "median": 1700042,
+          "max": 1722042
+        },
+        "interning_validation_ns": {
+          "min": 983875,
+          "median": 990791,
+          "max": 1003166
+        },
+        "encoding_ns": {
+          "min": 1082750,
+          "median": 1093750,
+          "max": 1099167
+        }
+      },
+      {
+        "stage": 1,
+        "method": "ordinary",
+        "source_tree_nodes": 7,
+        "source_payload_bytes": 4104,
+        "certificate_rows": 7,
+        "references": 6,
+        "encoded_bytes": 4157,
+        "goal_display_bytes": 1131,
+        "conditions": 2,
+        "fresh_conditions": 1,
+        "generation_accounting_ns": {
+          "min": 72459,
+          "median": 72958,
+          "max": 158000
+        },
+        "interning_validation_ns": {
+          "min": 36625,
+          "median": 37083,
+          "max": 38500
+        },
+        "encoding_ns": {
+          "min": 63375,
+          "median": 65541,
+          "max": 66125
+        }
+      },
+      {
+        "stage": 1,
+        "method": "specialized_diagram",
+        "source_tree_nodes": 7,
+        "source_payload_bytes": 4104,
+        "certificate_rows": 7,
+        "references": 6,
+        "encoded_bytes": 4157,
+        "goal_display_bytes": 1131,
+        "conditions": 2,
+        "fresh_conditions": 1,
+        "generation_accounting_ns": {
+          "min": 80500,
+          "median": 82209,
+          "max": 94000
+        },
+        "interning_validation_ns": {
+          "min": 35750,
+          "median": 36458,
+          "max": 37666
+        },
+        "encoding_ns": {
+          "min": 63167,
+          "median": 63709,
+          "max": 63917
+        }
+      },
+      {
+        "stage": 2,
+        "method": "general_diagram",
+        "source_tree_nodes": 130,
+        "source_payload_bytes": 159638,
+        "certificate_rows": 88,
+        "references": 109,
+        "encoded_bytes": 135058,
+        "goal_display_bytes": 1416,
+        "conditions": 3,
+        "fresh_conditions": 1,
+        "generation_accounting_ns": {
+          "min": 2833208,
+          "median": 2940750,
+          "max": 2999833
+        },
+        "interning_validation_ns": {
+          "min": 1851667,
+          "median": 1896125,
+          "max": 1929000
+        },
+        "encoding_ns": {
+          "min": 1937917,
+          "median": 1940917,
+          "max": 2013042
+        }
+      },
+      {
+        "stage": 2,
+        "method": "ordinary",
+        "source_tree_nodes": 12,
+        "source_payload_bytes": 7929,
+        "certificate_rows": 12,
+        "references": 11,
+        "encoded_bytes": 8021,
+        "goal_display_bytes": 1416,
+        "conditions": 3,
+        "fresh_conditions": 1,
+        "generation_accounting_ns": {
+          "min": 140958,
+          "median": 145292,
+          "max": 146166
+        },
+        "interning_validation_ns": {
+          "min": 71834,
+          "median": 73417,
+          "max": 82500
+        },
+        "encoding_ns": {
+          "min": 120708,
+          "median": 124416,
+          "max": 130000
+        }
+      },
+      {
+        "stage": 2,
+        "method": "specialized_diagram",
+        "source_tree_nodes": 12,
+        "source_payload_bytes": 7929,
+        "certificate_rows": 12,
+        "references": 11,
+        "encoded_bytes": 8021,
+        "goal_display_bytes": 1416,
+        "conditions": 3,
+        "fresh_conditions": 1,
+        "generation_accounting_ns": {
+          "min": 158708,
+          "median": 159209,
+          "max": 167625
+        },
+        "interning_validation_ns": {
+          "min": 68083,
+          "median": 68375,
+          "max": 74166
+        },
+        "encoding_ns": {
+          "min": 118750,
+          "median": 121583,
+          "max": 125209
+        }
+      },
+      {
+        "stage": 3,
+        "method": "general_diagram",
+        "source_tree_nodes": 171,
+        "source_payload_bytes": 235141,
+        "certificate_rows": 121,
+        "references": 149,
+        "encoded_bytes": 206891,
+        "goal_display_bytes": 1707,
+        "conditions": 4,
+        "fresh_conditions": 1,
+        "generation_accounting_ns": {
+          "min": 4156500,
+          "median": 4216333,
+          "max": 4289041
+        },
+        "interning_validation_ns": {
+          "min": 3152334,
+          "median": 3187417,
+          "max": 3394917
+        },
+        "encoding_ns": {
+          "min": 3038083,
+          "median": 3083833,
+          "max": 3344292
+        }
+      },
+      {
+        "stage": 3,
+        "method": "ordinary",
+        "source_tree_nodes": 17,
+        "source_payload_bytes": 12330,
+        "certificate_rows": 17,
+        "references": 16,
+        "encoded_bytes": 12464,
+        "goal_display_bytes": 1707,
+        "conditions": 4,
+        "fresh_conditions": 1,
+        "generation_accounting_ns": {
+          "min": 214167,
+          "median": 223292,
+          "max": 227833
+        },
+        "interning_validation_ns": {
+          "min": 104833,
+          "median": 106709,
+          "max": 143291
+        },
+        "encoding_ns": {
+          "min": 187917,
+          "median": 192750,
+          "max": 203041
+        }
+      },
+      {
+        "stage": 3,
+        "method": "specialized_diagram",
+        "source_tree_nodes": 17,
+        "source_payload_bytes": 12330,
+        "certificate_rows": 17,
+        "references": 16,
+        "encoded_bytes": 12464,
+        "goal_display_bytes": 1707,
+        "conditions": 4,
+        "fresh_conditions": 1,
+        "generation_accounting_ns": {
+          "min": 249958,
+          "median": 254417,
+          "max": 258125
+        },
+        "interning_validation_ns": {
+          "min": 104084,
+          "median": 104625,
+          "max": 114375
+        },
+        "encoding_ns": {
+          "min": 186416,
+          "median": 190959,
+          "max": 194791
+        }
+      },
+      {
+        "stage": 4,
+        "method": "general_diagram",
+        "source_tree_nodes": 212,
+        "source_payload_bytes": 322734,
+        "certificate_rows": 154,
+        "references": 189,
+        "encoded_bytes": 290255,
+        "goal_display_bytes": 2004,
+        "conditions": 5,
+        "fresh_conditions": 1,
+        "generation_accounting_ns": {
+          "min": 5697125,
+          "median": 5924583,
+          "max": 6399750
+        },
+        "interning_validation_ns": {
+          "min": 4439333,
+          "median": 4536292,
+          "max": 4735916
+        },
+        "encoding_ns": {
+          "min": 4169875,
+          "median": 4282209,
+          "max": 4330084
+        }
+      },
+      {
+        "stage": 4,
+        "method": "ordinary",
+        "source_tree_nodes": 22,
+        "source_payload_bytes": 17319,
+        "certificate_rows": 22,
+        "references": 21,
+        "encoded_bytes": 17495,
+        "goal_display_bytes": 2004,
+        "conditions": 5,
+        "fresh_conditions": 1,
+        "generation_accounting_ns": {
+          "min": 309833,
+          "median": 326209,
+          "max": 338750
+        },
+        "interning_validation_ns": {
+          "min": 163375,
+          "median": 166917,
+          "max": 168709
+        },
+        "encoding_ns": {
+          "min": 264208,
+          "median": 266000,
+          "max": 290833
+        }
+      },
+      {
+        "stage": 4,
+        "method": "specialized_diagram",
+        "source_tree_nodes": 22,
+        "source_payload_bytes": 17319,
+        "certificate_rows": 22,
+        "references": 21,
+        "encoded_bytes": 17495,
+        "goal_display_bytes": 2004,
+        "conditions": 5,
+        "fresh_conditions": 1,
+        "generation_accounting_ns": {
+          "min": 354375,
+          "median": 358167,
+          "max": 392875
+        },
+        "interning_validation_ns": {
+          "min": 146417,
+          "median": 148542,
+          "max": 161417
+        },
+        "encoding_ns": {
+          "min": 258833,
+          "median": 261500,
+          "max": 285750
+        }
+      }
+    ],
+    "timer_scope": {
+      "generation_accounting_ns": "Construct and force the input rule tree, node count and rendered payload accounting. Common goal setup and its forced display are outside the timer.",
+      "interning_validation_ns": "Same producer with fuel scan, structural interning and full typed boundary/support checker for every frontend.",
+      "encoding_ns": "Force encoded certificate UTF-8 bytes."
+    },
+    "excluded": "Semantic proof reconstruction/evaluation, Lean kernel checking, fresh condition proof generation, actual game execution, native execution, and common library code/proof sizes. These times cannot be compared directly to prior protocols with different phase boundaries.",
+    "interpretation": "The general normalizer and chain-specialized derivation have different input scope. Measurements compare these algorithms on the MAC chain; they do not isolate dimension as a causal factor or establish a statistical performance result."
+  },
+  "scope": [
+    "Tree-preserving translations concern this common local-rule presentation. No impossibility of advantages for other higher-dimensional proof systems is claimed.",
+    "No theorem of global minimum proof size, semantic minimum condition support, optimal repair cost or generic compiler completeness is supplied.",
+    "Compilation acceptance for the independently generated MAC tree and the general geometric tree is checked for stages 0..4. All-stages success of the producer is not proved.",
+    "The same existing attack, query order, retained state/trace and 1/256 bound are used. This step introduces no new cryptographic bound or native execution/time guarantee.",
+    "The specialized geometric frontend is the same ordinary derivation interpreted into the geometric model; exact agreement is intentional. Its timings are a control, not independent evidence of two proof-search algorithms.",
+    "Whole-certificate decoding, semantic/kernel proof-checking costs, a finite mixed higher basis including probabilistic and computational transformations, and full copy/discard integration remain open."
+  ],
+  "novelty": {
+    "status": "unconfirmed",
+    "finding": "In this local-rule library the presented tree translations preserve data exactly. The measured chain specialization benefits both ordinary and geometric proof construction. Neither sharing nor this specialization establishes an exclusive dimensional advantage.",
+    "next_evidence": "Formulate and prove a relative mixed coherence/repair theorem with explicit finite-overlap and termination hypotheses, then construct the required finite diagrams for a substantive cryptographic signature and compare against ordinary shared-lemma repair."
+  },
+  "literature_this_step": "Selected primary-source re-reading of Fritz-Liang (2023), Definition 2.1, Theorem 4.1, Section 6, Lemma 6.5 and Theorem 6.6; newly inspected Dupont-Malbos arXiv:1810.08184v3, Definitions 4.2.1/4.3.8/5.1.3, Theorems 5.2.3/6.2.2 and Corollary 6.2.4 with selected surrounding arguments. No full-paper or full-diagram reading, artifact reproduction, or literature exclusion is claimed. Scope and proposed theorem recorded separately.",
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4378,
+    "build_log": "/tmp/foundation-ordinary-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-ordinary-audit.log",
+    "audit_declarations": 2318,
+    "new_selected_declarations": 33,
+    "new_authored_theorems": 15,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "inputs": 6,
+        "mismatches": []
+      }
+    }
+  }
+}

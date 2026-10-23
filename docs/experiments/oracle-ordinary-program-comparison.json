@@ -1,0 +1,132 @@
+{
+  "kind": "ordinary_probability_program_expressivity_and_repair_cost_comparison",
+  "date": "2026-10-17",
+  "claims": {
+    "actual_program_law": "Foundation.Probability.SelectedCouplingGraph.OrdinaryProgram.law_eq",
+    "arbitrary_joint_existence_iff_ordinary_program": "Foundation.Probability.SelectedCouplingGraph.OrdinaryProgram.expressivity_iff",
+    "same_exact_repair_cost": "Foundation.Probability.SelectedCouplingGraph.OrdinaryProgram.repair_cost_iff",
+    "same_optimal_searched_repair": "Foundation.Probability.SelectedCouplingGraph.OrdinaryProgram.searched_repair",
+    "scope": "Uniform vertex bits and selected identity/complement edge joint laws. Existence of some joint, not equality to every prescribed higher-order or secret-retaining joint.",
+    "program": "One fair coin followed by a deterministic vector-valued return. No oracle queries. Deterministic output functions remain host terms as in the compared semantic model.",
+    "not_claimed": [
+      "One-bit sampling of arbitrary full tags",
+      "Zero-query MAC adversary",
+      "Constant proof byte size or CPU cost",
+      "No possible higher-dimensional advantage outside this fragment",
+      "Preserving an arbitrary complete original joint distribution",
+      "Proof-term repair removing old type references",
+      "Novelty established"
+    ]
+  },
+  "decision": {
+    "reject_as_high_dimensional_expressivity_claim": true,
+    "reject_as_exclusive_optimal_cost_claim": true,
+    "proof_size_advantage": "Unproven",
+    "implementation_contribution": "Verified minimum selected-edge repair for limited represented-cache MAC games; scholarly novelty unconfirmed"
+  },
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4280,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 1103,
+    "new_audit_declarations": [
+      "Foundation.Probability.SelectedCouplingGraph.OrdinaryProgram.sampler_no_queries",
+      "Foundation.Probability.SelectedCouplingGraph.OrdinaryProgram.law_eq",
+      "Foundation.Probability.SelectedCouplingGraph.OrdinaryProgram.realizes",
+      "Foundation.Probability.SelectedCouplingGraph.OrdinaryProgram.expressivity_iff",
+      "Foundation.Probability.SelectedCouplingGraph.OrdinaryProgram.repair_cost_iff",
+      "Foundation.Probability.SelectedCouplingGraph.OrdinaryProgram.searched_repair"
+    ],
+    "missing_audit_outputs": [],
+    "axiom_dependencies": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "temporary_build_log": "/tmp/foundation-ordinary-program-build.log",
+    "temporary_audit_log": "/tmp/foundation-ordinary-program-audit.log"
+  },
+  "source_sha256": {
+    "Foundation/Crypto/Semantics/Probability/SelectedCouplingOrdinaryProgram.lean": "f59ee12c60535279f152f6e863a83873887fc7d6906b5690e5e88e35ecf300be"
+  },
+  "unchanged_previous_inputs": [
+    {
+      "record": "docs/experiments/oracle-optimal-coupling-repair-search.json",
+      "source_count": 3,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-operational-representation-repair.json",
+      "source_count": 3,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-checked-coupling-repair-game.json",
+      "source_count": 4,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-selected-coupling-repair.json",
+      "source_count": 6,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-interaction-encoding-comparison.json",
+      "source_count": 4,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-interaction-replay-scope.json",
+      "source_count": 10,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-proof-edits-benchmark.json",
+      "source_count": 6,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-proof-edits-benchmark-replication.json",
+      "source_count": 6,
+      "mismatches": []
+    }
+  ],
+  "ordinary_baseline_dependencies": {
+    "local_dependency_count": 9,
+    "diagram_related_imports": []
+  },
+  "primary_source_review": [
+    {
+      "url": "https://arxiv.org/html/1804.04052",
+      "version": "v1",
+      "title": "Constraint-Based Synthesis of Coupling Proofs",
+      "assistant_reading_scope": [
+        "Main text sections 1-7",
+        "Appendices A-E"
+      ],
+      "reference_metadata_independently_checked": false,
+      "artifact_source_checked": false,
+      "artifact_rebuilt": false,
+      "cached_html_sha256": "ff4fa366ba09c253878e9efa4b0445bdf14fc5f698f713657becb1ad5fedbe0d"
+    },
+    {
+      "url": "https://arxiv.org/html/2310.06959v7",
+      "version": "v7",
+      "title": "Proof Repair across Quotient Type Equivalences",
+      "assistant_reading_scope": [
+        "Main text sections 1-8",
+        "Data availability statement"
+      ],
+      "reference_metadata_independently_checked": false,
+      "artifact_source_checked": false,
+      "artifact_rebuilt": false,
+      "cached_html_sha256": "fe5d7905900a69799b3f006008dec68927aa3dcb3e822c6a4f9342298967152f"
+    }
+  ],
+  "reading_limitations": [
+    "HTML displayed mathematics and TeX sometimes repeat. No complete PDF visual cross-check.",
+    "Reading is not an independent proof of source theorems or artifact reproduction.",
+    "No absence-of-prior-work conclusion from keyword searches."
+  ],
+  "ai_assistance": "Source reading, comparison, formalization, implementation, validation, and documentation used AI assistance."
+}

@@ -1,0 +1,27 @@
+{
+  "exact_rational_checks": {
+    "rational_control_points": 446,
+    "quantized_ciphers": 1784,
+    "exactly_preserved_dyadic_boundary_settings": 112,
+    "neighbor_parameter_pairs": 1024,
+    "neighbor_l1_radius": "1/128",
+    "sampler_fair_coin_bits": 8,
+    "analytic_neighbor_joint_TV_upper_bound": "17/256",
+    "largest_sampled_neighbor_joint_TV": "1/128",
+    "enumerated_bounded_sampler_outcomes": 2048,
+    "real_number_oracle_or_rejection_sampling_used": false
+  },
+  "fill_Lipschitz_bound_joint_key_ciphertext_TV": "6 times parameter l1 distance",
+  "quantized_neighbor_bound": "6h + 5/2^B",
+  "perfect_privacy_and_correctness_after_quantization": true,
+  "input_representation": "four rational coordinates of zero sum and l1 norm <=1; integer precision B>=1",
+  "Foundation_machine_realization_certified": false,
+  "topological_four_key_lower_bound_computer_verified": false,
+  "ordinary_cryptographic_security_alone_implies_neighbor_stability": false,
+  "Lean_checked": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/classical-bit-encryption-digital-fill.py": "ec309b74b9cbcbe531803e949cd5634c8d00ea525e5b5153c795b3647e496e3f",
+    "/Users/hiro/workspace/Foundation/docs/experiments/classical-bit-encryption-control.py": "667cdff66e5eb6ab6b56e49cc5c0d0f6e6d56197c14b08af9e123635b5e8de86"
+  }
+}

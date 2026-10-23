@@ -1,0 +1,172 @@
+{
+  "kind": "executable_optimal_coupling_repair_search",
+  "date": "2026-10-17",
+  "claims": {
+    "enumeration_size": "Foundation.Probability.SelectedCouplingGraph.Search.cuts_length",
+    "enumeration_complete": "Foundation.Probability.SelectedCouplingGraph.Search.cuts_complete",
+    "selected_certificate_sound": "Foundation.Probability.SelectedCouplingGraph.Search.solve_accepted",
+    "minimum_over_all_feasible_repairs": "Foundation.Probability.SelectedCouplingGraph.Search.solve_optimal",
+    "budget_complete_for_selected_joint_laws": "Foundation.Probability.SelectedCouplingGraph.Search.solve_budget_complete",
+    "failure_exactly_loop_request": "Foundation.Probability.SelectedCouplingGraph.Search.solve_none_iff",
+    "unbounded_fan_cost": "Foundation.Probability.SelectedCouplingGraph.Fan.SearchExample.always_finds",
+    "same_mac_adaptive_optimality": "Foundation.Symmetric.RandomFunctionMACRepairSearch.optimal_at_history",
+    "same_mac_operational_edges": "Foundation.Symmetric.RandomFunctionMACRepairSearch.operational_edges",
+    "same_mac_full_decoded_game": "Foundation.Symmetric.RandomFunctionMACRepairSearch.decoded_vertices",
+    "scope": "Natural edge weights; one required edge-label flip; identity/complement couplings; supplied finite list covering every vertex. MAC weights and requested edge may depend on signing history.",
+    "complexity": "Exactly 2^(input vertex-list length) enumerated assignments before filtering, possibly duplicated if the vertex list repeats. Exponential search, not a verified polynomial-time min-cut algorithm or an exact machine-time bound.",
+    "comparison": "Ordinary shared-lemma reasoning uses the same exhaustive search, candidate checker, cost and operational state maps. No exclusive higher-dimensional advantage established.",
+    "not_claimed": [
+      "Novelty established",
+      "Polynomial-time solver",
+      "Proof-size, checking-time or human-effort separation",
+      "General graph extraction from arbitrary program changes",
+      "Arbitrary stochastic coupling optimization",
+      "New native encoded-cache implementation or time bound",
+      "Finite completeness for all structural transformations"
+    ]
+  },
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4279,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 1097,
+    "new_audit_declarations": [
+      "Foundation.Probability.SelectedCouplingGraph.Search.cuts_length",
+      "Foundation.Probability.SelectedCouplingGraph.Search.cuts_cover",
+      "Foundation.Probability.SelectedCouplingGraph.Search.cuts_complete",
+      "Foundation.Probability.SelectedCouplingGraph.Search.solve_spec",
+      "Foundation.Probability.SelectedCouplingGraph.Search.solve_accepted",
+      "Foundation.Probability.SelectedCouplingGraph.Search.solve_optimal",
+      "Foundation.Probability.SelectedCouplingGraph.Search.solve_budget_complete",
+      "Foundation.Probability.SelectedCouplingGraph.Search.solve_none_iff",
+      "Foundation.Probability.SelectedCouplingGraph.Fan.SearchExample.covers",
+      "Foundation.Probability.SelectedCouplingGraph.Fan.SearchExample.enumeration_size",
+      "Foundation.Probability.SelectedCouplingGraph.Fan.SearchExample.selected_cost",
+      "Foundation.Probability.SelectedCouplingGraph.Fan.SearchExample.always_finds",
+      "Foundation.Probability.SelectedCouplingGraph.Fan.SearchExample.computed_three",
+      "Foundation.Probability.SelectedCouplingGraph.Fan.SearchExample.computed_weighted",
+      "Foundation.Probability.SelectedCouplingGraph.Fan.SearchExample.fixed_cut_weighted_cost",
+      "Foundation.Probability.SelectedCouplingGraph.Fan.SearchExample.computed_impossible_loop",
+      "Foundation.Symmetric.RandomFunctionMACRepairSearch.optimal_at_history",
+      "Foundation.Symmetric.RandomFunctionMACRepairSearch.operational_vertices",
+      "Foundation.Symmetric.RandomFunctionMACRepairSearch.decoded_vertices",
+      "Foundation.Symmetric.RandomFunctionMACRepairSearch.operational_edges"
+    ],
+    "missing_audit_outputs": [],
+    "axiom_dependencies": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "temporary_build_log": "/tmp/foundation-search-build.log",
+    "temporary_audit_log": "/tmp/foundation-search-audit.log"
+  },
+  "source_sha256": {
+    "Foundation/Crypto/Semantics/Probability/SelectedCouplingSearch.lean": "9832595c3a232b6253c5b0fb6419d1b33dadfc99bcae6459f95cc067dd45b7dd",
+    "Foundation/Examples/SelectedCouplingSearch.lean": "bda53827cb0a7e34203bb6289cbc2a34090178bbf4cfc95b72088f7437aade3b",
+    "Foundation/Examples/RandomFunctionMACRepairSearch.lean": "fc0c6a1505079981b994384e79877819427b09f8a814b119fd6d842d10565c1d"
+  },
+  "unchanged_previous_inputs": [
+    {
+      "record": "docs/experiments/oracle-operational-representation-repair.json",
+      "source_count": 3,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-checked-coupling-repair-game.json",
+      "source_count": 4,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-selected-coupling-repair.json",
+      "source_count": 6,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-interaction-encoding-comparison.json",
+      "source_count": 4,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-interaction-replay-scope.json",
+      "source_count": 10,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-proof-edits-benchmark.json",
+      "source_count": 6,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-proof-edits-benchmark-replication.json",
+      "source_count": 6,
+      "mismatches": []
+    }
+  ],
+  "computational_examples": {
+    "method": "decide_cbv",
+    "fan_three": {
+      "cost": 3
+    },
+    "weighted_triangle": {
+      "left_weight": 2,
+      "right_weight": 7,
+      "requested_edge_weight": 0,
+      "solver_cost": 2,
+      "fixed_cut_cost": 7
+    },
+    "loop_request": "none"
+  },
+  "baseline_dependencies": {
+    "Foundation/Crypto/Semantics/Probability/SelectedCouplingSearch.lean": {
+      "local_dependency_count": 7,
+      "diagram_related_imports": []
+    },
+    "Foundation/Examples/SelectedCouplingSearch.lean": {
+      "local_dependency_count": 9,
+      "diagram_related_imports": []
+    }
+  },
+  "primary_sources": [
+    {
+      "url": "https://homes.cs.washington.edu/~djg/papers/pldi21pumpkin.pdf",
+      "title": "Proof Repair across Type Equivalences",
+      "reading_scope": [
+        "Section 1",
+        "Section 3",
+        "Section 4.1"
+      ],
+      "complete_paper_read": false,
+      "artifact_compared_or_rebuilt": false
+    },
+    {
+      "url": "https://arxiv.org/html/1804.04052",
+      "title": "Constraint-Based Synthesis of Coupling Proofs",
+      "reading_scope": [
+        "Section 1",
+        "Section 4"
+      ],
+      "complete_paper_read": false,
+      "artifact_compared_or_rebuilt": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2310.06959v7",
+      "title": "Proof Repair across Quotient Type Equivalences",
+      "reading_scope": [
+        "Bibliographic metadata",
+        "Abstract"
+      ],
+      "complete_paper_read": false,
+      "artifact_compared_or_rebuilt": false
+    }
+  ],
+  "search_queries": [
+    "\"coupling\" \"proof repair\" cryptographic",
+    "\"coupling\" \"proof synthesis\" \"optimal\" verification",
+    "\"cryptographic\" \"proof maintenance\" repair games",
+    "\"Proof Repair across Type Equivalences\" arxiv",
+    "\"Constraint-Based Synthesis of Coupling Proofs\" arxiv"
+  ],
+  "novelty_status": "Unconfirmed. Automatic synthesis/transport is prior work. Exact inclusion of this history-dependent minimum repair contract has not been resolved.",
+  "ai_assistance": "Formalization, implementation, source checking, verification, and documentation used AI assistance."
+}

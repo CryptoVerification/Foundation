@@ -1,0 +1,207 @@
+{
+  "kind": "actual_oracle_program_effects_and_retained_continuation_reuse",
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Semantics/Oracle/QueryFootprint.lean": "43c2cfc4043bcb96e75c331c4b3b81e2929c234429c8b40e47e901d5c6194b83",
+    "Foundation/Crypto/Semantics/Oracle/RepresentationLocality.lean": "990f4d510d1a9dbed737a853e38be167784d3289cb78a5ecac30e0b7030f46b3",
+    "Foundation/Crypto/Semantics/Oracle/QueryPrefix.lean": "45a47567dac74c19ebd664dbdccaa8ca09dbb59b4b084d587a2f6db698e7963b",
+    "Foundation/Examples/RandomFunctionMACQueryFootprint.lean": "4c4ac1e33e6492a5c2bd2440377b9eafdb2b6cad389f43aaae460aaeb26ceecc"
+  },
+  "public_theorems": [
+    "CryptoOracle.Program.continuation_subset",
+    "CryptoOracle.Program.footprintAt_subset",
+    "CryptoOracle.Program.BoundedQueries.footprint_positions",
+    "CryptoOracle.Program.footprint_trace",
+    "CryptoOracle.Program.run_congr_on_footprint",
+    "CryptoOracle.Program.affectedPositions_mem",
+    "CryptoOracle.Program.BoundedQueries.unaffected_iff",
+    "CryptoOracle.RandomOracle.Representation.oracle_congr_at",
+    "CryptoOracle.RandomOracle.Representation.run_congr_on_footprint",
+    "CryptoOracle.RandomOracle.Representation.run_unaffected_patch",
+    "CryptoOracle.RandomOracle.Representation.run_unaffected_positions",
+    "CryptoOracle.RandomOracle.Representation.table_eq_of_agree",
+    "CryptoOracle.RandomOracle.Representation.encoded_run_unaffected_patch",
+    "CryptoOracle.RandomOracle.Representation.plain_entries_in_set",
+    "CryptoOracle.Program.pauseAfter_resume",
+    "CryptoOracle.Program.pauseAfter_continuation",
+    "CryptoOracle.Program.pauseAfter_bounded",
+    "CryptoOracle.Program.pauseAfter_footprintAt",
+    "CryptoOracle.Program.pauseAfter_unaffected",
+    "CryptoOracle.Program.pauseAfter_representation_patch",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.first_position",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.second_position",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.repeated_position",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.verification_position",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.no_fifth_position",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.signing_positions",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.signing_footprint",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.target_bounded",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.target_footprint",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.verification_only",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.unused_patch",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.codec_agrees",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.signing_patch_unaffected",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.represented_signing_law",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.retained_signing_patch",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.unused_codec_changed",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.unused_encoding_patch",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.full_game_law",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.full_storage_relation",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.full_games_distinct",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.decoded_full_game",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.first_three_unaffected",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.extracted_prefix_patch",
+    "Foundation.Symmetric.RandomFunctionMACQueryFootprint.resume_extracted_prefix"
+  ],
+  "claims": {
+    "all_recorded_queries_in_extracted_set": "CryptoOracle.Program.footprint_trace",
+    "complete_outcome_equality_from_local_kernels": "CryptoOracle.Program.run_congr_on_footprint",
+    "bounded_position_coverage": "CryptoOracle.Program.BoundedQueries.footprint_positions",
+    "empty_extracted_effects_is_syntactic_disjointness": "CryptoOracle.Program.BoundedQueries.unaffected_iff",
+    "actual_encoded_oracle_unchanged": "CryptoOracle.RandomOracle.Representation.run_unaffected_positions",
+    "exact_original_syntax_after_resume": "CryptoOracle.Program.pauseAfter_resume",
+    "actual_full_distribution_after_resume": "CryptoOracle.Program.pauseAfter_continuation",
+    "retained_prefix_locality": "CryptoOracle.Program.pauseAfter_representation_patch",
+    "mac_affected_last_position": "Foundation.Symmetric.RandomFunctionMACQueryFootprint.verification_only",
+    "mac_genuinely_changed_unused_codec": "Foundation.Symmetric.RandomFunctionMACQueryFootprint.unused_codec_changed",
+    "mac_unused_patch_raw_equality": "Foundation.Symmetric.RandomFunctionMACQueryFootprint.unused_encoding_patch",
+    "mac_retained_plain_history_joint": "Foundation.Symmetric.RandomFunctionMACQueryFootprint.retained_signing_patch",
+    "mac_original_program_prefix_reused": "Foundation.Symmetric.RandomFunctionMACQueryFootprint.extracted_prefix_patch",
+    "mac_resume_original_continuation": "Foundation.Symmetric.RandomFunctionMACQueryFootprint.resume_extracted_prefix",
+    "mac_raw_full_games_distinct": "Foundation.Symmetric.RandomFunctionMACQueryFootprint.full_games_distinct",
+    "mac_decoded_full_games_equal_original": "Foundation.Symmetric.RandomFunctionMACQueryFootprint.decoded_full_game"
+  },
+  "model": {
+    "program": "Existing Program syntax with done, adaptive query and fair local coin nodes.",
+    "effects": "Finite response type; union over ALL syntactic responses, including impossible ones.",
+    "mac_inputs_by_zero_based_query_position": {
+      "0": [
+        0,
+        1
+      ],
+      "1": [
+        2,
+        3
+      ],
+      "2": [
+        0,
+        1
+      ],
+      "3": [
+        7
+      ]
+    },
+    "changed_7_affected_positions": [
+      3
+    ],
+    "changed_6_affected_positions": [],
+    "initial_state": "Locality compares a COMMON raw stored cache. Separately encoded initial tables require codec agreement on their entries.",
+    "pause": "Typed syntax after at most n queries; result retains original remaining Program, actual cache and ordered prefix transcript.",
+    "representation": "Fin 256 public responses and Bits 8 stored responses; operational encode on insertion, decode on lookup.",
+    "retained_signing_joint": "Same plain SigningOutcome and represented cache. This new theorem alone does not add the original eager secret function."
+  },
+  "comparison": {
+    "generic_modules": "Ordinary probability induction and shared lemmas; no diagram dependencies.",
+    "new_diagram_specific_validator": false,
+    "higher_dimensional_advantage_shown": false,
+    "do_not_transfer_previous_acceptance_equality": "Previous all-script equality concerned visibility annotations, not this new actual program extractor."
+  },
+  "limits": [
+    "Extractor may enumerate all finite response branches; no non-enumeration or polynomial-time bound.",
+    "Effects are conservative; no minimal semantic dependency set or completeness for semantic equivalence.",
+    "No proof-term byte count, elapsed checking-time benchmark or manual repair effort measurement.",
+    "No physical machine pause/resume implementation or new time bound for represented oracle.",
+    "No new cryptographic success-probability bound.",
+    "No automatic extraction of arbitrary state correspondences, selected couplings, or polygraphic cells from arbitrary games.",
+    "No finite complete basis for horizontal composition, copying and discarding."
+  ],
+  "literature": [
+    {
+      "title": "SSProve official getting-started documentation",
+      "url": "https://github.com/SSProve/ssprove/blob/main/DOC.md",
+      "read_scope": "Selected sections: valid code, locations and interfaces; package algebra; relational reflexivity; remembering values after memory reads. Not entire documentation.",
+      "paper_url": "https://eprint.iacr.org/2021/397.pdf",
+      "paper_access_this_turn": "web tool retrieval failed; no full-paper reading or artifact rebuild claimed",
+      "use": "Prior work on modular probabilistic cryptographic proofs with state/import restrictions. Exact equivalence with the new extractor not established."
+    }
+  ],
+  "novelty": "Unconfirmed. This is implemented actual-game locality, not an established exclusive high-dimensional theorem.",
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4294,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 1240,
+    "new_public_declarations": 44,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "standard_axioms_allowlist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "own_new_warnings": [],
+    "neutral_dependency_modules": [
+      "Foundation.Crypto.Semantics.Oracle.Composition",
+      "Foundation.Crypto.Semantics.Oracle.Program",
+      "Foundation.Crypto.Semantics.Oracle.QueryFootprint",
+      "Foundation.Crypto.Semantics.Oracle.QueryMap",
+      "Foundation.Crypto.Semantics.Oracle.QueryPrefix",
+      "Foundation.Crypto.Semantics.Oracle.RandomOracle",
+      "Foundation.Crypto.Semantics.Oracle.RandomOracleRepresentation",
+      "Foundation.Crypto.Semantics.Oracle.RepresentationLocality",
+      "Foundation.Crypto.Semantics.Oracle.StateMap",
+      "Foundation.Crypto.Semantics.Probability.Comp",
+      "Foundation.Crypto.Semantics.Probability.Facts"
+    ],
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      }
+    }
+  }
+}

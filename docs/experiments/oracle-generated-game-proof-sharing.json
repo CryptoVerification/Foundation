@@ -1,0 +1,480 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Logic/SharedInferenceCompilation.lean": "c38cf48650668c81c51214c7add8dd8b0ca85ed3b6d8c84bbb6a155455c7bc16",
+    "Foundation/Crypto/Logic/Polygraph/GameProofEncoding.lean": "c181ac64a26fe165b127789c334c488a9e65a8e6c3d610c32720ce0e3fceca43",
+    "Foundation/Crypto/Logic/Polygraph/GameProofPresentation.lean": "88d65a490bef4c02d5f835dca3073c96515ccd7c6b099769988aacce37ed4dd6",
+    "Foundation/Crypto/Logic/Polygraph/GameProofShared.lean": "c7b0a3438e43da5b5e411ce4c63baaf7ede2c0c66b8b3c685127d00cd45acc2b",
+    "Foundation/Examples/GameProofGeneratedSharedMAC.lean": "6652e5ac90d2f61abb99ba729def5748dd92c0159c444ecea382c163d7259ae3",
+    "docs/experiments/bench_generated_game_proofs.lean": "e6822eb66eb681f8662cb2fe1b7ce4bca43693a473f7f233e2b7d8adc838f310"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Claim",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Claim.left",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Claim.mk",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Claim.right",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Claim.source",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Claim.support",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Claim.target",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Rule",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Rule.assoc",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Rule.leftUnit",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Rule.refl",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Rule.rightUnit",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Rule.root",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Rule.seq",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Rule.symm",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Rule.trans",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified.accepted",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified.computational",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified.data",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified.diagram",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified.mk",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified.probabilistic",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified.repaired",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.checked",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.compile",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.compileMode",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.geometric",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.instDecidableEqClaim",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.instDecidableEqRule",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.ordinary",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.render",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.theory",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.toTree",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.Output",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.compile",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.compileMode",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.ordinary_comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.rejectsMissingInterior",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.repaired",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.stats",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.PackedPlan",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.decode_shape",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.shape",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.shape_injective",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.PlanShape",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.PlanShape.atom",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.PlanShape.decode",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.PlanShape.identity",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.PlanShape.seq",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.instDecidableEqPlan",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.instDecidableEqPlanShape",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.instReprPlanShape",
+    "Foundation.Logic.SharedInference.compile",
+    "Foundation.Logic.SharedInference.compileChecked",
+    "Foundation.Logic.SharedInference.compileChecked_accepts",
+    "Foundation.Logic.SharedInference.compileChecked_sound",
+    "Foundation.Logic.SharedInference.compileFuel",
+    "Foundation.Logic.SharedInference.compileUnshared",
+    "Foundation.Logic.SharedInference.intern"
+  ],
+  "public_theorems": [
+    "Foundation.Logic.SharedInference.compileChecked_accepts",
+    "Foundation.Logic.SharedInference.compileChecked_sound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.decode_shape",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.shape_injective",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.checked",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified.diagram",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified.probabilistic",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified.computational",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.CellPresentation.Verified.repaired",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.ordinary_comparison",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.GeneratedSharedMAC.repaired"
+  ],
+  "claims": [
+    "Directed plans admit executable structural equality via an untyped shape decoder. Decoding their encoding returns the original typed plan; equal shapes imply equal indexed plans.",
+    "Every Cell constructor has a finite-arity inference rule. Judgments include both typed boundary plans AND the exact whole-diagram declared condition support. No new higher root is introduced.",
+    "Structural interning compares actual rule payloads and parent indices, not rendered strings. A separate unshared producer is also checked by the same checker.",
+    "A successful compilation returns a Verified certificate with its actual checker acceptance proof at the original boundary and support. Soundness is independent of producer correctness.",
+    "Accepted shared data has a geometric interpretation with exactly the recorded support, a probabilistic comparison under that finite support, and a computational certified-reduction comparison under a checked corresponding model.",
+    "Finite-support cached-condition repair reconstructs the probabilistic comparison in the checked updated model.",
+    "The same typed certificate also has an ordinary conditional-kernel/loss-equality interpretation when the model conditions are supplied globally; this baseline does not retain source Cell syntax in its carrier.",
+    "Actual MAC terminalCoherence outputs for stages 0 through 4 are compiled and accepted, with boundary-plan and condition metadata included. The previous artificial repeated-comparison family is not substituted."
+  ],
+  "runtime_checks": {
+    "shared_MAC_stages": [
+      [
+        0,
+        48,
+        24,
+        29,
+        25709,
+        1,
+        0
+      ],
+      [
+        1,
+        89,
+        55,
+        69,
+        74531,
+        2,
+        1
+      ],
+      [
+        2,
+        130,
+        88,
+        109,
+        135058,
+        3,
+        1
+      ],
+      [
+        3,
+        171,
+        121,
+        149,
+        206891,
+        4,
+        1
+      ],
+      [
+        4,
+        212,
+        154,
+        189,
+        290255,
+        5,
+        1
+      ]
+    ],
+    "fields": [
+      "stage",
+      "source tree nodes",
+      "shared rows",
+      "references",
+      "rendered UTF-8 bytes",
+      "whole support count",
+      "fresh count for changed={1}"
+    ],
+    "missing_interior_condition_rejected": true,
+    "ill_typed_plan_shape_rejected": true,
+    "method": "guarded compiled evaluation, not an all-stages producer completeness theorem"
+  },
+  "experiment": {
+    "driver": "docs/experiments/bench_generated_game_proofs.lean",
+    "command": "nix develop path:. -c lake env lean --run docs/experiments/bench_generated_game_proofs.lean",
+    "csv": "docs/experiments/oracle-generated-game-proof-timing.csv",
+    "csv_sha256": "aa4b9a35455cda638af5a7480cf094adf62e2f744f9a617f543fe31bc93e0471",
+    "stdout": "/tmp/foundation-generated-game-benchmark.csv",
+    "stderr": "/tmp/foundation-generated-game-benchmark.stderr",
+    "summary": {
+      "rows": [
+        {
+          "stage": 0,
+          "source_tree_nodes": 48,
+          "shared": {
+            "rows": 24,
+            "references": 29,
+            "encoded_bytes": 25709,
+            "lowering_validation_ns": {
+              "min": 428958,
+              "median": 438958,
+              "max": 984500
+            }
+          },
+          "unshared": {
+            "rows": 48,
+            "references": 47,
+            "encoded_bytes": 44314,
+            "lowering_validation_ns": {
+              "min": 279625,
+              "median": 290333,
+              "max": 296250
+            }
+          }
+        },
+        {
+          "stage": 1,
+          "source_tree_nodes": 89,
+          "shared": {
+            "rows": 55,
+            "references": 69,
+            "encoded_bytes": 74531,
+            "lowering_validation_ns": {
+              "min": 1204250,
+              "median": 1224125,
+              "max": 1257875
+            }
+          },
+          "unshared": {
+            "rows": 89,
+            "references": 88,
+            "encoded_bytes": 96721,
+            "lowering_validation_ns": {
+              "min": 642084,
+              "median": 651458,
+              "max": 659792
+            }
+          }
+        },
+        {
+          "stage": 2,
+          "source_tree_nodes": 130,
+          "shared": {
+            "rows": 88,
+            "references": 109,
+            "encoded_bytes": 135058,
+            "lowering_validation_ns": {
+              "min": 2274208,
+              "median": 2311250,
+              "max": 2385167
+            }
+          },
+          "unshared": {
+            "rows": 130,
+            "references": 129,
+            "encoded_bytes": 160756,
+            "lowering_validation_ns": {
+              "min": 1073583,
+              "median": 1105333,
+              "max": 1167291
+            }
+          }
+        },
+        {
+          "stage": 3,
+          "source_tree_nodes": 171,
+          "shared": {
+            "rows": 121,
+            "references": 149,
+            "encoded_bytes": 206891,
+            "lowering_validation_ns": {
+              "min": 3735125,
+              "median": 3753000,
+              "max": 3865917
+            }
+          },
+          "unshared": {
+            "rows": 171,
+            "references": 170,
+            "encoded_bytes": 236646,
+            "lowering_validation_ns": {
+              "min": 1581958,
+              "median": 1639375,
+              "max": 1662375
+            }
+          }
+        },
+        {
+          "stage": 4,
+          "source_tree_nodes": 212,
+          "shared": {
+            "rows": 154,
+            "references": 189,
+            "encoded_bytes": 290255,
+            "lowering_validation_ns": {
+              "min": 5507167,
+              "median": 5530916,
+              "max": 5599833
+            }
+          },
+          "unshared": {
+            "rows": 212,
+            "references": 211,
+            "encoded_bytes": 324626,
+            "lowering_validation_ns": {
+              "min": 2230250,
+              "median": 2245042,
+              "max": 2305334
+            }
+          }
+        }
+      ],
+      "samples_per_case": 3,
+      "row_count": 30,
+      "machine": {
+        "system": "Darwin",
+        "release": "25.3.0",
+        "architecture": "arm64"
+      }
+    },
+    "design": "3 sequential samples x 5 actual MAC stages x 2 lowering modes = 30 rows. Mode order alternates by sample; same source Cell per stage/sample. Exploratory single-host measurements, not a statistical performance claim.",
+    "timer_scope": {
+      "generation_accounting_ns": "Generate/force source Cell tree and full rendered rule-payload accounting. This value is measured once per stage/sample and repeated in both mode rows; do not sum duplicates.",
+      "lowering_validation_ns": "Includes Cell-to-tree lowering, producer fuel-count pass, structural interning or unshared emission, and full typed boundary/support validation.",
+      "encoding_ns": "Force rendered UTF-8 certificate size. Semantic proof reconstruction, Lean kernel checking, condition proof generation, and game/native execution are outside timers."
+    },
+    "payload_scope": "Full rule-argument plans, condition support sets, reference indices and output index are rendered. Common layout/relator and semantic-lemma library, code and proof sizes of those libraries, game/model parameters, and concrete syntax of the final goal are external. Rendering is not a full serialized-file decoder.",
+    "negative_observation": "At stage 3 shared output shrank 171 to 121 rows and 236646 to 206891 bytes, but lowering+validation median increased from 1.639375 ms to 3.753 ms. Linear interning search and payload comparisons are included; no exclusive causal profiling or speedup claimed."
+  },
+  "scope": [
+    "The exporter traverses every Cell constructor but generic producer success, checker acceptance for all source Cells, and exact source-Cell syntax recovery are not proved. Only successful checked outputs have the stated unconditional soundness guarantee.",
+    "Default fuel is source tree node count plus one. No polynomial generation, minimality, optimal sharing, or total proof-size bound is established.",
+    "Typed payload data are checked; the plan-shape decoder has a left-inverse theorem. A text/binary decoder and whole-certificate serialization round-trip theorem remain open.",
+    "Condition support is conservative declared support, preserved exactly. No condition extraction from arbitrary proof terms, semantic minimality, or optimal repair algorithm.",
+    "The ordinary model in this step assumes all local model conditions; finite-support repair is proved via the reconstructed geometric value. No independent ordinary finite-support repair generator or total-cost benchmark is supplied.",
+    "The MAC attack and retained source/target states and trace are unchanged; existing 1/256 security bound and semantics are reused, without new native execution/time claims.",
+    "Shared and unshared are two representations of the SAME generated diagram. They are not geometric versus ordinary independent proof-generation methods. Both semantic interpretations may use the same shared certificate.",
+    "Only stages 0..4 were measured. The observed 48+41*stage source count is a checked finite-sample observation, not an all-stages theorem.",
+    "No general finite mixed higher basis, full copy/discard extension, exclusive higher-dimensional size/time advantage, or publication novelty is claimed."
+  ],
+  "novelty": {
+    "status": "unconfirmed",
+    "finding": "Actual generated diagrams can be lowered to checked shared data while retaining interior support and both boundary plans. Sharing reduces the measured payload but is also available to the ordinary semantic interpretation, and the current producer is slower on these inputs.",
+    "next_evidence": "Independently generate ordinary comparison/repair certificates under the same library and sharing permissions; include semantic proof/kernel checking and condition repair costs. Resolve generic exporter completeness and serialized input checking."
+  },
+  "literature_this_step": "No new external theorem/artifact review; all positive and negative findings are scoped to the checked local implementation and measurements.",
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4374,
+    "build_log": "/tmp/foundation-generated-sharing-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-generated-sharing-audit.log",
+    "audit_declarations": 2285,
+    "new_selected_declarations": 61,
+    "new_authored_theorems": 12,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "inputs": 4,
+        "mismatches": []
+      }
+    }
+  }
+}

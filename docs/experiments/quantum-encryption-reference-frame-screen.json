@@ -1,0 +1,38 @@
+{
+  "covariance_commutant": {
+    "rotations": 24,
+    "affine_unknowns": 12,
+    "constraint_rank": 11,
+    "solution_dimension": 1,
+    "solution": "A=lambda I3, t=0"
+  },
+  "exact_rational_checks": {
+    "Pauli_channel_composition_and_recovery_checks": 2401,
+    "ensembles_checked": 896,
+    "key_counts": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "attained_privacy_budget_settings": 73,
+    "exact_privacy_two_key_recovery_error": "2/3",
+    "privacy_budget_at_frontier_transition": "1/12"
+  },
+  "mathematical_frontier": "For all-rotation-covariant qubit encoder branches, arbitrary qubit decoders, finitely many keys, privacy budget 0<=epsilon<=3/4, and maximum positive-key recovery error: delta_min = min(2/3, 3/4-epsilon). Two keys suffice to attain the frontier.",
+  "averaged_recovery_channel_frontier": "Half diamond distance of sum_k p_k decoder_k encoder_k from identity: delta_av_min = 1/2 - (2/3) epsilon. Two keys suffice.",
+  "branch_covariance_required": true,
+  "averaged_ciphertext_covariance_alone_is_sufficient": false,
+  "arbitrary_quantum_decoders_covered_by_analytic_twirl_argument": true,
+  "analytic_frontier_computer_verified": false,
+  "reference_frame_resource_or_larger_ciphertext_covered": false,
+  "higher_categorical_necessity_demonstrated": false,
+  "Lean_checked": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/quantum-encryption-reference-frame-screen.py": "6c8452462f8d79225dee8d9e55fb1ee208086a3a9064e7da83bd578ad7068234"
+  }
+}

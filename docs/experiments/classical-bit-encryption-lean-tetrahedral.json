@@ -1,0 +1,84 @@
+{
+  "target_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitTetrahedralBoundary",
+  "targeted_lake_build_passed": true,
+  "lean_toolchain": "leanprover/lean4:v4.33.0",
+  "axioms_per_theorem": {
+    "coordinate_separates_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "sharpTetrahedron_face_avoids_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "sharpEdgeMidpoint_coordinates": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "sharpEdgeMidpoint_mass": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "sharpEdgeMidpoint_normalized": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "interpolate_sharp_midpoint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "sharp_boundary_midpoint_nonunit": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "sharp_boundary_midpoint_normalized": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "sharp_boundary_conditional_edge": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "sorry_or_additional_axioms_in_listed_theorems": false,
+  "all_proper_tetrahedron_faces_avoid_zero": true,
+  "certificate": "a coordinate absent from the face is identically 1/6 on its convex hull",
+  "actual_boundary_midpoint_interpolation_checked": true,
+  "raw_midpoint_l1_mass": "2/3",
+  "normalized_midpoint_coordinates": [
+    "-1/4",
+    "-1/4",
+    "1/4",
+    "1/4"
+  ],
+  "raw_unit_mass_boundary_requirement_demonstrably_unnecessary": true,
+  "conditional_edge_api_application_checked": true,
+  "conditional_edge_application_proves_boundary_nonnullity": false,
+  "concrete_boundary_nonnullity_checked": false,
+  "probabilities_include_nondyadic_one_sixth": true,
+  "Foundation_bounded_machine_realization_checked": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/classical-bit-encryption-lean-tetrahedral.py": "6271b4da11aebf0d6a40ad1907faf315ac70b406b282ef156baed01f02b5588f",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitTetrahedralBoundary.lean": "b15d168127860a85496dd6c00adbea68deaa148dc1aab647a34bd9d90ab3bbfa",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitNormalizedBoundary.lean": "f20e61ad98612e5aa5dab5610ba7e15ec684f982cc724c5fb642ce9671e5625b",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitSimplicialInterpolation.lean": "d1124720e2e06c81ea1c478a00259c866e3eb01ed29ffd9a4697dc6aae8de323",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitBoundaryCertificate.lean": "965e273b18c96a70e8d4f80e540bf80c70e42626edcbf12fc76cf1bdf9dd5c43",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitConvexCertificate.lean": "61a9d1ba588d70e16fb4c75cf187baf6616de2e9eae0e8310acfecd804946950",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitSimplexCertificate.lean": "e5ebeb7ca2c9ed2b37e47e4a654b8d010cd405bc9312f3b6989084e34b3a741c",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepairStability.lean": "d83db5cc70fbda328ccd400f5232f7aa6b3ea9058da0f3b5b02da2d673e7f50b",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepair.lean": "459aa24b50357f54d78ce8faf35ebbf96164a3971bc6b6aebd19524f69921a07",
+    "/Users/hiro/workspace/Foundation/lakefile.toml": "b537fcdfd0e540cfd6f310d771aff1eb8fc24ab107a421b02cfa42cf131a9411",
+    "/Users/hiro/workspace/Foundation/lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
+    "/Users/hiro/workspace/Foundation/lake-manifest.json": "ef3799fa73ec244f1db2063a084e5c03ab1196e16604e883952f870179bff929"
+  }
+}

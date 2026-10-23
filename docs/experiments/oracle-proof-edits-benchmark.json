@@ -1,0 +1,215 @@
+{
+  "scope": "client checking with common precompiled libraries and unrestricted lemma sharing",
+  "excluded": [
+    "library construction",
+    "kernel proof-term size",
+    "human proof-maintenance effort",
+    "native machine runtime",
+    "asymptotic separation",
+    "novelty judgment"
+  ],
+  "platform": "macOS-26.3.1-arm64-arm-64bit-Mach-O",
+  "lean": "Lean (version 4.33.0, arm64-apple-darwin24.6.0, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+  "git_head": "620ad73752b9d804382427805bb8883f277ee177",
+  "source_sha256": {
+    "Foundation/Crypto/Logic/Polygraph/OracleProofEdits.lean": "51478c5a6906d866165c3b70ec9d5d5d6181dc2906001ed27e5f9f705f7cc40a",
+    "Foundation/Crypto/Logic/Polygraph/OracleLocalEdits.lean": "f2ae45a5b455c9a1219ca47a653280840bbd6535a68ccfc215be1985ea77316e",
+    "Foundation/Constructions/Symmetric/RandomFunctionMACProofSyntax.lean": "2380c040b49d52617eb7bc31fb53b0cc0ed7fa2d2b98043e172c267fe46d5eda",
+    "Foundation/Constructions/Symmetric/RandomFunctionMACProofEdits.lean": "32ea11cbd2f3393421422da12bc23e16fd56ad9fd3ab7bb428d56dddc732a1d0",
+    "Foundation/Examples/OracleProofEditsBaseline.lean": "5db0c66ff0d41b413a28a742119e0783946a3db8ee1e3158cf3d3dcdec52cbe4",
+    "Foundation/Examples/ScheduleCertificate.lean": "e1514474e49d54e451d76008b2f1e8f52f63a9e77973479d7631423f80d77b25"
+  },
+  "unmeasured_warmups_per_client": 1,
+  "clients": {
+    "ordinary-0": {
+      "source": "import Foundation.Examples.OracleProofEditsBaseline\nimport Foundation.Constructions.Symmetric.RandomFunctionMACProofEdits\nimport Foundation.Examples.ScheduleCertificate\nopen CryptoOracle CryptoOracle.ProofEdits Foundation.Symmetric.RandomFunctionMACProofEdits\ndef padded : Nat \u2192 Program (Fin 8) (Fin 256) (Fin 8 \u00d7 Fin 256)\n  | 0 => Foundation.Symmetric.RandomFunctionMACSchedules.Examples.attack\n  | n + 1 => .query 0 (fun _ => padded n)\ntheorem check :\n    (before (padded 0)).run RandomOracle.oracle [] [] =\n      (cached (padded 0)).run RandomOracle.oracle [] [] :=\n  Baseline.cached_eq (padded 0) RandomOracle.oracle lazy_cache_laws [] []\n",
+      "bytes": 646,
+      "proof_application_lines": 1
+    },
+    "elementary-0": {
+      "source": "import Foundation.Examples.OracleProofEditsBaseline\nimport Foundation.Constructions.Symmetric.RandomFunctionMACProofEdits\nimport Foundation.Examples.ScheduleCertificate\nopen CryptoOracle CryptoOracle.ProofEdits Foundation.Symmetric.RandomFunctionMACProofEdits\ndef padded : Nat \u2192 Program (Fin 8) (Fin 256) (Fin 8 \u00d7 Fin 256)\n  | 0 => Foundation.Symmetric.RandomFunctionMACSchedules.Examples.attack\n  | n + 1 => .query 0 (fun _ => padded n)\ntheorem check :\n    (before (padded 0)).run RandomOracle.oracle [] [] =\n      (cached (padded 0)).run RandomOracle.oracle [] [] :=\n  (localCachedRoutes (padded 0)).sound RandomOracle.oracle lazy_cache_laws [] [] (knows_nil [])\n",
+      "bytes": 668,
+      "proof_application_lines": 1
+    },
+    "ordinary-4": {
+      "source": "import Foundation.Examples.OracleProofEditsBaseline\nimport Foundation.Constructions.Symmetric.RandomFunctionMACProofEdits\nimport Foundation.Examples.ScheduleCertificate\nopen CryptoOracle CryptoOracle.ProofEdits Foundation.Symmetric.RandomFunctionMACProofEdits\ndef padded : Nat \u2192 Program (Fin 8) (Fin 256) (Fin 8 \u00d7 Fin 256)\n  | 0 => Foundation.Symmetric.RandomFunctionMACSchedules.Examples.attack\n  | n + 1 => .query 0 (fun _ => padded n)\ntheorem check :\n    (before (padded 4)).run RandomOracle.oracle [] [] =\n      (cached (padded 4)).run RandomOracle.oracle [] [] :=\n  Baseline.cached_eq (padded 4) RandomOracle.oracle lazy_cache_laws [] []\n",
+      "bytes": 646,
+      "proof_application_lines": 1
+    },
+    "elementary-4": {
+      "source": "import Foundation.Examples.OracleProofEditsBaseline\nimport Foundation.Constructions.Symmetric.RandomFunctionMACProofEdits\nimport Foundation.Examples.ScheduleCertificate\nopen CryptoOracle CryptoOracle.ProofEdits Foundation.Symmetric.RandomFunctionMACProofEdits\ndef padded : Nat \u2192 Program (Fin 8) (Fin 256) (Fin 8 \u00d7 Fin 256)\n  | 0 => Foundation.Symmetric.RandomFunctionMACSchedules.Examples.attack\n  | n + 1 => .query 0 (fun _ => padded n)\ntheorem check :\n    (before (padded 4)).run RandomOracle.oracle [] [] =\n      (cached (padded 4)).run RandomOracle.oracle [] [] :=\n  (localCachedRoutes (padded 4)).sound RandomOracle.oracle lazy_cache_laws [] [] (knows_nil [])\n",
+      "bytes": 668,
+      "proof_application_lines": 1
+    },
+    "ordinary-16": {
+      "source": "import Foundation.Examples.OracleProofEditsBaseline\nimport Foundation.Constructions.Symmetric.RandomFunctionMACProofEdits\nimport Foundation.Examples.ScheduleCertificate\nopen CryptoOracle CryptoOracle.ProofEdits Foundation.Symmetric.RandomFunctionMACProofEdits\ndef padded : Nat \u2192 Program (Fin 8) (Fin 256) (Fin 8 \u00d7 Fin 256)\n  | 0 => Foundation.Symmetric.RandomFunctionMACSchedules.Examples.attack\n  | n + 1 => .query 0 (fun _ => padded n)\ntheorem check :\n    (before (padded 16)).run RandomOracle.oracle [] [] =\n      (cached (padded 16)).run RandomOracle.oracle [] [] :=\n  Baseline.cached_eq (padded 16) RandomOracle.oracle lazy_cache_laws [] []\n",
+      "bytes": 649,
+      "proof_application_lines": 1
+    },
+    "elementary-16": {
+      "source": "import Foundation.Examples.OracleProofEditsBaseline\nimport Foundation.Constructions.Symmetric.RandomFunctionMACProofEdits\nimport Foundation.Examples.ScheduleCertificate\nopen CryptoOracle CryptoOracle.ProofEdits Foundation.Symmetric.RandomFunctionMACProofEdits\ndef padded : Nat \u2192 Program (Fin 8) (Fin 256) (Fin 8 \u00d7 Fin 256)\n  | 0 => Foundation.Symmetric.RandomFunctionMACSchedules.Examples.attack\n  | n + 1 => .query 0 (fun _ => padded n)\ntheorem check :\n    (before (padded 16)).run RandomOracle.oracle [] [] =\n      (cached (padded 16)).run RandomOracle.oracle [] [] :=\n  (localCachedRoutes (padded 16)).sound RandomOracle.oracle lazy_cache_laws [] [] (knows_nil [])\n",
+      "bytes": 671,
+      "proof_application_lines": 1
+    }
+  },
+  "records": [
+    {
+      "method": "ordinary",
+      "extra_signing_queries": 0,
+      "repetition": 0,
+      "elapsed_seconds": 6.22431812499417
+    },
+    {
+      "method": "elementary",
+      "extra_signing_queries": 0,
+      "repetition": 0,
+      "elapsed_seconds": 6.547332999994978
+    },
+    {
+      "method": "ordinary",
+      "extra_signing_queries": 4,
+      "repetition": 0,
+      "elapsed_seconds": 6.502718667004956
+    },
+    {
+      "method": "elementary",
+      "extra_signing_queries": 4,
+      "repetition": 0,
+      "elapsed_seconds": 6.621019666999928
+    },
+    {
+      "method": "ordinary",
+      "extra_signing_queries": 16,
+      "repetition": 0,
+      "elapsed_seconds": 6.429420583997853
+    },
+    {
+      "method": "elementary",
+      "extra_signing_queries": 16,
+      "repetition": 0,
+      "elapsed_seconds": 3.6932363329979125
+    },
+    {
+      "method": "elementary",
+      "extra_signing_queries": 16,
+      "repetition": 1,
+      "elapsed_seconds": 3.588431207987014
+    },
+    {
+      "method": "ordinary",
+      "extra_signing_queries": 16,
+      "repetition": 1,
+      "elapsed_seconds": 3.6051790000055917
+    },
+    {
+      "method": "elementary",
+      "extra_signing_queries": 4,
+      "repetition": 1,
+      "elapsed_seconds": 3.6878830830100924
+    },
+    {
+      "method": "ordinary",
+      "extra_signing_queries": 4,
+      "repetition": 1,
+      "elapsed_seconds": 3.60283829200489
+    },
+    {
+      "method": "elementary",
+      "extra_signing_queries": 0,
+      "repetition": 1,
+      "elapsed_seconds": 3.572717792005278
+    },
+    {
+      "method": "ordinary",
+      "extra_signing_queries": 0,
+      "repetition": 1,
+      "elapsed_seconds": 3.593428166001104
+    },
+    {
+      "method": "ordinary",
+      "extra_signing_queries": 0,
+      "repetition": 2,
+      "elapsed_seconds": 3.4965775000018766
+    },
+    {
+      "method": "elementary",
+      "extra_signing_queries": 0,
+      "repetition": 2,
+      "elapsed_seconds": 3.486010584005271
+    },
+    {
+      "method": "ordinary",
+      "extra_signing_queries": 4,
+      "repetition": 2,
+      "elapsed_seconds": 3.7391253749956377
+    },
+    {
+      "method": "elementary",
+      "extra_signing_queries": 4,
+      "repetition": 2,
+      "elapsed_seconds": 3.543762417000835
+    },
+    {
+      "method": "ordinary",
+      "extra_signing_queries": 16,
+      "repetition": 2,
+      "elapsed_seconds": 3.5488208750030026
+    },
+    {
+      "method": "elementary",
+      "extra_signing_queries": 16,
+      "repetition": 2,
+      "elapsed_seconds": 3.814161083995714
+    }
+  ],
+  "summaries": [
+    {
+      "method": "ordinary",
+      "extra_signing_queries": 0,
+      "measured_runs": 3,
+      "median_seconds": 3.593428166001104,
+      "min_seconds": 3.4965775000018766,
+      "max_seconds": 6.22431812499417
+    },
+    {
+      "method": "elementary",
+      "extra_signing_queries": 0,
+      "measured_runs": 3,
+      "median_seconds": 3.572717792005278,
+      "min_seconds": 3.486010584005271,
+      "max_seconds": 6.547332999994978
+    },
+    {
+      "method": "ordinary",
+      "extra_signing_queries": 4,
+      "measured_runs": 3,
+      "median_seconds": 3.7391253749956377,
+      "min_seconds": 3.60283829200489,
+      "max_seconds": 6.502718667004956
+    },
+    {
+      "method": "elementary",
+      "extra_signing_queries": 4,
+      "measured_runs": 3,
+      "median_seconds": 3.6878830830100924,
+      "min_seconds": 3.543762417000835,
+      "max_seconds": 6.621019666999928
+    },
+    {
+      "method": "ordinary",
+      "extra_signing_queries": 16,
+      "measured_runs": 3,
+      "median_seconds": 3.6051790000055917,
+      "min_seconds": 3.5488208750030026,
+      "max_seconds": 6.429420583997853
+    },
+    {
+      "method": "elementary",
+      "extra_signing_queries": 16,
+      "measured_runs": 3,
+      "median_seconds": 3.6932363329979125,
+      "min_seconds": 3.588431207987014,
+      "max_seconds": 3.814161083995714
+    }
+  ]
+}

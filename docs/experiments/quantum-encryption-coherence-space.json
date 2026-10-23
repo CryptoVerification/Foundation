@@ -1,0 +1,19 @@
+{
+  "rational_unit_quaternions_checked": 126,
+  "key_branch_correctness_checks": 504,
+  "perfect_privacy_Bloch_map_checks": 126,
+  "Q8_right_action_invariance_checks": 1008,
+  "pairwise_stabilizer_fiber_checks": 15876,
+  "equal_normalized_scheme_pairs": 278,
+  "distinct_normalized_scheme_pairs": 15598,
+  "mathematical_space_identification": "labelled, uniform four-key, no-ancilla qubit unitary encryption with identity first branch: SO(3)/D2 homeomorphic to S3/Q8",
+  "mathematical_high_degree_obstruction": "For each prime p, the p-primary component of pi_(2p) of this space is Z/p, by the covering map and Serre 1953 Chapter IV Proposition 7.",
+  "topological_classification_computer_verified": false,
+  "Lean_checked": false,
+  "cryptographic_reduction_impossibility_proved": false,
+  "requires_infinity_categories_instead_of_other_topology_formalisms": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/quantum-encryption-coherence-space.py": "2715cd55f357be6050ef9dfc0c27aae2fc30ef7a9e4ed45b5bf23c67624ca840"
+  }
+}

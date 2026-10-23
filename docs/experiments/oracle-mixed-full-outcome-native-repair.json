@@ -1,0 +1,382 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Logic/Polygraph/MixedCircuitStatefulSimulation.lean": "e25aafb890cb472102b90b0bb842a5d06f70ac6cf8c29bdb2e5209ece13b4cd4",
+    "Foundation/Examples/MixedCircuitMACNativeContinuation.lean": "5a005ed87db1a7ff4a05acd8ec15b025e21810f156e7aaf603782da14e983e6e",
+    "Foundation/Examples/MixedCircuitMACNativeRepair.lean": "6d9b06a284439828cfc8fc5265d284674bf06c508616e594a3326d873bee643f",
+    "Foundation/Examples/MixedCircuitMACNativeContinuationGame.lean": "8399b871898131ba27c33894fe7d1fbaf4a16ce8ba57cf440c069306df4d40f0",
+    "Foundation/Examples/MixedCircuitMACNativeRepairExample.lean": "eb668055085a5b2194ab09be3134171c103e74fb8cd9676117de8b4f0bedb95f"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.Implementation",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.Implementation.code",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.Implementation.horizon",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.Implementation.optimized",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.Implementation.original",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.charges_retained",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.comparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.comparison_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.comparison_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.fixed",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.localComparison",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.native_repair",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.originalDiagram",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.updatedDiagram",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.updated_security",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.wrap",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.analysis",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.analysis_kernel",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.analysis_needs",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.analysis_retains_state_trace",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.analysis_run",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.analysis_terminal_queries",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.frames",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.frames_refinement",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.optimized_compiler_code",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.original_compiler_code",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.prefix_awaiting_format",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.prefix_transcript_encoded",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.repaired_refinement",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.repaired_refinement_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.run",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.runGame",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.runGame_full_law",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.runGame_native",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.runGame_refinement",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.runGame_security",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.run_refinement",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.run_refinement_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.run_state_marginal",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.run_terminal_queries",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Simulation",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Simulation.box",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Simulation.evaluate",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Simulation.joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Simulation.mk",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.lift_simulation",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.lift_state_marginal",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.stateMap"
+  ],
+  "public_theorems": [
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.charges_retained",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.comparison_count",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.comparison_support",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.native_repair",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.RepairExample.updated_security",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.analysis_kernel",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.analysis_needs",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.analysis_retains_state_trace",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.analysis_run",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.analysis_terminal_queries",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.frames_refinement",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.optimized_compiler_code",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.original_compiler_code",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.prefix_awaiting_format",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.prefix_transcript_encoded",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.repaired_refinement",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.repaired_refinement_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.runGame_full_law",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.runGame_native",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.runGame_refinement",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.runGame_security",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.run_refinement",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.run_refinement_joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.run_state_marginal",
+    "CryptoLogic.Polygraph.MixedCircuit.Examples.MAC.NativeContinuation.run_terminal_queries",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Simulation.evaluate",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.Simulation.joint",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.lift_simulation",
+    "CryptoLogic.Polygraph.MixedCircuit.Stateful.lift_state_marginal"
+  ],
+  "claims": [
+    "A per-box deterministic simulation of one threaded state lifts constructively to every circuit of the original mixed syntax, including tensor and all copy/discard wires, without duplicating implicit state.",
+    "Old/new actual native MAC prefixes followed by arbitrary nonempty MAC analysis circuits retain their full joint frame/output correspondence under final PC relocation.",
+    "A supplied comparison cell in any higher basis of the actual unified MAC rules can be repaired at its exact internal footprint and connected to the old-to-optimized native-prefix correspondence.",
+    "Both generic simulation and concrete native repair preserve arbitrary correlated past, old initial state and original data/transcript.",
+    "The selected physical programs equal the outputs of the previously certified original/optimizing compilers.",
+    "The physical prefix retains its respective stopping, request encoding, transcript encoding and four-call contracts; mixed analysis leaves its complete native-frame marginal intact.",
+    "For the actual fixed-key-space MAC game, both implementations followed by arbitrary mixed analysis retain the complete original physical game law and inherited success upper bound 1/256.",
+    "A concrete nonempty tensor/copy/discard analysis copies sampled full outcomes and retains state/trace, while a generated finite local association/crypto comparison is instantiated under such a context and passed to native repair."
+  ],
+  "concrete_diagnostics": {
+    "native_prefix": {
+      "original_horizon_transitions": 343,
+      "optimized_horizon_transitions": 286,
+      "physical_calls": 4,
+      "full_frame_relation": "Final PC +1; original tapes, oracle state and bit transcript retained."
+    },
+    "analysis": "Copies an actual full outcome, analyzes both copies, discards one result and copies the retained sanitized outcome; physical native frame remains unsanitized and is not duplicated.",
+    "generated_repair_stage_0": {
+      "higher_constructors": 15,
+      "guard_count": 2,
+      "old_charge_occurrences": 2,
+      "new_charge_occurrences": 2,
+      "verification": "Lean #guard_msgs checks (15, 2, 2, 2)"
+    },
+    "generic_lifted_comparison_constructor_bound": 52
+  },
+  "limits": [
+    "The mixed MAC boxes are the original conditional analysis kernels, not newly compiled native instructions. 343/286 are physical caller-prefix bounds only, excluding analysis generation/execution/checking.",
+    "The model uses one actual caller invocation followed by analysis of sampled output. It is not arbitrary interleaving of new effectful native programs or a compiler from the full mixed proof language.",
+    "The general simulation theorem requires explicit per-box kernel contracts. Native execution evidence is not inferred from stochastic equality.",
+    "Repair interprets both compared diagrams in the updated analysis model; arbitrary changes of model interpretations are not equated by transporting condition proofs.",
+    "Physical game success bounds do not certify arbitrary extra adversary observations of analysis data, arbitrary attackers, or asymptotic security.",
+    "Copying the oracle state snapshot inside a full outcome does not fork the running oracle state. Tensor threads one physical frame in its fixed order.",
+    "A higher comparison cell is explicitly supplied or constructed by the partial local basis. Global finite-basis completeness, old-library higher projection and all remaining overlaps stay open.",
+    "No equality of old/new clock processes at every horizon or pointwise speed dominance; an old false branch takes 285 while the new one takes 286.",
+    "Native oracle internals and key generation remain externally accounted for. Mixed computational reduction extraction, contextual loss/resource contracts and total execution costs remain open.",
+    "Counts exclude diagram/wire/boundary/code/library payload and dependency search. No compression or speed advantage over an equally informed ordinary shared proof is established."
+  ],
+  "novelty": {
+    "status": "unconfirmed",
+    "interpretation": "Concrete connection of nonempty full-outcome mixed MAC analysis and exact-footprint repair to actual code-changing physical prefixes; no novelty claim for deterministic state naturality or compositional substitution."
+  },
+  "literature_this_step": "No new external primary-source review. Existing repository contracts and previous frozen experiment records were inspected and reused.",
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4466,
+    "build_log": "/tmp/foundation-mac-mixed-native-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-mac-mixed-native-audit.log",
+    "audit_declarations": 3930,
+    "new_modules": 5,
+    "new_selected_declarations": 48,
+    "new_authored_theorems": 29,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "source_count": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "source_count": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-normalization.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-game-proof-computational.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-game-proof-shared.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-generated-game-proof-sharing.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-game-proof-ordinary-baseline.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-branching.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-normalization.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-circuit-higher-coherence.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-context.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mixed-structural-overlap-classification.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mixed-fusion-conservative-completion.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-typed-cartesian-wiring-completeness.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-cartesian-local-higher-discard-coherence.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-mixed-path-repair-novelty-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-mixed-directed-computational-extraction.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-mac-native-quantitative-contracts.json": {
+        "source_count": 5,
+        "mismatches": []
+      },
+      "oracle-mac-native-code-changing-transport.json": {
+        "source_count": 7,
+        "mismatches": []
+      },
+      "oracle-stateful-chronological-history-boundary.json": {
+        "source_count": 1,
+        "mismatches": []
+      },
+      "oracle-mixed-single-state-native-execution.json": {
+        "source_count": 6,
+        "mismatches": []
+      },
+      "oracle-stateful-unified-wiring-fusion.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-unified-fusion-overlap-resolution.json": {
+        "source_count": 3,
+        "mismatches": []
+      },
+      "oracle-bounded-old-wire-elimination.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-root-only-wire-context-lifting.json": {
+        "source_count": 4,
+        "mismatches": []
+      },
+      "oracle-unified-association-overlap-resolution.json": {
+        "source_count": 4,
+        "mismatches": []
+      }
+    },
+    "imported_warnings": "Preexisting imported Encoding warning remains; no whole-project warning-free claim."
+  }
+}

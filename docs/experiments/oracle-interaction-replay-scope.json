@@ -1,0 +1,60 @@
+{
+  "kind": "formal_scope_comparison_and_native_service_verification",
+  "claims": {
+    "acceptance_equality": "CryptoOracle.ProofEdits.Interaction.ReplayComparison.validates_eq",
+    "scope": "All finite supplied adjacent-swap scripts in the query/record/refresh fragment; not all game transformations.",
+    "native_service": "Foundation.Hash.Native.CompactMACService.service_costed",
+    "native_service_scope": "One request through response loading and caller resumption; not the complete four-call MAC execution.",
+    "novelty": "unresolved",
+    "proof_size_or_checking_time_advantage": "not established"
+  },
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4250,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 853,
+    "missing_audit_outputs": [],
+    "axiom_dependencies": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "temporary_build_log": "/tmp/foundation-compact-build.log",
+    "temporary_audit_log": "/tmp/foundation-compact-audit.log"
+  },
+  "baseline_imports": {
+    "module": "Foundation.Examples.OracleInteractionReplayBaseline",
+    "local_dependencies": [
+      "Foundation.Crypto.Semantics.Oracle.InteractionRules",
+      "Foundation.Crypto.Semantics.Oracle.PosteriorCoupling",
+      "Foundation.Crypto.Semantics.Oracle.Program",
+      "Foundation.Crypto.Semantics.Oracle.QueryMap",
+      "Foundation.Crypto.Semantics.Oracle.RandomOracle",
+      "Foundation.Crypto.Semantics.Oracle.RandomOracleContext",
+      "Foundation.Crypto.Semantics.Oracle.RandomOracleFinite",
+      "Foundation.Crypto.Semantics.Oracle.RandomOracleValues",
+      "Foundation.Crypto.Semantics.Oracle.Refresh",
+      "Foundation.Crypto.Semantics.Oracle.RefreshInteraction",
+      "Foundation.Crypto.Semantics.Oracle.StateMap",
+      "Foundation.Crypto.Semantics.Probability.Comp",
+      "Foundation.Crypto.Semantics.Probability.Facts",
+      "Foundation.Crypto.Semantics.Probability.FiniteFunction",
+      "Foundation.Examples.OracleInteractionBaseline",
+      "Foundation.Examples.OracleInteractionReplayBaseline"
+    ],
+    "forbidden_imports": []
+  },
+  "source_sha256": {
+    "Foundation/Crypto/Semantics/Oracle/NativeCompactRequest.lean": "1f25a3ce43528d818f1a549ea6112d895454be51d3e210fc6ddff0e0bcb8f8ea",
+    "Foundation/Constructions/Symmetric/RandomFunctionMACNativeInterface.lean": "9e4f8158795539ad00403cb30c9e5499d66004c6fc63f5c9fea53be1972598a6",
+    "Foundation/Constructions/Hash/NativeCompactMACQuery.lean": "d2bdf8fb9909af12732f8ee87631e1757334afe39a05c7b8cc0ae08762dc2cb2",
+    "Foundation/Constructions/Hash/NativeCompactMACPacket.lean": "dba2fca5ff88bc347c9af53ea7255cb5aa2d199ff0c426e28d2b89d6a5c6dd89",
+    "Foundation/Constructions/Hash/NativeCompactMACService.lean": "1a42b7b85eff71b58e85ea2e959af7ac81ebfc29dcffc17d9008514c118c626d",
+    "Foundation/Examples/OracleInteractionReplayBaseline.lean": "a816596f0f1f8f3236b4b6f0cca3937a2ace6b117fbf3a92750644683eaa19b1",
+    "Foundation/Examples/OracleInteractionReplayComparison.lean": "1ef90fd188109e99a6c684243899488c6eb3b32d2ce8366fd0baa6d76fd1c5e4",
+    "Foundation/Examples/OracleInteractionBaseline.lean": "eb9b23d92fe36aed26cf1038b85d916f0a8323efa84b495f66d7bcaf7c5a3401",
+    "Foundation/Crypto/Logic/Polygraph/OracleInteractionCells.lean": "bbb8731918c7c460da863744c38b2d172a069c7184f05c98bec5fd8e4a86ab5c",
+    "Foundation/Crypto/Meta/Polygraph/OracleInteractionCertificate.lean": "5814b827d7e96ed3ebdeff280e5f7d1706e41b5a4996d960b756ef945277098f"
+  },
+  "ai_assistance": "Formulation, implementation, checking, analysis, and documentation used AI assistance."
+}

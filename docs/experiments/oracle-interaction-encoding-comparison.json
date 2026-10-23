@@ -1,0 +1,117 @@
+{
+  "kind": "internal_state_representation_repair_comparison",
+  "claims": {
+    "generic_representation_law": "CryptoOracle.ProofEdits.Interaction.Encoding.run_state",
+    "ordinary_repair": "CryptoOracle.ProofEdits.Interaction.Encoding.Baseline.repair",
+    "diagram_repair": "CryptoOracle.ProofEdits.Interaction.Encoding.Comparison.validated_diagram_repair",
+    "ordinary_matches_all_diagram_scripts": "CryptoOracle.ProofEdits.Interaction.Encoding.Comparison.ordinary_repair_from_diagram_validation",
+    "ordinary_joint_matches_diagram_scripts": "CryptoOracle.ProofEdits.Interaction.Encoding.Comparison.ordinary_joint_from_diagram_validation",
+    "adaptive_choice_not_injective": "CryptoOracle.ProofEdits.Interaction.Encoding.Adaptive.not_injective",
+    "adaptive_choice_loses_uniformity": "CryptoOracle.ProofEdits.Interaction.Encoding.Adaptive.encoded_secret_not_uniform",
+    "retaining_actual_choice_restores_joint": "CryptoOracle.ProofEdits.Interaction.Encoding.Adaptive.retained_joint",
+    "scope": "Input-dependent fixed bijections of internal function/cache values, decoded public history, finite query/record/refresh words, and supplied swap scripts.",
+    "byte_example": {
+      "inputs": 8,
+      "tags": 256,
+      "encoding": "Complement even-coordinate tags using 255 - t; leave odd coordinates unchanged.",
+      "positions": [
+        0,
+        1,
+        0
+      ],
+      "public_response_mismatch_detected": "Reusing the unmodified query operation would publish stored code 255 rather than response 0."
+    },
+    "comparison_result": "Ordinary shared-lemma reasoning also reuses every accepted swap script across any two fixed input-dependent encodings, including selected prefix-context joint laws. No exclusive maintenance advantage established.",
+    "not_claimed": [
+      "Equal proof-byte size or equal Lean checking time",
+      "A timing bound for a new native encoded-cache implementation",
+      "No advantage for all higher-dimensional methods",
+      "Novelty of the fixed-bijection transport or adaptive-choice counterexample",
+      "Finite completeness for all structural transformations"
+    ]
+  },
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4263,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 985,
+    "missing_audit_outputs": [],
+    "axiom_dependencies": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "temporary_build_log": "/tmp/foundation-encoding-build.log",
+    "temporary_audit_log": "/tmp/foundation-encoding-audit.log"
+  },
+  "baseline_imports": {
+    "module": "Foundation.Examples.OracleInteractionEncodingBaseline",
+    "local_modules": [
+      "Foundation.Crypto.Semantics.Oracle.InteractionEncoding",
+      "Foundation.Crypto.Semantics.Oracle.InteractionRules",
+      "Foundation.Crypto.Semantics.Oracle.PosteriorCoupling",
+      "Foundation.Crypto.Semantics.Oracle.Program",
+      "Foundation.Crypto.Semantics.Oracle.QueryMap",
+      "Foundation.Crypto.Semantics.Oracle.RandomOracle",
+      "Foundation.Crypto.Semantics.Oracle.RandomOracleContext",
+      "Foundation.Crypto.Semantics.Oracle.RandomOracleFinite",
+      "Foundation.Crypto.Semantics.Oracle.RandomOracleValues",
+      "Foundation.Crypto.Semantics.Oracle.Refresh",
+      "Foundation.Crypto.Semantics.Oracle.RefreshInteraction",
+      "Foundation.Crypto.Semantics.Oracle.StateMap",
+      "Foundation.Crypto.Semantics.Probability.Comp",
+      "Foundation.Crypto.Semantics.Probability.Facts",
+      "Foundation.Crypto.Semantics.Probability.FiniteFunction",
+      "Foundation.Examples.OracleInteractionBaseline",
+      "Foundation.Examples.OracleInteractionEncodingBaseline",
+      "Foundation.Examples.OracleInteractionReplayBaseline"
+    ],
+    "forbidden_diagram_imports": []
+  },
+  "unchanged_prior_comparison_inputs": {
+    "record": "docs/experiments/oracle-interaction-replay-scope.json",
+    "source_count": 10,
+    "changed": []
+  },
+  "protected_benchmarks": [
+    {
+      "record": "docs/experiments/oracle-proof-edits-benchmark-replication.json",
+      "sources": 6,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-proof-edits-benchmark.json",
+      "sources": 6,
+      "mismatches": []
+    }
+  ],
+  "source_sha256": {
+    "Foundation/Crypto/Semantics/Oracle/InteractionEncoding.lean": "839d579ca4f625d8da579cb4c9bda219792db96c67846829f7c49d49a4bd6b97",
+    "Foundation/Examples/OracleInteractionEncodingBaseline.lean": "d2711483caedccf46d439233f007acc8ec9bb612a8f0e793476de356ad89cd96",
+    "Foundation/Examples/OracleInteractionEncodingComparison.lean": "0d6c3ca66e5e66763d956ba5f94ba2d7307339ba107922ce2cc70790575b2455",
+    "Foundation/Examples/OracleInteractionAdaptiveEncoding.lean": "48a872a84d0a231825e3079294df353263ef01ef6dc619e472cf903c8e2f171c"
+  },
+  "primary_sources": [
+    {
+      "url": "https://clutch-project.org/logics-and-examples.html",
+      "scope": "Official overview of mutable-state couplings and probabilistic ghost state.",
+      "artifact_rebuilt": false
+    },
+    {
+      "url": "https://arxiv.org/pdf/2608.13846v1",
+      "title": "Verified Pythagorean Composition for Adaptive Cryptographic Games: Noise Flooding in Homomorphic Encryption",
+      "version": "v1",
+      "submitted": "2026-08-14",
+      "reading_scope": [
+        "Section 1.1",
+        "Sections 4.3 through 5.4",
+        "Section 6.1"
+      ],
+      "full_37_page_paper_read": false,
+      "artifact_source_compared": false,
+      "artifact_rebuilt": false,
+      "access_note": "HTML fetch failed; selected original PDF passages were read."
+    }
+  ],
+  "ai_assistance": "Investigation, formalization, implementation, comparison, verification, and documentation used AI assistance."
+}

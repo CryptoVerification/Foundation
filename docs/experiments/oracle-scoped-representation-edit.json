@@ -1,0 +1,222 @@
+{
+  "kind": "effect_scoped_representation_generation_and_reuse_under_declaration_edits",
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Logic/FiniteCodecRestriction.lean": "057bb68e77411ef0c060af37b26cc7d24f564b24c1c12b3f182e0e44650256ed",
+    "Foundation/Crypto/Semantics/Oracle/RepresentationScope.lean": "fde6eed1324cff3e915a5bf586f2cc3430287c56b3d6b036eeab445c3c3e4bda",
+    "Foundation/Crypto/Semantics/Oracle/ScopedRepresentationEdit.lean": "84186e8ec4c894db9f123cd082aaab7e760b24c4f71f9c03b0d9947c8f4c35c1",
+    "Foundation/Examples/RandomFunctionMACScopedEdit.lean": "c129dd63d52d8b74c85e0998c1a80b764b7441d9c80b0b7ddd908ba8e4b45273"
+  },
+  "public_theorems": [
+    "Foundation.Logic.FiniteCodecRestriction.complete",
+    "Foundation.Logic.FiniteCodecRestriction.forward_spec",
+    "Foundation.Logic.FiniteCodecRestriction.inverse_spec",
+    "Foundation.Logic.FiniteCodecRestriction.outside_spec",
+    "Foundation.Logic.FiniteCodecRestriction.compile_congr",
+    "Foundation.Logic.FiniteCodecRestriction.repair_complete",
+    "CryptoOracle.RandomOracle.Representation.Scope.step_keys",
+    "CryptoOracle.RandomOracle.Representation.Scope.run_keys",
+    "CryptoOracle.RandomOracle.Representation.Scope.pause_footprint",
+    "CryptoOracle.RandomOracle.Representation.Scope.remaining_footprint",
+    "CryptoOracle.RandomOracle.Representation.Scope.initial_keys",
+    "CryptoOracle.RandomOracle.Representation.Scope.prefix_scope",
+    "CryptoOracle.RandomOracle.Representation.ScopedEdit.used_pair",
+    "CryptoOracle.RandomOracle.Representation.ScopedEdit.oracle_on",
+    "CryptoOracle.RandomOracle.Representation.ScopedEdit.run_on",
+    "CryptoOracle.RandomOracle.Representation.ScopedEdit.recode_on",
+    "CryptoOracle.RandomOracle.Representation.ScopedEdit.joint_matches_declaration",
+    "CryptoOracle.RandomOracle.Representation.ScopedEdit.generate_congr",
+    "CryptoOracle.RandomOracle.Representation.ScopedEdit.raw_joint_congr",
+    "CryptoOracle.RandomOracle.Representation.ScopedEdit.generate_complete",
+    "CryptoOracle.RandomOracle.Representation.ScopedEdit.generate_sound",
+    "CryptoOracle.RandomOracle.Representation.ScopedEdit.generated_final",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.exact_scope",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.exact_preloaded_scope",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.ten_declarations",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.declaration_counts",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.scoped_accepts",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.compiled",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.generated_game",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.matches_declared_edit",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.decoded_joint",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.decoded_game",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.outside_completed",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.preloaded_rejected",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.actual_collision_rejected",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.unselected_label_equal",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.unused_edit_reuses_artifact",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.two_changed_rows",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.local_repair_accepts",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.local_repair_generated",
+    "Foundation.Symmetric.RandomFunctionMACScopedEdit.local_repair_sound"
+  ],
+  "claims": {
+    "scope": "All labels times (original syntactic query footprint union initial cache keys).",
+    "infinite_input_domain_allowed": true,
+    "finite_labels_and_public_response_required": true,
+    "complete_for_scoped_bijections": "Foundation.Logic.FiniteCodecRestriction.complete",
+    "supported_prefix_and_remaining_scope": "CryptoOracle.RandomOracle.Representation.Scope.prefix_scope",
+    "raw_declared_joint_equality": "CryptoOracle.RandomOracle.Representation.ScopedEdit.joint_matches_declaration",
+    "preserved_prefix_selection_and_final_joint": "CryptoOracle.RandomOracle.Representation.ScopedEdit.generate_sound",
+    "outside_scope_artifact_reuse": "Foundation.Logic.FiniteCodecRestriction.compile_congr",
+    "outside_scope_generated_game_reuse": "CryptoOracle.RandomOracle.Representation.ScopedEdit.generate_congr",
+    "outside_scope_raw_operational_joint_reuse": "CryptoOracle.RandomOracle.Representation.ScopedEdit.raw_joint_congr",
+    "changed_rows_reproof_iff": "Foundation.Logic.FiniteCodecRestriction.repair_complete",
+    "changed_rows_reproof_assumptions": "Old declaration accepted; user supplies a finite changed set and proof of equality on unedited in-scope rows. This does not automatically infer the changed set.",
+    "mac_scoped_rows": 10,
+    "mac_global_rows": 16,
+    "mac_local_edit_rows": 2,
+    "row_unit": "One (label,input) pair, each with 256 public tag values; not total runtime or proof bytes.",
+    "mac_local_edit": "Change only input 7 to tag+(3 if label=true else 2) modulo 256; existing dynamic selection after the actual first response and original continuation retained.",
+    "mac_local_edit_joint_soundness": "Foundation.Symmetric.RandomFunctionMACScopedEdit.local_repair_sound"
+  },
+  "runtime_checks": [
+    {
+      "mechanism": "#guard_msgs in #eval",
+      "check": "Scoped unused collision accepted; same collision with initial input6 rejected; used collision rejected; local input7 edit accepted.",
+      "expected": [
+        true,
+        false,
+        false,
+        true
+      ],
+      "passed": true
+    }
+  ],
+  "execution_scope": {
+    "finite_runtime_scope": "The runtime tests use finiteScope/preloadedScope constants, whose equality with the computed program scopes is proved by exact_scope/exact_preloaded_scope.",
+    "not_executed": "Direct expansion/evaluation of the 256-tag branching footprint; the general extractor may enumerate all response branches.",
+    "no_incremental_runtime_claim": "repair_complete reduces necessary NEW bijectivity proofs to the edited intersection. Existing compile still checks all in-scope rows; no skipping compiler or timing speedup is claimed."
+  },
+  "boundaries": [
+    "Outside scope, the generated total equivalence is identity, not the unchecked declaration. Equality to the raw declared game is only along supported original executions, proved using cache and continuation scope.",
+    "Every label is checked even if the choice policy cannot select it. unselected_label_equal together with actual_collision_rejected witnesses incompleteness for program equivalence.",
+    "All public tag values are checked, not just semantic reachable values. Initial cache keys are necessary for recoding even when never queried later.",
+    "Generic modules use ordinary shared lemmas and no Polygraph imports; the MAC example may indirectly import older diagram modules.",
+    "No exclusive high-dimensional advantage, minimum proof-size separation, kernel-time improvement or human repair-effort measurement.",
+    "No inferred unknown coupling, generated polygraph diagram, finite complete basis for all structural transformations, new cryptographic probability bound or native execution/time proof for the edit.",
+    "No new literature review or claim of publication novelty this turn."
+  ],
+  "novelty": "Unconfirmed. Concrete foundation for comparing proof repair after actual cryptographic game edits, not evidence of an exclusive higher-dimensional benefit.",
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4306,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 1356,
+    "new_public_theorems": 41,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "axiom_allowlist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "neutral_dependencies": {
+      "Foundation.Logic.FiniteCodecRestriction": [
+        "Foundation.Logic.FiniteCodecGenerator",
+        "Foundation.Logic.FiniteCodecRestriction"
+      ],
+      "Foundation.Crypto.Semantics.Oracle.RepresentationScope": [
+        "Foundation.Crypto.Semantics.Oracle.Composition",
+        "Foundation.Crypto.Semantics.Oracle.Program",
+        "Foundation.Crypto.Semantics.Oracle.QueryFootprint",
+        "Foundation.Crypto.Semantics.Oracle.QueryMap",
+        "Foundation.Crypto.Semantics.Oracle.QueryPrefix",
+        "Foundation.Crypto.Semantics.Oracle.RandomOracle",
+        "Foundation.Crypto.Semantics.Oracle.RandomOracleRepresentation",
+        "Foundation.Crypto.Semantics.Oracle.RepresentationLocality",
+        "Foundation.Crypto.Semantics.Oracle.RepresentationScope",
+        "Foundation.Crypto.Semantics.Oracle.RepresentationSwitch",
+        "Foundation.Crypto.Semantics.Oracle.StateMap",
+        "Foundation.Crypto.Semantics.Probability.Comp",
+        "Foundation.Crypto.Semantics.Probability.Facts"
+      ],
+      "Foundation.Crypto.Semantics.Oracle.ScopedRepresentationEdit": [
+        "Foundation.Crypto.Semantics.Oracle.Composition",
+        "Foundation.Crypto.Semantics.Oracle.GeneratedRepresentationEdit",
+        "Foundation.Crypto.Semantics.Oracle.Program",
+        "Foundation.Crypto.Semantics.Oracle.QueryFootprint",
+        "Foundation.Crypto.Semantics.Oracle.QueryMap",
+        "Foundation.Crypto.Semantics.Oracle.QueryPrefix",
+        "Foundation.Crypto.Semantics.Oracle.RandomOracle",
+        "Foundation.Crypto.Semantics.Oracle.RandomOracleRepresentation",
+        "Foundation.Crypto.Semantics.Oracle.RepresentationLocality",
+        "Foundation.Crypto.Semantics.Oracle.RepresentationScope",
+        "Foundation.Crypto.Semantics.Oracle.RepresentationSwitch",
+        "Foundation.Crypto.Semantics.Oracle.ScopedRepresentationEdit",
+        "Foundation.Crypto.Semantics.Oracle.StateMap",
+        "Foundation.Crypto.Semantics.Probability.Comp",
+        "Foundation.Crypto.Semantics.Probability.Facts",
+        "Foundation.Logic.FiniteCodecGenerator",
+        "Foundation.Logic.FiniteCodecRestriction"
+      ]
+    },
+    "prior_source_hash_checks": {
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      }
+    }
+  }
+}

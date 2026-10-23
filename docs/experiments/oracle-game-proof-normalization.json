@@ -1,0 +1,308 @@
+{
+  "date": "2026-10-17",
+  "source_sha256": {
+    "Foundation/Crypto/Logic/Polygraph/GameProofNormalization.lean": "90792d8256e3b5f91398d41da59027058c9943cf12de1496e8664198414c578b",
+    "Foundation/Examples/GameProofMACNormalization.lean": "fc30ec248f3ec6d11f576c26590e0f5b66b58a156ba5dd2b697e3d5cd9a44ddb",
+    "Foundation/Examples/GameProofNormalizationBoundary.lean": "77e3af985dc396bbb453943d7270e8ef0fa157ed64cd0f17861c3cfc36cfda8c"
+  },
+  "audited_public_declarations": [
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.Atom",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.Atom.eliminate",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.Atom.schedule",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.Vertex",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.Vertex.finish",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.Vertex.stage",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.arbitraryDiagram",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.arbitrary_bound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.arbitrary_kernel",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.arbitrary_state",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.arbitrary_trace",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.baseModel",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.condition",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.conditions",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.diamonds",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.direct",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.eliminateRetaining",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.game",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.generated",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.generated_bound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.generated_joint",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.layout",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.model",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.price",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.realized",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.relators",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.repairedConditions",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.repairedDiagram",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.retainedGame",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.sanitize",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.sanitize_state",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.sanitize_trace",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.strategy",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.terminal_charges",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.NormalizationBoundary.completed",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.NormalizationBoundary.discard",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.NormalizationBoundary.suffix_cancellation_fails",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.NormalizationBoundary.terminal",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.LocalDiamond",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.LocalDiamond.cell",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.LocalDiamond.join",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.LocalDiamond.left",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.LocalDiamond.mk",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.LocalDiamond.right",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Next",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Next.done",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Next.step",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.rank_le",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy.decreases",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy.mk",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy.next",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy.normal",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy.normal_sink",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy.normal_step",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy.rank",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy.terminal",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transition",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transition.atom",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transition.label",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transition.mk",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transition.plan",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transition.rank_lt",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transition.source_eq",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transition.target_eq",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.completedCoherence",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.foldNormalization",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.normalizePlan",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.normalizeTerminal",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.normalizeTransition",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.terminalCoherence",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.terminal_coherence_complete"
+  ],
+  "public_theorems": [
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy.normal_step",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Strategy.normal_sink",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Plan.rank_le",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Transition.rank_lt",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.terminal_coherence_complete",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.sanitize_state",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.sanitize_trace",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.conditions",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.generated_bound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.terminal_charges",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.arbitrary_bound",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.arbitrary_kernel",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.arbitrary_state",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.arbitrary_trace",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.generated_joint",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.MACNormalization.repairedConditions",
+    "CryptoLogic.Polygraph.Experiment.GameCoherence.Requirements.Examples.NormalizationBoundary.suffix_cancellation_fails"
+  ],
+  "claims": [
+    "Decreasing natural-rank strategies compute directed terminal routes.",
+    "Actual local branching diagrams generate completed comparisons and comparisons of any two sink-ending plans by rank recursion and structural pasting.",
+    "No inverse stochastic execution or global comparison constructor is added.",
+    "The concrete single adaptive MAC example checks all four local branching cases using one two-edge versus one-edge relator schema.",
+    "For all stages and all terminal plans, a generated comparison proves one error charge and a pointwise conditional kernel that retains secret/oracle state and full transcript, replacing only the result flag.",
+    "Whole-diagram conditions feed the existing cached-condition repair theorem.",
+    "An exact private-bit discard counterexample disproves general common-suffix cancellation."
+  ],
+  "runtime_checks": {
+    "MAC_stage_3": [
+      4,
+      1,
+      false,
+      1,
+      1,
+      true,
+      true
+    ],
+    "fields": [
+      "whole diagram conditions",
+      "fresh conditions for changed={1}",
+      "reuse without fresh proof",
+      "direct charge multiplicity",
+      "strategy charge multiplicity",
+      "condition 1 absent from boundary union",
+      "condition 1 present internally"
+    ],
+    "status": "guarded compiled metadata evaluation, not a theorem for the general condition-set formula"
+  },
+  "scope": [
+    "Assumes a natural rank decreasing on every atom, a total strategy, one sink without outgoing edges, and actual local diamond diagrams for every atomic branching.",
+    "Generic local diamonds and residual paths are supplied, not discovered; no general finite critical-branching basis theorem.",
+    "Fixed stage n has finitely many reachable lower stages and relators. Nat-indexed rule schema is not a finite set of concrete generators.",
+    "One existing adaptive attack, with preparation order changes on eight coordinates; attacker query order unchanged. No independent product games.",
+    "Existing information-theoretic bound 1/256, not a new security bound or computational reduction. Native execution/time guarantees not extended.",
+    "Terminal output is full MAC outcome with result=false, not Unit.",
+    "Previous cyclic checked exchanges do not automatically meet the decreasing-rank hypothesis. General mixed transformations, copy/discard basis and intermediate-endpoint coherence remain open.",
+    "Declared conditions/change sets are sufficient, not minimal. Direct reduction proofs of stage-3 membership hit recursion limits; final membership observations are guarded compiled diagnostics. Quantified semantic theorems have checked ordinary proofs.",
+    "No total proof-size, complexity, minimality, or fair shared-proof baseline result."
+  ],
+  "literature_this_step": [
+    {
+      "title": "Higher-dimensional normalisation strategies for acyclicity",
+      "authors": [
+        "Yves Guiraud",
+        "Philippe Malbos"
+      ],
+      "url": "https://webusers.imj-prg.fr/~yves.guiraud/articles/ktheory.pdf",
+      "read_scope": "Selected searchable PDF text: theorem 3.3.6 and its proof (printed pages 24–25), plus introductory context. No full-paper, artifact, or visual diagram review. Screenshot endpoint returned no usable image content to model.",
+      "comparison": "Established normalization-to-coherence principle overlaps this construction. No formal theorem reduction or priority claim."
+    }
+  ],
+  "novelty": {
+    "status": "unconfirmed",
+    "candidate": "Generated higher comparisons integrated with interior-condition repair and retained probabilistic state correspondence. Requires theorem-level literature comparison and fair cost evaluation.",
+    "not_claimed": [
+      "new normalization-to-coherence principle",
+      "exclusive higher-dimensional size advantage",
+      "new security bound"
+    ]
+  },
+  "ai_assistance": true,
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4362,
+    "build_log": "/tmp/foundation-game-normalization-full-build.log",
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_log": "/tmp/foundation-game-normalization-audit.log",
+    "audit_declarations": 2073,
+    "new_selected_declarations": 72,
+    "new_authored_theorems": 17,
+    "missing_declarations": [],
+    "nonstandard_axioms": {},
+    "own_new_warnings": [],
+    "source_forbidden_tokens": {},
+    "prior_source_hash_checks": {
+      "oracle-information-schedule-comparison.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark-replication.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-interaction-encoding-comparison.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-generated-representation-edit.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-checked-coupling-repair-game.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-selected-coupling-repair.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-information-schedule-local-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-optimal-coupling-repair-search.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-interaction-replay-scope.json": {
+        "inputs": 10,
+        "mismatches": []
+      },
+      "oracle-scoped-representation-edit.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-query-footprint-locality.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-cell-compilation-counts.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-proof-edits-benchmark.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-ordinary-program-comparison.json": {
+        "inputs": 1,
+        "mismatches": []
+      },
+      "oracle-causal-coupling-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-representation-switch.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-operational-representation-repair.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-incremental-representation-edit.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-automatic-representation-edit.json": {
+        "inputs": 6,
+        "mismatches": []
+      },
+      "oracle-structural-representation-transport.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-live-shared-reference-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-completeness.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-finite-wiring-higher-coherence.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-change-frontier-repair.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-diagram-obligations.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-proof-support-transport.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-self-exchange-boundary.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-decision.json": {
+        "inputs": 4,
+        "mismatches": []
+      },
+      "oracle-stateful-canonical-exchange.json": {
+        "inputs": 3,
+        "mismatches": []
+      },
+      "oracle-stateful-horizontal-interchange.json": {
+        "inputs": 2,
+        "mismatches": []
+      },
+      "oracle-stateful-exchange-coherence.json": {
+        "inputs": 5,
+        "mismatches": []
+      },
+      "oracle-game-proof-requirements.json": {
+        "inputs": 6,
+        "mismatches": []
+      }
+    }
+  }
+}

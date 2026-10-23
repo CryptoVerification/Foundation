@@ -1,0 +1,78 @@
+{
+  "build_command": "nix develop path:. -c lake build Foundation.Examples.BalancedRewindingResources",
+  "build_success": true,
+  "build_jobs": 3007,
+  "new_module_warnings": 0,
+  "declarations_audited": 11,
+  "axiom_dependencies": {
+    "Foundation.Examples.BalancedRewindingResources.permutation_fiber_count": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.BalancedRewindingResources.permutation_fiber_mass": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.BalancedRewindingResources.balanced_denominator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.BalancedRewindingResources.balanced_exit_normalization": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.BalancedRewindingResources.expected_a_preparations": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.BalancedRewindingResources.expected_b_preparations": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.BalancedRewindingResources.preparation_saving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.BalancedRewindingResources.weighted_cost_gap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.BalancedRewindingResources.improvement_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.BalancedRewindingResources.binary_resources": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Foundation.Examples.BalancedRewindingResources.binary_equal_restore_gap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "registered_in_root_module": false,
+  "scope": "Permutation-fiber finite sums, normalization, expected-preparation ratios, weighted snapshot/restore cost gap. Operational stochastic proofs are separate.",
+  "full_machine_semantics_Lean_checked": false,
+  "full_Schnorr_transcript_law_Lean_checked": false,
+  "arbitrary_simulator_optimality_proved": false,
+  "wall_clock_advantage_established": false,
+  "newness_established": false,
+  "infinity_category_necessity_proved": false,
+  "source_sha256": {
+    "Foundation/Examples/BalancedRewindingResources.lean": "0c923ce9bb5535a861f02d1163b97c71769dce2f9ea919bf3b0f1c861d81a19b",
+    "Foundation/Examples/LocalRewindingCompiler.lean": "d200f24fec202222277ac0cfd7f331f3b416756ce31b5ccdc96d25891a175361",
+    "docs/experiments/balanced-rewinding-resources.py": "bcf9bd557073e59c85b67e12315e8bfcb16014cff534ff131fb0b5dac8e04b82",
+    "docs/experiments/balanced-rewinding-resources.json": "e48a28025358f524a5ae793f77b659791be23fef873b5fe59ec3ce7b64b9fef9"
+  }
+}

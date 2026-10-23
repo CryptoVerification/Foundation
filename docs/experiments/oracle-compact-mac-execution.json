@@ -1,0 +1,55 @@
+{
+  "kind": "whole_compact_native_mac_execution",
+  "claims": {
+    "whole_execution": "Foundation.Hash.Native.CompactMACExecution.whole_run",
+    "actual_cost_reachability": "Foundation.Hash.Native.CompactMACExecution.whole_costed",
+    "protocol_shape": "Foundation.Hash.Native.CompactMACExecution.whole_shape",
+    "empty_cache_example": "Foundation.Symmetric.RandomFunctionMACNativeCaller.NativeBackend.empty_run",
+    "native_caller_instructions": 251,
+    "caller_queries": 4,
+    "budget_in_transition_steps": "584 * initial_table_length + 2091",
+    "empty_cache_budget_in_transition_steps": 2091,
+    "precondition": "The private native tape represents the initial table. The empty-table instance has one false end-marker cell; preparing that input layout is outside this bound.",
+    "scope": "All supported response sequences and both local-coin branches in the same continuing caller/component transition system.",
+    "not_yet_proved": [
+      "Full distributional refinement to the original typed MAC game",
+      "Security transfer for the whole physical backend execution",
+      "Local-diagram edits of this physical execution",
+      "Advantage over ordinary shared-lemma proofs",
+      "Novelty or finite completeness for all structural transformations"
+    ]
+  },
+  "verification": {
+    "build_command": "nix develop path:. -c lake build",
+    "build_jobs": 4254,
+    "audit_command": "nix develop path:. -c lake env lean Foundation/Examples/PolygraphAudit.lean",
+    "audit_declarations": 905,
+    "missing_audit_outputs": [],
+    "axiom_dependencies": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "temporary_build_log": "/tmp/foundation-compact-whole-build.log",
+    "temporary_audit_log": "/tmp/foundation-compact-whole-audit.log"
+  },
+  "protected_benchmarks": [
+    {
+      "record": "docs/experiments/oracle-proof-edits-benchmark-replication.json",
+      "sources": 6,
+      "mismatches": []
+    },
+    {
+      "record": "docs/experiments/oracle-proof-edits-benchmark.json",
+      "sources": 6,
+      "mismatches": []
+    }
+  ],
+  "source_sha256": {
+    "Foundation/Constructions/Hash/NativeCompactMACRound.lean": "d328a7bd824b66c1185554741be230d5c25f3d5c277d2809ef5524ad4e6491f5",
+    "Foundation/Constructions/Hash/NativeCompactMACExecution.lean": "0d9629db8d2a766d05dd2611790670034c718b99d30ce68ab0a3208c5f45133f",
+    "Foundation/Constructions/Hash/NativeCompactMACExecutionCorrectness.lean": "3e073ccd64683085cb466ec319b9ed24a444745b5c9fc4c68db35a8dc6cd47de",
+    "Foundation/Examples/RandomFunctionMACNativeBackend.lean": "410e6030c3b5496d7c2ccca0807576b75c9ea3ef42c318ae6fb2da22075fea2c"
+  },
+  "ai_assistance": "Construction, formalization, implementation, checking, and documentation used AI assistance."
+}

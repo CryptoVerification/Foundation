@@ -1,0 +1,59 @@
+{
+  "target_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair",
+  "targeted_lake_build_passed": true,
+  "lean_toolchain": "leanprover/lean4:v4.33.0",
+  "axioms_per_theorem": {
+    "mass_lower_of_correctness": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "repair_margin": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "repair_margin_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "repair_fixed": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "repairedCipher_sound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "continuous_repairedCipher": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "continuous_perfect_implementation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "sorry_or_additional_axioms_in_listed_theorems": false,
+  "finite_key_type_is_arbitrary": true,
+  "key_averaged_correctness_supported": true,
+  "actual_stochastic_matrix_privacy_and_correctness_checked": true,
+  "continuous_signed_repair_and_weighted_implementation_checked": true,
+  "sphere_classification_checked": false,
+  "topological_nonextension_checked": false,
+  "quantitative_repair_distance_checked_in_Lean": false,
+  "Foundation_bounded_machine_realization_checked": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/classical-bit-encryption-lean-repair.py": "a531579b562bd5b18ff63f60728b793e563ebda7e50913f90f2d2d382078a852",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepair.lean": "459aa24b50357f54d78ce8faf35ebbf96164a3971bc6b6aebd19524f69921a07",
+    "/Users/hiro/workspace/Foundation/lakefile.toml": "b537fcdfd0e540cfd6f310d771aff1eb8fc24ab107a421b02cfa42cf131a9411",
+    "/Users/hiro/workspace/Foundation/lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
+    "/Users/hiro/workspace/Foundation/lake-manifest.json": "ef3799fa73ec244f1db2063a084e5c03ab1196e16604e883952f870179bff929"
+  }
+}
