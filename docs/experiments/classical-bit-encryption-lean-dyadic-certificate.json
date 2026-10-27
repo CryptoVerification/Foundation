@@ -1,0 +1,101 @@
+{
+  "target_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitDyadicCertificate",
+  "targeted_lake_build_passed": true,
+  "lean_toolchain": "leanprover/lean4:v4.33.0",
+  "axioms_per_theorem": {
+    "dyadic_l1_exact": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "dyadic_jointTV_exact": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "eight_bit_jointTV_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "integer_rounding_coordinate_error": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "eight_bit_rounding_l1": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "normalizeSigned_div_pos": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "gridVertexPosition_numerator": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "sharpAffine_grid_numerator": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "normalizeSigned_grid_numerator": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "grid_boundary_integer_error": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "sorry_or_additional_axioms_in_listed_theorems": false,
+  "signed_integer_mass_and_bias_construct_perfect_cipher": true,
+  "integer_l1_difference_equals_actual_joint_TV_times_2D": true,
+  "eight_bit_integer_difference_148_implies_joint_TV_le_37_over_128": true,
+  "integer_cross_products_imply_rounding_error_verified": true,
+  "grid_affine_raw_integer_numerator_relation_verified": true,
+  "integer_vertex_error_certificate_to_actual_normalized_boundary_verified": true,
+  "concrete_table_values_checked_in_this_record": false,
+  "concrete_6545_vertex_rounding_certificates_generated_in_Lean": false,
+  "Foundation_machine_execution_certified": false,
+  "infinity_categories_shown_necessary": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/docs/experiments/classical-bit-encryption-lean-dyadic-certificate.py": "b94bc124527e16978bf6868c6b21c58ea6553d716c4f1932409e32c0b04e1810",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitDyadicCertificate.lean": "8170bb639798993111aa50c74c7e1d9c901a63ce2a7b02a9bdab5301ebf417c3",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitGridGluing.lean": "139459be1f984eee9903c0360e07eec29848503fe72591a301994fde4d560d44",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitIntegralChain.lean": "f9ee84fc66705ee787e1b9af588b714bed36c8ea70b3beba5fd624e2f34d161e",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitGridComplex.lean": "fb1fe0a9f744991f666be500ff6bbf9eb90ac20b585ca56ad2b232cf6a12a2be",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitGridLocator.lean": "385137ff1a97e37398155e373ecc4bb0986459e4c9bb69c8e98b5875a0b1dae8",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitCubeTriangulation.lean": "5534bf9a707550ae50964325b34fb43778077e2f1ec562051ed550e771a4f0d0",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitMeshGeometry.lean": "685885997630fe8bbfb9344aad3be4019f92b07e7dd7807674889dbf61fef873",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitMeshCoordinates.lean": "8c08565831ac182247d5c293de809d43352116a1c5806622d19f0ffb0b981133",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitProjectiveInterpolation.lean": "be6638cf60f56dd9db13b0888d1574860bd5afc776ca1d3296e282533d646049",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitBoundaryError.lean": "1eab79e7acf54a9ca3d95eebe602943e17204d3d83feed393ab1271af3416400",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRobustBoundary.lean": "05a1dab112a5191ca9194ac5b26e1fcd8dad5ac9099714f52d8311742a049fe9",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitBrouwerObstruction.lean": "76fa9974c703a9d49c0aeb7abdeca3b1c3eb9b6b5bdde3caf0c3195121509e31",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitTetrahedralBoundary.lean": "b15d168127860a85496dd6c00adbea68deaa148dc1aab647a34bd9d90ab3bbfa",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitNormalizedBoundary.lean": "f20e61ad98612e5aa5dab5610ba7e15ec684f982cc724c5fb642ce9671e5625b",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitSimplicialInterpolation.lean": "d1124720e2e06c81ea1c478a00259c866e3eb01ed29ffd9a4697dc6aae8de323",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitBoundaryCertificate.lean": "965e273b18c96a70e8d4f80e540bf80c70e42626edcbf12fc76cf1bdf9dd5c43",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitConvexCertificate.lean": "61a9d1ba588d70e16fb4c75cf187baf6616de2e9eae0e8310acfecd804946950",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitSimplexCertificate.lean": "e5ebeb7ca2c9ed2b37e47e4a654b8d010cd405bc9312f3b6989084e34b3a741c",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepairStability.lean": "d83db5cc70fbda328ccd400f5232f7aa6b3ea9058da0f3b5b02da2d673e7f50b",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepair.lean": "459aa24b50357f54d78ce8faf35ebbf96164a3971bc6b6aebd19524f69921a07",
+    "/Users/hiro/workspace/Foundation/Foundation/ThirdParty/Brouwer/Scarf.lean": "443f9acc760b665494cde8ad5a849de5b1b243ef864ef79dc86690fb08bff886",
+    "/Users/hiro/workspace/Foundation/Foundation/ThirdParty/Brouwer/PathComponents.lean": "a9c5ec6e5a4c69834980f981d3b3bc6a761073a8a658ec33668b70d0b8aab454",
+    "/Users/hiro/workspace/Foundation/Foundation/ThirdParty/Brouwer/ScarfPath.lean": "feee73478505fec4d4af15edd1c035424cf238a9433bd44c8385432a534ca17b",
+    "/Users/hiro/workspace/Foundation/Foundation/ThirdParty/Brouwer/Brouwer.lean": "aac1f4b8fee3664bbb14452068cd0390d47cdf32b8781650aa8daccb572524c4",
+    "/Users/hiro/workspace/Foundation/Foundation/ThirdParty/Brouwer/LICENSE": "956bddafa77f8b8ad428bb35cf59424b0ddd0933ebab506037b97a20fab1a5d0",
+    "/Users/hiro/workspace/Foundation/Foundation/ThirdParty/Brouwer/ORIGIN.json": "f35b9c346e4ef495b4eeddaffbc432cad271fa713cf6df500297c64ebfc07f68",
+    "/Users/hiro/workspace/Foundation/lakefile.toml": "b537fcdfd0e540cfd6f310d771aff1eb8fc24ab107a421b02cfa42cf131a9411",
+    "/Users/hiro/workspace/Foundation/lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
+    "/Users/hiro/workspace/Foundation/lake-manifest.json": "ef3799fa73ec244f1db2063a084e5c03ab1196e16604e883952f870179bff929"
+  }
+}

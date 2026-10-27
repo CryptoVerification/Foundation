@@ -1,0 +1,37 @@
+{
+  "checked_date": "2026-10-28",
+  "kind": "primary-source-bounded-novelty-comparison",
+  "primary_source": {
+    "title": "Classification of uniform flag triangulations of the boundary of the full root polytope of type A",
+    "authors": [
+      "Richard Ehrenborg",
+      "Gábor Hetyei",
+      "Margaret Readdy"
+    ],
+    "arxiv": "1901.07113v2",
+    "url": "https://arxiv.org/pdf/1901.07113",
+    "read_scope": "Section 2.1, PDF pages 2-3; not the entire 42-page article",
+    "locators": [
+      "definition of full root polytope",
+      "intersection with zero-sum hyperplane of cross-polytope with vertices plus/minus 2e_i",
+      "faces indexed by two disjoint nonempty subsets"
+    ]
+  },
+  "derived_comparison": {
+    "condition": "N >= 2",
+    "perfect_signed_space": "C_N = {w: sum(w)=0, sum(abs(w))=1}",
+    "root_polytope": "P_(N-1) = conv{e_i-e_j : i != j}",
+    "identity": "C_N = relative_boundary_in_H((1/2) P_(N-1)), H={sum(w)=0}",
+    "status": "mathematical identification derived from the cited section; not yet a Lean root-polytope theorem",
+    "cryptographic_interpretation": "scaled root vertices represent labelled two-active-key bit pads; fixed-sign faces correspond to independent positive and negative probability simplices"
+  },
+  "novelty_limits": [
+    "sphere-like geometry and root-polytope triangulations are prior mathematics",
+    "this identity does not identify a prior cryptographic finite stability separation theorem",
+    "no matching search result is not evidence establishing novelty",
+    "natural reasons to preserve the labelled boundary remain to be justified"
+  ],
+  "newness_established": false,
+  "infinity_categories_shown_necessary": false,
+  "search_scope": "limited primary-source web searches plus reading the indicated section; not a systematic literature review"
+}

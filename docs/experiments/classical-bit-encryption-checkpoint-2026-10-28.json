@@ -1,0 +1,29 @@
+{
+  "checkpoint_date": "2026-10-28",
+  "reason": "user requested stopping research at a checkpoint and add, commit, push",
+  "research_goal_status": "paused",
+  "verified_scope": [
+    "all-point ordered grid geometry and common faces",
+    "all 6545 eight-bit vertex settings",
+    "fixed-boundary four-key edge lower bound 2/3",
+    "approximate four-key edge lower bound 7/24 under the stated 1/8 error budget",
+    "nonempty four-key boundary-preserving assignment family"
+  ],
+  "frozen_source_records_verified": 136,
+  "frozen_source_hash_entries_verified": 822,
+  "interrupted_command": "lake build Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitNeighborChecks",
+  "interrupted_session_exit_code": 130,
+  "neighbor_check_full_build_passed": false,
+  "separation_full_build_passed": false,
+  "five_key_edge_upper_bound_Lean_verified": false,
+  "candidate_five_key_edge_upper_bound": "37/128",
+  "candidate_strict_approximate_gap": "1/384",
+  "newness_established": false,
+  "infinity_categories_shown_necessary": false,
+  "resume_commands": [
+    "lake build Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitNeighborChecks",
+    "lake build Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitSeparation",
+    "python3 docs/experiments/classical-bit-encryption-lean-eight-bit-separation.py"
+  ],
+  "resume_note": "Run after an explicit research resume. Save the runner output as a certificate only after its build and axiom audit succeed. A conditional comparison probe passed, but that does not establish the unchecked neighbor certificate."
+}
