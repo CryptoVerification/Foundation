@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-29T18:46:54.917174+00:00",
+  "observed_at_utc": "2026-10-29T19:26:07.364192+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -16,15 +16,17 @@
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "Connect the explicit prepared native caller and the constrained-boundary theorem to the existing polygraph interpretation through declared contracts.",
-    "Instantiate the preparation and continuation contracts in any intended original callers beyond this fixed 19-bit reference protocol."
+    "Provide explicit native realization and boundary-preservation contracts for the compared four-key candidate implementations, so the transferred lower bounds apply through those contracts.",
+    "If full retained-state statistical transformations are required by the intended comparison model, supply their conditional kernels and higher coherence certificates; current statistical edge diagrams use the native-written Boolean decision view.",
+    "Instantiate caller adapters for protocols beyond the fixed 39-bit reference request."
   ],
   "native_one_bit_branch_compiled_and_audited": true,
   "native_one_bit_branch_verification_record": "docs/experiments/classical-bit-encryption-native-bit-choice.json",
   "native_one_bit_branch_overhead_bound_steps": 3,
   "next_native_obligations": [
-    "Provide adapters from the intended original callers to the verified 39-bit flagged request format, with their own computation/invariant/runtime proofs.",
-    "If polynomial compiler size in a growing control width is required, replace the reference exponential control decision tree by shared or comparison-based code."
+    "Connect candidate four-key machine profiles to their required semantic, boundary and stopping contracts.",
+    "Prove additional caller code, preparation, invariants and stopping before assigning runtime to new native contexts.",
+    "If polynomial compiler size in growing control width is required, replace the fixed reference exponential control decision tree by shared or comparison-based code."
   ],
   "native_finite_word_decoder_verified": true,
   "native_private_three_bit_key_writer_verified": true,
@@ -79,5 +81,20 @@
   "native_prepared_malformed_request_correctness_or_rejection_guaranteed": false,
   "native_prepared_timeout_probability": "0 for every raw input at budget 930",
   "native_request_preparation_record": "docs/experiments/classical-bit-encryption-native-request-preparation.json",
-  "native_final_decision_on_original_output_tape": true
+  "native_final_decision_on_original_output_tape": true,
+  "native_polygraph_interpretation_entrypoint": "Foundation.Crypto.Logic.Polygraph.NativePreparedInterpretation",
+  "native_polygraph_interpretation_record": "docs/experiments/classical-bit-encryption-native-polygraph-interpretation.json",
+  "native_exact_public_packet_polygraph_bridge_verified": true,
+  "native_direct_factorized_four_cell_verified": true,
+  "native_contextual_factorization_verified": true,
+  "native_retained_key_ciphertext_law_verified": true,
+  "native_joint_public_internal_same_execution_verified": true,
+  "native_private_forgetting_square_four_cell_verified": true,
+  "native_internal_perfect_four_key_boundary_gap": "145/384",
+  "native_internal_approximate_four_key_boundary_gap": "1/384 under the original error/bias and repaired-boundary premises",
+  "native_decision_statistical_edge_diagrams_verified": true,
+  "native_decision_edge_coupling": "uniform Fin 256 with checked threshold marginals",
+  "native_decision_chain_error_bound": "n * (37/128)",
+  "native_general_retained_state_statistical_kernel_coherence_verified": false,
+  "original_polygraph_model_connection_status": "Exact returned-packet and retained labelled-state interpretation, two certified four-cell comparisons, and Boolean statistical edge/path diagrams are verified; general full-state statistical kernels and candidate-machine comparison contracts remain separate."
 }
