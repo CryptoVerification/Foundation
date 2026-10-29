@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-29T17:55:32.795325+00:00",
+  "observed_at_utc": "2026-10-29T18:08:54.447633+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -16,16 +16,18 @@
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "Discharge the numerical 37/128 bound for all probabilistic key/ciphertext observers, then instantiate native caller transport.",
-    "Connect the native implementation, request-generating callers and quantitative distance theorem to the original polygraph interpretation.",
-    "Assess novelty of the constrained quantitative theorem and the precise scope of any unbounded higher-dimensional necessity claim."
+    "Connect native request-generating callers and the quantitative constrained-boundary theorem to the original polygraph interpretation.",
+    "Assess whether the prescribed boundary and fixed labels follow from the intended cryptographic interface, rather than being an artificial restriction.",
+    "Assess novelty of the constrained quantitative obstruction relative to established geometric/topological arguments; contraction and optimal finite likelihood tests are not claimed novel.",
+    "If an ordinary cryptographic security advantage is intended, supply a legitimate public-transcript example: the present sharp gap is already witnessed by private key distribution alone.",
+    "Establish the precise scope, if any, of unbounded higher-dimensional necessity; the finite numeric example does not establish it."
   ],
   "native_one_bit_branch_compiled_and_audited": true,
   "native_one_bit_branch_verification_record": "docs/experiments/classical-bit-encryption-native-bit-choice.json",
   "native_one_bit_branch_overhead_bound_steps": 3,
   "next_native_obligations": [
-    "Instantiate numerical observer bounds for the concrete or general native continuation kernel; current transport retains an explicit source-bound premise.",
-    "Prove request preparation by the intended original callers, and their complete before-call/after-call invariants and time bounds.",
+    "Prove request preparation by the intended original callers and their before-call/after-call invariants and runtime.",
+    "If a charged executable distinguisher is required, compile the simple key-label predicate and certify its evaluation time; currently it is a computable observation of the returned state.",
     "If polynomial compiler size in request width is required, replace the reference exponential decision tree by a shared or comparison-based compiler."
   ],
   "native_finite_word_decoder_verified": true,
@@ -48,5 +50,13 @@
   "native_reference_cipher_cleanup_toggle_caller_raw_initial_law_verified": true,
   "native_generic_continuation_runtime_bound": "411+T+1; caller must actually stop on all tapes within T",
   "native_clean_continuation_record": "docs/experiments/classical-bit-encryption-native-clean-continuation.json",
-  "native_numerical_edge_observer_bound_37_over_128_discharged": false
+  "native_numerical_edge_observer_bound_37_over_128_discharged": true,
+  "native_all_probabilistic_observers_edge_bound": "37/128",
+  "native_observer_security_record": "docs/experiments/classical-bit-encryption-native-observer-security.json",
+  "native_sharp_observation_attained": true,
+  "native_sharp_private_key_only_predicate": "key label 0 or 2; ciphertext ignored",
+  "native_sharp_first_acceptance": "1",
+  "native_sharp_second_acceptance": "91/128",
+  "native_sharp_key_hidden_advantage_claimed": false,
+  "native_observation_predicate_runtime_charged": false
 }
