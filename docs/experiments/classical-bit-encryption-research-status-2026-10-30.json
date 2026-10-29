@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-29T19:50:05.919482+00:00",
+  "observed_at_utc": "2026-10-29T19:59:30.279772+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -16,7 +16,7 @@
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "If full retained-state statistical transformations are required by the intended comparison model, supply their conditional kernels and higher coherence certificates; current statistical edge diagrams use the native-written Boolean decision view.",
+    "Extend statistical kernels to any additional physical registers/caller state required by the comparison model; labelled key/ciphertext kernels and native/reference pointwise coherence are verified. Coherence between different chosen couplings must be proved separately.",
     "Instantiate caller adapters for protocols beyond the fixed 39-bit reference request."
   ],
   "native_one_bit_branch_compiled_and_audited": true,
@@ -95,7 +95,7 @@
   "native_decision_edge_coupling": "uniform Fin 256 with checked threshold marginals",
   "native_decision_chain_error_bound": "n * (37/128)",
   "native_general_retained_state_statistical_kernel_coherence_verified": false,
-  "original_polygraph_model_connection_status": "Exact returned-packet and retained labelled-state interpretation, two certified four-cell comparisons, and Boolean statistical edge/path diagrams are verified. Native cipher-family comparison contracts and concrete five-key and prescribed-boundary four-key encryption/decryption instances are verified. General full-state statistical kernels remain separate.",
+  "original_polygraph_model_connection_status": "Exact returned-packet and retained labelled-state interpretation, native cipher-family contracts, and concrete five-key and four-key encryption/decryption instances are verified. Labelled key/ciphertext statistical transitions now have explicit maximal conditional kernels and a native/reference four-cell preserving kernels pointwise and losses. Additional physical registers and arbitrary different selected couplings remain separate.",
   "native_cipher_realization_contracts_verified": true,
   "native_cipher_realization_record": "docs/experiments/classical-bit-encryption-native-cipher-realization.json",
   "native_five_key_family_with_encryption_and_decryption_verified": true,
@@ -106,5 +106,13 @@
   "native_four_key_encryption_runtime_bound_steps": 148,
   "native_four_key_decryption_runtime_bound_steps": 69,
   "native_four_key_actual_execution_edge_lower_bound": "2/3",
-  "native_concrete_five_vs_four_execution_gap": "145/384 in the internal labelled key/ciphertext metric"
+  "native_concrete_five_vs_four_execution_gap": "145/384 in the internal labelled key/ciphertext metric",
+  "native_labelled_statistical_kernel_coherence_verified": true,
+  "native_labelled_statistical_kernel_coherence_record": "docs/experiments/classical-bit-encryption-native-retained-coupling.json",
+  "native_labelled_statistical_kernel_outcome": "Fin 5 x Bool; private key label and ciphertext",
+  "native_labelled_statistical_edge_error_bound": "37/128",
+  "native_labelled_statistical_mismatch_exact": "finite total variation of the retained distributions",
+  "native_labelled_statistical_kernel_event_independent": true,
+  "native_labelled_statistical_native_reference_four_cell_verified": true,
+  "native_labelled_statistical_native_reference_sequential_contexts_verified": true
 }
