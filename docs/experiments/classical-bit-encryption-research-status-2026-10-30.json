@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-29T18:19:03.213370+00:00",
+  "observed_at_utc": "2026-10-29T18:46:54.917174+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -16,15 +16,15 @@
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "Connect native request-generating callers and the quantitative constrained-boundary theorem to the existing polygraph interpretation through explicit contracts.",
-    "Prove preparation of requests by the intended original callers, including their complete state invariants and runtime."
+    "Connect the explicit prepared native caller and the constrained-boundary theorem to the existing polygraph interpretation through declared contracts.",
+    "Instantiate the preparation and continuation contracts in any intended original callers beyond this fixed 19-bit reference protocol."
   ],
   "native_one_bit_branch_compiled_and_audited": true,
   "native_one_bit_branch_verification_record": "docs/experiments/classical-bit-encryption-native-bit-choice.json",
   "native_one_bit_branch_overhead_bound_steps": 3,
   "next_native_obligations": [
-    "Prove request preparation by the intended original callers and their before-call/after-call invariants and runtime.",
-    "If polynomial compiler size in request width is required, replace the reference exponential decision tree by a shared or comparison-based compiler."
+    "Provide adapters from the intended original callers to the verified 39-bit flagged request format, with their own computation/invariant/runtime proofs.",
+    "If polynomial compiler size in a growing control width is required, replace the reference exponential control decision tree by shared or comparison-based code."
   ],
   "native_finite_word_decoder_verified": true,
   "native_private_three_bit_key_writer_verified": true,
@@ -66,5 +66,18 @@
     "Research novelty",
     "Necessity of infinite/higher categorical structure",
     "Interpretation and significance of the constrained-boundary example"
-  ]
+  ],
+  "native_pre_call_flagged_request_format_bits": 39,
+  "native_pre_call_logical_request_bits": 19,
+  "native_complete_preparation_code_length": 724,
+  "native_complete_preparation_runtime_bound_steps": 487,
+  "native_prepared_full_execution_runtime_bound_steps": 930,
+  "native_prepared_standard_output_packet_verified": true,
+  "native_prepared_standard_output_packet": "some [complemented ciphertext, native key-label decision]",
+  "native_prepared_standard_evalWithin_law_verified": true,
+  "native_prepared_all_raw_inputs_stop": true,
+  "native_prepared_malformed_request_correctness_or_rejection_guaranteed": false,
+  "native_prepared_timeout_probability": "0 for every raw input at budget 930",
+  "native_request_preparation_record": "docs/experiments/classical-bit-encryption-native-request-preparation.json",
+  "native_final_decision_on_original_output_tape": true
 }
