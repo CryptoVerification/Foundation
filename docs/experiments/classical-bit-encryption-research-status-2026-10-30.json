@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-29T17:39:59.357117+00:00",
+  "observed_at_utc": "2026-10-29T17:55:32.795325+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -16,17 +16,17 @@
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "Prove concrete caller continuation, private-history encapsulation or cleanup, invariants and total runtime in one continuing execution.",
-    "Connect the native implementation and quantitative distance theorem to the original polygraph interpretation.",
+    "Discharge the numerical 37/128 bound for all probabilistic key/ciphertext observers, then instantiate native caller transport.",
+    "Connect the native implementation, request-generating callers and quantitative distance theorem to the original polygraph interpretation.",
     "Assess novelty of the constrained quantitative theorem and the precise scope of any unbounded higher-dimensional necessity claim."
   ],
   "native_one_bit_branch_compiled_and_audited": true,
   "native_one_bit_branch_verification_record": "docs/experiments/classical-bit-encryption-native-bit-choice.json",
   "native_one_bit_branch_overhead_bound_steps": 3,
   "next_native_obligations": [
-    "Track consumed control and coin history: prove cleanup or observation restriction before claiming arbitrary caller distance guarantees.",
-    "Prove caller preparation, physical handoff, invariants, stopping and continuation contracts.",
-    "Investigate sharing or comparison-based code if polynomial compiler size in request width is required; the reference decision tree has an exponential bound."
+    "Instantiate numerical observer bounds for the concrete or general native continuation kernel; current transport retains an explicit source-bound premise.",
+    "Prove request preparation by the intended original callers, and their complete before-call/after-call invariants and time bounds.",
+    "If polynomial compiler size in request width is required, replace the reference exponential decision tree by a shared or comparison-based compiler."
   ],
   "native_finite_word_decoder_verified": true,
   "native_private_three_bit_key_writer_verified": true,
@@ -38,5 +38,15 @@
   "native_common_runtime_bound_steps": 148,
   "native_common_code_length_bound": "code.length+6 <= 3932*2^19",
   "native_common_code_size_polynomial_in_control_width_claimed": false,
-  "native_common_program_record": "docs/experiments/classical-bit-encryption-native-initial-cipher.json"
+  "native_common_program_record": "docs/experiments/classical-bit-encryption-native-initial-cipher.json",
+  "native_physical_request_and_coin_history_erasure_verified": true,
+  "native_cleanup_runtime_bound_steps": 262,
+  "native_clean_cipher_runtime_bound_steps": 411,
+  "native_complete_formatted_state_factors_through_key_ciphertext": true,
+  "native_reference_cipher_cleanup_toggle_caller_single_execution_certified": true,
+  "native_reference_cipher_cleanup_toggle_caller_bound_steps": 418,
+  "native_reference_cipher_cleanup_toggle_caller_raw_initial_law_verified": true,
+  "native_generic_continuation_runtime_bound": "411+T+1; caller must actually stop on all tapes within T",
+  "native_clean_continuation_record": "docs/experiments/classical-bit-encryption-native-clean-continuation.json",
+  "native_numerical_edge_observer_bound_37_over_128_discharged": false
 }
