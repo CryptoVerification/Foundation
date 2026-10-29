@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-29T20:44:09.441580+00:00",
+  "observed_at_utc": "2026-10-29T21:02:04.415121+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -16,7 +16,7 @@
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "Construct and verify a compatible alternative forward coupling or an explicit state extension if exact recovery is required. Changing only the reverse of the current fixed maximal kernel cannot restore every reachable source; other kernel choices and approximate recovery remain separate.",
+    "Extend compatible coupling choices and coherence beyond the repaired sharp-edge direction if required. The new construction is a one-sided recovery on the reachable source invariant; reverse-order identity, identity on unreachable states, and a general path-independent family are not established.",
     "Instantiate caller adapters for protocols beyond the fixed 39-bit reference request."
   ],
   "native_one_bit_branch_compiled_and_audited": true,
@@ -143,5 +143,15 @@
   ],
   "native_fixed_forward_all_reverse_game_paths_no_identity_cell_verified": true,
   "native_fixed_forward_all_reverse_game_paths_no_identity_edits_verified": true,
-  "native_fixed_forward_obstruction_allows_forward_changes_or_extra_state": true
+  "native_fixed_forward_obstruction_allows_forward_changes_or_extra_state": true,
+  "native_alternative_recoverable_coupling_verified": true,
+  "native_alternative_recoverable_coupling_record": "docs/experiments/classical-bit-encryption-native-coupling-repair.json",
+  "native_alternative_coupling_same_endpoint_full_state_laws_verified": true,
+  "native_alternative_coupling_same_local_loss_budgets": "37/128 in each direction",
+  "native_alternative_coupling_exact_source_support_recovery_verified": true,
+  "native_alternative_coupling_no_extra_correlated_state": true,
+  "native_alternative_coupling_forward_changed_verified": true,
+  "native_alternative_coupling_reachable_index_four_cell_verified": true,
+  "native_alternative_coupling_reverse_order_identity_claimed": false,
+  "native_alternative_coupling_sampler_runtime_compiled": false
 }
