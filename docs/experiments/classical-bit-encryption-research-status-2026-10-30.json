@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-29T16:55:53.648403+00:00",
+  "observed_at_utc": "2026-10-29T17:39:59.357117+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -9,32 +9,34 @@
   "perfect_four_key_gap_at_least": "145/384",
   "approximate_four_key_gap_at_least": "1/384",
   "scope": "Fixed labelled keys and prescribed boundary; internal joint key/ciphertext distance.",
-  "Foundation_machine_execution_certified": false,
-  "Foundation_machine_runtime_bound_certified": false,
+  "Foundation_machine_execution_certified": true,
+  "Foundation_machine_runtime_bound_certified": true,
   "single_continuing_machine_execution_with_caller_certified": false,
   "original_polygraph_model_connection_certified": false,
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "Fix the concrete control-point and ciphertext/key input-output encodings for one fixed finite machine program.",
-    "Compile and verify the same sampler and encryption using native instructions, with request formats, runtime, invariants and termination proofs.",
-    "Connect the program to the caller in a single continuing execution and the original polygraph interpretation.",
-    "Assess the novelty of the constrained quantitative theorem and establish the precise scope of any unbounded higher-dimensional necessity claim."
+    "Prove concrete caller continuation, private-history encapsulation or cleanup, invariants and total runtime in one continuing execution.",
+    "Connect the native implementation and quantitative distance theorem to the original polygraph interpretation.",
+    "Assess novelty of the constrained quantitative theorem and the precise scope of any unbounded higher-dimensional necessity claim."
   ],
   "native_one_bit_branch_compiled_and_audited": true,
   "native_one_bit_branch_verification_record": "docs/experiments/classical-bit-encryption-native-bit-choice.json",
   "native_one_bit_branch_overhead_bound_steps": 3,
   "next_native_obligations": [
-    "Connect a fixed native generator for eight independent fair bits and prove its complete tape law, including rewinding to read the generated word.",
-    "Instantiate the three-bit private key encoding for Fin 5 and the exact table encryption payload.",
-    "Use one fixed code with the encoded control point and message as input; a separate generated program for each vertex is not the final target.",
-    "Track generated coin and control-input history explicitly; prove cleanup or the appropriate observation restriction before transporting caller distance guarantees.",
-    "Bound code size as well as time; the current general decision-tree construction has an exponential code-size bound.",
-    "Prove the concrete caller serialization, physical handoff, invariant, stopping and continuation contracts."
+    "Track consumed control and coin history: prove cleanup or observation restriction before claiming arbitrary caller distance guarantees.",
+    "Prove caller preparation, physical handoff, invariants, stopping and continuation contracts.",
+    "Investigate sharing or comparison-based code if polynomial compiler size in request width is required; the reference decision tree has an exponential bound."
   ],
   "native_finite_word_decoder_verified": true,
   "native_private_three_bit_key_writer_verified": true,
   "native_word_decoder_record": "docs/experiments/classical-bit-encryption-native-bit-decoder.json",
   "native_private_payload_runtime_bound": "9 + 3*n",
-  "native_private_payload_code_length_bound": "15 * 2^n - 6"
+  "native_private_payload_code_length_bound": "15 * 2^n - 6",
+  "native_common_controlled_program_verified": true,
+  "native_raw_initial_observation_law_verified": true,
+  "native_common_runtime_bound_steps": 148,
+  "native_common_code_length_bound": "code.length+6 <= 3932*2^19",
+  "native_common_code_size_polynomial_in_control_width_claimed": false,
+  "native_common_program_record": "docs/experiments/classical-bit-encryption-native-initial-cipher.json"
 }
