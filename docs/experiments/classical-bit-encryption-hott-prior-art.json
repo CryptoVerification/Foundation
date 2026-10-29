@@ -1,0 +1,27 @@
+{
+  "checked_date": "2026-10-30",
+  "source": {
+    "author": "Paventhan Vivekanandan",
+    "title": "A Type-based Formal Specification for Cryptographic Protocols",
+    "year": 2018,
+    "journal": "Journal of Internet Services and Information Security",
+    "volume": 8,
+    "issue": 4,
+    "pages": "16-36",
+    "url": "https://isyou.info/jisis/vol8/no4/jisis-2018-vol8-no4-02.pdf"
+  },
+  "read_scope": "Selected web-extracted passages only: abstract/introduction; OTP specification and universe interpretation; section 4 description of CryptDB and homomorphic correctness; section 7 limitations and future work. Not a full-paper read.",
+  "primary_source_observations": [
+    {
+      "locator": "sections 1, 3, 4",
+      "claim": "Higher inductive types encode encryption and correctness laws as paths and higher paths, including OTP and CryptDB examples."
+    },
+    {
+      "locator": "section 7, printed pp.32-33",
+      "claim": "The author discusses difficulties mapping nonbijective and probabilistic encryption to the path interpretation, and lists security guarantees via paths as future work."
+    }
+  ],
+  "our_comparison_not_a_source_claim": "Using higher paths for cryptographic correctness is prior art. The present finite-table candidate instead concerns extension and quantitative edge-distance obstructions for parameterized stochastic cipher families. A difference in the question is not proof of novelty, practical cryptographic advantage, or necessity of infinity categories.",
+  "exact_prior_theorem_match_established": false,
+  "newness_established": false
+}

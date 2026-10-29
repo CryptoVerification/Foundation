@@ -1,0 +1,44 @@
+{
+  "observed_at_utc": "2026-10-29T16:11:28.157305+00:00",
+  "record_scope": "Progress snapshot, not a complete all-edge or final comparison certificate.",
+  "superseded_serial_run": {
+    "session": 29271,
+    "exit_code": 130,
+    "reason": "Superseded by individually cached row modules after successful split-row probe; serial-only mode still reached 21.1 GB observed footprint."
+  },
+  "split_row_probe": {
+    "session": 26825,
+    "exit_code": 0,
+    "real_seconds": 162.34,
+    "user_seconds": 57.03,
+    "system_seconds": 19.8,
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "scope": "First coordinate 0, all second-coordinate cases split and kernel checked.",
+    "source": "/- The exhaustive neighbor checks use serial elaboration to limit peak memory.\nThe dated experiment records distinguish completed builds from interrupted runs. -/\nimport Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitData\n\n/-! Binary neighboring grid vertices: a sufficient superset of actual edges.\nThe exhaustive integer distance certificates are checked by the Lean kernel. -/\nnamespace Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.EightBitTable\nopen scoped BigOperators\n\ndef neighborIncrement (mask : Fin 8) (j : Fin 3) : \u2115 :=\n  if j.val = 0 then mask.val % 2 else if j.val = 1 then (mask.val / 2) % 2 else (mask.val / 4) % 2\n\ndef neighborCheck (a b c : \u2115) (mask : Fin 8) : Prop :=\n  let aa := a+neighborIncrement mask 0\n  let bb := b+neighborIncrement mask 1\n  let cc := c+neighborIncrement mask 2\n  aa \u2264 bb \u2192 bb \u2264 cc \u2192 cc \u2264 32 \u2192\n    (\u2211 k : Fin 5, |counts a b c k.val-counts aa bb cc k.val|) \u2264 148\n\ndef neighborRowCheck (a : \u2115) : Prop :=\n  \u2200 b c : Fin 33, a \u2264 b.val \u2192 b.val \u2264 c.val \u2192 \u2200 mask : Fin 8, neighborCheck a b.val c.val mask\n\nlocal instance (a b c : \u2115) (mask : Fin 8) : Decidable (neighborCheck a b c mask) := by\n  unfold neighborCheck; infer_instance\nlocal instance (a : \u2115) : Decidable (neighborRowCheck a) := by unfold neighborRowCheck; infer_instance\nset_option maxRecDepth 65536\nset_option maxHeartbeats 0\nset_option Elab.async false\n\ntheorem split_row_0 : neighborRowCheck 0 := by\n  unfold neighborRowCheck\n  intro b\n  fin_cases b <;> decide +kernel\n#print axioms split_row_0\nend Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.EightBitTable\n",
+    "output": "'Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.EightBitTable.split_row_0' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\nreal 162.34\nuser 57.03\nsys 19.80\n"
+  },
+  "new_build_session": 14969,
+  "new_lake_pid": 30308,
+  "row_module_count": 33,
+  "completed_row_modules_at_observation": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "all_three_original_predicate_definitions_unchanged": true,
+  "generated_Lean_files_reproduced_exactly": 35,
+  "full_build_completed_at_observation": false,
+  "all_edge_upper_bound_verified_by_this_record": false,
+  "comparison_candidate": "Foundation/Crypto/Semantics/Probability/ClassicalBitEightBitCertifiedComparison.lean",
+  "comparison_candidate_full_build_passed": false
+}

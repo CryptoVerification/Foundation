@@ -1,0 +1,119 @@
+{
+  "target_module": "Foundation.Crypto.Semantics.Machine.NativePrivateBitResult",
+  "targeted_lake_build_passed": true,
+  "lean_toolchain": "leanprover/lean4:v4.33.0",
+  "axioms_per_theorem": {
+    "Machine.NativeBitDecisionTree.preload_moveRight_cons": [
+      "propext"
+    ],
+    "Machine.NativeBitDecisionTree.afterRead_cons": [
+      "propext"
+    ],
+    "Machine.NativeBitDecisionTree.run_selected": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Machine.NativeBitDecisionTree.finishControl_overwrite": [
+      "propext"
+    ],
+    "Machine.NativeBitDecisionTree.compile_contract": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Machine.NativeBitDecisionTree.compile_halts": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Machine.NativeBitDecisionTree.compile_run": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Machine.NativeBitDecisionTree.compile_length_bound": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Machine.NativePrivateBitResult.code_length": [
+      "propext"
+    ],
+    "Machine.NativePrivateBitResult.run": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Machine.NativePrivateBitResult.stops": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Machine.NativePrivateBitResult.writeKey_buffer": [
+      "propext"
+    ],
+    "Machine.NativePrivateBitResult.writeOutput_buffer": [
+      "propext"
+    ],
+    "Machine.NativePrivateBitResult.compiled_halts": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Machine.NativePrivateBitResult.compiled_run": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Machine.NativePrivateBitResult.compiled_length_bound": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Machine.NativePrivateBitResult.afterRead_keyBuffer": [],
+    "Machine.NativePrivateBitResult.finish_buffers": [
+      "propext"
+    ],
+    "Machine.NativePrivateBitResult.compiled_buffers_run": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "sorry_or_additional_axioms_in_listed_theorems": false,
+  "one_fixed_native_code_per_fixed_payload_table": true,
+  "exact_joint_physical_configuration_law_verified": true,
+  "arbitrary_retained_input_and_output_frames_and_suffixes": true,
+  "generic_uniform_native_leaf_stopping_contract_required": true,
+  "private_payload_leaf_stopping_contract_discharged": true,
+  "input_format": "n real input bits; buffered placement reserves three private key cells and one output cell, followed by arbitrary suffixes.",
+  "generic_runtime_bound_steps": "T + 3*n",
+  "generic_code_length_bound": "code.length + 6 <= (L + 6) * 2^n",
+  "private_key_bit_count": 3,
+  "ciphertext_output_bit_count": 1,
+  "private_payload_leaf_steps": 9,
+  "private_payload_decoder_runtime_bound_steps": "9 + 3*n",
+  "private_payload_decoder_code_length_bound": "code.length + 6 <= 15 * 2^n",
+  "read_word_is_retained_in_private_input_history": true,
+  "native_fair_random_generator_connected": false,
+  "five_key_label_encoding_instantiated": false,
+  "native_cipher_table_compiled": false,
+  "entire_sampler_machine_runtime_certified": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Machine/Basic.lean": "51c0be5bded74cd04a7c0238eb37321d053486f23ef3a8df4f39bcf68753a08e",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Machine/Execution.lean": "5fd9ce0ae48c32ecbe25cc3e95f225c3fdff28c64e4b60bb0d5fe5abf58c6270",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Machine/NativeBitChoice.lean": "cf2c56fe8105fbd18ad34ddad17ffa25f509858120108ef88b63034dd5c55c0e",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Machine/NativeBitDecisionTree.lean": "d3d3821deedb61441debe9ac2b8ae5911b8cace233f8368f46f918cb7892bace",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Machine/NativePrivateBitResult.lean": "34c1e67e5a30234ec94c9b4e5d05b3bcaa45e99d612e35b4c3b053e352caeb31",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Machine/Subroutine.lean": "aa1c1bffef80347ad8b86ebe4291e9a369b56abdd8433b5426766e6c450e7313",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Machine/SubroutineAtHalt.lean": "5c919bc06068ab5b8c96ad795ffaeef8cb861a651e325a298ee3513f8271de19",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Machine/SubroutineProbability.lean": "f9fc426e46ccfd9ed838d6178dbaa5cb0934ec495c2dcb11274120f141059ed9",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Machine/SubroutineRuntime.lean": "a7da38902425a455678eee4763ec130a693944762a25fbab16c53353e1317e4c",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Machine/SubroutineSimulation.lean": "7c08b349f894de639c7e69f7499918f412ae9f1b4540b6b72fc51344b8cf8dff",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/Comp.lean": "ce7f3c43eab876347ed9047cca93211a1ddf44016628618f616b9653924f0887",
+    "/Users/hiro/workspace/Foundation/docs/experiments/classical-bit-encryption-native-bit-decoder.py": "e4951f8096c1af8870b73baa4cf370cedb4433a80d8d806dbde11fc7d57e159e",
+    "/Users/hiro/workspace/Foundation/lakefile.toml": "b537fcdfd0e540cfd6f310d771aff1eb8fc24ab107a421b02cfa42cf131a9411",
+    "/Users/hiro/workspace/Foundation/lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
+    "/Users/hiro/workspace/Foundation/lake-manifest.json": "ef3799fa73ec244f1db2063a084e5c03ab1196e16604e883952f870179bff929"
+  }
+}

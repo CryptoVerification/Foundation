@@ -1,8 +1,7 @@
-/- Checkpoint 2026-10-28: the full build has not completed.
-The user requested a checkpoint; the exhaustive neighbor check was interrupted.
-This file is a proof candidate, not a completed validation artifact. -/
+/- Concrete finite comparison using the sliced exhaustive neighbor certificates.
+Build completion and axiom audits are recorded by the verification runner. -/
 import Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitBoundary
-import Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitNeighborChecks
+import Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitSlicedNeighborChecks
 
 /-! Kernel-checked finite separation on the actual N=32 grid edges.
 Distances retain the secret key label; they are not adversarial advantage. -/

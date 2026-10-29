@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-30",
+  "record_scope": "Interrupted run and serial-elaboration change; not a completed all-edge certificate.",
+  "previous_run": {
+    "session": 68997,
+    "lake_pid": 27076,
+    "lean_pid": 27104,
+    "exit_code": 130,
+    "stop_reason": "30-minute execution limit with observed 24.9 GB physical footprint",
+    "profile": "/tmp/foundation-neighbor-stack.txt",
+    "input_source_sha256": "ee8892448305113ac750e7dd1376f0f00e8e2e15dc75460c050b659584298272"
+  },
+  "serial_change": {
+    "option": "Elab.async false",
+    "input_source_sha256": "781c422fc2649810abfc9ca8f8fc3421cd86203b556b0c764aa1f3550f97cded",
+    "all_definitions_and_33_kernel_row_proofs_unchanged": true,
+    "new_session": 29271,
+    "new_lake_pid": 29488,
+    "new_lean_pid": 29518
+  },
+  "full_build_passed_by_this_record": false
+}

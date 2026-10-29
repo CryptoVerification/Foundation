@@ -1,0 +1,83 @@
+{
+  "target_module": "Foundation.Crypto.Semantics.Machine.NativeBitChoice",
+  "targeted_lake_build_passed": true,
+  "lean_toolchain": "leanprover/lean4:v4.33.0",
+  "axioms_per_theorem": {
+    "Machine.Program.evalConfigWithin_withSubroutine_haltAt": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Machine.NativeBitChoice.code_length": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Machine.NativeBitChoice.onePrefix_length": [
+      "propext"
+    ],
+    "Machine.NativeBitChoice.code_one_layout": [
+      "propext"
+    ],
+    "Machine.NativeBitChoice.code_return_halt": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Machine.NativeBitChoice.zero_prefix_run": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Machine.NativeBitChoice.one_prefix_run": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Machine.NativeBitChoice.run_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Machine.NativeBitChoice.run_one": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Machine.NativeBitChoice.halts_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Machine.NativeBitChoice.halts_one": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "sorry_or_additional_axioms_in_listed_theorems": false,
+  "real_input_bit_is_read_and_consumed": true,
+  "joint_physical_tape_law_matches_chosen_branch": true,
+  "arbitrary_inherited_input_and_output_tapes_allowed": true,
+  "source_all_branch_stopping_contract_required": true,
+  "input_precondition": "The current input cell contains the selected Boolean bit.",
+  "native_branch_overhead_bound_steps": 3,
+  "compiled_code_length": "zero.length + one.length + 6",
+  "native_cipher_table_compiled": false,
+  "entire_sampler_machine_runtime_certified": false,
+  "newness_established": false,
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Machine/Basic.lean": "51c0be5bded74cd04a7c0238eb37321d053486f23ef3a8df4f39bcf68753a08e",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Machine/Execution.lean": "5fd9ce0ae48c32ecbe25cc3e95f225c3fdff28c64e4b60bb0d5fe5abf58c6270",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Machine/NativeBitChoice.lean": "cf2c56fe8105fbd18ad34ddad17ffa25f509858120108ef88b63034dd5c55c0e",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Machine/Subroutine.lean": "aa1c1bffef80347ad8b86ebe4291e9a369b56abdd8433b5426766e6c450e7313",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Machine/SubroutineAtHalt.lean": "5c919bc06068ab5b8c96ad795ffaeef8cb861a651e325a298ee3513f8271de19",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Machine/SubroutineProbability.lean": "f9fc426e46ccfd9ed838d6178dbaa5cb0934ec495c2dcb11274120f141059ed9",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Machine/SubroutineRuntime.lean": "a7da38902425a455678eee4763ec130a693944762a25fbab16c53353e1317e4c",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Machine/SubroutineSimulation.lean": "7c08b349f894de639c7e69f7499918f412ae9f1b4540b6b72fc51344b8cf8dff",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/Comp.lean": "ce7f3c43eab876347ed9047cca93211a1ddf44016628618f616b9653924f0887",
+    "/Users/hiro/workspace/Foundation/docs/experiments/classical-bit-encryption-native-bit-choice.py": "a86f17683c7bb7c05d5633b8a264129f9a1c8ce8d22c0265aa7cf213593ad804",
+    "/Users/hiro/workspace/Foundation/lakefile.toml": "b537fcdfd0e540cfd6f310d771aff1eb8fc24ab107a421b02cfa42cf131a9411",
+    "/Users/hiro/workspace/Foundation/lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
+    "/Users/hiro/workspace/Foundation/lake-manifest.json": "ef3799fa73ec244f1db2063a084e5c03ab1196e16604e883952f870179bff929"
+  }
+}

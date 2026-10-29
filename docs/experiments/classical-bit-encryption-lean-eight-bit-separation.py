@@ -1,4 +1,4 @@
-# Checkpoint 2026-10-28: this runner is prepared; its target has not yet passed the full build.
+# Emit a certificate only after the complete target and its axiom audits pass.
 """Verify the complete concrete four-versus-five key separation, including every actual grid edge."""
 from pathlib import Path
 import hashlib
@@ -41,17 +41,19 @@ def main():
         if unexpected:
             raise RuntimeError('Unexpected axioms: ' + repr(unexpected))
     stem = ROOT / 'Foundation/Crypto/Semantics/Probability'
-    modules = ['ClassicalBitEightBitSeparation', 'ClassicalBitEightBitNeighborChecks', 'ClassicalBitEightBitBoundary', 'ClassicalBitEightBitVertices', 'ClassicalBitEightBitData', 'ClassicalBitDyadicCertificate', 'ClassicalBitGridGluing', 'ClassicalBitIntegralChain', 'ClassicalBitGridComplex', 'ClassicalBitGridLocator', 'ClassicalBitCubeTriangulation', 'ClassicalBitMeshGeometry', 'ClassicalBitMeshCoordinates', 'ClassicalBitProjectiveInterpolation', 'ClassicalBitBoundaryError', 'ClassicalBitRobustBoundary', 'ClassicalBitBrouwerObstruction',
+    modules = ['ClassicalBitEightBitSeparation', 'ClassicalBitEightBitSlicedNeighborChecks', 'ClassicalBitEightBitNeighborPredicates', 'ClassicalBitEightBitBoundary', 'ClassicalBitEightBitVertices', 'ClassicalBitEightBitData', 'ClassicalBitDyadicCertificate', 'ClassicalBitGridGluing', 'ClassicalBitIntegralChain', 'ClassicalBitGridComplex', 'ClassicalBitGridLocator', 'ClassicalBitCubeTriangulation', 'ClassicalBitMeshGeometry', 'ClassicalBitMeshCoordinates', 'ClassicalBitProjectiveInterpolation', 'ClassicalBitBoundaryError', 'ClassicalBitRobustBoundary', 'ClassicalBitBrouwerObstruction',
                'ClassicalBitTetrahedralBoundary', 'ClassicalBitNormalizedBoundary',
                'ClassicalBitSimplicialInterpolation', 'ClassicalBitBoundaryCertificate',
                'ClassicalBitConvexCertificate', 'ClassicalBitSimplexCertificate',
                'ClassicalBitRepairStability', 'ClassicalBitRepair']
+    modules += ['ClassicalBitEightBitNeighborRows/Row' + str(a) for a in range(33)]
     vendor = ROOT / 'Foundation/ThirdParty/Brouwer'
     sources = [Path(__file__).resolve()] + [stem / (name + '.lean') for name in modules] + [
         vendor / name for name in ['Scarf.lean', 'PathComponents.lean', 'ScarfPath.lean',
                                   'Brouwer.lean', 'LICENSE', 'ORIGIN.json']] + [
         ROOT / 'lakefile.toml', ROOT / 'lean-toolchain', ROOT / 'lake-manifest.json']
-    sources += [ROOT / 'docs/experiments/classical-bit-encryption-lean-eight-bit-data.py',
+    sources += [ROOT / 'docs/experiments/classical-bit-encryption-lean-eight-bit-neighbor-slices.py',
+                ROOT / 'docs/experiments/classical-bit-encryption-lean-eight-bit-data.py',
                 ROOT / 'docs/experiments/classical-bit-encryption-mesh-separation.py']
     print(json.dumps({
         'target_module': MODULE, 'targeted_lake_build_passed': True,

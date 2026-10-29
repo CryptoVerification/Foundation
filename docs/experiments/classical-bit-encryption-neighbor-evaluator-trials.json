@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-30",
+  "purpose": "Exploratory evaluator trials; not an all-edge certificate or controlled performance benchmark.",
+  "lean_toolchain": "leanprover/lean4:v4.33.0",
+  "input_data_path": "Foundation/Crypto/Semantics/Probability/ClassicalBitEightBitData.lean",
+  "input_data_sha256": "9f4780cd28f45b6d6bc4d15a9a051f04f2e3fb787314fa1d81e6521af5221847",
+  "slice_scope": "a=0, b=0; all c in Fin 33 and masks in Fin 8 with the original guards",
+  "kernel_slice": {
+    "exit_code": 0,
+    "real_seconds": 14.86,
+    "user_seconds": 5.36,
+    "system_seconds": 8.07,
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "probe_source": "/- Checkpoint 2026-10-28: the full build has not completed.\nThe user requested a checkpoint; the exhaustive neighbor check was interrupted.\nThis file is a proof candidate, not a completed validation artifact. -/\nimport Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitData\n\n/-! Binary neighboring grid vertices: a sufficient superset of actual edges.\nThe exhaustive integer distance certificates are checked by the Lean kernel. -/\nnamespace Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.EightBitTable\nopen scoped BigOperators\n\ndef neighborIncrement (mask : Fin 8) (j : Fin 3) : \u2115 :=\n  if j.val = 0 then mask.val % 2 else if j.val = 1 then (mask.val / 2) % 2 else (mask.val / 4) % 2\n\ndef neighborCheck (a b c : \u2115) (mask : Fin 8) : Prop :=\n  let aa := a+neighborIncrement mask 0\n  let bb := b+neighborIncrement mask 1\n  let cc := c+neighborIncrement mask 2\n  aa \u2264 bb \u2192 bb \u2264 cc \u2192 cc \u2264 32 \u2192\n    (\u2211 k : Fin 5, |counts a b c k.val-counts aa bb cc k.val|) \u2264 148\n\ndef neighborRowCheck (a : \u2115) : Prop :=\n  \u2200 b c : Fin 33, a \u2264 b.val \u2192 b.val \u2264 c.val \u2192 \u2200 mask : Fin 8, neighborCheck a b.val c.val mask\n\nlocal instance (a b c : \u2115) (mask : Fin 8) : Decidable (neighborCheck a b c mask) := by\n  unfold neighborCheck; infer_instance\nlocal instance (a : \u2115) : Decidable (neighborRowCheck a) := by unfold neighborRowCheck; infer_instance\nset_option maxRecDepth 65536\nset_option maxHeartbeats 0\n\n\ndef neighborSliceCheck (a b : \u2115) : Prop :=\n  \u2200 c : Fin 33, b \u2264 c.val \u2192 \u2200 mask : Fin 8, neighborCheck a b c.val mask\nlocal instance (a b : \u2115) : Decidable (neighborSliceCheck a b) := by\n  unfold neighborSliceCheck; infer_instance\n theorem slice_0_0 : neighborSliceCheck 0 0 := by decide +kernel\n#print axioms slice_0_0\nend Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.EightBitTable\n"
+  },
+  "cbv_slice": {
+    "exit_code": 0,
+    "real_seconds": 131.99,
+    "user_seconds": 43.69,
+    "system_seconds": 18.53,
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "probe_source": "/- Checkpoint 2026-10-28: the full build has not completed.\nThe user requested a checkpoint; the exhaustive neighbor check was interrupted.\nThis file is a proof candidate, not a completed validation artifact. -/\nimport Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitData\n\n/-! Binary neighboring grid vertices: a sufficient superset of actual edges.\nThe exhaustive integer distance certificates are checked by the Lean kernel. -/\nnamespace Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.EightBitTable\nopen scoped BigOperators\n\ndef neighborIncrement (mask : Fin 8) (j : Fin 3) : \u2115 :=\n  if j.val = 0 then mask.val % 2 else if j.val = 1 then (mask.val / 2) % 2 else (mask.val / 4) % 2\n\ndef neighborCheck (a b c : \u2115) (mask : Fin 8) : Prop :=\n  let aa := a+neighborIncrement mask 0\n  let bb := b+neighborIncrement mask 1\n  let cc := c+neighborIncrement mask 2\n  aa \u2264 bb \u2192 bb \u2264 cc \u2192 cc \u2264 32 \u2192\n    (\u2211 k : Fin 5, |counts a b c k.val-counts aa bb cc k.val|) \u2264 148\n\ndef neighborRowCheck (a : \u2115) : Prop :=\n  \u2200 b c : Fin 33, a \u2264 b.val \u2192 b.val \u2264 c.val \u2192 \u2200 mask : Fin 8, neighborCheck a b.val c.val mask\n\nlocal instance (a b c : \u2115) (mask : Fin 8) : Decidable (neighborCheck a b c mask) := by\n  unfold neighborCheck; infer_instance\nlocal instance (a : \u2115) : Decidable (neighborRowCheck a) := by unfold neighborRowCheck; infer_instance\nset_option maxRecDepth 65536\nset_option maxHeartbeats 0\n\n\ndef neighborSliceCheck (a b : \u2115) : Prop :=\n  \u2200 c : Fin 33, b \u2264 c.val \u2192 \u2200 mask : Fin 8, neighborCheck a b c.val mask\nlocal instance (a b : \u2115) : Decidable (neighborSliceCheck a b) := by\n  unfold neighborSliceCheck; infer_instance\nset_option cbv.maxSteps 1000000\n theorem slice_0_0 : neighborSliceCheck 0 0 := by decide_cbv\n#print axioms slice_0_0\nend Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.EightBitTable\n",
+    "output": "'Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.EightBitTable.slice_0_0' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\nreal 131.99\nuser 43.69\nsys 18.53\n"
+  },
+  "cbv_full_first_row": {
+    "exit_code": 1,
+    "real_seconds": 114.47,
+    "reason": "Default cbv.maxSteps=100000 exhausted. The failed theorem printed sorryAx and is not an accepted proof.",
+    "output": "/tmp/FoundationNeighborCbvProbe.lean:30:45: error: `simp` failed: maximum number of steps exceeded\n'Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.EightBitTable.cbv_row_0' depends on axioms: [propext,\n sorryAx,\n Classical.choice,\n Quot.sound]\nreal 114.47\nuser 25.39\nsys 18.53\n"
+  },
+  "interpretation": "The replacement evaluator did not supply evidence for a speedup in these trials. Retain the running original all-row kernel check. Different process contention and memory pressure prevent a controlled timing claim.",
+  "all_edge_upper_bound_verified_by_this_record": false
+}
