@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-29T19:26:07.364192+00:00",
+  "observed_at_utc": "2026-10-29T19:44:48.495112+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -16,7 +16,7 @@
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "Provide explicit native realization and boundary-preservation contracts for the compared four-key candidate implementations, so the transferred lower bounds apply through those contracts.",
+    "Instantiate a concrete four-key native candidate satisfying the explicit encryption/decryption profile and boundary contracts, if such a concrete comparison is required.",
     "If full retained-state statistical transformations are required by the intended comparison model, supply their conditional kernels and higher coherence certificates; current statistical edge diagrams use the native-written Boolean decision view.",
     "Instantiate caller adapters for protocols beyond the fixed 39-bit reference request."
   ],
@@ -24,7 +24,7 @@
   "native_one_bit_branch_verification_record": "docs/experiments/classical-bit-encryption-native-bit-choice.json",
   "native_one_bit_branch_overhead_bound_steps": 3,
   "next_native_obligations": [
-    "Connect candidate four-key machine profiles to their required semantic, boundary and stopping contracts.",
+    "Discharge the explicit profile and boundary contracts for any further candidate implementation; native four-key existence has not been instantiated.",
     "Prove additional caller code, preparation, invariants and stopping before assigning runtime to new native contexts.",
     "If polynomial compiler size in growing control width is required, replace the fixed reference exponential control decision tree by shared or comparison-based code."
   ],
@@ -96,5 +96,10 @@
   "native_decision_edge_coupling": "uniform Fin 256 with checked threshold marginals",
   "native_decision_chain_error_bound": "n * (37/128)",
   "native_general_retained_state_statistical_kernel_coherence_verified": false,
-  "original_polygraph_model_connection_status": "Exact returned-packet and retained labelled-state interpretation, two certified four-cell comparisons, and Boolean statistical edge/path diagrams are verified; general full-state statistical kernels and candidate-machine comparison contracts remain separate."
+  "original_polygraph_model_connection_status": "Exact returned-packet and retained labelled-state interpretation, two certified four-cell comparisons, and Boolean statistical edge/path diagrams are verified. Native cipher-family comparison contracts and a five-key encryption/decryption instance are verified. General full-state statistical kernels and concrete four-key candidate instantiation remain separate.",
+  "native_cipher_realization_contracts_verified": true,
+  "native_cipher_realization_record": "docs/experiments/classical-bit-encryption-native-cipher-realization.json",
+  "native_five_key_family_with_encryption_and_decryption_verified": true,
+  "native_five_key_decryption_runtime_bound_steps": 69,
+  "native_four_key_machine_candidate_instantiated": false
 }
