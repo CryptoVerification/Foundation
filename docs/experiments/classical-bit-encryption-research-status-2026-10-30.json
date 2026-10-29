@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-29T20:35:48.629355+00:00",
+  "observed_at_utc": "2026-10-29T20:44:09.441580+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -16,7 +16,7 @@
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "If path-independent state correspondence is required, supply compatible kernel choices or an explicit extension of retained state. The currently selected maximal kernels have a verified nonidentity round trip, even with the same loss budget as the identity path.",
+    "Construct and verify a compatible alternative forward coupling or an explicit state extension if exact recovery is required. Changing only the reverse of the current fixed maximal kernel cannot restore every reachable source; other kernel choices and approximate recovery remain separate.",
     "Instantiate caller adapters for protocols beyond the fixed 39-bit reference request."
   ],
   "native_one_bit_branch_compiled_and_audited": true,
@@ -133,5 +133,15 @@
   "native_selected_maximal_kernel_roundtrip_vs_identity_same_budget": "37/64; identity budget is conservative padding",
   "native_selected_maximal_kernel_roundtrip_no_four_cell_verified": true,
   "native_selected_maximal_kernel_roundtrip_no_diagram_edits_verified": true,
-  "native_selected_kernel_counterexample_excludes_other_coupling_choices": false
+  "native_selected_kernel_counterexample_excludes_other_coupling_choices": false,
+  "native_exact_recovery_support_separation_criterion_verified": true,
+  "native_fixed_forward_any_reverse_obstruction_verified": true,
+  "native_fixed_forward_any_reverse_obstruction_record": "docs/experiments/classical-bit-encryption-native-state-recovery.json",
+  "native_fixed_forward_shared_intermediate_probabilities": [
+    "25/296 from source key 0",
+    "85/1184 from source key 2"
+  ],
+  "native_fixed_forward_all_reverse_game_paths_no_identity_cell_verified": true,
+  "native_fixed_forward_all_reverse_game_paths_no_identity_edits_verified": true,
+  "native_fixed_forward_obstruction_allows_forward_changes_or_extra_state": true
 }
