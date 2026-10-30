@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-30T14:54:43.757820+00:00",
+  "observed_at_utc": "2026-10-30T15:14:55.319773+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -16,15 +16,14 @@
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "Connect the compiled sharp-edge forward realization to the existing local-loss and recovery four-cell statements, including native reverse code and all continuation budgets. The native entry and canonical cell-layout/public-packet exit adapters are now verified. Full-cell equality uses an executed common-terminal target wrapper; public equality also holds with the original unwrapped target.",
-    "Extend compatible coupling choices and coherence beyond the repaired sharp-edge direction if required. The new construction is a one-sided recovery on the reachable source invariant; reverse-order identity, identity on unreachable states, and a general path-independent family are not established.",
+    "Extend compatible native coupling choices and coherence beyond the repaired sharp edge. The current one-sided recovery is verified on the two reachable source states; reverse-order target identity, identity on unreachable states, and a general path-independent family are not established.",
     "Instantiate caller adapters for protocols beyond the fixed 39-bit reference request."
   ],
   "native_one_bit_branch_compiled_and_audited": true,
   "native_one_bit_branch_verification_record": "docs/experiments/classical-bit-encryption-native-bit-choice.json",
   "native_one_bit_branch_overhead_bound_steps": 3,
   "next_native_obligations": [
-    "Compile and verify the reverse full-state recovery program and connect native forward/reverse execution laws to the existing one-sided four-cell. Count its caller preparation, native execution, exit formatting and control. The forward execution and both endpoint adapters are already verified for the repaired sharp edge.",
+    "For any further edge or protocol, give compatible native conditional kernels, reverse programs, entry/exit formats, time and stopping proofs. The repaired sharp-edge forward/reverse programs and their recovery four-cell are now connected, with actual full-cell stationary comparison at common executed control.",
     "Discharge the explicit profile and boundary contracts for any further candidate implementation; the prescribed-boundary four-key reference witness now has a native instance.",
     "Prove additional caller code, preparation, invariants and stopping before assigning runtime to new native contexts.",
     "If polynomial compiler size in growing control width is required, replace the fixed reference exponential control decision tree by shared or comparison-based code."
@@ -156,7 +155,7 @@
   "native_alternative_coupling_reachable_index_four_cell_verified": true,
   "native_alternative_coupling_reverse_order_identity_claimed": false,
   "native_alternative_coupling_sampler_runtime_compiled": true,
-  "native_alternative_coupling_sampler_runtime_scope": "The repaired sharp-edge construction now has native reference-state entry and canonical cell-layout/public-packet exit adapters. The full raw transformed execution stops within 1219 steps. Its public law equals the original 930-step target reference; its full-cell law, including actual control, equals an actually executed 932-step target wrapper with common terminal control. General grid kernels and native reverse/coherence contexts remain separate.",
+  "native_alternative_coupling_sampler_runtime_scope": "The repaired sharp-edge native forward runs within 288 steps from a reference exit, and its native reverse within 101. Their one continuing 390-step execution recovers each of the two admitted source states. The raw source experiment and roundtrip stop within 1321 steps and have full-cell identity against a charged 932-step stationary reference at common terminal control; public identity also holds against the original 930-step reference. Native observed kernels realize the local-loss recovery four-cell. General grid couplings and arbitrary native contexts remain separate.",
   "native_conditional_coupling_sampler_record": "docs/experiments/classical-bit-encryption-native-coupling-sampler.json",
   "native_conditional_coupling_request_bits": 2,
   "native_conditional_coupling_fair_coin_count": 7,
@@ -205,5 +204,25 @@
   "native_canonical_coupling_public_reference_game_reification_verified": true,
   "native_canonical_coupling_free_control_normalization_used": false,
   "native_canonical_coupling_equal_actual_runtimes_claimed": false,
-  "native_full_cell_state_sampler_runtime_compiled_scope": "The existing false flag refers to the original general statistical kernels over all grid edges. A different repaired sharp-edge sampler is now compiled with explicit endpoint adapters and executed common terminal control."
+  "native_full_cell_state_sampler_runtime_compiled_scope": "The existing false flag refers to the original general statistical kernels over all grid edges. A different repaired sharp-edge sampler is now compiled with explicit endpoint adapters and executed common terminal control.",
+  "native_compiled_recovery_record": "docs/experiments/classical-bit-encryption-native-compiled-recovery.json",
+  "native_recovery_writer_runtime_bound_steps": 55,
+  "native_recovery_writer_code_length_bound": 126,
+  "native_reverse_coupling_runtime_bound_steps": 101,
+  "native_reverse_coupling_code_length_bound": 390,
+  "native_repaired_forward_canonical_runtime_bound_steps": 288,
+  "native_continuing_forward_reverse_runtime_bound_steps": 390,
+  "native_continuing_forward_reverse_code_length_bound": 9064,
+  "native_raw_reference_and_roundtrip_runtime_bound_steps": 1321,
+  "native_roundtrip_stationary_reference_runtime_bound_steps": 932,
+  "native_pointwise_recovery_of_both_admitted_source_states_verified": true,
+  "native_roundtrip_full_cell_identity_against_executed_stationary_wrapper_verified": true,
+  "native_roundtrip_public_identity_against_original_reference_verified": true,
+  "native_recovery_cell_observed_kernels_realized_by_native_programs": true,
+  "native_recovery_cell_path_matches_single_continuing_machine": true,
+  "native_repaired_sharp_edge_polygraph_four_cell_and_edits_verified": true,
+  "native_recovery_cell_local_loss_budgets": "37/128 forward and reverse; 37/64 roundtrip and conservatively padded stationary path",
+  "native_raw_recovery_identity_exact_game_step_verified": true,
+  "native_recovery_reverse_order_target_identity_claimed": false,
+  "native_recovery_identity_on_unreachable_states_claimed": false
 }
