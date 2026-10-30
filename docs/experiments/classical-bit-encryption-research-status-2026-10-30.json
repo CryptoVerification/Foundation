@@ -16,7 +16,7 @@
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "Extend finite approximate cells and annotated diagram edits to general infinite endpoint outcomes and more general state encodings. Correlated frames now lift using explicit joint preservation, constructible from supported-label conditional preservation or local tag invariants. Apply these obligations to further actual caller and protocol states.",
+    "Arbitrary discrete PMF endpoint types now have total variation, input-weighted conditional distance, sound approximate cells, closed diagram edits, preserving sequential contexts, and retained-input observer guarantees. The finite theory embeds with the same budget. The actual native infinite state type has a positive-error recovery cell and edit, with no zero-budget cell for the chosen paths. Generalize the new interface to independent parallel products, correlated frames and additional state encodings/callers; the existing finite product/frame results remain valid. The concrete native source distribution in this example still has finite support.",
     "Choose compatible approximate kernels across the full grid; the full-support edge requires at least 3/256 source-weighted recovery discrepancy. Its chosen both-preserving example admits an approximate cell at exactly 5719/253440, which is minimal for that fixed path, but optimality over all preserving pairs remains open.",
     "Generalize the fixed-five-state, twelve-bit fair-kernel construction to further boundaries and widths, with controlled local error. Local integer edit paths compile to 307-step native samplers from one initial certificate and local nonnegative/label conditions; arbitrary pairs have a 663-step continuing execution. All 95 examples now connect to the actual original cipher, entry preparation, both history erasures, packet restoration, and a per-parameter charged common-control stationary comparator. The complete loop stops within 1676 steps and matches the 932-step stationary final-state law at the selected source. Post-packet conditional recovery is bounded by 13037041/536870912 + 1849*r/524288. Move completeness, recovery optimization, whole-grid compatibility, and generalization beyond this fixed key/coin/request format remain open.",
     "Instantiate native caller adapters for protocols beyond the fixed 39-bit reference request."
@@ -419,5 +419,24 @@
   "local_integer_cycle_native_family_post_packet_cut_final_marginal_matches_actual_program": true,
   "local_integer_cycle_native_family_post_packet_recovery_error_bound": "13037041/536870912 + 1849*r/524288 for r=0,...,94",
   "local_integer_cycle_native_family_stationary_comparator_depends_on_parameter": true,
-  "local_integer_cycle_native_family_time_observation_equality_claimed": false
+  "local_integer_cycle_native_family_time_observation_equality_claimed": false,
+  "general_discrete_recovery_record": "docs/experiments/classical-bit-encryption-general-discrete-recovery-cells.json",
+  "general_discrete_kernel_variation_without_finite_endpoint_instances_verified": true,
+  "general_discrete_kernel_distance_budget_type": "ENNReal",
+  "general_discrete_kernel_triangle_mixture_pre_post_seq_verified": true,
+  "general_discrete_retained_input_joint_distance_exact": true,
+  "general_discrete_finite_budget_compatibility_verified": true,
+  "general_discrete_approximate_cells_and_closed_diagram_edits_verified": true,
+  "general_discrete_sequential_contextual_observer_bounds_verified": true,
+  "general_native_full_state_type_proved_infinite": true,
+  "general_native_example_source_support_finite": true,
+  "general_native_actual_continuation_and_caller_conditional_distance_verified": true,
+  "general_native_conditional_distance_lower_bound": "3/256",
+  "general_native_conditional_distance_upper_bound": "13037041/536870912 + 1849*r/524288 for r=0,...,94",
+  "general_native_actual_control_approximate_cell_and_diagram_edit_verified": true,
+  "general_native_zero_budget_approximate_cell_ruled_out": true,
+  "general_native_original_and_final_whole_state_observer_bounds_verified": true,
+  "general_discrete_parallel_and_correlated_frame_interfaces_verified": false,
+  "general_discrete_continuous_measure_model_claimed": false,
+  "general_discrete_native_infinite_support_sampling_claimed": false
 }
