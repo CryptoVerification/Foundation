@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-30T15:56:40.323309+00:00",
+  "observed_at_utc": "2026-10-30T16:19:05.789089+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -16,8 +16,9 @@
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "Define approximate four-cell kernel discrepancy and its composition/context laws, using the certified source-weighted recovery-error lower bound 3/256 on the full-support edge. A both-marginal-preserving game-path example has error 5719/253440; its optimality is open. General noninvertible coherence and retained-state refinements remain possible.",
-    "Check exact bounded fair-coin realizability before compiling new conditional kernels (the semantic example has conditional probabilities such as 1/21). Provide approximation or an appropriate execution model, native entry/exit formats, invariants, time and stopping for any new implementation.",
+    "Extend the verified finite-endpoint approximate four-cells to annotated diagram edits, horizontal/product/frame structure, and retained-state encodings or general infinite endpoint outcomes. Vertical/sequential pasting and common preserving before/after game paths are now verified.",
+    "Choose compatible approximate kernels across the full grid; the full-support edge requires at least 3/256 source-weighted recovery discrepancy. Its chosen both-preserving example admits an approximate cell at exactly 5719/253440, which is minimal for that fixed path, but optimality over all preserving pairs remains open.",
+    "Check exact bounded fair-coin realizability before compiling the new conditional kernels (the semantic example has probabilities such as 1/21). Prove the chosen exact/approximate sampling, native entry/exit, invariants, time and stopping contracts.",
     "Instantiate native caller adapters for protocols beyond the fixed 39-bit reference request."
   ],
   "native_one_bit_branch_compiled_and_audited": true,
@@ -282,5 +283,21 @@
   "quantitative_recovery_deterministic_decoder_certificate_count": 3125,
   "quantitative_recovery_retained_integer_mass_upper_bound": 253,
   "quantitative_recovery_new_semantic_kernels_native_runtime_compiled": false,
-  "quantitative_approximate_four_cell_composition_laws_verified": false
+  "quantitative_approximate_four_cell_composition_laws_verified": true,
+  "approximate_finite_game_coherence_record": "docs/experiments/classical-bit-encryption-approximate-recovery.json",
+  "approximate_four_cell_finite_endpoint_outcomes_required": true,
+  "approximate_four_cell_metric": "source-weighted conditional finite total variation",
+  "approximate_four_cell_allocated_path_losses_preserved_exactly": true,
+  "approximate_four_cell_proof_relevant_inductive_data_verified": true,
+  "approximate_four_cell_vertical_and_sequential_error_addition_verified": true,
+  "approximate_four_cell_common_preserving_context_bound_verified": true,
+  "approximate_four_cell_joint_retained_observer_probability_gap_verified": true,
+  "approximate_four_cell_zero_kernel_equality_scope": "Initial-law support only; conversion back to the original strict cell requires full initial support.",
+  "approximate_recovery_example_cell_discrepancy": "5719/253440",
+  "approximate_recovery_fixed_example_minimum_tolerance_verified": true,
+  "approximate_recovery_any_path_tolerance_lower_bound": "3/256",
+  "approximate_existing_native_exact_recovery_cell_embedded_at_zero": true,
+  "approximate_positive_error_example_or_arbitrary_context_native_runtime_claimed": false,
+  "approximate_general_infinite_endpoint_cell_extension_verified": false,
+  "approximate_annotated_diagram_edit_extension_verified": false
 }
