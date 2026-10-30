@@ -1,0 +1,442 @@
+{
+  "target_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitCycleKernels",
+  "targeted_lake_build_passed": true,
+  "lean_toolchain": "leanprover/lean4:v4.33.0",
+  "axioms_per_declaration": {
+    "Foundation.Probability.FiniteFairKernelCertificate.kernel": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FiniteFairKernelCertificate.kernel_real": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FiniteFairKernelCertificate.sample": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FiniteFairKernelCertificate.sample_law": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FiniteFairKernelCertificate.realizable": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FiniteFairKernelCertificate.bits_law": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FiniteFairKernelCertificate.preserve": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FiniteFairKernelCertificate.columns_of_preserve": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FiniteFairKernelCertificate.independentCounts": [
+      "propext"
+    ],
+    "Foundation.Probability.FiniteFairKernelCertificate.independent_rows": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FiniteFairKernelCertificate.independent_columns": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.rowWeight": [],
+    "Foundation.Probability.IntegerKernelCycles.direction": [],
+    "Foundation.Probability.IntegerKernelCycles.cycle": [],
+    "Foundation.Probability.IntegerKernelCycles.applyCycle": [],
+    "Foundation.Probability.IntegerKernelCycles.direction_sum": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.weighted_row_sum": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.cycle_rows": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.cycle_columns": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.unchanged_row": [
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.unchanged_column": [
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.Certificate": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.nonnegative_of_corners": [
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.Certificate.adjust": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.Move": [],
+    "Foundation.Probability.IntegerKernelCycles.Move.sound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.Path": [],
+    "Foundation.Probability.IntegerKernelCycles.Path.sound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.natural": [],
+    "Foundation.Probability.IntegerKernelCycles.Certificate.natural_cast": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.Certificate.natural_rows": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.Certificate.natural_columns": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.signed": [],
+    "Foundation.Probability.IntegerKernelCycles.Certificate.ofNat": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.applyCycle_neg": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.Move.reverse": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.Path.reverse": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FairCycleKernel.kernel": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FairCycleKernel.kernel_real": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FairCycleKernel.distance_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FairCycleKernel.realizable": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FairCycleKernel.preserve": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FairCycleKernel.pathKernel": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FairCycleKernel.path_realizable": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FairCycleKernel.path_preserves": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.relation_of_corners": [
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.Respects": [],
+    "Foundation.Probability.IntegerKernelCycles.Path.relation": [
+      "propext"
+    ],
+    "Foundation.Probability.FairCycleKernel.support_table_nonzero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FairCycleKernel.support_iff_table_nonzero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.FairCycleKernel.path_joint_preserves": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.base": [
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.seed_kernel": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.base_certificate": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.edited": [
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.corner00": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.corner01": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.corner10": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.corner11": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.move": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.path": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.certificate": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.kernel": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.realizable": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.preserves": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.entry01": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.kernel_injective": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.base_kernel": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.base_ciphertext": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.path_respects": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.ciphertext": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.target_ciphertext": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.joint_preserves": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Crypto.Semantics.Probability.ClassicalBitRepair.CycleKernels.edit_distance": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.Certificate.mk": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.Certificate.nonnegative": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.Certificate.rows": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.Certificate.columns": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.Certificate.rec": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Foundation.Probability.IntegerKernelCycles.Move.mk": [],
+    "Foundation.Probability.IntegerKernelCycles.Move.i": [],
+    "Foundation.Probability.IntegerKernelCycles.Move.j": [],
+    "Foundation.Probability.IntegerKernelCycles.Move.k": [],
+    "Foundation.Probability.IntegerKernelCycles.Move.l": [],
+    "Foundation.Probability.IntegerKernelCycles.Move.coefficient": [],
+    "Foundation.Probability.IntegerKernelCycles.Move.equation": [],
+    "Foundation.Probability.IntegerKernelCycles.Move.corner00": [],
+    "Foundation.Probability.IntegerKernelCycles.Move.corner01": [],
+    "Foundation.Probability.IntegerKernelCycles.Move.corner10": [],
+    "Foundation.Probability.IntegerKernelCycles.Move.corner11": [],
+    "Foundation.Probability.IntegerKernelCycles.Move.rec": [],
+    "Foundation.Probability.IntegerKernelCycles.Path.refl": [],
+    "Foundation.Probability.IntegerKernelCycles.Path.step": [],
+    "Foundation.Probability.IntegerKernelCycles.Path.trans": [],
+    "Foundation.Probability.IntegerKernelCycles.Path.rec": []
+  },
+  "sorry_or_additional_axioms_in_listed_declarations": false,
+  "audited_theorem_count": 52,
+  "audited_definition_count": 19,
+  "audited_structure_count": 2,
+  "audited_inductive_count": 1,
+  "audited_constructor_projection_recursor_count": 21,
+  "natural_weighted_columns_equivalent_to_endpoint_preservation": true,
+  "local_four_corner_nonnegativity_implies_global_certificate": true,
+  "edit_paths_compose_and_reverse_with_certificate": true,
+  "path_endpoint_preservation_and_finite_fair_realizability": true,
+  "local_support_relation_implies_joint_label_preservation": true,
+  "retained_label_type_required_finite": false,
+  "generic_exact_conditional_distance_formula_verified": true,
+  "five_state_distinct_kernel_family_size": 95,
+  "five_state_family_fair_bits_per_sample": 12,
+  "five_state_family_endpoint_and_joint_ciphertext_preservation_verified": true,
+  "five_state_family_distance_from_seed": "1849*r/524288, r=0,...,94",
+  "native_compilation_and_runtime_for_new_family_claimed": false,
+  "optimality_or_improved_recovery_error_claimed": false,
+  "connectivity_of_all_integer_tables_by_these_moves_claimed": false,
+  "sampler_inverse_from_reversing_table_edits_claimed": false,
+  "whole_grid_compatibility_claimed": false,
+  "novelty_and_necessity_assessment_owner": "user",
+  "source_sha256": {
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitBoundaryCertificate.lean": "965e273b18c96a70e8d4f80e540bf80c70e42626edcbf12fc76cf1bdf9dd5c43",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitBoundaryError.lean": "1eab79e7acf54a9ca3d95eebe602943e17204d3d83feed393ab1271af3416400",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitBrouwerObstruction.lean": "76fa9974c703a9d49c0aeb7abdeca3b1c3eb9b6b5bdde3caf0c3195121509e31",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitConvexCertificate.lean": "61a9d1ba588d70e16fb4c75cf187baf6616de2e9eae0e8310acfecd804946950",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitCubeTriangulation.lean": "5534bf9a707550ae50964325b34fb43778077e2f1ec562051ed550e771a4f0d0",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitCycleKernels.lean": "1d5ac0a337b3c60c6788ce6a342ad48d3f90b55d5f1760a4baca834c22a18b76",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitDyadicCertificate.lean": "8170bb639798993111aa50c74c7e1d9c901a63ce2a7b02a9bdab5301ebf417c3",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitDyadicSampler.lean": "5afb421e8ca7bed87d771ee94f4b8da353f6c1621899c1229baaf8ba93dfbe86",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitEightBitBoundary.lean": "20a16281cb8160cb7975752b28d981ce1aada4936da151d99606fab2fe3073e3",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitEightBitData.lean": "9f4780cd28f45b6d6bc4d15a9a051f04f2e3fb787314fa1d81e6521af5221847",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitEightBitExperiment.lean": "6b835367601e0cfe631d16b7eba97960032b684d32c75271ecbd40b4688e753b",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitEightBitSampler.lean": "488a458ae39d47e27f5250c4285a400cc95463376c3cbd3b7947ea72c49709f7",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitEightBitVertices.lean": "e50df0a3ee1de76f19209f1655203fb56dab38dec5942d4d337e1d5f4a6cb9c5",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitFairRecovery.lean": "e340e503cae0f5da03816be45219476e42d68cd6dacd3eb12a721e4ff4022754",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitFairRecoveryCipher.lean": "3547fb22b96955b443fc4e352b4debb637ea81f5a55c47049365b4c4b0bb91a2",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitGridComplex.lean": "fb1fe0a9f744991f666be500ff6bbf9eb90ac20b585ca56ad2b232cf6a12a2be",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitGridGluing.lean": "139459be1f984eee9903c0360e07eec29848503fe72591a301994fde4d560d44",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitGridLocator.lean": "385137ff1a97e37398155e373ecc4bb0986459e4c9bb69c8e98b5875a0b1dae8",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitIntegralChain.lean": "f9ee84fc66705ee787e1b9af588b714bed36c8ea70b3beba5fd624e2f34d161e",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitMeshCoordinates.lean": "8c08565831ac182247d5c293de809d43352116a1c5806622d19f0ffb0b981133",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitMeshGeometry.lean": "685885997630fe8bbfb9344aad3be4019f92b07e7dd7807674889dbf61fef873",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitNormalizedBoundary.lean": "f20e61ad98612e5aa5dab5610ba7e15ec684f982cc724c5fb642ce9671e5625b",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitProjectiveInterpolation.lean": "be6638cf60f56dd9db13b0888d1574860bd5afc776ca1d3296e282533d646049",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRecoveryError.lean": "a543aeece801e99f8a754fbf3165df2f8a2d38904c839c13dd9a44435e228e3e",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRecoveryErrorCertificate.lean": "f27ebb5bf10d988f2ed3ccf9f27adf560fdb10bec7cdbdf6de57eda47f8a6b1f",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRecoveryRigidity.lean": "c4372491bce1f8118b76d4524b38b72bc03051ccc829f45e8505721c05e8e2a2",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepair.lean": "459aa24b50357f54d78ce8faf35ebbf96164a3971bc6b6aebd19524f69921a07",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRepairStability.lean": "d83db5cc70fbda328ccd400f5232f7aa6b3ea9058da0f3b5b02da2d673e7f50b",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitRobustBoundary.lean": "05a1dab112a5191ca9194ac5b26e1fcd8dad5ac9099714f52d8311742a049fe9",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitSimplexCertificate.lean": "e5ebeb7ca2c9ed2b37e47e4a654b8d010cd405bc9312f3b6989084e34b3a741c",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitSimplicialInterpolation.lean": "d1124720e2e06c81ea1c478a00259c866e3eb01ed29ffd9a4697dc6aae8de323",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ClassicalBitTetrahedralBoundary.lean": "b15d168127860a85496dd6c00adbea68deaa148dc1aab647a34bd9d90ab3bbfa",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/Comp.lean": "ce7f3c43eab876347ed9047cca93211a1ddf44016628618f616b9653924f0887",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/Coupling.lean": "f56571ae6347e5b0cf90ea1ecd42964be3c6bae1bd72c719d2249ff86fb69579",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/Facts.lean": "6849467d6791c1a78371c9ff125861d9dc802bdf237a38ccbba28552f4bc365e",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/FairCycleKernel.lean": "6fc58bcdc0f2ab147596d14216b3c44e37d627e82812f5101b47b6125b16e2a2",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/FairCycleRelations.lean": "89cde661e8a0d46ea714be21eab707028ccebc85b5acf2316be26848eb9352ce",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/FiniteFairKernelCertificate.lean": "e121122a6ff6abc880fe3bead30a3a95d691ad8f6ce165a3c74fd958f02bc927",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/FiniteFairSampling.lean": "2f2c63e1df33567505958b6638ecbb38f176b4ba68496dcd6c6da59370d4235f",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/FiniteKernelVariation.lean": "1cd78b14c54d6ce4de815700af13ff92867db2b3ecf91740dabd1bef05215819",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/FiniteMaximalCoupling.lean": "ed34dd9191cbf2ff45d0a81cace06fc85efa9b28f011f0de78dec3e36d6c65bd",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/FiniteMaximalKernel.lean": "47493fbd8fa2cc2000e82e3991f32ad78da1b4e1b2d36cd22f662d98b580935f",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/FiniteObserverVariation.lean": "febef85710577c3a345bb1c9aa8a252da264615f39bccc6783b6f41f609760f0",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/FiniteRecoveryError.lean": "79d5730df1b5ba26e84ef1d4fa2158322f93f74012a48a2f58cdd28f86ac469f",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/FiniteRecoveryRigidity.lean": "3eab2d4a633399dd28317d68008cb6bd6b7e0cb8189f598bbaf44b0d742a2ac6",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/FiniteVariationWitness.lean": "bb828f7a81715a552063f2b1dc7ea84af1d49382a92fe83a57952e8b3f769f6b",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/IntegerKernelCycles.lean": "2938db74fcbecc5e01670ae6771dd3fa794d7439020584a21d1a61adc9a7f05a",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/KernelRecovery.lean": "d5b353f21ee51663aa330a464cff9f2255c60068a81b8cc5e471b30c6928c45f",
+    "/Users/hiro/workspace/Foundation/Foundation/Crypto/Semantics/Probability/ObserverBound.lean": "36bf96e5eb22fb72d63112d1ed4d2dce6a073af7a8196a86b3f07ce43dc2ab88",
+    "/Users/hiro/workspace/Foundation/Foundation/ThirdParty/Brouwer/Brouwer.lean": "aac1f4b8fee3664bbb14452068cd0390d47cdf32b8781650aa8daccb572524c4",
+    "/Users/hiro/workspace/Foundation/Foundation/ThirdParty/Brouwer/PathComponents.lean": "a9c5ec6e5a4c69834980f981d3b3bc6a761073a8a658ec33668b70d0b8aab454",
+    "/Users/hiro/workspace/Foundation/Foundation/ThirdParty/Brouwer/Scarf.lean": "443f9acc760b665494cde8ad5a849de5b1b243ef864ef79dc86690fb08bff886",
+    "/Users/hiro/workspace/Foundation/Foundation/ThirdParty/Brouwer/ScarfPath.lean": "feee73478505fec4d4af15edd1c035424cf238a9433bd44c8385432a534ca17b",
+    "/Users/hiro/workspace/Foundation/docs/experiments/classical-bit-encryption-integer-cycle-kernels.py": "1f4fd19265ee9fb4adc1ba5588a34f71d0d116d5f079e034690e20cc1793a5e5",
+    "/Users/hiro/workspace/Foundation/lakefile.toml": "b537fcdfd0e540cfd6f310d771aff1eb8fc24ab107a421b02cfa42cf131a9411",
+    "/Users/hiro/workspace/Foundation/lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
+    "/Users/hiro/workspace/Foundation/lake-manifest.json": "ef3799fa73ec244f1db2063a084e5c03ab1196e16604e883952f870179bff929"
+  }
+}

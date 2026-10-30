@@ -18,7 +18,7 @@
   "remaining_work": [
     "Extend finite approximate cells and annotated diagram edits to general infinite endpoint outcomes and more general state encodings. Correlated frames now lift using explicit joint preservation, constructible from supported-label conditional preservation or local tag invariants. Apply these obligations to further actual caller and protocol states.",
     "Choose compatible approximate kernels across the full grid; the full-support edge requires at least 3/256 source-weighted recovery discrepancy. Its chosen both-preserving example admits an approximate cell at exactly 5719/253440, which is minimal for that fixed path, but optimality over all preserving pairs remains open.",
-    "Generalize finitely fair replacement-kernel construction with exact endpoint/joint preservation and controlled local error, and prove uniform native and caller/resource contracts for additional boundaries. The selected five-state case now includes the original cipher, entry adapter, continuing recovery, both history erasures, packet restoration, and a charged common-control stationary comparison.",
+    "Generalize finitely fair replacement-kernel construction with exact endpoint/joint preservation and controlled local error, and prove uniform native and caller/resource contracts for additional boundaries. Local integer four-corner edit paths now construct certified fair kernels from one initial certificate and preserve arbitrary labels from local relation conditions. The five-state example gives 95 distinct twelve-bit kernels with exact endpoint/joint ciphertext laws and conditional distance 1849*r/524288 from the seed. Completeness of these moves, recovery optimization, grid compatibility, and native/caller/resource contracts for the new family remain open. The previously selected seed pair retains its verified end-to-end native implementation.",
     "Instantiate native caller adapters for protocols beyond the fixed 39-bit reference request."
   ],
   "native_one_bit_branch_compiled_and_audited": true,
@@ -376,5 +376,21 @@
   "fair_replacement_native_full_cell_and_public_game_exact_steps_verified": true,
   "fair_replacement_native_post_packet_recovery_error": "13037041/536870912",
   "fair_replacement_native_selected_source_joint_key_ciphertext_law_restored": true,
-  "fair_replacement_native_equal_running_time_claimed": false
+  "fair_replacement_native_equal_running_time_claimed": false,
+  "local_integer_cycle_kernel_record": "docs/experiments/classical-bit-encryption-integer-cycle-kernels.json",
+  "local_integer_cycle_row_and_weighted_column_conservation_verified": true,
+  "local_integer_cycle_nonnegative_certificate_requires_four_corners_per_move": true,
+  "local_integer_cycle_paths_compose_and_reverse_with_certificate": true,
+  "local_integer_cycle_path_finite_fair_kernel_construction_verified": true,
+  "local_integer_cycle_label_preservation_implies_joint_law_preservation": true,
+  "local_integer_cycle_label_type_required_finite": false,
+  "local_integer_cycle_initial_global_certificate_still_required": true,
+  "local_integer_cycle_generic_conditional_distance_formula_verified": true,
+  "local_integer_cycle_five_state_distinct_family_size": 95,
+  "local_integer_cycle_five_state_fair_bits_per_sample": 12,
+  "local_integer_cycle_five_state_joint_ciphertext_law_preserved": true,
+  "local_integer_cycle_five_state_distance_from_seed": "1849*r/524288 for r=0,...,94",
+  "local_integer_cycle_native_resource_contract_for_new_family_verified": false,
+  "local_integer_cycle_all_valid_tables_connected_claimed": false,
+  "local_integer_cycle_recovery_improvement_or_optimality_claimed": false
 }
