@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-30T15:14:55.319773+00:00",
+  "observed_at_utc": "2026-10-30T15:29:24.272075+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -16,14 +16,14 @@
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "Extend compatible native coupling choices and coherence beyond the repaired sharp edge. The current one-sided recovery is verified on the two reachable source states; reverse-order target identity, identity on unreachable states, and a general path-independent family are not established.",
-    "Instantiate caller adapters for protocols beyond the fixed 39-bit reference request."
+    "Design a compatible grid extension using nontrivial roundtrip kernels, bounded recovery discrepancy, or an explicit refinement of retained state. Exact marginal-preserving left inverses on every fixed five-state edge are impossible: the certified edge (1,2,3) to (1,2,4) has different full-support atom masses. This does not rule out general noninvertible coherence or invalidate the repaired two-to-five-state witness.",
+    "Instantiate native caller adapters for protocols beyond the fixed 39-bit reference request."
   ],
   "native_one_bit_branch_compiled_and_audited": true,
   "native_one_bit_branch_verification_record": "docs/experiments/classical-bit-encryption-native-bit-choice.json",
   "native_one_bit_branch_overhead_bound_steps": 3,
   "next_native_obligations": [
-    "For any further edge or protocol, give compatible native conditional kernels, reverse programs, entry/exit formats, time and stopping proofs. The repaired sharp-edge forward/reverse programs and their recovery four-cell are now connected, with actual full-cell stationary comparison at common executed control.",
+    "Before extending native kernels, specify which recovery/coherence condition is intended after the all-edge exact-recovery obstruction. Check bounded fair-coin realizability of the desired general conditional probabilities before compiling, then provide native code, entry/exit formats, invariants, time and stopping for the chosen extension.",
     "Discharge the explicit profile and boundary contracts for any further candidate implementation; the prescribed-boundary four-key reference witness now has a native instance.",
     "Prove additional caller code, preparation, invariants and stopping before assigning runtime to new native contexts.",
     "If polynomial compiler size in growing control width is required, replace the fixed reference exponential control decision tree by shared or comparison-based code."
@@ -224,5 +224,44 @@
   "native_recovery_cell_local_loss_budgets": "37/128 forward and reverse; 37/64 roundtrip and conservatively padded stationary path",
   "native_raw_recovery_identity_exact_game_step_verified": true,
   "native_recovery_reverse_order_target_identity_claimed": false,
-  "native_recovery_identity_on_unreachable_states_claimed": false
+  "native_recovery_identity_on_unreachable_states_claimed": false,
+  "finite_equal_cardinality_recovery_rigidity_verified": true,
+  "finite_recovery_rigidity_record": "docs/experiments/classical-bit-encryption-recovery-rigidity.json",
+  "finite_equal_cardinality_recoverable_kernels_are_permutations": true,
+  "finite_recoverable_preserving_transport_atom_masses_must_match_up_to_permutation": true,
+  "grid_full_support_recovery_obstruction_edge": [
+    [
+      1,
+      2,
+      3
+    ],
+    [
+      1,
+      2,
+      4
+    ]
+  ],
+  "grid_full_support_recovery_obstruction_source_counts": [
+    43,
+    43,
+    42,
+    111,
+    17
+  ],
+  "grid_full_support_recovery_obstruction_target_counts": [
+    45,
+    44,
+    39,
+    111,
+    17
+  ],
+  "grid_full_support_recovery_obstruction_denominator": 256,
+  "grid_edge_any_coupling_exact_recovery_impossibility_verified": true,
+  "grid_edge_arbitrary_ambient_full_cell_recovery_impossibility_verified": true,
+  "grid_edge_arbitrary_game_paths_no_identity_four_cell_verified": true,
+  "grid_all_edges_exact_recovery_family_ruled_out_for_fixed_five_state_views": true,
+  "grid_general_noninvertible_coherence_ruled_out": false,
+  "grid_approximate_recovery_ruled_out": false,
+  "grid_retained_state_refinement_ruled_out": false,
+  "grid_obstruction_invalidates_compiled_two_to_five_recovery": false
 }
