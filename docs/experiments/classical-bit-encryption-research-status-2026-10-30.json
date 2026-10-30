@@ -16,7 +16,7 @@
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "Arbitrary discrete PMF endpoint types now have total variation, input-weighted conditional distance, sound approximate cells, closed diagram edits, preserving sequential contexts, and retained-input observer guarantees. The finite theory embeds with the same budget. The actual native infinite state type has a positive-error recovery cell and edit, with no zero-budget cell for the chosen paths. Generalize the new interface to independent parallel products, correlated frames and additional state encodings/callers; the existing finite product/frame results remain valid. The concrete native source distribution in this example still has finite support.",
+    "Arbitrary discrete PMF endpoint types now support total variation, expected conditional distance, approximate cells, closed diagram edits, sequential and independent parallel contexts, exchange, and correlated retained registers. The finite theory embeds with the same budget. Locally invariant stochastic side information constructs whole-joint preservation. The actual native active example now has a semantic correlated extension with infinite joint support and unchanged positive discrepancy. Extend to further caller/state encodings and prove any requested native preparation, finite-tape encoding and resource contracts for new registers; no bounded native generator for the geometric register is claimed.",
     "Choose compatible approximate kernels across the full grid; the full-support edge requires at least 3/256 source-weighted recovery discrepancy. Its chosen both-preserving example admits an approximate cell at exactly 5719/253440, which is minimal for that fixed path, but optimality over all preserving pairs remains open.",
     "Generalize the fixed-five-state, twelve-bit fair-kernel construction to further boundaries and widths, with controlled local error. Local integer edit paths compile to 307-step native samplers from one initial certificate and local nonnegative/label conditions; arbitrary pairs have a 663-step continuing execution. All 95 examples now connect to the actual original cipher, entry preparation, both history erasures, packet restoration, and a per-parameter charged common-control stationary comparator. The complete loop stops within 1676 steps and matches the 932-step stationary final-state law at the selected source. Post-packet conditional recovery is bounded by 13037041/536870912 + 1849*r/524288. Move completeness, recovery optimization, whole-grid compatibility, and generalization beyond this fixed key/coin/request format remain open.",
     "Instantiate native caller adapters for protocols beyond the fixed 39-bit reference request."
@@ -436,7 +436,22 @@
   "general_native_actual_control_approximate_cell_and_diagram_edit_verified": true,
   "general_native_zero_budget_approximate_cell_ruled_out": true,
   "general_native_original_and_final_whole_state_observer_bounds_verified": true,
-  "general_discrete_parallel_and_correlated_frame_interfaces_verified": false,
+  "general_discrete_parallel_and_correlated_frame_interfaces_verified": true,
   "general_discrete_continuous_measure_model_claimed": false,
-  "general_discrete_native_infinite_support_sampling_claimed": false
+  "general_discrete_native_infinite_support_sampling_claimed": false,
+  "general_correlated_recovery_record": "docs/experiments/classical-bit-encryption-general-correlated-recovery.json",
+  "general_discrete_left_and_right_context_distances_exact": true,
+  "general_discrete_parallel_cell_and_diagram_edit_budgets_add": true,
+  "general_discrete_independent_exchange_zero_discrepancy_verified": true,
+  "general_discrete_retained_correlated_register_distance_exact": true,
+  "general_discrete_stochastic_side_information_local_invariant_implies_joint_preservation": true,
+  "general_native_ciphertext_correlated_frame_compatibility_constructed_locally": true,
+  "general_native_correlated_frame_discrepancy_lower_bound": "3/256",
+  "general_native_correlated_frame_discrepancy_upper_bound": "13037041/536870912 + 1849*r/524288 for r=0,...,94",
+  "general_infinite_correlated_register_law": "Geometric N with P[N=n]=2^(-(n+1)), paired with ciphertext",
+  "general_infinite_correlated_source_joint_support_proved_infinite": true,
+  "general_infinite_correlated_source_active_marginal_support_finite": true,
+  "general_infinite_correlated_example_cell_and_edit_verified": true,
+  "general_infinite_correlated_register_resampled_by_lifted_kernel": false,
+  "general_infinite_correlated_native_register_preparation_encoding_or_runtime_verified": false
 }
