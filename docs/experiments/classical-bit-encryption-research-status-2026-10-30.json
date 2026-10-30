@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-30T16:47:16.375468+00:00",
+  "observed_at_utc": "2026-10-30T16:59:19.812582+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -18,7 +18,7 @@
   "remaining_work": [
     "Extend finite approximate cells and annotated diagram edits to general infinite endpoint outcomes and more general state encodings. Correlated frames now lift using explicit joint preservation, constructible from supported-label conditional preservation or local tag invariants. Apply these obligations to further actual caller and protocol states.",
     "Choose compatible approximate kernels across the full grid; the full-support edge requires at least 3/256 source-weighted recovery discrepancy. Its chosen both-preserving example admits an approximate cell at exactly 5719/253440, which is minimal for that fixed path, but optimality over all preserving pairs remains open.",
-    "Choose finitely fair realizable replacement kernels that preserve required endpoint/joint laws, and verify loss and recovery error before compiling native adapters and time/stopping contracts. Exact bounded fair sampling of the selected five-state kernels is now ruled out. Row rounding alone does not establish exact marginal preservation.",
+    "Physically erase the new four-bit request and twelve-coin history, build adapters from/to native reference exits, and connect both new 143-step samplers into one continuing execution. The replacement kernels preserve endpoint laws and realize observed local game kernels; whole-state comparison and caller/runtime contracts for this new roundtrip remain.",
     "Instantiate native caller adapters for protocols beyond the fixed 39-bit reference request."
   ],
   "native_one_bit_branch_compiled_and_audited": true,
@@ -333,5 +333,22 @@
   "selected_five_state_forward_obstructing_probability": "1/21 at input 2, output 0",
   "selected_five_state_reverse_obstructing_probability": "1/44 at input 1, output 2",
   "selected_five_state_forward_native_conditional_variation_lower_bound": "1/(21*2^steps)",
-  "fair_sampling_obstruction_scope": "Fixed initial configuration, arbitrary finite native evaluation budget, and arbitrary deterministic observation. Selected conditional kernels only; endpoint laws, other couplings and almost-sure unbounded sampling are not ruled out."
+  "fair_sampling_obstruction_scope": "Fixed initial configuration, arbitrary finite native evaluation budget, and arbitrary deterministic observation. Selected conditional kernels only; endpoint laws, other couplings and almost-sure unbounded sampling are not ruled out.",
+  "fair_replacement_recovery_record": "docs/experiments/classical-bit-encryption-native-fair-recovery.json",
+  "fair_replacement_forward_and_reverse_endpoint_preservation_verified": true,
+  "fair_replacement_conditional_sampler_fair_bits": 12,
+  "fair_replacement_forward_local_loss": "6961/524288",
+  "fair_replacement_reverse_local_loss": "12499/1048576",
+  "fair_replacement_allocated_roundtrip_loss": "26421/1048576",
+  "fair_replacement_conditional_recovery_error": "13037041/536870912",
+  "fair_replacement_approximate_cell_and_diagram_edit_verified": true,
+  "fair_replacement_error_and_loss_exceed_original_selected_example": true,
+  "fair_replacement_pair_optimality_proved": false,
+  "fair_replacement_native_sampler_runtime_bound_steps": 143,
+  "fair_replacement_native_sampler_request_bits": 4,
+  "fair_replacement_native_sampler_code_length_bound": 985210,
+  "fair_replacement_native_observed_kernels_realize_local_game_paths": true,
+  "fair_replacement_native_request_and_coin_history_erased": false,
+  "fair_replacement_native_continuing_forward_reverse_verified": false,
+  "fair_replacement_whole_native_state_game_law_comparison_claimed": false
 }
