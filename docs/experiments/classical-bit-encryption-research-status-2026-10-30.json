@@ -18,7 +18,7 @@
   "remaining_work": [
     "Extend finite approximate cells and annotated diagram edits to general infinite endpoint outcomes and more general state encodings. Correlated frames now lift using explicit joint preservation, constructible from supported-label conditional preservation or local tag invariants. Apply these obligations to further actual caller and protocol states.",
     "Choose compatible approximate kernels across the full grid; the full-support edge requires at least 3/256 source-weighted recovery discrepancy. Its chosen both-preserving example admits an approximate cell at exactly 5719/253440, which is minimal for that fixed path, but optimality over all preserving pairs remains open.",
-    "Generalize the fixed-five-state, twelve-bit fair-kernel construction to further boundaries and widths, with controlled local error. Local integer edit paths now compile to 307-step native samplers from an initial certificate and local nonnegative/label conditions. Arbitrary pairs of five-state twelve-bit samplers have a 663-step continuing execution with charged adaptation and both histories erased. All 95 locally constructed examples have exact native endpoint/joint ciphertext laws and a loop recovery bound 13037041/536870912 + 1849*r/524288. Original-cipher entry, packet restoration and matching stationary comparison for this new family remain unproved. Move completeness, recovery optimization, and whole-grid compatibility also remain open. The original selected seed pair retains its verified end-to-end native implementation.",
+    "Generalize the fixed-five-state, twelve-bit fair-kernel construction to further boundaries and widths, with controlled local error. Local integer edit paths compile to 307-step native samplers from one initial certificate and local nonnegative/label conditions; arbitrary pairs have a 663-step continuing execution. All 95 examples now connect to the actual original cipher, entry preparation, both history erasures, packet restoration, and a per-parameter charged common-control stationary comparator. The complete loop stops within 1676 steps and matches the 932-step stationary final-state law at the selected source. Post-packet conditional recovery is bounded by 13037041/536870912 + 1849*r/524288. Move completeness, recovery optimization, whole-grid compatibility, and generalization beyond this fixed key/coin/request format remain open.",
     "Instantiate native caller adapters for protocols beyond the fixed 39-bit reference request."
   ],
   "native_one_bit_branch_compiled_and_audited": true,
@@ -404,7 +404,20 @@
   "local_integer_cycle_native_two_stage_code_length_bound": 1971259,
   "local_integer_cycle_native_family_loop_joint_ciphertext_state_law_restored": true,
   "local_integer_cycle_native_family_loop_recovery_error_bound": "13037041/536870912 + 1849*r/524288 for r=0,...,94",
-  "local_integer_cycle_native_family_original_cipher_and_packet_restore_wrappers_verified": false,
-  "local_integer_cycle_native_family_matching_stationary_comparator_verified": false,
-  "local_integer_cycle_native_arbitrary_key_and_coin_widths_supported": false
+  "local_integer_cycle_native_family_original_cipher_and_packet_restore_wrappers_verified": true,
+  "local_integer_cycle_native_family_matching_stationary_comparator_verified": true,
+  "local_integer_cycle_native_arbitrary_key_and_coin_widths_supported": false,
+  "local_integer_cycle_native_family_reference_record": "docs/experiments/classical-bit-encryption-native-reference-cycle-recovery.json",
+  "local_integer_cycle_native_family_reference_request_steps": 50,
+  "local_integer_cycle_native_family_reference_continuation_steps": 714,
+  "local_integer_cycle_native_family_original_cipher_and_loop_steps": 1645,
+  "local_integer_cycle_native_family_original_cipher_loop_and_packet_steps": 1676,
+  "local_integer_cycle_native_family_stationary_reference_steps": 932,
+  "local_integer_cycle_native_family_actual_terminal_control_matched_per_parameter": true,
+  "local_integer_cycle_native_family_full_cell_state_identity_verified": true,
+  "local_integer_cycle_native_family_public_identity_against_original_cipher_verified": true,
+  "local_integer_cycle_native_family_post_packet_cut_final_marginal_matches_actual_program": true,
+  "local_integer_cycle_native_family_post_packet_recovery_error_bound": "13037041/536870912 + 1849*r/524288 for r=0,...,94",
+  "local_integer_cycle_native_family_stationary_comparator_depends_on_parameter": true,
+  "local_integer_cycle_native_family_time_observation_equality_claimed": false
 }
