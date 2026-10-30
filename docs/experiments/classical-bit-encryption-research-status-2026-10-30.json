@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-30T16:24:30.192331+00:00",
+  "observed_at_utc": "2026-10-30T16:30:32.694852+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -16,7 +16,7 @@
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "Extend the verified finite-endpoint approximate four-cells and annotated diagram edits to horizontal/product/frame structure, retained-state encodings or general infinite endpoint outcomes. Vertical/sequential edit pasting and common preserving before/after game paths are verified.",
+    "Extend the verified finite-endpoint approximate cells and annotated diagram edits to retained-state encodings or general infinite endpoint outcomes. Independent product frames and parallel edits are now verified; correlated game-path lifts still require joint-distribution preservation beyond the verified conditional-distance frame theorem.",
     "Choose compatible approximate kernels across the full grid; the full-support edge requires at least 3/256 source-weighted recovery discrepancy. Its chosen both-preserving example admits an approximate cell at exactly 5719/253440, which is minimal for that fixed path, but optimality over all preserving pairs remains open.",
     "Check exact bounded fair-coin realizability before compiling the new conditional kernels (the semantic example has probabilities such as 1/21). Prove the chosen exact/approximate sampling, native entry/exit, invariants, time and stopping contracts.",
     "Instantiate native caller adapters for protocols beyond the fixed 39-bit reference request."
@@ -305,5 +305,12 @@
   "approximate_diagram_edit_vertical_and_sequential_error_addition": true,
   "approximate_diagram_edit_common_preserving_context_bound": true,
   "approximate_diagram_edit_joint_observer_bound": true,
-  "approximate_diagram_edit_positive_recovery_example_tolerance": "5719/253440"
+  "approximate_diagram_edit_positive_recovery_example_tolerance": "5719/253440",
+  "approximate_product_record": "docs/experiments/classical-bit-encryption-approximate-product.json",
+  "approximate_product_left_right_frame_cells_verified": true,
+  "approximate_product_parallel_cell_error_addition_verified": true,
+  "approximate_product_annotated_diagram_edits_verified": true,
+  "approximate_independent_interchange_cell_at_zero_verified": true,
+  "approximate_conditional_distance_correlated_retained_register_equality_verified": true,
+  "approximate_arbitrary_correlated_game_lift_claimed": false
 }
