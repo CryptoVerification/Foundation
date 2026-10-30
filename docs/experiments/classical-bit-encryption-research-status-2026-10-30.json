@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-30T15:29:24.272075+00:00",
+  "observed_at_utc": "2026-10-30T15:56:40.323309+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -16,14 +16,15 @@
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "Design a compatible grid extension using nontrivial roundtrip kernels, bounded recovery discrepancy, or an explicit refinement of retained state. Exact marginal-preserving left inverses on every fixed five-state edge are impossible: the certified edge (1,2,3) to (1,2,4) has different full-support atom masses. This does not rule out general noninvertible coherence or invalidate the repaired two-to-five-state witness.",
+    "Define approximate four-cell kernel discrepancy and its composition/context laws, using the certified source-weighted recovery-error lower bound 3/256 on the full-support edge. A both-marginal-preserving game-path example has error 5719/253440; its optimality is open. General noninvertible coherence and retained-state refinements remain possible.",
+    "Check exact bounded fair-coin realizability before compiling new conditional kernels (the semantic example has conditional probabilities such as 1/21). Provide approximation or an appropriate execution model, native entry/exit formats, invariants, time and stopping for any new implementation.",
     "Instantiate native caller adapters for protocols beyond the fixed 39-bit reference request."
   ],
   "native_one_bit_branch_compiled_and_audited": true,
   "native_one_bit_branch_verification_record": "docs/experiments/classical-bit-encryption-native-bit-choice.json",
   "native_one_bit_branch_overhead_bound_steps": 3,
   "next_native_obligations": [
-    "Before extending native kernels, specify which recovery/coherence condition is intended after the all-edge exact-recovery obstruction. Check bounded fair-coin realizability of the desired general conditional probabilities before compiling, then provide native code, entry/exit formats, invariants, time and stopping for the chosen extension.",
+    "The new quantitative maximal kernels and game-path example are semantic constructions, without native runtime contracts. First verify bounded fair-coin realizability of their conditional probabilities; then choose and prove the relevant exact/approximate sampling and stopping contract. The previous compiled two-to-five-state exact-recovery witness is unchanged.",
     "Discharge the explicit profile and boundary contracts for any further candidate implementation; the prescribed-boundary four-key reference witness now has a native instance.",
     "Prove additional caller code, preparation, invariants and stopping before assigning runtime to new native contexts.",
     "If polynomial compiler size in growing control width is required, replace the fixed reference exponential control decision tree by shared or comparison-based code."
@@ -263,5 +264,23 @@
   "grid_general_noninvertible_coherence_ruled_out": false,
   "grid_approximate_recovery_ruled_out": false,
   "grid_retained_state_refinement_ruled_out": false,
-  "grid_obstruction_invalidates_compiled_two_to_five_recovery": false
+  "grid_obstruction_invalidates_compiled_two_to_five_recovery": false,
+  "quantitative_recovery_error_record": "docs/experiments/classical-bit-encryption-quantitative-recovery.json",
+  "quantitative_recovery_error_lower_bound": "3/256",
+  "quantitative_recovery_error_scope": "Source-weighted probability of failing to return the original state; not a final marginal distance or public cryptographic advantage.",
+  "quantitative_recovery_error_all_stochastic_forward_reverse_kernels_verified": true,
+  "quantitative_recovery_error_forward_marginal_required": true,
+  "quantitative_recovery_error_reverse_marginal_required_for_lower_bound": false,
+  "quantitative_recovery_error_finite_unconstrained_attainment_verified": true,
+  "quantitative_recovery_unconstrained_attaining_reverse_does_not_preserve_source_marginal": true,
+  "quantitative_recovery_both_preserving_example_error": "5719/253440",
+  "quantitative_recovery_both_preserving_example_game_paths_verified": true,
+  "quantitative_recovery_both_preserving_example_allocated_roundtrip_loss": "3/128",
+  "quantitative_recovery_both_preserving_optimum_proved": false,
+  "quantitative_recovery_full_cell_state_lower_bound_verified": true,
+  "quantitative_recovery_arbitrary_game_path_lower_bound_verified": true,
+  "quantitative_recovery_deterministic_decoder_certificate_count": 3125,
+  "quantitative_recovery_retained_integer_mass_upper_bound": 253,
+  "quantitative_recovery_new_semantic_kernels_native_runtime_compiled": false,
+  "quantitative_approximate_four_cell_composition_laws_verified": false
 }
