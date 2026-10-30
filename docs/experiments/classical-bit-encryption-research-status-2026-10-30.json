@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-30T14:43:03.040898+00:00",
+  "observed_at_utc": "2026-10-30T14:54:43.757820+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -16,7 +16,7 @@
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "Compile and verify an exit adapter from the new clean coupling layout to the canonical reference exit layout, including public-packet formatting, tape-head positions, control, time and stopping. The reference full-cell entry adapter, conditional sampling, recovery, and old/new history erasure now run natively; the raw reference experiment and this continuation have one 1189-step contract.",
+    "Connect the compiled sharp-edge forward realization to the existing local-loss and recovery four-cell statements, including native reverse code and all continuation budgets. The native entry and canonical cell-layout/public-packet exit adapters are now verified. Full-cell equality uses an executed common-terminal target wrapper; public equality also holds with the original unwrapped target.",
     "Extend compatible coupling choices and coherence beyond the repaired sharp-edge direction if required. The new construction is a one-sided recovery on the reachable source invariant; reverse-order identity, identity on unreachable states, and a general path-independent family are not established.",
     "Instantiate caller adapters for protocols beyond the fixed 39-bit reference request."
   ],
@@ -24,7 +24,7 @@
   "native_one_bit_branch_verification_record": "docs/experiments/classical-bit-encryption-native-bit-choice.json",
   "native_one_bit_branch_overhead_bound_steps": 3,
   "next_native_obligations": [
-    "Provide canonical full-cell exit adapter code, format, time, invariants and stopping. The request entry adapter is verified, and the 1189-step raw execution has the exact target distribution in an injective new clean-state layout. Its output layout has not yet been converted to the reference public packet.",
+    "Compile and verify the reverse full-state recovery program and connect native forward/reverse execution laws to the existing one-sided four-cell. Count its caller preparation, native execution, exit formatting and control. The forward execution and both endpoint adapters are already verified for the repaired sharp edge.",
     "Discharge the explicit profile and boundary contracts for any further candidate implementation; the prescribed-boundary four-key reference witness now has a native instance.",
     "Prove additional caller code, preparation, invariants and stopping before assigning runtime to new native contexts.",
     "If polynomial compiler size in growing control width is required, replace the fixed reference exponential control decision tree by shared or comparison-based code."
@@ -156,7 +156,7 @@
   "native_alternative_coupling_reachable_index_four_cell_verified": true,
   "native_alternative_coupling_reverse_order_identity_claimed": false,
   "native_alternative_coupling_sampler_runtime_compiled": true,
-  "native_alternative_coupling_sampler_runtime_scope": "A 45-step native adapter reads a reference full-cell exit and prepares the request; the cleaned sampler/recovery/erasure completes in 258 steps including that adapter. The actual 930-step reference experiment followed by this continuation completes in 1189 steps. The full-cell target law uses a new clean exit layout; the canonical reference exit adapter remains separate.",
+  "native_alternative_coupling_sampler_runtime_scope": "The repaired sharp-edge construction now has native reference-state entry and canonical cell-layout/public-packet exit adapters. The full raw transformed execution stops within 1219 steps. Its public law equals the original 930-step target reference; its full-cell law, including actual control, equals an actually executed 932-step target wrapper with common terminal control. General grid kernels and native reverse/coherence contexts remain separate.",
   "native_conditional_coupling_sampler_record": "docs/experiments/classical-bit-encryption-native-coupling-sampler.json",
   "native_conditional_coupling_request_bits": 2,
   "native_conditional_coupling_fair_coin_count": 7,
@@ -168,7 +168,7 @@
   "native_conditional_coupling_exact_target_result_marginal_verified": true,
   "native_conditional_coupling_logical_reification_verified": true,
   "native_full_cell_state_coupling_request_adapter_verified": true,
-  "native_full_cell_state_coupling_canonical_exit_adapter_verified": false,
+  "native_full_cell_state_coupling_canonical_exit_adapter_verified": true,
   "native_conditional_coupling_clean_execution_record": "docs/experiments/classical-bit-encryption-native-clean-coupling.json",
   "native_conditional_coupling_history_erasure_verified": true,
   "native_conditional_coupling_erased_history_cells": 9,
@@ -190,5 +190,20 @@
   "native_raw_reference_and_clean_coupling_full_cell_target_law_verified": true,
   "native_reference_coupling_clean_state_embedding_injective_verified": true,
   "native_reference_coupling_kernel_equivalent_state_representatives_verified": true,
-  "native_reference_coupling_canonical_public_packet_adapter_verified": false
+  "native_reference_coupling_canonical_public_packet_adapter_verified": true,
+  "native_canonical_coupling_record": "docs/experiments/classical-bit-encryption-native-canonical-coupling.json",
+  "native_coupling_exit_adapter_runtime_bound_steps": 29,
+  "native_coupling_exit_adapter_code_length_bound": 149,
+  "native_canonical_coupling_full_execution_runtime_bound_steps": 1219,
+  "native_canonical_coupling_original_target_runtime_bound_steps": 930,
+  "native_canonical_coupling_wrapped_target_runtime_bound_steps": 932,
+  "native_canonical_coupling_target_padding_length_bound": 8671,
+  "native_canonical_coupling_common_terminal_control_reached_by_actual_code": true,
+  "native_canonical_coupling_full_cell_law_equals_wrapped_reference": true,
+  "native_canonical_coupling_public_law_equals_original_unwrapped_reference": true,
+  "native_canonical_coupling_full_cell_probabilistic_game_reification_verified": true,
+  "native_canonical_coupling_public_reference_game_reification_verified": true,
+  "native_canonical_coupling_free_control_normalization_used": false,
+  "native_canonical_coupling_equal_actual_runtimes_claimed": false,
+  "native_full_cell_state_sampler_runtime_compiled_scope": "The existing false flag refers to the original general statistical kernels over all grid edges. A different repaired sharp-edge sampler is now compiled with explicit endpoint adapters and executed common terminal control."
 }
