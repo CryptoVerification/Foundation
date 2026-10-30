@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-30T14:31:27.807085+00:00",
+  "observed_at_utc": "2026-10-30T14:43:03.040898+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -11,12 +11,12 @@
   "scope": "Fixed labelled keys and prescribed boundary; internal joint key/ciphertext distance.",
   "Foundation_machine_execution_certified": true,
   "Foundation_machine_runtime_bound_certified": true,
-  "single_continuing_machine_execution_with_caller_certified": false,
+  "single_continuing_machine_execution_with_caller_certified": true,
   "original_polygraph_model_connection_certified": false,
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "Compile and verify adapters from the full reference state to the two-bit conditional request and from the cleaned sampler exit to the required canonical full state. The conditional sampler, recovery caller and physical request/coin history erasure now have a joint 212-step native contract; adapter preparation, layout and control remain to be charged before claiming runtime realization of the entire full-state coupling kernel.",
+    "Compile and verify an exit adapter from the new clean coupling layout to the canonical reference exit layout, including public-packet formatting, tape-head positions, control, time and stopping. The reference full-cell entry adapter, conditional sampling, recovery, and old/new history erasure now run natively; the raw reference experiment and this continuation have one 1189-step contract.",
     "Extend compatible coupling choices and coherence beyond the repaired sharp-edge direction if required. The new construction is a one-sided recovery on the reachable source invariant; reverse-order identity, identity on unreachable states, and a general path-independent family are not established.",
     "Instantiate caller adapters for protocols beyond the fixed 39-bit reference request."
   ],
@@ -24,7 +24,7 @@
   "native_one_bit_branch_verification_record": "docs/experiments/classical-bit-encryption-native-bit-choice.json",
   "native_one_bit_branch_overhead_bound_steps": 3,
   "next_native_obligations": [
-    "Provide full-state entry/exit adapter code, format, time, invariants and stopping for the conditional coupling sampler. Its cleaned 212-step contract starts with a given two-bit raw request, erases all nine consumed request/coin cells, and returns a sampled private key/ciphertext plus recovery output.",
+    "Provide canonical full-cell exit adapter code, format, time, invariants and stopping. The request entry adapter is verified, and the 1189-step raw execution has the exact target distribution in an injective new clean-state layout. Its output layout has not yet been converted to the reference public packet.",
     "Discharge the explicit profile and boundary contracts for any further candidate implementation; the prescribed-boundary four-key reference witness now has a native instance.",
     "Prove additional caller code, preparation, invariants and stopping before assigning runtime to new native contexts.",
     "If polynomial compiler size in growing control width is required, replace the fixed reference exponential control decision tree by shared or comparison-based code."
@@ -156,7 +156,7 @@
   "native_alternative_coupling_reachable_index_four_cell_verified": true,
   "native_alternative_coupling_reverse_order_identity_claimed": false,
   "native_alternative_coupling_sampler_runtime_compiled": true,
-  "native_alternative_coupling_sampler_runtime_scope": "Conditional repaired-key sampler, recovery-bit caller and physical erasure of nine request/coin history cells from a two-bit raw request; full reference-state entry and canonical exit adapters remain separate.",
+  "native_alternative_coupling_sampler_runtime_scope": "A 45-step native adapter reads a reference full-cell exit and prepares the request; the cleaned sampler/recovery/erasure completes in 258 steps including that adapter. The actual 930-step reference experiment followed by this continuation completes in 1189 steps. The full-cell target law uses a new clean exit layout; the canonical reference exit adapter remains separate.",
   "native_conditional_coupling_sampler_record": "docs/experiments/classical-bit-encryption-native-coupling-sampler.json",
   "native_conditional_coupling_request_bits": 2,
   "native_conditional_coupling_fair_coin_count": 7,
@@ -167,7 +167,7 @@
   "native_conditional_coupling_joint_result_and_public_packet_verified": true,
   "native_conditional_coupling_exact_target_result_marginal_verified": true,
   "native_conditional_coupling_logical_reification_verified": true,
-  "native_full_cell_state_coupling_request_adapter_verified": false,
+  "native_full_cell_state_coupling_request_adapter_verified": true,
   "native_full_cell_state_coupling_canonical_exit_adapter_verified": false,
   "native_conditional_coupling_clean_execution_record": "docs/experiments/classical-bit-encryption-native-clean-coupling.json",
   "native_conditional_coupling_history_erasure_verified": true,
@@ -178,5 +178,17 @@
   "native_conditional_coupling_clean_framed_full_configuration_law_verified": true,
   "native_conditional_coupling_clean_initial_full_cell_state_law_verified": true,
   "native_conditional_coupling_clean_exits_coin_independent_given_key_verified": true,
-  "native_conditional_coupling_clean_public_packet_and_target_result_law_verified": true
+  "native_conditional_coupling_clean_public_packet_and_target_result_law_verified": true,
+  "native_reference_coupling_execution_record": "docs/experiments/classical-bit-encryption-native-reference-coupling.json",
+  "native_coupling_request_adapter_runtime_bound_steps": 45,
+  "native_coupling_request_adapter_code_length_bound": 261,
+  "native_coupling_request_adapter_old_private_key_cells_erased": 3,
+  "native_coupling_request_adapter_old_output_cells_erased": 2,
+  "native_reference_exit_to_clean_coupling_runtime_bound_steps": 258,
+  "native_reference_exit_to_clean_coupling_code_length_bound": 8519,
+  "native_raw_reference_and_clean_coupling_runtime_bound_steps": 1189,
+  "native_raw_reference_and_clean_coupling_full_cell_target_law_verified": true,
+  "native_reference_coupling_clean_state_embedding_injective_verified": true,
+  "native_reference_coupling_kernel_equivalent_state_representatives_verified": true,
+  "native_reference_coupling_canonical_public_packet_adapter_verified": false
 }
