@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-30T16:19:05.789089+00:00",
+  "observed_at_utc": "2026-10-30T16:24:30.192331+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -16,7 +16,7 @@
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
-    "Extend the verified finite-endpoint approximate four-cells to annotated diagram edits, horizontal/product/frame structure, and retained-state encodings or general infinite endpoint outcomes. Vertical/sequential pasting and common preserving before/after game paths are now verified.",
+    "Extend the verified finite-endpoint approximate four-cells and annotated diagram edits to horizontal/product/frame structure, retained-state encodings or general infinite endpoint outcomes. Vertical/sequential edit pasting and common preserving before/after game paths are verified.",
     "Choose compatible approximate kernels across the full grid; the full-support edge requires at least 3/256 source-weighted recovery discrepancy. Its chosen both-preserving example admits an approximate cell at exactly 5719/253440, which is minimal for that fixed path, but optimality over all preserving pairs remains open.",
     "Check exact bounded fair-coin realizability before compiling the new conditional kernels (the semantic example has probabilities such as 1/21). Prove the chosen exact/approximate sampling, native entry/exit, invariants, time and stopping contracts.",
     "Instantiate native caller adapters for protocols beyond the fixed 39-bit reference request."
@@ -299,5 +299,11 @@
   "approximate_existing_native_exact_recovery_cell_embedded_at_zero": true,
   "approximate_positive_error_example_or_arbitrary_context_native_runtime_claimed": false,
   "approximate_general_infinite_endpoint_cell_extension_verified": false,
-  "approximate_annotated_diagram_edit_extension_verified": false
+  "approximate_annotated_diagram_edit_extension_verified": true,
+  "approximate_annotated_diagram_edit_record": "docs/experiments/classical-bit-encryption-approximate-diagram.json",
+  "approximate_diagram_edit_strict_and_structural_embeddings_at_zero": true,
+  "approximate_diagram_edit_vertical_and_sequential_error_addition": true,
+  "approximate_diagram_edit_common_preserving_context_bound": true,
+  "approximate_diagram_edit_joint_observer_bound": true,
+  "approximate_diagram_edit_positive_recovery_example_tolerance": "5719/253440"
 }
