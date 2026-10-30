@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-30T16:38:57.248103+00:00",
+  "observed_at_utc": "2026-10-30T16:47:16.375468+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -18,7 +18,7 @@
   "remaining_work": [
     "Extend finite approximate cells and annotated diagram edits to general infinite endpoint outcomes and more general state encodings. Correlated frames now lift using explicit joint preservation, constructible from supported-label conditional preservation or local tag invariants. Apply these obligations to further actual caller and protocol states.",
     "Choose compatible approximate kernels across the full grid; the full-support edge requires at least 3/256 source-weighted recovery discrepancy. Its chosen both-preserving example admits an approximate cell at exactly 5719/253440, which is minimal for that fixed path, but optimality over all preserving pairs remains open.",
-    "Check exact bounded fair-coin realizability before compiling the new conditional kernels (the semantic example has probabilities such as 1/21). Prove the chosen exact/approximate sampling, native entry/exit, invariants, time and stopping contracts.",
+    "Choose finitely fair realizable replacement kernels that preserve required endpoint/joint laws, and verify loss and recovery error before compiling native adapters and time/stopping contracts. Exact bounded fair sampling of the selected five-state kernels is now ruled out. Row rounding alone does not establish exact marginal preservation.",
     "Instantiate native caller adapters for protocols beyond the fixed 39-bit reference request."
   ],
   "native_one_bit_branch_compiled_and_audited": true,
@@ -324,5 +324,14 @@
   "correlated_game_full_copy_diagonal_preservation_forces_stationarity": true,
   "correlated_five_state_recovery_invariant_bit": "key belongs to {3,4}",
   "correlated_five_state_recovery_discrepancy": "5719/253440",
-  "correlated_game_lifts_compiled_to_native_machine": false
+  "correlated_game_lifts_compiled_to_native_machine": false,
+  "fair_sampling_obstruction_record": "docs/experiments/classical-bit-encryption-fair-sampling-obstruction.json",
+  "native_any_fixed_budget_execution_is_finitely_fair_realizable_verified": true,
+  "native_fair_realizability_requires_finite_configuration_type": false,
+  "selected_five_state_forward_exact_bounded_fair_sampling_ruled_out": true,
+  "selected_five_state_reverse_exact_bounded_fair_sampling_ruled_out": true,
+  "selected_five_state_forward_obstructing_probability": "1/21 at input 2, output 0",
+  "selected_five_state_reverse_obstructing_probability": "1/44 at input 1, output 2",
+  "selected_five_state_forward_native_conditional_variation_lower_bound": "1/(21*2^steps)",
+  "fair_sampling_obstruction_scope": "Fixed initial configuration, arbitrary finite native evaluation budget, and arbitrary deterministic observation. Selected conditional kernels only; endpoint laws, other couplings and almost-sure unbounded sampling are not ruled out."
 }
