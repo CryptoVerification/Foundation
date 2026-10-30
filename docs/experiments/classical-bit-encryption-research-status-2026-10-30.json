@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-29T21:02:04.415121+00:00",
+  "observed_at_utc": "2026-10-30T14:16:41.135135+00:00",
   "research_goal_status": "active",
   "completed_finite_comparison_module": "Foundation.Crypto.Semantics.Probability.ClassicalBitEightBitCertifiedComparison",
   "verification_record": "docs/experiments/classical-bit-encryption-lean-eight-bit-certified-comparison.json",
@@ -16,6 +16,7 @@
   "newness_established": false,
   "infinity_categories_shown_necessary": false,
   "remaining_work": [
+    "Compile and verify adapters from the full reference state to the two-bit conditional request and from the sampler exit to the required canonical full state. Charge preparation and history erasure before claiming runtime realization of the entire full-state coupling kernel.",
     "Extend compatible coupling choices and coherence beyond the repaired sharp-edge direction if required. The new construction is a one-sided recovery on the reachable source invariant; reverse-order identity, identity on unreachable states, and a general path-independent family are not established.",
     "Instantiate caller adapters for protocols beyond the fixed 39-bit reference request."
   ],
@@ -23,6 +24,7 @@
   "native_one_bit_branch_verification_record": "docs/experiments/classical-bit-encryption-native-bit-choice.json",
   "native_one_bit_branch_overhead_bound_steps": 3,
   "next_native_obligations": [
+    "Provide full-state entry/exit adapter code, format, time, invariants and stopping for the newly compiled conditional coupling sampler. Its current 111-step contract starts with a given two-bit raw request and returns a sampled private key/ciphertext plus recovery output.",
     "Discharge the explicit profile and boundary contracts for any further candidate implementation; the prescribed-boundary four-key reference witness now has a native instance.",
     "Prove additional caller code, preparation, invariants and stopping before assigning runtime to new native contexts.",
     "If polynomial compiler size in growing control width is required, replace the fixed reference exponential control decision tree by shared or comparison-based code."
@@ -153,5 +155,18 @@
   "native_alternative_coupling_forward_changed_verified": true,
   "native_alternative_coupling_reachable_index_four_cell_verified": true,
   "native_alternative_coupling_reverse_order_identity_claimed": false,
-  "native_alternative_coupling_sampler_runtime_compiled": false
+  "native_alternative_coupling_sampler_runtime_compiled": true,
+  "native_alternative_coupling_sampler_runtime_scope": "Conditional repaired-key sampler and its recovery-bit caller from a two-bit raw request; full reference-state adapters and canonical full-state exit realization remain separate.",
+  "native_conditional_coupling_sampler_record": "docs/experiments/classical-bit-encryption-native-coupling-sampler.json",
+  "native_conditional_coupling_request_bits": 2,
+  "native_conditional_coupling_fair_coin_count": 7,
+  "native_conditional_coupling_sampler_runtime_bound_steps": 87,
+  "native_conditional_coupling_recovery_caller_runtime_bound_steps": 23,
+  "native_conditional_coupling_single_execution_runtime_bound_steps": 111,
+  "native_conditional_coupling_single_execution_code_length_bound": 8086,
+  "native_conditional_coupling_joint_result_and_public_packet_verified": true,
+  "native_conditional_coupling_exact_target_result_marginal_verified": true,
+  "native_conditional_coupling_logical_reification_verified": true,
+  "native_full_cell_state_coupling_request_adapter_verified": false,
+  "native_full_cell_state_coupling_canonical_exit_adapter_verified": false
 }
